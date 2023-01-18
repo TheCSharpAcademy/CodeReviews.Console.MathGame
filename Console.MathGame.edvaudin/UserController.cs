@@ -18,6 +18,9 @@ internal class UserController
             case "d":
                 SetExerciseDifficulty(Operator.Divide);
                 break;
+            case "r":
+                SetExerciseDifficulty(Operator.Random);
+                break;
             case "h":
                 ExerciseManager.PrintHistory();
                 break;

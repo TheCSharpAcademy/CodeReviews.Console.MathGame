@@ -4,7 +4,7 @@ internal class Validator
 {
     internal static bool IsValidOption(string? input)
     {
-        string[] validOptions = { "a", "s", "m", "d", "h", "0" };
+        string[] validOptions = { "a", "s", "m", "d", "r", "h", "0" };
         foreach (string validOption in validOptions)
         {
             if (input == validOption)

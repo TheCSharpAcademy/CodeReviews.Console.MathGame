@@ -9,6 +9,7 @@ internal class Viewer
         Console.WriteLine("\ts - Practice subtracting exercises");
         Console.WriteLine("\tm - Practice multiplying exercises");
         Console.WriteLine("\td - Practice dividing exercises");
+        Console.WriteLine("\tr - Practice random exercises");
         Console.WriteLine("\th - Show history of exercises");
         Console.WriteLine("\t0 - Quit this application");
         Console.Write("\nYour option? ");

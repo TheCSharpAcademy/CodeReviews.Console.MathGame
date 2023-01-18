@@ -23,8 +23,20 @@ internal class ExerciseManager
     private static int RunExerciseAndRetrieveScore(Operator op, Difficulty difficulty)
     {
         int[] nums = GetTwoRandomNumbers(op, difficulty);
-        int result = GetResult(nums[0], nums[1], op);
-        Console.Write($"What is {nums[0]} {GetOperatorFromEnum(op)} {nums[1]}? ");
+        int result = 0;
+
+        if (op == Operator.Random)
+        {
+            KeyValuePair<Operator, int> resultWithOp = GetRandomResult(nums[0], nums[1]);
+            result = resultWithOp.Value;
+            Console.Write($"What is {nums[0]} {resultWithOp.Key} {nums[1]}? ");
+        }
+        else
+        {
+            result = GetResult(nums[0], nums[1], op);
+            Console.Write($"What is {nums[0]} {GetOperatorFromEnum(op)} {nums[1]}? ");
+        }
+        
         int input = UserInput.GetAnswer();
         return ProcessAnswer(result, input);
     }
@@ -109,6 +121,7 @@ internal class ExerciseManager
             Operator.Subtract => "Subtraction",
             Operator.Multiply => "Multiplication",
             Operator.Divide => "Division",
+            Operator.Random => "Random",
             _ => throw new NotImplementedException()
         };
     }
@@ -123,6 +136,17 @@ internal class ExerciseManager
             Operator.Divide => num1 / num2,
             _ => throw new NotImplementedException()
         };
+    }
+
+    private static KeyValuePair<Operator, int> GetRandomResult(int num1, int num2)
+    {
+        Random random = new();
+        Dictionary<Operator, int> resultWithOp = new Dictionary<Operator, int>();
+        resultWithOp.Add(Operator.Add, num1 + num2);
+        resultWithOp.Add(Operator.Subtract, num1 - num2);
+        resultWithOp.Add(Operator.Multiply, num1 * num2);
+        resultWithOp.Add(Operator.Divide, num1 / num2);
+        return resultWithOp.ElementAt(random.Next(resultWithOp.Count));
     }
 
     internal static void PrintHistory()
@@ -144,7 +168,8 @@ public enum Operator
     Add,
     Subtract,
     Multiply,
-    Divide
+    Divide,
+    Random
 }
 
 public enum Difficulty
