@@ -34,7 +34,7 @@ internal class UserController
 
     private static void SetExerciseDifficulty(Operator op)
     {
-        Console.Write("Please select a difficulty: easy (e) medium (m) or hard (m): ");
+        Console.Write("Please select a difficulty: easy (e) medium (m) or hard (h): ");
         Difficulty difficulty = UserInput.GetExerciseDifficulty();
         SetExerciseLength(op, difficulty);
     }

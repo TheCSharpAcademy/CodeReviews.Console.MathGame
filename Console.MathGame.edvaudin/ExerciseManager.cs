@@ -29,7 +29,7 @@ internal class ExerciseManager
         {
             KeyValuePair<Operator, int> resultWithOp = GetRandomResult(nums[0], nums[1]);
             result = resultWithOp.Value;
-            Console.Write($"What is {nums[0]} {resultWithOp.Key} {nums[1]}? ");
+            Console.Write($"What is {nums[0]} {GetOperatorFromEnum(resultWithOp.Key)} {nums[1]}? ");
         }
         else
         {
