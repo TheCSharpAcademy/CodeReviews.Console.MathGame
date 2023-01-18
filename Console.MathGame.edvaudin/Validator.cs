@@ -19,4 +19,17 @@ internal class Validator
     {
         return !string.IsNullOrWhiteSpace(input) && Int32.TryParse(input, out int _);
     }
+
+    internal static bool IsValidDifficulty(string? input)
+    {
+        string[] validOptions = { "e", "m", "h" };
+        foreach (string validOption in validOptions)
+        {
+            if (input == validOption)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

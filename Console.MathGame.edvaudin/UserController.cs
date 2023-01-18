@@ -7,16 +7,16 @@ internal class UserController
         switch (userInput)
         {
             case "a":
-                ExerciseManager.StartExerciseRoutine(Operator.Add, 5);
+                SetExerciseDifficulty(Operator.Add);
                 break;
             case "s":
-                ExerciseManager.StartExerciseRoutine(Operator.Subtract, 5);
+                SetExerciseDifficulty(Operator.Subtract);
                 break;
             case "m":
-                ExerciseManager.StartExerciseRoutine(Operator.Multiply, 5);
+                SetExerciseDifficulty(Operator.Multiply);
                 break;
             case "d":
-                ExerciseManager.StartExerciseRoutine(Operator.Divide, 5);
+                SetExerciseDifficulty(Operator.Divide);
                 break;
             case "h":
                 ExerciseManager.PrintHistory();
@@ -27,5 +27,19 @@ internal class UserController
             default:
                 break;
         }
+    }
+
+    private static void SetExerciseDifficulty(Operator op)
+    {
+        Console.Write("Please select a difficulty: easy (e) medium (m) or hard (m): ");
+        Difficulty difficulty = UserInput.GetExerciseDifficulty();
+        SetExerciseLength(op, difficulty);
+    }
+
+    private static void SetExerciseLength(Operator op, Difficulty difficulty) 
+    {
+        Console.Write("Please type how many questions you want in your exercise: ");
+        int length = UserInput.GetExerciseLength();
+        ExerciseManager.StartExerciseRoutine(op, difficulty, length);
     }
 }

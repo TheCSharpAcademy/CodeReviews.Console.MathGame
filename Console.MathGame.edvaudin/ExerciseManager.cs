@@ -4,25 +4,25 @@ internal class ExerciseManager
 {
     public static List<string> exercises = new();
 
-    internal static void AddToHistory(int gameScore, string gameType)
+    internal static void AddToHistory(int gameScore, string gameType, Difficulty diff)
     {
-        exercises.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+        exercises.Add($"{DateTime.Now} - {gameType} ({diff}): {gameScore} pts");
     }
 
-    internal static void StartExerciseRoutine(Operator op, int count)
+    internal static void StartExerciseRoutine(Operator op, Difficulty difficulty, int count)
     {
         int score = 0;
         for (int i = 0; i < count; i++)
         {
-            score += RunExerciseAndRetrieveScore(op);
+            score += RunExerciseAndRetrieveScore(op, difficulty);
         }
         Console.WriteLine($"Exercise complete! You earnt {score} out of {count}.");
-        AddToHistory(score, GetOperatorNameFromEnum(op));
+        AddToHistory(score, GetOperatorNameFromEnum(op), difficulty);
     }
 
-    private static int RunExerciseAndRetrieveScore(Operator op)
+    private static int RunExerciseAndRetrieveScore(Operator op, Difficulty difficulty)
     {
-        int[] nums = GetTwoRandomNumbers(op);
+        int[] nums = GetTwoRandomNumbers(op, difficulty);
         int result = GetResult(nums[0], nums[1], op);
         Console.Write($"What is {nums[0]} {GetOperatorFromEnum(op)} {nums[1]}? ");
         int input = UserInput.GetAnswer();
@@ -45,38 +45,48 @@ internal class ExerciseManager
         }
     }
 
-    private static int[] GetTwoRandomNumbers(Operator op)
+    private static int[] GetTwoRandomNumbers(Operator op, Difficulty difficulty)
     {
-        Random random = new();
         int[] nums = new int[2];
 
         if (op == Operator.Divide)
         {
-            nums = GetDivisionNumbers();
+            nums = GetDivisionNumbers(difficulty);
             return nums;
         }
 
-        nums[0] = random.Next(2, 99);
-        nums[1] = random.Next(2, 99);
+        nums[0] = GetRandomNumberByDifficulty(difficulty);
+        nums[1] = GetRandomNumberByDifficulty(difficulty);
         return nums;
     }
 
-    private static int[] GetDivisionNumbers()
+    private static int[] GetDivisionNumbers(Difficulty difficulty)
     {
-        Random random = new();
-        int num1 = random.Next(2, 99);
-        int num2 = random.Next(2, 99);
+        int num1 = GetRandomNumberByDifficulty(difficulty);
+        int num2 = GetRandomNumberByDifficulty(difficulty);
         int[] result = new int[2];
 
         while (num1 % num2 != 0)
         {
-            num1 = random.Next(2, 99);
-            num2 = random.Next(2, 99);
+            num1 = GetRandomNumberByDifficulty(difficulty);
+            num2 = GetRandomNumberByDifficulty(difficulty);
         }
 
         result[0] = num1;
         result[1] = num2;
         return result;
+    }
+
+    private static int GetRandomNumberByDifficulty(Difficulty difficulty)
+    {
+        Random random = new();
+        return difficulty switch
+        {
+            Difficulty.Easy => random.Next(1, 10),
+            Difficulty.Medium => random.Next(2, 100),
+            Difficulty.Hard => random.Next(10, 1000),
+            _ => throw new NotImplementedException()
+        };
     }
 
     private static string GetOperatorFromEnum(Operator op)
@@ -135,4 +145,11 @@ public enum Operator
     Subtract,
     Multiply,
     Divide
+}
+
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard
 }
