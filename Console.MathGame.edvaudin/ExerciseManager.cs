@@ -1,23 +1,30 @@
-﻿namespace MathGame;
+﻿using System;
+using System.Diagnostics;
+
+namespace MathGame;
 
 internal class ExerciseManager
 {
     public static List<string> exercises = new();
 
-    internal static void AddToHistory(int gameScore, string gameType, Difficulty diff)
+    internal static void AddToHistory(int gameScore, int possibleScore, string gameType, Difficulty diff, TimeSpan timeSpan)
     {
-        exercises.Add($"{DateTime.Now} - {gameType} ({diff}): {gameScore} pts");
+        exercises.Add($"{DateTime.Now} - {gameType} ({diff}): {gameScore} out of {possibleScore} pts [Completed in {(int)timeSpan.TotalSeconds} seconds]");
     }
 
     internal static void StartExerciseRoutine(Operator op, Difficulty difficulty, int count)
     {
+        Stopwatch stopwatch = new();
+        stopwatch.Start();
         int score = 0;
         for (int i = 0; i < count; i++)
         {
             score += RunExerciseAndRetrieveScore(op, difficulty);
         }
-        Console.WriteLine($"Exercise complete! You earnt {score} out of {count}.");
-        AddToHistory(score, GetOperatorNameFromEnum(op), difficulty);
+        stopwatch.Stop();
+        Console.WriteLine($"Exercise complete! You earnt {score} out of {count}. [Completed in {(int)stopwatch.Elapsed.TotalSeconds} seconds]");
+        
+        AddToHistory(score, count, GetOperatorNameFromEnum(op), difficulty, stopwatch.Elapsed);
     }
 
     private static int RunExerciseAndRetrieveScore(Operator op, Difficulty difficulty)
@@ -61,7 +68,7 @@ internal class ExerciseManager
     {
         int[] nums = new int[2];
 
-        if (op == Operator.Divide)
+        if (op == Operator.Divide || op == Operator.Random)
         {
             nums = GetDivisionNumbers(difficulty);
             return nums;
