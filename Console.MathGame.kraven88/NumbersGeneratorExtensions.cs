@@ -1,11 +1,11 @@
 ﻿using MathGame.Models;
 
 namespace MathGame;
+
 internal static class NumbersGeneratorExtensions
 {
     internal static Equasion SetNumbersForDivision(this Equasion eq, int range)
     {
-        
         bool isValidResult = false;
         while (isValidResult == false)
         {
@@ -16,6 +16,7 @@ internal static class NumbersGeneratorExtensions
 
         return eq;
     }
+
     internal static Equasion SetNumbers(this Equasion eq, int range)
     {
         eq.A = Random.Shared.Next(1, range);

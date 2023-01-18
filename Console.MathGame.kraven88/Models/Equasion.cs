@@ -1,4 +1,5 @@
 ﻿namespace MathGame.Models;
+
 internal class Equasion
 {
     public int A { get; set; }

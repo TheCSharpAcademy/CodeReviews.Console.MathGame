@@ -1,8 +1,7 @@
 ﻿using MathGame.Models;
-using System.Diagnostics;
-using static MathGame.GameLogic;
 
 namespace MathGame.UI;
+
 internal static class UserMessages
 {
     internal static void WelcomeMessage()

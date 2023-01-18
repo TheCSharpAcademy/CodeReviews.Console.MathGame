@@ -2,6 +2,7 @@
 using System.Diagnostics;
 
 namespace MathGame.UI;
+
 internal class Menu
 {
     internal List<string> gameHistory = new();

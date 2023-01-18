@@ -1,6 +1,7 @@
 ﻿using MathGame.Models;
 
 namespace MathGame;
+
 internal static class NumbersGenerator
 {
     public static List<Equasion> GetEquasions(GameEntry game, int range)

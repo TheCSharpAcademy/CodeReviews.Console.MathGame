@@ -1,9 +1,9 @@
 ﻿using MathGame.Models;
 using static MathGame.NumbersGenerator;
-using MathGame.UI;
 using static MathGame.UI.UserMessages;
 
 namespace MathGame;
+
 internal class GameLogic
 {
     int EasyRange = 10;

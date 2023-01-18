@@ -1,4 +1,5 @@
 ﻿namespace MathGame.Models;
+
 internal class GameEntry
 {
     required internal string GameType { get; set; }
