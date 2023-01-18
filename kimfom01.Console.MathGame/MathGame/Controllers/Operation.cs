@@ -1,4 +1,4 @@
-﻿namespace MathGame.Services;
+﻿namespace MathGame.Controllers;
 
 public enum Operation
 {
