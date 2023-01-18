@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MathGame;
+﻿namespace MathGame;
 
 internal class UserInput
 {

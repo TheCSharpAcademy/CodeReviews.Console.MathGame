@@ -6,7 +6,7 @@ internal class Program
     static void Main(string[] args)
     {
         Viewer.DisplayTitle();
-        
+
         while (!endApp)
         {
             Viewer.DisplayOptionsMenu();

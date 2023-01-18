@@ -39,7 +39,7 @@ internal class UserController
         SetExerciseLength(op, difficulty);
     }
 
-    private static void SetExerciseLength(Operator op, Difficulty difficulty) 
+    private static void SetExerciseLength(Operator op, Difficulty difficulty)
     {
         Console.Write("Please type how many questions you want in your exercise: ");
         int length = UserInput.GetExerciseLength();

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace MathGame;
 
@@ -23,7 +22,7 @@ internal class ExerciseManager
         }
         stopwatch.Stop();
         Console.WriteLine($"Exercise complete! You earnt {score} out of {count}. [Completed in {(int)stopwatch.Elapsed.TotalSeconds} seconds]");
-        
+
         AddToHistory(score, count, GetOperatorNameFromEnum(op), difficulty, stopwatch.Elapsed);
     }
 
@@ -43,7 +42,7 @@ internal class ExerciseManager
             result = GetResult(nums[0], nums[1], op);
             Console.Write($"What is {nums[0]} {GetOperatorFromEnum(op)} {nums[1]}? ");
         }
-        
+
         int input = UserInput.GetAnswer();
         return ProcessAnswer(result, input);
     }
@@ -148,7 +147,7 @@ internal class ExerciseManager
     private static KeyValuePair<Operator, int> GetRandomResult(int num1, int num2)
     {
         Random random = new();
-        Dictionary<Operator, int> resultWithOp = new Dictionary<Operator, int>();
+        Dictionary<Operator, int> resultWithOp = new();
         resultWithOp.Add(Operator.Add, num1 + num2);
         resultWithOp.Add(Operator.Subtract, num1 - num2);
         resultWithOp.Add(Operator.Multiply, num1 * num2);
