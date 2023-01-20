@@ -1,4 +1,5 @@
 ﻿namespace SinghxRaj.MathGame.MathGame;
+
 internal class MathGameHistory 
 {
     public List<MathGame> Games { get; set; } = new List<MathGame>();
