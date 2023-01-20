@@ -87,6 +87,12 @@ public class GameController
             {
                 numA = Random.Shared.Next(10, 100);
                 numB = Random.Shared.Next(1, 10);
+
+                while ((double)numA / numB != numA / numB)
+                {
+                    numA = Random.Shared.Next(10, 100);
+                    numB = Random.Shared.Next(1, 10);
+                }
             }
 
             var question = CreateQuestion(numA, numB, operation);
@@ -112,7 +118,7 @@ public class GameController
         }
 
         Console.WriteLine($"Your total score was {score} out of {count}");
-        _gameHistory.Add($"Game - {operation} - Score: {score}");
+        _gameHistory.Add($"Game - {operation} - Score: {score} out of {count}");
         Console.WriteLine("Press Enter to continue: ");
         Console.ReadLine();
     }
@@ -128,7 +134,6 @@ public class GameController
             case Operation.Multiplication:
                 return $"{numA} * {numB}";
             case Operation.Division:
-                Console.WriteLine("Enter only the whole number part of the division");
                 return $"{numA} / {numB}";
             default:
                 return "No question";
