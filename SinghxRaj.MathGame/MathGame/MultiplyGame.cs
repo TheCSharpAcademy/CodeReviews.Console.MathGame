@@ -9,7 +9,8 @@ namespace SinghxRaj.MathGame.MathGame;
 internal class MultiplyGame : IMathGame
 {
     public void PlayGame()
-    {
+    {   
+        // TODO
         throw new NotImplementedException();
     }
 }

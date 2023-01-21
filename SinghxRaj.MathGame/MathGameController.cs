@@ -1,24 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SinghxRaj.MathGame.MathGame;
 
 namespace SinghxRaj.MathGame;
 
 internal class MathGameController
 {
+    private MathGameHistory Games { get; set; } = new();
+
     public static void Run()
     {
+        Display.Intro();
+        MathGameHistory games = new();
+        bool isRunning = true;
+        while (isRunning)
+        {
+            Display.Options();
+            HandleOptions();
+        }
+        Display.Exit();
+    }
+
+    private static int GetOption()
+    {
         // TODO
+        string? userOption = Console.ReadLine();
 
-        // Display the application intro
+        throw new NotImplementedException();
+    }
 
-        // Display the menu / let them choose an option
-
-        // Create an instance of that MathGame (add, subtract, multiply, divide)
-
-        // Play the Game
+    private static void HandleOptions() 
+    {
+        // TODO
+        int option = GetOption();
 
         throw new NotImplementedException();
     }
