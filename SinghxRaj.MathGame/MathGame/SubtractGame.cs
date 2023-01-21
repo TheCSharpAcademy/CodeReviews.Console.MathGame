@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SinghxRaj.MathGame.MathGame;
 
-internal class Subtract : IMathGame
+internal class SubtractGame : IMathGame
 {
     public void PlayGame()
     {
