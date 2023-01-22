@@ -18,10 +18,11 @@ internal class Display
     public static void Options()
     {
         Console.WriteLine("Type 0 to exit application.");
-        Console.WriteLine("Type 1 to play addition game");
-        Console.WriteLine("Type 2 to play subtraction game");
-        Console.WriteLine("Type 3 to play multiplication game");
-        Console.WriteLine("Type 4 to play division game");
+        Console.WriteLine("Type 1 to view games played");
+        Console.WriteLine("Type 2 to play addition game");
+        Console.WriteLine("Type 3 to play subtraction game");
+        Console.WriteLine("Type 4 to play multiplication game");
+        Console.WriteLine("Type 5 to play division game");
         Console.WriteLine();
     }
 

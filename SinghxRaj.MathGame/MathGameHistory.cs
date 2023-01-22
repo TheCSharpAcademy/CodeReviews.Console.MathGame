@@ -1,13 +1,20 @@
 ﻿namespace SinghxRaj.MathGame.MathGame;
 internal class MathGameHistory 
 {
-    public List<IMathGame> Games { get; set; } = new List<IMathGame>();
+    public List<MathGame> Games { get; set; } = new List<MathGame>();
 
     public void ViewHistory()
     {
-        // TODO
-
-        throw new NotImplementedException();
+        if (Games.Count == 0)
+        {
+            Console.WriteLine("No games played...");
+            return;
+        }
+        int index = 1;
+        Games.ForEach(game => 
+        {
+            Console.WriteLine($"{index++}.Game Time: {game.GameTime}, Number of Points: {game.Points}");
+        });
     }
 
 }

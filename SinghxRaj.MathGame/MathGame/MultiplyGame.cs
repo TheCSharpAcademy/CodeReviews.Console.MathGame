@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SinghxRaj.MathGame.MathGame;
 
-namespace SinghxRaj.MathGame.MathGame;
-
-internal class MultiplyGame : IMathGame
+internal class MultiplyGame : MathGame
 {
-    public void PlayGame()
-    {   
-        // TODO
-        throw new NotImplementedException();
+    public override double Compute(int operand1, int operand2)
+    {
+        return operand1 * operand2;
+    }
+
+    public override string GetOperator()
+    {
+        return "*";
     }
 }

@@ -4,7 +4,7 @@ namespace SinghxRaj.MathGame;
 
 internal class MathGameController
 {
-    private MathGameHistory Games { get; set; } = new();
+    private static MathGameHistory GameHistory = new();
 
     public static void Run()
     {
@@ -14,24 +14,54 @@ internal class MathGameController
         while (isRunning)
         {
             Display.Options();
-            HandleOptions();
+            isRunning = HandleOptions();
         }
         Display.Exit();
     }
 
     private static int GetOption()
     {
-        // TODO
         string? userOption = Console.ReadLine();
-
-        throw new NotImplementedException();
+        int option;
+        while (!int.TryParse(userOption, out option))
+        {
+            Console.WriteLine("Invalid input. Try again.");
+            userOption = Console.ReadLine();
+        }
+        return option;
     }
 
-    private static void HandleOptions() 
+    private static bool HandleOptions() 
     {
-        // TODO
         int option = GetOption();
 
-        throw new NotImplementedException();
+        MathGame.MathGame currentGame;
+
+        switch (option)
+        {
+            case (int)Option.ExitApplication:
+                return false;
+            case (int)Option.ViewHistory:
+                GameHistory.ViewHistory();
+                return true;
+            case (int)Option.AdditionGame:
+                currentGame = new AddGame();
+                break;
+            case (int)Option.SubtractionGame:
+                currentGame = new SubtractGame();
+                break;
+            case (int)Option.MultiplicationGame:
+                currentGame = new MultiplyGame();
+                break;
+            case (int)Option.DivisionGame:
+                currentGame = new DivideGame();
+                break;
+            default:
+                Console.WriteLine($"{option} is not a valid option.");
+                return true; ;
+        }
+        currentGame.PlayGame();
+        GameHistory.Games.Add(currentGame);
+        return true;
     }
 }
