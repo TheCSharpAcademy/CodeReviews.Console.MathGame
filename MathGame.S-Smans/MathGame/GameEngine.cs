@@ -4,19 +4,20 @@ namespace MathGame;
 
 internal class GameEngine
 {
-    private Helper helper;
+    private Helper _helper;
 
     public GameEngine(Helper helper) 
     {
-        this.helper = helper;
+        _helper = helper;
     }
+
     internal void Addition()
     {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
 
         int score = 0;
-        for (int i = 0; i < helper.ask; i++)
+        for (int i = 0; i < _helper.QuestionAmount; i++)
         {
             score = AdditionPlay() ? ++score : score;
         }
@@ -25,16 +26,17 @@ internal class GameEngine
         string duration = time.ToString("mm':'ss");
 
         Console.WriteLine($"Your score is: {score} in {duration}");
-        helper.AddHistory(GameType.Addition, score, (Difficulty)helper.lvl, duration, helper.ask);
+        _helper.AddHistory(GameType.Addition, score, (Difficulty)_helper.DifficultyLevel, duration, _helper.QuestionAmount);
         Console.ReadLine();
     }
+
     internal void Subtraction()
     {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
 
         int score = 0;
-        for (int i = 0; i < helper.ask; i++)
+        for (int i = 0; i < _helper.QuestionAmount; i++)
         {
             score = SubtractionPlay() ? ++score : score;
         }
@@ -43,7 +45,7 @@ internal class GameEngine
         string duration = time.ToString("mm':'ss");
 
         Console.WriteLine($"Your score is: {score} in {duration}");
-        helper.AddHistory(GameType.Subtraction, score, (Difficulty)helper.lvl, duration, helper.ask);
+        _helper.AddHistory(GameType.Subtraction, score, (Difficulty)_helper.DifficultyLevel, duration, _helper.QuestionAmount);
         Console.ReadLine();
     }
 
@@ -53,7 +55,7 @@ internal class GameEngine
         stopWatch.Start();
 
         int score = 0;
-        for (int i = 0; i < helper.ask; i++)
+        for (int i = 0; i < _helper.QuestionAmount; i++)
         {
             score = MultiplicationPlay() ? ++score: score;
         }
@@ -62,7 +64,7 @@ internal class GameEngine
         string duration = time.ToString("mm':'ss");
 
         Console.WriteLine($"Your score is: {score} in {duration}");
-        helper.AddHistory(GameType.Multiplication, score, (Difficulty)helper.lvl, duration, helper.ask);
+        _helper.AddHistory(GameType.Multiplication, score, (Difficulty)_helper.DifficultyLevel, duration, _helper.QuestionAmount);
         Console.ReadLine();
     }
 
@@ -72,7 +74,7 @@ internal class GameEngine
         stopWatch.Start();
 
         int score = 0;
-        for (int i = 0; i < helper.ask; i++)
+        for (int i = 0; i < _helper.QuestionAmount; i++)
         {
             score = DivisionPlay() ? ++score : score;
         }
@@ -81,7 +83,7 @@ internal class GameEngine
         string duration = time.ToString("mm':'ss");
 
         Console.WriteLine($"Your score is: {score} in {duration}");
-        helper.AddHistory(GameType.Division, score, (Difficulty)helper.lvl, duration, helper.ask);
+        _helper.AddHistory(GameType.Division, score, (Difficulty)_helper.DifficultyLevel, duration, _helper.QuestionAmount);
         Console.ReadLine();
     }
 
@@ -91,7 +93,8 @@ internal class GameEngine
         stopWatch.Start();
 
         int score = 0;
-        for (int i = 0; i < helper.ask; i++)
+
+        for (int i = 0; i < _helper.QuestionAmount; i++)
         {
             Random random = new Random();
             int operandIndex = random.Next(0, 4);
@@ -115,12 +118,13 @@ internal class GameEngine
                     break;
             }
         }
+
         stopWatch.Stop();
         TimeSpan time = stopWatch.Elapsed;
         string duration = time.ToString("mm':'ss");
 
         Console.WriteLine($"Your score is: {score} in {duration}");
-        helper.AddHistory(GameType.Random, score, (Difficulty)helper.lvl, duration, helper.ask);
+        _helper.AddHistory(GameType.Random, score, (Difficulty)_helper.DifficultyLevel, duration, _helper.QuestionAmount);
         Console.ReadLine();
     }
 
@@ -129,9 +133,9 @@ internal class GameEngine
         Console.Clear();
         Console.WriteLine("Division");
 
-        int[] numbers = helper.GetDivisionNumbers();
+        int[] numbers = _helper.GetDivisionNumbers();
         Console.WriteLine($"{numbers[0]} / {numbers[1]}");
-        int userInput = helper.VerifyResultsInput();
+        int userInput = _helper.VerifyResultsInput();
 
         if (userInput == numbers[0] / numbers[1])
         {
@@ -152,9 +156,9 @@ internal class GameEngine
         Console.Clear();
         Console.WriteLine("Multiplication");
 
-        int[] numbers = helper.GetTwoNumbers();
+        int[] numbers = _helper.GetTwoNumbers();
         Console.WriteLine($"{numbers[0]} * {numbers[1]}");
-        int userInput = helper.VerifyResultsInput();
+        int userInput = _helper.VerifyResultsInput();
 
         if (userInput == numbers[0] * numbers[1])
         {
@@ -169,14 +173,15 @@ internal class GameEngine
             return false;
         }
     }
+
     private bool SubtractionPlay()
     {
         Console.Clear();
         Console.WriteLine("Subtraction");
 
-        int[] numbers = helper.GetTwoNumbers();
+        int[] numbers = _helper.GetTwoNumbers();
         Console.WriteLine($"{numbers[0]} - {numbers[1]}");
-        int userInput = helper.VerifyResultsInput();
+        int userInput = _helper.VerifyResultsInput();
 
         if (userInput == numbers[0] - numbers[1])
         {
@@ -191,14 +196,15 @@ internal class GameEngine
             return false;
         }
     }
+
     private bool AdditionPlay()
     {
         Console.Clear();
         Console.WriteLine("Addition");
 
-        int[] numbers = helper.GetTwoNumbers();
+        int[] numbers = _helper.GetTwoNumbers();
         Console.WriteLine($"{numbers[0]} + {numbers[1]}");
-        int userInput = helper.VerifyResultsInput();
+        int userInput = _helper.VerifyResultsInput();
 
         if (userInput == numbers[0] + numbers[1])
         {

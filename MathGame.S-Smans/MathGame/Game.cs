@@ -1,5 +1,4 @@
-﻿
-namespace MathGame;
+﻿namespace MathGame;
 
 internal class Game
 {

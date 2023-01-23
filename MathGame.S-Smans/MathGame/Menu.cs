@@ -1,9 +1,9 @@
-﻿
-namespace MathGame;
+﻿namespace MathGame;
 
 internal class Menu
 {
     private Helper _helper = new Helper();
+
     internal void StartGame()
     {
         bool gameInProcess = true;
@@ -51,18 +51,16 @@ internal class Menu
                     break;
             }
         } while (gameInProcess);
-
     }
 
     private void PrintIntroduction()
     {
-
         Console.WriteLine("Welcome to the Math Game! Where your knowledge in mathematics will be tested");
         Console.WriteLine("Choose from the options below which math operand you want to test your skills with:");
         Console.WriteLine("-------------------------------------------");
         Console.WriteLine(" H - History");
-        Console.WriteLine(" L - Current Level Difficulty: " + (Difficulty)_helper.lvl);
-        Console.WriteLine(" I - Question Amount Currently: " + _helper.ask);
+        Console.WriteLine(" L - Current Level Difficulty: " + (Difficulty)_helper.DifficultyLevel);
+        Console.WriteLine(" I - Question Amount Currently: " + _helper.QuestionAmount);
         Console.WriteLine(" A - Addition");
         Console.WriteLine(" S - Subraction");
         Console.WriteLine(" M - Multiplication");

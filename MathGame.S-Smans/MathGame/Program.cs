@@ -1,6 +1,4 @@
-﻿// save history of played games
-
-using MathGame;
+﻿using MathGame;
 
 Menu mainGame = new Menu();
 
