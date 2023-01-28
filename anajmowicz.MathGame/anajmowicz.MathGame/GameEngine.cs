@@ -1,10 +1,12 @@
-﻿namespace anajmowicz.MathGame
+﻿using anajmowicz.MathGame.Models;
+
+namespace anajmowicz.MathGame
 {
     internal class GameEngine
     {
-        internal void DivisionGame(string message)
+        internal void DivisionGame(GameType type)
         {
-            Console.WriteLine($"{message} game selected");
+            Console.WriteLine($"{type} game selected");
             var random = new Random();
             int firstNumber;
             int secondNumber;
@@ -35,15 +37,15 @@
                 if (i == 4)
                 {
                     Console.WriteLine($"Game over. Your final score: {score}. Press any key to go back to main menu.");
-                    Helpers.AddToHistory(message, score);
+                    Helpers.AddToHistory(type, score);
                     Console.ReadLine();
                 }
             }
         }
 
-        internal void MultiplicaionGame(string message)
+        internal void MultiplicationGame(GameType type)
         {
-            Console.WriteLine($"{message} game selected");
+            Console.WriteLine($"{type} game selected");
             var random = new Random();
             int firstNumber;
             int secondNumber;
@@ -72,15 +74,15 @@
                 if (i == 4)
                 {
                     Console.WriteLine($"Game over. Your final score: {score}. Press any key to go back to main menu.");
-                    Helpers.AddToHistory(message, score);
+                    Helpers.AddToHistory(type, score);
                     Console.ReadLine();
                 }
             }
         }
 
-        internal void SubtractionGame(string message)
+        internal void SubtractionGame(GameType type)
         {
-            Console.WriteLine($"{message} game selected");
+            Console.WriteLine($"{type} game selected");
             var random = new Random();
             int firstNumber;
             int secondNumber;
@@ -109,19 +111,19 @@
                 if (i == 4)
                 {
                     Console.WriteLine($"Game over. Your final score: {score}. Press any key to go back to main menu.");
-                    Helpers.AddToHistory(message, score);
+                    Helpers.AddToHistory(type, score);
                     Console.ReadLine();
                 }
             }
         }
 
-        internal void AdditionGame(string message)
+        internal void AdditionGame(GameType type)
         {
-            Console.WriteLine($"{message} game selected");
+            Console.WriteLine($"{type} game selected");
             var random = new Random();
             int firstNumber;
             int secondNumber;
-            var score = 0;
+            var gameScore = 0;
 
             for (int i = 0; i < 5; i++)
             {
@@ -134,7 +136,7 @@
                 if (int.Parse(result) == firstNumber + secondNumber)
                 {
                     Console.WriteLine("Your answer was correct. Press any key for the next question.");
-                    score++;
+                    gameScore++;
                     Console.ReadLine();
                 }
                 else
@@ -145,8 +147,8 @@
 
                 if (i == 4)
                 {
-                    Console.WriteLine($"Game over. Your final score: {score}. Press any key to go back to main menu.");
-                    Helpers.AddToHistory(message, score);
+                    Console.WriteLine($"Game over. Your final score: {gameScore}. Press any key to go back to main menu.");
+                    Helpers.AddToHistory(type, gameScore);
                     Console.ReadLine();
                 }
             }

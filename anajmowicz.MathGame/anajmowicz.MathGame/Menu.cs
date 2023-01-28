@@ -1,4 +1,6 @@
-﻿namespace anajmowicz.MathGame
+﻿using anajmowicz.MathGame.Models;
+
+namespace anajmowicz.MathGame
 {
     internal class Menu
     {
@@ -30,19 +32,19 @@
                 switch (gameSelected.Trim().ToLower())
                 {
                     case "a":
-                        engine.AdditionGame("Addition");
+                        engine.AdditionGame(GameType.Addition);
                         break;
                     case "s":
-                        engine.SubtractionGame("Subtraction");
+                        engine.SubtractionGame(GameType.Subtraction);
                         break;
                     case "m":
-                        engine.MultiplicaionGame("Multiplication");
+                        engine.MultiplicationGame(GameType.Multiplication);
                         break;
                     case "d":
-                        engine.DivisionGame("Division");
+                        engine.DivisionGame(GameType.Division);
                         break;
                     case "v":
-                        Helpers.GetGames();
+                        Helpers.PrintGames();
                         break;
                     case "q":
                         Console.WriteLine("Goodbye!");
