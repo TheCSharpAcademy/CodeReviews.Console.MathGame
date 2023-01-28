@@ -4,22 +4,7 @@ namespace anajmowicz.MathGame
 {
     internal class Helpers
     {
-        static List<Game> games = new()
-        {
-        new Game { Date = DateTime.Now.AddDays(-1), Type = GameType.Addition, Score = 5 },
-        new Game { Date = DateTime.Now.AddDays(-2), Type = GameType.Multiplication, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(-3), Type = GameType.Division, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(-4), Type = GameType.Subtraction, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(-5), Type = GameType.Addition, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(-6), Type = GameType.Multiplication, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(-7), Type = GameType.Division, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(-8), Type = GameType.Subtraction, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(-9), Type = GameType.Addition, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(-10), Type = GameType.Multiplication, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(-11), Type = GameType.Subtraction, Score = 0 },
-        new Game { Date = DateTime.Now.AddDays(-12), Type = GameType.Division, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(-13), Type = GameType.Subtraction, Score = 5 },
-        };
+        static List<Game> games = new();
 
         internal static void AddToHistory(GameType type, int gameScore)
         {
@@ -27,7 +12,7 @@ namespace anajmowicz.MathGame
             {
                 Date = DateTime.Now,
                 Score = gameScore,
-                Type = type
+                Type = type,
             });
         }
 
@@ -44,6 +29,56 @@ namespace anajmowicz.MathGame
 
             Console.WriteLine("-----------------------\n");
             Console.WriteLine("Press any key to return to the main menu");
+            Console.ReadLine();
+        }
+
+        internal static string ValidateResult(string result)
+        {
+            while(string.IsNullOrEmpty(result) || !Int32.TryParse(result,out _))
+            {
+                Console.WriteLine("Your answers has to be an integer. Please enter a valid number.");
+                Console.Write("> ");
+                result = Console.ReadLine();
+            }
+            return result;
+        }
+
+        internal static string ValidateSelection(string selection)
+        {
+            string[] possibleAnswers = {"a", "s", "m", "d", "v", "q"};
+            while(!possibleAnswers.Contains(selection.Trim().ToLower())){
+                Console.WriteLine("Incorrect choice. Try again");
+                Console.Write("> ");
+                selection = Console.ReadLine().Trim().ToLower();
+            }
+            return selection;
+        }
+
+        internal static string GetName()
+        {
+            Console.WriteLine("Welcome to Math Game. What's your name?");
+            Console.Write("> ");
+            string name = Console.ReadLine();
+
+            while(string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("Name can't be empty.");
+                Console.Write("> ");
+                name = Console.ReadLine();
+            }
+            return name;
+        }
+
+        internal static void ShowIntro()
+        {
+            Console.WriteLine(@"
+                 __  __       _   _        ____                      
+                |  \/  | __ _| |_| |__    / ___| __ _ _ __ ___   ___ 
+                | |\/| |/ _` | __| '_ \  | |  _ / _` | '_ ` _ \ / _ \
+                | |  | | (_| | |_| | | | | |_| | (_| | | | | | |  __/
+                |_|  |_|\__,_|\__|_| |_|  \____|\__,_|_| |_| |_|\___|
+                                                     
+                            Press any key to continue");
             Console.ReadLine();
         }
     }

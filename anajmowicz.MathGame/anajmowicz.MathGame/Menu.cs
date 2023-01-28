@@ -4,19 +4,16 @@ namespace anajmowicz.MathGame
 {
     internal class Menu
     {
+        
         GameEngine engine = new GameEngine();
         internal void ShowMenu(string name, DateTime date)
         {
-            Console.WriteLine("-----------------------------");
-            Console.WriteLine($"Hello {name}! It's {date.DayOfWeek}. Are you ready to play a game?");
-            Console.WriteLine("\n");
-
             bool isGameOn = true;
-
             do
             {
                 Console.Clear();
-                Console.WriteLine(@"What game would you like to play today? Please select from the options below:
+                Console.WriteLine(@$"What game would you like to play today, {name}? Please select from the options below:
+
     A - Addition
     S - Subtraction
     M - Multiplication
@@ -27,7 +24,7 @@ namespace anajmowicz.MathGame
 ");
                 Console.Write("> ");
 
-                string gameSelected = Console.ReadLine();
+                string gameSelected = Helpers.ValidateSelection(Console.ReadLine());
 
                 switch (gameSelected.Trim().ToLower())
                 {

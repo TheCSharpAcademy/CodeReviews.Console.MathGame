@@ -1,16 +1,8 @@
-﻿
-using anajmowicz.MathGame;
+﻿using anajmowicz.MathGame;
 
+Helpers.ShowIntro();
 var menu = new Menu();
 var date = DateTime.Now;
-var name = GetName();
-
+var name = Helpers.GetName();
 
 menu.ShowMenu(name, date);
-string GetName()
-{
-    Console.WriteLine("Welcome to Math Game. What's your name?");
-    Console.Write("> ");
-    name = Console.ReadLine();
-    return name;
-}

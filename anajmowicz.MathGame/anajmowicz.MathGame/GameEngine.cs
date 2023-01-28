@@ -20,7 +20,9 @@ namespace anajmowicz.MathGame
                 product = firstNumber * secondNumber;
 
                 Console.WriteLine($"{product} / {firstNumber} = ");
+                Console.Write("> ");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == secondNumber)
                 {
@@ -57,7 +59,9 @@ namespace anajmowicz.MathGame
                 secondNumber = random.Next(1, 9);
 
                 Console.WriteLine($"{firstNumber} * {secondNumber} = ");
+                Console.Write("> ");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
@@ -94,7 +98,9 @@ namespace anajmowicz.MathGame
                 secondNumber = random.Next(1, 9);
 
                 Console.WriteLine($"{firstNumber} - {secondNumber} = ");
+                Console.Write("> ");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber - secondNumber)
                 {
@@ -131,7 +137,9 @@ namespace anajmowicz.MathGame
                 secondNumber = random.Next(1, 9);
 
                 Console.WriteLine($"{firstNumber} + {secondNumber} = ");
+                Console.Write("> ");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber + secondNumber)
                 {
