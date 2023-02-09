@@ -1,5 +1,4 @@
 ﻿using Kolejarz.MathGame.GameEngine.PuzzleProviders;
-using System.Diagnostics;
 
 namespace Kolejarz.MathGame.GameEngine;
 
