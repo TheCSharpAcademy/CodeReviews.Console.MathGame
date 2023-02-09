@@ -1,4 +1,5 @@
 ﻿using MathGame.Models;
+using System;
 using System.Diagnostics;
 
 namespace MathGame;
@@ -13,13 +14,38 @@ internal class GameEngine
 
         int nQuestions = Helpers.GetAmountOfQuestions();
 
+        int score = 0;
+
+        List<int> numbers = new List<int>();
+
         Stopwatch timer = new Stopwatch();
+        timer.Start();
 
-        Helpers.GameTimer(timer, "start");
+        for (int i = 0; i < nQuestions; i++)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
 
-        int score = Helpers.BaseGameMode(nQuestions, message, difficulty, operand);
+            numbers.Clear();
+            Helpers.PrintQuestions(difficulty, numbers, operand);
 
-        TimeSpan timeTaken = Helpers.GameTimer(timer, "stop");
+            string input = Console.ReadLine();
+            input = Helpers.ValidateInput(input);
+
+            int output = numbers[0];
+            output = Helpers.GetOutput(output, operand, numbers);
+
+            score = Helpers.GetScore(input, output, score);
+
+            if (i == nQuestions - 1)
+            {
+                Console.WriteLine($"Game over, Your final score is {score}. Press any key to go back to the main menu.");
+                Console.ReadLine();
+            }
+        }
+
+        timer.Start();
+        TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Addition, difficulty, timeTaken);
     }
@@ -31,13 +57,38 @@ internal class GameEngine
 
         int nQuestions = Helpers.GetAmountOfQuestions();
 
+        int score = 0;
+
+        List<int> numbers = new List<int>();
+
         Stopwatch timer = new Stopwatch();
+        timer.Start();
 
-        Helpers.GameTimer(timer, "start");
+        for (int i = 0; i < nQuestions; i++)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
 
-        int score = Helpers.BaseGameMode(nQuestions, message, difficulty, operand);
+            numbers.Clear();
+            Helpers.PrintQuestions(difficulty, numbers, operand);
 
-        TimeSpan timeTaken = Helpers.GameTimer(timer, "stop");
+            string input = Console.ReadLine();
+            input = Helpers.ValidateInput(input);
+
+            int output = numbers[0];
+            output = Helpers.GetOutput(output, operand, numbers);
+
+            score = Helpers.GetScore(input, output, score);
+
+            if (i == nQuestions - 1)
+            {
+                Console.WriteLine($"Game over, Your final score is {score}. Press any key to go back to the main menu.");
+                Console.ReadLine();
+            }
+        }
+
+        timer.Start();
+        TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Subtraction, difficulty, timeTaken);
 
@@ -50,13 +101,38 @@ internal class GameEngine
 
         int nQuestions = Helpers.GetAmountOfQuestions();
 
+        int score = 0;
+
+        List<int> numbers = new List<int>();
+
         Stopwatch timer = new Stopwatch();
+        timer.Start();
 
-        Helpers.GameTimer(timer, "start");
+        for (int i = 0; i < nQuestions; i++)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
 
-        int score = Helpers.BaseGameMode(nQuestions, message, difficulty, operand);
+            numbers.Clear();
+            Helpers.PrintQuestions(difficulty, numbers, operand);
 
-        TimeSpan timeTaken = Helpers.GameTimer(timer, "stop");
+            string input = Console.ReadLine();
+            input = Helpers.ValidateInput(input);
+
+            int output = numbers[0];
+            output = Helpers.GetOutput(output, operand, numbers);
+
+            score = Helpers.GetScore(input, output, score);
+
+            if (i == nQuestions - 1)
+            {
+                Console.WriteLine($"Game over, Your final score is {score}. Press any key to go back to the main menu.");
+                Console.ReadLine();
+            }
+        }
+
+        timer.Start();
+        TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Multiplication, difficulty, timeTaken);
     }
@@ -147,7 +223,7 @@ internal class GameEngine
     }
 
     //DivisionGame does not offer difficult levels.
-    internal void DivisionGame(string message)
+    internal void DivisionGame(string message, char operand)
     {
         Console.WriteLine(message);
 
@@ -155,9 +231,9 @@ internal class GameEngine
 
         int nQuestions = Helpers.GetAmountOfQuestions();
 
-        List<int> numbers = new List<int>();
-
         int score = 0;
+
+        List<int> numbers = new List<int>();
 
         Stopwatch timer = new Stopwatch();
         timer.Start();
@@ -167,33 +243,18 @@ internal class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
+            numbers.Clear();
             numbers = Helpers.GetDivisionNumbers();
-            int firstNumber = numbers[0];
-            int secondNumber = numbers[1];
 
-            Console.WriteLine($"{firstNumber} / {secondNumber}");
+            Helpers.PrintQuestions(difficulty, numbers, operand);
+
             string input = Console.ReadLine();
-
             input = Helpers.ValidateInput(input);
 
             int output = numbers[0];
+            output = Helpers.GetOutput(output, operand, numbers);
 
-            for (int j = 1; j < numbers.Count; j++)
-            {
-                output /= numbers[j];
-            }
-
-            if (int.Parse(input) == output)
-            {
-                Console.WriteLine("Your answer was correct! Type any key for the next question");
-                score++;
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Your answer was incorrect. Type any key for the next question");
-                Console.ReadLine();
-            }
+            score = Helpers.GetScore(input, output, score);
 
             if (i == nQuestions - 1)
             {

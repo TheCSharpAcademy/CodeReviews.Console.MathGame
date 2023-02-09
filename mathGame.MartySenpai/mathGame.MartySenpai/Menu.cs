@@ -44,7 +44,7 @@ Q - Quit the program");
                     gameEngine.MultiplicationGame("Multiplication game", '*');
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division game");
+                    gameEngine.DivisionGame("Division game", '/');
                     break;
                 case "r":
                     gameEngine.RandomGame("Randomized game");

@@ -1,5 +1,6 @@
 ﻿using MathGame.Models;
 using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace MathGame;
 
@@ -128,78 +129,42 @@ internal class Helpers
             }
         }
     }
-
-    internal static int BaseGameMode(int nQuestions, string message, string difficulty, char operand)
+    internal static int GetOutput(int output, char operand, List<int> numbers)
     {
-        // Further Refactoring to simplify method.
-        int score = 0;
-
-        List<int> numbers = new List<int>();
-
-        for (int i = 0; i < nQuestions; i++)
+        for (int j = 1; j < numbers.Count; j++)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-
-            numbers.Clear();
-
-            Helpers.PrintQuestions(difficulty, numbers, operand);
-
-            string input = Console.ReadLine();
-
-            input = Helpers.ValidateInput(input);
-
-            int output = numbers[0];
-
-            for (int j = 1; j < numbers.Count; j++)
+            switch (operand)
             {
-                switch (operand)
-                {
-                    case '+':
-                        output += numbers[j];
-                        break;
-                    case '-':
-                        output += numbers[j];
-                        break;
-                    case '*':
-                        output += numbers[j];
-                        break;
-                }
-            }
-
-            if (int.Parse(input) == output)
-            {
-                Console.WriteLine("Your answer was correct! Type any key for the next question");
-                score++;
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Your answer was incorrect. Type any key for the next question");
-                Console.ReadLine();
-            }
-
-            if (i == nQuestions - 1)
-            {
-                Console.WriteLine($"Game over, Your final score is {score}. Press any key to go back to the main menu.");
-                Console.ReadLine();
+                case '+':
+                    output += numbers[j];
+                    break;
+                case '-':
+                    output += numbers[j];
+                    break;
+                case '*':
+                    output += numbers[j];
+                    break;
+                case '/':
+                    output += numbers[j];
+                    break;
             }
         }
-        return score;
+        return output;
     }
 
-    internal static TimeSpan GameTimer(Stopwatch timer, string mode)
+    internal static int GetScore(string input, int output, int score)
     {
-        switch (mode)
+        if (int.Parse(input) == output)
         {
-            case "start":
-                timer.Start();
-                break;
-            case "stop":
-                timer.Stop();
-                break;
+            Console.WriteLine("Your answer was correct! Type any key for the next question");
+            score++;
+            Console.ReadLine();
         }
-        TimeSpan timeTaken = timer.Elapsed;
-        return timeTaken;
+        else
+        {
+            Console.WriteLine("Your answer was incorrect. Type any key for the next question");
+            Console.ReadLine();
+        }
+        return score;
     }
 }
