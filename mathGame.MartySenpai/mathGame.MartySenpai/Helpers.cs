@@ -1,6 +1,4 @@
 ﻿using MathGame.Models;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace MathGame;
 
@@ -139,19 +137,18 @@ internal class Helpers
                     output += numbers[j];
                     break;
                 case '-':
-                    output += numbers[j];
+                    output -= numbers[j];
                     break;
                 case '*':
-                    output += numbers[j];
+                    output *= numbers[j];
                     break;
                 case '/':
-                    output += numbers[j];
+                    output /= numbers[j];
                     break;
             }
         }
         return output;
     }
-
     internal static int GetScore(string input, int output, int score)
     {
         if (int.Parse(input) == output)
