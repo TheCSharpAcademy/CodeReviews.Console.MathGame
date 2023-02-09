@@ -1,11 +1,9 @@
 ﻿using MathGame;
 
-{
-    Menu menu = new Menu();
+Menu menu = new Menu();
 
-    DateTime date = DateTime.UtcNow;
+DateTime date = DateTime.UtcNow;
 
-    string name = Helpers.GetName();
+string name = Helpers.GetName();
 
-    menu.ShowMenu(name, date);
-}
+menu.ShowMenu(name, date);
