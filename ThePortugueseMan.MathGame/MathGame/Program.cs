@@ -25,7 +25,7 @@ bool Sum (int _min, int _max)
 {
     Random random= new Random();
     int number1 = random.Next(_min, _max + 1);
-    int number2 = random.Next(1, 11);
+    int number2 = random.Next(_max, _max + 1);
     int answer;
 
     Console.WriteLine($"{number1} + {number2} = ?");
@@ -85,7 +85,7 @@ bool Division( int _min, int _max)
 
     Console.WriteLine($"{number2} / {number1} = ?");
 
-    if (int.TryParse(Console.ReadLine(), out answer) && answer == (int)number2/number1)
+    if (int.TryParse(Console.ReadLine(), out answer) && answer == number2/number1)
     {
         return true;
     }
@@ -97,7 +97,7 @@ bool Multiplication(int _min, int _max)
 {
     Random random = new Random();
     int number1 = random.Next(_min, _max + 1);
-    int number2 = random.Next(1, 11);
+    int number2 = random.Next(_min, _max + 1);
     int answer;
 
     Console.WriteLine($"{number1} * {number2} = ?");
