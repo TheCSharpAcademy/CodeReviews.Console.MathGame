@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using static System.Formats.Asn1.AsnWriter;
+﻿using System.Diagnostics;
 
 void DisplayScore (int score)
 {
@@ -150,7 +147,7 @@ int Game (string gameType, int _numberOfRounds, int _min, int _max)
                 timeToAnswer.Stop();
                 break;
             case "SUBTRACTION":
-                right= Subtraction(_max, _min);
+                right= Subtraction(_min, _max);
                 timeToAnswer.Stop();
                 break;
             case "DIVISION":
