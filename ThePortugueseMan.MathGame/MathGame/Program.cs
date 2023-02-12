@@ -25,20 +25,17 @@ bool Sum (int _min, int _max)
 {
     Random random= new Random();
     int number1 = random.Next(_min, _max + 1);
-    int number2 = random.Next(_max, _max + 1);
-    int answer;
+    int number2 = random.Next(_min, _max + 1);
 
     Console.WriteLine($"{number1} + {number2} = ?");
 
-    if (int.TryParse(Console.ReadLine(), out answer))
+    if (int.TryParse(Console.ReadLine(), out int answer))
     {
         if (answer == number1 + number2)
         {
             return true;
         }
-
     }
-
     return false;
 }
 
@@ -48,48 +45,38 @@ bool Subtraction(int _min, int _max)
     int number1 = random.Next(_min, _max + 1);
     int number2 = random.Next(number1, _max + 1);
     int subResult = number2 - number1;
-    int answer;
-
 
     Console.WriteLine($"{number2} - {number1} = ?");
-    if (int.TryParse(Console.ReadLine(), out answer))
+    if (int.TryParse(Console.ReadLine(), out int answer))
     {
         if (answer == subResult)
         {
             return true;
         }
-
         else { return false; }
     }
-
     return false;
-
 }
 
 bool Division( int _min, int _max)
 {
     Random random = new Random();
-    double divResult;
     int number1;
     int number2;
-    int answer;
 
     do
     {
-        number1 = random.Next(_min, _max+1);
-        number2 = random.Next(number1+1, _max+1);
-        divResult = number2 / number1;
+        number1 = random.Next(_min, _max + 1);
+        number2 = random.Next(number1 + 1, _max + 1);
     }
-
-    while (number2%number1 != 0);
+    while (number2 % number1 != 0);
 
     Console.WriteLine($"{number2} / {number1} = ?");
 
-    if (int.TryParse(Console.ReadLine(), out answer) && answer == number2/number1)
+    if (int.TryParse(Console.ReadLine(), out int answer) && answer == number2/number1)
     {
         return true;
     }
-
     else { return false; }
 }
 
@@ -98,19 +85,16 @@ bool Multiplication(int _min, int _max)
     Random random = new Random();
     int number1 = random.Next(_min, _max + 1);
     int number2 = random.Next(_min, _max + 1);
-    int answer;
 
     Console.WriteLine($"{number1} * {number2} = ?");
 
-    if (int.TryParse(Console.ReadLine(), out answer))
+    if (int.TryParse(Console.ReadLine(), out int answer))
     {
         if (answer == number1 * number2)
         {
             return true;
         }
-
     }
-
     return false;
 }
 
@@ -173,7 +157,6 @@ int Game (string gameType, int _numberOfRounds, int _min, int _max)
                 timeToAnswer.Stop();
                 break;
         }
-
         if (right) { score = score + CalculateScore(timeToAnswer); }
 
         _numberOfRounds--;
@@ -185,8 +168,6 @@ int Game (string gameType, int _numberOfRounds, int _min, int _max)
 void GameSelect(int _numberOfRounds, int _min, int _max, List<Game> _games)
 {
     int gameScore;
-    
-
     string? gameMode;
 
     Console.Clear();
@@ -225,13 +206,11 @@ void GameSelect(int _numberOfRounds, int _min, int _max, List<Game> _games)
                 Console.WriteLine("Invalid character!");
                 break;
         }
-
     }
 }
 
 void Settings(ref int min, ref int max, ref int numberOfRounds)
 {
-
     while (true)
     {
         Console.Clear();
@@ -288,8 +267,6 @@ int min = 1;
 int max = 100;
 string? mode;
 
-
-
 do
 {
     Console.WriteLine("MATH GAME\n\n");
@@ -312,8 +289,6 @@ do
         default:
             break;
     }
-
-
 }
 while (mode != "e");
 
@@ -333,7 +308,6 @@ void ViewPreviousGames(List<Game> _games)
     Console.ReadLine();
     Console.Clear();
     return;
-
 }
 
 
