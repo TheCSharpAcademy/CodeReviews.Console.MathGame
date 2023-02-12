@@ -60,7 +60,6 @@ Q - Quit the program");
                     Console.ReadLine();
                     break;
             }
-
         } while (isGameOn);
     }
 
