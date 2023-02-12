@@ -177,7 +177,6 @@ void GameSelect(int _numberOfRounds, int _min, int _max, List<Game> _games)
 
         switch (gameMode = Console.ReadLine())
         {
-            
             case "S":
                 gameScore = Game("SUM", _numberOfRounds,_min, _max);
                 _games.Add(new Game("Sum", gameScore));
