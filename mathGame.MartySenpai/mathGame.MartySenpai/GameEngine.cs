@@ -10,14 +10,13 @@ internal class GameEngine
         Console.WriteLine(message);
 
         string difficulty = Menu.ShowDifficultyMenu();
-
         int nQuestions = Helpers.GetAmountOfQuestions();
 
         int score = 0;
 
-        List<int> numbers = new List<int>();
+        List<int> numbers = new();
 
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
 
         for (int i = 0; i < nQuestions; i++)
@@ -26,6 +25,7 @@ internal class GameEngine
             Console.WriteLine(message);
 
             numbers.Clear();
+
             Helpers.PrintQuestions(difficulty, numbers, operand);
 
             string input = Console.ReadLine();
@@ -42,25 +42,24 @@ internal class GameEngine
                 Console.ReadLine();
             }
         }
-
-        timer.Start();
+        timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Addition, difficulty, timeTaken);
     }
+
     internal void SubtractionGame(string message, char operand)
     {
         Console.WriteLine(message);
 
         string difficulty = Menu.ShowDifficultyMenu();
-
         int nQuestions = Helpers.GetAmountOfQuestions();
 
         int score = 0;
 
-        List<int> numbers = new List<int>();
+        List<int> numbers = new();
 
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
 
         for (int i = 0; i < nQuestions; i++)
@@ -69,6 +68,7 @@ internal class GameEngine
             Console.WriteLine(message);
 
             numbers.Clear();
+
             Helpers.PrintQuestions(difficulty, numbers, operand);
 
             string input = Console.ReadLine();
@@ -85,25 +85,24 @@ internal class GameEngine
                 Console.ReadLine();
             }
         }
-
-        timer.Start();
+        timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Subtraction, difficulty, timeTaken);
     }
+
     internal void MultiplicationGame(string message, char operand)
     {
         Console.WriteLine(message);
 
         string difficulty = Menu.ShowDifficultyMenu();
-
         int nQuestions = Helpers.GetAmountOfQuestions();
 
         int score = 0;
 
-        List<int> numbers = new List<int>();
+        List<int> numbers = new();
 
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
 
         for (int i = 0; i < nQuestions; i++)
@@ -112,6 +111,7 @@ internal class GameEngine
             Console.WriteLine(message);
 
             numbers.Clear();
+
             Helpers.PrintQuestions(difficulty, numbers, operand);
 
             string input = Console.ReadLine();
@@ -128,12 +128,12 @@ internal class GameEngine
                 Console.ReadLine();
             }
         }
-
-        timer.Start();
+        timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
 
         Helpers.AddToHistory(score, nQuestions, GameType.Multiplication, difficulty, timeTaken);
     }
+
     internal void RandomGame(string message)
     {
         Console.WriteLine(message);
@@ -141,27 +141,25 @@ internal class GameEngine
         Random random = new Random();
 
         string difficulty = Menu.ShowDifficultyMenu();
-
         int nQuestions = Helpers.GetAmountOfQuestions();
 
         int score = 0;
 
         List<char> operands = new List<char> { '+', '-', '*', '/'};
+        List<int> numbers = new();
 
-        List<int> numbers = new List<int>();
-
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
 
         for (int i = 0; i < nQuestions; i++)
         {
             Console.Clear();
             Console.WriteLine(message);
-
-            // Clear previous values from numbers. 
+            
             numbers.Clear();
 
             char operand = operands[random.Next(0, 4)];
+
             if (operand == '/') 
             {
                 numbers = Helpers.GetDivisionNumbers();
@@ -188,7 +186,7 @@ internal class GameEngine
 
         Helpers.AddToHistory(score, nQuestions, GameType.Random, difficulty, timeTaken);
     }
-    //DivisionGame does not offer difficult levels.
+
     internal void DivisionGame(string message, char operand)
     {
         Console.WriteLine(message);
@@ -199,9 +197,9 @@ internal class GameEngine
 
         int score = 0;
 
-        List<int> numbers = new List<int>();
+        List<int> numbers = new();
 
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
 
         for (int i = 0; i < nQuestions; i++)
@@ -231,6 +229,6 @@ internal class GameEngine
         timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
 
-       Helpers.AddToHistory(score,nQuestions, GameType.Division, difficulty, timeTaken);
+        Helpers.AddToHistory(score,nQuestions, GameType.Division, difficulty, timeTaken);
     }
 }

@@ -4,20 +4,24 @@ namespace MathGame;
 
 internal class Helpers
 {
-    internal static List<Game> games = new List<Game>();
+    internal static List<Game> games = new();
+
     internal static void PrintGames()
     {
         Console.Clear();
         Console.WriteLine("Games History");
         Console.WriteLine("------------------------------------");
+
         foreach (Game game in games)
         {
             Console.WriteLine($"{game.Date} - {game.Difficulty} - {game.Type} : {game.Score}/{game.NQuestions} pts - Time: {game.GameTime:mm\\:ss\\:ff}");
         }
+
         Console.WriteLine("------------------------------------\n");
         Console.WriteLine("Press any key to return to the main menu");
         Console.ReadLine();
     }
+
     internal static void AddToHistory(int gameScore, int nQuestions, GameType gameType, string difficulty, TimeSpan timeTaken)
     {
         games.Add(new Game
@@ -30,13 +34,15 @@ internal class Helpers
             GameTime = timeTaken
         });
     }
+
     internal static List<int> GetDivisionNumbers()
     {
         Random random = new Random();
+
         int firstNumber = random.Next(1, 101);
         int secondNumber = random.Next(1, 101);
 
-        List<int> numbers = new List<int>();
+        List<int> numbers = new();
 
         while (firstNumber % secondNumber != 0)
         {
@@ -49,6 +55,7 @@ internal class Helpers
 
         return numbers;
     }
+
     internal static string ValidateInput(string input)
     {
         while (string.IsNullOrEmpty(input) || !Int32.TryParse(input, out _))
@@ -58,6 +65,7 @@ internal class Helpers
         }
         return input;
     }
+
     internal static string GetName()
     {
         Console.WriteLine("Please type your name");
@@ -70,9 +78,9 @@ internal class Helpers
         }
         return name;
     }
+
     internal static int GetAmountOfQuestions()
     {
-
         Console.Clear();
         Console.WriteLine("Please enter how many questions you would like to recieve.");
 
@@ -84,13 +92,13 @@ internal class Helpers
 
         return amount;
     }
+
     internal static void PrintQuestions(string difficulty, List<int> numbers, char operand)
     {
         var random = new Random();
 
         int n = 0;
 
-        // Makes sure division only print two numbers.
         if (operand == '/')
         {
             difficulty = "Easy";
@@ -109,7 +117,6 @@ internal class Helpers
                 break;
         }
 
-        // Prints different amounts of values in a question based on difficulty.
         for (int j = 0; j < n; j++)
         {
             if (operand != '/')
@@ -127,6 +134,7 @@ internal class Helpers
             }
         }
     }
+
     internal static int GetOutput(int output, char operand, List<int> numbers)
     {
         for (int j = 1; j < numbers.Count; j++)
@@ -149,6 +157,7 @@ internal class Helpers
         }
         return output;
     }
+
     internal static int GetScore(string input, int output, int score)
     {
         if (int.Parse(input) == output)

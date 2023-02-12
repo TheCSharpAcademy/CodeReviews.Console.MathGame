@@ -2,7 +2,8 @@
 
 internal class Menu
 {
-    GameEngine gameEngine = new GameEngine();
+    GameEngine gameEngine = new();
+
     internal void ShowMenu(string name, DateTime date)
     {
         Console.Clear();
@@ -59,8 +60,10 @@ Q - Quit the program");
                     Console.ReadLine();
                     break;
             }
+
         } while (isGameOn);
     }
+
     internal static string ShowDifficultyMenu()
     {
         bool selectingDifficulty = true;
