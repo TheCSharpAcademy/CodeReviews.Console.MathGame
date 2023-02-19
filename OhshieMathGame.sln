@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OhshieMathGame", "OhshieMathGame\OhshieMathGame.csproj", "{97213E35-CD8E-42F8-AC25-E9A12C07F4C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97213E35-CD8E-42F8-AC25-E9A12C07F4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97213E35-CD8E-42F8-AC25-E9A12C07F4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97213E35-CD8E-42F8-AC25-E9A12C07F4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97213E35-CD8E-42F8-AC25-E9A12C07F4C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
