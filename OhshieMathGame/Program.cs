@@ -4,6 +4,11 @@ class Program
 {
     public static double gamesPlayed;
     public static ConsoleKey menuOperator;
+    public static double score;
+    public static List<string> prevGames = new List<string>();
+    public static double effectiveness;
+    
+    
     static void MainMenu()
     {
         while (true)
@@ -19,7 +24,7 @@ class Program
             }
             else
             {
-                Console.WriteLine($"Correct answers: {Gameplay.score}\n" +
+                Console.WriteLine($"Correct answers: {score}\n" +
                                   "Press corresponding key to choose:\n" +
                                   "1. Let's play!\n"+
                                   "2. Adjust difficulty settings\n" +
@@ -61,7 +66,7 @@ class Program
     static void ScorePrinter()
     {
         Console.Clear();
-        foreach (var record in Gameplay.prevGames)
+        foreach (var record in prevGames)
         {
             Console.WriteLine(record);
         }

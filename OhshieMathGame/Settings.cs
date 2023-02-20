@@ -39,7 +39,7 @@ public class Settings
         }
 
         Program.gamesPlayed = 0;
-        Gameplay.score = 0;
+        Program.score = 0;
     }
 
     // method to adjust length of equation. Also checks if user entered something that is not a number.

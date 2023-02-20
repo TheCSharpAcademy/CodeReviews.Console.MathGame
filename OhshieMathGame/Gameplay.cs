@@ -6,12 +6,9 @@ public class Gameplay
 {
     // to make everything work
     static Random random = new Random();
-    public static double score;
     private static Stopwatch _stopwatch = new Stopwatch();
     private static TimeSpan _elapsed;
     public static double[] variables = new double[Settings.amountOfVariables];
-    public static List<string> prevGames = new List<string>();
-    public static double effectiveness;
     
     // method accumulated score data and saves it into a list
     public static void ScoreTracker(int randomChooser, double playerAnswer, double correctAnswer)
@@ -22,16 +19,16 @@ public class Gameplay
         if (wincheck)
         {
             result = "Your answer was correct!";
-            effectiveness = Math.Round(Convert.ToDouble(score / Program.gamesPlayed),2);
+            Program.effectiveness = Math.Round(Convert.ToDouble(Program.score / Program.gamesPlayed),2);
         }
         else
         {
             result = "Your answer was incorrect!";
-            effectiveness = Math.Round(score / Program.gamesPlayed,2)*100;
+            Program.effectiveness = Math.Round(Program.score / Program.gamesPlayed,2)*100;
         }
         
-        gameScoreWritedown = ($"Round {Program.gamesPlayed}. {EquiationToString(randomChooser)}{playerAnswer}. {result} Accuracy: {effectiveness}%");
-        prevGames.Add(gameScoreWritedown);
+        gameScoreWritedown = ($"Round {Program.gamesPlayed}. {EquiationToString(randomChooser)}{playerAnswer}. {result} Accuracy: {Program.effectiveness}%");
+        Program.prevGames.Add(gameScoreWritedown);
     }
     // method used to output readable timer in string format.
     private static string Timer()
@@ -66,7 +63,7 @@ public class Gameplay
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"Correct answers {score}");
+                Console.WriteLine($"Correct answers {Program.score}");
                 Console.WriteLine("Solve this:");
                 Console.Write(EquiationToString(randomChooser));
                 
@@ -129,7 +126,7 @@ public class Gameplay
         bool winCheck = playerAnswer == correctAnswer;
         if (winCheck)
         {
-            score++;
+            Program.score++;
             Console.WriteLine($"Correct! It took you {Timer()} seconds to answer");
         }
         else
