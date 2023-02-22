@@ -6,12 +6,12 @@ static class OperatorsConfiguration
     
     public static void SaveOperatorConfiguration()
     {
-        GameController.possibleOperators = _tempAllowedOperators;
+        GameController.OperatorsInPlay = _tempAllowedOperators;
     }
     // main Operator settings menu.
     public static void OperatorsSettings()
     {
-        _tempAllowedOperators = GameController.possibleOperators;
+        _tempAllowedOperators = GameController.AllPossibleOperators;
         while (true)
         {
             string plus = "";
@@ -27,7 +27,7 @@ static class OperatorsConfiguration
                               $"/ [{divide}]\t Press 4 to toggle");
             
             OperatorToggler();
-            if (_tempAllowedOperators.Count >= 1 && Program.menuOperator == ConsoleKey.Enter)
+            if (_tempAllowedOperators.Count >= 1 && Program.MenuOperator == ConsoleKey.Enter)
             {
                 break;
             }
@@ -67,9 +67,9 @@ static class OperatorsConfiguration
         else
             Console.WriteLine("What you want to toggle?\n"+
                               "Press enter to confirm your choice.");
-        Program.menuOperator = Console.ReadKey().Key;
+        Program.MenuOperator = Console.ReadKey().Key;
         Console.Clear();
-            switch (Program.menuOperator)
+            switch (Program.MenuOperator)
             {
                 case ConsoleKey.D1:
                 {

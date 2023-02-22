@@ -5,145 +5,106 @@ namespace OhshieMathGame.GameModes;
 public class CareerGameMode
 {
     // required variables to make this mode work
-    private static int lives;
-    private static int difficultyLevel;
+    public static int Lives;
+    private static int _difficultyLevel;
 
-    private static List<string> operatorsInPlay = new List<string>();
-    private static int amountOfVariables;
-        
+    private static Random _random = new Random();
+
+    private static void AdjustOperatorsInPlay()
+    {
+        int operatorChooser = _random.Next(0, GameController.AllPossibleOperators.Count-1);
+        GameController.OperatorsInPlay.Add(GameController.AllPossibleOperators[operatorChooser]);
+        GameController.AllPossibleOperators.Remove(GameController.AllPossibleOperators[operatorChooser]);
+    }
     private static void DifficultySettings()
     {
-        switch (GameController.gamesPlayed)
+        switch (GameController.GamesPlayed)
         {
-            case (1):
+            case (<=1):
             {
-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
-                amountOfVariables = 2;
-                difficultyLevel = 1;
+                AdjustOperatorsInPlay();
+                GameController.AmountOfVariables = 2;
+                _difficultyLevel = 1;
                 break;
             }
-            case (5):
+            case (6):
             {
-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
-                amountOfVariables = 3;
-                difficultyLevel = 2;
+                AdjustOperatorsInPlay();
+                GameController.AmountOfVariables = 3;
+                _difficultyLevel = 2;
                 break;
             }
-            case (10):
+            case (11):
             {
-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
-                amountOfVariables = 4;
-                difficultyLevel = 3;
+                AdjustOperatorsInPlay();
+                GameController.AmountOfVariables = 4;
+                _difficultyLevel = 3;
                 break;
             }
-            case (15):
+            case (16):
             {
-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
-                amountOfVariables = 5;
-                difficultyLevel = 4;
+                AdjustOperatorsInPlay();
+                GameController.AmountOfVariables = 5;
+                _difficultyLevel = 4;
                 break;
             }
-            case (20):
+            case (21):
             {
-                difficultyLevel = 5;
+                _difficultyLevel = 5;
                 break;
             }
         }
     }
     public static void GameplayLoop()
     {
-        GameController.gamesPlayed = 1;
-        lives = 4;
+        GameController.LoadDefaults();
+        Lives = 4;
         
         int cont = 1;
-        while (cont == 1 && lives > 0) 
+        while (cont == 1 && Lives > 0) 
         {
+            GameController.GamesPlayed++;
+            
             DifficultySettings();
             
-            ProblemGenerator();
-            double correctAnswer = ProblemSolver();
-            double playerAnswer = PlayerSolution();
+            ProblemGenerator(GameController.AmountOfVariables);
+            float correctAnswer = GameController.ProblemSolver();
+            float playerAnswer = PlayerSolution();
 
-            WinCondition(playerAnswer, correctAnswer);
-            ScoreTracker(playerAnswer,correctAnswer);
+            GameController.WinCondition(playerAnswer,correctAnswer, true);
+            GameController.ScoreTracker(playerAnswer,correctAnswer);
             
-            cont = ContinueCheck(cont);
-            GameController.gamesPlayed++;
+            cont = GameController.ContinueCheck(cont, true);
+            
         }
         GameFinished();
     }
-
     private static void GameFinished()
     {
         Console.Clear();
-        if (lives < 1)
+        if (Lives < 1)
         {
             Console.WriteLine("Dang! You run out of lives.\n" +
-                              $"You've solved {GameController.score} equations our of possible 25");
-            ScorePrinter();
+                              $"You've solved {GameController.Score} equations our of possible 25");
+            GameController.ScorePrinter();
             
             Console.WriteLine("Press enter to go back to menu");
             
             Console.ReadLine();
         }
-        else if (lives > 0 && GameController.gamesPlayed == 26)
+        else if (Lives > 0 && GameController.GamesPlayed == 26)
         {
             Console.WriteLine("You WON\n" +
-                              $"You've solved {GameController.score} equations our of possible 25\n" +
-                              $"You still have {lives} lives left");
-            ScorePrinter();
+                              $"You've solved {GameController.Score} equations our of possible 25\n" +
+                              $"You still have {Lives} lives left");
+            GameController.ScorePrinter();
             
             Console.WriteLine("Press enter to go back to menu");
             
             Console.ReadLine();
         }
     }
-    private static int ContinueCheck(int cont)
-    {
-        if (lives < 1)
-        {
-            Console.WriteLine("No more lives. Press enter to exit this session");
-            Console.ReadLine();
-            cont++;
-        }
-        else if (lives > 0 && GameController.gamesPlayed == 26)
-        {
-            Console.WriteLine("Whew, that was the final question! Press enter to finish this session");
-            Console.ReadLine();
-            cont++;
-        }
-        else
-        {
-            while (true)
-            {
-                Console.WriteLine("Advance to the next round?\n" +
-                                  "1. Yes 2. No");
-                Program.menuOperator = Console.ReadKey().Key;
-                switch (Program.menuOperator)
-                {
-                    case ConsoleKey.D1:
-                        Console.Clear();
-                        return cont;
-                    case ConsoleKey.D2:
-                        cont++;
-                        return cont;
-                    default:
-                        continue;
-                }
-            }
-        }
-
-        return cont;
-    }
-    private static void ProblemGenerator()
+    private static void ProblemGenerator(int amountOfVariables)
     {
         // getting maximum amount of variables possible from settings
         
@@ -153,107 +114,54 @@ public class CareerGameMode
         
         for (int i = 0; i < variables.Length; i++)
         {
-            variables[i] = GameController.random.Next(1, 10);
+            variables[i] = _random.Next(1, 10);
         }
         
         // getting random operators for that equation
         
-        string[] operatorsInEquasion = new string[variables.Length - 1];
-
-        int maxActiveOperatorsForRandom = operatorsInPlay.Count;
+        string[] operatorsInEquation = new string[variables.Length - 1];
         
-        for (int i = 0; i < operatorsInEquasion.Length; i++)
+        for (int i = 0; i < operatorsInEquation.Length; i++)
         {
-            operatorsInEquasion[i] = operatorsInPlay[GameController.random.Next(0,maxActiveOperatorsForRandom)];
+            operatorsInEquation[i] = GameController.OperatorsInPlay[_random.Next(0,GameController.OperatorsInPlay.Count)];
         }
         
         // filling a sting
         
-        GameController.equation = "";
+        GameController.Equation = "";
         
         for (int i = 0; i < variables.Length; i++)
         {
-            GameController.equation += variables[i];
-            if (i<operatorsInEquasion.Length)
+            GameController.Equation += variables[i];
+            if (i<operatorsInEquation.Length)
             {
-                GameController.equation += operatorsInEquasion[i];
+                GameController.Equation += operatorsInEquation[i];
             }
         }
 
     }
-    private static double ProblemSolver()
+    private static float PlayerSolution()
     {
-        Expression expression = new Expression(GameController.equation);
-        double correctAnswer = Convert.ToDouble(expression.Evaluate());
-
-        // doing this so it is actually possible to answer division questions
-        correctAnswer = Math.Round(correctAnswer, 2);
-
-        return correctAnswer;
-    }
-    private static double PlayerSolution()
-    {
-        double playerAnswer;
+        float playerAnswer;
         // while loop for safety check
         while (true)
         {
             Console.Clear();
-            Console.WriteLine($"Correct answers {GameController.score}. {lives} lives left\n" +
-                              $"Problem: {GameController.gamesPlayed}. Difficulty level: {difficultyLevel}");
+            Console.WriteLine($"Correct answers {GameController.Score}. {Lives} lives left\n" +
+                              $"Problem: {GameController.GamesPlayed}. Difficulty level: {_difficultyLevel}");
             Console.WriteLine("Solve this:");
-            Console.Write(GameController.equation+"=");
+            Console.Write(GameController.Equation+"=");
                 
-            if (Double.TryParse(Console.ReadLine(),out playerAnswer))
+            if (Single.TryParse(Console.ReadLine(),out playerAnswer))
                 break;
             Console.WriteLine("Looks like you entered something that is not a number.\n" +
                               "Try again!");
         }
         return playerAnswer;
     }
-    private static void WinCondition(double playerAnswer, double correctAnswer)
-    {
-        bool winCheck = playerAnswer == correctAnswer;
-        if (winCheck)
-        {
-            GameController.score++;
-            Console.WriteLine($"Correct!");
-        }
-        else
-        {
-            lives--;
-            Console.WriteLine($"Wrong! Correct answer is: {correctAnswer}.");
-        }
-            
-    }
     
-    private static void ScoreTracker(double playerAnswer, double correctAnswer)
-    {
-        string gameScoreWritedown;
-        bool wincheck = playerAnswer == correctAnswer;
-        string result;
-        double effectiveness;
-        if (wincheck)
-        {
-            result = "Your answer was correct!";
-            effectiveness = Math.Round(Convert.ToDouble(GameController.score / GameController.gamesPlayed),2);
-        }
-        else
-        {
-            result = "Your answer was incorrect!";
-            effectiveness = Math.Round(GameController.score / GameController.gamesPlayed,2)*100;
-        }
-        
-        gameScoreWritedown = ($"Round {GameController.gamesPlayed}. {GameController.equation}={playerAnswer}. {result} Accuracy: {effectiveness}%");
-        GameController.prevGames.Add(gameScoreWritedown);
-    }
+   
     
-    static void ScorePrinter()
-    {
-        foreach (var record in GameController.prevGames)
-        {
-            Console.WriteLine(record);
-        }
-    }
 
  
 

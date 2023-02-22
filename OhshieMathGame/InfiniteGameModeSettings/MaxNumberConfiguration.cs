@@ -6,7 +6,7 @@ public class MaxNumberConfiguration
     
     public static void SaveOperatorConfiguration()
     {
-        InfiniteSettings.maxNumber = _tempMaxNumber;
+        GameController.MaxNumber = _tempMaxNumber;
     }
     
     // method to adjust how big numbers can be in equations

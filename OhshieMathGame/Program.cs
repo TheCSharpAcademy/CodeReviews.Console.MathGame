@@ -3,8 +3,8 @@ using OhshieMathGame.GameModes;
 
 class Program
 {
-    public static ConsoleKey menuOperator;
-    static void MainMenu()
+    public static ConsoleKey MenuOperator;
+    private static void MainMenu()
     {
         while (true)
         {
@@ -12,10 +12,9 @@ class Program
             Console.WriteLine("Welcome to math game\n" +
                               "Press corresponding key to choose:\n" +
                               "1. Let's play!\n"+
-                              "2. Adjust difficulty settings\n" +
-                              "3. Exit");
-            menuOperator = Console.ReadKey().Key;
-            switch (menuOperator)
+                              "2. Exit");
+            MenuOperator = Console.ReadKey().Key;
+            switch (MenuOperator)
             {
                 case ConsoleKey.D1:
                 {
@@ -23,17 +22,12 @@ class Program
                 }
                 case ConsoleKey.D2:
                 {
-                    InfiniteSettings.SettingsMenu();
-                    continue;
-                }
-                case ConsoleKey.D4:
-                {
                     Environment.Exit(0);
                     break;
                 }
                 default:
                     Console.WriteLine();
-                    Console.WriteLine("hm");
+                    Console.WriteLine("You entered something that you shouldn't");
                     continue;
             }
             Console.Clear();
@@ -43,7 +37,6 @@ class Program
     
     public static void Main(string[] args)
     {
-        
         while (true)
         {
             MainMenu();

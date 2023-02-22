@@ -7,7 +7,7 @@ public class EquationLengthConfiguration
     //used to save changes
     public static void SaveOperatorConfiguration()
     {
-        InfiniteSettings.amountOfVariables = _tempVariables;
+        GameController.AmountOfVariables = _tempVariables;
     }
     // method to adjust length of equation. Also checks if user entered something that is not a number.
     public static void LengthOfEquation()
