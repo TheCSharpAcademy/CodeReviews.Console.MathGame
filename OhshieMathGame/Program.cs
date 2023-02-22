@@ -35,10 +35,11 @@
     
     public static void Main(string[] args)
     {
+        GameController gameController = new GameController();
         while (true)
         {
             MainMenu();
-            GameController.GameModeSelector();
+            gameController.GameModeSelector();
         }
     }
 }

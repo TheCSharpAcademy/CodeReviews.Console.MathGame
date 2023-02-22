@@ -23,9 +23,9 @@ public class GameController
     public static Stopwatch Stopwatch = new Stopwatch();
     public static TimeSpan Elapsed = new TimeSpan();
     private static Random _random = new Random();
-    
+
     // main game selector menu
-    public static void GameModeSelector()
+    public void GameModeSelector()
     {
         while (true)
         {
@@ -226,5 +226,13 @@ public class GameController
         AmountOfVariables = 2;
         PrevGames.Clear();
         CareerGameMode.Lives = 4;
+        OperatorsInPlay = new List<string>();
+        AllPossibleOperators = new List<string>()
+        {
+            "+",
+            "-",
+            "*",
+            "/"
+        };
     }
 }

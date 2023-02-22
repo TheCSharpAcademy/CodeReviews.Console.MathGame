@@ -6,6 +6,13 @@ public class CareerGameMode
     public static int Lives;
     public static int DifficultyLevel;
     private static Random _random = new Random();
+    private static List<string> _defaultOperators = new List<string>()
+    {
+        "+",
+        "-",
+        "*",
+        "/"
+    };
     
     public static void GameplayLoop()
     {
@@ -31,7 +38,7 @@ public class CareerGameMode
     {
         switch (GameController.GamesPlayed)
         {
-            case (<=1):
+            case (1):
             {
                 AdjustOperatorsInPlay();
                 GameController.AmountOfVariables = 2;
