@@ -9,6 +9,7 @@ public class EquationLengthConfiguration
     {
         GameController.AmountOfVariables = _tempVariables;
     }
+    
     // method to adjust length of equation. Also checks if user entered something that is not a number.
     public static void LengthOfEquation()
     {

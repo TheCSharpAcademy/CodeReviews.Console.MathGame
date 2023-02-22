@@ -25,7 +25,6 @@ public class MaxNumberConfiguration
             Console.WriteLine("Either you entered 0, or not a number at all.");
             
             // need this adjustment as "random" range does not include actuall last number in range
-
             _tempMaxNumber += 1;
         }
     }

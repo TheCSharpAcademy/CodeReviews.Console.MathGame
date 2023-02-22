@@ -1,5 +1,6 @@
+using System.Diagnostics;
 using NCalc;
-
+using OhshieMathGame;
 using OhshieMathGame.GameModes;
 
 public class GameController
@@ -7,14 +8,10 @@ public class GameController
     // those variables are used in both gamemodes to make them work
     public static float Score;
     public static float GamesPlayed;
-    
     public static int MaxNumber; // used to store maximum value for each operands
     public static int AmountOfVariables; // used to store how many operands are available
-    
     public static string Equation = ""; // used to store equation
-    
     public static List<string> OperatorsInPlay = new List<string>(); // stores current available operators
-    
     public static List<string> AllPossibleOperators = new List<string>() // default operators list
     {
         "+",
@@ -22,34 +19,44 @@ public class GameController
         "*",
         "/"
     };
-    
     public static List<string> PrevGames = new List<string>(); // stores rounds that were played
+    public static Stopwatch Stopwatch = new Stopwatch();
+    public static TimeSpan Elapsed = new TimeSpan();
+    private static Random _random = new Random();
     
     // main game selector menu
     public static void GameModeSelector()
     {
-
         while (true)
         {
+            Console.Clear();
             LoadDefaults();
             Console.WriteLine("Select game mode\n" +
                               "1. Career\n" +
                               "2. Infinite\n" +
-                              "3. Go back to main menu");
+                              "3. Display previously played games\n" +
+                              "4. Go back to main menu");
             Program.MenuOperator = Console.ReadKey().Key;
             switch (Program.MenuOperator)
             {
                 case (ConsoleKey.D1):
                 {
                     CareerGameMode.GameplayLoop();
+                    GameRecordsKeeper.OverallScoreTracker(true);
                     continue;
                 }
                 case (ConsoleKey.D2):
                 {
                     InfiniteGameMode.GameplayLoop();
+                    GameRecordsKeeper.OverallScoreTracker(false);
                     continue;
                 }
                 case (ConsoleKey.D3):
+                {
+                    GameRecordsKeeper.OverallScorePrinter();
+                    continue;
+                }
+                case (ConsoleKey.D4):
                 {
                     break;
                 }
@@ -62,39 +69,17 @@ public class GameController
         }
     }
     
-    // prints out user previous games
-    public static void ScorePrinter()
+    // method control operates game logic
+    public static void GameLogic(bool careerGameMode)
     {
-        Console.Clear();
-        
-        foreach (var record in PrevGames)
-        {
-            Console.WriteLine(record);
-        }
+        Stopwatch.Reset();
+        ProblemGenerator();
+        float correctAnswer = ProblemSolver();
+        float playerAnswer = PlayerSolution(careerGameMode);
+        WinCondition(playerAnswer,correctAnswer, careerGameMode);
+        GameRecordsKeeper.CurrentScoreTracker(playerAnswer,correctAnswer);
     }
-    
-    // writes game score/stats into a sting and add it to a list of played games
-    public static void ScoreTracker(float playerAnswer, float correctAnswer)
-    {
-        string gameScoreWritedown;
-        bool wincheck = playerAnswer == correctAnswer;
-        string result;
-        float effectiveness;
-        if (wincheck)
-        {
-            result = "Your answer was correct!";
-            effectiveness = (float)Math.Round(Convert.ToSingle(Score / GamesPlayed),2);
-        }
-        else
-        {
-            result = "Your answer was incorrect!";
-            effectiveness = (float)Math.Round(Score / GamesPlayed,2)*100;
-        }
-        
-        gameScoreWritedown = ($"Round {GamesPlayed}. {Equation}={playerAnswer}. {result} Accuracy: {effectiveness}%");
-        PrevGames.Add(gameScoreWritedown);
-    }
-    
+
     // checks is player answer is correct
     public static void WinCondition(float playerAnswer, float correctAnswer, bool careerGameMode)
     {
@@ -112,7 +97,6 @@ public class GameController
             }
             Console.WriteLine($"Wrong! Correct answer is: {correctAnswer}.");
         }
-            
     }
     
     // checks if player wants to continue. Displays endgame message if career mode is activated
@@ -154,6 +138,38 @@ public class GameController
         }
     }
     
+    // found out about NCalc lib that allows to parse a string into a readable expression for program to use. Lets try it
+    public static void ProblemGenerator()
+    {
+        // getting maximum amount of variables possible from settings
+        double[] variables = new double[AmountOfVariables];
+        
+        // Creating random numbers for equation
+        for (int i = 0; i < variables.Length; i++)
+        {
+            variables[i] = _random.Next(1, MaxNumber);
+        }
+        
+        // getting random operators for that equation
+        string[] operatorsInEquation = new string[variables.Length - 1];
+        
+        for (int i = 0; i < operatorsInEquation.Length; i++)
+        {
+            operatorsInEquation[i] = OperatorsInPlay[_random.Next(0,OperatorsInPlay.Count)];
+        }
+        
+        // filling a sting
+        Equation = "";
+        for (int i = 0; i < variables.Length; i++)
+        {
+            Equation += variables[i];
+            if (i<operatorsInEquation.Length)
+            {
+                Equation += operatorsInEquation[i];
+            }
+        }
+    }
+    
     // solves generated equation using NCalc to parse a sting 
     public static float ProblemSolver()
     {
@@ -166,6 +182,41 @@ public class GameController
         return correctAnswer;
     }
     
+    // outputs equation in console and waits for player to solve it
+    public static float PlayerSolution(bool careerGameMode)
+    {
+        float playerAnswer;
+        Stopwatch.Start();
+        while (true)
+        {
+            Console.Clear();
+            Console.Write($"Correct answers {Score}.");
+            if (careerGameMode)
+            {
+                Console.Write($" You have {CareerGameMode.Lives} lives left.\n" +
+                              $"Currently on difficulty level {CareerGameMode.DifficultyLevel}\n");
+            }
+            Console.WriteLine("Solve this:");
+            Console.Write(Equation+"=");
+                
+            if (Single.TryParse(Console.ReadLine(),out playerAnswer))
+                break;
+            Console.WriteLine("Looks like you entered something that is not a number.\n" +
+                              "Try again!");
+        }
+        Stopwatch.Stop();
+        return playerAnswer;
+    }
+
+    // method used to output readable timer in string format.
+    public static string Timer()
+    {
+        Elapsed = Stopwatch.Elapsed;
+        string timer = string.Format("{0:0},{1}", Elapsed.Seconds,Elapsed.Milliseconds);
+        Console.WriteLine($"It took you {timer} seconds to solve");
+        return timer;
+    }
+    
     // method stores defaul values and load them when invoked
     public static void LoadDefaults()
     {
@@ -174,6 +225,6 @@ public class GameController
         MaxNumber = 11;
         AmountOfVariables = 2;
         PrevGames.Clear();
+        CareerGameMode.Lives = 4;
     }
-    
 }

@@ -1,9 +1,7 @@
-﻿using OhshieMathGame;
-using OhshieMathGame.GameModes;
-
-class Program
+﻿class Program
 {
     public static ConsoleKey MenuOperator;
+    
     private static void MainMenu()
     {
         while (true)

@@ -8,6 +8,7 @@ static class OperatorsConfiguration
     {
         GameController.OperatorsInPlay = _tempAllowedOperators;
     }
+    
     // main Operator settings menu.
     public static void OperatorsSettings()
     {
@@ -25,7 +26,6 @@ static class OperatorsConfiguration
                               $"- [{minus}]\t Press 2 to toggle\n" +
                               $"* [{multiply}]\t Press 3 to toggle\n" +
                               $"/ [{divide}]\t Press 4 to toggle");
-            
             OperatorToggler();
             if (_tempAllowedOperators.Count >= 1 && Program.MenuOperator == ConsoleKey.Enter)
             {
@@ -33,6 +33,7 @@ static class OperatorsConfiguration
             }
         }
     }
+    
     // currently displays a list of activated operators
     private static void CurrentOperatorState(ref string plus, ref string minus, ref string multiply, ref string divide)
     {
@@ -56,6 +57,7 @@ static class OperatorsConfiguration
             }
         }
     }
+    
     // method allows turning Operators on and off
     private static void OperatorToggler()
     {
@@ -73,54 +75,22 @@ static class OperatorsConfiguration
             {
                 case ConsoleKey.D1:
                 {
-                    if (_tempAllowedOperators.Contains("+"))
-                    {
-                        _tempAllowedOperators.Remove("+");
-                    }
-                    else
-                    {
-                        _tempAllowedOperators.Add("+");
-                    }
-
+                    OperatorTogglerAddRemove("+");
                     break;
                 }
                 case ConsoleKey.D2:
                 {
-                    if (_tempAllowedOperators.Contains("-"))
-                    {
-                        _tempAllowedOperators.Remove("-");
-                    }
-                    else
-                    {
-                        _tempAllowedOperators.Add("-");
-                    }
-
+                    OperatorTogglerAddRemove("-");
                     break;
                 }
                 case ConsoleKey.D3:
                 {
-                    if (_tempAllowedOperators.Contains("*"))
-                    {
-                        _tempAllowedOperators.Remove("*");
-                    }
-                    else
-                    {
-                        _tempAllowedOperators.Add("*");
-                    }
-
+                    OperatorTogglerAddRemove("*");
                     break;
                 }
                 case ConsoleKey.D4:
                 {
-                    if (_tempAllowedOperators.Contains("/"))
-                    {
-                        _tempAllowedOperators.Remove("/");
-                    }
-                    else
-                    {
-                        _tempAllowedOperators.Add("/");
-                    }
-
+                    OperatorTogglerAddRemove("/");
                     break;
                 }
                 case ConsoleKey.Enter:
@@ -133,5 +103,18 @@ static class OperatorsConfiguration
                     break;
                 }
             }
+    }
+    
+    // Helper method for OperatorToggler
+    private static void OperatorTogglerAddRemove(string operation)
+    {
+        if (_tempAllowedOperators.Contains(operation))
+        {
+            _tempAllowedOperators.Remove(operation);
+        }
+        else
+        {
+            _tempAllowedOperators.Add(operation);
+        } 
     }
 }

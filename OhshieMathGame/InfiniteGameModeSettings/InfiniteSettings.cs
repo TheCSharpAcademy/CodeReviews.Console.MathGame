@@ -1,4 +1,5 @@
 using OhshieMathGame.InfiniteGameModeSettings;
+
 public class InfiniteSettings
 {
     private static bool ChangesWereMade;
@@ -77,6 +78,5 @@ public class InfiniteSettings
             SaveSettings();
             break;
         }
-        
     }
 }
