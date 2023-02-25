@@ -1,26 +1,24 @@
-namespace OhshieMathGame.GameModes;
+using OhshieMathGame.InfiniteGameModeSettings;
 
 public class InfiniteGameMode
 {
-    public static void GameplayLoop()
+    private GameController _gameController = new GameController();
+    private InfiniteSettings _infiniteSettings = new InfiniteSettings();
+
+    public void GameplayLoop(GameRecordsKeeper scoreTracker)
     {
-        GameRecordsKeeper.infinitePlayedCounter++;
+        GameRecordsKeeper.InfinitePlayedCounter++;
         
-        if (GameController.GamesPlayed==0)
-        {
-            InfiniteSettings.SettingsMenu();
-        }
-        
+        _infiniteSettings.SettingsMenu(_gameController);
+
         int cont = 1;
         while (cont == 1)
         {
-            GameController.GamesPlayed++;
-            GameController.GameLogic(false);
-            cont = GameController.ContinueCheck(cont, false);
+            _gameController.GamesPlayed++;
+            _gameController.GameLogic(false, scoreTracker, _gameController);
+            cont = _gameController.ContinueCheck(cont, false);
         }
-        
-        Console.Clear();
-        GameRecordsKeeper.CurrentScorePrinter();
+        scoreTracker.CurrentScorePrinter();
         Console.Clear();
     }
 }

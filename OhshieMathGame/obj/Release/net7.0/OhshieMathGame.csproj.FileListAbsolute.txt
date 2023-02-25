@@ -1,0 +1,17 @@
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/OhshieMathGame
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/OhshieMathGame.deps.json
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/OhshieMathGame.runtimeconfig.json
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/OhshieMathGame.dll
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/OhshieMathGame.pdb
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/NCalc.dll
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.csproj.AssemblyReference.cache
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.GeneratedMSBuildEditorConfig.editorconfig
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.AssemblyInfoInputs.cache
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.AssemblyInfo.cs
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.csproj.CoreCompileInputs.cache
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.csproj.CopyComplete
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.dll
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/refint/OhshieMathGame.dll
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.pdb
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/OhshieMathGame.genruntimeconfig.cache
+/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/obj/Release/net7.0/ref/OhshieMathGame.dll

@@ -1,39 +1,14 @@
-using OhshieMathGame.InfiniteGameModeSettings;
+namespace OhshieMathGame.InfiniteGameModeSettings;
 
 public class InfiniteSettings
 {
-    private static bool ChangesWereMade;
-    // method saves all changes
-    private static void SaveSettings()
+    public void SettingsMenu(GameController currentGame)
     {
-        if (ChangesWereMade)
-        {
-            GameController.GamesPlayed = 0; 
-            GameController.Score = 0;
-            MaxNumberConfiguration.SaveOperatorConfiguration();
-            EquationLengthConfiguration.SaveOperatorConfiguration();
-            OperatorsConfiguration.SaveOperatorConfiguration();
-            GameController.PrevGames.Clear();
-        }
-        else
-        {
-            GameController.GamesPlayed = 0; 
-            GameController.Score = 0;
-            MaxNumberConfiguration.SaveOperatorConfiguration();
-            EquationLengthConfiguration.SaveOperatorConfiguration();
-            GameController.OperatorsInPlay=GameController.AllPossibleOperators;
-            GameController.PrevGames.Clear();
-        }
-    }
-    
-    // Main settings menu
-    public static void SettingsMenu()
-    {
-        while (true)
+        bool settingsConfirmed = false;
+        while (settingsConfirmed == false)
         {
             Console.Clear();
-            Console.WriteLine("Keep in mind that changing difficulty will reset your score.");
-            Console.WriteLine("What do you want to change?\n" +
+            Console.WriteLine("Adjust difficulty?\n" +
                               $"1. Amount of variables in equation.\n" +
                               $"2. Maximum size for variables in equation.\n" +
                               "3. Activate/Deactivate operators");
@@ -41,42 +16,42 @@ public class InfiniteSettings
             Program.MenuOperator = Console.ReadKey().Key;
             switch (Program.MenuOperator)
             {
-                // adjusting length of equation
                 case ConsoleKey.D1:
                 {
                     Console.Clear();
                     EquationLengthConfiguration.LengthOfEquation();
-                    ChangesWereMade = true;
                     continue;
                 }
-                // adjusting max value of variables
                 case ConsoleKey.D2:
                 {
                     Console.Clear();
                     MaxNumberConfiguration.AdjustMaximumAllowedNumber();
-                    ChangesWereMade = true;
                     continue;
                 }
-                // allow for different operands in equation. Not implemented yet.
                 case ConsoleKey.D3:
                 {
                     Console.Clear();
                     OperatorsConfiguration.OperatorsSettings();
-                    ChangesWereMade = true;
                     continue;
                 }
-                // exit settings.
                 case ConsoleKey.D4:
                 {
+                    settingsConfirmed = true;
+                    SaveSettings(currentGame);
                     Console.Clear();
-                    ChangesWereMade = false;
-                    break;
+                    return;
                 }
                 default:
+                    Console.WriteLine("Please select appropriate variant");
                     continue;
             }
-            SaveSettings();
-            break;
         }
+    }
+
+    private static void SaveSettings(GameController currentGame)
+    {
+        currentGame.OperatorsInPlay = OperatorsConfiguration._tempAllowedOperators;
+        currentGame.AmountOfVariables = EquationLengthConfiguration.TempVariables;
+        currentGame.MaxNumber = MaxNumberConfiguration.TempMaxNumber;
     }
 }

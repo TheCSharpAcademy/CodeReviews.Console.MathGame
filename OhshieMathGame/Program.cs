@@ -1,21 +1,22 @@
 ﻿class Program
 {
     public static ConsoleKey MenuOperator;
-    
     private static void MainMenu()
     {
-        while (true)
+        bool gameStart = false;
+        while (gameStart == false)
         {
             Console.Clear();
             Console.WriteLine("Welcome to math game\n" +
                               "Press corresponding key to choose:\n" +
                               "1. Let's play!\n"+
                               "2. Exit");
-            MenuOperator = Console.ReadKey().Key;
+            MenuOperator = Console.ReadKey(true).Key;
             switch (MenuOperator)
             {
                 case ConsoleKey.D1:
                 {
+                    gameStart = true;
                     break;
                 }
                 case ConsoleKey.D2:
@@ -24,22 +25,20 @@
                     break;
                 }
                 default:
-                    Console.WriteLine();
                     Console.WriteLine("You entered something that you shouldn't");
                     continue;
             }
-            Console.Clear();
-            break;
         }
     }
     
     public static void Main(string[] args)
     {
-        GameController gameController = new GameController();
+        GameMenu gameMenu = new GameMenu();
+        
         while (true)
         {
             MainMenu();
-            gameController.GameModeSelector();
+            gameMenu.Menu();
         }
     }
 }

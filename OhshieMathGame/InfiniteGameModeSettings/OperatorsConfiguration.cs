@@ -2,17 +2,17 @@ using OhshieMathGame.InfiniteGameModeSettings;
 
 static class OperatorsConfiguration
 {
-    private static List<string> _tempAllowedOperators = new List<string>();
-    
-    public static void SaveOperatorConfiguration()
+    public static List<string> _tempAllowedOperators = new List<string>()
     {
-        GameController.OperatorsInPlay = _tempAllowedOperators;
-    }
+        "+",
+        "-",
+        "*",
+        "/"
+    };
     
     // main Operator settings menu.
     public static void OperatorsSettings()
     {
-        _tempAllowedOperators = GameController.AllPossibleOperators;
         while (true)
         {
             string plus = "";
@@ -61,14 +61,13 @@ static class OperatorsConfiguration
     // method allows turning Operators on and off
     private static void OperatorToggler()
     {
+        Console.WriteLine("What you want to toggle?");
         if (_tempAllowedOperators.Count < 1)
         {
-            Console.WriteLine("What you want to toggle?");
             Console.WriteLine("You much choose at least 1 operator".ToUpper());
         }
         else
-            Console.WriteLine("What you want to toggle?\n"+
-                              "Press enter to confirm your choice.");
+            Console.WriteLine("Press enter to confirm your choice.");
         Program.MenuOperator = Console.ReadKey().Key;
         Console.Clear();
             switch (Program.MenuOperator)
