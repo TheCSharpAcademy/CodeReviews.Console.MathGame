@@ -116,7 +116,7 @@ class MathGame
         }
     }
 
-    public void printMenu()
+    public void PrintMenu()
     {
         string menu = @"-------------------------------------------------------------
 ¡HI! Welcome to Math Game. ¿Which game do you want to play today?:
@@ -131,7 +131,7 @@ class MathGame
         Console.WriteLine(menu);
     }
 
-    public int chooseNumberOfQuestions()
+    public int ChooseNumberOfQuestions()
     {
         Console.WriteLine("Please, choose the number of questions: ");
         int number = Convert.ToInt32(Console.ReadLine());
@@ -139,7 +139,7 @@ class MathGame
         return number;
     }
 
-    public int chooseDifficulty()
+    public int ChooseDifficulty()
     {
         Console.WriteLine(@"Please, choose the difficulty:
 1: easy,
@@ -359,7 +359,7 @@ class Score
         this.Time = time;
     }
 
-    public void printScoreMessage()
+    public void PrintScoreMessage()
     {
         Console.WriteLine($"¡Congratulations {Name}! You finished the game in {Time} and you scored: {Value}pts");
     }
@@ -369,12 +369,12 @@ class ScoreTable
 {
     List<Score> scores = new List<Score>();
 
-    public void addScore(Score score)
+    public void AddScore(Score score)
     {
         scores.Add(score);
     }
 
-    public void printScores()
+    public void PrintScores()
     {
         Console.WriteLine("Name - Time - Score");
         foreach (Score score in scores)
