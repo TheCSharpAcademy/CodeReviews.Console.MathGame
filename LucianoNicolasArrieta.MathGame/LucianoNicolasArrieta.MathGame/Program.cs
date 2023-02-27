@@ -13,21 +13,21 @@ class MathGame
 
         while (option != 7)
         {
-            mg.printMenu();
+            mg.PrintMenu();
             option = Convert.ToInt32(Console.ReadLine());
             
             switch (option)
             {
                 case 1:
                     Console.WriteLine("You choose Addition Game");
-                    int number = mg.chooseNumberOfQuestions();
-                    int difficulty = mg.chooseDifficulty();
+                    int number = mg.ChooseNumberOfQuestions();
+                    int difficulty = mg.ChooseDifficulty();
                     try
                     {
                         AdditionGame additionGame = new AdditionGame(number, difficulty);
                         Score score = additionGame.RunGame();
-                        score.printScoreMessage();
-                        st.addScore(score);
+                        score.PrintScoreMessage();
+                        st.AddScore(score);
                     }
                     catch (Exception)
                     {
@@ -37,14 +37,14 @@ class MathGame
                     break;
                 case 2:
                     Console.WriteLine("You choose Subtraction Game");
-                    number = mg.chooseNumberOfQuestions();
-                    difficulty = mg.chooseDifficulty();
+                    number = mg.ChooseNumberOfQuestions();
+                    difficulty = mg.ChooseDifficulty();
                     try
                     {
                         SubtractionGame subtractionGame = new SubtractionGame(number, difficulty);
                         Score score = subtractionGame.RunGame();
-                        score.printScoreMessage();
-                        st.addScore(score);
+                        score.PrintScoreMessage();
+                        st.AddScore(score);
                     }
                     catch (Exception)
                     {
@@ -54,14 +54,14 @@ class MathGame
                     break;
                 case 3:
                     Console.WriteLine("You choose Multiplication Game");
-                    number = mg.chooseNumberOfQuestions();
-                    difficulty = mg.chooseDifficulty();
+                    number = mg.ChooseNumberOfQuestions();
+                    difficulty = mg.ChooseDifficulty();
                     try
                     {
                         MultiplicationGame multiplicationGame = new MultiplicationGame(number, difficulty);
                         Score score = multiplicationGame.RunGame();
-                        score.printScoreMessage();
-                        st.addScore(score);
+                        score.PrintScoreMessage();
+                        st.AddScore(score);
                     }
                     catch (Exception)
                     {
@@ -71,14 +71,14 @@ class MathGame
                     break;
                 case 4:
                     Console.WriteLine("You choose Division Game");
-                    number = mg.chooseNumberOfQuestions();
-                    difficulty = mg.chooseDifficulty();
+                    number = mg.ChooseNumberOfQuestions();
+                    difficulty = mg.ChooseDifficulty();
                     try
                     {
                         DivisionGame divisionGame = new DivisionGame(number, difficulty);
                         Score score = divisionGame.RunGame();
-                        score.printScoreMessage();
-                        st.addScore(score);
+                        score.PrintScoreMessage();
+                        st.AddScore(score);
                     }
                     catch (Exception)
                     {
@@ -88,14 +88,14 @@ class MathGame
                     break;
                 case 5:
                     Console.WriteLine("You choose Random Operations");
-                    number = mg.chooseNumberOfQuestions();
-                    difficulty = mg.chooseDifficulty();
+                    number = mg.ChooseNumberOfQuestions();
+                    difficulty = mg.ChooseDifficulty();
                     try
                     {
                         RandomGame randomGame = new RandomGame(number, difficulty);
                         Score score = randomGame.RunGame();
-                        score.printScoreMessage();
-                        st.addScore(score);
+                        score.PrintScoreMessage();
+                        st.AddScore(score);
                     }
                     catch (Exception)
                     {
@@ -104,7 +104,7 @@ class MathGame
                     }
                     break;
                 case 6:
-                    st.printScores();
+                    st.PrintScores();
                     break;
                 case 7:
                     Console.WriteLine("Thanks for playing, see you!");
@@ -115,6 +115,7 @@ class MathGame
             }
         }
     }
+
 
     public void PrintMenu()
     {
