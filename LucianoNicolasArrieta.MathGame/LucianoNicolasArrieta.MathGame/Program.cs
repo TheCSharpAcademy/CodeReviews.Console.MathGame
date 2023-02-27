@@ -29,7 +29,7 @@ class MathGame
                         score.PrintScoreMessage();
                         st.AddScore(score);
                     }
-                    catch (Exception)
+                    catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
                         break;
@@ -46,7 +46,7 @@ class MathGame
                         score.PrintScoreMessage();
                         st.AddScore(score);
                     }
-                    catch (Exception)
+                    catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
                         break;
@@ -63,7 +63,7 @@ class MathGame
                         score.PrintScoreMessage();
                         st.AddScore(score);
                     }
-                    catch (Exception)
+                    catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
                         break;
@@ -80,7 +80,7 @@ class MathGame
                         score.PrintScoreMessage();
                         st.AddScore(score);
                     }
-                    catch (Exception)
+                    catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
                         break;
@@ -97,7 +97,7 @@ class MathGame
                         score.PrintScoreMessage();
                         st.AddScore(score);
                     }
-                    catch (Exception)
+                    catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
                         break;
@@ -181,7 +181,7 @@ abstract class Game
         }
         else
         {
-            throw new Exception();
+            throw new InvalidDifficultyException();
         }
     }
 
@@ -281,8 +281,13 @@ class DivisionGame : Game
 
     public override void CreateAndAnswerArithmeticEq()
     {
-        int dividend = r.Next(0, 100);
-        int divisor = r.Next(0, maxNumber);
+        int dividend, divisor;
+
+        do
+        {
+            dividend = r.Next(0, 100);
+            divisor = r.Next(1, maxNumber);
+        } while (dividend % divisor != 0);
 
         correctAnswer = dividend / divisor;
         Console.WriteLine($"{dividend} / {divisor}");
@@ -383,4 +388,8 @@ class ScoreTable
             Console.WriteLine("{0} - {1} - {2}", score.Name, score.Time, score.Value);
         }
     }
+}
+
+class InvalidDifficultyException : Exception
+{
 }
