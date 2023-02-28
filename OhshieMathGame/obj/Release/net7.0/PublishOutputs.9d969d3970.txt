@@ -1,6 +1,0 @@
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/OhshieMathGame
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/OhshieMathGame.dll
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/OhshieMathGame.deps.json
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/OhshieMathGame.runtimeconfig.json
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/OhshieMathGame.pdb
-/Users/stas/RiderProjects/Ohshie.MathGame/OhshieMathGame/bin/Release/net7.0/publish/NCalc.dll
