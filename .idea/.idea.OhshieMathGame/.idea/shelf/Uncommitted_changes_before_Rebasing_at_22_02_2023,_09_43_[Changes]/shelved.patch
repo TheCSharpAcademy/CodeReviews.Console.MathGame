@@ -1,0 +1,1045 @@
+Index: OhshieMathGame/InfiniteGameModeSettings/InfiniteSettings.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using OhshieMathGame.InfiniteGameModeSettings;\npublic class InfiniteSettings\n{\n    // default values\n    public static int maxNumber = 11;\n    public static int amountOfVariables = 2;\n\n    // method used to check if user want to change settings after modifying them. To be implemented - autocheck if changes were made.\n    private static void SaveSettings()\n    {\n        while (true)\n        {\n            \n            Console.WriteLine(\"Save changes?\\n\" +\n                              \"1. Yes\\n\" +\n                              \"2. Revert to previous\");\n            Program.menuOperator = Console.ReadKey().Key;\n            switch (Program.menuOperator)\n            {\n                case ConsoleKey.D1:\n                {\n                    GameController.gamesPlayed = 0;\n                    GameController.score = 0;\n                    MaxNumberConfiguration.SaveOperatorConfiguration();\n                    EquationLengthConfiguration.SaveOperatorConfiguration();\n                    OperatorsConfiguration.SaveOperatorConfiguration();\n                    GameController.prevGames.Clear();\n                    break;\n                }\n                case ConsoleKey.D2:\n                {\n                    break;\n                }\n                default:\n                    continue;\n            }\n            break;\n        }\n        \n    }\n    \n    // Main settings menu\n    public static void SettingsMenu()\n    {\n        while (true)\n        {\n            Console.Clear();\n            Console.WriteLine(\"Keep in mind that changing difficulty will reset your score.\");\n            Console.WriteLine(\"What do you want to change?\\n\" +\n                              \"1. Amount of variables in equation\\n\" +\n                              \"2. Maximum size for variables in equation\\n\" +\n                              \"3. Activate/Deactivate operators\\n\" +\n                              \"4. Go back\");\n            Program.menuOperator = Console.ReadKey().Key;\n            switch (Program.menuOperator)\n            {\n                // adjusting length of equation\n                case ConsoleKey.D1:\n                {\n                    Console.Clear();\n                    EquationLengthConfiguration.LengthOfEquation();\n                    continue;\n                }\n                // adjusting max value of variables\n                case ConsoleKey.D2:\n                {\n                    Console.Clear();\n                    MaxNumberConfiguration.AdjustMaximumAllowedNumber();\n                    continue;\n                }\n                // allow for different operands in equation. Not implemented yet.\n                case ConsoleKey.D3:\n                {\n                    Console.Clear();\n                    OperatorsConfiguration.OperatorsSettings();\n                    continue;\n                }\n                // exit settings.\n                case ConsoleKey.D4:\n                {\n                    Console.Clear();\n                    break;\n                }\n                default:\n                    continue;\n            }\n            break;\n        }\n        SaveSettings();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/InfiniteGameModeSettings/InfiniteSettings.cs b/OhshieMathGame/InfiniteGameModeSettings/InfiniteSettings.cs
+--- a/OhshieMathGame/InfiniteGameModeSettings/InfiniteSettings.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/InfiniteGameModeSettings/InfiniteSettings.cs	(date 1677009962501)
+@@ -1,42 +1,28 @@
+ using OhshieMathGame.InfiniteGameModeSettings;
+ public class InfiniteSettings
+ {
+-    // default values
+-    public static int maxNumber = 11;
+-    public static int amountOfVariables = 2;
+-
+-    // method used to check if user want to change settings after modifying them. To be implemented - autocheck if changes were made.
++    private static bool ChangesWereMade;
++    // method saves all changes
+     private static void SaveSettings()
+     {
+-        while (true)
++        if (ChangesWereMade)
+         {
+-            
+-            Console.WriteLine("Save changes?\n" +
+-                              "1. Yes\n" +
+-                              "2. Revert to previous");
+-            Program.menuOperator = Console.ReadKey().Key;
+-            switch (Program.menuOperator)
+-            {
+-                case ConsoleKey.D1:
+-                {
+-                    GameController.gamesPlayed = 0;
+-                    GameController.score = 0;
+-                    MaxNumberConfiguration.SaveOperatorConfiguration();
+-                    EquationLengthConfiguration.SaveOperatorConfiguration();
+-                    OperatorsConfiguration.SaveOperatorConfiguration();
+-                    GameController.prevGames.Clear();
+-                    break;
+-                }
+-                case ConsoleKey.D2:
+-                {
+-                    break;
+-                }
+-                default:
+-                    continue;
+-            }
+-            break;
++            GameController.GamesPlayed = 0; 
++            GameController.Score = 0;
++            MaxNumberConfiguration.SaveOperatorConfiguration();
++            EquationLengthConfiguration.SaveOperatorConfiguration();
++            OperatorsConfiguration.SaveOperatorConfiguration();
++            GameController.PrevGames.Clear();
++        }
++        else
++        {
++            GameController.GamesPlayed = 0; 
++            GameController.Score = 0;
++            MaxNumberConfiguration.SaveOperatorConfiguration();
++            EquationLengthConfiguration.SaveOperatorConfiguration();
++            GameController.OperatorsInPlay=GameController.AllPossibleOperators;
++            GameController.PrevGames.Clear();
+         }
+-        
+     }
+     
+     // Main settings menu
+@@ -47,18 +33,19 @@
+             Console.Clear();
+             Console.WriteLine("Keep in mind that changing difficulty will reset your score.");
+             Console.WriteLine("What do you want to change?\n" +
+-                              "1. Amount of variables in equation\n" +
+-                              "2. Maximum size for variables in equation\n" +
+-                              "3. Activate/Deactivate operators\n" +
+-                              "4. Go back");
+-            Program.menuOperator = Console.ReadKey().Key;
+-            switch (Program.menuOperator)
++                              $"1. Amount of variables in equation.\n" +
++                              $"2. Maximum size for variables in equation.\n" +
++                              "3. Activate/Deactivate operators");
++            Console.WriteLine("4. Confirm those settings");
++            Program.MenuOperator = Console.ReadKey().Key;
++            switch (Program.MenuOperator)
+             {
+                 // adjusting length of equation
+                 case ConsoleKey.D1:
+                 {
+                     Console.Clear();
+                     EquationLengthConfiguration.LengthOfEquation();
++                    ChangesWereMade = true;
+                     continue;
+                 }
+                 // adjusting max value of variables
+@@ -66,6 +53,7 @@
+                 {
+                     Console.Clear();
+                     MaxNumberConfiguration.AdjustMaximumAllowedNumber();
++                    ChangesWereMade = true;
+                     continue;
+                 }
+                 // allow for different operands in equation. Not implemented yet.
+@@ -73,19 +61,22 @@
+                 {
+                     Console.Clear();
+                     OperatorsConfiguration.OperatorsSettings();
++                    ChangesWereMade = true;
+                     continue;
+                 }
+                 // exit settings.
+                 case ConsoleKey.D4:
+                 {
+                     Console.Clear();
++                    ChangesWereMade = false;
+                     break;
+                 }
+                 default:
+                     continue;
+             }
++            SaveSettings();
+             break;
+         }
+-        SaveSettings();
++        
+     }
+ }
+\ No newline at end of file
+Index: OhshieMathGame/GameModes/InfiniteGameMode.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Diagnostics;\nusing NCalc;\n\nnamespace OhshieMathGame.GameModes;\n\npublic class InfiniteGameMode\n{\n    // to make everything work\n    static Random random = new Random();\n    private static Stopwatch _stopwatch = new Stopwatch();\n    private static TimeSpan _elapsed;\n    private static string _equation = \"\";\n    \n    // main gameplay loop happens here\n    public static void GameplayLoop()\n    {\n        int cont = 1;\n        while (cont == 1)\n        {\n            GameController.gamesPlayed++;\n            _stopwatch.Reset();\n\n            // Generating equation and finding correct answer\n            ProblemGenerator();\n            double correctAnswer = ProblemSolver();\n            \n            // Printing problem to solve and reading player answer\n            double playerAnswer = PlayerSolution();\n            \n            // checking if answer is correct\n            WinCondition(playerAnswer,correctAnswer);\n            \n            // checking if player wants to continue \n            ScoreTracker(playerAnswer,correctAnswer);\n            cont = ContinueCheck(cont);\n            \n        }\n    }\n    // found out about NCalc lib that allows to parse a string into a readable expression for program to use. Lets try it\n    private static void ProblemGenerator()\n    {\n        // getting maximum amount of variables possible from settings\n        \n        double[] variables = new double[InfiniteSettings.amountOfVariables];\n        \n        // Creating random numbers for equation\n        \n        for (int i = 0; i < variables.Length; i++)\n        {\n            variables[i] = random.Next(1, InfiniteSettings.maxNumber);\n        }\n        \n        // getting random operators for that equation\n        \n        string[] operatorsInEquasion = new string[variables.Length - 1];\n\n        int maxActiveOperatorsForRandom = GameController.possibleOperators.Count;\n        \n        for (int i = 0; i < operatorsInEquasion.Length; i++)\n        {\n            operatorsInEquasion[i] = GameController.possibleOperators[random.Next(0,maxActiveOperatorsForRandom)];\n        }\n        \n        // filling a sting\n        \n        _equation = \"\";\n        \n        for (int i = 0; i < variables.Length; i++)\n        {\n            _equation += variables[i];\n            if (i<operatorsInEquasion.Length)\n            {\n                _equation += operatorsInEquasion[i];\n            }\n        }\n\n    }\n    // parsing string into math problem and solving it via NCalc lib\n    private static double ProblemSolver()\n    {\n        Expression expression = new Expression(_equation);\n        double correctAnswer = Convert.ToDouble(expression.Evaluate());\n\n        // doing this so it is actually possible to answer division questions\n        correctAnswer = Math.Round(correctAnswer, 2);\n\n        return correctAnswer;\n    }\n    // outputs equation in console and waits for player to solve it\n    private static double PlayerSolution()\n    {\n        double playerAnswer;\n        // while loop for safety check\n        _stopwatch.Start();\n        while (true)\n        {\n            Console.Clear();\n            Console.WriteLine($\"Correct answers {GameController.score}\");\n            Console.WriteLine(\"Solve this:\");\n            Console.Write(_equation+\"=\");\n                \n            if (Double.TryParse(Console.ReadLine(),out playerAnswer))\n                break;\n            Console.WriteLine(\"Looks like you entered something that is not a number.\\n\" +\n                              \"Try again!\");\n        }\n        _stopwatch.Stop();\n\n        return playerAnswer;\n    }\n    // method used to output readable timer in string format.\n    private static string Timer()\n    {\n        _elapsed = _stopwatch.Elapsed;\n        string timer = string.Format(\"{0:0},{1}\", _elapsed.Seconds,_elapsed.Milliseconds);\n        return timer;\n    }\n    // method accumulated score data and saves it into a list\n    private static void ScoreTracker(double playerAnswer, double correctAnswer)\n    {\n        string gameScoreWritedown;\n        bool wincheck = playerAnswer == correctAnswer;\n        string result;\n        if (wincheck)\n        {\n            result = \"Your answer was correct!\";\n            GameController.effectiveness = Math.Round(Convert.ToDouble(GameController.score / GameController.gamesPlayed),2);\n        }\n        else\n        {\n            result = \"Your answer was incorrect!\";\n            GameController.effectiveness = Math.Round(GameController.score / GameController.gamesPlayed,2)*100;\n        }\n        \n        gameScoreWritedown = ($\"Round {GameController.gamesPlayed}. {_equation}={playerAnswer}. {result} Accuracy: {GameController.effectiveness}%\");\n        GameController.prevGames.Add(gameScoreWritedown);\n    }\n    // checks if player answer equals to correct answer and increases score. Score rn is based on each equation solved\n    // maybe it would be better to base score on amount of variables/operators.\n    private static void WinCondition(double playerAnswer, double correctAnswer)\n    {\n        bool winCheck = playerAnswer == correctAnswer;\n        if (winCheck)\n        {\n            GameController.score++;\n            Console.WriteLine($\"Correct! It took you {Timer()} seconds to answer\");\n        }\n        else\n        {\n            Console.WriteLine($\"Wrong! Correct answer is: {correctAnswer}. It took you {Timer()} seconds to answer\");\n        }\n            \n    }\n    // asks user if he wants to continue playing after each round.\n    private static int ContinueCheck(int cont)\n    {\n        while (true)\n        {\n            Console.WriteLine(\"Another round?\\n\" +\n                              \"1. Yes 2. No\");\n            Program.menuOperator = Console.ReadKey().Key;\n            switch (Program.menuOperator)\n            {\n                case ConsoleKey.D1:\n                    Console.Clear();\n                    return cont;\n                case ConsoleKey.D2:\n                    cont++;\n                    return cont;\n                default:\n                    continue;\n            }\n        }\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/GameModes/InfiniteGameMode.cs b/OhshieMathGame/GameModes/InfiniteGameMode.cs
+--- a/OhshieMathGame/GameModes/InfiniteGameMode.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/GameModes/InfiniteGameMode.cs	(date 1677010791213)
+@@ -6,100 +6,99 @@
+ public class InfiniteGameMode
+ {
+     // to make everything work
+-    static Random random = new Random();
++    static Random _random = new Random();
+     private static Stopwatch _stopwatch = new Stopwatch();
+     private static TimeSpan _elapsed;
+-    private static string _equation = "";
+-    
++
++
+     // main gameplay loop happens here
+     public static void GameplayLoop()
+     {
++        if (GameController.GamesPlayed==0)
++        {
++            InfiniteSettings.SettingsMenu();
++        }
++        
+         int cont = 1;
+         while (cont == 1)
+         {
+-            GameController.gamesPlayed++;
++            GameController.GamesPlayed++;
+             _stopwatch.Reset();
+ 
+             // Generating equation and finding correct answer
+-            ProblemGenerator();
+-            double correctAnswer = ProblemSolver();
++            ProblemGenerator(GameController.AmountOfVariables);
++            float correctAnswer = GameController.ProblemSolver();
+             
+             // Printing problem to solve and reading player answer
+-            double playerAnswer = PlayerSolution();
++            float playerAnswer = PlayerSolution();
+             
+             // checking if answer is correct
+-            WinCondition(playerAnswer,correctAnswer);
++            Timer();
++            GameController.WinCondition(playerAnswer,correctAnswer, false);
+             
+             // checking if player wants to continue 
+-            ScoreTracker(playerAnswer,correctAnswer);
+-            cont = ContinueCheck(cont);
++            GameController.ScoreTracker(playerAnswer,correctAnswer);
++            cont = GameController.ContinueCheck(cont, false);
+             
+         }
++        
++        GameController.ScorePrinter();
++        Console.WriteLine("Press enter to go back.");
++        Console.ReadLine();
++        Console.Clear();
+     }
+     // found out about NCalc lib that allows to parse a string into a readable expression for program to use. Lets try it
+-    private static void ProblemGenerator()
++    private static void ProblemGenerator(int amountOfVariables)
+     {
+         // getting maximum amount of variables possible from settings
+         
+-        double[] variables = new double[InfiniteSettings.amountOfVariables];
++        double[] variables = new double[amountOfVariables];
+         
+         // Creating random numbers for equation
+         
+         for (int i = 0; i < variables.Length; i++)
+         {
+-            variables[i] = random.Next(1, InfiniteSettings.maxNumber);
++            variables[i] = _random.Next(1, GameController.MaxNumber);
+         }
+         
+         // getting random operators for that equation
+         
+-        string[] operatorsInEquasion = new string[variables.Length - 1];
+-
+-        int maxActiveOperatorsForRandom = GameController.possibleOperators.Count;
++        string[] operatorsInEquation = new string[variables.Length - 1];
+         
+-        for (int i = 0; i < operatorsInEquasion.Length; i++)
++        for (int i = 0; i < operatorsInEquation.Length; i++)
+         {
+-            operatorsInEquasion[i] = GameController.possibleOperators[random.Next(0,maxActiveOperatorsForRandom)];
++            operatorsInEquation[i] = GameController.OperatorsInPlay[_random.Next(0,GameController.OperatorsInPlay.Count)];
+         }
+         
+         // filling a sting
+         
+-        _equation = "";
++        GameController.Equation = "";
+         
+         for (int i = 0; i < variables.Length; i++)
+         {
+-            _equation += variables[i];
+-            if (i<operatorsInEquasion.Length)
++            GameController.Equation += variables[i];
++            if (i<operatorsInEquation.Length)
+             {
+-                _equation += operatorsInEquasion[i];
++                GameController.Equation += operatorsInEquation[i];
+             }
+         }
+ 
+     }
+-    // parsing string into math problem and solving it via NCalc lib
+-    private static double ProblemSolver()
+-    {
+-        Expression expression = new Expression(_equation);
+-        double correctAnswer = Convert.ToDouble(expression.Evaluate());
+-
+-        // doing this so it is actually possible to answer division questions
+-        correctAnswer = Math.Round(correctAnswer, 2);
+-
+-        return correctAnswer;
+-    }
++    
+     // outputs equation in console and waits for player to solve it
+-    private static double PlayerSolution()
++    private static float PlayerSolution()
+     {
+-        double playerAnswer;
++        float playerAnswer;
+         // while loop for safety check
+         _stopwatch.Start();
+         while (true)
+         {
+             Console.Clear();
+-            Console.WriteLine($"Correct answers {GameController.score}");
++            Console.WriteLine($"Correct answers {GameController.Score}");
+             Console.WriteLine("Solve this:");
+-            Console.Write(_equation+"=");
++            Console.Write(GameController.Equation+"=");
+                 
+-            if (Double.TryParse(Console.ReadLine(),out playerAnswer))
++            if (Single.TryParse(Console.ReadLine(),out playerAnswer))
+                 break;
+             Console.WriteLine("Looks like you entered something that is not a number.\n" +
+                               "Try again!");
+@@ -113,64 +112,8 @@
+     {
+         _elapsed = _stopwatch.Elapsed;
+         string timer = string.Format("{0:0},{1}", _elapsed.Seconds,_elapsed.Milliseconds);
++        Console.WriteLine($"It took you {timer} seconds to solve");
+         return timer;
+     }
+-    // method accumulated score data and saves it into a list
+-    private static void ScoreTracker(double playerAnswer, double correctAnswer)
+-    {
+-        string gameScoreWritedown;
+-        bool wincheck = playerAnswer == correctAnswer;
+-        string result;
+-        if (wincheck)
+-        {
+-            result = "Your answer was correct!";
+-            GameController.effectiveness = Math.Round(Convert.ToDouble(GameController.score / GameController.gamesPlayed),2);
+-        }
+-        else
+-        {
+-            result = "Your answer was incorrect!";
+-            GameController.effectiveness = Math.Round(GameController.score / GameController.gamesPlayed,2)*100;
+-        }
+-        
+-        gameScoreWritedown = ($"Round {GameController.gamesPlayed}. {_equation}={playerAnswer}. {result} Accuracy: {GameController.effectiveness}%");
+-        GameController.prevGames.Add(gameScoreWritedown);
+-    }
+-    // checks if player answer equals to correct answer and increases score. Score rn is based on each equation solved
+-    // maybe it would be better to base score on amount of variables/operators.
+-    private static void WinCondition(double playerAnswer, double correctAnswer)
+-    {
+-        bool winCheck = playerAnswer == correctAnswer;
+-        if (winCheck)
+-        {
+-            GameController.score++;
+-            Console.WriteLine($"Correct! It took you {Timer()} seconds to answer");
+-        }
+-        else
+-        {
+-            Console.WriteLine($"Wrong! Correct answer is: {correctAnswer}. It took you {Timer()} seconds to answer");
+-        }
+-            
+-    }
+-    // asks user if he wants to continue playing after each round.
+-    private static int ContinueCheck(int cont)
+-    {
+-        while (true)
+-        {
+-            Console.WriteLine("Another round?\n" +
+-                              "1. Yes 2. No");
+-            Program.menuOperator = Console.ReadKey().Key;
+-            switch (Program.menuOperator)
+-            {
+-                case ConsoleKey.D1:
+-                    Console.Clear();
+-                    return cont;
+-                case ConsoleKey.D2:
+-                    cont++;
+-                    return cont;
+-                default:
+-                    continue;
+-            }
+-        }
+-    }
+-
++    
+ }
+\ No newline at end of file
+Index: OhshieMathGame/GameController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Diagnostics;\nusing OhshieMathGame.GameModes;\n\npublic class GameController\n{\n    // those variables are used in both gamemodes to make them work\n    public static double score;\n    public static List<string> prevGames = new List<string>();\n    public static double effectiveness;\n    public static double gamesPlayed;\n    public static Random random = new Random();\n    public static string equation = \"\";\n    \n    public static List<string> possibleOperators = new List<string>()\n    {\n        \"+\",\n        \"-\",\n        \"*\",\n        \"/\"\n    };\n\n    public static void GameModeSelector()\n    {\n        while (true)\n        {\n            Console.WriteLine(\"Select game mode\\n\" +\n                              \"1. Career\\n\" +\n                              \"2. Infinite\");\n            Program.menuOperator = Console.ReadKey().Key;\n            switch (Program.menuOperator)\n            {\n                case (ConsoleKey.D1):\n                {\n                    CareerGameMode.GameplayLoop();\n                    break;\n                }\n                case (ConsoleKey.D2):\n                {\n                    InfiniteGameMode.GameplayLoop();\n                    break;\n                }\n            }\n        }\n    }\n    \n    // prints out user previous games\n    public static void ScorePrinter()\n    {\n        Console.Clear();\n        \n        foreach (var record in prevGames)\n        {\n            Console.WriteLine(record);\n        }\n\n        Console.WriteLine(\"Press enter to go back\");\n        Console.ReadLine();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/GameController.cs b/OhshieMathGame/GameController.cs
+--- a/OhshieMathGame/GameController.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/GameController.cs	(date 1677010715750)
+@@ -1,45 +1,64 @@
+-using System.Diagnostics;
++using NCalc;
++
+ using OhshieMathGame.GameModes;
+ 
+ public class GameController
+ {
+     // those variables are used in both gamemodes to make them work
+-    public static double score;
+-    public static List<string> prevGames = new List<string>();
+-    public static double effectiveness;
+-    public static double gamesPlayed;
+-    public static Random random = new Random();
+-    public static string equation = "";
++    public static float Score;
++    public static float GamesPlayed;
++    
++    public static int MaxNumber; // used to store maximum value for each operands
++    public static int AmountOfVariables; // used to store how many operands are available
+     
+-    public static List<string> possibleOperators = new List<string>()
++    public static string Equation = ""; // used to store equation
++    
++    public static List<string> OperatorsInPlay = new List<string>(); // stores current available operators
++    
++    public static List<string> AllPossibleOperators = new List<string>() // default operators list
+     {
+         "+",
+         "-",
+         "*",
+         "/"
+     };
+-
++    
++    public static List<string> PrevGames = new List<string>(); // stores rounds that were played
++    
++    // main game selector menu
+     public static void GameModeSelector()
+     {
++
+         while (true)
+         {
++            LoadDefaults();
+             Console.WriteLine("Select game mode\n" +
+                               "1. Career\n" +
+-                              "2. Infinite");
+-            Program.menuOperator = Console.ReadKey().Key;
+-            switch (Program.menuOperator)
++                              "2. Infinite\n" +
++                              "3. Go back to main menu");
++            Program.MenuOperator = Console.ReadKey().Key;
++            switch (Program.MenuOperator)
+             {
+                 case (ConsoleKey.D1):
+                 {
+                     CareerGameMode.GameplayLoop();
+-                    break;
++                    continue;
+                 }
+                 case (ConsoleKey.D2):
+                 {
+                     InfiniteGameMode.GameplayLoop();
++                    continue;
++                }
++                case (ConsoleKey.D3):
++                {
+                     break;
+                 }
++                default:
++                {
++                    continue;
++                }
+             }
++            break;
+         }
+     }
+     
+@@ -48,12 +67,113 @@
+     {
+         Console.Clear();
+         
+-        foreach (var record in prevGames)
++        foreach (var record in PrevGames)
+         {
+             Console.WriteLine(record);
+         }
+-
+-        Console.WriteLine("Press enter to go back");
+-        Console.ReadLine();
++    }
++    
++    // writes game score/stats into a sting and add it to a list of played games
++    public static void ScoreTracker(float playerAnswer, float correctAnswer)
++    {
++        string gameScoreWritedown;
++        bool wincheck = playerAnswer == correctAnswer;
++        string result;
++        float effectiveness;
++        if (wincheck)
++        {
++            result = "Your answer was correct!";
++            effectiveness = (float)Math.Round(Convert.ToSingle(Score / GamesPlayed),2);
++        }
++        else
++        {
++            result = "Your answer was incorrect!";
++            effectiveness = (float)Math.Round(Score / GamesPlayed,2)*100;
++        }
++        
++        gameScoreWritedown = ($"Round {GamesPlayed}. {Equation}={playerAnswer}. {result} Accuracy: {effectiveness}%");
++        PrevGames.Add(gameScoreWritedown);
++    }
++    
++    // checks is player answer is correct
++    public static void WinCondition(float playerAnswer, float correctAnswer, bool careerGameMode)
++    {
++        bool winCheck = playerAnswer == correctAnswer;
++        if (winCheck)
++        {
++            Score++;
++            Console.WriteLine($"Correct!");
++        }
++        else
++        {
++            if (careerGameMode)
++            {
++                CareerGameMode.Lives--;
++            }
++            Console.WriteLine($"Wrong! Correct answer is: {correctAnswer}.");
++        }
++            
++    }
++    
++    // checks if player wants to continue. Displays endgame message if career mode is activated
++    public static int ContinueCheck(int cont, bool careerGameMode)
++    {
++        if (careerGameMode)
++        {
++            if (CareerGameMode.Lives < 1)
++            {
++                Console.WriteLine("No more lives. Press enter to exit this session");
++                Console.ReadLine();
++                cont++;
++                return cont;
++            }
++            if (CareerGameMode.Lives > 0 && GamesPlayed == 26)
++            {
++                Console.WriteLine("Whew, that was the final question! Press enter to finish this session");
++                Console.ReadLine();
++                cont++;
++                return cont;
++            }
++        }
++        while (true)
++        {
++            Console.WriteLine("Advance to the next round?\n" +
++                              "1. Yes 2. No");
++            Program.MenuOperator = Console.ReadKey().Key;
++            switch (Program.MenuOperator)
++            {
++                case ConsoleKey.D1:
++                    Console.Clear();
++                    return cont;
++                case ConsoleKey.D2:
++                    cont++;
++                    return cont;
++                default:
++                    continue;
++            }
++        }
+     }
++    
++    // solves generated equation using NCalc to parse a sting 
++    public static float ProblemSolver()
++    {
++        Expression expression = new Expression(Equation);
++        float correctAnswer = Convert.ToSingle(expression.Evaluate());
++
++        // doing this so it is actually possible to answer division questions
++        correctAnswer = (float)Math.Round(correctAnswer, 2);
++
++        return correctAnswer;
++    }
++    
++    // method stores defaul values and load them when invoked
++    public static void LoadDefaults()
++    {
++        GamesPlayed = 0;
++        Score = 0;
++        MaxNumber = 11;
++        AmountOfVariables = 2;
++        PrevGames.Clear();
++    }
++    
+ }
+Index: OhshieMathGame/InfiniteGameModeSettings/OperatorsConfiguration.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using OhshieMathGame.InfiniteGameModeSettings;\n\nstatic class OperatorsConfiguration\n{\n    private static List<string> _tempAllowedOperators = new List<string>();\n    \n    public static void SaveOperatorConfiguration()\n    {\n        GameController.possibleOperators = _tempAllowedOperators;\n    }\n    // main Operator settings menu.\n    public static void OperatorsSettings()\n    {\n        _tempAllowedOperators = GameController.possibleOperators;\n        while (true)\n        {\n            string plus = \"\";\n            string minus = \"\";\n            string multiply = \"\";\n            string divide = \"\";\n\n            CurrentOperatorState(ref plus, ref minus, ref multiply, ref divide);\n            Console.WriteLine(\"Current activated operators:\\n\" +\n                              $\"+ [{plus}]\\t Press 1 to toggle\\n\" +\n                              $\"- [{minus}]\\t Press 2 to toggle\\n\" +\n                              $\"* [{multiply}]\\t Press 3 to toggle\\n\" +\n                              $\"/ [{divide}]\\t Press 4 to toggle\");\n            \n            OperatorToggler();\n            if (_tempAllowedOperators.Count >= 1 && Program.menuOperator == ConsoleKey.Enter)\n            {\n                break;\n            }\n        }\n    }\n    // currently displays a list of activated operators\n    private static void CurrentOperatorState(ref string plus, ref string minus, ref string multiply, ref string divide)\n    {\n        for (int i = 0; i < _tempAllowedOperators.Count; i++)\n        {\n            if (_tempAllowedOperators[i] == \"+\")\n            {\n                plus = \"x\";\n            }\n            else if (_tempAllowedOperators[i] == \"-\")\n            {\n                minus = \"x\";\n            }\n            else if (_tempAllowedOperators[i] == \"*\")\n            {\n                multiply = \"x\";\n            }\n            else if (_tempAllowedOperators[i] == \"/\")\n            {\n                divide = \"x\";\n            }\n        }\n    }\n    // method allows turning Operators on and off\n    private static void OperatorToggler()\n    {\n        if (_tempAllowedOperators.Count < 1)\n        {\n            Console.WriteLine(\"What you want to toggle?\");\n            Console.WriteLine(\"You much choose at least 1 operator\".ToUpper());\n        }\n        else\n            Console.WriteLine(\"What you want to toggle?\\n\"+\n                              \"Press enter to confirm your choice.\");\n        Program.menuOperator = Console.ReadKey().Key;\n        Console.Clear();\n            switch (Program.menuOperator)\n            {\n                case ConsoleKey.D1:\n                {\n                    if (_tempAllowedOperators.Contains(\"+\"))\n                    {\n                        _tempAllowedOperators.Remove(\"+\");\n                    }\n                    else\n                    {\n                        _tempAllowedOperators.Add(\"+\");\n                    }\n\n                    break;\n                }\n                case ConsoleKey.D2:\n                {\n                    if (_tempAllowedOperators.Contains(\"-\"))\n                    {\n                        _tempAllowedOperators.Remove(\"-\");\n                    }\n                    else\n                    {\n                        _tempAllowedOperators.Add(\"-\");\n                    }\n\n                    break;\n                }\n                case ConsoleKey.D3:\n                {\n                    if (_tempAllowedOperators.Contains(\"*\"))\n                    {\n                        _tempAllowedOperators.Remove(\"*\");\n                    }\n                    else\n                    {\n                        _tempAllowedOperators.Add(\"*\");\n                    }\n\n                    break;\n                }\n                case ConsoleKey.D4:\n                {\n                    if (_tempAllowedOperators.Contains(\"/\"))\n                    {\n                        _tempAllowedOperators.Remove(\"/\");\n                    }\n                    else\n                    {\n                        _tempAllowedOperators.Add(\"/\");\n                    }\n\n                    break;\n                }\n                case ConsoleKey.Enter:\n                {\n                    break;\n                }\n                default:\n                {\n                    Console.WriteLine(\"Looks like you selected something that you shouldn't, try again.\");\n                    break;\n                }\n            }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/InfiniteGameModeSettings/OperatorsConfiguration.cs b/OhshieMathGame/InfiniteGameModeSettings/OperatorsConfiguration.cs
+--- a/OhshieMathGame/InfiniteGameModeSettings/OperatorsConfiguration.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/InfiniteGameModeSettings/OperatorsConfiguration.cs	(date 1677007737407)
+@@ -6,12 +6,12 @@
+     
+     public static void SaveOperatorConfiguration()
+     {
+-        GameController.possibleOperators = _tempAllowedOperators;
++        GameController.OperatorsInPlay = _tempAllowedOperators;
+     }
+     // main Operator settings menu.
+     public static void OperatorsSettings()
+     {
+-        _tempAllowedOperators = GameController.possibleOperators;
++        _tempAllowedOperators = GameController.AllPossibleOperators;
+         while (true)
+         {
+             string plus = "";
+@@ -27,7 +27,7 @@
+                               $"/ [{divide}]\t Press 4 to toggle");
+             
+             OperatorToggler();
+-            if (_tempAllowedOperators.Count >= 1 && Program.menuOperator == ConsoleKey.Enter)
++            if (_tempAllowedOperators.Count >= 1 && Program.MenuOperator == ConsoleKey.Enter)
+             {
+                 break;
+             }
+@@ -67,9 +67,9 @@
+         else
+             Console.WriteLine("What you want to toggle?\n"+
+                               "Press enter to confirm your choice.");
+-        Program.menuOperator = Console.ReadKey().Key;
++        Program.MenuOperator = Console.ReadKey().Key;
+         Console.Clear();
+-            switch (Program.menuOperator)
++            switch (Program.MenuOperator)
+             {
+                 case ConsoleKey.D1:
+                 {
+Index: OhshieMathGame/InfiniteGameModeSettings/EquationLengthConfiguration.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace OhshieMathGame.InfiniteGameModeSettings;\n\npublic class EquationLengthConfiguration\n{\n    private static int _tempVariables = 2;\n    \n    //used to save changes\n    public static void SaveOperatorConfiguration()\n    {\n        InfiniteSettings.amountOfVariables = _tempVariables;\n    }\n    // method to adjust length of equation. Also checks if user entered something that is not a number.\n    public static void LengthOfEquation()\n    {\n        Console.Clear();\n        Console.WriteLine(\"How many variables do you want to have in the equation?\\n\" +\n                          \"Number must be 2 or more\");\n        while (true)\n        {\n            _tempVariables  = int.Parse(Console.ReadLine());\n            if (_tempVariables >= 2)\n            {\n                break;  \n            }\n            Console.WriteLine(\"Either you entered number below 2, or not a number at all.\");\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/InfiniteGameModeSettings/EquationLengthConfiguration.cs b/OhshieMathGame/InfiniteGameModeSettings/EquationLengthConfiguration.cs
+--- a/OhshieMathGame/InfiniteGameModeSettings/EquationLengthConfiguration.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/InfiniteGameModeSettings/EquationLengthConfiguration.cs	(date 1677007737403)
+@@ -7,7 +7,7 @@
+     //used to save changes
+     public static void SaveOperatorConfiguration()
+     {
+-        InfiniteSettings.amountOfVariables = _tempVariables;
++        GameController.AmountOfVariables = _tempVariables;
+     }
+     // method to adjust length of equation. Also checks if user entered something that is not a number.
+     public static void LengthOfEquation()
+Index: OhshieMathGame/Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using OhshieMathGame;\nusing OhshieMathGame.GameModes;\n\nclass Program\n{\n    public static ConsoleKey menuOperator;\n    static void MainMenu()\n    {\n        while (true)\n        {\n            Console.Clear();\n            Console.WriteLine(\"Welcome to math game\\n\" +\n                              \"Press corresponding key to choose:\\n\" +\n                              \"1. Let's play!\\n\"+\n                              \"2. Adjust difficulty settings\\n\" +\n                              \"3. Exit\");\n            menuOperator = Console.ReadKey().Key;\n            switch (menuOperator)\n            {\n                case ConsoleKey.D1:\n                {\n                    break;\n                }\n                case ConsoleKey.D2:\n                {\n                    InfiniteSettings.SettingsMenu();\n                    continue;\n                }\n                case ConsoleKey.D4:\n                {\n                    Environment.Exit(0);\n                    break;\n                }\n                default:\n                    Console.WriteLine();\n                    Console.WriteLine(\"hm\");\n                    continue;\n            }\n            Console.Clear();\n            break;\n        }\n    }\n    \n    public static void Main(string[] args)\n    {\n        \n        while (true)\n        {\n            MainMenu();\n            GameController.GameModeSelector();\n        }\n    }\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/Program.cs b/OhshieMathGame/Program.cs
+--- a/OhshieMathGame/Program.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/Program.cs	(date 1677007737397)
+@@ -3,8 +3,8 @@
+ 
+ class Program
+ {
+-    public static ConsoleKey menuOperator;
+-    static void MainMenu()
++    public static ConsoleKey MenuOperator;
++    private static void MainMenu()
+     {
+         while (true)
+         {
+@@ -12,10 +12,9 @@
+             Console.WriteLine("Welcome to math game\n" +
+                               "Press corresponding key to choose:\n" +
+                               "1. Let's play!\n"+
+-                              "2. Adjust difficulty settings\n" +
+-                              "3. Exit");
+-            menuOperator = Console.ReadKey().Key;
+-            switch (menuOperator)
++                              "2. Exit");
++            MenuOperator = Console.ReadKey().Key;
++            switch (MenuOperator)
+             {
+                 case ConsoleKey.D1:
+                 {
+@@ -23,17 +22,12 @@
+                 }
+                 case ConsoleKey.D2:
+                 {
+-                    InfiniteSettings.SettingsMenu();
+-                    continue;
+-                }
+-                case ConsoleKey.D4:
+-                {
+                     Environment.Exit(0);
+                     break;
+                 }
+                 default:
+                     Console.WriteLine();
+-                    Console.WriteLine("hm");
++                    Console.WriteLine("You entered something that you shouldn't");
+                     continue;
+             }
+             Console.Clear();
+@@ -43,7 +37,6 @@
+     
+     public static void Main(string[] args)
+     {
+-        
+         while (true)
+         {
+             MainMenu();
+Index: OhshieMathGame/InfiniteGameModeSettings/MaxNumberConfiguration.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace OhshieMathGame.InfiniteGameModeSettings;\n\npublic class MaxNumberConfiguration\n{\n    private static int _tempMaxNumber = 11;\n    \n    public static void SaveOperatorConfiguration()\n    {\n        InfiniteSettings.maxNumber = _tempMaxNumber;\n    }\n    \n    // method to adjust how big numbers can be in equations\n    public static void AdjustMaximumAllowedNumber()\n    {\n        Console.Clear();\n        Console.WriteLine(\"Enter maximum possible number allowed in equation\\n\" +\n                          \"Number must not be 0\");\n        while (true)\n        {\n            _tempMaxNumber = int.Parse(Console.ReadLine());\n            if (_tempMaxNumber != 0)\n            {\n                break;\n            }\n            Console.WriteLine(\"Either you entered 0, or not a number at all.\");\n            \n            // need this adjustment as \"random\" range does not include actuall last number in range\n\n            _tempMaxNumber += 1;\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/InfiniteGameModeSettings/MaxNumberConfiguration.cs b/OhshieMathGame/InfiniteGameModeSettings/MaxNumberConfiguration.cs
+--- a/OhshieMathGame/InfiniteGameModeSettings/MaxNumberConfiguration.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/InfiniteGameModeSettings/MaxNumberConfiguration.cs	(date 1677007737411)
+@@ -6,7 +6,7 @@
+     
+     public static void SaveOperatorConfiguration()
+     {
+-        InfiniteSettings.maxNumber = _tempMaxNumber;
++        GameController.MaxNumber = _tempMaxNumber;
+     }
+     
+     // method to adjust how big numbers can be in equations
+Index: OhshieMathGame/OhshieMathGame.csproj
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><Project Sdk=\"Microsoft.NET.Sdk\">\n\n    <PropertyGroup>\n        <OutputType>Exe</OutputType>\n        <TargetFramework>net7.0</TargetFramework>\n        <ImplicitUsings>enable</ImplicitUsings>\n        <Nullable>enable</Nullable>\n    </PropertyGroup>\n\n    <ItemGroup>\n      <PackageReference Include=\"ncalc\" Version=\"1.3.8\" />\n    </ItemGroup>\n\n</Project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/OhshieMathGame.csproj b/OhshieMathGame/OhshieMathGame.csproj
+--- a/OhshieMathGame/OhshieMathGame.csproj	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/OhshieMathGame.csproj	(date 1677004790356)
+@@ -11,4 +11,8 @@
+       <PackageReference Include="ncalc" Version="1.3.8" />
+     </ItemGroup>
+ 
++    <ItemGroup>
++      <Compile Remove="Gameplay.cs" />
++    </ItemGroup>
++
+ </Project>
+Index: OhshieMathGame/GameModes/CareerGameMode.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using NCalc;\n\nnamespace OhshieMathGame.GameModes;\n\npublic class CareerGameMode\n{\n    // required variables to make this mode work\n    private static int lives;\n    private static int difficultyLevel;\n\n    private static List<string> operatorsInPlay = new List<string>();\n    private static int amountOfVariables;\n        \n    private static void DifficultySettings()\n    {\n        switch (GameController.gamesPlayed)\n        {\n            case (1):\n            {\n                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);\n                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);\n                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);\n                amountOfVariables = 2;\n                difficultyLevel = 1;\n                break;\n            }\n            case (5):\n            {\n                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);\n                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);\n                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);\n                amountOfVariables = 3;\n                difficultyLevel = 2;\n                break;\n            }\n            case (10):\n            {\n                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);\n                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);\n                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);\n                amountOfVariables = 4;\n                difficultyLevel = 3;\n                break;\n            }\n            case (15):\n            {\n                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);\n                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);\n                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);\n                amountOfVariables = 5;\n                difficultyLevel = 4;\n                break;\n            }\n            case (20):\n            {\n                difficultyLevel = 5;\n                break;\n            }\n        }\n    }\n    public static void GameplayLoop()\n    {\n        GameController.gamesPlayed = 1;\n        lives = 4;\n        \n        int cont = 1;\n        while (cont == 1 && lives > 0) \n        {\n            DifficultySettings();\n            \n            ProblemGenerator();\n            double correctAnswer = ProblemSolver();\n            double playerAnswer = PlayerSolution();\n\n            WinCondition(playerAnswer, correctAnswer);\n            ScoreTracker(playerAnswer,correctAnswer);\n            \n            cont = ContinueCheck(cont);\n            GameController.gamesPlayed++;\n        }\n        GameFinished();\n    }\n\n    private static void GameFinished()\n    {\n        Console.Clear();\n        if (lives < 1)\n        {\n            Console.WriteLine(\"Dang! You run out of lives.\\n\" +\n                              $\"You've solved {GameController.score} equations our of possible 25\");\n            ScorePrinter();\n            \n            Console.WriteLine(\"Press enter to go back to menu\");\n            \n            Console.ReadLine();\n        }\n        else if (lives > 0 && GameController.gamesPlayed == 26)\n        {\n            Console.WriteLine(\"You WON\\n\" +\n                              $\"You've solved {GameController.score} equations our of possible 25\\n\" +\n                              $\"You still have {lives} lives left\");\n            ScorePrinter();\n            \n            Console.WriteLine(\"Press enter to go back to menu\");\n            \n            Console.ReadLine();\n        }\n    }\n    private static int ContinueCheck(int cont)\n    {\n        if (lives < 1)\n        {\n            Console.WriteLine(\"No more lives. Press enter to exit this session\");\n            Console.ReadLine();\n            cont++;\n        }\n        else if (lives > 0 && GameController.gamesPlayed == 26)\n        {\n            Console.WriteLine(\"Whew, that was the final question! Press enter to finish this session\");\n            Console.ReadLine();\n            cont++;\n        }\n        else\n        {\n            while (true)\n            {\n                Console.WriteLine(\"Advance to the next round?\\n\" +\n                                  \"1. Yes 2. No\");\n                Program.menuOperator = Console.ReadKey().Key;\n                switch (Program.menuOperator)\n                {\n                    case ConsoleKey.D1:\n                        Console.Clear();\n                        return cont;\n                    case ConsoleKey.D2:\n                        cont++;\n                        return cont;\n                    default:\n                        continue;\n                }\n            }\n        }\n\n        return cont;\n    }\n    private static void ProblemGenerator()\n    {\n        // getting maximum amount of variables possible from settings\n        \n        double[] variables = new double[amountOfVariables];\n        \n        // Creating random numbers for equation\n        \n        for (int i = 0; i < variables.Length; i++)\n        {\n            variables[i] = GameController.random.Next(1, 10);\n        }\n        \n        // getting random operators for that equation\n        \n        string[] operatorsInEquasion = new string[variables.Length - 1];\n\n        int maxActiveOperatorsForRandom = operatorsInPlay.Count;\n        \n        for (int i = 0; i < operatorsInEquasion.Length; i++)\n        {\n            operatorsInEquasion[i] = operatorsInPlay[GameController.random.Next(0,maxActiveOperatorsForRandom)];\n        }\n        \n        // filling a sting\n        \n        GameController.equation = \"\";\n        \n        for (int i = 0; i < variables.Length; i++)\n        {\n            GameController.equation += variables[i];\n            if (i<operatorsInEquasion.Length)\n            {\n                GameController.equation += operatorsInEquasion[i];\n            }\n        }\n\n    }\n    private static double ProblemSolver()\n    {\n        Expression expression = new Expression(GameController.equation);\n        double correctAnswer = Convert.ToDouble(expression.Evaluate());\n\n        // doing this so it is actually possible to answer division questions\n        correctAnswer = Math.Round(correctAnswer, 2);\n\n        return correctAnswer;\n    }\n    private static double PlayerSolution()\n    {\n        double playerAnswer;\n        // while loop for safety check\n        while (true)\n        {\n            Console.Clear();\n            Console.WriteLine($\"Correct answers {GameController.score}. {lives} lives left\\n\" +\n                              $\"Problem: {GameController.gamesPlayed}. Difficulty level: {difficultyLevel}\");\n            Console.WriteLine(\"Solve this:\");\n            Console.Write(GameController.equation+\"=\");\n                \n            if (Double.TryParse(Console.ReadLine(),out playerAnswer))\n                break;\n            Console.WriteLine(\"Looks like you entered something that is not a number.\\n\" +\n                              \"Try again!\");\n        }\n        return playerAnswer;\n    }\n    private static void WinCondition(double playerAnswer, double correctAnswer)\n    {\n        bool winCheck = playerAnswer == correctAnswer;\n        if (winCheck)\n        {\n            GameController.score++;\n            Console.WriteLine($\"Correct!\");\n        }\n        else\n        {\n            lives--;\n            Console.WriteLine($\"Wrong! Correct answer is: {correctAnswer}.\");\n        }\n            \n    }\n    \n    private static void ScoreTracker(double playerAnswer, double correctAnswer)\n    {\n        string gameScoreWritedown;\n        bool wincheck = playerAnswer == correctAnswer;\n        string result;\n        double effectiveness;\n        if (wincheck)\n        {\n            result = \"Your answer was correct!\";\n            effectiveness = Math.Round(Convert.ToDouble(GameController.score / GameController.gamesPlayed),2);\n        }\n        else\n        {\n            result = \"Your answer was incorrect!\";\n            effectiveness = Math.Round(GameController.score / GameController.gamesPlayed,2)*100;\n        }\n        \n        gameScoreWritedown = ($\"Round {GameController.gamesPlayed}. {GameController.equation}={playerAnswer}. {result} Accuracy: {effectiveness}%\");\n        GameController.prevGames.Add(gameScoreWritedown);\n    }\n    \n    static void ScorePrinter()\n    {\n        foreach (var record in GameController.prevGames)\n        {\n            Console.WriteLine(record);\n        }\n    }\n\n \n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OhshieMathGame/GameModes/CareerGameMode.cs b/OhshieMathGame/GameModes/CareerGameMode.cs
+--- a/OhshieMathGame/GameModes/CareerGameMode.cs	(revision ee7f58bb3572c64abe20264e4b30704ce98d3cea)
++++ b/OhshieMathGame/GameModes/CareerGameMode.cs	(date 1677010168166)
+@@ -5,145 +5,106 @@
+ public class CareerGameMode
+ {
+     // required variables to make this mode work
+-    private static int lives;
+-    private static int difficultyLevel;
++    public static int Lives;
++    private static int _difficultyLevel;
+ 
+-    private static List<string> operatorsInPlay = new List<string>();
+-    private static int amountOfVariables;
+-        
++    private static Random _random = new Random();
++
++    private static void AdjustOperatorsInPlay()
++    {
++        int operatorChooser = _random.Next(0, GameController.AllPossibleOperators.Count-1);
++        GameController.OperatorsInPlay.Add(GameController.AllPossibleOperators[operatorChooser]);
++        GameController.AllPossibleOperators.Remove(GameController.AllPossibleOperators[operatorChooser]);
++    }
+     private static void DifficultySettings()
+     {
+-        switch (GameController.gamesPlayed)
++        switch (GameController.GamesPlayed)
+         {
+-            case (1):
++            case (<=1):
+             {
+-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
+-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
+-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
+-                amountOfVariables = 2;
+-                difficultyLevel = 1;
++                AdjustOperatorsInPlay();
++                GameController.AmountOfVariables = 2;
++                _difficultyLevel = 1;
+                 break;
+             }
+-            case (5):
++            case (6):
+             {
+-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
+-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
+-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
+-                amountOfVariables = 3;
+-                difficultyLevel = 2;
++                AdjustOperatorsInPlay();
++                GameController.AmountOfVariables = 3;
++                _difficultyLevel = 2;
+                 break;
+             }
+-            case (10):
++            case (11):
+             {
+-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
+-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
+-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
+-                amountOfVariables = 4;
+-                difficultyLevel = 3;
++                AdjustOperatorsInPlay();
++                GameController.AmountOfVariables = 4;
++                _difficultyLevel = 3;
+                 break;
+             }
+-            case (15):
++            case (16):
+             {
+-                int operatorChooser = GameController.random.Next(0, GameController.possibleOperators.Count-1);
+-                operatorsInPlay.Add(GameController.possibleOperators[operatorChooser]);
+-                GameController.possibleOperators.Remove(GameController.possibleOperators[operatorChooser]);
+-                amountOfVariables = 5;
+-                difficultyLevel = 4;
++                AdjustOperatorsInPlay();
++                GameController.AmountOfVariables = 5;
++                _difficultyLevel = 4;
+                 break;
+             }
+-            case (20):
++            case (21):
+             {
+-                difficultyLevel = 5;
++                _difficultyLevel = 5;
+                 break;
+             }
+         }
+     }
+     public static void GameplayLoop()
+     {
+-        GameController.gamesPlayed = 1;
+-        lives = 4;
++        GameController.LoadDefaults();
++        Lives = 4;
+         
+         int cont = 1;
+-        while (cont == 1 && lives > 0) 
++        while (cont == 1 && Lives > 0) 
+         {
++            GameController.GamesPlayed++;
++            
+             DifficultySettings();
+             
+-            ProblemGenerator();
+-            double correctAnswer = ProblemSolver();
+-            double playerAnswer = PlayerSolution();
++            ProblemGenerator(GameController.AmountOfVariables);
++            float correctAnswer = GameController.ProblemSolver();
++            float playerAnswer = PlayerSolution();
+ 
+-            WinCondition(playerAnswer, correctAnswer);
+-            ScoreTracker(playerAnswer,correctAnswer);
++            GameController.WinCondition(playerAnswer,correctAnswer, true);
++            GameController.ScoreTracker(playerAnswer,correctAnswer);
+             
+-            cont = ContinueCheck(cont);
+-            GameController.gamesPlayed++;
++            cont = GameController.ContinueCheck(cont, true);
++            
+         }
+         GameFinished();
+     }
+-
+     private static void GameFinished()
+     {
+         Console.Clear();
+-        if (lives < 1)
++        if (Lives < 1)
+         {
+             Console.WriteLine("Dang! You run out of lives.\n" +
+-                              $"You've solved {GameController.score} equations our of possible 25");
+-            ScorePrinter();
++                              $"You've solved {GameController.Score} equations our of possible 25");
++            GameController.ScorePrinter();
+             
+             Console.WriteLine("Press enter to go back to menu");
+             
+             Console.ReadLine();
+         }
+-        else if (lives > 0 && GameController.gamesPlayed == 26)
++        else if (Lives > 0 && GameController.GamesPlayed == 26)
+         {
+             Console.WriteLine("You WON\n" +
+-                              $"You've solved {GameController.score} equations our of possible 25\n" +
+-                              $"You still have {lives} lives left");
+-            ScorePrinter();
++                              $"You've solved {GameController.Score} equations our of possible 25\n" +
++                              $"You still have {Lives} lives left");
++            GameController.ScorePrinter();
+             
+             Console.WriteLine("Press enter to go back to menu");
+             
+             Console.ReadLine();
+         }
+     }
+-    private static int ContinueCheck(int cont)
+-    {
+-        if (lives < 1)
+-        {
+-            Console.WriteLine("No more lives. Press enter to exit this session");
+-            Console.ReadLine();
+-            cont++;
+-        }
+-        else if (lives > 0 && GameController.gamesPlayed == 26)
+-        {
+-            Console.WriteLine("Whew, that was the final question! Press enter to finish this session");
+-            Console.ReadLine();
+-            cont++;
+-        }
+-        else
+-        {
+-            while (true)
+-            {
+-                Console.WriteLine("Advance to the next round?\n" +
+-                                  "1. Yes 2. No");
+-                Program.menuOperator = Console.ReadKey().Key;
+-                switch (Program.menuOperator)
+-                {
+-                    case ConsoleKey.D1:
+-                        Console.Clear();
+-                        return cont;
+-                    case ConsoleKey.D2:
+-                        cont++;
+-                        return cont;
+-                    default:
+-                        continue;
+-                }
+-            }
+-        }
+-
+-        return cont;
+-    }
+-    private static void ProblemGenerator()
++    private static void ProblemGenerator(int amountOfVariables)
+     {
+         // getting maximum amount of variables possible from settings
+         
+@@ -153,107 +114,54 @@
+         
+         for (int i = 0; i < variables.Length; i++)
+         {
+-            variables[i] = GameController.random.Next(1, 10);
++            variables[i] = _random.Next(1, 10);
+         }
+         
+         // getting random operators for that equation
+         
+-        string[] operatorsInEquasion = new string[variables.Length - 1];
+-
+-        int maxActiveOperatorsForRandom = operatorsInPlay.Count;
++        string[] operatorsInEquation = new string[variables.Length - 1];
+         
+-        for (int i = 0; i < operatorsInEquasion.Length; i++)
++        for (int i = 0; i < operatorsInEquation.Length; i++)
+         {
+-            operatorsInEquasion[i] = operatorsInPlay[GameController.random.Next(0,maxActiveOperatorsForRandom)];
++            operatorsInEquation[i] = GameController.OperatorsInPlay[_random.Next(0,GameController.OperatorsInPlay.Count)];
+         }
+         
+         // filling a sting
+         
+-        GameController.equation = "";
++        GameController.Equation = "";
+         
+         for (int i = 0; i < variables.Length; i++)
+         {
+-            GameController.equation += variables[i];
+-            if (i<operatorsInEquasion.Length)
++            GameController.Equation += variables[i];
++            if (i<operatorsInEquation.Length)
+             {
+-                GameController.equation += operatorsInEquasion[i];
++                GameController.Equation += operatorsInEquation[i];
+             }
+         }
+-
+-    }
+-    private static double ProblemSolver()
+-    {
+-        Expression expression = new Expression(GameController.equation);
+-        double correctAnswer = Convert.ToDouble(expression.Evaluate());
+ 
+-        // doing this so it is actually possible to answer division questions
+-        correctAnswer = Math.Round(correctAnswer, 2);
+-
+-        return correctAnswer;
+     }
+-    private static double PlayerSolution()
++    private static float PlayerSolution()
+     {
+-        double playerAnswer;
++        float playerAnswer;
+         // while loop for safety check
+         while (true)
+         {
+             Console.Clear();
+-            Console.WriteLine($"Correct answers {GameController.score}. {lives} lives left\n" +
+-                              $"Problem: {GameController.gamesPlayed}. Difficulty level: {difficultyLevel}");
++            Console.WriteLine($"Correct answers {GameController.Score}. {Lives} lives left\n" +
++                              $"Problem: {GameController.GamesPlayed}. Difficulty level: {_difficultyLevel}");
+             Console.WriteLine("Solve this:");
+-            Console.Write(GameController.equation+"=");
++            Console.Write(GameController.Equation+"=");
+                 
+-            if (Double.TryParse(Console.ReadLine(),out playerAnswer))
++            if (Single.TryParse(Console.ReadLine(),out playerAnswer))
+                 break;
+             Console.WriteLine("Looks like you entered something that is not a number.\n" +
+                               "Try again!");
+         }
+         return playerAnswer;
+     }
+-    private static void WinCondition(double playerAnswer, double correctAnswer)
+-    {
+-        bool winCheck = playerAnswer == correctAnswer;
+-        if (winCheck)
+-        {
+-            GameController.score++;
+-            Console.WriteLine($"Correct!");
+-        }
+-        else
+-        {
+-            lives--;
+-            Console.WriteLine($"Wrong! Correct answer is: {correctAnswer}.");
+-        }
+-            
+-    }
+     
+-    private static void ScoreTracker(double playerAnswer, double correctAnswer)
+-    {
+-        string gameScoreWritedown;
+-        bool wincheck = playerAnswer == correctAnswer;
+-        string result;
+-        double effectiveness;
+-        if (wincheck)
+-        {
+-            result = "Your answer was correct!";
+-            effectiveness = Math.Round(Convert.ToDouble(GameController.score / GameController.gamesPlayed),2);
+-        }
+-        else
+-        {
+-            result = "Your answer was incorrect!";
+-            effectiveness = Math.Round(GameController.score / GameController.gamesPlayed,2)*100;
+-        }
+-        
+-        gameScoreWritedown = ($"Round {GameController.gamesPlayed}. {GameController.equation}={playerAnswer}. {result} Accuracy: {effectiveness}%");
+-        GameController.prevGames.Add(gameScoreWritedown);
+-    }
++   
+     
+-    static void ScorePrinter()
+-    {
+-        foreach (var record in GameController.prevGames)
+-        {
+-            Console.WriteLine(record);
+-        }
+-    }
+ 
+  
+ 

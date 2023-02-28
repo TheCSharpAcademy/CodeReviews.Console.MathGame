@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_22_02_2023,_17_45_[Changes]" date="1677073506141" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.OhshieMathGame/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_02_2023,_17_45_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 22.02.2023, 17:45 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="OhshieMathGame/obj/Debug/net7.0/OhshieMathGame.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.OhshieMathGame/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_02_2023,_17_45_[Changes]/OhshieMathGame.assets.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="OhshieMathGame/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.OhshieMathGame/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_02_2023,_17_45_[Changes]/project.nuget.cache" />
+  </binary>
+</changelist>
