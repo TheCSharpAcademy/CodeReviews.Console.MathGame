@@ -15,9 +15,9 @@
             return answer;
         }
 
-        internal static string ValidateMode(string? selection) 
+        internal static string ValidateMode(string? selection)
         {
-            
+
 
             while (string.IsNullOrEmpty(selection) || (!Int32.TryParse(selection, out _) && selection.ToLower() != "q"))
             {

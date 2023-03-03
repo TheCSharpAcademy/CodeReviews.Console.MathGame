@@ -19,7 +19,7 @@ namespace MathGame_
             var score = 0;
 
             int[] divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
-            
+
             for (int i = 0; i < numOfQuestions; i++)
             {
                 var divNum1 = divisionNumbers[0];
@@ -66,7 +66,7 @@ namespace MathGame_
                     {
                         Console.WriteLine("Incorrect!\n");
                     }
-                        
+
                 }
 
                 else if (operation == 3)
@@ -102,7 +102,7 @@ namespace MathGame_
                     else
                         Console.WriteLine("Incorrect!\n");
                 }
-                
+
                 divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
 
             }
@@ -114,7 +114,7 @@ namespace MathGame_
             Console.WriteLine("Press [enter] to return to Main Menu..");
             Console.ReadLine();
         }
-        
+
         internal void DivisionGame(string message, string diffText, int difficulty, int numOfQuestions)
         {
             Console.Clear();
