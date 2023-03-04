@@ -280,7 +280,6 @@ namespace MathGame_
             }
 
             stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
             Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
             stopWatch.Reset();
 
