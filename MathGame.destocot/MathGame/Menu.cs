@@ -33,8 +33,8 @@ Q - Quit Program");
                         break;
 
                     case "1":
-                        var diff = chooseDifficulty();
-                        var numOfQs = numofQuestions();
+                        var diff = ChooseDifficulty();
+                        var numOfQs = NumofQuestions();
                         var diffText = "Easy";
 
                         if (diff == 40)
@@ -45,8 +45,8 @@ Q - Quit Program");
                         gameSelection.AdditionGame("Addition Game", diffText, diff, numOfQs);
                         break;
                     case "2":
-                        diff = chooseDifficulty();
-                        numOfQs = numofQuestions();
+                        diff = ChooseDifficulty();
+                        numOfQs = NumofQuestions();
                         diffText = "Easy";
 
                         if (diff == 40)
@@ -58,8 +58,8 @@ Q - Quit Program");
                         break;
 
                     case "3":
-                        diff = chooseDifficulty();
-                        numOfQs = numofQuestions();
+                        diff = ChooseDifficulty();
+                        numOfQs = NumofQuestions();
                         diffText = "Easy";
 
                         if (diff == 40)
@@ -70,8 +70,8 @@ Q - Quit Program");
                         gameSelection.MultiplicationGame("Multiplication Game", diffText, diff, numOfQs);
                         break;
                     case "4":
-                        diff = chooseDifficulty();
-                        numOfQs = numofQuestions();
+                        diff = ChooseDifficulty();
+                        numOfQs = NumofQuestions();
                         diffText = "Easy";
 
                         if (diff == 40)
@@ -118,7 +118,7 @@ Q - Quit Program");
             } while (selection);
         }
 
-        private int numofQuestions()
+        private int NumofQuestions()
         {
             Console.Write("Select Number of Questions: 1 - 10.. ");
             var choice = Console.ReadLine();
@@ -133,7 +133,7 @@ Q - Quit Program");
             return int.Parse(choice);
         }
 
-        private int chooseDifficulty()
+        private int ChooseDifficulty()
         {
             Console.WriteLine("Select Difficulty:\t1 - Easy\t2 - Medium\t3 - Hard");
             var difficulty = Console.ReadLine();

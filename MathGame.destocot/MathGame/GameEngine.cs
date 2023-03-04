@@ -237,7 +237,6 @@ namespace MathGame_
             }
 
             stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
             Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
             stopWatch.Reset();
 
@@ -290,14 +289,5 @@ namespace MathGame_
             Console.ReadLine();
         }
 
-        private int numberOfQuestions(string difficulty)
-        {
-            if (difficulty == "Medium")
-                return 2;
-            else if (difficulty == "Hard")
-                return 3;
-
-            return 1;
-        }
     }
 }
