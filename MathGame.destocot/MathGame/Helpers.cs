@@ -1,5 +1,4 @@
 ﻿using MathGame.Models;
-using System.Diagnostics;
 
 namespace MathGame
 {

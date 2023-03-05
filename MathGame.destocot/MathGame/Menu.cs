@@ -44,31 +44,6 @@ internal class Menu
                     Console.ReadLine();
                     break;
             }
-
-            /*
-            switch (mode)
-            {
-                            case "5":
-                                Random random = new Random();
-            int[] difficulties = { 0, 40, 90 };
-            diff = difficulties[random.Next(0, 3)];
-            diffText = "Easy";
-            Console.ForegroundColor = ConsoleColor.Green;
-            if (diff == 40)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                diffText = "Medium";
-            }
-            else if (diff == 90)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                diffText = "Hard";
-            }
-
-            var randomNumOfQs = random.Next(1, 11);
-
-            gameSelection.RandomGame("Random Game", diffText, diff, randomNumOfQs);
-            break;        }*/
         } while (selection);
     }
 
