@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using static System.Formats.Asn1.AsnWriter;
 
 class MathGame
 {
@@ -9,14 +7,21 @@ class MathGame
         MathGame mg = new MathGame();
         ScoreTable st = new ScoreTable();
 
+        string input;
         int option = 0;
 
         while (option != 7)
         {
             mg.PrintMenu();
-            option = Convert.ToInt32(Console.ReadLine());
-            
-            switch (option)
+
+            input = Console.ReadLine();
+            while (!Int32.TryParse(input, out option))
+            {
+                Console.Write("Error, please enter a number from the menu: ");
+                input = Console.ReadLine();
+            }
+
+                switch (option)
             {
                 case 1:
                     Console.WriteLine("You choose Addition Game");
@@ -32,7 +37,6 @@ class MathGame
                     catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
-                        break;
                     }
                     break;
                 case 2:
@@ -49,7 +53,6 @@ class MathGame
                     catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
-                        break;
                     }
                     break;
                 case 3:
@@ -66,7 +69,6 @@ class MathGame
                     catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
-                        break;
                     }
                     break;
                 case 4:
@@ -83,7 +85,6 @@ class MathGame
                     catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
-                        break;
                     }
                     break;
                 case 5:
@@ -100,7 +101,6 @@ class MathGame
                     catch (InvalidDifficultyException)
                     {
                         Console.WriteLine("Invalid difficulty, try again.");
-                        break;
                     }
                     break;
                 case 6:
@@ -130,6 +130,7 @@ class MathGame
 7. Quit
 -------------------------------------------------------------";
         Console.WriteLine(menu);
+        Console.Write("Please, choose an option from the menu: ");
     }
 
     public int ChooseNumberOfQuestions()
@@ -143,9 +144,9 @@ class MathGame
     public int ChooseDifficulty()
     {
         Console.WriteLine(@"Please, choose the difficulty:
-1: easy,
-2: medium,
-3: hard");
+1: Easy,
+2: Medium,
+3: Hard");
         int difficulty = Convert.ToInt32(Console.ReadLine());
 
         return difficulty;
@@ -154,67 +155,74 @@ class MathGame
 
 abstract class Game
 {
-    protected Random r = new Random();
-    Stopwatch sw = Stopwatch.StartNew();
-    protected int difficulty, numberOfQuestions, answeredQuestions, maxNumber, answerValue, score, correctAnswer, userAnswer;
+    protected Random Random { get; }
+    Stopwatch Stopwatch { get; }
+    private int TotalNumberOfQuestions { get; }
+    private int AnsweredQuestions { get; set; }
+    private int Score { get; set; }
+    protected int CorrectAnswer { get; set; }
+    protected int UserAnswer { get; set; }
+    protected int MaxNumber { get; }
+    private int AnswerValue { get; }
+    private int TotalObtainablePoints { get; }
 
     public Game(int numberQ, int dif)
     {
-        this.numberOfQuestions = numberQ;
-        if (dif == 1)
+        this.TotalNumberOfQuestions = numberQ;
+        if (dif == 1) // EASY
         {
-            this.difficulty = dif;
-            this.maxNumber = 20;
-            this.answerValue = 1;
+            this.MaxNumber = 20;
+            this.AnswerValue = 1;
         }
-        else if (dif == 2)
+        else if (dif == 2) // MEDIUM
         {
-            this.difficulty = dif;
-            this.maxNumber = 50;
-            this.answerValue = 2;
+            this.MaxNumber = 50;
+            this.AnswerValue = 2;
         }
-        else if (dif == 3)
+        else if (dif == 3) // HARD
         {
-            this.difficulty = dif;
-            this.maxNumber = 100;
-            this.answerValue = 3;
+            this.MaxNumber = 100;
+            this.AnswerValue = 3;
         }
         else
         {
             throw new InvalidDifficultyException();
         }
+        this.TotalObtainablePoints = AnswerValue * TotalNumberOfQuestions;
+        this.Random = new Random();
+        this.Stopwatch = Stopwatch.StartNew();
     }
 
-    abstract public void CreateAndAnswerArithmeticEq();
+    abstract protected void CreateAndAnswerArithmeticEq();
 
-    public void CheckResult()
+    private void CheckResult()
     {
-        if (correctAnswer == userAnswer)
+        if (this.CorrectAnswer == this.UserAnswer)
         {
-            correctAnswer++;
-            score += answerValue;
+            this.Score += this.AnswerValue;
         }
     }
+
     public Score RunGame()
     {
-        sw.Start();
-        while (answeredQuestions < numberOfQuestions)
+        this.Stopwatch.Start();
+        while (this.AnsweredQuestions < this.TotalNumberOfQuestions)
         {
             this.CreateAndAnswerArithmeticEq();
             this.CheckResult();
 
-            answeredQuestions++;
+            this.AnsweredQuestions++;
         }
-        sw.Stop();
-        TimeSpan ts = sw.Elapsed;
-        sw.Restart();
+        this.Stopwatch.Stop();
+        TimeSpan ts = this.Stopwatch.Elapsed;
+        Stopwatch.Restart();
         string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
             ts.Hours, ts.Minutes, ts.Seconds,
             ts.Milliseconds / 10);
         Console.Write("Please type your name: ");
         string name = Console.ReadLine();
 
-        Score finalScore = new Score(score, name, elapsedTime);
+        Score finalScore = new Score(this.Score, name, elapsedTime, this.TotalObtainablePoints);
         return finalScore;
     }
 }
@@ -225,14 +233,14 @@ class AdditionGame : Game
     {
     }
 
-    public override void CreateAndAnswerArithmeticEq()
+    protected override void CreateAndAnswerArithmeticEq()
     {
-        int addend1 = r.Next(0, maxNumber);
-        int addend2 = r.Next(0, maxNumber);
+        int addend1 = this.Random.Next(0, this.MaxNumber);
+        int addend2 = this.Random.Next(0, this.MaxNumber);
 
-        correctAnswer = addend1 + addend2;
+        this.CorrectAnswer = addend1 + addend2;
         Console.WriteLine($"{addend1} + {addend2}");
-        userAnswer = Convert.ToInt32(Console.ReadLine());
+        this.UserAnswer = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("");
     }
 }
@@ -243,14 +251,14 @@ class SubtractionGame : Game
     {
     }
 
-    public override void CreateAndAnswerArithmeticEq()
+    protected override void CreateAndAnswerArithmeticEq()
     {
-        int minuend = r.Next(0, maxNumber);
-        int subtrahend = r.Next(0, maxNumber);
+        int minuend = this.Random.Next(0, this.MaxNumber);
+        int subtrahend = this.Random.Next(0, this.MaxNumber);
 
-        correctAnswer = minuend - subtrahend;
+        this.CorrectAnswer = minuend - subtrahend;
         Console.WriteLine($"{minuend} - {subtrahend}");
-        userAnswer = Convert.ToInt32(Console.ReadLine());
+        this.UserAnswer = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("");
     }
 }
@@ -261,14 +269,14 @@ class MultiplicationGame : Game
     {
     }
 
-    public override void CreateAndAnswerArithmeticEq()
+    protected override void CreateAndAnswerArithmeticEq()
     {
-        int factor1 = r.Next(0, 10);
-        int factor2 = r.Next(0, maxNumber);
+        int factor1 = this.Random.Next(0, 10);
+        int factor2 = this.Random.Next(0, this.MaxNumber);
 
-        correctAnswer = factor1 * factor2;
+        this.CorrectAnswer = factor1 * factor2;
         Console.WriteLine($"{factor1} * {factor2}");
-        userAnswer = Convert.ToInt32(Console.ReadLine());
+        this.UserAnswer = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("");
     }
 }
@@ -279,19 +287,19 @@ class DivisionGame : Game
     {
     }
 
-    public override void CreateAndAnswerArithmeticEq()
+    protected override void CreateAndAnswerArithmeticEq()
     {
         int dividend, divisor;
 
         do
         {
-            dividend = r.Next(0, 100);
-            divisor = r.Next(1, maxNumber);
+            dividend = this.Random.Next(0, 100);
+            divisor = this.Random.Next(1, this.MaxNumber);
         } while (dividend % divisor != 0);
 
-        correctAnswer = dividend / divisor;
+        this.CorrectAnswer = dividend / divisor;
         Console.WriteLine($"{dividend} / {divisor}");
-        userAnswer = Convert.ToInt32(Console.ReadLine());
+        this.UserAnswer = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("");
     }
 }
@@ -302,50 +310,50 @@ class RandomGame : Game
     {
     }
 
-    public override void CreateAndAnswerArithmeticEq()
+    protected override void CreateAndAnswerArithmeticEq()
     {
-        int choosenOperation = r.Next(0, 3);
+        int choosenOperation = this.Random.Next(0, 4);
 
         switch (choosenOperation)
         {
             case 0:
                 // Addition
-                int number1 = r.Next(0, maxNumber);
-                int number2 = r.Next(0, maxNumber);
+                int number1 = this.Random.Next(0, this.MaxNumber);
+                int number2 = this.Random.Next(0, this.MaxNumber);
 
-                correctAnswer = number1 + number2;
+                this.CorrectAnswer = number1 + number2;
                 Console.WriteLine($"{number1} + {number2}");
-                userAnswer = Convert.ToInt32(Console.ReadLine());
+                this.UserAnswer = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
                 break;
             case 1:
                 // Subtraction
-                number1 = r.Next(0, maxNumber);
-                number2 = r.Next(0, maxNumber);
+                number1 = this.Random.Next(0, this.MaxNumber);
+                number2 = this.Random.Next(0, this.MaxNumber);
 
-                correctAnswer = number1 - number2;
+                this.CorrectAnswer = number1 - number2;
                 Console.WriteLine($"{number1} - {number2}");
-                userAnswer = Convert.ToInt32(Console.ReadLine());
+                this.UserAnswer = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
                 break;
             case 2:
                 // Multiplication
-                number1 = r.Next(0, 10);
-                number2 = r.Next(0, maxNumber);
+                number1 = this.Random.Next(0, 10);
+                number2 = this.Random.Next(0, this.MaxNumber);
 
-                correctAnswer = number1 * number2;
+                this.CorrectAnswer = number1 * number2;
                 Console.WriteLine($"{number1} * {number2}");
-                userAnswer = Convert.ToInt32(Console.ReadLine());
+                this.UserAnswer = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
                 break;
             case 3:
                 // Division
-                number1 = r.Next(0, 100);
-                number2 = r.Next(0, maxNumber);
+                number1 = this.Random.Next(0, 100);
+                number2 = this.Random.Next(0, this.MaxNumber);
 
-                correctAnswer = number1 / number2;
+                this.CorrectAnswer = number1 / number2;
                 Console.WriteLine($"{number1} / {number2}");
-                userAnswer = Convert.ToInt32(Console.ReadLine());
+                this.UserAnswer = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
                 break;
         }
@@ -357,17 +365,20 @@ class Score
     public int Value { get; }
     public string Name { get; }
     public string Time { get; }
+    public int TotalObtainablePoints { get; }
 
-    public Score(int value, string name, string time)
+    public Score(int value, string name, string time, int obtainablePoints)
     {
         this.Value = value;
         this.Name = name;
         this.Time = time;
+        this.TotalObtainablePoints = obtainablePoints;
     }
 
     public void PrintScoreMessage()
     {
-        Console.WriteLine($"¡Congratulations {Name}! You finished the game in {Time} and you scored: {Value}pts");
+        Console.WriteLine($"¡Congratulations {Name}! You finished the game in {Time} and scored: {Value} pts out of {TotalObtainablePoints}");
+        // "¡Congratulations {Name}! You finished the game in {Time} and scored: {Value} pts out of {TotalObtainablePoints}"
     }
 }
 
@@ -385,7 +396,7 @@ class ScoreTable
         Console.WriteLine("Name - Time - Score");
         foreach (Score score in scores)
         {
-            Console.WriteLine("{0} - {1} - {2}", score.Name, score.Time, score.Value);
+            Console.WriteLine("{0} - {1} - {2}/{3}", score.Name, score.Time, score.Value, score.TotalObtainablePoints);
         }
     }
 }
