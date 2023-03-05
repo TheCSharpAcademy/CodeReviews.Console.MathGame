@@ -1,292 +1,169 @@
 ﻿using System.Diagnostics;
 
-namespace MathGame_
+namespace MathGame;
+
+internal class GameEngine
 {
-    internal class GameEngine
+    internal static Stopwatch stopWatch = new();
+
+    internal void RandomGame(string message)
     {
-        Stopwatch stopWatch = new Stopwatch();
+        Random random = new Random();
 
-        internal void RandomGame(string message, string diffText, int difficulty, int numOfQuestions)
+        var diffLevel = Validations.GetDifficulty($"{random.Next(1, 4)}");
+        var diffModified = (DiffModifier)Enum.Parse(typeof(DiffModifier), diffLevel);
+        var numOfQuestions = Validations.GetNumberOfQuestions($"{random.Next(1, 4)}");
+
+        Helpers.StartGame(message);
+
+        var score = 0;
+        var idx = random.Next(0, 4);
+
+        for (int i = 0; i < int.Parse(numOfQuestions); i++)
         {
-            Console.Clear();
-            Console.WriteLine("Press [enter] to begin..");
-            Console.ReadLine();
-            stopWatch.Start();
-            message += $" ({diffText}) [{numOfQuestions} Questions]";
-            Console.WriteLine(message);
-            Console.WriteLine("-------------------------");
+            string[] opList = { "+", "-", "*", "/" };
 
-            var score = 0;
+            var num1 = random.Next(0, 9 + (int)diffModified);
+            var num2 = random.Next(0, 9 + (int)diffModified);
 
-            int[] divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
-
-            for (int i = 0; i < numOfQuestions; i++)
+            switch (opList[idx])
             {
-                var divNum1 = divisionNumbers[0];
-                var divNum2 = divisionNumbers[1];
-
-                Random random = new Random();
-                var operation = random.Next(1, 5);
-                var num1 = random.Next(11 + difficulty);
-                var num2 = random.Next(11 + difficulty);
-
-                if (operation == 1)
-                {
-                    Console.Write($"{num1} + {num2} = ");
-
-                    var ans = Console.ReadLine();
-                    ans = Helpers.ValidateAns(ans);
-
-                    if (int.Parse(ans) == num1 + num2)
-                    {
-                        Console.WriteLine("Correct!\n");
-                        score++;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("Incorrect!\n");
-                    }
-                }
-
-                else if (operation == 2)
-                {
-                    Console.Write($"{num1} - {num2} = ");
-
-                    var ans = Console.ReadLine();
-                    ans = Helpers.ValidateAns(ans);
-
-                    if (int.Parse(ans) == num1 - num2)
-                    {
-                        Console.WriteLine("Correct!\n");
-                        score++;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("Incorrect!\n");
-                    }
-
-                }
-
-                else if (operation == 3)
-                {
-                    Console.Write($"{num1} * {num2} = ");
-
-                    var ans = Console.ReadLine();
-                    ans = Helpers.ValidateAns(ans);
-
-                    if (int.Parse(ans) == num1 * num2)
-                    {
-                        Console.WriteLine("Correct!\n");
-                        score++;
-                    }
-
-                    else
-                        Console.WriteLine("Incorrect!\n");
-                }
-
-                else
-                {
-                    Console.Write($"{divNum1} / {divNum2} = ");
-
-                    var ans = Console.ReadLine();
-                    ans = Helpers.ValidateAns(ans);
-
-                    if (int.Parse(ans) == divNum1 / divNum2)
-                    {
-                        Console.WriteLine("Correct!\n");
-                        score++;
-                    }
-
-                    else
-                        Console.WriteLine("Incorrect!\n");
-                }
-
-                divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
-
+                case "+":
+                    score = Helpers.DisplayProblems(score, num1, num2, opList[idx], (num1, num2) => num1 + num2);
+                    break;
+                case "-":
+                    score = Helpers.DisplayProblems(score, num1, num2, opList[idx], (num1, num2) => num1 - num2);
+                    break;
+                case "*":
+                    score = Helpers.DisplayProblems(score, num1, num2, opList[idx], (num1, num2) => num1 * num2);
+                    break;
+                case "/":
+                    int[] divisionNumbers = Helpers.GetDivisionNumbers((int)diffModified * 5);
+                    num1 = divisionNumbers[0];
+                    num2 = divisionNumbers[1];
+                    score = Helpers.DisplayProblems(score, num1, num2, opList[idx], (num1, num2) => num1 / num2);
+                    break;
             }
-            stopWatch.Stop();
-            Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
-            stopWatch.Reset();
-
-            Console.WriteLine($"Your final score is {score}");
-            Console.WriteLine("Press [enter] to return to Main Menu..");
-            Console.ReadLine();
+            idx = random.Next(0, 3);
         }
-
-        internal void DivisionGame(string message, string diffText, int difficulty, int numOfQuestions)
-        {
-            Console.Clear();
-            Console.WriteLine("Press [enter] to begin..");
-            Console.ReadLine();
-            stopWatch.Start();
-            message += $" ({diffText}) [{numOfQuestions} Questions]";
-            Console.WriteLine(message);
-            Console.WriteLine("-------------------------");
-            int[] divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
-
-            var score = 0;
-
-            for (int i = 0; i < numOfQuestions; i++)
-            {
-                var num1 = divisionNumbers[0];
-                var num2 = divisionNumbers[1];
-
-                Console.Write($"{num1} / {num2} = ");
-
-                var ans = Console.ReadLine();
-                ans = Helpers.ValidateAns(ans);
-
-                if (int.Parse(ans) == num1 / num2)
-                {
-                    Console.WriteLine("Correct!\n");
-                    score++;
-                }
-
-                else
-                    Console.WriteLine("Incorrect!\n");
-
-                divisionNumbers = Helpers.GetDivisionNumbers(difficulty * 10);
-
-            }
-            stopWatch.Stop();
-            Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
-            stopWatch.Reset();
-
-            Console.WriteLine($"Your final score is {score}");
-            Console.WriteLine("Press [enter] to return to Main Menu..");
-            Console.ReadLine();
-        }
-
-        internal void MultiplicationGame(string message, string diffText, int difficulty, int numOfQuestions)
-        {
-            Console.Clear();
-            Console.WriteLine("Press [enter] to begin..");
-            Console.ReadLine();
-            stopWatch.Start();
-            message += $" ({diffText}) [{numOfQuestions} Questions]";
-            Console.WriteLine(message);
-            Console.WriteLine("-------------------------");
-
-            Random random = new Random();
-
-            var score = 0;
-
-            for (int i = 0; i < numOfQuestions; i++)
-            {
-                var num1 = random.Next(11 + difficulty);
-                var num2 = random.Next(11 + difficulty);
-
-                Console.Write($"{num1} * {num2} = ");
-
-                var ans = Console.ReadLine();
-                ans = Helpers.ValidateAns(ans);
-
-                if (int.Parse(ans) == num1 * num2)
-                {
-                    Console.WriteLine("Correct!\n");
-                    score++;
-                }
-
-                else
-                    Console.WriteLine("Incorrect!\n");
-            }
-
-            stopWatch.Stop();
-            Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
-            stopWatch.Reset();
-
-            Console.WriteLine($"Your final score is {score}");
-            Console.WriteLine("Press [enter] to return to Main Menu..");
-            Console.ReadLine();
-        }
-
-        internal void SubtractionGame(string message, string diffText, int difficulty, int numOfQuestions)
-        {
-            Console.Clear();
-            Console.WriteLine("Press [enter] to begin..");
-            Console.ReadLine();
-            stopWatch.Start();
-            message += $" ({diffText}) [{numOfQuestions} Questions]";
-            Console.WriteLine(message);
-            Console.WriteLine("-------------------------");
-
-            Random random = new Random();
-
-            var score = 0;
-
-            for (int i = 0; i < numOfQuestions; i++)
-            {
-                var num1 = random.Next(11 + difficulty);
-                var num2 = random.Next(11 + difficulty);
-
-                Console.Write($"{num1} - {num2} = ");
-
-                var ans = Console.ReadLine();
-                ans = Helpers.ValidateAns(ans);
-
-                if (int.Parse(ans) == num1 - num2)
-                {
-                    Console.WriteLine("Correct!\n");
-                    score++;
-                }
-
-                else
-                    Console.WriteLine("Incorrect!\n");
-            }
-
-            stopWatch.Stop();
-            Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
-            stopWatch.Reset();
-
-            Console.WriteLine($"Your final score is {score}");
-            Console.WriteLine("Press [enter] to return to Main Menu..");
-            Console.ReadLine();
-        }
-
-        internal void AdditionGame(string message, string diffText, int difficulty, int numOfQuestions)
-        {
-            Console.Clear();
-            Console.WriteLine("Press [enter] to begin..");
-            Console.ReadLine();
-            stopWatch.Start();
-            message += $" ({diffText}) [{numOfQuestions} Questions]";
-            Console.WriteLine(message);
-            Console.WriteLine("-------------------------");
-
-            Random random = new Random();
-
-            var score = 0;
-
-            for (int i = 0; i < numOfQuestions; i++)
-            {
-                var num1 = random.Next(11 + difficulty);
-                var num2 = random.Next(11 + difficulty);
-
-                Console.Write($"{num1} + {num2} = ");
-
-                var ans = Console.ReadLine();
-                ans = Helpers.ValidateAns(ans);
-
-                if (int.Parse(ans) == num1 + num2)
-                {
-                    Console.WriteLine("Correct!\n");
-                    score++;
-                }
-
-                else
-                    Console.WriteLine("Incorrect!\n");
-            }
-
-            stopWatch.Stop();
-            Helpers.AddToHistory(score, message, stopWatch.ElapsedMilliseconds / 1000);
-            stopWatch.Reset();
-
-            Console.WriteLine($"Your final score is {score}");
-            Console.WriteLine("Press [enter] to return to Main Menu..");
-            Console.ReadLine();
-        }
-
+        Helpers.GameResults(message, diffLevel, numOfQuestions, score);
     }
+
+    internal void DivisionGame(string message)
+    {
+        Helpers.DisplayDifficulties();
+        var diffLevel = Console.ReadLine();
+        diffLevel = Validations.GetDifficulty(diffLevel);
+        var diffModified = (DiffModifier)Enum.Parse(typeof(DiffModifier), diffLevel);
+
+        Helpers.DisplayQuestionsPrompt();
+        var numOfQuestions = Console.ReadLine();
+        numOfQuestions = Validations.GetNumberOfQuestions(numOfQuestions);
+
+        Helpers.StartGame(message);
+
+        int[] divisionNumbers = Helpers.GetDivisionNumbers((int)diffModified * 5);
+
+        var score = 0;
+
+        for (int i = 0; i < int.Parse(numOfQuestions); i++)
+        {
+            var num1 = divisionNumbers[0];
+            var num2 = divisionNumbers[1];
+
+            score = Helpers.DisplayProblems(score, num1, num2, "/", (num1, num2) => num1 / num2);
+
+            divisionNumbers = Helpers.GetDivisionNumbers((int)diffModified * 5);
+        }
+
+        Helpers.GameResults(message, diffLevel, numOfQuestions, score);
+    }
+
+    internal void MultiplicationGame(string message)
+    {
+        Helpers.DisplayDifficulties();
+        var diffLevel = Console.ReadLine();
+        diffLevel = Validations.GetDifficulty(diffLevel);
+        var diffModified = (DiffModifier)Enum.Parse(typeof(DiffModifier), diffLevel);
+
+        Helpers.DisplayQuestionsPrompt();
+        var numOfQuestions = Console.ReadLine();
+        numOfQuestions = Validations.GetNumberOfQuestions(numOfQuestions);
+
+        Helpers.StartGame(message);
+
+        Random random = new Random();
+        var score = 0;
+
+        for (int i = 0; i < int.Parse(numOfQuestions); i++)
+        {
+            var num1 = random.Next(0, 9 + ((int)diffModified + 1));
+            var num2 = random.Next(0, 9 + ((int)diffModified + 1));
+
+            score = Helpers.DisplayProblems(score, num1, num2, "*", (num1, num2) => num1 * num2);
+        }
+
+        Helpers.GameResults(message, diffLevel, numOfQuestions, score);
+    }
+
+    internal void SubtractionGame(string message)
+    {
+        Helpers.DisplayDifficulties();
+        var diffLevel = Console.ReadLine();
+        diffLevel = Validations.GetDifficulty(diffLevel);
+        var diffModified = (DiffModifier)Enum.Parse(typeof(DiffModifier), diffLevel);
+
+        Helpers.DisplayQuestionsPrompt();
+        var numOfQuestions = Console.ReadLine();
+        numOfQuestions = Validations.GetNumberOfQuestions(numOfQuestions);
+
+        Helpers.StartGame(message);
+
+        Random random = new Random();
+        var score = 0;
+
+        for (int i = 0; i < int.Parse(numOfQuestions); i++)
+        {
+            var num1 = random.Next(0, 9 + ((int)diffModified * 5));
+            var num2 = random.Next(0, 9 + ((int)diffModified * 5));
+
+            score = Helpers.DisplayProblems(score, num1, num2, "-", (num1, num2) => num1 - num2);
+        }
+        Helpers.GameResults(message, diffLevel, numOfQuestions, score);
+    }
+
+    internal void AdditionGame(string message)
+    {
+        Helpers.DisplayDifficulties();
+        var diffLevel = Console.ReadLine();
+        diffLevel = Validations.GetDifficulty(diffLevel);
+        var diffModified = (DiffModifier)Enum.Parse(typeof(DiffModifier), diffLevel);
+
+        Helpers.DisplayQuestionsPrompt();
+        var numOfQuestions = Console.ReadLine();
+        numOfQuestions = Validations.GetNumberOfQuestions(numOfQuestions);
+
+        Helpers.StartGame(message);
+
+        Random random = new Random();
+        var score = 0;
+
+        for (int i = 0; i < int.Parse(numOfQuestions); i++)
+        {
+            var num1 = random.Next(0, 9 + ((int)diffModified * 5));
+            var num2 = random.Next(0, 9 + ((int)diffModified * 5));
+
+            score = Helpers.DisplayProblems(score, num1, num2, "+", (num1, num2) => num1 + num2);
+        }
+        Helpers.GameResults(message, diffLevel, numOfQuestions, score);
+    }
+
+    /* range of numbers for each operation modifier from 0-9 to 0-x, 
+    where x is some multiple of 9 calculated from difficulty selection */
+    enum DiffModifier
+    {
+        Easy = 0,
+        Medium = 10,
+        Hard = 20,
+    };
 }

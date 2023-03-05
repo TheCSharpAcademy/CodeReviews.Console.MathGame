@@ -1,4 +1,4 @@
-﻿using MathGame_;
+﻿using MathGame;
 
 Menu menu = new();
 
