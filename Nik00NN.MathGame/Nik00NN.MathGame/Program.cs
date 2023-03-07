@@ -1,10 +1,8 @@
 ﻿using System.Transactions;
 
 Console.WriteLine("Enter your username :");
-
 string username = Console.ReadLine();
 var date = DateTime.UtcNow;
-
 bool IsGameOn = true;
 bool IsRandom = false;
 bool RandomON = true;
@@ -15,9 +13,7 @@ Console.WriteLine(@"Set your level of difficulty(1-3):
                     2-Medium
                     3-Hard");
 
-
 int difficulty = Convert.ToInt32(Console.ReadLine());
-
 
 if (difficulty < 1 || difficulty > 3)
 {
@@ -29,10 +25,6 @@ if (difficulty < 1 || difficulty > 3)
     }
 
 }
-
-
-
-
 void Menu(string username)
 {
     Console.Clear();
@@ -45,6 +37,7 @@ void Menu(string username)
                       V-View Game History
                       Q-Quit the program");
     Console.WriteLine("--------------------------------------------");
+
     string select = Console.ReadLine().ToUpper().Trim();
 
     switch (select)
@@ -70,12 +63,9 @@ void Menu(string username)
             break;
         default:
             Console.WriteLine("Invalid input");
-
             break;
     }
-
 }
-
 void AdditionGame(int difficulty)
 {
     Console.Clear();
@@ -83,7 +73,6 @@ void AdditionGame(int difficulty)
 
     int score = 0;
     bool again = true;
-
 
     while (again)
     {
@@ -95,7 +84,6 @@ void AdditionGame(int difficulty)
             Console.WriteLine($"{firstnumber} + {secondnumber} = ");
             string result = Console.ReadLine();
 
-
             if (Convert.ToInt32(result) == firstnumber + secondnumber)
             {
                 Console.WriteLine("your answer was correct ");
@@ -104,12 +92,8 @@ void AdditionGame(int difficulty)
             else
                 Console.WriteLine("your answer was incorrect");
 
-
-
-
             Console.WriteLine("--------");
             Console.WriteLine("Do you want to play again?(Yes/No)");
-
 
             string select = Console.ReadLine().ToLower();
 
@@ -122,26 +106,20 @@ void AdditionGame(int difficulty)
                 Console.WriteLine("Type any key to be redirected to main menu");
                 Console.ReadKey();
             }
-
-
-
         }
         catch (Exception ex) { Console.WriteLine("You must enter a number"); }
     }
 }
-
 void DivisionGame(int difficulty)
 {
     Console.Clear();
     Console.WriteLine("Division Game selected ");
     int score = 0;
     bool again = true;
-
     while (again)
     {
         int firstnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
         int secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100); ;
-
 
         try
         {
@@ -163,8 +141,6 @@ void DivisionGame(int difficulty)
             else
                 Console.WriteLine("your answer is incorrect");
 
-
-
             Console.WriteLine("-------");
             Console.WriteLine("Do you want to play again?(Yes/No)");
 
@@ -180,17 +156,14 @@ void DivisionGame(int difficulty)
             }
         }
         catch (Exception ex) { Console.WriteLine("You must enter a number"); }
-
     }
 }
-
 void MultiplicationGame(int difficulty)
 {
     Console.Clear();
     Console.WriteLine("Multiplication Game selected ");
     int score = 0;
     bool again = true;
-
     while (again)
     {
         int firstnumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(9);
@@ -211,13 +184,10 @@ void MultiplicationGame(int difficulty)
             else
                 Console.WriteLine("your answer is incorrect");
 
-
-
             Console.WriteLine("-------");
             Console.WriteLine("Do you want to play again?(Yes/No)");
 
             string select = Console.ReadLine().ToLower();
-
             if (select == "no")
             {
                 games.Add($"Date: {date} GameType: Multiplication Score:{score}");
@@ -228,12 +198,8 @@ void MultiplicationGame(int difficulty)
             }
         }
         catch (Exception ex) { Console.WriteLine("You must enter a number"); }
-
     }
-
-
 }
-
 void SubstractionGame(int difficulty)
 {
     Console.Clear();
@@ -273,14 +239,10 @@ void SubstractionGame(int difficulty)
                 Console.WriteLine("Type any key to be redirected to main menu");
                 Console.ReadKey();
             }
-
         }
         catch (Exception ex) { Console.WriteLine("You must enter a number"); }
     }
-
-
 }
-
 void ViewGameHistory()
 {
     Console.Clear();
@@ -290,14 +252,7 @@ void ViewGameHistory()
 
     Console.WriteLine("Press enter to go back to main menu");
     Console.ReadLine();
-
-
 }
-
-
-
-
-
 while (IsGameOn)
 {
     Menu(username);
