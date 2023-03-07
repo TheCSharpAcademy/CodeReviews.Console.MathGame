@@ -4,8 +4,6 @@ Console.WriteLine("Enter your username :");
 string username = Console.ReadLine();
 var date = DateTime.UtcNow;
 bool IsGameOn = true;
-bool IsRandom = false;
-bool RandomON = true;
 var games = new List<string>();
 
 Console.WriteLine(@"Set your level of difficulty(1-3):
@@ -119,7 +117,7 @@ void DivisionGame(int difficulty)
     while (again)
     {
         int firstnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
-        int secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100); ;
+        int secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100); 
 
         try
         {
