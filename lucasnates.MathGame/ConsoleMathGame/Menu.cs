@@ -3,8 +3,8 @@
     internal class Menu
     {
         GameEngine gameEngine = new();
-        internal static bool isDivisionOn = false;
-        internal static bool isMultiplicationOn = false;
+        internal static bool isDivisionOn;
+        internal static bool isMultiplicationOn;
 
         internal void ShowMenu(string name, DateTime date)
         {

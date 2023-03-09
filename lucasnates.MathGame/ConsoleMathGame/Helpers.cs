@@ -7,8 +7,8 @@ namespace ConsoleMathGame
 {
     internal class Helpers
     {
-        internal static int diffRange1 = 0;
-        internal static int diffRange2 = 0;
+        internal static int diffRange1;
+        internal static int diffRange2;
         internal static string diffLevel;
 
         internal static void ChooseDifficulty()
