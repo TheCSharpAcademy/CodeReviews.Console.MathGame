@@ -38,19 +38,20 @@ internal class Menu
         switch (menuOption.Trim().ToUpper())
         {
             case "A":
-                gameEngine.AdditionGame("Addition Game\n");
+                //gameEngine.AdditionGame("Addition Game\n");
+                gameEngine.StartGame(GameType.Addition);
                 Console.Clear();
                 break;
             case "S":
-                gameEngine.SubtractionGame("Subtraction Game\n");
+                gameEngine.StartGame(GameType.Subtraction);
                 Console.Clear();
                 break;
             case "M":
-                gameEngine.MultiplicationGame("Multiplication Game\n");
+                gameEngine.StartGame(GameType.Multiplication);
                 Console.Clear();
                 break;
             case "D":
-                gameEngine.DivisionGame("Division Game\nAll answers should be whole numbers!\n");
+                gameEngine.StartGame(GameType.Division);
                 Console.Clear();
                 break;
             case "V":

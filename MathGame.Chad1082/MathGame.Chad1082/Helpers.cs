@@ -17,22 +17,28 @@ internal class Helpers
     }
 
 
-    internal static void AddGameScore(int score, string gameName)
+    internal static void AddGameScore(int score, GameType gameType)
     {
-        gameList.Add($"{DateTime.Now} - {gameName}: {score} points.");
+        gameList.Add($"{DateTime.Now} - {gameType}: {score} points.");
     }
 
-    internal static int[] GetDivisionNumbers()
+    internal static int[] GetNumbers(GameType gameType)
     {
         var random = new Random();
 
-        int firstNumber = random.Next(1, 100); ;
-        int secondNumber = random.Next(1, 100); ;
+        int firstNumber = random.Next(1, 11);
+        int secondNumber = random.Next(1, 11);
 
-        while (firstNumber % secondNumber != 0)
+        if (gameType == GameType.Division)
         {
             firstNumber = random.Next(1, 100);
             secondNumber = random.Next(1, 100);
+
+            while (firstNumber % secondNumber != 0)
+            {
+                firstNumber = random.Next(1, 100);
+                secondNumber = random.Next(1, 100);
+            }
         }
 
         var result = new int[2];
