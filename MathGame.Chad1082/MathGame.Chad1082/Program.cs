@@ -1,29 +1,19 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿
+namespace MathGame.chad1082;
 
-namespace MathGame.chad1082
+internal class Program
 {
-    internal class Program
+
+
+    static void Main(string[] args)
     {
+        Menu menu = new();
 
+        Console.WriteLine("Please enter your name:");
+        string name = Console.ReadLine();
 
-        static void Main(string[] args)
-        {
-            Menu menu = new Menu();
+        var date = DateTime.UtcNow;
 
-
-            Console.WriteLine("Please enter your name:");
-            string name = Console.ReadLine();
-
-            var date = DateTime.UtcNow;
-
-            menu.ShowMainMenu(name, date);
-
-
-
-        }
-
-
-
+        menu.ShowMainMenu(name, date);
     }
 }
