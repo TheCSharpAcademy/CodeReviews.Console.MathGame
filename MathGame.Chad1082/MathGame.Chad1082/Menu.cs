@@ -14,7 +14,6 @@ internal class Menu
         do
         {
             MainMenu();
-            //Console.Clear();
         } while (gameRunning);
 
     }
@@ -38,7 +37,6 @@ internal class Menu
         switch (menuOption.Trim().ToUpper())
         {
             case "A":
-                //gameEngine.AdditionGame("Addition Game\n");
                 gameEngine.StartGame(GameType.Addition);
                 Console.Clear();
                 break;
