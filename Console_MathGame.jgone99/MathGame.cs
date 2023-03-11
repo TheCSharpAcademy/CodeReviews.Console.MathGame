@@ -44,12 +44,12 @@ namespace Console_MathGame
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 Console.Write("\n" + message + "\n");
-                while (stopwatch.Elapsed < interval) ;
+                while (stopwatch.Elapsed < interval);
             }
             else
             {
                 Console.Write("\n" + message + "\n\nPress any key to continue\n");
-                while (!Console.KeyAvailable) ;
+                while (!Console.KeyAvailable);
                 _ = Console.ReadKey(true);
             }
             Console.Clear();
