@@ -57,7 +57,7 @@ namespace ConsoleMathGame
         internal void DivisionGame(string message)
         {
             string selectedMode;
-            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            int gamesToPlay, score = 0;
             Random random;
             GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
