@@ -2,17 +2,17 @@
 {
     internal class Timer
     {
-        private DateTime startTime; 
+        private DateTime startTime;
 
-        public void Start() 
+        public void Start()
         {
-            startTime = DateTime.Now; 
+            startTime = DateTime.Now;
         }
 
-        public TimeSpan Stop() 
+        public TimeSpan Stop()
         {
-            TimeSpan elapsedTime = DateTime.Now - startTime; 
-            return elapsedTime; 
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            return elapsedTime;
         }
     }
 }

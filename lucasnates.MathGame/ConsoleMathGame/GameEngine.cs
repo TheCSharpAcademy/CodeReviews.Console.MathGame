@@ -1,6 +1,4 @@
 ﻿using ConsoleMathGame.Models;
-using System.Drawing;
-using System.Net.Sockets;
 
 namespace ConsoleMathGame
 {
@@ -8,23 +6,23 @@ namespace ConsoleMathGame
     {
         Timer timer = new Timer();
 
-        internal void AdditionGame(string message)
+        private void GameSetup(out string selectedMode, out int gamesToPlay, out Random random, string message)
         {
             Console.Clear();
             Console.WriteLine(message);
-            Console.WriteLine("---------------------------------");
-
             Helpers.ChooseDifficulty();
-            var selectedMode = Helpers.diffLevel;
-            GameMode selectedMode2 = (GameMode)Enum.Parse(typeof(GameMode), selectedMode);
-
-            int gamesToPlay = Helpers.ChooseGames();
+            selectedMode = Helpers.diffLevel;
+            gamesToPlay = Helpers.ChooseGames();
+            random = new Random();
             timer.Start();
+        }
 
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
+        internal void AdditionGame(string message)
+        {
+            string selectedMode;
+            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            Random random;
+            GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -45,9 +43,9 @@ namespace ConsoleMathGame
                 {
                     Console.WriteLine("Incorrect!");
                 }
-                if (i == (gamesToPlay-1))
+                if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Addition, selectedMode2, timer.Stop(), gamesToPlay);
+                    Helpers.AddToHistory(score, GameType.Addition, selectedMode, timer.Stop(), gamesToPlay);
                     Console.Clear();
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
@@ -58,32 +56,20 @@ namespace ConsoleMathGame
 
         internal void DivisionGame(string message)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-            Console.WriteLine("---------------------------------");
-
-            Helpers.ChooseDifficulty();
-            var selectedMode = Helpers.diffLevel;
-            GameMode selectedMode2 = (GameMode)Enum.Parse(typeof(GameMode), selectedMode);
-
-            int gamesToPlay = Helpers.ChooseGames();
-            timer.Start();
-
-            var score = 0;
+            string selectedMode;
+            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            Random random;
+            GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
-
                 var divisionNumbers = Helpers.GetDivisionNumbers();
-                var firstNumber = divisionNumbers[0];
-                var secondNumber = divisionNumbers[1];
-
-                Console.WriteLine($"{firstNumber} / {secondNumber}");
+                Console.WriteLine($"{divisionNumbers[0]} / {divisionNumbers[1]}");
 
                 var result = Console.ReadLine();
                 result = Helpers.ValidateResult(result);
 
-                if (int.Parse(result) == firstNumber / secondNumber)
+                if (int.Parse(result) == divisionNumbers[0] / divisionNumbers[1])
                 {
                     Console.WriteLine("Correct!");
                     score++;
@@ -92,9 +78,9 @@ namespace ConsoleMathGame
                 {
                     Console.WriteLine("Incorrect!");
                 }
-                if (i == (gamesToPlay-1))
+                if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Division, selectedMode2, timer.Stop(), gamesToPlay);
+                    Helpers.AddToHistory(score, GameType.Division, selectedMode, timer.Stop(), gamesToPlay);
                     Console.Clear();
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine($"Game over. Your score is {score}/{gamesToPlay}");
@@ -106,23 +92,10 @@ namespace ConsoleMathGame
 
         internal void MultiplicationGame(string message)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-            Console.WriteLine("---------------------------------");
-
-            Helpers.ChooseDifficulty();
-
-            var selectedMode = Helpers.diffLevel;
-            GameMode selectedMode2 = (GameMode)Enum.Parse(typeof(GameMode), selectedMode);
-
-            int gamesToPlay = Helpers.ChooseGames();
-
-            timer.Start();
-
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
+            string selectedMode;
+            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            Random random;
+            GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -145,7 +118,7 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Multiplication, selectedMode2, timer.Stop(), gamesToPlay);
+                    Helpers.AddToHistory(score, GameType.Multiplication, selectedMode, timer.Stop(), gamesToPlay);
                     Console.Clear();
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}");
@@ -156,21 +129,10 @@ namespace ConsoleMathGame
 
         internal void SubstractionGame(string message)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-            Console.WriteLine("---------------------------------");
-
-            Helpers.ChooseDifficulty();
-            var selectedMode = Helpers.diffLevel;
-            GameMode selectedMode2 = (GameMode)Enum.Parse(typeof(GameMode), selectedMode);
-
-            int gamesToPlay = Helpers.ChooseGames();
-            timer.Start();
-
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
+            string selectedMode;
+            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            Random random;
+            GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -193,7 +155,7 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Substraction, selectedMode2, timer.Stop(), gamesToPlay);
+                    Helpers.AddToHistory(score, GameType.Substraction, selectedMode, timer.Stop(), gamesToPlay);
                     Console.Clear();
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
@@ -204,21 +166,10 @@ namespace ConsoleMathGame
 
         internal void RandomizerGame(string message)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-            Console.WriteLine("---------------------------------");
-
-            Helpers.ChooseDifficulty();
-            var selectedMode = Helpers.diffLevel;
-            GameMode selectedMode2 = (GameMode)Enum.Parse(typeof(GameMode), selectedMode);
-
-            int gamesToPlay = Helpers.ChooseGames();
-            timer.Start();
-
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
+            string selectedMode;
+            int gamesToPlay, score = 0, firstNumber, secondNumber;
+            Random random;
+            GameSetup(out selectedMode, out gamesToPlay, out random, message);
 
             int playedGames = 0;
 
@@ -226,7 +177,7 @@ namespace ConsoleMathGame
             {
                 int randomGame = random.Next(0, 4);
 
-                switch(randomGame)
+                switch (randomGame)
                 {
                     case 0:
                         //Addition game
@@ -321,7 +272,7 @@ namespace ConsoleMathGame
                 }
 
             }
-            Helpers.AddToHistory(score, GameType.Randomizer, selectedMode2, timer.Stop(), gamesToPlay);
+            Helpers.AddToHistory(score, GameType.Randomizer, selectedMode, timer.Stop(), gamesToPlay);
             Console.Clear();
             Console.WriteLine("---------------------------------");
             Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");

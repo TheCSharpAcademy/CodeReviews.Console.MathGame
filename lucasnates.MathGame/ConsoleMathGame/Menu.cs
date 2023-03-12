@@ -26,7 +26,7 @@
     M - Multiplication
     D - Division 
     R - Randomizer!
-    V - View previous games
+    V - Show played games
     Q - Quit the program");
                 Console.WriteLine("---------------------------------");
 

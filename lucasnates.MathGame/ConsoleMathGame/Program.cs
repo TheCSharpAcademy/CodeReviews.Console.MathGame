@@ -2,7 +2,7 @@
 
 var menu = new Menu();
 
-var date = DateTime.UtcNow; 
+var date = DateTime.UtcNow;
 
 string name = Helpers.GetName();
 
