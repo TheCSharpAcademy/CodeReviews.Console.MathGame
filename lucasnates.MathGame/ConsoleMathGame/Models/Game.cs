@@ -13,10 +13,10 @@ internal class Game
 internal enum GameType
 {
     Addition,
-    Substraction,
+    Subtraction,
     Multiplication,
     Division,
-    Randomizer
+    Randomizer,
 }
 
 internal enum GameMode

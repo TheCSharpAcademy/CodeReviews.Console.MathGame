@@ -5,6 +5,7 @@ namespace ConsoleMathGame
     internal class GameEngine
     {
         Timer timer = new Timer();
+        GameType gameType = new GameType();
 
         private void GameSetup(out string selectedMode, out int gamesToPlay, out Random random, string message)
         {
@@ -17,8 +18,18 @@ namespace ConsoleMathGame
             timer.Start();
         }
 
+        private void EndGame(string selectedMode, int gamesToPlay, int score, GameType gameType)
+        {
+            Helpers.AddToHistory(score, gameType, selectedMode, timer.Stop(), gamesToPlay);
+            Console.Clear();
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
+            Console.WriteLine("---------------------------------");
+        }
+
         internal void AdditionGame(string message)
         {
+            GameType currentGame = GameType.Addition;
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
@@ -45,17 +56,14 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Addition, selectedMode, timer.Stop(), gamesToPlay);
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
-                    Console.WriteLine("---------------------------------");
+                    EndGame(selectedMode, gamesToPlay, score, currentGame);
                 }
             }
         }
 
         internal void DivisionGame(string message)
         {
+            GameType currentGame = GameType.Division;
             string selectedMode;
             int gamesToPlay, score = 0;
             Random random;
@@ -80,18 +88,14 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Division, selectedMode, timer.Stop(), gamesToPlay);
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"Game over. Your score is {score}/{gamesToPlay}");
-                    Console.WriteLine("---------------------------------");
+                    EndGame(selectedMode, gamesToPlay, score, currentGame);
                 }
-
             }
         }
 
         internal void MultiplicationGame(string message)
         {
+            GameType currentGame = GameType.Multiplication;
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
@@ -118,17 +122,14 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Multiplication, selectedMode, timer.Stop(), gamesToPlay);
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}");
-                    Console.WriteLine("---------------------------------");
+                    EndGame(selectedMode, gamesToPlay, score, currentGame);
                 }
             }
         }
 
-        internal void SubstractionGame(string message)
+        internal void SubtractionGame(string message)
         {
+            GameType currentGame = GameType.Subtraction;
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
@@ -155,17 +156,14 @@ namespace ConsoleMathGame
                 }
                 if (i == (gamesToPlay - 1))
                 {
-                    Helpers.AddToHistory(score, GameType.Substraction, selectedMode, timer.Stop(), gamesToPlay);
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
-                    Console.WriteLine("---------------------------------");
+                    EndGame(selectedMode, gamesToPlay, score, currentGame);
                 }
             }
         }
 
         internal void RandomizerGame(string message)
         {
+            GameType currentGame = GameType.Randomizer;
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
@@ -272,11 +270,7 @@ namespace ConsoleMathGame
                 }
 
             }
-            Helpers.AddToHistory(score, GameType.Randomizer, selectedMode, timer.Stop(), gamesToPlay);
-            Console.Clear();
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine($"Game over. Your score was {score}/{gamesToPlay}.");
-            Console.WriteLine("---------------------------------");
+            EndGame(selectedMode, gamesToPlay, score, currentGame);
         }
     }
 }
