@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Console_MathGame
+﻿namespace Console_MathGame
 {
     public class MathGame
     {
@@ -42,14 +40,12 @@ namespace Console_MathGame
             Console.Clear();
             if (interval.HasValue)
             {
-                Stopwatch stopwatch = Stopwatch.StartNew();
                 Console.Write("\n" + message + "\n");
-                while (stopwatch.Elapsed < interval);
+                Thread.Sleep(interval.Value);
             }
             else
             {
                 Console.Write("\n" + message + "\n\nPress any key to continue\n");
-                while (!Console.KeyAvailable);
                 _ = Console.ReadKey(true);
             }
             Console.Clear();
@@ -81,7 +77,6 @@ namespace Console_MathGame
                 Console.Clear();
                 b = random.Next(50);
                 DisplayMainScreen();
-
                 // input loop
                 do
                 {
