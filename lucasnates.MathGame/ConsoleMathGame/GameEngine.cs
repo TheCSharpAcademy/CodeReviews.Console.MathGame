@@ -5,9 +5,8 @@ namespace ConsoleMathGame
     internal class GameEngine
     {
         Timer timer = new Timer();
-        GameType gameType = new GameType();
 
-        private void GameSetup(out string selectedMode, out int gamesToPlay, out Random random, string message)
+        private void StartGame(out string selectedMode, out int gamesToPlay, out Random random, string message)
         {
             Console.Clear();
             Console.WriteLine(message);
@@ -33,7 +32,7 @@ namespace ConsoleMathGame
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
-            GameSetup(out selectedMode, out gamesToPlay, out random, message);
+            StartGame(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -67,7 +66,7 @@ namespace ConsoleMathGame
             string selectedMode;
             int gamesToPlay, score = 0;
             Random random;
-            GameSetup(out selectedMode, out gamesToPlay, out random, message);
+            StartGame(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -99,7 +98,7 @@ namespace ConsoleMathGame
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
-            GameSetup(out selectedMode, out gamesToPlay, out random, message);
+            StartGame(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -133,7 +132,7 @@ namespace ConsoleMathGame
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
-            GameSetup(out selectedMode, out gamesToPlay, out random, message);
+            StartGame(out selectedMode, out gamesToPlay, out random, message);
 
             for (int i = 0; i < gamesToPlay; i++)
             {
@@ -167,7 +166,7 @@ namespace ConsoleMathGame
             string selectedMode;
             int gamesToPlay, score = 0, firstNumber, secondNumber;
             Random random;
-            GameSetup(out selectedMode, out gamesToPlay, out random, message);
+            StartGame(out selectedMode, out gamesToPlay, out random, message);
 
             int playedGames = 0;
 
