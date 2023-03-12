@@ -52,9 +52,7 @@ namespace ConsoleMathGame
                         diffRange2 = 9;
                     }
                     diffLevel = "Easy";
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"{diffLevel} mode selected.");
+                    SuccessMsg();
                     break;
                 case "m":
                     diffRange1 = 1;
@@ -70,9 +68,7 @@ namespace ConsoleMathGame
                         diffRange1 = 2;
                         diffRange2 = 50;
                     }
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"{diffLevel} mode selected.");
+                    SuccessMsg();
                     break;
                 case "h":
                     diffRange1 = 27;
@@ -88,11 +84,16 @@ namespace ConsoleMathGame
                         diffRange1 = 2;
                         diffRange2 = 125;
                     }
-                    Console.Clear();
-                    Console.WriteLine("---------------------------------");
-                    Console.WriteLine($"{diffLevel} mode selected.");
+                    SuccessMsg();
                     break;
             }
+        }
+
+        private static void SuccessMsg()
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"{diffLevel} mode selected.");
         }
 
         internal static List<Game> games = new List<Game>
