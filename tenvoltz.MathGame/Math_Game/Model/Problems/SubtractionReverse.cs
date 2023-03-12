@@ -27,7 +27,7 @@ For 4 digits and above, the middle must be all 0";
             {
                 firstNumber = random.Next(1, 9) * (int)Math.Pow(10, digits) + random.Next(1, 9);
             }
-            secondNumber = reverse(firstNumber);
+            secondNumber = Reverse(firstNumber);
         }
 
         public String Display()
@@ -49,7 +49,7 @@ For 4 digits and above, the middle must be all 0";
             else    return Result.Incorrect;
         }
 
-        private int reverse(int number)
+        private int Reverse(int number)
         {
             int result = 0;
             while (number > 0)

@@ -44,15 +44,15 @@
 
         public Fraction Simplify()
         {
-            int gcd = GCD(Numerator, Denominator);
+            int gcd = Gcd(Numerator, Denominator);
             return new Fraction(Numerator / gcd, Denominator / gcd);
         }
 
-        public static int GCD(int a, int b)
+        public static int Gcd(int a, int b)
         {
             if (a == 0)
                 return b;
-            return GCD(b % a, a);
+            return Gcd(b % a, a);
         }
 
         public String DisplayImproper()
