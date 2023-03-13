@@ -1,0 +1,15 @@
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.csproj.AssemblyReference.cache
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.GeneratedMSBuildEditorConfig.editorconfig
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.AssemblyInfoInputs.cache
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.AssemblyInfo.cs
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.csproj.CoreCompileInputs.cache
+/Users/john/Projects/MathGame/MathGame/bin/Debug/net7.0/MathGame
+/Users/john/Projects/MathGame/MathGame/bin/Debug/net7.0/MathGame.deps.json
+/Users/john/Projects/MathGame/MathGame/bin/Debug/net7.0/MathGame.runtimeconfig.json
+/Users/john/Projects/MathGame/MathGame/bin/Debug/net7.0/MathGame.dll
+/Users/john/Projects/MathGame/MathGame/bin/Debug/net7.0/MathGame.pdb
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.dll
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/refint/MathGame.dll
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.pdb
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/MathGame.genruntimeconfig.cache
+/Users/john/Projects/MathGame/MathGame/obj/Debug/net7.0/ref/MathGame.dll
