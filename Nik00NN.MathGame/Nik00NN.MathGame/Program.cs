@@ -1,32 +1,21 @@
-﻿using System.Transactions;
-
+﻿using Nik00NN.MathGame;
 Console.WriteLine("Enter your username :");
 string username = Console.ReadLine();
 var date = DateTime.UtcNow;
 bool IsGameOn = true;
 var games = new List<string>();
+Validator validator = new Validator();
+int difficulty = validator.SetDifficultyLevel();
 
-Console.WriteLine(@"Set your level of difficulty(1-3):
-                    1-Easy
-                    2-Medium
-                    3-Hard");
-
-int difficulty = Convert.ToInt32(Console.ReadLine());
-
-if (difficulty < 1 || difficulty > 3)
+while (IsGameOn)
 {
-    while (difficulty < 1 || difficulty > 3)
-    {
-        Console.WriteLine("Value must be between 1 and 3");
-        Console.WriteLine("Enter another value:");
-        difficulty = Convert.ToInt32(Console.ReadLine());
-    }
-
+    Menu(username);
 }
+
 void Menu(string username)
 {
     Console.Clear();
-    Console.WriteLine($"Hello {username} , it's {date} ! What game would u like to play today ?\n");
+    Console.WriteLine($"Hello {username}, it's {date} ! What game would u like to play today ?\n");
     Console.WriteLine(@"Select one from the list below:
                       A-Addition
                       S-Substraction
@@ -35,7 +24,11 @@ void Menu(string username)
                       V-View Game History
                       Q-Quit the program");
     Console.WriteLine("--------------------------------------------");
-
+    SelectGame(difficulty);
+   
+}
+void SelectGame(int difficulty)
+{
     string select = Console.ReadLine().ToUpper().Trim();
 
     switch (select)
@@ -63,6 +56,7 @@ void Menu(string username)
             Console.WriteLine("Invalid input");
             break;
     }
+
 }
 void AdditionGame(int difficulty)
 {
@@ -74,28 +68,37 @@ void AdditionGame(int difficulty)
 
     while (again)
     {
-        int firstnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
-        int secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
-
-        try
-        {
-            Console.WriteLine($"{firstnumber} + {secondnumber} = ");
-            string result = Console.ReadLine();
-
-            if (Convert.ToInt32(result) == firstnumber + secondnumber)
+        int firstNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+        int secondNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+        int result;
+       
+            Console.WriteLine($"{firstNumber} + {secondNumber} = ");
+        
+            if (int.TryParse(Console.ReadLine(), out result))
             {
-                Console.WriteLine("your answer was correct ");
-                score++;
+                if (result == firstNumber + secondNumber)
+                {
+                    Console.WriteLine("your answer is correct");
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine("your answer is incorrect");
+                    Console.WriteLine($"Answer was : {firstNumber + secondNumber}");
+                }
             }
             else
-                Console.WriteLine("your answer was incorrect");
+            {
+                Console.WriteLine("You must enter a valid number");
+            }
 
             Console.WriteLine("--------");
-            Console.WriteLine("Do you want to play again?(Yes/No)");
+            Console.WriteLine("Type Yes if you want to play again");
+            Console.WriteLine("Type anything else and press enter  to quit.");
 
             string select = Console.ReadLine().ToLower();
 
-            if (select == "no")
+            if (select != "yes")
             {
                 games.Add($"Date: {date} GameType: Addition Score:{score}");
                 again = false;
@@ -104,8 +107,6 @@ void AdditionGame(int difficulty)
                 Console.WriteLine("Type any key to be redirected to main menu");
                 Console.ReadKey();
             }
-        }
-        catch (Exception ex) { Console.WriteLine("You must enter a number"); }
     }
 }
 void DivisionGame(int difficulty)
@@ -116,44 +117,50 @@ void DivisionGame(int difficulty)
     bool again = true;
     while (again)
     {
-        int firstnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
-        int secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100); 
-
-        try
-        {
-            while (firstnumber % secondnumber != 0)
+        int firstNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+        int secondNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+        int result;
+        
+            while (firstNumber % secondNumber != 0 && firstNumber != secondNumber)
             {
-                firstnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
-                secondnumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+                firstNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
+                secondNumber = new Random().Next(99) * (int)Math.Pow(10, difficulty) + new Random().Next(100);
             }
 
-            Console.WriteLine($"{firstnumber} / {secondnumber} = ");
-
-            string result = Console.ReadLine();
-
-            if (Convert.ToInt32(result) == firstnumber / secondnumber)
+            Console.WriteLine($"{firstNumber} / {secondNumber} = ");
+            if(int.TryParse(Console.ReadLine(), out result))
             {
-                Console.WriteLine("your answer is correct");
-                score++;
+                if(result == firstNumber /secondNumber)
+                {
+                    Console.WriteLine("your answer is correct");
+                    score++;
+                } 
+                else 
+                {
+                    Console.WriteLine("your answer is incorrect");
+                    Console.WriteLine($"Answer was : {firstNumber / secondNumber}");
+                }
             }
             else
-                Console.WriteLine("your answer is incorrect");
-
-            Console.WriteLine("-------");
-            Console.WriteLine("Do you want to play again?(Yes/No)");
-
-            string select = Console.ReadLine().ToLower();
-
-            if (select == "no")
             {
-                games.Add($"Date: {date} GameType: Division Score:{score}");
-                again = false;
-                Console.WriteLine("Thank you for playing");
-                Console.WriteLine("Type any key to be redirected to main menu");
-                Console.ReadKey();
+                Console.WriteLine("You must enter a valid number");
             }
+            Console.WriteLine("-------");
+            Console.WriteLine("Type Yes if you want to play again");
+            Console.WriteLine("Type anything else and press enter  to quit.");
+
+        string select = Console.ReadLine().ToLower();
+
+        if (select != "yes")
+        {
+            games.Add($"Date: {date} GameType: Division Score:{score}");
+            again = false;
+
+            Console.WriteLine("Thank you for playing!");
+            Console.WriteLine("Type any key to be redirected to main menu");
+            Console.ReadKey();
         }
-        catch (Exception ex) { Console.WriteLine("You must enter a number"); }
+
     }
 }
 void MultiplicationGame(int difficulty)
@@ -162,40 +169,48 @@ void MultiplicationGame(int difficulty)
     Console.WriteLine("Multiplication Game selected ");
     int score = 0;
     bool again = true;
+   
     while (again)
     {
-        int firstnumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(9);
-        int secondnumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(9);
+        int firstNumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(9);
+        int secondNumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(9);
+        int result;
 
-        try
+        Console.WriteLine($"{firstNumber} * {secondNumber} = ");
+
+        if (int.TryParse(Console.ReadLine(), out result))
         {
-
-            Console.WriteLine($"{firstnumber} * {secondnumber} = ");
-
-            string result = Console.ReadLine();
-
-            if (Convert.ToInt32(result) == firstnumber * secondnumber)
+            if (result == firstNumber * secondNumber)
             {
                 Console.WriteLine("your answer is correct");
                 score++;
             }
             else
-                Console.WriteLine("your answer is incorrect");
-
-            Console.WriteLine("-------");
-            Console.WriteLine("Do you want to play again?(Yes/No)");
-
-            string select = Console.ReadLine().ToLower();
-            if (select == "no")
             {
-                games.Add($"Date: {date} GameType: Multiplication Score:{score}");
-                again = false;
-                Console.WriteLine("Thank you for playing");
-                Console.WriteLine("Type any key to be redirected to main menu");
-                Console.ReadKey();
+                Console.WriteLine("your answer is incorrect");
+                Console.WriteLine($"Answer was : {firstNumber * secondNumber}");
             }
         }
-        catch (Exception ex) { Console.WriteLine("You must enter a number"); }
+        else
+        {
+            Console.WriteLine("You must enter a valid number");
+        }
+
+        Console.WriteLine("-------");
+        Console.WriteLine("Type Yes if you want to play again");
+        Console.WriteLine("Type anything else and press enter  to quit.");
+
+        string select = Console.ReadLine().ToLower();
+        if (select != "yes")
+        {
+            games.Add($"Date: {date} GameType: Multiplication Score:{score}");
+            again = false;
+
+            Console.WriteLine("Thank you for playing!");
+            Console.WriteLine("Type any key to be redirected to main menu");
+            Console.ReadKey();
+        }
+
     }
 }
 void SubstractionGame(int difficulty)
@@ -207,38 +222,48 @@ void SubstractionGame(int difficulty)
 
     while (again)
     {
-        int firstnumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(99);
-        int secondnumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(99);
+        int firstNumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(99);
+        int secondNumber = new Random().Next(9) * (int)Math.Pow(10, difficulty) + new Random().Next(99);
+        int result;
+        
+            Console.WriteLine($"{firstNumber} - {secondNumber} = ");
 
-        try
-        {
-            Console.WriteLine($"{firstnumber} - {secondnumber} = ");
 
-            string result = Console.ReadLine();
 
-            if (Convert.ToInt32(result) == firstnumber - secondnumber)
+            if (int.TryParse(Console.ReadLine(), out result))
             {
-                Console.WriteLine("your answer is correct");
-                score++;
+                if (result == firstNumber - secondNumber)
+                {
+                    Console.WriteLine("your answer is correct");
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine("your answer is incorrect");
+                    Console.WriteLine($"Answer was : {firstNumber - secondNumber}");
+                }
             }
             else
-                Console.WriteLine("your answer is incorrect");
+            {
+                Console.WriteLine("You must enter a valid number");
+            }
 
             Console.WriteLine("-------");
-            Console.WriteLine("Do you want to play again?(Yes/No)");
+            Console.WriteLine("Type Yes if you want to play again");
+            Console.WriteLine("Type anything else and press enter to quit.");
 
-            string select = Console.ReadLine().ToLower();
+        string select = Console.ReadLine().ToLower();
 
-            if (select == "no")
-            {
-                games.Add($"Date: {date} GameType: Substraction Score:{score}");
-                again = false;
-                Console.WriteLine("Thank you for playing");
-                Console.WriteLine("Type any key to be redirected to main menu");
-                Console.ReadKey();
-            }
+        if (select != "yes")
+        {
+            games.Add($"Date: {date} GameType: Substraction Score:{score}");
+            again = false;
+
+            Console.WriteLine("Thank you for playing!");
+            Console.WriteLine("Type any key to be redirected to main menu");
+            Console.ReadKey();
         }
-        catch (Exception ex) { Console.WriteLine("You must enter a number"); }
+
     }
 }
 void ViewGameHistory()
@@ -246,16 +271,12 @@ void ViewGameHistory()
     Console.Clear();
     Console.WriteLine("Game History :");
     foreach (var game in games)
+    {
         Console.WriteLine(game);
-
+    }
     Console.WriteLine("Press enter to go back to main menu");
     Console.ReadLine();
 }
-while (IsGameOn)
-{
-    Menu(username);
-}
-
 
 
 
