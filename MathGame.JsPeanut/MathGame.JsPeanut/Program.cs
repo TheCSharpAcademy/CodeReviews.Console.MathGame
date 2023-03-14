@@ -19,7 +19,7 @@ class Program
             switch (Console.ReadLine())
             {
                 case "yes":
-                    startGame();
+                    StartGame();
                     break;
                 case "exit":
                     doUserStillWantToPlay = false;
@@ -27,28 +27,28 @@ class Program
             }
         }
 
-        void startGame()
+        void StartGame()
         {
             Random rnd = new Random();
             int a = rnd.Next(1, 100);
             int b = rnd.Next(1, 100);
 
-            int add(int x, int y)
+            int Add(int x, int y)
             {
                 return x + y;
             }
 
-            int substract(int x, int y)
+            int Substract(int x, int y)
             {
                 return x - y;
             }
 
-            int multiply(int x, int y)
+            int Multiply(int x, int y)
             {
                 return x * y;
             }
 
-            int divide(int x, int y)
+            int Divide(int x, int y)
             {
                 return x / y;
             }
@@ -68,17 +68,15 @@ class Program
             void AdditionGame()
             {
                 Operation sum = new Operation();
-                sum.Result = add(a, b);
+                sum.Result = Add(a, b);
                 sum.Calc = ($"{a} + {b}");
                 Console.WriteLine("You have 15 seconds to solve this operation:");
                 Console.WriteLine(sum.Calc);
-
-
                 if (Console.ReadLine() == $"{sum.Result}")
                 {
                     Console.WriteLine("Nice.");
                     sum.Score++;
-                    updateStats(sum);
+                    UpdateStats(sum);
                     do
                     {
                         a = rnd.Next(1, 100);
@@ -100,7 +98,7 @@ class Program
             {
                 Operation substraction = new Operation();
                 Console.WriteLine("You have 15 seconds to solve this operation:");
-                substraction.Result = substract(a, b);
+                substraction.Result = Substract(a, b);
                 substraction.Calc = ($"{a} - {b}");
                 Console.WriteLine(substraction.Calc);
 
@@ -108,7 +106,7 @@ class Program
                 {
                     Console.WriteLine("Nice.");
                     substraction.Score++;
-                    updateStats(substraction);
+                    UpdateStats(substraction);
                     do
                     {
                         a = rnd.Next(1, 100);
@@ -123,7 +121,7 @@ class Program
                     Console.WriteLine();
                     PlayWithoutIntro();
                     substraction.Score--;
-                    updateStats(substraction);
+                    UpdateStats(substraction);
                 }
             }
 
@@ -131,7 +129,7 @@ class Program
             {
                 Operation multiplication = new Operation();
                 Console.WriteLine("You have 15 seconds to solve this operation:");
-                multiplication.Result = multiply(a, b);
+                multiplication.Result = Multiply(a, b);
                 multiplication.Calc = ($"{a} * {b}");
                 Console.WriteLine(multiplication.Calc);
 
@@ -144,7 +142,7 @@ class Program
                     {
                         a = rnd.Next(1, 100);
                         b = rnd.Next(1, 100);
-                        updateStats(multiplication);
+                        UpdateStats(multiplication);
                     } while (a + b == multiplication.Calc[0]);
                     MultiplicationGame();
                 }
@@ -153,7 +151,7 @@ class Program
                     Console.WriteLine("Wrong. If you typed a command, ignore this message.");
                     PlayWithoutIntro();
                     multiplication.Score--;
-                    updateStats(multiplication);
+                    UpdateStats(multiplication);
                 }
 
 
@@ -174,7 +172,7 @@ class Program
                     } while (a % b != 0 || a == 1 || b == 1 || a == b);
                 }
 
-                division.Result = divide(a, b);
+                division.Result = Divide(a, b);
                 division.Calc = ($"{a} / {b}");
 
                 Console.WriteLine(division.Calc);
@@ -183,7 +181,7 @@ class Program
                 {
                     Console.WriteLine("Nice.");
                     division.Score++;
-                    updateStats(division);
+                    UpdateStats(division);
                     do
                     {
                         a = rnd.Next(1, 100);
@@ -196,11 +194,11 @@ class Program
                     Console.WriteLine("Wrong. If you typed a command, ignore this message.");
                     PlayWithoutIntro();
                     division.Score--;
-                    updateStats(division);
+                    UpdateStats(division);
                 }
             }
 
-            void updateStats(Operation operation)
+            void UpdateStats(Operation operation)
             {
                 previousGames.Add(new Operation
                 {
@@ -210,7 +208,7 @@ class Program
                 });
             }
 
-            void showScore()
+            void ShowScore()
             {
                 if (previousGames.Count != 0)
                 {
@@ -251,7 +249,7 @@ class Program
                         DivisionGame();
                         break;
                     case "Score":
-                        showScore();
+                        ShowScore();
                         break;
                     case "Menu":
                         Menu();
@@ -272,7 +270,6 @@ class Program
                 Console.WriteLine("Division (Type D)");
                 switch (Console.ReadLine())
                 {
-
                     case "A":
                         AdditionGame();
                         break;
@@ -286,7 +283,7 @@ class Program
                         DivisionGame();
                         break;
                     case "Score":
-                        showScore();
+                        ShowScore();
                         break;
                     case "Menu":
                         Menu();
@@ -295,14 +292,12 @@ class Program
                         Console.WriteLine("Inexistent operation");
 
                         break;
-
                 }
             }
 
-
             if (Console.ReadLine() == "Score")
             {
-                showScore();
+                ShowScore();
             }
 
             if (Console.ReadLine() == "Menu")
@@ -317,9 +312,8 @@ class Program
     {
         public int Result { get; set; }
         public string Calc { get; set; }
-
         public int Score { get; set; }
-
+        
     }
 
 
