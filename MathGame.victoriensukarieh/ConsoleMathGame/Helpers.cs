@@ -1,6 +1,4 @@
 ﻿using ConsoleMathGame.Models;
-using System.Runtime.InteropServices;
-using System.Timers;
 
 namespace ConsoleMathGame;
 internal class Helpers
@@ -15,8 +13,6 @@ internal class Helpers
         int num1 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level + 1)));
         int num2 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level + 1)));
         int[] numbers = new int[2];
-
-
 
         while (num1 % num2 != 0 || num1 == num2 || num2 == 1)
         {
@@ -49,6 +45,7 @@ internal class Helpers
 
         return name;
     }
+
     public static int GetLevel()
     {
         Console.WriteLine("Choose the Dificulty of the game.");
@@ -66,6 +63,7 @@ internal class Helpers
         Console.Clear();
         return Int32.Parse(tempLevel);
     }
+
     public static int GetNumberOfQuestions()
     {
         Console.WriteLine("How many questions do you want to answer?");
@@ -81,6 +79,7 @@ internal class Helpers
         Console.Clear();
         return Int32.Parse(questions);
     }
+
     public static void SaveScore(string gamePlayer, Game.GameType gameType, int GameScore, int level, int numberOfQuestions, int time)
     {
         string theLevel;
@@ -114,21 +113,17 @@ internal class Helpers
 
     public static void ShowScores()
     {
-        //Console.Clear();
         if (games.Count == 0)
         {
             Console.WriteLine("No scores saved to display...");
         }
         else
         {
-            //Console.WriteLine("Date \t Type \t Player \t Score");
             foreach (var game in games)
             {
                 Console.WriteLine($"{game.Date} \t {game.Type} \t {game.Player} \t LEVEL = {game.Level} \t SCORE = {game.Score} out of {game.NumberOfQuestion} \t Time = {game.Time}");
             }
         }
-
-
     }
 
     public static void StartTimer()
@@ -141,7 +136,6 @@ internal class Helpers
         aTimer.AutoReset = true;
         aTimer.Enabled = true;
 
-
     }
     public static int StopTimer()
     {
@@ -152,8 +146,6 @@ internal class Helpers
 
     private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
     {
-        //Console.WriteLine(seconds);
         seconds += 1;
     }
 }
-

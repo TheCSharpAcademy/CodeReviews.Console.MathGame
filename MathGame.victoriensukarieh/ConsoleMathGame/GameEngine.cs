@@ -1,6 +1,4 @@
 ﻿using ConsoleMathGame.Models;
-using System.Globalization;
-using System.Net.Security;
 
 namespace ConsoleMathGame;
 internal class GameEngine
@@ -11,8 +9,7 @@ internal class GameEngine
         player = p;
     }
     public void AdditionGame(int level, int numberOfQuestions)
-    {
-        //Console.Clear();
+    {        
         Random rnd = new();
         int num1;
         int num2;
@@ -42,12 +39,10 @@ internal class GameEngine
         Console.WriteLine($"Your Score is {score}");
         Console.WriteLine($"Your Time is {time} Seconds");
         Helpers.SaveScore(player, Game.GameType.Addition, score, level, numberOfQuestions, time);
-
     }
 
     public void SubtractionGame(int level, int numberOfQuestions)
-    {
-        //Console.Clear();
+    {       
         Random rnd = new();
         int num1 = 0;
         int num2 = num1 + 1;
@@ -78,17 +73,14 @@ internal class GameEngine
             num1 = 0;
             num2 = num1 + 1;
         }
-        time = Helpers.StopTimer();
-        
+        time = Helpers.StopTimer();        
         Console.WriteLine($"Your Score is {score}");
         Console.WriteLine($"Your Time is {time} Seconds");
         Helpers.SaveScore(player, Game.GameType.Subtraction, score, level, numberOfQuestions, time);
-
     }
 
     public void MultiplicationGame(int level, int numberOfQuestions)
-    {
-        //Console.Clear();
+    {       
         Random rnd = new();
         int num1;
         int num2;
@@ -98,10 +90,8 @@ internal class GameEngine
         Helpers.StartTimer();
         for (int i = 0; i < numberOfQuestions; i++)
         {
-
             num1 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level)));
             num2 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level)));
-
            
             Console.Write($"{num1} x {num2} = ");
             answer = Console.ReadLine();
@@ -125,8 +115,7 @@ internal class GameEngine
 
     }
     public void DivisionGame(int level, int numberOfQuestions)
-    {
-        //Console.Clear();
+    {        
         string answer;
         int score = 0;
         int time;
@@ -178,8 +167,7 @@ internal class GameEngine
         }
     }
     public void FrenzyGame(int level, int numberOfQuestions)
-    {
-        //Console.Clear();
+    {        
         Random rnd = new();
         int num1;
         int num2;
@@ -189,7 +177,6 @@ internal class GameEngine
         Helpers.StartTimer();
         for (int i = 0; i < numberOfQuestions; i++)
         {
-
             num1 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level)));
             num2 = rnd.Next(Convert.ToInt32(Math.Pow(10, level - 1)), Convert.ToInt32(Math.Pow(10, level)));
 

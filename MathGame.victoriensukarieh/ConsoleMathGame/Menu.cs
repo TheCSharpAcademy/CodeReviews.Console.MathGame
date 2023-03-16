@@ -1,8 +1,4 @@
-﻿using ConsoleMathGame.Models;
-using System.Xml.Linq;
-
-namespace ConsoleMathGame;
-
+﻿namespace ConsoleMathGame;
 
 internal static class Menu
 {
@@ -13,21 +9,17 @@ internal static class Menu
         DateTime date = DateTime.Now;
 
         Console.WriteLine($"Hello {player} and welcome to the Math Game.");
-        Console.WriteLine($"Oh and by the way, today is  {date}");
-        //Game game = new Game();
+        Console.WriteLine($"Oh and by the way, today is  {date}");       
 
         Console.WriteLine("\nPress any key to open the menu.");
         Console.ReadLine();
         Console.Clear();
-
-
 
         GameEngine theGame = new(player);
         Boolean isGameOn = true;
 
         while (isGameOn)
         {
-
             Console.WriteLine("What would you like to play? Type the corresponding letter to start...");
             Console.WriteLine("\n\tA - Addition Game\n" +
                 "\tS - Subtraction Game\n" +
@@ -37,7 +29,6 @@ internal static class Menu
                 "\tF - Frenzy Game\n" +
                 "\tV - View Scores\n" +
                 "\tQ - Quit Game");
-
 
             string choice;
             int level, numberOfQuestions;
@@ -123,9 +114,6 @@ internal static class Menu
                     Console.Clear();
                     break;
             }
-
         }
-
-
     }
 }
