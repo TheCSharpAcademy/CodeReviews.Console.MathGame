@@ -144,7 +144,7 @@ internal class Helpers
         return seconds;
     }
 
-    private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+    private static void OnTimedEvent()
     {
         seconds += 1;
     }
