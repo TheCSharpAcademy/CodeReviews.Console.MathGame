@@ -1,18 +1,14 @@
-﻿using System;
-
 class Program
 {
-
+    
     public static void Main(string[] args)
     {
-        List<Operation> previousGames = new List<Operation>();
+
 
         bool doUserStillWantToPlay = true;
 
-        Console.WriteLine("Hello there! Welcome to this math game.");
-        Console.WriteLine("Available commands: -Score -Menu");
-        Console.WriteLine("Do you want to play?");
-        Console.WriteLine("Type 'yes' if so. If not, type 'exit'.");
+        Console.Clear();
+        Console.WriteLine("Welcome to Math Game. \nAvailable commands: -Score -Menu\nDo you want to play?\nType 'yes' if so. If not, type 'exit'");
 
         while (doUserStillWantToPlay)
         {
@@ -24,288 +20,208 @@ class Program
                 case "exit":
                     doUserStillWantToPlay = false;
                     break;
+                default:
+                    Console.WriteLine("Invalid answer! Type yes or no.");
+                    break;
             }
         }
 
-        void StartGame()
+    }
+
+    public static void StartGame()
+    {
+        List<Operation> previousGames = new();
+        Operation sum = new();
+        Operation substraction = new Operation();
+        Operation multiplication = new Operation();
+        Operation division = new Operation();
+        Random rnd = new();
+        int Score = 0;
+        int a = rnd.Next(1, 100);
+        int b = rnd.Next(1, 100);
+        string symbol = "";
+
+        Console.WriteLine("\nMath Game is a game in which you can choose one of the 4 basic operations, and you will have to solve a calc with that operation.");
+        Console.WriteLine("\nChoose a math operation");
+        Console.WriteLine("\nAddition (Type A)");
+        Console.WriteLine("Substraction (Type S)");
+        Console.WriteLine("Multiplication (Type M)");
+        Console.WriteLine("Division (Type D)");
+
+        switch (Console.ReadLine())
         {
-            Random rnd = new Random();
-            int a = rnd.Next(1, 100);
-            int b = rnd.Next(1, 100);
+            case "A":
+                symbol = "+";
+                createAndShowCalc(sum, symbol);
+                checkResultAndAwardScore(sum);
+                break;
+            case "S":
+                symbol = "-";
+                createAndShowCalc(substraction, symbol);
+                checkResultAndAwardScore(substraction);
+                break;
+            case "M":
+                symbol = "*";
+                createAndShowCalc(multiplication, symbol);
+                checkResultAndAwardScore(multiplication);
+                break;
+            case "D":
+                symbol = "/";
+                createAndShowCalc(division, symbol);
+                checkResultAndAwardScore(division);
+                break;
+            case "Score":
+                ShowScore();
+                break;
+            case "Menu":
+                StartGame();
+                break;
+            default:
+                break;
 
-            int Add(int x, int y)
-            {
-                return x + y;
-            }
+        }
 
-            int Substract(int x, int y)
-            {
-                return x - y;
-            }
+        void UpdateStats(Operation operation)
+        {
+            previousGames.Add(operation);
+        }
 
-            int Multiply(int x, int y)
+        void ShowScore()
+        {
+            if (previousGames.Count != 0)
             {
-                return x * y;
-            }
-
-            int Divide(int x, int y)
-            {
-                return x / y;
-            }
-
-            void Menu()
-            {
-                Console.WriteLine("Math Game is a game in which you can choose one of the 4 basic operations, and you will have to solve a calc with that operation.");
-                Console.WriteLine();
-                Console.WriteLine("Choose a math operation");
-                Console.WriteLine();
-                Console.WriteLine("Addition (Type A)");
-                Console.WriteLine("Substraction (Type S)");
-                Console.WriteLine("Multiplication (Type M)");
-                Console.WriteLine("Division (Type D)");
-            }
-
-            void AdditionGame()
-            {
-                Operation sum = new Operation();
-                sum.Result = Add(a, b);
-                sum.Calc = ($"{a} + {b}");
-                Console.WriteLine("You have 15 seconds to solve this operation:");
-                Console.WriteLine(sum.Calc);
-                if (Console.ReadLine() == $"{sum.Result}")
+                foreach (var items in previousGames)
                 {
-                    Console.WriteLine("Nice.");
-                    sum.Score++;
-                    UpdateStats(sum);
-                    do
-                    {
-                        a = rnd.Next(1, 100);
-                        b = rnd.Next(1, 100);
-                    } while (a + b == sum.Calc[0]);
-                    AdditionGame();
-                }
-                else
-                {
-                    Console.WriteLine("Wrong. If you typed a command, ignore this message.");
-                    PlayWithoutIntro();
-                    sum.Score--;
-                }
-
-
-            }
-
-            void SubstractionGame()
-            {
-                Operation substraction = new Operation();
-                Console.WriteLine("You have 15 seconds to solve this operation:");
-                substraction.Result = Substract(a, b);
-                substraction.Calc = ($"{a} - {b}");
-                Console.WriteLine(substraction.Calc);
-
-                if (Console.ReadLine() == $"{substraction.Result}")
-                {
-                    Console.WriteLine("Nice.");
-                    substraction.Score++;
-                    UpdateStats(substraction);
-                    do
-                    {
-                        a = rnd.Next(1, 100);
-                        b = rnd.Next(1, 100);
-                    } while (a + b == substraction.Calc[0]);
-                    SubstractionGame();
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Wrong. If you typed a command, ignore this message.");
-                    Console.WriteLine();
-                    PlayWithoutIntro();
-                    substraction.Score--;
-                    UpdateStats(substraction);
+                    Console.Clear();
+                    Console.WriteLine("-------SCORE-------");
+                    Console.WriteLine($"Solved: {items.Calc}");
+                    Console.WriteLine($"Result: {items.Result}");
+                    Console.WriteLine($"Score: {Score}");
+                    Console.WriteLine("-------SCORE-------");
                 }
             }
-
-            void MultiplicationGame()
+            else
             {
-                Operation multiplication = new Operation();
-                Console.WriteLine("You have 15 seconds to solve this operation:");
-                multiplication.Result = Multiply(a, b);
-                multiplication.Calc = ($"{a} * {b}");
-                Console.WriteLine(multiplication.Calc);
-
-                if (Console.ReadLine() == $"{multiplication.Result}")
-                {
-                    Console.WriteLine("Nice.");
-                    multiplication.Score++;
-
-                    do
-                    {
-                        a = rnd.Next(1, 100);
-                        b = rnd.Next(1, 100);
-                        UpdateStats(multiplication);
-                    } while (a + b == multiplication.Calc[0]);
-                    MultiplicationGame();
-                }
-                else
-                {
-                    Console.WriteLine("Wrong. If you typed a command, ignore this message.");
-                    PlayWithoutIntro();
-                    multiplication.Score--;
-                    UpdateStats(multiplication);
-                }
-
-
-
+                Console.WriteLine("\nYou don't have any score.\n");
             }
 
-            void DivisionGame()
+        }
+
+        void createAndShowCalc(Operation operation, string operator_)
+        {
+            int Calculate (int a, int b)
             {
-                Operation division = new Operation();
-                Console.WriteLine("You have 15 seconds to solve this operation:");
-
-                if (a % b != 0 || a == 1 || b == 1 || a == b)
+                switch (operator_)
                 {
-                    do
-                    {
-                        a = rnd.Next(1, 100);
-                        b = rnd.Next(1, 100);
-                    } while (a % b != 0 || a == 1 || b == 1 || a == b);
-                }
-
-                division.Result = Divide(a, b);
-                division.Calc = ($"{a} / {b}");
-
-                Console.WriteLine(division.Calc);
-
-                if (Console.ReadLine() == $"{division.Result}")
-                {
-                    Console.WriteLine("Nice.");
-                    division.Score++;
-                    UpdateStats(division);
-                    do
-                    {
-                        a = rnd.Next(1, 100);
-                        b = rnd.Next(1, 100);
-                    } while (a + b == division.Calc[0]);
-                    DivisionGame();
-                }
-                else
-                {
-                    Console.WriteLine("Wrong. If you typed a command, ignore this message.");
-                    PlayWithoutIntro();
-                    division.Score--;
-                    UpdateStats(division);
-                }
-            }
-
-            void UpdateStats(Operation operation)
-            {
-                previousGames.Add(new Operation
-                {
-                    Score = operation.Score,
-                    Result = operation.Result,
-                    Calc = operation.Calc
-                });
-            }
-
-            void ShowScore()
-            {
-                if (previousGames.Count != 0)
-                {
-                    foreach (var items in previousGames)
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine($"This is your score: {items.Score}");
-                        Console.WriteLine($"The calc(s) you solved: {items.Calc}");
-                        Console.WriteLine($"Its result: {items.Result}");
-                        Console.WriteLine();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("You don't have any score.");
-                }
-
-            }
-
-            Play();
-
-            void Play()
-            {
-                Menu();
-                switch (Console.ReadLine())
-                {
-
-                    case "A":
-                        AdditionGame();
-                        break;
-                    case "S":
-                        SubstractionGame();
-                        break;
-                    case "M":
-                        MultiplicationGame();
-                        break;
-                    case "D":
-                        DivisionGame();
-                        break;
-                    case "Score":
-                        ShowScore();
-                        break;
-                    case "Menu":
-                        Menu();
-                        break;
+                    case "+":
+                        return a + b;
+                    case "-":
+                        if ((a - b) == 0 || (a - b) < 0)
+                        {
+                            do
+                            {
+                                a = rnd.Next(1, 100);
+                                b = rnd.Next(1, 100);
+                            } while ((a - b) == 0 || (a - b) < 0);
+                        }
+                        return a - b;
+                    case "*":
+                        return a * b;
+                    case "/":
+                        if (a % b != 0 || a == 1 || b == 1 || a == b)
+                        {
+                            do
+                            {
+                                a = rnd.Next(1, 100);
+                                b = rnd.Next(1, 100);
+                            } while (a % b != 0 || a == 1 || b == 1 || a == b);
+                        }
+                        return a / b;
                     default:
-                        break;
-
+                        throw new ArgumentException($"\nInvalid operator: \n{operator_}\n");
                 }
+                
             }
+            operation.Result = Calculate(a,b);
+            operation.Calc = ($"{a} {operator_} {b}");
+            Console.WriteLine($"\nYou have 15 seconds to solve this operation: \n{operation.Calc}\n");
 
-            void PlayWithoutIntro()
+        }
+        void checkResultAndAwardScore(Operation operation)
+        {
+            string userInput = Console.ReadLine();
+            if (userInput == $"{operation.Result}")
             {
-                Console.WriteLine("Choose a math operation");
-                Console.WriteLine();
-                Console.WriteLine("Addition (Type A)");
-                Console.WriteLine("Substraction (Type S)");
-                Console.WriteLine("Multiplication (Type M)");
-                Console.WriteLine("Division (Type D)");
-                switch (Console.ReadLine())
+                Console.WriteLine("Nice.");
+                UpdateStats(operation);
+                Score++;
+                do
                 {
-                    case "A":
-                        AdditionGame();
-                        break;
-                    case "S":
-                        SubstractionGame();
-                        break;
-                    case "M":
-                        MultiplicationGame();
-                        break;
-                    case "D":
-                        DivisionGame();
-                        break;
-                    case "Score":
-                        ShowScore();
-                        break;
-                    case "Menu":
-                        Menu();
-                        break;
-                    default:
-                        Console.WriteLine("Inexistent operation");
-
-                        break;
-                }
+                    a = rnd.Next(1, 100);
+                    b = rnd.Next(1, 100);
+                } while ((a + b) == operation.Result);
+                createAndShowCalc(operation, symbol);
+                checkResultAndAwardScore(operation);
+                
             }
-
-            if (Console.ReadLine() == "Score")
+            else if (userInput == "Score")
             {
                 ShowScore();
+                createAndShowCalc(operation, symbol);
+                checkResultAndAwardScore(operation);
             }
-
-            if (Console.ReadLine() == "Menu")
+            else if (userInput == "Menu")
             {
-                Play();
+                StartGame();
             }
+            else
+            {
+                Console.WriteLine($"\nWrong. It was {operation.Result}\n. \nDo you still want to play? Type 'yes' or 'no'\n.");
+                Score--;
+                string wantsToPlay = "";
 
+                while (wantsToPlay != "yes" || wantsToPlay != "no")
+                {
+                    wantsToPlay = Console.ReadLine();
+
+                    if (wantsToPlay == "yes")
+                    {
+                        //This line of code changes the values of 'a' and 'b' once the user chooses to play again.
+                        a = rnd.Next(1, 100);
+                        b = rnd.Next(1, 100);
+                        createAndShowCalc(operation, symbol);
+                        checkResultAndAwardScore(operation);
+                    }
+                    else if (wantsToPlay == "no")
+                    {
+                        StartGame();
+                    } 
+                    else if (wantsToPlay == "Menu")
+                    {
+                        StartGame();
+                    }
+                    else if (wantsToPlay == "Score")
+                    {
+                        ShowScore();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nInvalid input. Type 'yes' or 'no'.\n");
+                    }
+                }
+            }
         }
+
+        if (Console.ReadLine() == "Score")
+        {
+            ShowScore();
+        }
+
+        if (Console.ReadLine() == "Menu")
+        {
+            StartGame();
+        }
+
     }
 
     class Operation
@@ -313,8 +229,6 @@ class Program
         public int Result { get; set; }
         public string Calc { get; set; }
         public int Score { get; set; }
-        
+
     }
-
-
 }
