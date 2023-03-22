@@ -67,7 +67,7 @@ class Program
                 break;
             case "D":
                 symbol = "/";
-                createAndShowCalc(division, symbol);
+                CreateAndShowCalc(division, symbol);
                 CheckResultAndAwardScore(division);
                 break;
             case "Score":
