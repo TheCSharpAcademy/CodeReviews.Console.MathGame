@@ -52,23 +52,23 @@ class Program
         {
             case "A":
                 symbol = "+";
-                createAndShowCalc(sum, symbol);
-                checkResultAndAwardScore(sum);
+                CreateAndShowCalc(sum, symbol);
+                CheckResultAndAwardScore(sum);
                 break;
             case "S":
                 symbol = "-";
-                createAndShowCalc(substraction, symbol);
-                checkResultAndAwardScore(substraction);
+                CreateAndShowCalc(substraction, symbol);
+                CheckResultAndAwardScore(substraction);
                 break;
             case "M":
                 symbol = "*";
-                createAndShowCalc(multiplication, symbol);
-                checkResultAndAwardScore(multiplication);
+                CreateAndShowCalc(multiplication, symbol);
+                CheckResultAndAwardScore(multiplication);
                 break;
             case "D":
                 symbol = "/";
                 createAndShowCalc(division, symbol);
-                checkResultAndAwardScore(division);
+                CheckResultAndAwardScore(division);
                 break;
             case "Score":
                 ShowScore();
@@ -107,7 +107,7 @@ class Program
 
         }
 
-        void createAndShowCalc(Operation operation, string operator_)
+        void CreateAndShowCalc(Operation operation, string operator_)
         {
             int Calculate (int a, int b)
             {
@@ -147,7 +147,7 @@ class Program
             Console.WriteLine($"\nYou have 15 seconds to solve this operation: \n{operation.Calc}\n");
 
         }
-        void checkResultAndAwardScore(Operation operation)
+        void CheckResultAndAwardScore(Operation operation)
         {
             string userInput = Console.ReadLine();
             if (userInput == $"{operation.Result}")
@@ -160,15 +160,15 @@ class Program
                     a = rnd.Next(1, 100);
                     b = rnd.Next(1, 100);
                 } while ((a + b) == operation.Result);
-                createAndShowCalc(operation, symbol);
-                checkResultAndAwardScore(operation);
+                CreateAndShowCalc(operation, symbol);
+                CheckResultAndAwardScore(operation);
                 
             }
             else if (userInput == "Score")
             {
                 ShowScore();
-                createAndShowCalc(operation, symbol);
-                checkResultAndAwardScore(operation);
+                CreateAndShowCalc(operation, symbol);
+                CheckResultAndAwardScore(operation);
             }
             else if (userInput == "Menu")
             {
@@ -189,8 +189,8 @@ class Program
                         //This line of code changes the values of 'a' and 'b' once the user chooses to play again.
                         a = rnd.Next(1, 100);
                         b = rnd.Next(1, 100);
-                        createAndShowCalc(operation, symbol);
-                        checkResultAndAwardScore(operation);
+                        CreateAndShowCalc(operation, symbol);
+                        CheckResultAndAwardScore(operation);
                     }
                     else if (wantsToPlay == "no")
                     {
