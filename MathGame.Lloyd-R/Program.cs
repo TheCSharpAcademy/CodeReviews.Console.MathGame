@@ -1,5 +1,4 @@
-﻿using MathGame;
-
+﻿
 namespace MathGame
 {
     class Program
