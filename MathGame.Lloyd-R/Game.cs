@@ -5,6 +5,14 @@ namespace MathGame
 {
     public class Game
     {
+
+        private static void LogMenuChoices()
+        {
+            Console.WriteLine("Welcome to the Math Game!");
+            Console.WriteLine("1. Start Game");
+            Console.WriteLine("2. View Scores");
+            Console.WriteLine("3. Exit");
+        }
         public static void RandomGame()
         {
             int score = 0;
@@ -17,12 +25,10 @@ namespace MathGame
 
             while (true)
             {
-                Console.WriteLine("Welcome to the Math Game!");
-                Console.WriteLine("1. Start Game");
-                Console.WriteLine("2. View Scores");
-                Console.WriteLine("3. Exit");
+                LogMenuChoices();
 
                 string userInput = Console.ReadLine();
+
 
                 if (userInput == "1")
                 {
@@ -112,4 +118,7 @@ namespace MathGame
 
        
     }
+
+   
 }
+
