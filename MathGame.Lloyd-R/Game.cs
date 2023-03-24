@@ -39,22 +39,22 @@ namespace MathGame
                         {
                             case 1:
                                 operationSymbol = "+";
-                                correctAnswer = AddNumbers(firstNumber, secondNumber);
+                                correctAnswer = MathOperations.AddNumbers(firstNumber, secondNumber);
                                 break;
 
                             case 2:
                                 operationSymbol = "-";
-                                correctAnswer = SubtractNumbers(firstNumber, secondNumber);
+                                correctAnswer = MathOperations.SubtractNumbers(firstNumber, secondNumber);
                                 break;
 
                             case 3:
                                 operationSymbol = "*";
-                                correctAnswer = MultiplyNumbers(firstNumber, secondNumber);
+                                correctAnswer = MathOperations.MultiplyNumbers(firstNumber, secondNumber);
                                 break;
 
                             case 4:
                                 operationSymbol = "/";
-                                correctAnswer = DivideNumbers(firstNumber, secondNumber);
+                                correctAnswer = MathOperations.DivideNumbers(firstNumber, secondNumber);
                                 break;
 
                             default:
@@ -110,24 +110,6 @@ namespace MathGame
             }
         }
 
-        private static int AddNumbers(int firstNumber, int secondNumber)
-        {
-            return firstNumber + secondNumber;
-        }
-
-        private static int SubtractNumbers(int firstNumber, int secondNumber)
-        {
-            return firstNumber - secondNumber;
-        }
-
-        private static int MultiplyNumbers(int firstNumber, int secondNumber)
-        {
-            return firstNumber * secondNumber;
-        }
-
-        private static int DivideNumbers(int firstNumber, int secondNumber)
-        {
-            return firstNumber / secondNumber;
-        }
+       
     }
 }
