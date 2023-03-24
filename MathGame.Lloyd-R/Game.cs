@@ -17,8 +17,8 @@
                 while (lives > 0)
                 {
                     randomOperation = random.Next(1, 5);
-                    randomNum1 = random.Next(1, 11);
-                    randomNum2 = random.Next(1, 11);
+                    randomNum1 = random.Next(0, 101);
+                    randomNum2 = random.Next(0, 101);
 
                     switch (randomOperation)
                     {
