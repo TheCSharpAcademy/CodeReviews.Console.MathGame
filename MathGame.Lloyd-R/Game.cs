@@ -1,5 +1,4 @@
-﻿
-namespace MathGame
+﻿namespace MathGame
 {
     public class Game
     {
