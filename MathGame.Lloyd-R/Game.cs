@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-
+﻿
 namespace MathGame
 {
     public class Game
