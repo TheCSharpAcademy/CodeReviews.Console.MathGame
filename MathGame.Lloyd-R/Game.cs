@@ -35,10 +35,10 @@
                             correctAnswer = randomNum1 * randomNum2;
                             break;
                         case 4:
-                            Console.WriteLine("Question {0}: {1} / {2} = ?", questionNumber, randomNum1, randomNum2);
-                            correctAnswer = randomNum1 / randomNum2;
-                            break;
-                        default:
+                        Console.WriteLine("Question {0}: {1} / {2} = ?", questionNumber, (randomNum1 * randomNum2), randomNum2); // modified division to result in integers only
+                        correctAnswer = (randomNum1 * randomNum2) / randomNum2; // modified division to result in integers only
+                        break;
+                    default:
                             correctAnswer = 0;
                             break;
                     }
