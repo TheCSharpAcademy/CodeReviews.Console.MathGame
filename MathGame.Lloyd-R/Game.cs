@@ -17,11 +17,13 @@ namespace MathGame
             int randomNum1;
             int randomNum2;
             Random random = new Random();
+
                 while (lives > 0)
                 {
                     randomOperation = random.Next(1, 5);
                     randomNum1 = random.Next(1, 11);
                     randomNum2 = random.Next(1, 11);
+
                     switch (randomOperation)
                     {
                         case 1:
