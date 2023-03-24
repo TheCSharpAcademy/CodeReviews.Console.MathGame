@@ -1,4 +1,7 @@
-﻿namespace MathGame
+﻿using System;
+using System.Collections.Generic;
+
+namespace MathGame
 {
     public class Game
     {
@@ -8,54 +11,123 @@
             int lives = 3;
             int questionNumber = 1;
             int answer;
-            int correctAnswer;
-            int randomOperation;
-            int randomNum1;
-            int randomNum2;
             Random random = new Random();
 
-                while (lives > 0)
-                {
-                    randomOperation = random.Next(1, 5);
-                    randomNum1 = random.Next(0, 101);
-                    randomNum2 = random.Next(0, 101);
+            List<int> scoresList = new List<int>();
 
-                    switch (randomOperation)
+            while (true)
+            {
+                Console.WriteLine("Welcome to the Math Game!");
+                Console.WriteLine("1. Start Game");
+                Console.WriteLine("2. View Scores");
+                Console.WriteLine("3. Exit");
+
+                string userInput = Console.ReadLine();
+
+                if (userInput == "1")
+                {
+                    while (lives > 0)
                     {
-                        case 1:
-                            Console.WriteLine("Question {0}: {1} + {2} = ?", questionNumber, randomNum1, randomNum2);
-                            correctAnswer = randomNum1 + randomNum2;
-                            break;
-                        case 2:
-                            Console.WriteLine("Question {0}: {1} - {2} = ?", questionNumber, randomNum1, randomNum2);
-                            correctAnswer = randomNum1 - randomNum2;
-                            break;
-                        case 3:
-                            Console.WriteLine("Question {0}: {1} * {2} = ?", questionNumber, randomNum1, randomNum2);
-                            correctAnswer = randomNum1 * randomNum2;
-                            break;
-                        case 4:
-                        Console.WriteLine("Question {0}: {1} / {2} = ?", questionNumber, (randomNum1 * randomNum2), randomNum2); // modified division to result in integers only
-                        correctAnswer = (randomNum1 * randomNum2) / randomNum2; // modified division to result in integers only
-                        break;
-                    default:
-                            correctAnswer = 0;
-                            break;
+                        int firstNumber = random.Next(0, 101);
+                        int secondNumber = random.Next(1, 101);
+
+                        string operationSymbol;
+                        int correctAnswer;
+
+                        // Generate question based on random operation
+                        switch (random.Next(1, 5))
+                        {
+                            case 1:
+                                operationSymbol = "+";
+                                correctAnswer = AddNumbers(firstNumber, secondNumber);
+                                break;
+
+                            case 2:
+                                operationSymbol = "-";
+                                correctAnswer = SubtractNumbers(firstNumber, secondNumber);
+                                break;
+
+                            case 3:
+                                operationSymbol = "*";
+                                correctAnswer = MultiplyNumbers(firstNumber, secondNumber);
+                                break;
+
+                            case 4:
+                                operationSymbol = "/";
+                                correctAnswer = DivideNumbers(firstNumber, secondNumber);
+                                break;
+
+                            default:
+                                operationSymbol = "";
+                                correctAnswer = 0;
+                                break;
+                        }
+
+                        Console.WriteLine($"Question {questionNumber}: {firstNumber} {operationSymbol} {secondNumber} = ?");
+                        answer = Convert.ToInt32(Console.ReadLine());
+
+                        if (answer == correctAnswer)
+                        {
+                            Console.WriteLine("Correct!");
+                            score++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect!");
+                            lives--;
+                        }
+
+                        questionNumber++;
                     }
-                    answer = Convert.ToInt32(Console.ReadLine());
-                    if (answer == correctAnswer)
+
+                    scoresList.Add(score);
+
+                    Console.WriteLine($"Game Over! Your score is {score}");
+
+                    score = 0;
+                    lives = 3;
+                    questionNumber = 1;
+                }
+                else if (userInput == "2")
+                {
+                    if (scoresList.Count == 0)
                     {
-                        Console.WriteLine("Correct!");
-                        score++;
+                        Console.WriteLine("No scores yet!");
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect!");
-                        lives--;
+                        Console.WriteLine("Scores:");
+                        foreach (int s in scoresList)
+                        {
+                            Console.WriteLine(s);
+                        }
                     }
-                    questionNumber++;
                 }
-            Console.WriteLine("Game Over! Your score is {0}", score);
+                else if (userInput == "3")
+                {
+                    break;
+                }
+            }
+        }
+
+        private static int AddNumbers(int firstNumber, int secondNumber)
+        {
+            return firstNumber + secondNumber;
+        }
+
+        private static int SubtractNumbers(int firstNumber, int secondNumber)
+        {
+            return firstNumber - secondNumber;
+        }
+
+        private static int MultiplyNumbers(int firstNumber, int secondNumber)
+        {
+            return firstNumber * secondNumber;
+        }
+
+        private static int DivideNumbers(int firstNumber, int secondNumber)
+        {
+            return firstNumber / secondNumber;
         }
     }
 }
