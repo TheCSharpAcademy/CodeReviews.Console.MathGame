@@ -18,9 +18,10 @@ namespace MathGame.jwhitt3r
         public char Symbol { get; set; }
         public Score results;
         private List<char> _symbols = new List<char>{'/', '+', '*', '-'};
-        public Game(char coreSymbol, Score gameScore) {
+        public Game(char coreSymbol, Score gameScore, int difficulty) {
             this.Symbol = coreSymbol;
             this.results = gameScore;
+            this._difficulty = difficulty;
             _symbols.Remove(this.Symbol);
             this.GameLoop();
         }

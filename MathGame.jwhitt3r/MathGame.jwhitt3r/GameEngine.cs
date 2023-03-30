@@ -24,10 +24,30 @@ namespace MathGame.jwhitt3r
             {
                 if (val == '+' || val == '-' || val == '/' || val == '*')
                 {
-                    _gameInstance = new Game(val, gameScores);
+                    int difficulty = 1;
+                    char difficultyValue = Menu.GenerateDifficulty();
+                    if (difficultyValue == '+')
+                    {
+                        difficulty = 1;
+                    }                    
+                    if (difficultyValue == '-')
+                    {
+                        difficulty = 2;
+                    }                    
+                    if (difficultyValue == '/')
+                    {
+                        difficulty = 3;
+                    }
+                    _gameInstance = new Game(val, gameScores, difficulty);
                     val = Menu.GenerateMenu();
 
                 }
+                if (val == 'e')
+                {
+                    gameScores.PrintScores();
+                    val = Menu.GenerateMenu();
+                }
+
                 if (val == 'e')
                 {
                     gameScores.PrintScores();

@@ -17,9 +17,18 @@ namespace MathGame.jwhitt3r
                 C) Division
                 D) Multiplication
                 E) List previous games
-                F) Increase Difficulty
                 P) Print Menu
                 Q) Exit
+            ");
+            return GetUserInput();
+        }
+
+        public static char GenerateDifficulty()
+        {
+            Console.WriteLine(@" Difficulty Menu
+                A) Difficulty Level 1
+                B) Difficulty Level 2
+                C) Difficulty Level 3
             ");
             return GetUserInput();
         }
@@ -45,6 +54,12 @@ namespace MathGame.jwhitt3r
                 case "e":
                     Console.WriteLine("E");
                     return 'e';
+                case "f":
+                    Console.WriteLine("F");
+                    return 'f';
+                case "g":
+                    Console.WriteLine("G");
+                    return 'g';
                 case "q":
                     Console.WriteLine("Q");
                     return 'q';
