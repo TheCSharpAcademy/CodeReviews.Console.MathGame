@@ -8,7 +8,7 @@ namespace MathGame.jwhitt3r
 {
     public sealed class GameEngine
     {
-        private Game _gameInstance;
+        private Game? _gameInstance;
         private Score gameScores = new Score();
         private static readonly Lazy<GameEngine> lazy = new Lazy<GameEngine>(() => new GameEngine());
 
