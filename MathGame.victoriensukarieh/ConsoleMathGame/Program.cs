@@ -1,0 +1,2 @@
+﻿using ConsoleMathGame;
+Menu.ShowMenu();
