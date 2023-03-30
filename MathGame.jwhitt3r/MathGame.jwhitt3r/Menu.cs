@@ -23,7 +23,7 @@ namespace MathGame.jwhitt3r
             return GetUserInput();
         }
 
-        public static char GenerateDifficulty()
+        public static char GenerateDifficultyMenu()
         {
             Console.WriteLine(@" Difficulty Menu
                 A) Difficulty Level 1

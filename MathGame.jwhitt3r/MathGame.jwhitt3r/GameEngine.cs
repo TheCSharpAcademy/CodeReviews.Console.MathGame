@@ -25,7 +25,7 @@ namespace MathGame.jwhitt3r
                 if (val == '+' || val == '-' || val == '/' || val == '*')
                 {
                     int difficulty = 1;
-                    char difficultyValue = Menu.GenerateDifficulty();
+                    char difficultyValue = Menu.GenerateDifficultyMenu();
                     if (difficultyValue == '+')
                     {
                         difficulty = 1;

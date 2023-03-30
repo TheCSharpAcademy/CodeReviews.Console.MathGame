@@ -62,10 +62,10 @@ namespace MathGame.jwhitt3r
             {
                 if (i == 0)
                 {
-                    problemSet += $"{numbers[i]}{this.Symbol}";
+                    problemSet += $"({numbers[i]}{this.Symbol}";
                 } else if (i == numbers.Length - 1)
                 {
-                    problemSet += $"{numbers[i]}";
+                    problemSet += $"{numbers[i]})";
                     break;
                 }
                 else
