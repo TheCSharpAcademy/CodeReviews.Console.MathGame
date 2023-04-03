@@ -8,7 +8,10 @@ namespace MathGame.jwhitt3r
 {
     static class Menu
     {
-
+        /// <summary>
+        /// Presents the user with the main menu and then calls the GetUserInput function.
+        /// </summary>
+        /// <returns></returns>
         public static char GenerateMenu()
         {
             Console.WriteLine(@" Game Menu
@@ -22,7 +25,11 @@ namespace MathGame.jwhitt3r
             ");
             return GetUserInput();
         }
-
+        /// <summary>
+        /// Presents the user with a difficulty level between 1-3.
+        /// Uses the GetUserInput, A, B, C correspond to the difficulty levels.
+        /// </summary>
+        /// <returns>Returns an integer to be used as a difficulty level</returns>
         public static int GenerateDifficultyMenu()
         {
             int difficulty = 1;
@@ -49,12 +56,13 @@ namespace MathGame.jwhitt3r
         }
 
         /// <summary>
-        /// 
+        /// Runs through the userinput logic to determine which menu item they have picked.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a character</returns>
         public static char GetUserInput()
         {
             char userInput = Console.ReadKey().KeyChar;
+            Console.WriteLine($"You entered: {userInput}");
             switch (userInput)
             {
                 case 'a':

@@ -180,12 +180,14 @@ namespace MathGame.jwhitt3r
         /// </summary>
         public void GetUsersAnswer()
         {
+            int attempts = 1;
             Console.WriteLine("What is your answer?");
             Console.WriteLine(computeResult());
             int answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
 
             while (answer != computeResult())
             {
+                attempts++;
                 Console.WriteLine("Unlucky try again");
                 answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
                 this.DecreaseLives();
@@ -196,7 +198,7 @@ namespace MathGame.jwhitt3r
                 }
             }
             this.IncreaseLives();
-            results.AddScore($"{this.Equation} - {answer}");
+            results.AddScore($"Equation:{this.Equation} - Answer:{answer} - Attempts at Equation:{attempts}");
             Console.WriteLine("You got it right!");
         }
 
