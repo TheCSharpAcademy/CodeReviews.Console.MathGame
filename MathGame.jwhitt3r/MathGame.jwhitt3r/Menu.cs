@@ -23,50 +23,70 @@ namespace MathGame.jwhitt3r
             return GetUserInput();
         }
 
-        public static char GenerateDifficultyMenu()
+        public static int GenerateDifficultyMenu()
         {
+            int difficulty = 1;
             Console.WriteLine(@" Difficulty Menu
                 A) Difficulty Level 1
                 B) Difficulty Level 2
                 C) Difficulty Level 3
             ");
-            return GetUserInput();
+
+            char userInput = GetUserInput();
+            if (userInput == '+')
+            {
+                difficulty = 1;
+            }
+            if (userInput == '-')
+            {
+                difficulty = 2;
+            }
+            if (userInput == '/')
+            {
+                difficulty = 3;
+            }
+            return difficulty;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static char GetUserInput()
         {
-            string userInput = Console.ReadLine();
-
-            switch(userInput.Trim().ToLower())
+            char userInput = Console.ReadKey().KeyChar;
+            switch (userInput)
             {
-                case "a":
-                    Console.WriteLine("A");
+                case 'a':
+                    Console.WriteLine("A - Addition");
                     return '+';
-                case "b":
-                    Console.WriteLine("B");
+                case 'b':
+                    Console.WriteLine("B - Subtraction");
                     return '-';
-                case "c":
-                    Console.WriteLine("C");
+                case 'c':
+                    Console.WriteLine("C - Division");
                     return '/';
-                case "d":
-                    Console.WriteLine("D");
+                case 'd':
+                    Console.WriteLine("D - Multiplication");
                     return '*';
-                case "e":
-                    Console.WriteLine("E");
+                case 'e':
+                    Console.WriteLine("E - List previous answer");
                     return 'e';
-                case "f":
-                    Console.WriteLine("F");
-                    return 'f';
-                case "g":
-                    Console.WriteLine("G");
-                    return 'g';
-                case "q":
-                    Console.WriteLine("Q");
-                    return 'q';
+                case 'p':
+                    Console.WriteLine("P - Print Menu");
+                    GenerateMenu();
+                    break;
+                case 'q':
+                    Console.WriteLine("Q - Quit Game");
+                    Console.WriteLine("Thank you for playing");
+                    Environment.Exit(0);
+                    break;
                 default:
-                    Console.WriteLine("Default");
-                    return '+';
+                    Console.WriteLine("No character input placed, printing menu...");
+                    return 'p';
             }
+            return 'p';
         }
     }
 }
+

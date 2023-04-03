@@ -10,17 +10,17 @@ namespace MathGame.jwhitt3r
     {
         private List<string> _gameScore;
         public Score() {
-            _gameScore = new List<string>();
+            this._gameScore = new List<string>();
         }
 
         public void AddScore(string Score)
         {
-            _gameScore.Add(Score);
+            this._gameScore.Add(Score);
         }
 
         public void PrintScores()
         {
-            foreach(var score in _gameScore) { Console.WriteLine(score);}
+            foreach(var score in this._gameScore) { Console.WriteLine(score);}
         }
     }
 }
