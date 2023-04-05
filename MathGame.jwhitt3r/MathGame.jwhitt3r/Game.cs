@@ -45,11 +45,6 @@ namespace MathGame.jwhitt3r
         private DataTable dt = new DataTable();
 
         /// <summary>
-        /// Holds the complete equation.
-        /// </summary>
-        public string Equation {  get; set; }
-
-        /// <summary>
         /// The core symbol of the game, e.g., +, -, /, *.
         /// </summary>
         public char Symbol { get; set; }
@@ -133,17 +128,7 @@ namespace MathGame.jwhitt3r
                     equation += $"{numbers[i]}{additionalSymbol}";
                 }
             }
-            this.Equation = equation;
             return equation;
-        }
-
-        /// <summary>
-        /// Prints the equation to the console
-        /// </summary>
-        public void PrintEquation()
-        {
-            Console.WriteLine($"What is the answer for the following math problem: {this.Equation}");
-            
         }
 
         /// <summary>
@@ -151,9 +136,9 @@ namespace MathGame.jwhitt3r
         /// and then generate the result.
         /// </summary>
         /// <returns>Returns the answer of the formula</returns>
-        private int computeResult()
+        private int computeResult(string equation)
         {
-           int answer = Convert.ToInt32(dt.Compute(this.Equation, ""));
+           int answer = Convert.ToInt32(dt.Compute(equation, ""));
            return answer;
         }
 
@@ -165,11 +150,27 @@ namespace MathGame.jwhitt3r
         {
             while (this._lives > 0)
             {
-                this.GenerateEquation();
-                this.PrintEquation();
-                this.GetUsersAnswer();
+                string equation = this.GenerateEquation();
+                
+                this.GetUsersAnswer(equation);
             }
             return;
+        }
+
+        private (bool, int) RequestAttempt(string equation)
+        {
+            int correctAnswer = computeResult(equation);
+
+            Console.WriteLine($"What is the answer for the following math problem: {equation}");
+            int answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
+
+            if(answer == correctAnswer)
+            {
+                return (true, answer);
+            } else
+            {
+                return (false, answer);
+            }
         }
 
         /// <summary>
@@ -178,28 +179,26 @@ namespace MathGame.jwhitt3r
         /// and the formula and answer is added to a list. If they get it wrong
         /// they lose a life and have another attempt at the equation.
         /// </summary>
-        public void GetUsersAnswer()
+        public void GetUsersAnswer(string equation)
         {
             int attempts = 1;
-            Console.WriteLine("What is your answer?");
-            Console.WriteLine(computeResult());
-            int answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
-
-            while (answer != computeResult())
+            while (this._lives > 0)
             {
                 attempts++;
-                Console.WriteLine("Unlucky try again");
-                answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
-                this.DecreaseLives();
-                if(this._lives <= 0)
+                (bool attempt, int answer) = RequestAttempt(equation);
+
+                if(attempt == false)
                 {
-                    Console.WriteLine("Game over, no more lives!");
-                    break;
+                    this.DecreaseLives();
+                    Console.WriteLine($"The answer {answer} is incorrect");
+                } else
+                {
+                    this.IncreaseLives();
+                    results.AddScore($"Equation: {equation} - Answer: {answer} - Attempts at Equation: {attempts}");
+                    Console.WriteLine("You got it right!");
                 }
             }
-            this.IncreaseLives();
-            results.AddScore($"Equation:{this.Equation} - Answer:{answer} - Attempts at Equation:{attempts}");
-            Console.WriteLine("You got it right!");
+
         }
 
         /// <summary>

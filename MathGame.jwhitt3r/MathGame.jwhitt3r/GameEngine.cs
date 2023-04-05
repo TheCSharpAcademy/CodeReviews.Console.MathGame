@@ -33,21 +33,18 @@ namespace MathGame.jwhitt3r
         public void NewGame()
         {
             
-            char val = Menu.GenerateMenu();
             while (true)
             {
+                char val = Menu.GenerateMenu();
                 if (val == '+' || val == '-' || val == '/' || val == '*')
                 {
                     // Using a discard variable as we don't really need to hold a game object. 
                     _ = new Game(val, gameScores, Menu.GenerateDifficultyMenu());
-                    val = Menu.GenerateMenu();
-
                 }
                 
                 if (val == 'e')
                 {
                     gameScores.PrintScores();
-                    val = Menu.GenerateMenu();
                 }
             }
         }

@@ -62,8 +62,8 @@ namespace MathGame.jwhitt3r
         public static char GetUserInput()
         {
             char userInput = Console.ReadKey().KeyChar;
-            Console.WriteLine($"You entered: {userInput}");
-            switch (userInput)
+            Console.WriteLine($"\nYou entered: {userInput}");
+            switch (char.ToLower(userInput))
             {
                 case 'a':
                     Console.WriteLine("A - Addition");
