@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace MathGame.jwhitt3r
 {
@@ -136,7 +131,7 @@ namespace MathGame.jwhitt3r
         /// and then generate the result.
         /// </summary>
         /// <returns>Returns the answer of the formula</returns>
-        private int computeResult(string equation)
+        private int ComputeResult(string equation)
         {
            int answer = Convert.ToInt32(dt.Compute(equation, ""));
            return answer;
@@ -159,7 +154,7 @@ namespace MathGame.jwhitt3r
 
         private (bool, int) RequestAttempt(string equation)
         {
-            int correctAnswer = computeResult(equation);
+            int correctAnswer = ComputeResult(equation);
 
             Console.WriteLine($"What is the answer for the following math problem: {equation}");
             int answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
