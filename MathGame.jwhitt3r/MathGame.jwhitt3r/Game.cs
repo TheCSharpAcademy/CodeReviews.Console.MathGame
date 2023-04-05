@@ -191,6 +191,7 @@ namespace MathGame.jwhitt3r
                     this.IncreaseLives();
                     results.AddScore($"Equation: {equation} - Answer: {answer} - Attempts at Equation: {attempts}");
                     Console.WriteLine("You got it right!");
+                    break;
                 }
             }
 
