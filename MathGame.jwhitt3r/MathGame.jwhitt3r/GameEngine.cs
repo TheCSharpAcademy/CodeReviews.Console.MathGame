@@ -30,7 +30,7 @@
             while (true)
             {
                 char val = Menu.GenerateMenu();
-                if (val == '+' || val == '-' || val == '/' || val == '*')
+                if (val == '+' || val == '-' || val == '/' || val == '*' || val == 'r')
                 {
                     // Using a discard variable as we don't really need to hold a game object. 
                     _ = new Game(val, gameScores, Menu.GenerateDifficultyMenu());

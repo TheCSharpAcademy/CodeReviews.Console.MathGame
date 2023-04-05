@@ -14,6 +14,7 @@
                 C) Division
                 D) Multiplication
                 E) List previous games
+                R) Random Game
                 P) Print Menu
                 Q) Exit
             ");
@@ -60,22 +61,18 @@
             switch (char.ToLower(userInput))
             {
                 case 'a':
-                    Console.WriteLine("A - Addition");
                     return '+';
                 case 'b':
-                    Console.WriteLine("B - Subtraction");
                     return '-';
                 case 'c':
-                    Console.WriteLine("C - Division");
                     return '/';
                 case 'd':
-                    Console.WriteLine("D - Multiplication");
                     return '*';
                 case 'e':
-                    Console.WriteLine("E - List previous answer");
                     return 'e';
+                case 'r':
+                    return 'r';
                 case 'p':
-                    Console.WriteLine("P - Print Menu");
                     GenerateMenu();
                     break;
                 case 'q':

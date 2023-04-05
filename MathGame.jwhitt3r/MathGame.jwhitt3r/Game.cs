@@ -57,9 +57,17 @@ namespace MathGame.jwhitt3r
         /// <param name="gameScore">The Score object that is used to tracker the users successful answers</param>
         /// <param name="difficulty">The difficulty of the game</param>
         public Game(char coreSymbol, Score gameScore, int difficulty) {
-            this.Symbol = coreSymbol;
+            if (coreSymbol == 'r')
+            {
+                this.Symbol = this.GetRandomSymbolFromList();
+            }
+            else
+            {
+                this.Symbol = coreSymbol;
+            }
             this.results = gameScore;
             this._difficulty = difficulty;
+
             _symbols.Remove(this.Symbol);
             this.GameLoop();
         }
