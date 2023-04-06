@@ -59,7 +59,7 @@ namespace MathGame.jwhitt3r
         public Game(char coreSymbol, Score gameScore, int difficulty) {
             if (coreSymbol == 'r')
             {
-                this.Symbol = this.GetRandomSymbolFromList();
+                (this.Symbol, _) = this.GetRandomSymbolFromList();
             }
             else
             {
@@ -86,7 +86,7 @@ namespace MathGame.jwhitt3r
             int[] numbers = new int[1 + this._difficulty]; // We always want 2 numbers to begin with and then add the additional numbers as we go
             for (int i = 0; i < numbers.Length; i++)
             {
-                numbers[i] = this._rnd.Next(1, 1000 * this._difficulty);
+                numbers[i] = this._rnd.Next(1, 1000 * (this._difficulty/2));
             }
             return numbers;
         }
@@ -96,10 +96,14 @@ namespace MathGame.jwhitt3r
         /// E.g., If the core symbol is +, then it will return either, *, -, or / as a char
         /// </summary>
         /// <returns>A symbol as a char</returns>
-        private char GetRandomSymbolFromList()
+        private (char, bool) GetRandomSymbolFromList()
         {
             int index = this._rnd.Next(this._symbols.Count);
-            return this._symbols[index];
+            if (this._symbols[index] == '/')
+            {
+                return (this._symbols[index], true);
+            }
+            return (this._symbols[index], false);
         }
 
         /// <summary>
@@ -127,7 +131,7 @@ namespace MathGame.jwhitt3r
                 }
                 else
                 {
-                    char additionalSymbol = this.GetRandomSymbolFromList();
+                    (char additionalSymbol, _) = this.GetRandomSymbolFromList();
                     equation += $"{numbers[i]}{additionalSymbol}";
                 }
             }
@@ -139,11 +143,20 @@ namespace MathGame.jwhitt3r
         /// and then generate the result.
         /// </summary>
         /// <returns>Returns the answer of the formula</returns>
-        private int ComputeResult(string equation)
+        private long? ComputeResult(string equation)
         {
-           int answer = Convert.ToInt32(dt.Compute(equation, ""));
-           return answer;
-        }
+            
+            if (equation.Contains('/'))
+            {
+                double dAnswer = Convert.ToDouble(dt.Compute(equation, ""));
+                if (dAnswer % 2 != 0)
+                {
+                    return null;
+                }
+            }
+            long answer = Convert.ToInt64(dt.Compute(equation, ""));
+            return answer;
+    }
 
         /// <summary>
         /// GameLoop cycles through the game until the user has no more lives.
@@ -160,20 +173,25 @@ namespace MathGame.jwhitt3r
             return;
         }
 
-        private (bool, int) RequestAttempt(string equation)
+        private (bool, long?) RequestAttempt(string equation)
         {
-            int correctAnswer = ComputeResult(equation);
-
-            Console.WriteLine($"What is the answer for the following math problem: {equation}");
-            int answer = int.TryParse(Console.ReadLine(), out answer) ? answer : 0;
-
-            if(answer == correctAnswer)
+            long? correctAnswer = ComputeResult(equation);
+            if (correctAnswer.HasValue)
             {
-                return (true, answer);
-            } else
-            {
-                return (false, answer);
+
+                Console.WriteLine($"What is the answer for the following math problem: {equation}");
+                long answer = long.TryParse(Console.ReadLine(), out answer) ? answer : 0;
+
+                if (answer == correctAnswer)
+                {
+                    return (true, answer);
+                }
+                else
+                {
+                    return (false, answer);
+                }
             }
+            return (false, null);
         }
 
         /// <summary>
@@ -188,9 +206,11 @@ namespace MathGame.jwhitt3r
             while (this._lives > 0)
             {
                 attempts++;
-                (bool attempt, int answer) = RequestAttempt(equation);
-
-                if(attempt == false)
+                (bool attempt, long? answer) = RequestAttempt(equation);
+                if (attempt == false && answer == null)
+                {
+                    break;
+                } else if(attempt == false)
                 {
                     this.DecreaseLives();
                     Console.WriteLine($"The answer {answer} is incorrect");
