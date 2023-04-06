@@ -59,7 +59,7 @@ namespace MathGame.jwhitt3r
         public Game(char coreSymbol, Score gameScore, int difficulty) {
             if (coreSymbol == 'r')
             {
-                (this.Symbol, _) = this.GetRandomSymbolFromList();
+                this.Symbol = this.GetRandomSymbolFromList();
             }
             else
             {
@@ -77,7 +77,8 @@ namespace MathGame.jwhitt3r
         /// The amount of numbers that are generated are defined by the difficulty of the game, e.g.,
         /// if the difficulty is 1 then there will only be two numbers. If the games difficulty is two
         /// then there will be three numbers and if the game is set to the difficulty of three, there will be
-        /// four numbers. The size of the numbers is also determined by the difficulty, by default it is 1000 * the difficulty.
+        /// four numbers. The size of the numbers is also determined by the difficulty, 
+        /// by default it is (1000 * the difficulty (1,2,3))/2 , e.g., (1000*1)/2 = 500.
         /// </summary>
         /// <returns>An array of integers</returns>
         private int[] GenerateNumbers()
@@ -86,7 +87,7 @@ namespace MathGame.jwhitt3r
             int[] numbers = new int[1 + this._difficulty]; // We always want 2 numbers to begin with and then add the additional numbers as we go
             for (int i = 0; i < numbers.Length; i++)
             {
-                numbers[i] = this._rnd.Next(1, 1000 * (this._difficulty/2));
+                numbers[i] = this._rnd.Next(1, (1000 * this._difficulty)/2);
             }
             return numbers;
         }
@@ -96,14 +97,11 @@ namespace MathGame.jwhitt3r
         /// E.g., If the core symbol is +, then it will return either, *, -, or / as a char
         /// </summary>
         /// <returns>A symbol as a char</returns>
-        private (char, bool) GetRandomSymbolFromList()
+        private char GetRandomSymbolFromList()
         {
             int index = this._rnd.Next(this._symbols.Count);
-            if (this._symbols[index] == '/')
-            {
-                return (this._symbols[index], true);
-            }
-            return (this._symbols[index], false);
+
+            return this._symbols[index];
         }
 
         /// <summary>
@@ -131,7 +129,7 @@ namespace MathGame.jwhitt3r
                 }
                 else
                 {
-                    (char additionalSymbol, _) = this.GetRandomSymbolFromList();
+                    char additionalSymbol = this.GetRandomSymbolFromList();
                     equation += $"{numbers[i]}{additionalSymbol}";
                 }
             }
