@@ -140,12 +140,12 @@ namespace MathGame.jwhitt3r
 
         /// <summary>
         /// A data table is used to convert the string-based equation into a mathematical formula
-        /// and then generate the result.
+        /// and then generate the result. If the equation has a division in it, the answer must be
+        /// a whole number, no decimals allowed, as per the requirements of the challenge.
         /// </summary>
         /// <returns>Returns the answer of the formula</returns>
         private long? ComputeResult(string equation)
         {
-            
             if (equation.Contains('/'))
             {
                 double dAnswer = Convert.ToDouble(dt.Compute(equation, ""));
