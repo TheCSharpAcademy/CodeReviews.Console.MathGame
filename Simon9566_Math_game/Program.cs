@@ -64,13 +64,22 @@ void Get_non_negative()
     }
 }
 
+void Validate_guess()
+{
+    var tmp = Console.ReadLine();
+    bool parse_result = double.TryParse(tmp, out div_guess);
+    while( parse_result == false)
+     {
+        parse_result = int.TryParse(tmp, out guess);
+     }
+}
 
 void Ask_addition()
 {
     a = random.Next(100, 999);
     b = random.Next(100, 999);
     Console.WriteLine($"What is {a} + {b}?");
-    guess = Convert.ToInt32(Console.ReadLine());
+    Validate_guess(); 
     if (guess == a + b)
     {
         Console.WriteLine("You are correct");
@@ -84,39 +93,36 @@ void Ask_addition()
 
 void Ask_subtraction()
 {
+    Get_non_negative();
+    Console.WriteLine($"What is {a} - {b}?");
+    Validate_guess();  
+    if (guess == a - b)
     {
-        Get_non_negative();
-        Console.WriteLine($"What is {a} - {b}?");
-        guess = Convert.ToInt32(Console.ReadLine());
-        if (guess == a - b)
-        {
-            Console.WriteLine("You are correct");
-            points++;
-        }
-        else
-        {
-            Console.WriteLine($"Unfortunately the correct answer was {a - b}");
-        }
+        Console.WriteLine("You are correct");
+        points++;
+    }
+    else
+    {
+        Console.WriteLine($"Unfortunately the correct answer was {a - b}");
     }
 }
 
 
 void Ask_multiplication()
 {
-        a = random.Next(11, 99);
-        b = random.Next(11, 99);
+    a = random.Next(11, 99);
+    b = random.Next(11, 99);
+
+    Console.WriteLine($"What is {a} * {b}?");
+    Validate_guess(); 
+    if (guess == a * b)
     {
-        Console.WriteLine($"What is {a} * {b}?");
-        guess = Convert.ToInt32(Console.ReadLine());
-        if (guess == a * b)
-        {
-            Console.WriteLine("You are correct");
-            points++;
-        }
-        else
-        {
-            Console.WriteLine($"Unfortunately the correct answer was {a * b}");
-        }
+        Console.WriteLine("You are correct");
+        points++;
+    }
+    else
+    {
+        Console.WriteLine($"Unfortunately the correct answer was {a * b}");
     }
 }
 
@@ -125,7 +131,7 @@ void Ask_division()
     Get_non_negative();
     div_result = (double)a /(double) b;
     Console.WriteLine($"What is {a} / {b}?");
-    div_guess = Convert.ToDouble(Console.ReadLine());
+    Validate_guess();
     if (div_guess == div_result)
     {
         Console.WriteLine("You are correct");
