@@ -53,6 +53,18 @@ void Ask_continue()
     }
 }
 
+void Get_non_negative()
+{
+    a = 0;
+    b = 0;
+    while (a <= b)
+    {
+        a = random.Next(200, 999);
+        b = random.Next(100, 555);
+    }
+}
+
+
 void Ask_addition()
 {
     a = random.Next(100, 999);
@@ -72,13 +84,8 @@ void Ask_addition()
 
 void Ask_subtraction()
 {
-    while (a < b)
     {
-        a = random.Next(100, 999);
-        b = random.Next(100, 999);
-    }
-
-    {
+        Get_non_negative();
         Console.WriteLine($"What is {a} - {b}?");
         guess = Convert.ToInt32(Console.ReadLine());
         if (guess == a - b)
@@ -93,10 +100,11 @@ void Ask_subtraction()
     }
 }
 
+
 void Ask_multiplication()
 {
         a = random.Next(11, 99);
-        b = random.Next(101, 99);
+        b = random.Next(11, 99);
     {
         Console.WriteLine($"What is {a} * {b}?");
         guess = Convert.ToInt32(Console.ReadLine());
@@ -113,34 +121,27 @@ void Ask_multiplication()
 }
 
 void Ask_division()
-{
-    while (a <  b)
+{ 
+    Get_non_negative();
+    div_result = (double)a /(double) b;
+    Console.WriteLine($"What is {a} / {b}?");
+    div_guess = Convert.ToDouble(Console.ReadLine());
+    if (div_guess == div_result)
     {
-        a = random.Next(100, 999);
-        b = random.Next(100, 999);
+        Console.WriteLine("You are correct");
+        points++;
     }
-
+    else
     {
-        div_result = a / b;
-        Console.WriteLine($"What is {a} / {b}?");
-        div_guess = Convert.ToDouble(Console.ReadLine());
-        if (div_guess == div_result)
-        {
-            Console.WriteLine("You are correct");
-            points++;
-        }
-        else
-        {
-            Console.WriteLine($"Unfortunately the correct answer was {div_result}");
-        }
+        Console.WriteLine($"Unfortunately the correct answer was {div_result}");
     }
 }
+
 
 while (playing)
 {
     if (difficulties[difficulty] == "easy")
     {
-        int operation = random.Next(1, 2);
         for (int i = 0; i < 10; i++)
         {
             Ask_addition();
