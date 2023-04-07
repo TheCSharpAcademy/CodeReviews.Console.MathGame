@@ -84,19 +84,17 @@ void Ask_addition()
 
 void Ask_subtraction()
 {
+    Get_non_negative();
+    Console.WriteLine($"What is {a} - {b}?");
+    guess = Convert.ToInt32(Console.ReadLine());
+    if (guess == a - b)
     {
-        Get_non_negative();
-        Console.WriteLine($"What is {a} - {b}?");
-        guess = Convert.ToInt32(Console.ReadLine());
-        if (guess == a - b)
-        {
-            Console.WriteLine("You are correct");
-            points++;
-        }
-        else
-        {
-            Console.WriteLine($"Unfortunately the correct answer was {a - b}");
-        }
+        Console.WriteLine("You are correct");
+        points++;
+    }
+    else
+    {
+        Console.WriteLine($"Unfortunately the correct answer was {a - b}");
     }
 }
 
