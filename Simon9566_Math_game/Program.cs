@@ -101,20 +101,18 @@ void Ask_subtraction()
 
 void Ask_multiplication()
 {
-        a = random.Next(11, 99);
-        b = random.Next(11, 99);
+    a = random.Next(11, 99);
+    b = random.Next(11, 99);
+    Console.WriteLine($"What is {a} * {b}?");
+    guess = Convert.ToInt32(Console.ReadLine());
+    if (guess == a * b)
     {
-        Console.WriteLine($"What is {a} * {b}?");
-        guess = Convert.ToInt32(Console.ReadLine());
-        if (guess == a * b)
-        {
-            Console.WriteLine("You are correct");
-            points++;
-        }
-        else
-        {
-            Console.WriteLine($"Unfortunately the correct answer was {a * b}");
-        }
+        Console.WriteLine("You are correct");
+        points++;
+    }
+    else
+    {
+        Console.WriteLine($"Unfortunately the correct answer was {a * b}");
     }
 }
 
