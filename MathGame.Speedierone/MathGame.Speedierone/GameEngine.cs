@@ -128,11 +128,9 @@
         }
 
         internal static void SubtractionGame(string message)
-        {
-            {
+        {           
                 Console.WriteLine(message);
                 var timer = new Stopwatch();
-                TimeSpan timeTaken = timer.Elapsed;
                 var random = new Random();
                 var score = 0;
                 int firstNumber;
@@ -183,7 +181,7 @@
                     }
                 }
                 Helpers.AddToHistory(score, "Subtraction");
-            }
+            
         }
 
         internal static void AdditionGame(string message)
