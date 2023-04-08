@@ -1,14 +1,11 @@
-﻿using System.Diagnostics;
-
-namespace Math_Game
+﻿namespace Math_Game
 {
     internal class GameEngine
     {
-        internal static void divisionGame(string message)
+        internal static void DivisionGame(string message)
         {
             Console.WriteLine(message);
             var timer = new Stopwatch();
-            var random = new Random();
             var score = 0;
             var difficulty = Helpers.Difficulty();
             var count = Helpers.NumberOfQuestions();
@@ -75,12 +72,10 @@ namespace Math_Game
             Helpers.AddToHistory(score, "Division");
         }
 
-        internal static void multiplicationGame(string message)
-        {
-            {
+        internal static void MultiplicationGame(string message)
+        {          
                 Console.WriteLine(message);
                 var timer = new Stopwatch();
-                TimeSpan timeTaken = timer.Elapsed;
                 var random = new Random();
                 var score = 0;
                 int firstNumber;
@@ -129,11 +124,10 @@ namespace Math_Game
                         Console.ReadLine();
                     }
                 }
-                Helpers.AddToHistory(score, "Multiplication");
-            }
+                Helpers.AddToHistory(score, "Multiplication");           
         }
 
-        internal static void subtractionGame(string message)
+        internal static void SubtractionGame(string message)
         {
             {
                 Console.WriteLine(message);
@@ -192,7 +186,7 @@ namespace Math_Game
             }
         }
 
-        internal static void additionGame(string message)
+        internal static void AdditionGame(string message)
         {
             Console.WriteLine(message);
 
@@ -214,7 +208,6 @@ namespace Math_Game
                 }
                 Console.Clear();
                 Console.WriteLine(message);
-                ;
 
                 if (difficulty == "e")
                 {
