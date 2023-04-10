@@ -34,7 +34,7 @@
                         gameClass.AdditionGame("Addition game");
                         break;
                     case "s":
-                        gameClass.SubtractionGame("Subtraction game"); ;
+                        gameClass.SubtractionGame("Subtraction game");
                         break;
                     case "m":
                         gameClass.MultiplicationGame("Multiplication game");
