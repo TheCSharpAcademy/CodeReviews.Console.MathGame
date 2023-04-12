@@ -12,7 +12,6 @@ string menuOptions = @"
 6. Change difficult (Normal by default)
 7. Random mode
 0. Exit
-
 ";
 string line;
 List<string> gamesHistory = new List<string>();
@@ -97,7 +96,7 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
 
         correctAnswers = 0;
 
-        for (int i = 0; i < numberQuestions && i == correctAnswers; i++)
+        for (int i = 0; i < numberQuestions; i++)
         {
             int firstNumber = new Random().Next(1, difficult);
             int secondNumber = new Random().Next(1, difficult);
@@ -107,29 +106,17 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
             switch (selectedOption)
             {
                 case 1:
-                    Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
-                    int.TryParse(Console.ReadLine(), out int responseAddition);
-
-                    if (responseAddition == firstNumber + secondNumber)
+                    if (AdditionGame(firstNumber, secondNumber))
                     {
                         correctAnswers++;
-                        Console.WriteLine("----------- Correct! -----------");
                     }
-
                     break;
-
                 case 2:
-                    Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
-                    int.TryParse(Console.ReadLine(), out int responseSubstraction);
-
-                    if (responseSubstraction == firstNumber - secondNumber)
+                    if (SubstractionGame(firstNumber, secondNumber))
                     {
                         correctAnswers++;
-                        Console.WriteLine("----------- Correct! -----------");
                     }
-
                     break;
-
                 case 3:
                     Console.WriteLine($"{firstNumber} * {secondNumber} = ?");
                     int.TryParse(Console.ReadLine(), out int responseMultiplication);
@@ -165,6 +152,8 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
         stopwatch.Stop();
         TimeSpan elapsedTime = stopwatch.Elapsed;
 
+        Console.WriteLine("\n"); // Friendly linespacing.
+
         if (correctAnswers == numberQuestions)
         {
             Console.WriteLine("\n----------- Congratulations, you won! -----------");
@@ -177,7 +166,7 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
         gamesHistory.Add($"Game {game}: {correctAnswers} / {numberQuestions} | Time elapsed: {elapsedTime.ToString(@"mm\:ss")}");
         game++;
 
-        Console.WriteLine($"\n----------- Time elapsed: {elapsedTime.ToString(@"mm\:ss")} -----------");
+        Console.WriteLine($"\n----------- Results: {correctAnswers} / {numberQuestions} | Time elapsed: {elapsedTime.ToString(@"mm\:ss")} -----------");
 
     }
 
@@ -187,3 +176,45 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
 
 
 Console.WriteLine("----------- Thanks for playing -----------");
+
+// Methods for game logic
+
+bool AdditionGame(int firstNumber, int secondNumber)
+{
+    bool isCorrect = false;
+
+    Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
+    int.TryParse(Console.ReadLine(), out int responseAddition);
+
+    if (responseAddition == firstNumber + secondNumber)
+    {
+        isCorrect = true;
+        Console.WriteLine("----------- Correct! -----------");
+    }
+    else
+    {
+        Console.WriteLine("----------- Incorrect! -----------");
+    }
+
+    return isCorrect;
+}
+
+bool SubstractionGame(int firstNumber, int secondNumber)
+{
+    bool isCorrect = false;
+
+    Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
+    int.TryParse(Console.ReadLine(), out int responseAddition);
+
+    if (responseAddition == firstNumber - secondNumber)
+    {
+        isCorrect = true;
+        Console.WriteLine("----------- Correct! -----------");
+    }
+    else
+    {
+        Console.WriteLine("----------- Incorrect! -----------");
+    }
+
+    return isCorrect;
+}
