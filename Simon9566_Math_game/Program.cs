@@ -1,233 +1,182 @@
-// Start of the program, get the player name, current date and clear the console to allow for the main loop
+List<char> operations = new List<char>();
+string data = "asmd";
+operations.AddRange(data);
 
-Console.WriteLine("Please enter your name");
-string player_name = Console.ReadLine();
-var date = DateTime.Now;
-Console.Clear();
+Console.WriteLine(@"Hello, what would you like to do today?
+[a]dd
+[s]ubtract
+[m]ultiply
+or [d]ivide
+2 numbers?");
 
-// Main menu
+// History, list of results and how many are stored currently
+List<int> history = new List<int>();
+int history_count = 0;
 
-Console.WriteLine($"Hello {player_name}, {date} is a good time to practice your mathematical skills. Are you ready?");
-Console.WriteLine();
-Console.WriteLine("Select your desired difficulty level");
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("E - Easy, addition only");
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine("M - Medium, addition and subtraction");
-Console.ForegroundColor = ConsoleColor.DarkYellow;
-Console.WriteLine("H - Hard, addition subtraction and multiplication");
-Console.ForegroundColor = ConsoleColor.Red;
-Console.WriteLine("S- Superb,  addition has been replaced with division, all results are to be given with 2 decimal spaces, even if those are zeroes :)");
-Console.ResetColor();
-
-// Getting the difficulty and constructing main play loops based on them
-
-string difficulty = "tmp";
-var difficulties = new Dictionary<string, string>();
-difficulties.Add("E", "easy");
-difficulties.Add("M", "medium");
-difficulties.Add("H", "hard");
-difficulties.Add("S", "special");
-while (difficulties.ContainsKey(difficulty) == false)
+// Validation of operations, only single characters in operations list will pass
+string operation = Console.ReadLine();
+operation = operation.ToLower();
+while (!(operation.Length == 1 && operations.Contains(operation.First())))
 {
-    difficulty = Console.ReadLine().ToUpper();
-}
-
-int a = 0;
-int b = 0;
-bool playing = true;
-int guess = 0;
-int points = 0;
-double div_guess = 0;
-double div_result = 0;
-
-Random random = new Random();
-
-void Ask_continue()
-{
-    Console.WriteLine("If you want to stop enter \"N\"");
-    string choice = Console.ReadLine().ToUpper();
-    if (choice == "N")
+    if (operation.Length != 1)
     {
-        playing = false;
-    }
-}
-
-void Get_non_negative()
-{
-    a = 0;
-    b = 0;
-    while (a <= b)
-    {
-        a = random.Next(200, 999);
-        b = random.Next(100, 555);
-    }
-}
-
-void Validate_guess()
-{
-    var tmp = Console.ReadLine();
-    bool parse_result = double.TryParse(tmp, out div_guess);
-    while( parse_result == false)
-     {
-        parse_result = int.TryParse(tmp, out guess);
-     }
-}
-
-void Ask_addition()
-{
-    a = random.Next(100, 999);
-    b = random.Next(100, 999);
-    Console.WriteLine($"What is {a} + {b}?");
-    Validate_guess(); 
-    if (guess == a + b)
-    {
-        Console.WriteLine("You are correct");
-        points++;
+        Console.WriteLine("Please enter a single letter");
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a + b}");
+        Console.WriteLine("Please enter a valid operation from the list");
     }
+    operation = Console.ReadLine();
 }
 
-void Ask_subtraction()
+// Operands for the operations, separate ones for floating point numbers and user inputs
+int operand_a = 0;
+int operand_c = 0;
+float operand_b = 0.0f;
+float operand_d = 0.0f;
+int result_int = 0;
+float result_float = 0.0f;
+string user_input1 = "";
+string user_input2 = "";
+bool isvalid_a = false;
+bool isvalid_b = false;
+bool isvalid_c = false;
+bool isvalid_d = false;
+
+// Validating the user input and assigning them to the correct operands
+float ValidateFloatInput(string str)
 {
-    Get_non_negative();
-    Console.WriteLine($"What is {a} - {b}?");
-    Validate_guess();  
-    if (guess == a - b)
+    str = str.Replace(",", ".");
+    if (float.TryParse(str, out float tmp))
     {
-        Console.WriteLine("You are correct");
-        points++;
+        return tmp;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a - b}");
+        return 0.0f;
     }
 }
 
-
-void Ask_multiplication()
+int ValidateIntInput(string str)
 {
-    a = random.Next(11, 99);
-    b = random.Next(11, 99);
-
-    Console.WriteLine($"What is {a} * {b}?");
-    Validate_guess(); 
-    if (guess == a * b)
+    if (int.TryParse(str, out int tmp))
     {
-        Console.WriteLine("You are correct");
-        points++;
+        return tmp;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a * b}");
+        Console.WriteLine("The number you entered is invalid");
+        return 0;
     }
+
 }
 
-void Ask_division()
-{ 
-    Get_non_negative();
-    div_result = (double)a /(double) b;
-    Console.WriteLine($"What is {a} / {b}?");
-    Validate_guess();
-    if (div_guess == div_result)
+// Validating the first user input
+while (operand_a == 0 && operand_b == 0.0f)
+{
+    Console.WriteLine("Enter the first number");
+    user_input1 = Console.ReadLine();
+
+    if (user_input1.Contains(",") || user_input1.Contains("."))
     {
-        Console.WriteLine("You are correct");
-        points++;
+        operand_b = (float)ValidateFloatInput(user_input1);
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {div_result}");
+        operand_a = ValidateIntInput(user_input1);
     }
 }
 
-
-while (playing)
+// Asking for the second operand depending on the operation chosen
+switch (operation)
 {
-    if (difficulties[difficulty] == "easy")
+    case "a":
+        Console.WriteLine($"What would you like to add to {user_input1}?");
+        user_input2 = Console.ReadLine();
+        break;
+    case "s":
+        Console.WriteLine($"What would you like to subtract from {user_input1}?");
+        user_input2 = Console.ReadLine();
+        break;
+    case "m":
+        Console.WriteLine($"What would you like to multiply {user_input1} by?");
+        user_input2 = Console.ReadLine();
+        break;
+    case "d":
+        Console.WriteLine($"What would you like to divide {user_input1} by?");
+        user_input2 = Console.ReadLine();
+        break;
+}
+
+
+// Validating the second user input
+while (operand_c == 0 && operand_d == 0.0f)
+{
+    user_input2 = Console.ReadLine();
+    if (user_input2 == "0")
     {
-        for (int i = 0; i < 10; i++)
+        Console.WriteLine("Are you sure you want to continue with 0?\n y/n");
+        string check = Console.ReadLine();
+        if (check.ToLower() == "n")
         {
-            Ask_addition();
-        }
-        Ask_continue();
-    }
-    else if (difficulties[difficulty] == "medium")
-    {
-        int operation = random.Next(1, 3);
-        if (operation == 1)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_addition();
-            }
-            Ask_continue();
+            continue;
         }
         else
         {
-            for (int i = 0; i < 10; i++)
+            switch (operation)
             {
-                Ask_subtraction();
+                case "a":
+                    Console.WriteLine($"The result is {user_input1}");
+                    break;
+                case "s":
+                    Console.WriteLine($"The result is {user_input1}");
+                    break;
+                case "m":
+                    Console.WriteLine("The result is 0");
+                    break;
+                case "d":
+                    Console.WriteLine("Unfortunately i cannot do that");
+                    break;
             }
-            Ask_continue();
         }
     }
-    else if (difficulties[difficulty] == "hard")
+
+    if (user_input2.Contains(",") || user_input2.Contains("."))
     {
-        int operation = random.Next(1, 4);
-        if (operation == 1)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_addition();
-            }
-            Ask_continue();
-        }
-        else if (operation == 2)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_subtraction();
-            }
-            Ask_continue();
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_multiplication();
-            }
-            Ask_continue();
-        }
+        operand_d = (float)ValidateFloatInput(user_input2);
     }
     else
     {
-        int operation = random.Next(1, 4);
-        if (operation == 1)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_division();
-            }
-            Ask_continue();
-        }
-        else if (operation == 2)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_subtraction();
-            }
-            Ask_continue();
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Ask_multiplication();
-            }
-            Ask_continue();
-        }
+        operand_c = ValidateIntInput(user_input2);
     }
 }
+
+// Getting the result and displaying it, ADD THE RESULT TO HISTORY
+if (operand_a != 0 && operand_c != 0)
+    switch (operation)
+    {
+        case "a":
+            result_int = operand_a + operand_c;
+            operand_a = 0;
+            operand_c = 0;
+            Console.WriteLine($"{result_int}");
+            break;
+        case "s":
+            result_int = operand_a - operand_c;
+            operand_a = 0;
+            operand_c = 0;
+            Console.WriteLine($"{result_int}");
+            break;
+        case "m":
+            result_int = operand_a * operand_c;
+            operand_a = 0;
+            operand_c = 0;
+            Console.WriteLine($"{result_int}");
+            break;
+        case "d":
+            result_float = operand_a / operand_c;
+            operand_a = 0;
+            operand_c = 0;
+            Console.WriteLine($"{result_float}");
+            break;
+    }
