@@ -118,33 +118,16 @@ while (!String.IsNullOrEmpty(line = Console.ReadLine()))
                     }
                     break;
                 case 3:
-                    Console.WriteLine($"{firstNumber} * {secondNumber} = ?");
-                    int.TryParse(Console.ReadLine(), out int responseMultiplication);
-
-                    if (responseMultiplication == firstNumber * secondNumber)
+                    if (MultiplicationGame(firstNumber, secondNumber))
                     {
                         correctAnswers++;
-                        Console.WriteLine("----------- Correct! -----------");
                     }
-
                     break;
-
                 case 4:
-                    while (firstNumber % secondNumber != 0 || secondNumber == 0)
-                    {
-                        firstNumber = new Random().Next(0, 100);
-                        secondNumber = new Random().Next(1, difficult);
-                    }
-
-                    Console.WriteLine($"{firstNumber} / {secondNumber} = ?");
-                    int.TryParse(Console.ReadLine(), out int responseDivision);
-
-                    if (responseDivision == firstNumber / secondNumber)
+                    if (DivisionGame(firstNumber, secondNumber))
                     {
                         correctAnswers++;
-                        Console.WriteLine("----------- Correct! -----------");
                     }
-
                     break;
             }
         }
@@ -207,6 +190,52 @@ bool SubstractionGame(int firstNumber, int secondNumber)
     int.TryParse(Console.ReadLine(), out int responseAddition);
 
     if (responseAddition == firstNumber - secondNumber)
+    {
+        isCorrect = true;
+        Console.WriteLine("----------- Correct! -----------");
+    }
+    else
+    {
+        Console.WriteLine("----------- Incorrect! -----------");
+    }
+
+    return isCorrect;
+}
+
+bool MultiplicationGame(int firstNumber, int secondNumber)
+{
+    bool isCorrect = false;
+
+    Console.WriteLine($"{firstNumber} * {secondNumber} = ?");
+    int.TryParse(Console.ReadLine(), out int responseAddition);
+
+    if (responseAddition == firstNumber * secondNumber)
+    {
+        isCorrect = true;
+        Console.WriteLine("----------- Correct! -----------");
+    }
+    else
+    {
+        Console.WriteLine("----------- Incorrect! -----------");
+    }
+
+    return isCorrect;
+}
+
+bool DivisionGame(int firstNumber, int secondNumber)
+{
+    bool isCorrect = false;
+
+    while (firstNumber % secondNumber != 0 || secondNumber == 0)
+    {
+        firstNumber = new Random().Next(0, 100);
+        secondNumber = new Random().Next(1, difficult);
+    }
+
+    Console.WriteLine($"{firstNumber} / {secondNumber} = ?");
+    int.TryParse(Console.ReadLine(), out int responseDivision);
+
+    if (responseDivision == firstNumber / secondNumber)
     {
         isCorrect = true;
         Console.WriteLine("----------- Correct! -----------");
