@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MyFirstProgram
+﻿namespace MyFirstProgram
 {
     public class AdditionProblem: Problem
     {

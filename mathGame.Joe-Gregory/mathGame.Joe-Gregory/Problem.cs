@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyFirstProgram
+﻿namespace MyFirstProgram
 {
     public class Problem
     {
@@ -49,8 +43,6 @@ namespace MyFirstProgram
         public virtual void GenerateNextProblem()
         {
             GenerateRandomInts();
-            //ProblemText = $"What is the result of {Number1} [OPERATION] {Number2}?";
-            //Answer = Number1 [OPERATION] Number2. For Division and Substraction arrange for positive first.
         }
        
         public bool CheckAnswer(int answer)

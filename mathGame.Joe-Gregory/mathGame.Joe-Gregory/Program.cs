@@ -1,12 +1,10 @@
 ﻿using MyFirstProgram;
-using System.Collections.Generic;
-
 internal class Program
 {
     static string PlayerName = string.Empty;
     static string ChallengeSelection = string.Empty;
     static int Difficulty;
-    static int Score = 0;
+    static int Score;
 
     const string ChallengeOptionsMenu = @"Choose where to prove the haters wrong: 
             A - Addition
@@ -97,7 +95,7 @@ internal class Program
     static void GetName()
     {
         bool nameSuccess = false;
-        Console.WriteLine("Name motherfucker, do you have it?");
+        Console.WriteLine("Name, do you have it?");
         while (!nameSuccess)
         {
             var inputName = Console.ReadLine();
