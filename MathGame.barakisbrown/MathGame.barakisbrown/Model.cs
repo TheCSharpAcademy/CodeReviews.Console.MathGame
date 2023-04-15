@@ -13,7 +13,6 @@ internal class Model
     }
 }
 
-
 internal enum GameType
 {
     Addition,
