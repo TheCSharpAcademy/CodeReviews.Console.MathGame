@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ConsoleTables" Version="2.4.2" />
-  </ItemGroup>
-
 </Project>
