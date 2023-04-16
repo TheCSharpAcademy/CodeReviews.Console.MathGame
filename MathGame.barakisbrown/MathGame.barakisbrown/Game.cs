@@ -30,6 +30,9 @@ internal class Game
                     ShowGamesPlayed();
                     index = -1;
                     break;
+                case MenuOptions.Quit:
+                    index = -1;
+                    break;
                 case MenuOptions.Addition:
                     index = 0;
                     break;
