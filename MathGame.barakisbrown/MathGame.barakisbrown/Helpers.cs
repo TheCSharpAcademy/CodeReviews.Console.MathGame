@@ -42,12 +42,13 @@ internal class Helpers
             S)ubtraction
             M)ultiplication
             D)ivision
-
+            
+            R)andom Game
             L)ist games played
             C)hange Difficutly if you dare.
             Q)uit the game
 
-            Select your choice [A/S/M/D/L/C/Q]?
+            Select your choice [A/S/M/D/R/L/C/Q]?
         ";
 
         Console.WriteLine(Prompt);
@@ -71,6 +72,10 @@ internal class Helpers
             case 'D':
             case 'd':
                 _options = MenuOptions.Division;
+                break;
+            case 'R':
+            case 'r':
+                _options = MenuOptions.RandomGame;
                 break;
             case 'L':
             case 'l':
