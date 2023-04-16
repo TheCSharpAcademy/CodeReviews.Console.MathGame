@@ -2,5 +2,5 @@
 
 internal interface IProblem
 {
-    internal Model Calc();
+    internal Model Calc(Diffuclty_Levels levels);
 }
