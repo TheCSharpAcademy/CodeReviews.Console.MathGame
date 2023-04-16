@@ -18,7 +18,8 @@ internal enum GameType
     Addition,
     Subtraction,
     Multiplication,
-    Division
+    Division,
+    RandomOperations
 }
 
 internal enum Diffuclty_Levels
