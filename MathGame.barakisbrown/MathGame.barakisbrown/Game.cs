@@ -6,7 +6,7 @@ internal class Game
 {
     private readonly List<Model> Problems = new();
     private string ?Name { get; set; }
-    private readonly IProblem[] Problem = { new Addition(), new Subtraction(), new Multiplication(), new Division() };
+    private readonly IProblem[] Problem = { new Addition(), new Subtraction(), new Multiplication(), new Division(),new RandomGame() };
     private Diffuclty_Levels Levels { get; set; } = Diffuclty_Levels.Beginnger;
 
     public void Begin() 
@@ -44,6 +44,9 @@ internal class Game
                     break;
                 case MenuOptions.Division:
                     index = 3;
+                    break;
+                case MenuOptions.RandomGame:
+                    index = 4;
                     break;
             }
 
