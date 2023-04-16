@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MathGame.barakisbrown;
+
+Game game = new();
+game.Begin();
