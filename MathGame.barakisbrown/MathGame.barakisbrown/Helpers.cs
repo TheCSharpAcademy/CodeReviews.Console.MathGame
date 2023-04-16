@@ -67,10 +67,6 @@ internal class Helpers
             case 'd':
                 _options = MenuOptions.Division;
                 break;
-            case 'Q':
-            case 'q':
-                _options = MenuOptions.Quit;
-                break;
             case 'L':
             case 'l':
                 _options = MenuOptions.ListGamesPlayed;
@@ -78,6 +74,10 @@ internal class Helpers
             case 'C':
             case 'c':
                 _options = MenuOptions.ChangeDifficulty;
+                break;
+            case 'Q':
+            case 'q':
+                _options = MenuOptions.Quit;
                 break;
         }
         return _options;
