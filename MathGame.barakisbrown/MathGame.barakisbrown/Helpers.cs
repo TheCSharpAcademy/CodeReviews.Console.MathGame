@@ -25,4 +25,61 @@ internal class Helpers
         }
         return name;
     }
+
+    internal static MenuOptions ShowMenu(string ?name)
+    {
+        MenuOptions _options = MenuOptions.Quit;
+        string Prompt = $@"
+            Welcome {name} to MathGame.  Any numbers used will be integers and the max value of 100. 
+            Please Select a menu option:
+
+            A)ddition
+            S)ubtraction
+            M)ultiplication
+            D)ivision
+
+            L)ist games played
+            C)hange Difficutly if you dare.
+            Q)uit the game
+
+            Select your choice [A/S/M/D/L/C/Q]?
+        ";
+
+        Console.WriteLine(Prompt);
+
+        char key = Console.ReadKey(true).KeyChar;
+
+        switch (key)
+        {
+            case 'A':
+            case 'a':
+                _options = MenuOptions.Addition;
+                break;
+            case 'S':
+            case 's':
+                _options = MenuOptions.Subtraction;
+                break;
+            case 'M':
+            case 'm':
+                _options = MenuOptions.Multiplication;
+                break;
+            case 'D':
+            case 'd':
+                _options = MenuOptions.Division;
+                break;
+            case 'Q':
+            case 'q':
+                _options = MenuOptions.Quit;
+                break;
+            case 'L':
+            case 'l':
+                _options = MenuOptions.ListGamesPlayed;
+                break;
+            case 'C':
+            case 'c':
+                _options = MenuOptions.ChangeDifficulty;
+                break;
+        }
+        return _options;
+    }
 }
