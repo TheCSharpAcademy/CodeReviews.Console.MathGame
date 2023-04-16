@@ -27,3 +27,14 @@ internal enum Diffuclty_Levels
     Moderate,
     Expert
 }
+
+internal enum MenuOptions
+{
+    Addition,
+    Subtraction,
+    Multiplication,
+    Division,
+    ListGamesPlayed,
+    ChangeDifficulty,
+    Quit
+}
