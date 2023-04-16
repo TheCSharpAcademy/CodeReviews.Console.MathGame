@@ -23,9 +23,9 @@ internal enum GameType
 
 internal enum Diffuclty_Levels
 {
-    Beginnger,
-    Moderate,
-    Expert
+    Beginnger = 10,
+    Moderate = 50,
+    Expert = 100
 }
 
 internal enum MenuOptions
