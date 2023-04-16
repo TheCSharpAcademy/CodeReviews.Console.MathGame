@@ -34,6 +34,7 @@ internal enum MenuOptions
     Subtraction,
     Multiplication,
     Division,
+    RandomGame,
     ListGamesPlayed,
     ChangeDifficulty,
     Quit
