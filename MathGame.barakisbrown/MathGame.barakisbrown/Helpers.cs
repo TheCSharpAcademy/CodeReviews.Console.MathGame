@@ -13,6 +13,11 @@ internal class Helpers
         return result;
     }
 
+    internal static int ConvertToInt(string? result)
+    {
+        return Convert.ToInt16(result);
+    }
+
     internal static string GetName()
     {
         Console.Write("Enter your name: ");
