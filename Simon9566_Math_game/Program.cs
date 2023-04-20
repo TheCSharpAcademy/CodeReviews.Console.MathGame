@@ -38,8 +38,10 @@ int b = 0;
 bool playing = true;
 int guess = 0;
 int points = 0;
-double div_guess = 0;
-double div_result = 0;
+string result = "";
+int history_key = 1;
+
+Dictionary< int, string> history = new Dictionary<int, string>();
 
 Random random = new Random();
 
@@ -53,72 +55,87 @@ void Ask_continue()
     }
 }
 
-void Get_non_negative()
+void Get_large()
 {
-    a = 0;
-    b = 0;
-    while (a <= b)
-    {
-        a = random.Next(200, 999);
-        b = random.Next(100, 555);
+    int tmp = random.Next(100, 999);
+    return tmp
+}
+
+void Get_small()
+{
+        int tmp = random.Next(3, 100);
+    return tmp
     }
 }
 
 void Validate_guess()
 {
-    var tmp = Console.ReadLine();
-    bool parse_result = double.TryParse(tmp, out div_guess);
-    while( parse_result == false)
-     {
-        parse_result = int.TryParse(tmp, out guess);
-     }
+     var tmp = Console.ReadLine();
+     bool  parse_result = int.TryParse(tmp, out guess);
 }
 
 void Ask_addition()
 {
-    a = random.Next(100, 999);
-    b = random.Next(100, 999);
+    a = Get_large();
+    b = Get_large();
+    result = $"{a + b}";
     Console.WriteLine($"What is {a} + {b}?");
     Validate_guess(); 
     if (guess == a + b)
     {
         Console.WriteLine("You are correct");
         points++;
+        result = $"{a} + {b} = {a + b}";
+        history.Add(history_key, result);
+        history_key++;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a + b}");
+        Console.WriteLine($"Unfortunately the correct answer was {result}");
     }
 }
 
 void Ask_subtraction()
 {
-    Get_non_negative();
+    a = 0;
+    b = 0;
+    while a <= b
+     {
+        a = Get_large();
+        b = Get_large();
+    }
+    result = $"{a - b}";
     Console.WriteLine($"What is {a} - {b}?");
     Validate_guess();  
     if (guess == a - b)
     {
         Console.WriteLine("You are correct");
         points++;
+        result = $"{a} - {b} = {a - b}";
+        history.Add(history_key, result);
+        history_key++;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a - b}");
+        Console.WriteLine($"Unfortunately the correct answer was {result}");
     }
 }
 
 
 void Ask_multiplication()
 {
-    a = random.Next(11, 99);
-    b = random.Next(11, 99);
-
+    a = Get_small();
+    b = Get_small();
+    result = $"{a * b}"
     Console.WriteLine($"What is {a} * {b}?");
     Validate_guess(); 
     if (guess == a * b)
     {
         Console.WriteLine("You are correct");
         points++;
+        result = $"{a} * {b} = {a * b}";
+        history.Add(history_key, result);
+        history_key++;
     }
     else
     {
@@ -127,19 +144,23 @@ void Ask_multiplication()
 }
 
 void Ask_division()
-{ 
-    Get_non_negative();
-    div_result = (double)a /(double) b;
+{
+    a = Get_large();
+    b = Get_small();
+    result =  $"{a / b}"
     Console.WriteLine($"What is {a} / {b}?");
     Validate_guess();
-    if (div_guess == div_result)
+    if (guess == a/b)
     {
         Console.WriteLine("You are correct");
         points++;
+        result = $"{a} / {b} = {a / b}";
+        history.Add(history_key, result);
+        history_key++;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {div_result}");
+        Console.WriteLine($"Unfortunately the correct answer was {a/b}");
     }
 }
 
