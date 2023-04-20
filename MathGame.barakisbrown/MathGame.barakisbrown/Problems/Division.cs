@@ -11,8 +11,19 @@ internal class Division : IProblem
         {
             Console.Clear();
             Console.WriteLine("Welcome to the Division Game");
-            int left = _random.Next(0, 101);
-            int right = _random.Next(1, (int)levels+1);
+
+            bool search = true;
+            int left = 0, right = 0;
+
+            while (search)
+            {
+                left = _random.Next(0, 101);
+                right = _random.Next(1, (int)levels + 1);
+                var remander = left % right;
+
+                if (remander == 0)
+                    search = false;                
+            }
             int actualAnswer = left / right;
             var problem = string.Format("{0} / {1}", left, right);
 
