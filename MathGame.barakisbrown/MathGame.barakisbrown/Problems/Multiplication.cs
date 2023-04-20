@@ -10,7 +10,7 @@ internal class Multiplication : IProblem
         do
         {
             Console.Clear();
-            Console.WriteLine("Welcome to the Addition Game");
+            Console.WriteLine("Welcome to the Multiplication Game");
             int left = _random.Next(0, (int)levels + 1);
             int right = _random.Next(0, (int)levels + 1);
             int actualAnswer = left * right;

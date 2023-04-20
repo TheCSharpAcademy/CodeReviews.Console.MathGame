@@ -10,9 +10,9 @@ internal class Division : IProblem
         do
         {
             Console.Clear();
-            Console.WriteLine("Welcome to the Addition Game");
-            int left = _random.Next(0, (int)levels + 1);
-            int right = _random.Next(0, 101);
+            Console.WriteLine("Welcome to the Division Game");
+            int left = _random.Next(0, 101);
+            int right = _random.Next(1, (int)levels+1);
             int actualAnswer = left / right;
             var problem = string.Format("{0} / {1}", left, right);
 

@@ -25,8 +25,8 @@
 
                 if (opUsed == '/')
                 {
-                    left = _random.Next(0, (int)levels + 1);
-                    right = _random.Next(0, 101);
+                    left = _random.Next(0, 101);
+                    right = _random.Next(1, (int)levels + 1);
                 }
                 else
                 {
