@@ -16,7 +16,7 @@ void Print_menu()
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("M - Medium, addition and subtraction");
     Console.ForegroundColor = ConsoleColor.DarkYellow;
-    Console.WriteLine("H - Hard, addition subtraction and multiplication");
+    Console.WriteLine("D - Difficult, addition subtraction and multiplication");
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("S- Superb,  addition has been replaced with division, all results are to be given with 2 decimal spaces, even if those are zeroes :)");
     Console.ResetColor();
@@ -28,7 +28,7 @@ string difficulty = "tmp";
 var difficulties = new Dictionary<string, string>();
 difficulties.Add("E", "easy");
 difficulties.Add("M", "medium");
-difficulties.Add("D", "Difficult");
+difficulties.Add("D", "difficult");
 difficulties.Add("S", "special");
 
 
@@ -43,6 +43,20 @@ int history_key = 1;
 Dictionary< int, string> history = new Dictionary<int, string>();
 
 Random random = new Random();
+
+void Display_history()
+{
+    foreach(int key in history.Keys)
+    {
+        Console.WriteLine($"{key} : {history[key]}");
+    }
+}
+
+void Increment_history(string operation)
+{
+    history.Add(history_key, operation);
+    history_key++;
+}
 
 void Ask_continue()
 {
@@ -84,8 +98,7 @@ void Ask_addition()
         Console.WriteLine("You are correct");
         points++;
         result = $"{a} + {b} = {a + b}";
-        history.Add(history_key, result);
-        history_key++;
+        Increment_history(result);
     }
     else
     {
@@ -110,8 +123,7 @@ void Ask_subtraction()
         Console.WriteLine("You are correct");
         points++;
         result = $"{a} - {b} = {a - b}";
-        history.Add(history_key, result);
-        history_key++;
+        Increment_history(result);
     }
     else
     {
@@ -132,8 +144,7 @@ void Ask_multiplication()
         Console.WriteLine("You are correct");
         points++;
         result = $"{a} * {b} = {a * b}";
-        history.Add(history_key, result);
-        history_key++;
+        Increment_history(result);
     }
     else
     {
@@ -153,8 +164,7 @@ void Ask_division()
         Console.WriteLine("You are correct");
         points++;
         result = $"{a} / {b} = {a / b}";
-        history.Add(history_key, result);
-        history_key++;
+        Increment_history(result);
     }
     else
     {
@@ -169,6 +179,11 @@ while (playing)
     while (difficulties.ContainsKey(difficulty) == false)
     {
         difficulty = Console.ReadLine().ToUpper();
+    }
+
+    if (difficulties[difficulty] == "history")
+    {
+        Display_history();
     }
 
     if (difficulties[difficulty] == "easy")
@@ -196,7 +211,7 @@ while (playing)
             }
         }
     }
-    else if (difficulties[difficulty] == "hard")
+    else if (difficulties[difficulty] == "difficult")
     {
         int operation = random.Next(1, 4);
         if (operation == 1)
@@ -247,7 +262,7 @@ while (playing)
         }
     }
     Console.WriteLine("What do you want to do now,\n H -  acces history");
+    Print_menu();
     Ask_continue();
     difficulties.Add("H", "history");
-    Print_menu();
 }
