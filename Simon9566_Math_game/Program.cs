@@ -9,7 +9,6 @@ Console.WriteLine($"Hello {player_name}, {date} is a good time to practice your 
 // Main menu
 void Print_menu()
 {
-    Console.WriteLine();
     Console.WriteLine("Select your desired difficulty level");
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("E - Easy, addition only");
@@ -46,6 +45,7 @@ Random random = new Random();
 
 void Display_history()
 {
+    Console.WriteLine("Outputting answers");
     foreach(int key in history.Keys)
     {
         Console.WriteLine($"{key} : {history[key]}");
@@ -65,6 +65,10 @@ void Ask_continue()
     if (choice == "N")
     {
         playing = false;
+    }
+    else
+    {
+        difficulty = choice;
     }
 }
 
@@ -92,18 +96,18 @@ void Ask_addition()
     b = Get_large();
     result = $"{a + b}";
     Console.WriteLine($"What is {a} + {b}?");
-    Validate_guess(); 
+    Validate_guess();
+    result = $"{a} + {b} = {a + b}";
     if (guess == a + b)
     {
         Console.WriteLine("You are correct");
         points++;
-        result = $"{a} + {b} = {a + b}";
-        Increment_history(result);
     }
     else
     {
         Console.WriteLine($"Unfortunately the correct answer was {result}");
     }
+    Increment_history(result);
 }
 
 void Ask_subtraction()
@@ -117,18 +121,18 @@ void Ask_subtraction()
     }
     result = $"{a - b}";
     Console.WriteLine($"What is {a} - {b}?");
-    Validate_guess();  
+    Validate_guess();
+    result = $"{a} - {b} = {a - b}";
     if (guess == a - b)
     {
         Console.WriteLine("You are correct");
         points++;
-        result = $"{a} - {b} = {a - b}";
-        Increment_history(result);
     }
     else
     {
         Console.WriteLine($"Unfortunately the correct answer was {result}");
     }
+    Increment_history(result);
 }
 
 
@@ -138,18 +142,18 @@ void Ask_multiplication()
     b = Get_small();
     result = $"{a * b}";
     Console.WriteLine($"What is {a} * {b}?");
-    Validate_guess(); 
+    Validate_guess();
+    result = $"{a} * {b} = {a * b}";
     if (guess == a * b)
     {
         Console.WriteLine("You are correct");
         points++;
-        result = $"{a} * {b} = {a * b}";
-        Increment_history(result);
     }
     else
     {
         Console.WriteLine($"Unfortunately the correct answer was {a * b}");
     }
+    Increment_history(result);
 }
 
 void Ask_division()
@@ -159,23 +163,25 @@ void Ask_division()
     result = $"{a / b}";
     Console.WriteLine($"What is {a} / {b}?");
     Validate_guess();
+    result = $"{a} / {b} = {a / b}";
     if (guess == a/b)
     {
         Console.WriteLine("You are correct");
         points++;
-        result = $"{a} / {b} = {a / b}";
-        Increment_history(result);
     }
     else
     {
         Console.WriteLine($"Unfortunately the correct answer was {a/b}");
     }
+    Increment_history(result);
 }
 
+// Main play loop, history and quitting inaccesible in the first loop
 
+Console.WriteLine();
+Print_menu();
 while (playing)
 {
-    Print_menu();
     while (difficulties.ContainsKey(difficulty) == false)
     {
         difficulty = Console.ReadLine().ToUpper();
@@ -186,7 +192,7 @@ while (playing)
         Display_history();
     }
 
-    if (difficulties[difficulty] == "easy")
+    else if (difficulties[difficulty] == "easy")
     {
         for (int i = 0; i < 10; i++)
         {
@@ -261,8 +267,12 @@ while (playing)
             }
         }
     }
-    Console.WriteLine("What do you want to do now,\n H -  acces history");
+    Console.WriteLine("\n\n");
+    Console.WriteLine("H -  acces history\n");
     Print_menu();
     Ask_continue();
+    if (!difficulties.ContainsKey("H"))
+    { 
     difficulties.Add("H", "history");
+    }
 }
