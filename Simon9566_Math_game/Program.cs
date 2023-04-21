@@ -87,7 +87,7 @@ int Get_small()
 void Validate_guess()
 {
      var tmp = Console.ReadLine();
-     bool  parse_result = int.TryParse(tmp, out guess);
+     int.TryParse(tmp, out guess);
 }
 
 void Ask_addition()
