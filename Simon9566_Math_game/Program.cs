@@ -39,6 +39,7 @@ int points = 0;
 string result = "";
 int history_key = 1;
 int operations_count = 0;
+int questions_amt = 10;
 
 Dictionary< int, string> history = new Dictionary<int, string>();
 
@@ -196,16 +197,16 @@ while (playing)
 
     else if (difficulties[difficulty] == "easy")
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < questions_amt; i++)
         {
             Ask_addition();
         }
     }
     else if (difficulties[difficulty] == "medium")
     {
-        while (operations_count < 10)
+        while (operations_count < questions_amt)
         {
-            int operation = random.Next(1, 3);
+            int operation = random.Next(1, 2);
             operations_count++;
             if (operation == 1)
             {
@@ -219,10 +220,10 @@ while (playing)
     }
     else if (difficulties[difficulty] == "difficult")
     {
-        while (operations_count < 10)
+        while (operations_count < questions_amt)
         {
             operations_count++;
-            int operation = random.Next(1, 4);
+            int operation = random.Next(1, 3);
             if (operation == 1)
             {
                     Ask_addition();
@@ -239,10 +240,10 @@ while (playing)
     }
     else
     {
-        while (operations_count < 10)
+        while (operations_count < questions_amt)
         {
             operations_count++;
-            int operation = random.Next(1, 4);
+            int operation = random.Next(1, 3);
             if (operation == 1)
             {
                     Ask_division();
