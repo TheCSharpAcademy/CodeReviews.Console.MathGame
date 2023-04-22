@@ -38,6 +38,7 @@ int guess = 0;
 int points = 0;
 string result = "";
 int history_key = 1;
+int operations_count = 0;
 
 Dictionary< int, string> history = new Dictionary<int, string>();
 
@@ -160,18 +161,19 @@ void Ask_division()
 {
     a = Get_large();
     b = Get_small();
-    result = $"{a / b}";
+    int div_result = a / b;
+    result = $"{div_result}";
     Console.WriteLine($"What is {a} / {b}?");
     Validate_guess();
-    result = $"{a} / {b} = {a / b}";
-    if (guess == a/b)
+    result = $"{a} / {b} = {div_result}";
+    if (guess == div_result)
     {
         Console.WriteLine("You are correct");
         points++;
     }
     else
     {
-        Console.WriteLine($"Unfortunately the correct answer was {a/b}");
+        Console.WriteLine($"Unfortunately the correct answer was {div_result}");
     }
     Increment_history(result);
 }
@@ -201,69 +203,57 @@ while (playing)
     }
     else if (difficulties[difficulty] == "medium")
     {
-        int operation = random.Next(1, 3);
-        if (operation == 1)
+        while (operations_count < 10)
         {
-            for (int i = 0; i < 10; i++)
+            int operation = random.Next(1, 3);
+            operations_count++;
+            if (operation == 1)
             {
-                Ask_addition();
+                    Ask_addition();
             }
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
+            else
             {
-                Ask_subtraction();
+                    Ask_subtraction();
             }
         }
     }
     else if (difficulties[difficulty] == "difficult")
     {
-        int operation = random.Next(1, 4);
-        if (operation == 1)
+        while (operations_count < 10)
         {
-            for (int i = 0; i < 10; i++)
+            operations_count++;
+            int operation = random.Next(1, 4);
+            if (operation == 1)
             {
-                Ask_addition();
+                    Ask_addition();
             }
-        }
-        else if (operation == 2)
-        {
-            for (int i = 0; i < 10; i++)
+            else if (operation == 2)
             {
-                Ask_subtraction();
+                    Ask_subtraction();
             }
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
+            else
             {
-                Ask_multiplication();
+                    Ask_multiplication();
             }
         }
     }
     else
     {
-        int operation = random.Next(1, 4);
-        if (operation == 1)
+        while (operations_count < 10)
         {
-            for (int i = 0; i < 10; i++)
+            operations_count++;
+            int operation = random.Next(1, 4);
+            if (operation == 1)
             {
-                Ask_division();
+                    Ask_division();
             }
-        }
-        else if (operation == 2)
-        {
-            for (int i = 0; i < 10; i++)
+            else if (operation == 2)
             {
-                Ask_subtraction();
+                    Ask_subtraction();
             }
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
+            else
             {
-                Ask_multiplication();
+                    Ask_multiplication();
             }
         }
     }
