@@ -4,6 +4,7 @@
     {
         public int low;
         public int high;
+        
         internal void AdditionGame(string message)
         {
             Console.WriteLine(message);
