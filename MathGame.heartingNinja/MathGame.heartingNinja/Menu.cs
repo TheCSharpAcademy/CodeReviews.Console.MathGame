@@ -1,7 +1,7 @@
-﻿namespace MathProject
+﻿namespace MathProject;
+
+internal class Menu
 {
-    internal class Menu
-    {
 
         GameEngine gameEngine = new();
 
@@ -167,8 +167,8 @@ Q - Quit program");
                 }
             } while (isGammeOn);
         }
-    }
 }
+
 
         
 

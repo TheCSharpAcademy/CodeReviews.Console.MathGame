@@ -1,10 +1,11 @@
-﻿namespace MathProject
+﻿namespace MathProject;
+
+internal class GameEngine
 {
-    internal class GameEngine
-    {
         public int low;
         public int high;
-        internal void AdditionGame(string message)
+
+       internal void AdditionGame(string message)
         {
             Console.WriteLine(message);
             Random random = new Random();
@@ -216,5 +217,5 @@
                 Helpers.AddToHistory(score, Models.GameType.Multiplication, Models.GameDifficulty.Hard);
             }
         }     
-    }   
-}
+}   
+
