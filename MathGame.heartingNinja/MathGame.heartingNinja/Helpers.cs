@@ -5,12 +5,8 @@ namespace MathProject
 {
     internal class Helpers
     {
-        
-        internal static List<Game> games = new List<Game>
-        {
+        internal static List<Game> games = new List<Game> { };
             
-        };
-
         internal static string ValidateResult(string result)
         {
             while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
@@ -22,10 +18,8 @@ namespace MathProject
         }
 
         internal static int[] GetDivisionNumbers(int low, int high)
-        {
-        
-
-        Random random = new Random();
+        {       
+            Random random = new Random();
             int firstNumber = random.Next(low, high);
             int secondNumber = random.Next(low, high);
 
@@ -56,8 +50,7 @@ namespace MathProject
         }
 
         internal static void PrintGames()
-        {
-         
+        {       
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("-----------------------");

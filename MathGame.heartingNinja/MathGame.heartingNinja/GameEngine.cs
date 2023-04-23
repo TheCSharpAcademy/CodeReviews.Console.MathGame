@@ -7,32 +7,24 @@
         internal void AdditionGame(string message)
         {
             Console.WriteLine(message);
-
             Random random = new Random();
             int score = 0;
-
-
             int firstNumber;
             int secondNumber;
 
             for (int i = 0; i < 5; i++)
             {
-
                 Console.Clear();
                 Console.WriteLine(message);
 
                 firstNumber = random.Next(low, high);
                 secondNumber = random.Next(low, high);
 
-                
-
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
+
                 string result = Console.ReadLine();
-
                 result = Helpers.ValidateResult(result);
-
-                
-
+          
                 if (int.Parse(result) == firstNumber + secondNumber)
                 {
                     Console.WriteLine("Your answer was correct! Type any key for the next question");
@@ -66,25 +58,19 @@
             if(high == 999)
             {
                 Helpers.AddToHistory(score, Models.GameType.Addition, Models.GameDifficulty.Hard);
-            }
-            
+            }          
         }
 
         internal void SubtractionGame(string message)
         {
             Console.WriteLine(message);
-
-
             Random random = new Random();
             int score = 0;
-
-
             int firstNumber;
             int secondNumber;
 
             for (int i = 0; i < 5; i++)
             {
-
                 Console.Clear();
                 Console.WriteLine(message);
 
@@ -92,8 +78,8 @@
                 secondNumber = random.Next(low, high);
 
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
-                string result = Console.ReadLine();
 
+                string result = Console.ReadLine();
                 result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber - secondNumber)
@@ -131,10 +117,8 @@
         internal void MultiplicationGame(string message)
         {
             Console.WriteLine(message);
-
             Random random = new Random();
             int score = 0;
-
             int firstNumber;
             int secondNumber;
 
