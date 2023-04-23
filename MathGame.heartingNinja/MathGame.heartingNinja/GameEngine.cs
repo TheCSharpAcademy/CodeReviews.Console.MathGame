@@ -4,8 +4,13 @@ internal class GameEngine
 {
         public int low;
         public int high;
+<<<<<<< HEAD
 
        internal void AdditionGame(string message)
+=======
+        
+        internal void AdditionGame(string message)
+>>>>>>> 5287587053ca22533deaed68f18dfa04cbf1c31f
         {
             Console.WriteLine(message);
             Random random = new Random();
