@@ -1,21 +1,21 @@
 ﻿class Game
 {
-    public List<ParentGame> history { get; set; }
+    public List<ParentGame> History { get; set; }
     public Game()
     {
-        history = new List<ParentGame>();
+        History = new List<ParentGame>();
     }
 
     public void AddHistory(ParentGame p)
     {
-        history.Add(p);
+        History.Add(p);
     }
     public void ViewHistory()
     {
         Console.WriteLine("Game history");
-        foreach (var item in history)
+        foreach (var item in History)
         {
-            Console.WriteLine($"{item.Date} - {item.Name}: {item.point}pts");
+            Console.WriteLine($"{item.Date} - {item.Name}: {item.Point}pts");
         }
     }
 }

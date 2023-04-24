@@ -32,7 +32,7 @@ while (true)
                 if (CheckAnswer(answer, a + b))
                 {
                     Console.WriteLine("Correct");
-                    gameChoice.point++;
+                    gameChoice.Point++;
                 }
                 else Console.WriteLine("Wrong");
                 continue;
@@ -42,7 +42,7 @@ while (true)
                 if (CheckAnswer(answer, a - b))
                 {
                     Console.WriteLine("Correct");
-                    gameChoice.point++;
+                    gameChoice.Point++;
                 }
                 else Console.WriteLine("Wrong");
                 continue;
@@ -52,7 +52,7 @@ while (true)
                 if (CheckAnswer(answer, a * b))
                 {
                     Console.WriteLine("Correct");
-                    gameChoice.point++;
+                    gameChoice.Point++;
                 }
                 else Console.WriteLine("Wrong");
                 continue;
@@ -62,7 +62,7 @@ while (true)
                 if (CheckAnswer(answer, a / b))
                 {
                     Console.WriteLine("Correct");
-                    gameChoice.point++;
+                    gameChoice.Point++;
                 }
                 else Console.WriteLine("Wrong");
                 continue;
