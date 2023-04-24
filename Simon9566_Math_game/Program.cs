@@ -160,8 +160,12 @@ void Ask_multiplication()
 
 void Ask_division()
 {
-    a = Get_large();
-    b = Get_small();
+        do
+    {
+        a = Get_large();
+        b = Get_small();
+    } while (a % b != 0);
+    
     int div_result = a / b;
     result = $"{div_result}";
     Console.WriteLine($"What is {a} / {b}?");
