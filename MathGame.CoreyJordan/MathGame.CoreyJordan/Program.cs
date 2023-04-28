@@ -2,7 +2,6 @@
 using MathGameLibrary.Logic;
 using MathGameLibrary.Player;
 using System.Diagnostics;
-using System.Numerics;
 
 WelcomeUser();
 Player player = new()
