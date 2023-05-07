@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MathGameV2Console\MathGameLibrary\MathGameLibrary.csproj" />
+    <Reference Include="MathGameLibrary">
+      <HintPath>..\MathGameLibrary\bin\Debug\net7.0\MathGameLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
