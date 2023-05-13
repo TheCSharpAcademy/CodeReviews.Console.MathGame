@@ -1,4 +1,6 @@
-﻿namespace mathGame.batista92;
+﻿using mathGame.batista92.Models;
+
+namespace mathGame.batista92;
 
 internal class GameEngine
 {
@@ -20,6 +22,7 @@ internal class GameEngine
 
             Console.WriteLine($"{firstNumber} + {secondNumber}");
             var result = Console.ReadLine();
+            result = Helpers.ValidadeResult(result);
 
             if (int.Parse(result) == firstNumber + secondNumber)
             {
@@ -37,7 +40,7 @@ internal class GameEngine
         Console.WriteLine($"Game over! Your final score is: {score} pts.");
         Console.WriteLine("Type any key for return to the menu...");
         Console.ReadKey();
-        Helpers.AddToHistory(score, "Addition");
+        Helpers.AddToHistory(score, GameType.Addition);
     }
 
     internal void SubtractionGame(string msg)
@@ -58,6 +61,7 @@ internal class GameEngine
 
             Console.WriteLine($"{firstNumber} - {secondNumber}");
             var result = Console.ReadLine();
+            result = Helpers.ValidadeResult(result);
 
             if (int.Parse(result) == firstNumber - secondNumber)
             {
@@ -75,7 +79,7 @@ internal class GameEngine
         Console.WriteLine($"Game over! Your final score is: {score}");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
-        Helpers.AddToHistory(score, "Subtraction");
+        Helpers.AddToHistory(score, GameType.Subtraction);
     }
 
     internal void MultiplicationGame(string msg)
@@ -96,6 +100,7 @@ internal class GameEngine
 
             Console.WriteLine($"{firstNumber} * {secondNumber}");
             var result = Console.ReadLine();
+            result = Helpers.ValidadeResult(result);
 
             if (int.Parse(result) == firstNumber * secondNumber)
             {
@@ -113,7 +118,7 @@ internal class GameEngine
         Console.WriteLine($"Game over! Your final score is: {score}");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
-        Helpers.AddToHistory(score, "Multiplication");
+        Helpers.AddToHistory(score, GameType.Multuplication);
     }
 
     internal void DivisionGame(string msg)
@@ -135,6 +140,7 @@ internal class GameEngine
 
             Console.WriteLine($"{firstNumber} / {secondNumber}");
             var result = Console.ReadLine();
+            result = Helpers.ValidadeResult(result);
 
             if (int.Parse(result) == firstNumber / secondNumber)
             {
@@ -152,6 +158,6 @@ internal class GameEngine
         Console.WriteLine($"Game over! Your final score is: {score}");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
-        Helpers.AddToHistory(score, "Division");
+        Helpers.AddToHistory(score, GameType.Division);
     }
 }

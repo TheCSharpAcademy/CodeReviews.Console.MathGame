@@ -1,4 +1,5 @@
 ﻿using mathGame.batista92.Models;
+using System.Security;
 
 namespace mathGame.batista92;
 
@@ -19,14 +20,38 @@ internal class Helpers
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, string gameType)
+    internal static void AddToHistory(int gameScore, GameType gameType)
     {
         games.Add(new Game 
         {
             Date = DateTime.Now,
-            Type = gameType,
-            Score = gameScore
+            Score = gameScore,
+            Type = gameType
         });
+    }
+
+    internal static string? ValidadeResult(string result)
+    {
+        while(string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+        {
+            Console.WriteLine("Your answer needs to be an interger. Try again.");
+            result = Console.ReadLine();
+        }
+        return result;
+    }
+
+    internal static string GetName()
+    {
+        Console.Clear();
+        Console.WriteLine("Please type your name");
+        string name = Console.ReadLine();
+
+        while (string.IsNullOrEmpty(name))
+        {
+            Console.WriteLine("Name can't be empty.");
+            name = Console.ReadLine();
+        }
+        return name;
     }
 
     internal static int[] GetDivisionNumbers()

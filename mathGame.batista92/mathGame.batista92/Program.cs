@@ -8,16 +8,8 @@ internal class Program
 
         var menu = new Menu();
 
-        string name = GetName();
+        string name = Helpers.GetName();
 
         menu.ShowMenu(name, date);
-
-        string GetName()
-        {
-            Console.Clear();
-            Console.WriteLine("Please type your name");
-            string name = Console.ReadLine();
-            return name;
-        }
     }
 }
