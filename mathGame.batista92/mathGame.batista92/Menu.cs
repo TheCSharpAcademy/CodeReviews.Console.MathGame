@@ -33,16 +33,16 @@ Q - Quit the program");
                     Helpers.PrintGames();
                     break;
                 case "a":
-                    gameEngine.AdditionGame("AdditionGame");
+                    gameEngine.AdditionGame("Addition Game");
                     break;
                 case "s":
-                    gameEngine.SubtractionGame("Subtraction");
+                    gameEngine.SubtractionGame("Subtraction Game");
                     break;
                 case "m":
-                    gameEngine.MultiplicationGame("Multiplication");
+                    gameEngine.MultiplicationGame("Multiplication Game");
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division");
+                    gameEngine.DivisionGame("Division Game");
                     break;
                 case "q":
                     Console.Clear();

@@ -14,5 +14,6 @@ internal enum GameType
     Addition,
     Subtraction,
     Multuplication,
-    Division
+    Division,
+    Random
 }
