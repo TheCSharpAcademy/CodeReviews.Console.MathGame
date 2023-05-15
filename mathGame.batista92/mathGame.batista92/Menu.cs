@@ -28,26 +28,25 @@ Q - Quit the program");
             Console.WriteLine("---------------------------------------------------");            
             string gameSelected = Console.ReadLine();
 
-            int numberOfQuestions = 5;
             switch (gameSelected.Trim().ToLower())
             {
                 case "v":
                     Helpers.PrintGames();
                     break;
                 case "a":
-                    gameEngine.AdditionGame("Addition Game", numberOfQuestions);
+                    gameEngine.AdditionGame("Addition Game", Helpers.NumberOfQuestions());
                     break;
                 case "s":
-                    gameEngine.SubtractionGame("Subtraction Game", numberOfQuestions);
+                    gameEngine.SubtractionGame("Subtraction Game", Helpers.NumberOfQuestions());
                     break;
                 case "m":
-                    gameEngine.MultiplicationGame("Multiplication Game", numberOfQuestions);
+                    gameEngine.MultiplicationGame("Multiplication Game", Helpers.NumberOfQuestions());
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division Game", numberOfQuestions);
+                    gameEngine.DivisionGame("Division Game", Helpers.NumberOfQuestions());
                     break;
                 case "r":
-                    gameEngine.RandomGame("Random Game", numberOfQuestions);
+                    gameEngine.RandomGame("Random Game", Helpers.NumberOfQuestions());
                 break;
                 case "q":
                     Console.Clear();

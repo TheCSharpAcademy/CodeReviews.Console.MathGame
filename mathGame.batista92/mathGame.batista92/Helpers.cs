@@ -1,5 +1,4 @@
 ﻿using mathGame.batista92.Models;
-using System.Security;
 
 namespace mathGame.batista92;
 
@@ -13,20 +12,21 @@ internal class Helpers
         Console.WriteLine("-------------------------------------------");
         foreach (var game in games)
         {
-            Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts");
+            Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}/{game.NumberOfQuestions}");
         }
         Console.WriteLine("-------------------------------------------\n");
         Console.WriteLine("Press anu key to return to Main Menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, GameType gameType)
+    internal static void AddToHistory(int gameScore, GameType gameType, int numberOfQuestions)
     {
         games.Add(new Game 
         {
             Date = DateTime.Now,
             Score = gameScore,
-            Type = gameType
+            Type = gameType,
+            NumberOfQuestions = numberOfQuestions
         });
     }
 
@@ -74,12 +74,26 @@ internal class Helpers
         return result;
     }
 
-    internal static void GameOver(int score, GameType gameType)
+    internal static void GameOver(int score, GameType gameType, int numberOfQuestions)
     {
         Console.Clear();
-        Console.WriteLine($"Game over! Your final score is: {score}");
+        Console.WriteLine($"Game over! Your final score is: {score}/{numberOfQuestions}");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
-        AddToHistory(score, gameType);
+        AddToHistory(score, gameType, numberOfQuestions);
+    }
+
+    internal static int NumberOfQuestions()
+    {
+        int numberOfQuestions;
+
+        Console.Clear();
+        Console.WriteLine("Type the number of questions you wish to answer:");
+
+        while (!int.TryParse(Console.ReadLine(), out numberOfQuestions))
+        {
+            Console.WriteLine("Invalid number, try again");
+        }
+        return numberOfQuestions;
     }
 }

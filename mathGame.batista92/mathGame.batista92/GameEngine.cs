@@ -35,7 +35,7 @@ internal class GameEngine
         }
         if (!isRandomGame)
         {
-            Helpers.GameOver(score, GameType.Addition);
+            Helpers.GameOver(score, GameType.Addition, numberOfQuestions);
             score = 0;
         }
     }
@@ -69,7 +69,7 @@ internal class GameEngine
 
         if (!isRandomGame)
         {
-            Helpers.GameOver(score, GameType.Subtraction);
+            Helpers.GameOver(score, GameType.Subtraction, numberOfQuestions);
             score = 0;
         }
     }
@@ -102,7 +102,7 @@ internal class GameEngine
         }
         if (!isRandomGame)
         {
-            Helpers.GameOver(score, GameType.Multuplication);
+            Helpers.GameOver(score, GameType.Multuplication, numberOfQuestions);
             score = 0;
         }
     }
@@ -136,7 +136,7 @@ internal class GameEngine
         }
         if (!isRandomGame)
         {
-            Helpers.GameOver(score, GameType.Division);
+            Helpers.GameOver(score, GameType.Division, numberOfQuestions);
             score = 0;
         }
     }
@@ -161,7 +161,7 @@ internal class GameEngine
                 DivisionGame(msg, 1);
         }
 
-        Helpers.GameOver(score, GameType.Random);
+        Helpers.GameOver(score, GameType.Random, numberOfQuestions);
         
         score = 0;
         isRandomGame = false;
