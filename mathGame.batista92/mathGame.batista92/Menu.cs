@@ -23,27 +23,32 @@ A - Addition
 S - Subtraction
 M - Multiplication
 D - Division
+R - Random
 Q - Quit the program");
-            Console.WriteLine("---------------------------------------------------");
-
+            Console.WriteLine("---------------------------------------------------");            
             string gameSelected = Console.ReadLine();
+
+            int numberOfQuestions = 5;
             switch (gameSelected.Trim().ToLower())
             {
                 case "v":
                     Helpers.PrintGames();
                     break;
                 case "a":
-                    gameEngine.AdditionGame("Addition Game");
+                    gameEngine.AdditionGame("Addition Game", numberOfQuestions);
                     break;
                 case "s":
-                    gameEngine.SubtractionGame("Subtraction Game");
+                    gameEngine.SubtractionGame("Subtraction Game", numberOfQuestions);
                     break;
                 case "m":
-                    gameEngine.MultiplicationGame("Multiplication Game");
+                    gameEngine.MultiplicationGame("Multiplication Game", numberOfQuestions);
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division Game");
+                    gameEngine.DivisionGame("Division Game", numberOfQuestions);
                     break;
+                case "r":
+                    gameEngine.RandomGame("Random Game", numberOfQuestions);
+                break;
                 case "q":
                     Console.Clear();
                     Console.WriteLine("See you later!");

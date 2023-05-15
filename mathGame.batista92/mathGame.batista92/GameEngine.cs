@@ -4,12 +4,12 @@ namespace mathGame.batista92;
 
 internal class GameEngine
 {
+    int score = 0;
+    bool isRandomGame = false;
     Random random = new Random();
-    internal void AdditionGame(string msg)
-    {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
+    internal void AdditionGame(string msg, int numberOfQuestions)
+    {        
+        for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.Clear();
             Console.WriteLine(msg);
@@ -33,18 +33,16 @@ internal class GameEngine
                 Console.ReadKey();
             }
         }
-
-        Console.WriteLine($"Game over! Your final score is: {score} pts.");
-        Console.WriteLine("Type any key for return to the menu...");
-        Console.ReadKey();
-        Helpers.AddToHistory(score, GameType.Addition);
+        if (!isRandomGame)
+        {
+            Helpers.GameOver(score, GameType.Addition);
+            score = 0;
+        }
     }
 
-    internal void SubtractionGame(string msg)
+    internal void SubtractionGame(string msg, int numberOfQuestions)
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.Clear();
             Console.WriteLine(msg);
@@ -69,17 +67,16 @@ internal class GameEngine
             }
         }
 
-        Console.WriteLine($"Game over! Your final score is: {score}");
-        Console.WriteLine("Type any key for return to the menu");
-        Console.ReadKey();
-        Helpers.AddToHistory(score, GameType.Subtraction);
+        if (!isRandomGame)
+        {
+            Helpers.GameOver(score, GameType.Subtraction);
+            score = 0;
+        }
     }
 
-    internal void MultiplicationGame(string msg)
+    internal void MultiplicationGame(string msg, int numberOfQuestions)
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.Clear();
             Console.WriteLine(msg);
@@ -103,18 +100,16 @@ internal class GameEngine
                 Console.ReadKey();
             }
         }
-
-        Console.WriteLine($"Game over! Your final score is: {score}");
-        Console.WriteLine("Type any key for return to the menu");
-        Console.ReadKey();
-        Helpers.AddToHistory(score, GameType.Multuplication);
+        if (!isRandomGame)
+        {
+            Helpers.GameOver(score, GameType.Multuplication);
+            score = 0;
+        }
     }
 
-    internal void DivisionGame(string msg)
+    internal void DivisionGame(string msg, int numberOfQuestions)
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.Clear();
             Console.WriteLine(msg);
@@ -139,10 +134,36 @@ internal class GameEngine
                 Console.ReadKey();
             }
         }
+        if (!isRandomGame)
+        {
+            Helpers.GameOver(score, GameType.Division);
+            score = 0;
+        }
+    }
 
-        Console.WriteLine($"Game over! Your final score is: {score}");
-        Console.WriteLine("Type any key for return to the menu");
-        Console.ReadKey();
-        Helpers.AddToHistory(score, GameType.Division);
+    internal void RandomGame(string msg, int numberOfQuestions)
+    {
+        isRandomGame = true;
+        for (int i = 0; i < numberOfQuestions; i++)
+        {
+            var gameType = random.Next(1, 5);
+
+            if (gameType == 1)
+                AdditionGame(msg, 1);
+
+            if (gameType == 2)
+                SubtractionGame(msg, 1);
+
+            if (gameType == 3)
+                MultiplicationGame(msg, 1);
+
+            if (gameType == 4)
+                DivisionGame(msg, 1);
+        }
+
+        Helpers.GameOver(score, GameType.Random);
+        
+        score = 0;
+        isRandomGame = false;
     }
 }

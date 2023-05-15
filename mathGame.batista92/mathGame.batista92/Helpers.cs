@@ -73,4 +73,13 @@ internal class Helpers
 
         return result;
     }
+
+    internal static void GameOver(int score, GameType gameType)
+    {
+        Console.Clear();
+        Console.WriteLine($"Game over! Your final score is: {score}");
+        Console.WriteLine("Type any key for return to the menu");
+        Console.ReadKey();
+        AddToHistory(score, gameType);
+    }
 }
