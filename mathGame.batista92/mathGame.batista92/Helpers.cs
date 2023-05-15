@@ -102,7 +102,7 @@ internal class Helpers
     internal static void GameOver(int score, GameType gameType, int numberOfQuestions,DifficultyLevel difficulty, TimeSpan timeTaken)
     {
         Console.Clear();
-        Console.WriteLine($"Game over! Your final score is: {score}/{numberOfQuestions}");
+        Console.WriteLine($"Game over! Your final score is: {score}/{numberOfQuestions} in {timeTaken.TotalSeconds.ToString("0.00")}s.");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
         AddToHistory(score, gameType, numberOfQuestions, difficulty, timeTaken);
