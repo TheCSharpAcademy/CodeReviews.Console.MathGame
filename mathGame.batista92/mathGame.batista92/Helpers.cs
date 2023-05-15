@@ -9,30 +9,32 @@ internal class Helpers
     {
         Console.Clear();
         Console.WriteLine("Games History");
-        Console.WriteLine("-------------------------------------------");
+        Console.WriteLine("--------------------------------------------------------------");
         foreach (var game in games)
         {
-            Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}/{game.NumberOfQuestions}");
+            Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score}/{game.NumberOfQuestions} in {game.TimeTaken.TotalSeconds.ToString("0.00")}s.");
         }
-        Console.WriteLine("-------------------------------------------\n");
+        Console.WriteLine("--------------------------------------------------------------\n");
         Console.WriteLine("Press anu key to return to Main Menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, GameType gameType, int numberOfQuestions)
+    internal static void AddToHistory(int gameScore, GameType gameType, int numberOfQuestions, DifficultyLevel difficulty, TimeSpan timeTaken)
     {
-        games.Add(new Game 
+        games.Add(new Game
         {
             Date = DateTime.Now,
             Score = gameScore,
             Type = gameType,
-            NumberOfQuestions = numberOfQuestions
+            NumberOfQuestions = numberOfQuestions,
+            Difficulty = difficulty,
+            TimeTaken = timeTaken
         });
     }
 
     internal static string? ValidadeResult(string result)
     {
-        while(string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+        while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
         {
             Console.WriteLine("Your answer needs to be an interger. Try again.");
             result = Console.ReadLine();
@@ -54,33 +56,56 @@ internal class Helpers
         return name;
     }
 
-    internal static int[] GetDivisionNumbers()
+    internal static int[] GetNumbers(DifficultyLevel difficulty, bool isDivisionGame = false)
     {
         Random random = new Random();
-        int firstNumber = random.Next(1, 99);
-        int secondNumber = random.Next(1, 99);
+        int[] numbers = new int[2];
 
-        int[] result = new int[2];
-
-        while (firstNumber % secondNumber != 0)
+        if(isDivisionGame)
         {
-            firstNumber = random.Next(1, 99);
-            secondNumber = random.Next(1, 99);
+            numbers[0] = random.Next(1, 99);
+            numbers[1] = random.Next(1, 99);
+
+            while (numbers[0] % numbers[1] != 0)
+            {
+                numbers[0] = random.Next(1, 99);
+                numbers[1] = random.Next(1, 99);
+            }
+        } 
+        else
+        {
+            numbers[0] = random.Next(1, 9);
+            numbers[1] = random.Next(1, 9);
+        }
+        
+        if(difficulty == DifficultyLevel.Easy)
+        {
+            numbers[0] *= 1;
+            numbers[1] *= 1;
         }
 
-        result[0] = firstNumber;
-        result[1] = secondNumber;
+        if (difficulty == DifficultyLevel.Medium)
+        {
+            numbers[0] *= 15;
+            numbers[1] *= 15;
+        }
 
-        return result;
+        if (difficulty == DifficultyLevel.Hard)
+        {
+            numbers[0] *= 35;
+            numbers[1] *= 35;
+        }
+
+        return numbers;
     }
 
-    internal static void GameOver(int score, GameType gameType, int numberOfQuestions)
+    internal static void GameOver(int score, GameType gameType, int numberOfQuestions,DifficultyLevel difficulty, TimeSpan timeTaken)
     {
         Console.Clear();
         Console.WriteLine($"Game over! Your final score is: {score}/{numberOfQuestions}");
         Console.WriteLine("Type any key for return to the menu");
         Console.ReadKey();
-        AddToHistory(score, gameType, numberOfQuestions);
+        AddToHistory(score, gameType, numberOfQuestions, difficulty, timeTaken);
     }
 
     internal static int NumberOfQuestions()
@@ -95,5 +120,24 @@ internal class Helpers
             Console.WriteLine("Invalid number, try again");
         }
         return numberOfQuestions;
+    }
+
+    internal static DifficultyLevel GetDifficulty()
+    {
+        DifficultyLevel difficulty;
+
+        Console.Clear();
+        Console.WriteLine("Choose a difficulty level:");
+        Console.WriteLine(@"
+1 - Easy
+2 - Medium
+3 - Hard
+");
+
+        while (!Enum.TryParse(Console.ReadLine(), out difficulty))
+        {
+            Console.WriteLine("Invalid mode, try again");
+        }
+        return difficulty;
     }
 }

@@ -10,6 +10,10 @@ internal class Game
 
     public int NumberOfQuestions { get; set; }
 
+    public DifficultyLevel Difficulty { get; set; }
+    
+    public TimeSpan TimeTaken { get; set; }
+
 }
 
 internal enum GameType
@@ -19,4 +23,11 @@ internal enum GameType
     Multuplication,
     Division,
     Random
+}
+
+internal enum DifficultyLevel : int
+{
+    Easy = 1,
+    Medium = 2,
+    Hard = 3
 }

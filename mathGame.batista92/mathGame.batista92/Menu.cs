@@ -34,19 +34,19 @@ Q - Quit the program");
                     Helpers.PrintGames();
                     break;
                 case "a":
-                    gameEngine.AdditionGame("Addition Game", Helpers.NumberOfQuestions());
+                    gameEngine.AdditionGame("Addition Game", Helpers.NumberOfQuestions(), Helpers.GetDifficulty());
                     break;
                 case "s":
-                    gameEngine.SubtractionGame("Subtraction Game", Helpers.NumberOfQuestions());
+                    gameEngine.SubtractionGame("Subtraction Game", Helpers.NumberOfQuestions(), Helpers.GetDifficulty());
                     break;
                 case "m":
-                    gameEngine.MultiplicationGame("Multiplication Game", Helpers.NumberOfQuestions());
+                    gameEngine.MultiplicationGame("Multiplication Game", Helpers.NumberOfQuestions(), Helpers.GetDifficulty());
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division Game", Helpers.NumberOfQuestions());
+                    gameEngine.DivisionGame("Division Game", Helpers.NumberOfQuestions(), Helpers.GetDifficulty());
                     break;
                 case "r":
-                    gameEngine.RandomGame("Random Game", Helpers.NumberOfQuestions());
+                    gameEngine.RandomGame("Random Game", Helpers.NumberOfQuestions(), Helpers.GetDifficulty());
                 break;
                 case "q":
                     Console.Clear();
