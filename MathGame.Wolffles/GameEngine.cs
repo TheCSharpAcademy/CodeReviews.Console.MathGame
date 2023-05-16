@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Math_Game;
 
 internal class GameEngine
 {
-    private int m_totalScore = 0;
-    private int m_roundScore = 0;
+    private int m_totalScore;
+    private int m_roundScore;
     private int m_minRange = 1;
     private int m_maxRange = 10;
 
@@ -19,13 +15,13 @@ internal class GameEngine
     private int m_addGamePoints = 1;
     private int m_subGamePoints = 2;
 
-    private int generateRandom()
+    private int GenerateRandom()
     {
         Random randomGen = new Random();
         return randomGen.Next(m_minRange, m_maxRange * m_difficulty);
     }
 
-    private int getUserInputAsInt()
+    private int GetUserInputAsInt()
     {
         int userInt;
         bool validateInput;          
@@ -40,11 +36,9 @@ internal class GameEngine
         return userInt;
     }
 
-    private void getUserAnswer(int currentQuestion, int points)
-    {
-        int userAnswer;
-                
-        int userInput = getUserInputAsInt();
+    private void GetUserAnswe(int currentQuestion, int points)
+    {            
+        int userInput = GetUserInputAsInt();
 
         if (currentQuestion==userInput)
         {
@@ -61,7 +55,7 @@ internal class GameEngine
         }
     }
 
-    private void endRound()
+    private void EndRound()
     {
 
         m_totalScore += m_roundScore;
@@ -73,10 +67,10 @@ Press any key to continue back to menu.");
         Console.Clear();   
     }
 
-    public void setDifficulty()
+    public void SetDifficulty()
     {
         Console.WriteLine("To change te difficulty enter a number between 1 and 100");
-        int a = getUserInputAsInt();
+        int a = GetUserInputAsInt();
 
         if (a <= 100 && a > 0)
         {
@@ -90,7 +84,7 @@ Press any key to continue back to menu.");
         return;
     }
  
-    public void additionGame()
+    public void AdditionGame()
     {
         Timer timer = new Timer();     
         Console.WriteLine("Addition Game");
@@ -99,23 +93,23 @@ Press any key to continue back to menu.");
 
         for (int i = 0; i < 5; ++i)
         {
-            a = generateRandom();
-            b = generateRandom();
+            a = GenerateRandom();
+            b = GenerateRandom();
 
             Console.WriteLine($"{a} + {b}?");
 
             int currentQuestion = a + b;
-            getUserAnswer(currentQuestion, m_addGamePoints);
+            GetUserAnswe(currentQuestion, m_addGamePoints);
         }
 
-        timer.stopTimer();
-        timer.printTimeElapsed();
+        timer.StopTimer();
+        timer.PrintTimeElapsed();
 
-        endRound();
+        EndRound();
         return;
     }
 
-    public void substractionGame()
+    public void SubstractionGame()
     {
         Timer timer = new Timer();
         Console.WriteLine("Substraction Game");
@@ -124,24 +118,24 @@ Press any key to continue back to menu.");
 
         for (int i = 0; i < 5; ++i)
         {
-            a = generateRandom();
-            b = generateRandom();
+            a = GenerateRandom();
+            b = GenerateRandom();
             
             Console.WriteLine($"{a} - {b}?");
 
             int currentQuestion = a - b;
-            getUserAnswer(currentQuestion, m_subGamePoints);
+            GetUserAnswe(currentQuestion, m_subGamePoints);
 
         }
 
-        timer.stopTimer();
-        timer.printTimeElapsed();
+        timer.StopTimer();
+        timer.PrintTimeElapsed();
 
-        endRound();
+        EndRound();
         return;
     }
   
-    public void multiplicationGame()
+    public void MultiplicationGame()
     {
         Timer timer = new Timer();
         Console.WriteLine("Substraction Game");
@@ -151,23 +145,23 @@ Press any key to continue back to menu.");
 
         for (int i = 0; i < 5; ++i)
         {
-            a = generateRandom();
-            b = generateRandom();
+            a = GenerateRandom();
+            b = GenerateRandom();
 
             Console.WriteLine($"{a} * {b}?");
 
             int currentQuestion = a * b;
-            getUserAnswer(currentQuestion, m_mulGamePoints);
+            GetUserAnswe(currentQuestion, m_mulGamePoints);
         }
 
-        timer.stopTimer();
-        timer.printTimeElapsed();
+        timer.StopTimer();
+        timer.PrintTimeElapsed();
 
-        endRound();
+        EndRound();
         return;
     }
 
-    public void divisionGame()
+    public void DivisionGame()
     {
         Timer timer = new Timer();
         Console.WriteLine("Division Game");
@@ -176,24 +170,23 @@ Press any key to continue back to menu.");
 
         for (int i = 0; i < 5; ++i)
         {
-            a = generateRandom();
+            a = GenerateRandom();
             do
             {              
-                b = generateRandom();
-                //Console.WriteLine("Division not valid... Regenerating...");
+                b = GenerateRandom();
             }
             while((a % b)!=0 || a==b);
 
             Console.WriteLine($"{a} / {b}?");
 
             int currentQuestion = a / b;
-            getUserAnswer(currentQuestion,m_divGamePoints);
+            GetUserAnswe(currentQuestion,m_divGamePoints);
         }
 
-        timer.stopTimer();
-        timer.printTimeElapsed();
+        timer.StopTimer();
+        timer.PrintTimeElapsed();
 
-        endRound();
+        EndRound();
         return;
     }
 }

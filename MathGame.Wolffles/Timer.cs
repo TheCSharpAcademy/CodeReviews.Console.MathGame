@@ -7,17 +7,17 @@ internal class Timer
     private DateTime m_startTime = DateTime.Now;
     private DateTime m_endTime = DateTime.Now;
 
-    public void startTimer()
+    public void StartTimer()
     {
         m_startTime = DateTime.Now;
     }
     
-    public void stopTimer() 
+    public void StopTimer() 
     {
         m_endTime = DateTime.Now;
     }
     
-    public void printTimeElapsed()
+    public void PrintTimeElapsed()
     {
         double seconds = (m_endTime - m_startTime).TotalSeconds;
         Console.WriteLine($"You finished in {seconds,1:N} seconds.");

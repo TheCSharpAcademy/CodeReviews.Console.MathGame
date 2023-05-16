@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Math_Game;
 
@@ -12,14 +9,14 @@ internal class Menu
     DateTime m_date = DateTime.UtcNow;
     GameEngine m_game = new GameEngine();
  
-    internal void initializeMenuParameters()
+    internal void InitializeMenuParameters()
     {
         Console.WriteLine("Please type your name");
         m_name = Console.ReadLine();
-        m_game.setDifficulty();
+        m_game.SetDifficulty();
     }
 
-    internal bool startMenu()
+    internal bool StartMenu()
     {
 
         Console.WriteLine("------------------------------------------------------------------------------------------------------------");
@@ -42,19 +39,19 @@ internal class Menu
                 Console.WriteLine("V");
                 break;
             case "f":
-                m_game.setDifficulty();
+                m_game.SetDifficulty();
                 break;
             case "a":
-                m_game.additionGame();
+                m_game.AdditionGame();
                 break;
             case "s":
-                m_game.substractionGame();
+                m_game.SubstractionGame();
                 break;
             case "m":
-                m_game.multiplicationGame();
+                m_game.MultiplicationGame();
                 break;
             case "d":
-                m_game.divisionGame();
+                m_game.DivisionGame();
                 break;
             case "q":
                 Console.WriteLine("Quitting program...");
