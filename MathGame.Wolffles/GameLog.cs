@@ -57,10 +57,14 @@ internal class GameLog
     
     public void ReadLog()
     {
+        Console.Clear();
         foreach (History game in list)
         {
-            Console.WriteLine($"{game.m_index} {game.m_time} {game.m_typeS} {game.m_score} \n");
+            Console.WriteLine($"Game#{game.m_index} Date/Time: {game.m_time} Type:{game.m_typeS} Score: {game.m_score} \n");
         }
+        Console.WriteLine("Press any key to return to menu");
+        Console.ReadKey();
+        Console.Clear();
     }
 
     
