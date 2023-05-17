@@ -4,10 +4,10 @@ namespace mathGame.batista92;
 
 internal class GameEngine
 {
-    int score = 0;
-    bool isRandomGame = false;
-    TimeSpan timeTaken = TimeSpan.Zero;
-    Random random = new Random();
+    int score;
+    bool isRandomGame;
+    TimeSpan timeTaken;
+    readonly Random random = new();
 
     internal void AdditionGame(string msg, int numberOfQuestions, DifficultyLevel difficulty)
     {
@@ -158,7 +158,7 @@ internal class GameEngine
     }
 
     internal void RandomGame(string msg, int numberOfQuestions, DifficultyLevel difficulty)
-    {
+    {    
         isRandomGame = true;
         for (int i = 0; i < numberOfQuestions; i++)
         {
