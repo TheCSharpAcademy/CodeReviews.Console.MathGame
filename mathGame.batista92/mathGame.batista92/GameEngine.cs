@@ -139,13 +139,13 @@ internal class GameEngine
 
             if (int.Parse(result) == firstNumber / secondNumber)
             {
-                Console.WriteLine("You answer was correct! Type any key for next question");
+                Console.WriteLine("You answer was correct! Type any key for next question...");
                 score++;
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Your answer war incorrect. Type any key for next question");
+                Console.WriteLine("Your answer war incorrect. Type any key for next question...");
                 Console.ReadKey();
             }
         }

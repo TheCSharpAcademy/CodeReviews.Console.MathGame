@@ -103,7 +103,7 @@ internal class Helpers
     {
         Console.Clear();
         Console.WriteLine($"Game over! Your final score is: {score}/{numberOfQuestions} in {timeTaken.TotalSeconds.ToString("0.00")}s.");
-        Console.WriteLine("Type any key for return to the menu");
+        Console.WriteLine("Type any key for return to the menu...");
         Console.ReadKey();
         AddToHistory(score, gameType, numberOfQuestions, difficulty, timeTaken);
     }
