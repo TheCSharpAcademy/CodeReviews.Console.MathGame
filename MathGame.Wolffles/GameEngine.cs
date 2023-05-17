@@ -15,6 +15,9 @@ internal class GameEngine
     private int m_addGamePoints = 1;
     private int m_subGamePoints = 2;
 
+    internal GameLog log = new GameLog();
+    
+
     private int GenerateRandom()
     {
         Random randomGen = new Random();
@@ -59,6 +62,7 @@ internal class GameEngine
     {
 
         m_totalScore += m_roundScore;
+
         Console.WriteLine(@$"Round is over. You scored {m_roundScore} points this round. Your total score this session is {m_totalScore}.
      
 Press any key to continue back to menu.");
@@ -104,7 +108,7 @@ Press any key to continue back to menu.");
 
         timer.StopTimer();
         timer.PrintTimeElapsed();
-
+        log.LogEntry('+', m_roundScore);
         EndRound();
         return;
     }
@@ -131,6 +135,7 @@ Press any key to continue back to menu.");
         timer.StopTimer();
         timer.PrintTimeElapsed();
 
+        log.LogEntry('-', m_roundScore);
         EndRound();
         return;
     }
@@ -156,7 +161,7 @@ Press any key to continue back to menu.");
 
         timer.StopTimer();
         timer.PrintTimeElapsed();
-
+        log.LogEntry('*', m_roundScore);
         EndRound();
         return;
     }
@@ -185,7 +190,7 @@ Press any key to continue back to menu.");
 
         timer.StopTimer();
         timer.PrintTimeElapsed();
-
+        log.LogEntry('/', m_roundScore);
         EndRound();
         return;
     }

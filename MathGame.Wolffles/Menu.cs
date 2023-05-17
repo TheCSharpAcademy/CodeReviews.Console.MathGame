@@ -36,7 +36,7 @@ internal class Menu
         switch (selectedGame.Trim().ToLower())
         {
             case "v":
-                Console.WriteLine("V");
+                m_game.log.ReadLog();
                 break;
             case "f":
                 m_game.SetDifficulty();
