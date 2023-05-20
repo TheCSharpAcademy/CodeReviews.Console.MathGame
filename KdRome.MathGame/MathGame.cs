@@ -1,5 +1,5 @@
 ﻿class MathGame {
-     static void Main(String[] args) {
+     static void Main() {
           //math game instance
           MathGame Game = new MathGame();
           //calling the main menu method
@@ -15,7 +15,6 @@
           String[] Menu = { "1 - Addition", "2 - Subraction", "3 - Multiplication", "4 - Division", "5 - Show Previous Games" };
           int GameSelection = 0;
           bool MenuCheck = false;
-          MathGame Game = new MathGame();
 
           //asking user to select a game mode
           Console.WriteLine("Welcome!");
