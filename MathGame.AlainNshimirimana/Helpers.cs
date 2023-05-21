@@ -1,15 +1,17 @@
-﻿namespace MathGame.AlainNshimirimana
+﻿using MathGame.AlainNshimirimana.Models;
+
+namespace MathGame.AlainNshimirimana
 {
     internal class Helpers
     {
-        static List<string> games = new();
+        static List<Game> games = new List<Game>();
         internal static void GetGames()
         {
             Console.WriteLine("Games History");
             Console.WriteLine("------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine(game);
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}");
             }
             Console.WriteLine("------------------------\n");
             Console.WriteLine("Press any key to return to the Main Menu");
@@ -18,7 +20,12 @@
 
         internal static void AddToHistory(int gameScore, string gameType)
         {
-            games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+            games.Add(new Game
+            {
+                Date = DateTime.Now,
+                Score = gameScore,
+                Type = gameType
+            });
         }
 
         internal static int[] GetDivisionNumbers()
