@@ -26,7 +26,7 @@
                 switch (gameSelected.Trim().ToLower())
                 {
                     case "v":
-                        Helpers.GetGames();
+                        Helpers.PrintGames();
                         break;
                     case "a":
                         engine.AdditionGame("Addition game");
