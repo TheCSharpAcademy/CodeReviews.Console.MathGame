@@ -18,7 +18,7 @@ namespace MathGame.AlainNshimirimana
             Console.ReadLine();
         }
 
-        internal static void AddToHistory(int gameScore, string gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType)
         {
             games.Add(new Game
             {
