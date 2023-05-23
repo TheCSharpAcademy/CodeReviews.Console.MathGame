@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdRome.MathGame", "KdRome.MathGame.csproj", "{EE36367A-48BD-40EA-AFBC-F17514F7908C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE36367A-48BD-40EA-AFBC-F17514F7908C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE36367A-48BD-40EA-AFBC-F17514F7908C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE36367A-48BD-40EA-AFBC-F17514F7908C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE36367A-48BD-40EA-AFBC-F17514F7908C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DBDAA9A6-8706-4C2C-8E39-CD5858170113}
+	EndGlobalSection
+EndGlobal
