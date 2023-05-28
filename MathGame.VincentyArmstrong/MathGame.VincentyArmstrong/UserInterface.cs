@@ -32,7 +32,7 @@ public class UserInterface
             ---------------------------------------------");
     }
    
-    public void MainMenuInput()
+    private void MainMenuInput()
     {
         switch (Console.ReadLine().Trim().ToLower())
         {
