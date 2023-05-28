@@ -3,11 +3,11 @@
 public class UserInterface
 {
     private int questions;
-    private bool hardMode = false;
+    private bool hardMode;
     private List<Game> games = new();
     private bool quit;
 
-    public UserInterface()
+    public void Run()
     {
         while (!quit)
         {
@@ -16,7 +16,7 @@ public class UserInterface
         }
     }
 
-    private void MainMenuDisplay()
+    private static void MainMenuDisplay()
     {
         Console.Clear();
         Console.WriteLine(
