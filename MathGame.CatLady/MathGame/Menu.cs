@@ -4,7 +4,7 @@ namespace CalculatingGame
 {
     internal class Menu
     {
-        bool isGameRunning = false;
+        bool isGameRunning;
         GameLogic gameLogic = new();
         internal void ShowMenu()
         {
