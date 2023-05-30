@@ -85,7 +85,8 @@ class MainMenu
             "Addition",
             "Subtraction",
             "Multiplication",
-            "Division"
+            "Division",
+            "Random"
         };
 
         foreach (string text in gameTypes)
@@ -163,18 +164,27 @@ class MainMenu
                 Console.WriteLine("\nLaunching Subtraction Game.");
                 Thread.Sleep(2000);
                 Console.Clear();
+
+                SubtractionGame subGame = new();
+                subGame.StartGame(difficulty, numOfQuest);
                 break;
 
             case "multiplication":
                 Console.WriteLine("\nLaunching Multiplication Game.");
                 Thread.Sleep(2000);
                 Console.Clear();
+
+                MultiplicationGame mulGame = new();
+                mulGame.StartGame(difficulty, numOfQuest);
                 break;
 
             case "division":
                 Console.WriteLine("\nLaunching Division Game.");
                 Thread.Sleep(2000);
                 Console.Clear();
+
+                DivisionGame divGame = new();
+                divGame.StartGame(difficulty, numOfQuest);
                 break;
 
             default:

@@ -9,23 +9,34 @@
 
     public static void PrintHistory()
     {
-        List<string> history = new();
-
-        history.Add("\nAddition Games");
-        history.AddRange(addGames);
-        history.Add("\nSubtraction Games");
-        history.AddRange(subGames);
-        history.Add("\nMultiplication Games");
-        history.AddRange(mulGames);
-        history.Add("\nDivision Games");
-        history.AddRange(divGames);
-
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Your Previous Games");
-
-        for (int index = 0; index < history.Count; index++)
+        Console.WriteLine("\nAddition Games");
+        
+        foreach (string s in addGames)
         {
-            Console.WriteLine(history[index]);
+            Console.WriteLine(s);
+        }
+
+        Console.WriteLine("\nSubtraction Games");
+
+        foreach (string s in subGames)
+        {
+            Console.WriteLine(s);
+        };
+
+        Console.WriteLine("\nMultiplication Games");
+
+        foreach (string s in mulGames)
+        {
+            Console.WriteLine(s);
+        };
+
+        Console.WriteLine("\nDivision Games");
+
+        foreach (string s in divGames)
+        {
+            Console.WriteLine(s);
         };
 
         Console.WriteLine("\nWould You Like To Play Again or Exit Program?");
