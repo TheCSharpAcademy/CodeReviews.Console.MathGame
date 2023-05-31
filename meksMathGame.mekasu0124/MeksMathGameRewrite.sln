@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meksMathGame.mekasu0124", "meksMathGame.mekasu0124.csproj", "{0AF066F1-8809-4E0A-A724-AD1F6BCD116E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeksMathGameRewrite", "MeksMathGameRewrite.csproj", "{1AA1CAA7-F8E9-4FE3-8589-E9E2860D2719}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0AF066F1-8809-4E0A-A724-AD1F6BCD116E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AF066F1-8809-4E0A-A724-AD1F6BCD116E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AF066F1-8809-4E0A-A724-AD1F6BCD116E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AF066F1-8809-4E0A-A724-AD1F6BCD116E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA1CAA7-F8E9-4FE3-8589-E9E2860D2719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA1CAA7-F8E9-4FE3-8589-E9E2860D2719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA1CAA7-F8E9-4FE3-8589-E9E2860D2719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA1CAA7-F8E9-4FE3-8589-E9E2860D2719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D8A91A64-D446-4E4F-9862-661AF7710919}
+		SolutionGuid = {8B81409D-D6DA-4599-942A-57A46F6C12B7}
 	EndGlobalSection
 EndGlobal
