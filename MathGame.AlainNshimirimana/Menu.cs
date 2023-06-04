@@ -33,15 +33,19 @@
                         Helpers.PrintGames();
                         break;
                     case "a":
+                        Helpers.GetDifficulty();
                         engine.AdditionGame("Addition game");
                         break;
                     case "s":
+                        Helpers.GetDifficulty();
                         engine.SubtractionGame("Subtraction game");
                         break;
                     case "m":
+                        Helpers.GetDifficulty();
                         engine.MultiplicationGame("Multiplication game");
                         break;
                     case "d":
+                        Helpers.GetDifficulty();
                         engine.DivisionGame("Division game");
                         break;
                     case "q":

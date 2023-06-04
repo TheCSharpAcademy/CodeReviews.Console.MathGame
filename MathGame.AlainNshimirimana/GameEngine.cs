@@ -6,6 +6,21 @@ namespace MathGame.AlainNshimirimana
 {
     internal class GameEngine
     {
+        internal static int GetMaxRange()
+        {
+            var difficulty = Helpers.GetDifficulty().ToString().Trim().ToLower();
+            switch (difficulty)
+            {
+                case "medium":
+                    return 99;
+
+                case "hard":
+                    return 999;
+
+                default:
+                    return 9;
+            }
+        }
         internal void AdditionGame(string message)
         {
             Console.Clear();
@@ -19,8 +34,8 @@ namespace MathGame.AlainNshimirimana
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                firstNumber = random.Next(1, GetMaxRange());
+                secondNumber = random.Next(1, GetMaxRange());
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
 
                 var result = Console.ReadLine();
@@ -59,8 +74,8 @@ namespace MathGame.AlainNshimirimana
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                firstNumber = random.Next(1, GetMaxRange());
+                secondNumber = random.Next(1, GetMaxRange());
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
 
                 var result = Console.ReadLine();
@@ -99,8 +114,8 @@ namespace MathGame.AlainNshimirimana
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                firstNumber = random.Next(1, GetMaxRange());
+                secondNumber = random.Next(1, GetMaxRange());
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 var result = Console.ReadLine();

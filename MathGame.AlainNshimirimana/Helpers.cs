@@ -48,16 +48,32 @@ namespace MathGame.AlainNshimirimana
 
         internal static int[] GetDivisionNumbers()
         {
+            var max = 1;
+
+            switch (GetDifficulty().Trim().ToLower())
+            {
+                case "medium":
+                    max = 999;
+                    break;
+
+                case "hard":
+                    max = 9999;
+                    break;
+
+                default:
+                    max = 99;
+                    break;
+            }
             var random = new Random();
-            var firstNumber = random.Next(1, 99);
-            var secondNumber = random.Next(1, 99);
+            var firstNumber = random.Next(1, max);
+            var secondNumber = random.Next(1, max);
 
             var result = new int[2];
 
             while (firstNumber % secondNumber != 0)
             {
-                firstNumber = random.Next(1, 99);
-                secondNumber = random.Next(1, 99);
+                firstNumber = random.Next(1, max);
+                secondNumber = random.Next(1, max);
             }
             result[0] = firstNumber;
             result[1] = secondNumber;
@@ -85,6 +101,38 @@ namespace MathGame.AlainNshimirimana
                 name = Console.ReadLine();
             }
             return name;
+        }
+
+        internal static string GetDifficulty()
+        {
+            bool isValidInput = false;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine($@"Please Choose difficulty level below:
+         E - Easy 
+         M - Medium
+         H - Hard");
+                Console.WriteLine("-----------------------------");
+
+                var difficultySelected = Console.ReadLine();
+
+                switch (difficultySelected.Trim().ToLower())
+                {
+                    case "e":
+                        isValidInput = true;
+                        return "easy";
+                    case "m":
+                        isValidInput = true;
+                        return "medium";
+                    case "h":
+                        isValidInput = true;
+                        return "hard";
+                    default:
+                        return "Invalid Input";
+                }
+            } while (isValidInput != false);
         }
     }
 }
