@@ -4,11 +4,11 @@ namespace Math_Game__JMS_;
 
 internal class GameLogic
 {
-    static int score = 0;
-    static int pointsEarned = 0;
+    static int score;
+    static int pointsEarned;
     static DifficultyStage stage;
     static int difficultyValue = 10;
-    static int numberOfGames = 0;
+    static int numberOfGames;
 
     private static Stopwatch stopwatch;
 
@@ -58,35 +58,35 @@ internal class GameLogic
                     break;
                 case "a":
                     score = 0;
-                    difficultyValue = difficultyChooser(out stage, out pointsEarned, 10);
+                    difficultyValue = DifficultyChooser(out stage, out pointsEarned, 10);
                     numberOfGames = NumberOfPlays();
                     Addition(games);
                     EndOfGame();
                     break;
                 case "s":
                     score = 0;
-                    difficultyValue = difficultyChooser(out stage, out pointsEarned, 10);
+                    difficultyValue = DifficultyChooser(out stage, out pointsEarned, 10);
                     numberOfGames = NumberOfPlays();
                     Subtraction(games);
                     EndOfGame();
                     break;
                 case "m":
                     score = 0;
-                    difficultyValue = difficultyChooser(out stage, out pointsEarned, 10);
+                    difficultyValue = DifficultyChooser(out stage, out pointsEarned, 10);
                     numberOfGames = NumberOfPlays();
                     Multiplication(games);
                     EndOfGame();
                     break;
                 case "d":
                     score = 0;
-                    difficultyValue = difficultyChooser(out stage, out pointsEarned, 100);
+                    difficultyValue = DifficultyChooser(out stage, out pointsEarned, 100);
                     numberOfGames = NumberOfPlays();
                     Division(games);
                     EndOfGame();
                     break;
                 case "r":
                     score = 0;
-                    difficultyValue = difficultyChooser(out stage, out pointsEarned, 10);
+                    difficultyValue = DifficultyChooser(out stage, out pointsEarned, 10);
                     numberOfGames = NumberOfPlays();
                     RandomG(games);
                     EndOfGame();
@@ -287,7 +287,7 @@ internal class GameLogic
         Console.WriteLine("Press any key to return to menu");
     }
 
-    static int difficultyChooser(out DifficultyStage stage, out int pointsEarned, int difficultyValue) 
+    static int DifficultyChooser(out DifficultyStage stage, out int pointsEarned, int difficultyValue) 
     {
         Console.Clear();
         Console.Write(@$"Choose a difficulty:
@@ -320,7 +320,7 @@ internal class GameLogic
                 stage = DifficultyStage.Easy;
                 pointsEarned = 0;
                 break;
-        };
+        }
         return difficultyValue;
     }
 
