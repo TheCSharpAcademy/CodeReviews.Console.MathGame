@@ -17,8 +17,8 @@ public class GameItem
     public int NumFour { get; }
 
     //some fields for the Easy, Medium and Hard methods
-    bool intCoverted = false;
-    int result = 0;
+    bool intCoverted;
+    int result;
 
     public GameItem(string gameMode, string difficulty)
     {
