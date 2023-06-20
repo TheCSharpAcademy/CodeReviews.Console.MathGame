@@ -3,7 +3,7 @@
 public class GameItem
 {
     //only allow subclases to get and set the properties:
-    readonly Random randomNumber = new();
+    private Random randomNumber = new();
     public string Difficulty { get; set; }
     public string GameMode { get; set; }
     public string Question { get; private set; }
@@ -11,10 +11,10 @@ public class GameItem
     public int CorrectAnswer { get; private set; }
 
     //no set is required:
-    public int NumOne { get; }
-    public int NumTwo { get; }
-    public int NumThree { get; }
-    public int NumFour { get; }
+    public int NumOne { get; private set; }
+    public int NumTwo { get; private set; }
+    public int NumThree { get; private set; }
+    public int NumFour { get; private set; }
 
     //some fields for the Easy, Medium and Hard methods
     bool intCoverted;
@@ -42,6 +42,7 @@ public class GameItem
     string EasyQuestion()
     {
         //switch through each operation and generate the question and answer
+        //for the division logic, I have overridden the Nums to ensure the result is between 0-100
         switch (GameMode)
         {
             case "A":
@@ -57,7 +58,9 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo;
                 break;
             case "D":
-                Question = $"What is {NumOne} / {NumTwo}";
+                NumOne = randomNumber.Next(25, 50);
+                NumTwo = randomNumber.Next(1, 10);
+                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo}";
                 CorrectAnswer = NumOne / NumTwo;
                 break;
         }
@@ -91,7 +94,7 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo * NumThree;
                 break;
             case "D":
-                Question = $"What is {NumOne} / {NumTwo} / {NumThree}";
+                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo} / {NumThree}";
                 CorrectAnswer = NumOne / NumTwo / NumThree;
                 break;
         }
@@ -124,7 +127,7 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo * NumThree * NumFour;
                 break;
             case "D":
-                Question = $"What is {NumOne} / {NumTwo} / {NumThree} / {NumFour}";
+                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo} / {NumThree} / {NumFour}";
                 CorrectAnswer = NumOne / NumTwo / NumThree / NumFour;
                 break;
         }
@@ -142,13 +145,43 @@ public class GameItem
     //public as GameEngine needs to call this method
     public string AskQuestion()
     {
-        return Difficulty switch
+        //additional logic for division questions 
+        if (GameMode.Equals("D"))
         {
-            "E" => EasyQuestion(),
-            "M" => MediumQuestion(),
-            "H" => HardQuestion(),
-            //the while loop inside menu (line 28) ensures it's not possible to hit the default case, however default to a meduim question
-            _ => MediumQuestion(),
-        };
+            switch (Difficulty)
+            {
+                case "E":
+                    NumOne = randomNumber.Next(10, 100);
+                    NumTwo = randomNumber.Next(1, 5);
+                    return EasyQuestion();
+                case "M":
+                    NumOne = randomNumber.Next(25, 100);
+                    NumTwo = randomNumber.Next(1, 10);
+                    NumThree = randomNumber.Next(1, 5);
+                    return MediumQuestion();
+                case "H":
+                    NumOne = randomNumber.Next(50, 100);
+                    NumTwo = randomNumber.Next(1, 5);
+                    NumThree = randomNumber.Next(1, 3);
+                    NumFour = randomNumber.Next(1, 3);
+                    return HardQuestion();
+                default:
+                    NumOne = randomNumber.Next(25, 100);
+                    NumTwo = randomNumber.Next(1, 10);
+                    NumThree = randomNumber.Next(1, 5);
+                    return MediumQuestion();
+            }
+        }
+        else
+        {
+            return Difficulty switch
+            {
+                "E" => EasyQuestion(),
+                "M" => MediumQuestion(),
+                "H" => HardQuestion(),
+                //the while loop inside menu (line 28) ensures it's not possible to hit the default case, however default to a meduim question
+                _ => MediumQuestion(),
+            };
+        }
     }
 }
