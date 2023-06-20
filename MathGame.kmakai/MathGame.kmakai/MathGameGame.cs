@@ -5,7 +5,7 @@ public class MathGameGame
     public List<Game> GamesPlayed { get; set; } = new List<Game>();
     public Game? CurrentGame { get; set; }
 
-    public void run()
+    public void Run()
     {
 
         Console.WriteLine("Welcome to the Math Game!");
@@ -34,8 +34,7 @@ public class MathGameGame
                 case "7":
                     PrintGamesPlayed();
                     break;
-
-            };
+            }
 
 
             if (CurrentGame != null)
