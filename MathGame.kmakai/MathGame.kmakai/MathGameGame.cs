@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Formats.Asn1;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MathGame.kmakai;
+﻿namespace MathGame.kmakai;
 
 public class MathGameGame
 {
