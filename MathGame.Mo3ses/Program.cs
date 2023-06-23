@@ -1,7 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Welcome to Math-Game");
+﻿Console.WriteLine("Welcome to Math-Game");
 
 bool PlayGame = true;
+
+List<string> gamesHistory = new List<string>();
 
 while (PlayGame)
 {
@@ -14,14 +15,15 @@ while (PlayGame)
     int answerMenu = 0;
     int answer = 0;
 
-    string actualOperation;
+    string actualOperation = "";
 
     Console.WriteLine("------------------ Menu ------------------");
     Console.WriteLine("1 - Addition");
     Console.WriteLine("2 - Subtraction");
     Console.WriteLine("3 - Multiplication");
     Console.WriteLine("4 - Division");
-    Console.WriteLine("5 - Exit");
+    Console.WriteLine("5 - Previous games history");
+    Console.WriteLine("6 - Exit");
     Console.WriteLine("------------------------------------------");
 
 
@@ -57,6 +59,9 @@ while (PlayGame)
             result = number1 / number2;
             break;
         case 5:
+            ShowHistoric();
+            break;
+        case 6:
             PlayGame = false;
             break;
         default:
@@ -64,9 +69,35 @@ while (PlayGame)
             break;
     }
 
-    if (result == answer)   {
+    if (result == answer)
+    {
         System.Console.WriteLine("Correct Answer");
-    } else {
+        gamesHistory.Add($"{actualOperation} = {result} (CORRECT)");
+    }
+    else
+    {
         System.Console.WriteLine($"Incorrect Answer Correct Value = {result}");
+        gamesHistory.Add($"{actualOperation} = {answer} WRONG (CORRECT IS {result})");
     }
 }
+
+
+void ShowHistoric()
+{
+    if (gamesHistory.Count == 0)
+    {
+        System.Console.WriteLine("No Game History");
+    }
+    else
+    {
+        System.Console.WriteLine("------------------Games History------------------");
+        foreach (var game in gamesHistory)
+        {
+            System.Console.WriteLine(game);
+
+        }
+        System.Console.WriteLine("Press any key to continue...");
+        System.Console.ReadKey();
+    }
+}
+
