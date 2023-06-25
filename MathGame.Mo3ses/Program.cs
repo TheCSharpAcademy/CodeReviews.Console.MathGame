@@ -28,35 +28,23 @@ while (PlayGame)
 
 
 
-    answerMenu = Convert.ToInt32(System.Console.ReadLine());
+    answerMenu = Convert.ToInt32(Console.ReadLine());
 
 
 
     switch (answerMenu)
     {
         case 1:
-            actualOperation = $"{number1} + {number2}";
-            System.Console.WriteLine(actualOperation);
-            answer = Convert.ToInt32(System.Console.ReadLine());
-            result = number1 + number2;
+            PlayMath("Addition", "+");
             break;
         case 2:
-            actualOperation = $"{number1} - {number2}";
-            System.Console.WriteLine(actualOperation);
-            answer = Convert.ToInt32(System.Console.ReadLine());
-            result = number1 - number2;
+            PlayMath("Subtraction", "-");
             break;
         case 3:
-            actualOperation = $"{number1} * {number2}";
-            System.Console.WriteLine(actualOperation);
-            answer = Convert.ToInt32(System.Console.ReadLine());
-            result = number1 * number2;
+            // PlayMath("Multiplication", "*");
             break;
         case 4:
-            actualOperation = $"{number1} / {number2}";
-            System.Console.WriteLine(actualOperation);
-            answer = Convert.ToInt32(System.Console.ReadLine());
-            result = number1 / number2;
+            PlayMath("Division", "/");
             break;
         case 5:
             ShowHistoric();
@@ -65,19 +53,8 @@ while (PlayGame)
             PlayGame = false;
             break;
         default:
-            System.Console.WriteLine("Invalid Option, Try Again.");
+            Console.WriteLine("Invalid Option, Try Again.");
             break;
-    }
-
-    if (result == answer)
-    {
-        System.Console.WriteLine("Correct Answer");
-        gamesHistory.Add($"{actualOperation} = {result} (CORRECT)");
-    }
-    else
-    {
-        System.Console.WriteLine($"Incorrect Answer Correct Value = {result}");
-        gamesHistory.Add($"{actualOperation} = {answer} WRONG (CORRECT IS {result})");
     }
 }
 
@@ -86,18 +63,75 @@ void ShowHistoric()
 {
     if (gamesHistory.Count == 0)
     {
-        System.Console.WriteLine("No Game History");
+        Console.WriteLine("No Game History");
     }
     else
     {
-        System.Console.WriteLine("------------------Games History------------------");
+        Console.WriteLine("------------------Games History------------------");
         foreach (var game in gamesHistory)
         {
-            System.Console.WriteLine(game);
+            Console.WriteLine(game);
 
         }
-        System.Console.WriteLine("Press any key to continue...");
-        System.Console.ReadKey();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 }
 
+
+
+bool PlayMath(string operation, string operationSymbol)
+{
+    Random random = new Random();
+    int number1 = random.Next(0, 100);
+    int number2 = random.Next(1, 100);
+    int result, answer = 0;
+    do
+    {
+        number1 = random.Next(0, 100);
+        number2 = random.Next(1, 100);
+    }
+    while (number1 % number2 != 0);
+
+
+    string actualOperation = $"{number1} {operationSymbol} {number2}";
+
+    Console.WriteLine(actualOperation);
+    answer = Convert.ToInt32(Console.ReadLine());
+
+    switch (operationSymbol)
+    {
+        case "+":
+            result = number1 + number2;
+            break;
+        case "-":
+            result = number1 - number2;
+            break;
+        case "*":
+            result = number1 * number2;
+            break;
+        case "/":
+            result = number1 / number2;
+            break;
+        default:
+            result = 0;
+            break;
+    }
+    if (answer == result)
+    {
+
+        Console.WriteLine("Correct!");
+        gamesHistory.Add($"{actualOperation} |  Correct Answer! ({answer})");
+        return true;
+    }
+    else
+    {
+        Console.WriteLine("Wrong!");
+        Console.WriteLine($"The correct answer is {result}.");
+        gamesHistory.Add($"{actualOperation} | Wrong Answer! ({answer})");
+        return false;
+    }
+
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey();
+}
