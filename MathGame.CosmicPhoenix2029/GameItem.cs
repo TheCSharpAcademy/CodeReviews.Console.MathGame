@@ -58,9 +58,7 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo;
                 break;
             case "D":
-                NumOne = randomNumber.Next(25, 50);
-                NumTwo = randomNumber.Next(1, 10);
-                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo}";
+                Question = $"what is {NumOne} / {NumTwo}";
                 CorrectAnswer = NumOne / NumTwo;
                 break;
         }
@@ -94,8 +92,8 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo * NumThree;
                 break;
             case "D":
-                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo} / {NumThree}";
-                CorrectAnswer = NumOne / NumTwo / NumThree;
+                Question = $"what is {NumOne} / {NumTwo}";
+                CorrectAnswer = NumOne / NumTwo;
                 break;
         }
 
@@ -127,8 +125,8 @@ public class GameItem
                 CorrectAnswer = NumOne * NumTwo * NumThree * NumFour;
                 break;
             case "D":
-                Question = $"Rounded down to the nearest whole number, what is {NumOne} / {NumTwo} / {NumThree} / {NumFour}";
-                CorrectAnswer = NumOne / NumTwo / NumThree / NumFour;
+                Question = $"what is {NumOne} / {NumTwo}";
+                CorrectAnswer = NumOne / NumTwo;
                 break;
         }
 
@@ -150,25 +148,37 @@ public class GameItem
         {
             switch (Difficulty)
             {
+                //adding while loops so it will only present questions which result in a whole number
                 case "E":
-                    NumOne = randomNumber.Next(10, 100);
-                    NumTwo = randomNumber.Next(1, 5);
+                    while (NumOne % NumTwo != 0)
+                    {
+                        NumOne = randomNumber.Next(1, 100);
+                        NumTwo = randomNumber.Next(1, 5);
+                    }
                     return EasyQuestion();
+
                 case "M":
-                    NumOne = randomNumber.Next(25, 100);
-                    NumTwo = randomNumber.Next(1, 10);
-                    NumThree = randomNumber.Next(1, 5);
+                    while (NumOne % NumTwo != 0)
+                    {
+                        NumOne = randomNumber.Next(1, 100);
+                        NumTwo = randomNumber.Next(6, 15);
+                    }
                     return MediumQuestion();
+
                 case "H":
-                    NumOne = randomNumber.Next(50, 100);
-                    NumTwo = randomNumber.Next(1, 5);
-                    NumThree = randomNumber.Next(1, 3);
-                    NumFour = randomNumber.Next(1, 3);
+                    while (NumOne % NumTwo != 0)
+                    {
+                        NumOne = randomNumber.Next(1, 100);
+                        NumTwo = randomNumber.Next(16, 100);
+                    }
                     return HardQuestion();
+
                 default:
-                    NumOne = randomNumber.Next(25, 100);
-                    NumTwo = randomNumber.Next(1, 10);
-                    NumThree = randomNumber.Next(1, 5);
+                    while (NumOne % NumTwo != 0)
+                    {
+                        NumOne = randomNumber.Next(1, 100);
+                        NumTwo = randomNumber.Next(6, 15);
+                    }
                     return MediumQuestion();
             }
         }
