@@ -11,7 +11,7 @@ In your first project you’ll build a very simple Math Game app. If this is you
  -  [x] You don't need to record results on a database. Once the program is closed the results will be deleted.
 
  ## Challenges
-  -  [ ] Try to implement levels of difficulty.
-  -  [ ] Add a timer to track how long the user takes to finish the game.
+  -  [x] Try to implement levels of difficulty.
+  -  [x] Add a timer to track how long the user takes to finish the game.
   -  [ ] Add a function that let's the user pick the number of questions.
-  -  [ ] Create a 'Random Game' option where the players will be presented with questions from random operations
+  -  [x] Create a 'Random Game' option where the players will be presented with questions from random operations
