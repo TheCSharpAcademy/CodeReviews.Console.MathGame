@@ -11,9 +11,10 @@ while (PlayGame)
     int answer = 0;
 
     Console.WriteLine("------------------ Choose an option ------------------");
-    Console.WriteLine("1 - Normal Game (Choose the Operation and play with time free)");
-    Console.WriteLine("2 - Hard Game (10 Random Operation with time limit)");
-    Console.WriteLine("3 - Random Game(Random Operation)");
+    Console.WriteLine("0 - Custom Play");
+    Console.WriteLine("1 - Normal Game");
+    Console.WriteLine("2 - Hard Game");
+    Console.WriteLine("3 - Random Game");
     Console.WriteLine("4 - Result History");
     Console.WriteLine("5 - Exit");
     Console.WriteLine("------------------------------------------------------");
@@ -21,6 +22,9 @@ while (PlayGame)
 
     switch (answer)
     {
+        case 0:
+            CustomPlay();
+            break;
         case 1:
             NormalPlay();
             break;
@@ -105,6 +109,76 @@ void ShowHistoric()
     }
 }
 
+void CustomPlay()
+{
+    int questions = 0;
+    int timeLimit = 0;
+    bool random = false;
+    Console.WriteLine("---------------------- RULES ----------------------");
+    Console.WriteLine("YOU CAN CHOOSE THE NUMBER OF QUESTIONS YOU WANT TO PLAY (CANT BE 0)");
+    Console.WriteLine("YOU CAN CHOOSE HOW MUCH TIME YOU HAVE TO ANSWER THE QUESTION (CANT BE 0)");
+    Console.WriteLine("YOU CAN CHOOSE IF ITS RANDOM OR NOT");
+    Console.WriteLine("---------------------------------------------------");
+
+    do
+    {
+        Console.Write("CHOOSE THE NUMBER OF QUESTIONS: ");
+        questions = Convert.ToInt32(Console.ReadLine());
+        if (questions == 0)
+        {
+            Console.WriteLine("YOU CANT CHOOSE 0 QUESTIONS");
+        }
+    } while (questions == 0);
+
+    do
+    {
+        Console.Write("CHOOSE THE TIME LIMIT: ");
+        timeLimit = Convert.ToInt32(Console.ReadLine());
+        if (timeLimit == 0)
+        {
+            Console.WriteLine("TIME LIMIT CANT BE 0");
+        }
+    } while (timeLimit == 0);
+
+
+    Console.Write("CHOOSE IF ITS RANDOM OR NOT (Y/N): ");
+    if (Console.ReadLine() == "Y" || Console.ReadLine() == "y")
+    {
+        random = true;
+    }
+    else
+    {
+        random = false;
+    }
+
+    for (int i = 0; i < questions; i++)
+    {
+        if (random == false)
+        {
+            stopwatch.Restart();
+            NormalPlay();
+            stopwatch.Stop();
+
+            if (stopwatch.Elapsed.Seconds > timeLimit)
+            {
+                Console.WriteLine("Time limit exceeded!");
+                break;
+            }
+        }
+        else
+        {
+            stopwatch.Restart();
+            RandomPlay();
+            stopwatch.Stop();
+
+            if (stopwatch.Elapsed.Seconds > timeLimit)
+            {
+                Console.WriteLine("Time limit exceeded!");
+                break;
+            }
+        }
+    }
+}
 
 void HardPlay()
 {
