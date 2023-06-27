@@ -41,10 +41,7 @@ public class MathGameGame
             {
                 Console.Clear();
                 GamesPlayed.Add(CurrentGame);
-                if (CurrentGame.Op == Operation.Divide)
-                {
-                    Console.WriteLine("Rounding to the nearest whole number.");
-                }
+               
                 Console.WriteLine($"What is {CurrentGame?.NumberOne} {CurrentGame?.Op} {CurrentGame?.NumberTwo}?");
                 Console.Write("Answer: ");
                 string? answer = Console.ReadLine();

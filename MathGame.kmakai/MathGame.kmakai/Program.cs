@@ -2,4 +2,4 @@
 
 MathGameGame game = new MathGameGame();
 
-game.run();
+game.Run();

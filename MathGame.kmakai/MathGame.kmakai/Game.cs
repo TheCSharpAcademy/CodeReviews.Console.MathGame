@@ -13,6 +13,17 @@ public class Game
         Random random = new Random();
         NumberOne = random.Next(1, 101);
         NumberTwo = random.Next(1, 101);
+
+        if (operation == Operation.Divide)
+        {
+            while (NumberOne % NumberTwo != 0)
+            {
+                NumberOne = random.Next(1, 101);
+                NumberTwo = random.Next(1, 101);
+            }
+        }
+
+
         Op = operation;
         Answer = Op switch
         {
@@ -21,6 +32,8 @@ public class Game
             Operation.Multiply => Calculator.Multiply(NumberOne, NumberTwo),
             Operation.Divide => Calculator.Divide(NumberOne, NumberTwo),
         };
+
+
     }
 }
 
