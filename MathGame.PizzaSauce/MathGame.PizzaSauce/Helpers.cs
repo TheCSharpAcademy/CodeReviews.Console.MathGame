@@ -25,7 +25,6 @@ namespace MyFirstProgram
         }
         internal static void AddToHistory(int gameScore, GameType gameType, string difficulty, int time)
         {
-            //games.Add($"{DateTime.Now} - {gameType}: Score = {gameScore}");
             games.Add(new Game
             {
                 Date = DateTime.Now,
