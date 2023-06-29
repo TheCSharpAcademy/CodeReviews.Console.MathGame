@@ -1,4 +1,6 @@
-﻿namespace MathGame.VincentyArmstrong;
+﻿using System;
+
+namespace MathGame.VincentyArmstrong;
 
 public class Game
 {
@@ -38,43 +40,53 @@ public class Game
             Console.Clear();
             Console.WriteLine($"Round {i + 1}");
             Console.WriteLine("Calculate:");
-
-            if (Type.Equals(GameType.Addition))
-            {
-                result = firstNumber + secondNumber;
-                Console.WriteLine($"{firstNumber} + {secondNumber}");
-            }
-            if (Type.Equals(GameType.Subtraction))
-            {
-                result = firstNumber - secondNumber;
-                Console.WriteLine($"{firstNumber} - {secondNumber}");
-            }
-            if (Type.Equals(GameType.Multiplication))
-            {
-                result = firstNumber * secondNumber;
-                Console.WriteLine($"{firstNumber} x {secondNumber}");
-            }
-            if (Type.Equals(GameType.Division))
-            {
-                int[] divisors = Utilities.GetDevisors(firstNumber);
-                secondNumber = divisors[random.Next(divisors.Length)];
-                result = firstNumber / secondNumber;
-                Console.WriteLine($"{firstNumber} ÷ {secondNumber}");
-            }
-
-            bool parsed;
-            int userResult;
-            do
-            {
-                parsed = int.TryParse(Console.ReadLine(), out userResult);
-                if (!parsed) Console.WriteLine("Please enter a number");
-            } while (!parsed);
-            if (userResult == result) Score++;
+            CalculateResult(firstNumber, secondNumber);
+            GetAnswerFromUser();
         }
         Console.WriteLine($"Game finished. Your final score is {Score} out of {Questions}");
         Console.WriteLine($"Press any key to return to Main Menu");
         Console.ReadLine();
     }
+
+    private void CalculateResult(int firstNumber, int secondNumber)
+    {
+        Random random = new();
+        if (Type.Equals(GameType.Addition))
+        {
+            result = firstNumber + secondNumber;
+            Console.WriteLine($"{firstNumber} + {secondNumber}");
+        }
+        if (Type.Equals(GameType.Subtraction))
+        {
+            result = firstNumber - secondNumber;
+            Console.WriteLine($"{firstNumber} - {secondNumber}");
+        }
+        if (Type.Equals(GameType.Multiplication))
+        {
+            result = firstNumber * secondNumber;
+            Console.WriteLine($"{firstNumber} x {secondNumber}");
+        }
+        if (Type.Equals(GameType.Division))
+        {
+            int[] divisors = Utilities.GetDevisors(firstNumber);
+            secondNumber = divisors[random.Next(divisors.Length)];
+            result = firstNumber / secondNumber;
+            Console.WriteLine($"{firstNumber} ÷ {secondNumber}");
+        }
+    }
+
+    private void GetAnswerFromUser()
+    {
+        bool parsed;
+        int userResult;
+        do
+        {
+            parsed = int.TryParse(Console.ReadLine(), out userResult);
+            if (!parsed) Console.WriteLine("Please enter a number");
+        } while (!parsed);
+        if (userResult == result) Score++;
+    }
+
 }
 
 public enum GameType { Addition, Subtraction, Multiplication, Division };

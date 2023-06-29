@@ -61,8 +61,8 @@ public class UserInterface
 
     private void Setup(GameType gameType)
     {
-        Questions();
-        Difficulty();
+        GetNumberOfQuestionsFromUser();
+        GetDifficultyFromUser();
         Game game = new(gameType, questions, hardMode);
         games.Add(game);
     }
@@ -103,7 +103,11 @@ public class UserInterface
     private void ViewHistory()
     {
         Console.Clear();
-        if (games.Count == 0) Console.WriteLine("No games have been played");
+        if (games.Count == 0)
+        {
+            Console.WriteLine("No games have been played");
+            return;
+        }
         foreach (Game game in games)
         {
             string difficulty;
