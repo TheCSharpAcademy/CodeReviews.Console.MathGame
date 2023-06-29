@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MathGame.VincentyArmstrong;
+﻿namespace MathGame.VincentyArmstrong;
 
 public class Game
 {
@@ -36,7 +34,6 @@ public class Game
                 firstNumber = random.Next(1, 99);
                 secondNumber = random.Next(1, 99);
             }
-
             Console.Clear();
             Console.WriteLine($"Round {i + 1}");
             Console.WriteLine("Calculate:");
