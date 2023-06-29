@@ -67,7 +67,7 @@ public class UserInterface
         games.Add(game);
     }
 
-    private void Questions()
+    private void GetNumberOfQuestionsFromUser()
     {
         Console.Clear();
         Console.WriteLine("How many questions do you wish to be asked?");
