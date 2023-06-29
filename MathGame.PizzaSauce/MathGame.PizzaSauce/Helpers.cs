@@ -1,10 +1,4 @@
 ﻿using MyFirstProgram.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyFirstProgram
 {
@@ -104,21 +98,20 @@ namespace MyFirstProgram
             Invalid Selection");
                 difficulty = Console.ReadLine();
             }
+
+            if (difficulty == "1")
             {
-                if (difficulty == "1")
-                {
-                    difficulty = "Easy";
-                }
-                else if (difficulty == "2")
-                {
-                    difficulty = "Medium";
-                }
-                else if (difficulty == "3")
-                {
-                    difficulty = "Hard";
-                }
-                return difficulty;
+                difficulty = "Easy";
             }
+            else if (difficulty == "2")
+            {
+                difficulty = "Medium";
+            }
+            else if (difficulty == "3")
+            {
+                difficulty = "Hard";
+            }
+            return difficulty;
         }
         internal static int SelectQuestions()
         {
