@@ -80,7 +80,7 @@ public class UserInterface
         }
     }
 
-    private void Difficulty()
+    private void GetDifficultyFromUser()
     {
         Console.Clear();
         Console.WriteLine("Do you want to play on easy or hard mode?");
