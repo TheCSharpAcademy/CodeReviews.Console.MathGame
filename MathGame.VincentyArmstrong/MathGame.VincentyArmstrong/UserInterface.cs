@@ -63,7 +63,7 @@ public class UserInterface
     {
         Questions();
         Difficulty();
-        Game game = new Game(gameType, questions, hardMode);
+        Game game = new(gameType, questions, hardMode);
         games.Add(game);
     }
 
