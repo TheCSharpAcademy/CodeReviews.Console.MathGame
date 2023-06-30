@@ -8,6 +8,8 @@ void SetupNewGame()
     DateTime currentDate = DateTime.UtcNow;
     GameEngine game = new GameEngine();
     new Menu(playerName, currentDate, game);
+    Console.Clear();
+    Console.WriteLine("Thanks for playing. Goodbye!")
 }
 
 string GetPlayerName()

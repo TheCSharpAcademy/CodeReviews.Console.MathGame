@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MathGame.alvaromosconi
+﻿namespace MathGame.alvaromosconi
 { 
     internal class Menu
     {
@@ -34,7 +28,7 @@ namespace MathGame.alvaromosconi
                 keepRunning = ProcessMainMenuUserChoice(choice);
             }
         }
-
+        
         private void ShowMainMenuOptions()
         {
             Console.Clear();
@@ -71,21 +65,22 @@ namespace MathGame.alvaromosconi
                         
                         } while (!validChoice);
 
-                        gameEngine.RunGame(gameChoice);
+                        int score = gameEngine.RunGame(gameChoice);
+                        GameRecord gc = new GameRecord { PlayerName = playerName, GameDate = currentDate, Score = score };
+                        GameRepository.AddNewGameRecord(gc);
                     }
                     return true;
                 case "2":
                     ShowPreviousGames();
                     return true;
                 case "3":
+                    ShowAbout();
                     return true;
                 case "4":
-                    return true;
-                case "5":
                     return false;
                 default: 
                     MessageHelper.ShowErrorMessage("Invalid choice. Please enter a valid one.");
-                    return false;
+                    return true;
             }
         }
 
@@ -113,12 +108,21 @@ namespace MathGame.alvaromosconi
 
         private static void ShowPreviousGames()
         {
-            // Code to display previous games
+            Console.Clear();
+            GameRepository.PrintAllGameRecords();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to back to main menu.");
+            Console.ReadKey();
         }
 
         private static void ShowAbout()
         {
-            // Code to display information about the game
+            Console.Clear();
+            Console.WriteLine("Created by Alvaro Mosconi");
+            Console.WriteLine("Github: @alvaromosconi");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to back to main menu.");
+            Console.ReadKey();
         }
 
     }
