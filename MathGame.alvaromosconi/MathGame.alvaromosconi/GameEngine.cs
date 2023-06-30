@@ -3,7 +3,7 @@
     internal class GameEngine
     {
         private const int QUESTIONS_NUMBER = 5;
-        private int score = 0;
+        private int score;
 
         internal int RunGame(string gameChoice)
         {
