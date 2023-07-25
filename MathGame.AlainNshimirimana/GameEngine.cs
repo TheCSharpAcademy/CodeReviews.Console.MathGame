@@ -6,21 +6,6 @@ namespace MathGame.AlainNshimirimana
 {
     internal class GameEngine
     {
-        internal static int GetMaxRange()
-        {
-            var difficulty = Helpers.GetDifficulty().ToString().Trim().ToLower();
-            switch (difficulty)
-            {
-                case "medium":
-                    return 99;
-
-                case "hard":
-                    return 999;
-
-                default:
-                    return 9;
-            }
-        }
         internal void AdditionGame(string message)
         {
             Console.Clear();
@@ -29,13 +14,9 @@ namespace MathGame.AlainNshimirimana
             var random = new Random();
             var score = 0;
 
-            int firstNumber;
-            int secondNumber;
-
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, GetMaxRange());
-                secondNumber = random.Next(1, GetMaxRange());
+                var (firstNumber, secondNumber) = Helpers.GameNumbers();
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
 
                 var result = Console.ReadLine();
@@ -69,13 +50,9 @@ namespace MathGame.AlainNshimirimana
             var random = new Random();
             var score = 0;
 
-            int firstNumber;
-            int secondNumber;
-
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, GetMaxRange());
-                secondNumber = random.Next(1, GetMaxRange());
+                var (firstNumber, secondNumber) = Helpers.GameNumbers();
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
 
                 var result = Console.ReadLine();
@@ -109,13 +86,9 @@ namespace MathGame.AlainNshimirimana
             var random = new Random();
             var score = 0;
 
-            int firstNumber;
-            int secondNumber;
-
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, GetMaxRange());
-                secondNumber = random.Next(1, GetMaxRange());
+                var (firstNumber, secondNumber) = Helpers.GameNumbers();
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 var result = Console.ReadLine();
@@ -149,9 +122,7 @@ namespace MathGame.AlainNshimirimana
 
             for (int i = 0; i < 5; i++)
             {
-                var divisionNumbers = Helpers.GetDivisionNumbers();
-                var firstNumber = divisionNumbers[0];
-                var secondNumber = divisionNumbers[1];
+                var (firstNumber, secondNumber) = Helpers.GetDivisionNumbers();
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
                 var result = Console.ReadLine();

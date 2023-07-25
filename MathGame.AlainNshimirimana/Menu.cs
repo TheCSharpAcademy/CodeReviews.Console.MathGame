@@ -6,7 +6,7 @@
         internal void ShowMenu(string name, DateTime date)
         {
             Console.Clear();
-            Console.WriteLine($"Hello {name.ToUpper()}. It's {date.DayOfWeek}. This is your math's game. That's great that you're working on improving yourselfq");
+            Console.WriteLine($"Hello {name.ToUpper()}. It's {date.DayOfWeek}. This is your math's game. That's great that you're working on improving yourself");
             Console.WriteLine("Press any key to show Menu");
             Console.ReadLine();
             Console.WriteLine("\n");
