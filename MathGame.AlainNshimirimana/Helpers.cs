@@ -4,6 +4,8 @@ namespace MathGame.AlainNshimirimana
 {
     internal class Helpers
     {
+        private static int _difficultyLevel;
+        public static int DifficultyLevel { get { return _difficultyLevel; } }
         internal static List<Game> games = new List<Game>
         {
             //new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
@@ -29,7 +31,7 @@ namespace MathGame.AlainNshimirimana
             Console.WriteLine("------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}");
+                Console.WriteLine($"{game.Date} - {game.Type} - {game.Level}: {game.Score}");
             }
             Console.WriteLine("------------------------\n");
             Console.WriteLine("Press any key to return to the Main Menu");
@@ -42,43 +44,21 @@ namespace MathGame.AlainNshimirimana
             {
                 Date = DateTime.Now,
                 Score = gameScore,
-                Type = gameType
+                Type = gameType,
+                Level = (Difficulty)DifficultyLevel
             });
         }
 
-        internal static int[] GetDivisionNumbers()
+        internal static (int, int) GetDivisionNumbers()
         {
-            var max = 1;
-
-            switch (GetDifficulty().Trim().ToLower())
-            {
-                case "medium":
-                    max = 999;
-                    break;
-
-                case "hard":
-                    max = 9999;
-                    break;
-
-                default:
-                    max = 99;
-                    break;
-            }
-            var random = new Random();
-            var firstNumber = random.Next(1, max);
-            var secondNumber = random.Next(1, max);
-
-            var result = new int[2];
+            var (firstNumber, secondNumber) = GameNumbers(99, 999, 9999);
 
             while (firstNumber % secondNumber != 0)
             {
-                firstNumber = random.Next(1, max);
-                secondNumber = random.Next(1, max);
+                (firstNumber, secondNumber) = GameNumbers(99, 999, 9999);
             }
-            result[0] = firstNumber;
-            result[1] = secondNumber;
 
-            return result;
+            return (firstNumber, secondNumber);
         }
 
         internal static string? ValidateResult(string result)
@@ -103,36 +83,60 @@ namespace MathGame.AlainNshimirimana
             return name;
         }
 
-        internal static string GetDifficulty()
+        internal static void GetDifficulty()
         {
-            bool isValidInput = false;
-
-            do
-            {
                 Console.Clear();
                 Console.WriteLine($@"Please Choose difficulty level below:
-         E - Easy 
-         M - Medium
-         H - Hard");
+         1 - Easy 
+         2 - Medium
+         3 - Hard");
                 Console.WriteLine("-----------------------------");
 
                 var difficultySelected = Console.ReadLine();
 
-                switch (difficultySelected.Trim().ToLower())
+                var difficultyCheck = DifficultyValidate(difficultySelected);
+                _difficultyLevel = Int32.Parse(difficultyCheck);
+        }
+        internal static string DifficultyValidate(string result)
+        {
+                while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _) || Int32.Parse(result) > 3)
                 {
-                    case "e":
-                        isValidInput = true;
-                        return "easy";
-                    case "m":
-                        isValidInput = true;
-                        return "medium";
-                    case "h":
-                        isValidInput = true;
-                        return "hard";
-                    default:
-                        return "Invalid Input";
+                    Console.WriteLine("Pick 1,2 or 3. Try again");
+                    result = Console.ReadLine();
                 }
-            } while (isValidInput != false);
+
+                return result;
+        }
+
+        internal static (int, int) GameNumbers(
+            int easy = 9,
+            int medium = 99,
+            int hard = 999)
+        {
+            int firstNumber = 0;
+            int secondNumber = 0;
+
+            var random = new Random();
+
+            switch (Helpers.DifficultyLevel)
+            {
+                case 1:
+                    firstNumber = random.Next(1, easy);
+                    secondNumber = random.Next(1, easy);
+                    break;
+                case 2:
+                    firstNumber = random.Next(1, medium);
+                    secondNumber = random.Next(1, medium);
+                    break;
+                case 3:
+                    firstNumber = random.Next(1, hard);
+                    secondNumber = random.Next(1, hard);
+                    break;
+                default:
+                    break;
+            }
+
+            return (firstNumber, secondNumber);
         }
     }
 }
