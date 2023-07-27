@@ -36,7 +36,6 @@ namespace SantoMathGame
         }
         internal static void AddToHistory(int gameScore, GameType gameType)
         {
-            //games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
             games.Add(new Game
             {
                 Date = DateTime.Now,
@@ -57,13 +56,8 @@ namespace SantoMathGame
                 firstNumber = random.Next(1, 99);
                 secondNumber = random.Next(1, 99);
             }
-
-
             result[0] = firstNumber;
             result[1] = secondNumber;
-
-            //Console.WriteLine(result);
-
             return result;
         }
         

@@ -1,0 +1,5 @@
+C:\Users\USER\Documents\Programas terminados\SantoMathGame.exe
+C:\Users\USER\Documents\Programas terminados\SantoMathGame.dll
+C:\Users\USER\Documents\Programas terminados\SantoMathGame.deps.json
+C:\Users\USER\Documents\Programas terminados\SantoMathGame.runtimeconfig.json
+C:\Users\USER\Documents\Programas terminados\SantoMathGame.pdb

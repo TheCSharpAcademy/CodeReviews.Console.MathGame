@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "SantoMathGame/1.0.0": {
+        "runtime": {
+          "SantoMathGame.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SantoMathGame/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

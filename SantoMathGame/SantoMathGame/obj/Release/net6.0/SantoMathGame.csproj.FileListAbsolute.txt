@@ -1,0 +1,15 @@
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\bin\Release\net6.0\SantoMathGame.exe
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\bin\Release\net6.0\SantoMathGame.deps.json
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\bin\Release\net6.0\SantoMathGame.runtimeconfig.json
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\bin\Release\net6.0\SantoMathGame.dll
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\bin\Release\net6.0\SantoMathGame.pdb
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.AssemblyInfo.cs
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.dll
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\refint\SantoMathGame.dll
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.pdb
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\SantoMathGame.genruntimeconfig.cache
+C:\Users\USER\source\repos\SantoMathGame\SantoMathGame\obj\Release\net6.0\ref\SantoMathGame.dll
