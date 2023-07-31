@@ -6,12 +6,14 @@
         // You don't need to record results on a database. Once the program is closed the results will be deleted.
         List<GameResult> listResults = new List<GameResult>();
 
+        Random random = new Random();
+
         private string option { get; set; }
         private bool validOption
         {
             get
             {
-                if (string.IsNullOrEmpty(operatorSymbol) && option != "V" && option != "Q" && option != "X")
+                if (string.IsNullOrEmpty(operatorSymbol) && option != "v" && option != "q" && option != "x")
                     return false;
 
                 return true;
@@ -23,15 +25,15 @@
             {
                 switch (option)
                 {
-                    case "A":
+                    case "a":
                         return "+";
-                    case "S":
+                    case "s":
                         return "-";
-                    case "M":
+                    case "m":
                         return "*";
-                    case "D":
+                    case "d":
                         return "/";
-                    case "R":
+                    case "r":
                         return GetRandomSymbol();
                     default:
                         return string.Empty;
@@ -64,7 +66,7 @@
                 Console.Write("Option selected: ");
 
                 Console.ForegroundColor = ConsoleColor.White;
-                option = Console.ReadLine();
+                option = Console.ReadLine().ToLower();
 
                 if (!validOption)
                 {
@@ -80,22 +82,23 @@
         public void ExecuteGame()
         {
             #region Quit Game
-            if (option.Equals("Q"))
+            if (option.Equals("q"))
             {
                 Environment.Exit(0);
             }
             #endregion
 
             #region View Previous Games
-            if (option.Equals("V"))
+            if (option.Equals("v"))
             {
+                Console.WriteLine();
                 DisplayPreviousGames();
                 return;
             }
             #endregion
 
             #region Change Difficulty
-            if (option.Equals("X"))
+            if (option.Equals("x"))
             {
                 SetDifficulty();
                 return;
@@ -106,8 +109,7 @@
             // Add a function that let's the user pick the number of questions.
             SetNumberQuestions();
 
-            Random random = new Random();
-            GameResult gameResult = new GameResult(option);
+            GameResult gameResult = new GameResult(option, numberAttempts, difficulty);
 
             // Add a timer to track how long the user takes to finish the game.
             gameResult.StartTimer();
@@ -117,7 +119,7 @@
                 // The divisions should result on INTEGERS ONLY and dividends should go from 0 to 100.
                 var currentSymbol = operatorSymbol;
                 var numA = currentSymbol.Equals("/") ? random.Next(0, 101 * difficulty) : random.Next(0, 11 * difficulty);
-                var numB = random.Next(0, 11 * difficulty);
+                var numB = currentSymbol.Equals("/") ? GetDivisor(numA) : random.Next(0, 11 * difficulty);
 
                 Console.Write($"{numA} {currentSymbol} {numB}: ");
                 string input = Console.ReadLine();
@@ -130,7 +132,8 @@
 
             gameResult.StopTimer();
 
-            gameResult.DisplayResult();
+            Console.WriteLine();
+            gameResult.DisplayResult(true);
 
             listResults.Add(gameResult);
             Console.WriteLine();
@@ -146,16 +149,17 @@
         {
             if (listResults.Any())
             {
-                var reversedResults = listResults;
-                reversedResults.Reverse();
-                foreach (var result in reversedResults)
+                bool header = true;
+                listResults.Reverse();
+                foreach (var result in listResults)
                 {
-                    result.DisplayResult();
+                    result.DisplayResult(header);
+                    header = false;
                 }
+                listResults.Reverse();
             }
             else
             {
-                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("There aren't previous games.");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -272,7 +276,18 @@
             } while (!valid);
 
             Console.WriteLine();
+        }
 
+        private int GetDivisor(int dividend)
+        {
+            do
+            {
+                int divisor = random.Next(1, dividend + 1);
+                if (dividend % divisor == 0)
+                {
+                    return divisor;
+                }
+            } while (true);
         }
         #endregion
 
