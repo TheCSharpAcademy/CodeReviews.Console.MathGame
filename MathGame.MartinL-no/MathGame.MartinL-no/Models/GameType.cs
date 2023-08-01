@@ -1,10 +1,9 @@
-﻿namespace MathGame.MartinL_no.Models
+﻿namespace MathGame.MartinL_no.Models;
+
+internal enum GameType
 {
-    internal enum GameType
-    {
-        Addition,
-        Multiplication,
-        Division,
-        Subtraction
-    }
+    Addition,
+    Multiplication,
+    Division,
+    Subtraction
 }

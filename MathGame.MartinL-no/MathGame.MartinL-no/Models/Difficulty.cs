@@ -1,9 +1,8 @@
-﻿namespace MathGame.MartinL_no.Models
+﻿namespace MathGame.MartinL_no.Models;
+
+internal enum Difficulty
 {
-	public enum Difficulty
-	{
-		Easy,
-		Medium,
-		Hard
-	}
+	Easy,
+	Medium,
+	Hard
 }
