@@ -1,4 +1,5 @@
 ﻿using MathGame.lordWalnuts.Models;
+using System.Diagnostics;
 
 namespace MathGame.lordWalnuts
 {
@@ -11,9 +12,12 @@ namespace MathGame.lordWalnuts
             var score = 0;
             var difficulty = Helpers.ChooseDifficulty();
 
-
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            TimeSpan ts = new TimeSpan();
             for (int i = 0; i < 5; i++)
             {
+
                 Console.Clear();
 
                 Console.WriteLine($"{message}, Difficulty: {difficulty}");
@@ -39,10 +43,21 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4) Console.WriteLine($"Game over. Your final score is {score}");
+                if (i == 4)
+                {
+                    Console.Clear();
+                    stopWatch.Stop();
+                    ts = stopWatch.Elapsed;
+                    Console.WriteLine($"Game over. Your final score is {score} and took {ts.Seconds} Seconds");
+                    Console.WriteLine("Press any key to go back to the main menu.");
+                    Console.ReadLine();
+                }
+
+
             }
 
-            Helpers.AddToHistory(score, GameType.Division, difficulty);
+
+            Helpers.AddToHistory(score, GameType.Division, difficulty, $"{ts.Seconds}s");
         }
 
         internal void MultiplicationGame(string message)
@@ -55,6 +70,12 @@ namespace MathGame.lordWalnuts
 
             int firstNumber;
             int secondNumber;
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            TimeSpan ts = new TimeSpan();
+
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -81,10 +102,18 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4) Console.WriteLine($"Game over. Your final score is {score}");
+                if (i == 4)
+                {
+                    Console.Clear();
+                    stopWatch.Stop();
+                    ts = stopWatch.Elapsed;
+                    Console.WriteLine($"Game over. Your final score is {score} and took {ts.Seconds} Seconds");
+                    Console.WriteLine("Press any key to go back to the main menu.");
+                    Console.ReadLine();
+                }
             }
 
-            Helpers.AddToHistory(score, GameType.Multiplication, difficulty);
+            Helpers.AddToHistory(score, GameType.Multiplication, difficulty, $"{ts.Seconds}s");
         }
 
         internal void SubtractionGame(string message)
@@ -96,6 +125,11 @@ namespace MathGame.lordWalnuts
 
             int firstNumber;
             int secondNumber;
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            TimeSpan ts = new TimeSpan();
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -122,10 +156,18 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4) Console.WriteLine($"Game over. Your final score is {score}");
+                if (i == 4)
+                {
+                    Console.Clear();
+                    stopWatch.Stop();
+                    ts = stopWatch.Elapsed;
+                    Console.WriteLine($"Game over. Your final score is {score} and took {ts.Seconds} Seconds");
+                    Console.WriteLine("Press any key to go back to the main menu.");
+                    Console.ReadLine();
+                }
             }
 
-            Helpers.AddToHistory(score, GameType.Subtraction, difficulty);
+            Helpers.AddToHistory(score, GameType.Subtraction, difficulty, $"{ts.Seconds}s");
         }
 
         internal void AdditionGame(string message)
@@ -137,6 +179,11 @@ namespace MathGame.lordWalnuts
 
             int firstNumber;
             int secondNumber;
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            TimeSpan ts = new TimeSpan();
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -166,12 +213,18 @@ namespace MathGame.lordWalnuts
 
                 if (i == 4)
                 {
-                    Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu.");
+                    Console.Clear();
+                    stopWatch.Stop();
+                    ts = stopWatch.Elapsed;
+                    Console.WriteLine($"Game over. Your final score is {score} and took {ts.Seconds} Seconds");
+                    Console.WriteLine("Press any key to go back to the main menu.");
                     Console.ReadLine();
                 }
+
+
             }
 
-            Helpers.AddToHistory(score, GameType.Addition, difficulty);
+            Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
         }
     }
 }

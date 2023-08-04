@@ -26,14 +26,15 @@ namespace MathGame.lordWalnuts
             return result;
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType, Difficulty difficulty)
+        internal static void AddToHistory(int gameScore, GameType gameType, Difficulty difficulty, string duration)
         {
             games.Add(new Game
             {
                 Date = DateTime.Now,
                 Score = gameScore,
                 Type = gameType,
-                Difficulty = difficulty
+                Difficulty = difficulty,
+                Duration = duration
             });
         }
 
@@ -49,7 +50,7 @@ namespace MathGame.lordWalnuts
             Console.WriteLine("---------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score}pts");
+                Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty} - {game.Duration}: {game.Score}pts");
             }
             Console.WriteLine("---------------------------\n");
             Console.WriteLine("Press any key to return to Main Menu");

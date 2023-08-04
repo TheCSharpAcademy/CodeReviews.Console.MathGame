@@ -8,6 +8,8 @@
         public GameType Type { get; set; }
 
         public Difficulty Difficulty { get; set; }
+
+        public string Duration { get; set; }
     }
 
     internal enum GameType
