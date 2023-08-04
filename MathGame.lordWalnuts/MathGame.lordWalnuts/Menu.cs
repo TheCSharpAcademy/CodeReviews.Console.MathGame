@@ -2,7 +2,7 @@
 internal class Menu
 {
 
-    GameEngine gamesClass = new();
+    GameEngine gameEngine = new();
 
     internal void ShowMenu(string name, DateTime date)
     {
@@ -18,17 +18,17 @@ internal class Menu
         {
             Console.Clear();
             Console.WriteLine(@$"
-What game would you like to play today? Choose from the options below:
-V - View Previous Games
-A - Addition
-S - Subtraction
-M - Multiplication
-D - Division
-Q - Quit the program");
+                    What game would you like to play today? Choose from the options below:
+                    V - View Previous Games
+                    A - Addition
+                    S - Subtraction
+                    M - Multiplication
+                    D - Division
+                    R - Random
+                    Q - Quit the program");
             Console.WriteLine("---------------------------------------------");
 
             var gameSelected = Console.ReadLine();
-
 
             switch (gameSelected.Trim().ToLower())
             {
@@ -36,16 +36,19 @@ Q - Quit the program");
                     Helpers.PrintGames();
                     break;
                 case "a":
-                    gamesClass.AdditionGame("Addition game");
+                    gameEngine.AdditionGame("Addition game");
                     break;
                 case "s":
-                    gamesClass.SubtractionGame("Subtraction game");
+                    gameEngine.SubtractionGame("Subtraction game");
                     break;
                 case "m":
-                    gamesClass.MultiplicationGame("Multiplication game");
+                    gameEngine.MultiplicationGame("Multiplication game");
                     break;
                 case "d":
-                    gamesClass.DivisionGame("Division game");
+                    gameEngine.DivisionGame("Division game");
+                    break;
+                case "r":
+                    Helpers.RandomGame(gameEngine);
                     break;
                 case "q":
                     Console.WriteLine("Goodbye");

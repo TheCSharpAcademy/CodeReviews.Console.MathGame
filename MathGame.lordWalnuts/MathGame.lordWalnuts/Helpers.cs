@@ -57,6 +57,19 @@ namespace MathGame.lordWalnuts
             Console.ReadLine();
         }
 
+        internal static void RandomGame(GameEngine gameEngine)
+        {
+            var random = new Random();
+            var num = random.Next(0, 4);
+            switch (num)
+            {
+                case 0: gameEngine.DivisionGame("Division game"); break;
+                case 1: gameEngine.AdditionGame("Addition game"); break;
+                case 2: gameEngine.SubtractionGame("Subtraction game"); break;
+                case 3: gameEngine.MultiplicationGame("Multiplication game"); break;
+            }
+        }
+
         internal static string ValidateResult(string? result)
         {
             while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
