@@ -1,9 +1,7 @@
 ﻿namespace MathGame.lordWalnuts;
 internal class Menu
 {
-
     GameEngine gameEngine = new();
-
     internal void ShowMenu()
     {
         string name = Helpers.GetName();
@@ -30,11 +28,9 @@ internal class Menu
     D - Division
     R - Random
     Q - Quit the program");
-
             Console.WriteLine("---------------------------------------------");
 
             var gameSelected = Console.ReadLine();
-
 
             switch (gameSelected.Trim().ToLower())
             {
@@ -69,4 +65,3 @@ internal class Menu
         } while (isGameOn);
     }
 }
-
