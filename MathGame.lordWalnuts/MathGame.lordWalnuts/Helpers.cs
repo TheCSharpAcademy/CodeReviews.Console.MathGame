@@ -8,7 +8,7 @@ namespace MathGame.lordWalnuts
         internal static List<Game> games = new();
 
         // score and time for random game mode
-        internal static int randomGameScore = 0;
+        internal static int randomGameScore;
         internal static TimeSpan randomGameTime = new();
 
         //Gets the right numbers for division mode
