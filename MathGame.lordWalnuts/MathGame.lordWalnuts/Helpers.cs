@@ -26,13 +26,14 @@ namespace MathGame.lordWalnuts
             return result;
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType, Difficulty difficulty)
         {
             games.Add(new Game
             {
                 Date = DateTime.Now,
                 Score = gameScore,
-                Type = gameType
+                Type = gameType,
+                Difficulty = difficulty
             });
         }
 
@@ -48,7 +49,7 @@ namespace MathGame.lordWalnuts
             Console.WriteLine("---------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts");
+                Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score}pts");
             }
             Console.WriteLine("---------------------------\n");
             Console.WriteLine("Press any key to return to Main Menu");
@@ -79,5 +80,36 @@ namespace MathGame.lordWalnuts
 
             return name;
         }
+
+        internal static Difficulty ChooseDifficulty()
+        {
+            var difficulty = new Difficulty();
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Choose your difficulty");
+            Console.WriteLine("Easy - Press 1");
+            Console.WriteLine("Medium - Press 2");
+            Console.WriteLine("Hard - Press 3");
+
+
+            var input = Console.ReadLine();
+            input = ValidateResult(input);
+            switch (int.Parse(input))
+            {
+                case 1:
+                    difficulty = Difficulty.Easy; break;
+                case 2:
+                    difficulty = Difficulty.Medium; break;
+                case 3:
+                    difficulty = Difficulty.Hard; break;
+                default:
+                    Console.WriteLine("Invalid Input");
+                    break;
+
+            }
+
+            return difficulty;
+        }
     }
 }
+
+

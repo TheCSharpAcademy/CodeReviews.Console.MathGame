@@ -29,6 +29,7 @@ Q - Quit the program");
 
             var gameSelected = Console.ReadLine();
 
+
             switch (gameSelected.Trim().ToLower())
             {
                 case "v":
@@ -54,6 +55,8 @@ Q - Quit the program");
                     Console.WriteLine("Invalid Input");
                     break;
             }
+
+
         } while (isGameOn);
     }
 }
