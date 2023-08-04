@@ -17,7 +17,8 @@
         Addition,
         Subtraction,
         Multiplication,
-        Division
+        Division,
+        Random
     }
 
     internal enum Difficulty

@@ -4,8 +4,14 @@ namespace MathGame.lordWalnuts
 {
     internal class Helpers
     {
-
+        // empty list
         internal static List<Game> games = new();
+
+        // score and time for random game mode
+        internal static int randomGameScore = 0;
+        internal static TimeSpan randomGameTime = new();
+
+        //Gets the right numbers for division mode
 
         internal static int[] GetDivisionNumbers()
         {
@@ -26,6 +32,7 @@ namespace MathGame.lordWalnuts
             return result;
         }
 
+        // Adds to the database(list)
         internal static void AddToHistory(int gameScore, GameType gameType, Difficulty difficulty, string duration)
         {
             games.Add(new Game
@@ -38,6 +45,7 @@ namespace MathGame.lordWalnuts
             });
         }
 
+        //prints the history to the console
         internal static void PrintGames()
         {
 
@@ -53,7 +61,7 @@ namespace MathGame.lordWalnuts
             Console.ReadLine();
         }
 
-
+        // asks user for number of questions
         internal static int NumberOfQuestions()
         {
             Console.WriteLine("---------------------------------------------");
@@ -63,19 +71,22 @@ namespace MathGame.lordWalnuts
             return int.Parse(input);
 
         }
-        internal static void RandomGame(GameEngine gameEngine)
+
+        //Logic for RandomGameMode
+        internal static void RandomGameLogic(Difficulty difficulty, GameEngine gameEngine, string message)
         {
             var random = new Random();
             var num = random.Next(0, 4);
             switch (num)
             {
-                case 0: gameEngine.DivisionGame("Division game"); break;
-                case 1: gameEngine.AdditionGame("Addition game"); break;
-                case 2: gameEngine.SubtractionGame("Subtraction game"); break;
-                case 3: gameEngine.MultiplicationGame("Multiplication game"); break;
+                case 0: gameEngine.DivisionGame(message, difficulty, 1, true); break;
+                case 1: gameEngine.AdditionGame(message, difficulty, 1, true); break;
+                case 2: gameEngine.SubtractionGame(message, difficulty, 1, true); break;
+                case 3: gameEngine.MultiplicationGame(message, difficulty, 1, true); break;
             }
         }
 
+        //Validating user input 
         internal static string ValidateResult(string? result)
         {
             while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
@@ -87,6 +98,7 @@ namespace MathGame.lordWalnuts
             return result;
         }
 
+        //gets name from user
         internal static string GetName()
         {
             Console.WriteLine("Please type your name");
@@ -101,6 +113,7 @@ namespace MathGame.lordWalnuts
             return name;
         }
 
+        //prompts user for difficulty
         internal static Difficulty ChooseDifficulty()
         {
             var difficulty = new Difficulty();

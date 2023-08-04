@@ -7,18 +7,17 @@ namespace MathGame.lordWalnuts
     {
 
         //DIVISION GAME
-        internal void DivisionGame(string message)
+        internal void DivisionGame(string message, Difficulty difficulty, int numberOfQuestion, bool isRandomGame)
         {
-            var difficulty = Helpers.ChooseDifficulty();
-            var numberOfQuestions = Helpers.NumberOfQuestions();
-
             var score = 0;
 
-            Stopwatch stopWatch = new Stopwatch();
+            //initialize a timer. 
+            Stopwatch stopWatch = new();
             stopWatch.Start();
-            TimeSpan ts = new TimeSpan();
+            TimeSpan ts = new();
 
-            for (int i = 0; i < numberOfQuestions; i++)
+            //
+            for (int i = 0; i < numberOfQuestion; i++)
             {
 
                 Console.Clear();
@@ -46,7 +45,8 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == numberOfQuestions - 1)
+
+                if (i == numberOfQuestion - 1 && !isRandomGame)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -59,15 +59,23 @@ namespace MathGame.lordWalnuts
 
             }
 
-
-            Helpers.AddToHistory(score, GameType.Division, difficulty, $"{ts.Seconds}s");
+            //checks if the game mode is random
+            if (!isRandomGame)
+            {
+                Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
+            }
+            else
+            {
+                stopWatch.Stop();
+                ts = stopWatch.Elapsed;
+                Helpers.randomGameScore += score;
+                Helpers.randomGameTime = Helpers.randomGameTime.Add(ts);
+            }
         }
 
         //MULTIPLICATION GAME
-        internal void MultiplicationGame(string message)
+        internal void MultiplicationGame(string message, Difficulty difficulty, int numberOfQuestions, bool isRandomGame)
         {
-            var difficulty = Helpers.ChooseDifficulty();
-
 
             var random = new Random();
             var score = 0;
@@ -75,12 +83,10 @@ namespace MathGame.lordWalnuts
             int firstNumber;
             int secondNumber;
 
-            var numberOfQuestions = Helpers.NumberOfQuestions();
-
-
-            Stopwatch stopWatch = new Stopwatch();
+            //intialize timer
+            Stopwatch stopWatch = new();
             stopWatch.Start();
-            TimeSpan ts = new TimeSpan();
+            TimeSpan ts = new();
 
             for (int i = 0; i < numberOfQuestions; i++)
             {
@@ -107,7 +113,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == numberOfQuestions - 1)
+                if (i == numberOfQuestions - 1 && !isRandomGame)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -118,27 +124,32 @@ namespace MathGame.lordWalnuts
                 }
             }
 
-            Helpers.AddToHistory(score, GameType.Multiplication, difficulty, $"{ts.Seconds}s");
+            if (!isRandomGame)
+            {
+                Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
+            }
+            else
+            {
+                stopWatch.Stop();
+                ts = stopWatch.Elapsed;
+                Helpers.randomGameScore += score;
+                Helpers.randomGameTime = Helpers.randomGameTime.Add(ts);
+            }
         }
 
         //SUBRACTION GAME
-        internal void SubtractionGame(string message)
+        internal void SubtractionGame(string message, Difficulty difficulty, int numberOfQuestions, bool isRandomGame)
         {
-            var difficulty = Helpers.ChooseDifficulty();
-            var numberOfQuestions = Helpers.NumberOfQuestions();
-
-
             var random = new Random();
             var score = 0;
 
             int firstNumber;
             int secondNumber;
 
-
-
-            Stopwatch stopWatch = new Stopwatch();
+            // timer
+            Stopwatch stopWatch = new();
             stopWatch.Start();
-            TimeSpan ts = new TimeSpan();
+            TimeSpan ts = new();
 
             for (int i = 0; i < numberOfQuestions; i++)
             {
@@ -165,7 +176,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == numberOfQuestions - 1)
+                if (i == numberOfQuestions - 1 && !isRandomGame)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -176,25 +187,33 @@ namespace MathGame.lordWalnuts
                 }
             }
 
-            Helpers.AddToHistory(score, GameType.Subtraction, difficulty, $"{ts.Seconds}s");
+            if (!isRandomGame)
+            {
+                Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
+            }
+            else
+            {
+                stopWatch.Stop();
+                ts = stopWatch.Elapsed;
+                Helpers.randomGameScore += score;
+                Helpers.randomGameTime = Helpers.randomGameTime.Add(ts);
+
+            }
         }
 
         //ADDITION GAME
-        internal void AdditionGame(string message)
+        internal void AdditionGame(string message, Difficulty difficulty, int numberOfQuestions, bool isRandomGame)
         {
-            var difficulty = Helpers.ChooseDifficulty();
-            var numberOfQuestions = Helpers.NumberOfQuestions();
-
-
             var random = new Random();
             var score = 0;
 
             int firstNumber;
             int secondNumber;
 
-            Stopwatch stopWatch = new Stopwatch();
+            //timer
+            Stopwatch stopWatch = new();
             stopWatch.Start();
-            TimeSpan ts = new TimeSpan();
+            TimeSpan ts = new();
 
             for (int i = 0; i < numberOfQuestions; i++)
             {
@@ -222,7 +241,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == numberOfQuestions - 1)
+                if (i == numberOfQuestions - 1 && !isRandomGame)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -234,8 +253,42 @@ namespace MathGame.lordWalnuts
 
 
             }
+            if (!isRandomGame)
+            {
+                Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
+            }
+            else
+            {
+                stopWatch.Stop();
+                ts = stopWatch.Elapsed;
+                Helpers.randomGameScore += score;
+                Helpers.randomGameTime = Helpers.randomGameTime.Add(ts);
 
-            Helpers.AddToHistory(score, GameType.Addition, difficulty, $"{ts.Seconds}s");
+            }
+
+        }
+
+        //RANDOM GAME
+        internal void RandomGame(string message, Difficulty difficulty, int numberOfQuestions)
+        {
+            for (int i = 0; i < numberOfQuestions; i++)
+            {
+                //
+                Helpers.RandomGameLogic(difficulty, this, message);
+            }
+
+            //add score and time to the database
+            Helpers.AddToHistory(Helpers.randomGameScore, GameType.Random, difficulty, Helpers.randomGameTime.ToString());
+
+            //print info
+            Console.WriteLine($"Game over. Your final score is {Helpers.randomGameScore} and took {Helpers.randomGameTime.Seconds} Seconds");
+            Console.WriteLine("Press any key to go back to the main menu.");
+            Console.ReadLine();
+
+            //clear score for new game
+            Helpers.randomGameTime = TimeSpan.Zero;
+            Helpers.randomGameScore = 0;
+
         }
     }
 }
