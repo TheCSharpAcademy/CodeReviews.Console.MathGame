@@ -6,16 +6,19 @@ namespace MathGame.lordWalnuts
     internal class GameEngine
     {
 
-
+        //DIVISION GAME
         internal void DivisionGame(string message)
         {
-            var score = 0;
             var difficulty = Helpers.ChooseDifficulty();
+            var numberOfQuestions = Helpers.NumberOfQuestions();
+
+            var score = 0;
 
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             TimeSpan ts = new TimeSpan();
-            for (int i = 0; i < 5; i++)
+
+            for (int i = 0; i < numberOfQuestions; i++)
             {
 
                 Console.Clear();
@@ -43,7 +46,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4)
+                if (i == numberOfQuestions - 1)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -60,6 +63,7 @@ namespace MathGame.lordWalnuts
             Helpers.AddToHistory(score, GameType.Division, difficulty, $"{ts.Seconds}s");
         }
 
+        //MULTIPLICATION GAME
         internal void MultiplicationGame(string message)
         {
             var difficulty = Helpers.ChooseDifficulty();
@@ -71,13 +75,14 @@ namespace MathGame.lordWalnuts
             int firstNumber;
             int secondNumber;
 
+            var numberOfQuestions = Helpers.NumberOfQuestions();
+
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             TimeSpan ts = new TimeSpan();
 
-
-
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine($"{message}, Difficulty: {difficulty}");
@@ -102,7 +107,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4)
+                if (i == numberOfQuestions - 1)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -116,9 +121,12 @@ namespace MathGame.lordWalnuts
             Helpers.AddToHistory(score, GameType.Multiplication, difficulty, $"{ts.Seconds}s");
         }
 
+        //SUBRACTION GAME
         internal void SubtractionGame(string message)
         {
             var difficulty = Helpers.ChooseDifficulty();
+            var numberOfQuestions = Helpers.NumberOfQuestions();
+
 
             var random = new Random();
             var score = 0;
@@ -126,12 +134,13 @@ namespace MathGame.lordWalnuts
             int firstNumber;
             int secondNumber;
 
+
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             TimeSpan ts = new TimeSpan();
 
-
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine($"{message}, Difficulty: {difficulty}");
@@ -156,7 +165,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4)
+                if (i == numberOfQuestions - 1)
                 {
                     Console.Clear();
                     stopWatch.Stop();
@@ -170,9 +179,12 @@ namespace MathGame.lordWalnuts
             Helpers.AddToHistory(score, GameType.Subtraction, difficulty, $"{ts.Seconds}s");
         }
 
+        //ADDITION GAME
         internal void AdditionGame(string message)
         {
             var difficulty = Helpers.ChooseDifficulty();
+            var numberOfQuestions = Helpers.NumberOfQuestions();
+
 
             var random = new Random();
             var score = 0;
@@ -184,8 +196,7 @@ namespace MathGame.lordWalnuts
             stopWatch.Start();
             TimeSpan ts = new TimeSpan();
 
-
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine($"{message}, Difficulty: {difficulty}");
@@ -211,7 +222,7 @@ namespace MathGame.lordWalnuts
                     Console.ReadLine();
                 }
 
-                if (i == 4)
+                if (i == numberOfQuestions - 1)
                 {
                     Console.Clear();
                     stopWatch.Stop();

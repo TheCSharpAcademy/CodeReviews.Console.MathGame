@@ -40,10 +40,6 @@ namespace MathGame.lordWalnuts
 
         internal static void PrintGames()
         {
-            // var gamesToPrint = games.Where(x => x.Type == GameType.Division);
-            // var gamesToPrint = games.Where(x => x.Date > new DateTime(2022, 08, 09));
-            // var gamesToPrint = games.Where(x => x.Date > new DateTime(2022, 08, 09) && x.Score > 3);
-            // var gamesToPrint = games.Where(x => x.Date > new DateTime(2022, 08, 09)).OrderByDescending(x => x.Score);
 
             Console.Clear();
             Console.WriteLine("Games History");
@@ -57,6 +53,16 @@ namespace MathGame.lordWalnuts
             Console.ReadLine();
         }
 
+
+        internal static int NumberOfQuestions()
+        {
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Enter number of questions");
+            var input = Console.ReadLine();
+            input = ValidateResult(input);
+            return int.Parse(input);
+
+        }
         internal static void RandomGame(GameEngine gameEngine)
         {
             var random = new Random();
