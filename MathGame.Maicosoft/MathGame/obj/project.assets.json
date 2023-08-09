@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\C# .NET\\The C# Academy\\MathGame\\MathGame\\MathGame.csproj",
+      "projectUniqueName": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
       "projectName": "MathGame",
-      "projectPath": "C:\\Code\\C# .NET\\The C# Academy\\MathGame\\MathGame\\MathGame.csproj",
+      "projectPath": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
       "packagesPath": "C:\\Users\\maico\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\C# .NET\\The C# Academy\\MathGame\\MathGame\\obj\\",
+      "outputPath": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
