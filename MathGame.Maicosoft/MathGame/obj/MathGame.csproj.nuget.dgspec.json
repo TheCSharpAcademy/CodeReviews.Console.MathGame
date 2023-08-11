@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj": {}
+    "C:\\Code\\C# .NET\\The C# Academy\\MathGame.Repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj": {}
   },
   "projects": {
-    "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj": {
+    "C:\\Code\\C# .NET\\The C# Academy\\MathGame.Repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
+        "projectUniqueName": "C:\\Code\\C# .NET\\The C# Academy\\MathGame.Repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
         "projectName": "MathGame",
-        "projectPath": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
+        "projectPath": "C:\\Code\\C# .NET\\The C# Academy\\MathGame.Repos\\MathGame.Maicosoft\\MathGame\\MathGame.csproj",
         "packagesPath": "C:\\Users\\maico\\.nuget\\packages\\",
-        "outputPath": "C:\\Code\\C# .NET\\The C# Academy\\repos\\MathGame.Maicosoft\\MathGame\\obj\\",
+        "outputPath": "C:\\Code\\C# .NET\\The C# Academy\\MathGame.Repos\\MathGame.Maicosoft\\MathGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
