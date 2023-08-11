@@ -86,7 +86,8 @@ namespace MathGame.CharlieDW
         {
             var score = 0;
             bool isCorrect = true;
-
+            
+            
             do
             {
                 Console.Clear();
