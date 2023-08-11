@@ -86,7 +86,6 @@ namespace MathGame.CharlieDW
         {
             var score = 0;
             bool isCorrect = true;
-            var random = new Random();
 
             do
             {
