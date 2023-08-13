@@ -24,26 +24,26 @@ Options:  1 - Addition
           6 - Exit
 
 Select: ");
-    int input = getInput();
+    int input = GetInput();
     if (input == 1)
     {
-        addPage();
+        AddPage();
     }
     else if (input == 2)
     {
-        subPage();
+        SubPage();
     }
     else if (input == 3)
     {
-        mulPage();
+        MulPage();
     }
     else if (input == 4)
     {
-        divPage();
+        DivPage();
     }
     else if (input == 5)
     {
-        scorePage();
+        ScorePage();
     }
     else if (input == 6)
     {
@@ -56,7 +56,7 @@ Select: ");
         Console.ReadKey();
     }
 }
-void addPage()
+void AddPage()
 {
     // Play addition game
     bool screen = true;
@@ -67,7 +67,7 @@ void addPage()
     {
         Console.Clear();
         Console.Write("++++ Addition Game ++++\n\n Select difficulty (1 - 3): ");
-        level = getInput();
+        level = GetInput();
         if (level == 1 | level == 2 | level == 3)
         {
             screen = false;
@@ -78,7 +78,7 @@ void addPage()
     {
         Console.Clear();
         Console.Write("++++ Addition Game ++++\n\n Select number of questions: ");
-        quantity = getInput();
+        quantity = GetInput();
         if (quantity > 0)
         {
             screen = false;
@@ -123,7 +123,7 @@ void addPage()
             Console.Write($"\n   + {b}");
         }
         Console.Write("\n  = ");
-        int answer = getInput();
+        int answer = GetInput();
         if (answer == c)
         {
             Console.Write("\n Correct!");
@@ -142,7 +142,7 @@ void addPage()
     Console.Write($"++++ Addition Game ++++\n\nGame Over! Score = {score}!\n\nTime taken = {spent.TotalSeconds:0.00} seconds\n\nPress any key to continue...");
     Console.ReadKey();
 }
-void subPage()
+void SubPage()
 {
     // Play subtraction game
     bool screen = true;
@@ -153,7 +153,7 @@ void subPage()
     {
         Console.Clear();
         Console.Write("---- Subtraction Game ----\n\n Select difficulty (1 - 3): ");
-        level = getInput();
+        level = GetInput();
         if (level == 1 | level == 2 | level == 3)
         {
             screen = false;
@@ -164,7 +164,7 @@ void subPage()
     {
         Console.Clear();
         Console.Write("---- Subtraction Game ----\n\n Select number of questions: ");
-        quantity = getInput();
+        quantity = GetInput();
         if (quantity > 0)
         {
             screen = false;
@@ -215,7 +215,7 @@ void subPage()
             Console.Write($"\n   - {b}");
         }
         Console.Write("\n  = ");
-        int answer = getInput();
+        int answer = GetInput();
         if (answer == c)
         {
             Console.Write("\n Correct!");
@@ -234,7 +234,7 @@ void subPage()
     Console.Write($"---- Subtraction Game ----\n\nGame Over! Score = {score}!\n\nTime taken = {spent.TotalSeconds:0.00} seconds\n\nPress any key to continue...");
     Console.ReadKey();
 }
-void mulPage()
+void MulPage()
 {
     // Play Multiplication game
     bool screen = true;
@@ -245,7 +245,7 @@ void mulPage()
     {
         Console.Clear();
         Console.Write("**** Muliplication Game ****\n\n Select difficulty (1 - 3): ");
-        level = getInput();
+        level = GetInput();
         if (level == 1 | level == 2 | level == 3)
         {
             screen = false;
@@ -256,7 +256,7 @@ void mulPage()
     {
         Console.Clear();
         Console.Write("**** Muliplication Game ****\n\n Select number of questions: ");
-        quantity = getInput();
+        quantity = GetInput();
         if (quantity > 0)
         {
             screen = false;
@@ -307,7 +307,7 @@ void mulPage()
             Console.Write($"\n   * {b}");
         }
         Console.Write("\n  = ");
-        int answer = getInput();
+        int answer = GetInput();
         if (answer == c)
         {
             Console.Write("\n Correct!");
@@ -326,7 +326,7 @@ void mulPage()
     Console.Write($"**** Muliplication Game ****\n\nGame Over! Score = {score}!\n\nTime taken = {spent.TotalSeconds:0.00} seconds\n\nPress any key to continue...");
     Console.ReadKey();
 }
-void divPage()
+void DivPage()
 {
     // Play division game
     bool screen = true;
@@ -337,7 +337,7 @@ void divPage()
     {
         Console.Clear();
         Console.Write("//// Division Game ////\n\n Select difficulty (1 - 3): ");
-        level = getInput();
+        level = GetInput();
         if (level == 1 | level == 2 | level == 3)
         {
             screen = false;
@@ -348,7 +348,7 @@ void divPage()
     {
         Console.Clear();
         Console.Write("//// Division Game ////\n\n Select number of questions: ");
-        quantity = getInput();
+        quantity = GetInput();
         if (quantity > 0)
         {
             screen = false;
@@ -399,7 +399,7 @@ void divPage()
             Console.Write($"\n   / {b}");
         }
         Console.Write("\n  = ");
-        int answer = getInput();
+        int answer = GetInput();
         if (answer == c)
         {
             Console.Write("\n Correct!");
@@ -418,7 +418,7 @@ void divPage()
     Console.Write($"//// Division Game ////\n\nGame Over! Score = {score}!\n\nTime taken = {spent.TotalSeconds:0.00} seconds\n\nPress any key to continue...");
     Console.ReadKey();
 }
-void scorePage()
+void ScorePage()
 {
     Console.Clear();
     Console.Write("#### Score History ####\n\n");
@@ -429,7 +429,7 @@ void scorePage()
     Console.WriteLine("\nPress any key to continue...");
     Console.ReadKey();
 }
-int getInput()
+int GetInput()
 {
     int.TryParse(Console.ReadLine().Trim(), out int input);
     return input;
