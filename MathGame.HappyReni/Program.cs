@@ -2,4 +2,4 @@
 
 using MathGame;
 
-GameManager gm = new();
+new GameManager();

@@ -4,16 +4,16 @@
     internal class GameManager
     {
         private int _round_count = 5;
-        private int _point { get; set; }
-        private bool _isDifficult { get; set; }
-        private SELECTOR _selector { get; set; }
+        private int Point { get; set; }
+        private bool IsDifficult { get; set; }
+        private SELECTOR Selector { get; set; }
         private List<History> _history;
 
         public GameManager()
         {
-            _selector = SELECTOR.INVALID_SELECT;
-            _point = 0;
-            _isDifficult = false;
+            Selector = SELECTOR.INVALID_SELECT;
+            Point = 0;
+            IsDifficult = false;
             _history = new();
             MainMenu();
         }
@@ -32,8 +32,8 @@
             Console.WriteLine("6. Levels of Difficulty");
             Console.WriteLine("9. Exit The Program");
             Console.WriteLine("".PadRight(24, '='));
-            _selector = (SELECTOR)GetInput("").val;
-            Begin(_selector);
+            Selector = (SELECTOR)GetInput("").val;
+            Begin(Selector);
         }
 
         private void Begin(SELECTOR s)
@@ -51,9 +51,9 @@
             }
             else if (s == SELECTOR.Difficulty)
             {
-                string level = _isDifficult ? "DIFFICULT" : "EASY";
+                string level = IsDifficult ? "DIFFICULT" : "EASY";
                 var diff = GetInput($"Current Difficulty : {level}\nWould you want to change it ? (Y)").str;
-                _isDifficult = diff == "Y"? !_isDifficult : _isDifficult;
+                IsDifficult = diff == "Y"? !IsDifficult : IsDifficult;
                 WaitForInput($"Difficulty has changed");
             }
             else
@@ -70,7 +70,7 @@
                     Operation(s);
                 }
                 var playTime = DateTime.Now - startTime;
-                Console.WriteLine($"Your final score is {_point}.");
+                Console.WriteLine($"Your final score is {Point}.");
                 Console.WriteLine($"Your play time is {playTime.ToString("ss")} seconds.");
                 WaitForInput($"Press any button to go back to the main menu.");
             }
@@ -85,11 +85,11 @@
 
         private void Operation(SELECTOR s)
         {
-            Game game = new(s,_isDifficult);
+            Game game = new(s,IsDifficult);
             Console.WriteLine(game.Question);
             game.Input = GetInput("").val;
             var result = game.GetResult();
-            _point += (result.resultType == "CORRECT") ? 1 : 0;
+            Point += (result.resultType == "CORRECT") ? 1 : 0;
             WaitForInput(result.resultMessage);
             AddHistory(result);
 
