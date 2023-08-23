@@ -38,48 +38,58 @@
         private void Begin(SELECTOR selector)
         {
             Console.Clear();
-            if (selector == SELECTOR.ViewPreviousGames)
-            {
-                ShowHistory();
-                WaitForInput($"Press any button to go back to the main menu.");
-            }
-            else if (selector == SELECTOR.EXIT)
-            {
-                WaitForInput($"Bye Bye");
-                Environment.Exit(0);
-            }
-            else if (selector == SELECTOR.Difficulty)
-            {
-                string level = IsDifficult ? "DIFFICULT" : "EASY";
-                var diff = GetInput($"Current Difficulty : {level}\nWould you want to change it ? (Y)").str;
-                IsDifficult = diff == "Y"? !IsDifficult : IsDifficult;
-                WaitForInput($"Difficulty has changed");
-            }
-            else
-            {
-                var input_number = GetInput("Enter the number of questions.");
-                if (input_number.res)
-                {
-                    _round_count = input_number.val;
-                    Console.Clear();
 
-                    Random rand = new();
-                    int _point = 0;
-                    var isRandom = selector == SELECTOR.RandomGame;
-                    var startTime = DateTime.Now;
-                    for (int i = 0; i < _round_count; i++)
-                    {
-                        selector = isRandom ? (SELECTOR)rand.Next(1, 5) : selector ;
-                        _point += Operation(selector) ;
-                    }
-                    var playTime = DateTime.Now - startTime;
-                    Console.WriteLine($"Your score is {_point}.");
-                    Console.WriteLine($"Your play time is {playTime.ToString("ss")} seconds.");
+            switch (selector)
+            {
+                case SELECTOR.ViewPreviousGames:
+                    ShowHistory();
                     WaitForInput($"Press any button to go back to the main menu.");
-                }
-                else WaitForInput("Invalid Input. Try again.");
-            }
+                    break;
+                case SELECTOR.EXIT:
+                    WaitForInput($"Bye Bye");
+                    Environment.Exit(0);
+                    break;
+                case SELECTOR.Difficulty:
+                    string level = IsDifficult ? "DIFFICULT" : "EASY";
+                    var diff = GetInput($"Current Difficulty : {level}\nWould you want to change it ? (Y)").str;
+                    IsDifficult = diff == "Y" ? !IsDifficult : IsDifficult;
+                    WaitForInput($"Difficulty has changed");
+                    break;
+                case SELECTOR.Addition:
+                case SELECTOR.Substraction:
+                case SELECTOR.Multiplication:
+                case SELECTOR.Division:
+                case SELECTOR.RandomGame:
+                    var input_number = GetInput("Enter the number of questions.");
+                    if (input_number.res)
+                    {
+                        _round_count = input_number.val;
+                        Console.Clear();
 
+                        Random rand = new();
+                        int _point = 0;
+                        var isRandom = selector == SELECTOR.RandomGame;
+                        var startTime = DateTime.Now;
+                        for (int i = 0; i < _round_count; i++)
+                        {
+                            selector = isRandom ? (SELECTOR)rand.Next(1, 5) : selector;
+                            _point += Operation(selector);
+                        }
+                        var playTime = DateTime.Now - startTime;
+                        Console.WriteLine($"Your score is {_point}.");
+                        Console.WriteLine($"Your play time is {playTime.ToString("ss")} seconds.");
+                        WaitForInput($"Press any button to go back to the main menu.");
+                    }
+                    else
+                    {
+                        WaitForInput("Invalid Input. Try again.");
+                    }
+                    break;
+                default:
+                    WaitForInput("Invalid Input. Try again.");
+                    break;
+            }
+            
             MainMenu();
         }
 
