@@ -1,6 +1,5 @@
 ﻿namespace MathGame
 {
-
     internal class GameManager
     {
         private int _round_count = 5;
@@ -22,7 +21,7 @@
         {
             Console.Clear();
             Console.WriteLine("".PadRight(24, '='));
-            Console.WriteLine("Choose your game.");
+            Console.WriteLine($"Choose your game. Your current score is {Point}");
             Console.WriteLine("0. View Previous Games");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Substraction");
@@ -36,20 +35,20 @@
             Begin(Selector);
         }
 
-        private void Begin(SELECTOR s)
+        private void Begin(SELECTOR selector)
         {
             Console.Clear();
-            if (s == SELECTOR.ViewPreviousGames)
+            if (selector == SELECTOR.ViewPreviousGames)
             {
                 ShowHistory();
                 WaitForInput($"Press any button to go back to the main menu.");
             }
-            else if (s == SELECTOR.EXIT)
+            else if (selector == SELECTOR.EXIT)
             {
                 WaitForInput($"Bye Bye");
                 Environment.Exit(0);
             }
-            else if (s == SELECTOR.Difficulty)
+            else if (selector == SELECTOR.Difficulty)
             {
                 string level = IsDifficult ? "DIFFICULT" : "EASY";
                 var diff = GetInput($"Current Difficulty : {level}\nWould you want to change it ? (Y)").str;
@@ -58,34 +57,41 @@
             }
             else
             {
-                _round_count = GetInput("Enter the number of questions.").val;
-                Console.Clear();
-
-                Random rand = new();
-                var isRandom = s == SELECTOR.RandomGame;
-                var startTime = DateTime.Now;
-                for (int i = 0; i < _round_count; i++)
+                var input_number = GetInput("Enter the number of questions.");
+                if (input_number.res)
                 {
-                    s = isRandom ? (SELECTOR)rand.Next(1, 5) : s;
-                    Operation(s);
+                    _round_count = input_number.val;
+                    Console.Clear();
+
+                    Random rand = new();
+                    int _point = 0;
+                    var isRandom = selector == SELECTOR.RandomGame;
+                    var startTime = DateTime.Now;
+                    for (int i = 0; i < _round_count; i++)
+                    {
+                        selector = isRandom ? (SELECTOR)rand.Next(1, 5) : selector ;
+                        _point += Operation(selector) ;
+                    }
+                    var playTime = DateTime.Now - startTime;
+                    Console.WriteLine($"Your score is {_point}.");
+                    Console.WriteLine($"Your play time is {playTime.ToString("ss")} seconds.");
+                    WaitForInput($"Press any button to go back to the main menu.");
                 }
-                var playTime = DateTime.Now - startTime;
-                Console.WriteLine($"Your final score is {Point}.");
-                Console.WriteLine($"Your play time is {playTime.ToString("ss")} seconds.");
-                WaitForInput($"Press any button to go back to the main menu.");
+                else WaitForInput("Invalid Input. Try again.");
             }
+
             MainMenu();
         }
 
-        private void WaitForInput(string s) 
+        private void WaitForInput(string message) 
         {
-            Console.WriteLine(s);
+            Console.WriteLine(message);
             Console.ReadLine();
         }
 
-        private void Operation(SELECTOR s)
+        private int Operation(SELECTOR selector)
         {
-            Game game = new(s,IsDifficult);
+            Game game = new(selector,IsDifficult);
             Console.WriteLine(game.Question);
             game.Input = GetInput("").val;
             var result = game.GetResult();
@@ -94,12 +100,13 @@
             AddHistory(result);
 
             Console.Clear();
+            return (result.resultType == "CORRECT") ? 1 : 0;
         }
 
-        private void AddHistory((string question, int answer, int input, string resultMessage, string resultType) r)
+        private void AddHistory((string question, int answer, int input, string resultMessage, string resultType) result)
         {
             DateTime dateTime = DateTime.Now;
-            _history.Add(new History(dateTime, r.question, r.answer, r.input, r.resultType));
+            _history.Add(new History(dateTime, result.question, result.answer, result.input, result.resultType));
         }
 
         private void ShowHistory()
@@ -110,19 +117,19 @@
                 Console.WriteLine($"{"Time",-25}{"Question",-20}{"CorrectAnswer",-20}{"Answer",-20}{"Result",-5}");
                 Console.WriteLine("".PadRight(100, '='));
 
-                foreach (var h in _history)
+                foreach (var history in _history)
                 {
-                    Console.WriteLine($"{h.Time,-25}{h.Question,-20}{h.CorrectAnswer,-20}{h.Answer,-20}{h.Result,-5}");
+                    Console.WriteLine($"{history.Time,-25}{history.Question,-20}{history.CorrectAnswer,-20}{history.Answer,-20}{history.Result,-5}");
                 }
             }
             Console.WriteLine("".PadRight(100, '='));
         }
 
-        private (bool res, string str, int val) GetInput(string s)
+        private (bool res, string str, int val) GetInput(string message)
         {
             // This function returns string input too in case you need it
             int number;
-            Console.WriteLine(s);
+            Console.WriteLine(message);
             Console.Write(">> ");
             string str = Console.ReadLine();
             var res = int.TryParse(str, out number);
