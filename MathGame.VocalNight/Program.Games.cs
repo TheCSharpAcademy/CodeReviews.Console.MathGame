@@ -11,14 +11,15 @@
         for (int i = 0; i < numberOfQuestions; i++)
         {
 
-            firstNumber = random.Next(1, 9) * difficulty;
-            secondNumber = random.Next(1, 9) * difficulty;
+            firstNumber = random.Next(1, 99) * difficulty;
+            secondNumber = random.Next(1, 99) * difficulty;
 
             Console.WriteLine($"{firstNumber} + {secondNumber}");
-            var result = Console.ReadLine();
+
+            int result = ValidateResponse(Console.ReadLine());
             Console.Clear();
 
-            if (int.Parse(result) == firstNumber + secondNumber)
+            if (result == firstNumber + secondNumber)
             {
                 Console.WriteLine("Your answer was correct!\n");
                 score++;
@@ -28,10 +29,7 @@
                 Console.WriteLine("Incorrect\n");
             }
         }
-        Console.Clear();
-        Console.WriteLine($"Game over. Final score is {score}");
-
-        Menu($"{DateTime.Now.TimeOfDay} - Addition game - Score: {score}");
+        EndGame(score);
     }
 
     static void SubtractionGame( int numberOfQuestions, int difficulty )
@@ -45,14 +43,15 @@
         for (int i = 0; i < numberOfQuestions; i++)
         {
 
-            firstNumber = random.Next(1, 9) * difficulty;
-            secondNumber = random.Next(1, 9) * difficulty;
+            firstNumber = random.Next(1, 99) * difficulty;
+            secondNumber = random.Next(1, 99) * difficulty;
 
             Console.WriteLine($"{firstNumber} - {secondNumber}");
-            var result = Console.ReadLine();
+
+            int result = ValidateResponse(Console.ReadLine());
             Console.Clear();
 
-            if (int.Parse(result) == firstNumber - secondNumber)
+            if (result == firstNumber - secondNumber)
             {
                 Console.WriteLine("Your answer was correct!\n");
                 score++;
@@ -62,10 +61,7 @@
                 Console.WriteLine("Incorrect\n");
             }
         }
-        Console.Clear();
-        Console.WriteLine($"Game over. Final score is {score}");
-
-        Menu($"{DateTime.Now.TimeOfDay} - Subtraction game - Score: {score}");
+        EndGame(score);
     }
 
     static void MultiplicationGame( int numberOfQuestions, int difficulty )
@@ -79,14 +75,15 @@
         for (int i = 0; i < numberOfQuestions; i++)
         {
 
-            firstNumber = random.Next(1, 9) * difficulty;
-            secondNumber = random.Next(1, 9) * difficulty;
+            firstNumber = random.Next(1, 99) * difficulty;
+            secondNumber = random.Next(1, 99) * difficulty;
 
             Console.WriteLine($"{firstNumber} * {secondNumber}");
-            var result = Console.ReadLine();
+
+            int result = ValidateResponse(Console.ReadLine());
             Console.Clear();
 
-            if (int.Parse(result) == firstNumber * secondNumber)
+            if (result == firstNumber * secondNumber)
             {
                 Console.WriteLine("Your answer was correct!\n");
                 score++;
@@ -96,24 +93,21 @@
                 Console.WriteLine("Incorrect\n");
             }
         }
-
-        Console.Clear();
-        Console.WriteLine($"Game over. Final score is {score}");
-
-        Menu($"{DateTime.Now.TimeOfDay} - Multiplication game - Score: {score}");
+        EndGame(score);
     }
 
     static void DivisionGame( int numberOfQuestions, int difficulty )
     {
         var random = new Random();
 
-        int firstNumber = random.Next(1, 9) * difficulty;
-        int secondNumber = random.Next(1, 9) * difficulty;
+        //Make sure numbers are divisible with remain zero.
+        int firstNumber = random.Next(1, 99) * difficulty;
+        int secondNumber = random.Next(1, 99) * difficulty;
 
         while (firstNumber % secondNumber != 0)
         {
-            firstNumber = random.Next(1, 9) * difficulty;
-            secondNumber = random.Next(1, 9) * difficulty;
+            firstNumber = random.Next(1, 99) * difficulty;
+            secondNumber = random.Next(1, 99) * difficulty;
         }
 
         var score = 0;
@@ -121,10 +115,11 @@
         for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.WriteLine($"{firstNumber} / {secondNumber}");
-            var result = Console.ReadLine();
+
+            int result = ValidateResponse(Console.ReadLine());
             Console.Clear();
 
-            if (int.Parse(result) == firstNumber / secondNumber)
+            if (result == firstNumber / secondNumber)
             {
                 Console.WriteLine("Your answer was correct!\n");
                 score++;
@@ -134,11 +129,7 @@
                 Console.WriteLine("Incorrect\n");
             }
         }
-
-        Console.Clear();
-        Console.WriteLine($"Game over. Final score is {score}");
-
-        Menu($"{DateTime.Now.TimeOfDay} - Division game - Score: {score}");
+        EndGame(score);
     }
 
     static int NumberOfQuestions()
@@ -170,20 +161,21 @@
             Console.WriteLine("---");
         }
 
+        Console.WriteLine("Press enter to go back");
+        var a = Console.ReadKey(true);
+        Console.Clear();
+
         Menu(null);
     }
 
-    static int[] GetDivisionNumber()
+    static int ValidateResponse(string input)
     {
-        var random = new Random();
+        while (!int.TryParse(input, out _))
+        {
+            Console.WriteLine("That was not a valid answer, try again.\n");
+            input = Console.ReadLine();
+        }
 
-        var firstNumber = random.Next(0, 99);
-        var secondNumber = random.Next(0, 99);
-        var result = new int[2];
-
-        result[0] = firstNumber;
-        result[1] = secondNumber;
-
-        return result;
+        return int.Parse(input);
     }
 }

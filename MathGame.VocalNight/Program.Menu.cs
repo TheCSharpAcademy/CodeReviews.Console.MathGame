@@ -1,4 +1,6 @@
-﻿partial class Program
+﻿using static System.Formats.Asn1.AsnWriter;
+
+partial class Program
 {
     static List<string> pastGames = new List<string>();
 
@@ -39,8 +41,12 @@
                 Environment.Exit(1);
                 break;
             default:
-                Console.WriteLine("Invalid");
-                Environment.Exit(1);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid command! Try again.\n");
+
+                Console.ForegroundColor = ConsoleColor.White;
+                Menu(null);
                 break;
 
         }
@@ -59,10 +65,22 @@ S - Subtraction
 M - Multiplication
 D - Division
 R - Show past game results
-Q - Quite the program");
+Q - Quit the program");
         Console.WriteLine("-------------------");
 
         ShowMenu();
+    }
+
+    static void EndGame(int result)
+    {
+        Console.Clear();
+        Console.WriteLine($"Game over. Final score is {result}\n");
+
+        Console.WriteLine("Press enter to go back");
+        var a = Console.ReadLine();
+        Console.Clear();
+
+        Menu($"{DateTime.Now.TimeOfDay} - Subtraction game - Score: {result}");
     }
 
 }
