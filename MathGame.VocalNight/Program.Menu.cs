@@ -77,7 +77,7 @@ Q - Quit the program");
         Console.WriteLine($"Game over. Final score is {result}\n");
 
         Console.WriteLine("Press enter to go back");
-        var a = Console.ReadLine();
+        Console.ReadKey(true);
         Console.Clear();
 
         Menu($"{DateTime.Now.TimeOfDay} - Subtraction game - Score: {result}");

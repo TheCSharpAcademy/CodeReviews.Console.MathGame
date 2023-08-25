@@ -162,7 +162,7 @@
         }
 
         Console.WriteLine("Press enter to go back");
-        var a = Console.ReadKey(true);
+        Console.ReadKey(true);
         Console.Clear();
 
         Menu(null);
