@@ -100,20 +100,21 @@
     {
         var random = new Random();
 
-        //Make sure numbers are divisible with remain zero.
-        int firstNumber = random.Next(1, 99) * difficulty;
-        int secondNumber = random.Next(1, 99) * difficulty;
-
-        while (firstNumber % secondNumber != 0)
-        {
-            firstNumber = random.Next(1, 99) * difficulty;
-            secondNumber = random.Next(1, 99) * difficulty;
-        }
-
         var score = 0;
 
         for (int i = 0; i < numberOfQuestions; i++)
         {
+
+            //Make sure numbers are divisible with remain zero.
+            int firstNumber = random.Next(1, 99) * difficulty;
+            int secondNumber = random.Next(1, 99) * difficulty;
+
+            while (firstNumber % secondNumber != 0)
+            {
+                firstNumber = random.Next(1, 99) * difficulty;
+                secondNumber = random.Next(1, 99) * difficulty;
+            }
+
             Console.WriteLine($"{firstNumber} / {secondNumber}");
 
             int result = ValidateResponse(Console.ReadLine());
