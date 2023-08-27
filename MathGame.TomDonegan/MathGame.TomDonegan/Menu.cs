@@ -7,8 +7,6 @@
         internal void ShowMenu(string name, DateTime date)
         {
             Console.Clear();
-            //Console.WriteLine("Press any key to show the menu.");
-            //Console.ReadLine();
 
             bool isGameOn = true;
 

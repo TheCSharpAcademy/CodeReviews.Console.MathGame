@@ -44,7 +44,7 @@ namespace MathGameConsole
             return difficulty;
         }
 
-        internal static int totalQuestions()
+        internal static int TotalQuestions()
         {
             string noOfQuestions;
 
@@ -55,8 +55,6 @@ namespace MathGameConsole
 
             return int.Parse(noOfQuestions);
         }       
-
-        //static string name;
         internal static int[] GetDivisionNumbers()
         {
             var random = new Random();
@@ -90,7 +88,7 @@ namespace MathGameConsole
                 Type = gameType,
                 TotalQuestions = noOfQuestions,
                 GameTime = gameTime
-            }); ;
+            });
         }
         internal static void PrintGames()
         {

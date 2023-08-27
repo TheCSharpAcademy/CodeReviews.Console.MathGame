@@ -7,7 +7,7 @@ namespace MathGameConsole
         internal void PlayGame(int choice)
         {
             var difficulty = Helpers.DifficultyMultiplier();
-            var numberOfQuestions = Helpers.totalQuestions();
+            var numberOfQuestions = Helpers.TotalQuestions();
             var random = new Random();
             int score = 0;
 
