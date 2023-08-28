@@ -25,7 +25,8 @@ namespace MathGame
             Console.WriteLine("A. Addition");
             Console.WriteLine("B. Substraction");
             Console.WriteLine("C. Multiplication");
-            Console.WriteLine("D. Division\n");
+            Console.WriteLine("D. Division");
+            Console.WriteLine("E. Random problem\n");
             Console.WriteLine("H. Show games log");
             Console.WriteLine("X. Exit");
             Console.WriteLine($"\nYour choice: ");
@@ -93,7 +94,135 @@ namespace MathGame
                 }
             }
         }
+
+        public void multiplicationChallange()
+        {
+            questions++;
+            int a, b;
+            Random rng = new Random();
+            a = rng.Next(10);
+            b = rng.Next(10);
+            Console.WriteLine("========================");
+            string question = $"{a} * {b} = ?";
+            questionsList.Add(question);
+            Console.WriteLine($"Yor question is:\n{question}\nYour answer:");
+            for (int i = 0; i < 3; i++)
+            {
+                string input = Console.ReadLine()!;
+                int answerNum = 0;
+                try
+                {
+                    answerNum = int.Parse(input);
+                    if (answerNum == (a * b))
+                    {
+                        Console.WriteLine($"Correct!\n{a} * {b} = {a * b}!");
+                        questionsList.Add($"Correct answer ({answerNum})");
+                        goodAnswers++;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not correct, please try again!");
+                        questionsList.Add($"Wrong answer ({answerNum})");
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Not correct, please try again!");
+                    questionsList.Add($"Wrong answer (wrong input ex. character instead of number)");
+                }
+            }
+        }
+
+        public void substractionChallange()
+        {
+            questions++;
+            int a = 0, b = 1;
+            do
+            {
+                Random rng = new Random();
+                a = rng.Next(10);
+                b = rng.Next(10);
+            } while (a < b);
+            Console.WriteLine("========================");
+            string question = $"{a} - {b} = ?";
+            questionsList.Add(question);
+            Console.WriteLine($"Yor question is:\n{question}\nYour answer:");
+            for (int i = 0; i < 3; i++)
+            {
+                string input = Console.ReadLine()!;
+                int answerNum = 0;
+                try
+                {
+                    answerNum = int.Parse(input);
+                    if (answerNum == (a - b))
+                    {
+                        Console.WriteLine($"Correct!\n{a} - {b} = {a - b}!");
+                        questionsList.Add($"Correct answer ({answerNum})");
+                        goodAnswers++;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not correct, please try again!");
+                        questionsList.Add($"Wrong answer ({answerNum})");
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Not correct, please try again!");
+                    questionsList.Add($"Wrong answer (wrong input ex. character instead of number)");
+                }
+            }
+        }
+
+        public void divisionChallange()
+        {
+            questions++;
+            int a = 1, b = 1;
+            do
+            {
+                Random rng = new Random();
+                a = rng.Next(1,10);
+                b = rng.Next(1,10);
+            } while (a % b != 0);
+            Console.WriteLine("========================");
+            string question = $"{a} / {b} = ?";
+            questionsList.Add(question);
+            Console.WriteLine($"Yor question is:\n{question}\nYour answer:");
+            for (int i = 0; i < 3; i++)
+            {
+                string input = Console.ReadLine()!;
+                int answerNum = 0;
+                try
+                {
+                    answerNum = int.Parse(input);
+                    if (answerNum == (a / b))
+                    {
+                        Console.WriteLine($"Correct!\n{a} / {b} = {a / b}!");
+                        questionsList.Add($"Correct answer ({answerNum})");
+                        goodAnswers++;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not correct, please try again!");
+                        questionsList.Add($"Wrong answer ({answerNum})");
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Not correct, please try again!");
+                    questionsList.Add($"Wrong answer (wrong input ex. character instead of number)");
+                }
+            }
+        }
     }
+
+
 
     class Programm
     {
@@ -112,11 +241,45 @@ namespace MathGame
                 {
                     gameLoop = false;
                 }
+                else if (userSelection == 'B')
+                {
+                    game.substractionChallange();
+                }
+                else if (userSelection == 'C')
+                {
+                    game.multiplicationChallange();
+                }
+                else if (userSelection == 'D')
+                {
+                    game.divisionChallange();
+                }
+                else if (userSelection == 'E')
+                {
+                    Random rng = new Random();
+                    int randomSelection = rng.Next(1,5);
+                    switch (randomSelection)
+                    {
+                        case 1:
+                            game.additionChallange();
+                            break;
+                        case 2:
+                            game.substractionChallange();
+                            break;
+                        case 3:
+                            game.multiplicationChallange();
+                            break;
+                        case 4:
+                            game.divisionChallange();
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 else if (userSelection == 'H')
                 {
                     game.showGamesHistory();
                 }
-                Console.WriteLine($"\n\n");
+                Console.WriteLine($"\n");
             }
         }
     }
