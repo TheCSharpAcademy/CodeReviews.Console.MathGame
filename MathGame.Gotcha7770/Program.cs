@@ -16,26 +16,38 @@ var whatsNext = AnsiConsole.Prompt(
             Converter = value => value is Choice.PlayAgain ? "Let`s start the game!" : "I`m busy, not now..."
         }
         .Title("Hi! Do you want play or quit?")
-        .AddChoices(Enum.GetValues<Choice>()));
+        .AddChoices(Choice.PlayAgain, Choice.Quit));
 
-while (whatsNext == Choice.PlayAgain)
+while (whatsNext is not Choice.Quit)
 {
-    var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>().Title("Choose Math operation:")
-        .AddChoices(Enum.GetValues<MathOperation>()));
-
-    var example = Game.GetExample(input);
-    AnsiConsole.WriteLine(example.Representation);
-    int answer = AnsiConsole.Ask<int>("Enter the answer:");
-
-    if (answer == example.Value)
+    if (whatsNext == Choice.ShowHistory)
     {
-        AnsiConsole.MarkupLine($"Good job! {answer} is correct :thumbs_up:");
+        foreach (var item in Game.History)
+        {
+            AnsiConsole.MarkupLineInterpolated($"Example: {item.Item1.Representation}, Users answer: {item.Item2}, Correct value: {item.Item1.Value}");
+        }
     }
     else
     {
-        AnsiConsole.MarkupLine($"Sorry, but answer is {example.Value} :pensive_face:");
+        var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>().Title("Choose Math operation:")
+            .AddChoices(Enum.GetValues<MathOperation>()));
+
+        var gameTurn = Game.NextTurn(input);
+        AnsiConsole.WriteLine(gameTurn.Representation);
+        int answer = AnsiConsole.Ask<int>("Enter the answer:");
+
+        if (answer == gameTurn.Value)
+        {
+            AnsiConsole.MarkupLine($"Good job! {answer} is correct :thumbs_up:");
+        }
+        else
+        {
+            AnsiConsole.MarkupLine($"Sorry, but answer is {gameTurn.Value} :pensive_face:");
+        }
+        
+        Game.SaveAnswer(gameTurn, answer);
     }
-    
+
     AnsiConsole.WriteLine();
     whatsNext = AnsiConsole.Prompt(new SelectionPrompt<Choice>()
         .Title("What`s next?")
@@ -52,5 +64,6 @@ AnsiConsole.Clear();
 public enum Choice
 {
     PlayAgain,
+    ShowHistory,
     Quit
 }

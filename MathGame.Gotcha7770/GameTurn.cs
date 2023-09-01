@@ -1,8 +1,8 @@
 ﻿namespace MathGame.Gotcha7770;
 
-public class Example
+public class GameTurn
 {
-    public Example(int value, string representation)
+    public GameTurn(int value, string representation)
     {
         Value = value;
         Representation = representation;

@@ -11,8 +11,10 @@ public enum MathOperation
 public static class Game
 {
     private static readonly Random Random = new Random((int)DateTime.Now.Ticks);
+    private static readonly List<(GameTurn, int)> _history = new List<(GameTurn, int)>();
+    public static IReadOnlyCollection<(GameTurn, int)> History => _history;
 
-    public static Example GetExample(MathOperation operation)
+    public static GameTurn NextTurn(MathOperation operation)
     {
         return operation switch
         {
@@ -24,42 +26,47 @@ public static class Game
         };
     }
     
-    public class Addition
+    public static void SaveAnswer(GameTurn gameTurn, int answer)
     {
-        public static Example GetNext(Random random)
-        {
-            int x = random.Next(0, 999);
-            int y = random.Next(0, 999);
-            
-            return new Example(x + y, $"{x} + {y}");
-        }
+        _history.Add((gameTurn, answer));
     }
-    
-    public class Subtraction
+
+    private class Addition
     {
-        public static Example GetNext(Random random)
+        public static GameTurn GetNext(Random random)
         {
             int x = random.Next(0, 999);
             int y = random.Next(0, 999);
             
-            return new Example(x - y, $"{x} - {y}");
+            return new GameTurn(x + y, $"{x} + {y}");
         }
     }
 
-    public class Multiplication
+    private class Subtraction
     {
-        public static Example GetNext(Random random)
+        public static GameTurn GetNext(Random random)
+        {
+            int x = random.Next(0, 999);
+            int y = random.Next(0, 999);
+            
+            return new GameTurn(x - y, $"{x} - {y}");
+        }
+    }
+
+    private class Multiplication
+    {
+        public static GameTurn GetNext(Random random)
         {
             int x = random.Next(0, 99);
             int y = random.Next(0, 99);
             
-            return new Example(x * y, $"{x} * {y}");
+            return new GameTurn(x * y, $"{x} * {y}");
         }
     }
 
-    public class Division
+    private class Division
     {
-        public static Example GetNext(Random random)
+        public static GameTurn GetNext(Random random)
         {
             int x, y;
             do
@@ -68,7 +75,7 @@ public static class Game
                 y = random.Next(1, 99);
             } while ( x < y || x % y != 0);
        
-            return new Example(x / y, $"{x} / {y}");
+            return new GameTurn(x / y, $"{x} / {y}");
         }
     }
 }
