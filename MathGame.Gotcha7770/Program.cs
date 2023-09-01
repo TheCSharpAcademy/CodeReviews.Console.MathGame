@@ -13,5 +13,14 @@ var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>()
     .AddChoices(Enum.GetValues<MathOperation>()));
 
 var example = Game.GetExample(input);
-AnsiConsole.WriteLine(example);
+AnsiConsole.WriteLine(example.Representation);
 int answer = AnsiConsole.Ask<int>("Enter the answer:");
+
+if (answer == example.Value)
+{
+    AnsiConsole.MarkupLine($"Good job! {answer} is correct :thumbs_up:");
+}
+else
+{
+    AnsiConsole.MarkupLine($"Sorry, but answer is {example.Value} :pensive_face:");
+}
