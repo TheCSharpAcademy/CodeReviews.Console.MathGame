@@ -11,8 +11,8 @@ public enum MathOperation
 public static class Game
 {
     private static readonly Random Random = new Random((int)DateTime.Now.Ticks);
-    private static readonly List<(GameTurn, int)> _history = new List<(GameTurn, int)>();
-    public static IReadOnlyCollection<(GameTurn, int)> History => _history;
+    private static readonly List<GameTurn> _history = new List<GameTurn>();
+    public static IReadOnlyCollection<GameTurn> History => _history;
 
     public static GameTurn NextTurn(MathOperation operation)
     {
@@ -28,7 +28,7 @@ public static class Game
     
     public static void SaveAnswer(GameTurn gameTurn, int answer)
     {
-        _history.Add((gameTurn, answer));
+        _history.Add(gameTurn with { PlayerAnswer = answer });
     }
 
     private class Addition

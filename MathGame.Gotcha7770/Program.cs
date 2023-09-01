@@ -22,18 +22,16 @@ while (whatsNext is not Choice.Quit)
 {
     if (whatsNext == Choice.ShowHistory)
     {
-        foreach (var item in Game.History)
-        {
-            AnsiConsole.MarkupLineInterpolated($"Example: {item.Item1.Representation}, Users answer: {item.Item2}, Correct value: {item.Item1.Value}");
-        }
+        AnsiConsole.Write(Game.History.ToRows());
     }
     else
     {
-        var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>().Title("Choose Math operation:")
+        var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>()
+            .Title("Choose Math operation:")
             .AddChoices(Enum.GetValues<MathOperation>()));
 
         var gameTurn = Game.NextTurn(input);
-        AnsiConsole.WriteLine(gameTurn.Representation);
+        AnsiConsole.WriteLine(gameTurn.Expression);
         int answer = AnsiConsole.Ask<int>("Enter the answer:");
 
         if (answer == gameTurn.Value)

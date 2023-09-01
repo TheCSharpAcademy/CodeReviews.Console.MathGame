@@ -1,13 +1,11 @@
 ﻿namespace MathGame.Gotcha7770;
 
-public class GameTurn
+public record GameTurn(int Value, string Expression)
 {
-    public GameTurn(int value, string representation)
-    {
-        Value = value;
-        Representation = representation;
-    }
+    public int PlayerAnswer { get; init; }
 
-    public int Value { get; }
-    public string Representation { get; }
+    public override string ToString()
+    {
+        return $"Example: {Expression}, Players answer: {PlayerAnswer}, Correct value: {Value}";
+    }
 }
