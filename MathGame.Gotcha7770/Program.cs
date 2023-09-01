@@ -4,13 +4,22 @@
 using MathGame.Gotcha7770;
 using Spectre.Console;
 
-Choice whatsNext;
+AnsiConsole.Clear();
+AnsiConsole.Write(new FigletText("Math Game project for The C# Academy")
+    .Centered()
+    .Color(Color.Green));
 
-do
+AnsiConsole.WriteLine();
+var whatsNext = AnsiConsole.Prompt(
+    new SelectionPrompt<Choice>
+        {
+            Converter = value => value is Choice.PlayAgain ? "Let`s start the game!" : "I`m busy, not now..."
+        }
+        .Title("Hi! Do you want play or quit?")
+        .AddChoices(Enum.GetValues<Choice>()));
+
+while (whatsNext == Choice.PlayAgain)
 {
-    AnsiConsole.Write(new FigletText("Math Game project for The C# Academy").Centered()
-        .Color(Color.Green));
-
     var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>().Title("Choose Math operation:")
         .AddChoices(Enum.GetValues<MathOperation>()));
 
@@ -33,8 +42,12 @@ do
         .AddChoices(Enum.GetValues<Choice>()));
 
     AnsiConsole.Clear();
+    AnsiConsole.Write(new FigletText("Math Game project for The C# Academy")
+        .Centered()
+        .Color(Color.Green));
+}
 
-} while (whatsNext == Choice.PlayAgain);
+AnsiConsole.Clear();
 
 public enum Choice
 {
