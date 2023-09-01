@@ -66,7 +66,7 @@ public static class Game
             {
                 x = random.Next(0, 999);
                 y = random.Next(1, 99);
-            } while ( x > y && x % y == 0);
+            } while ( x < y || x % y != 0);
        
             return new Example(x / y, $"{x} / {y}");
         }
