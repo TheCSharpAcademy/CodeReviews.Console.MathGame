@@ -7,6 +7,8 @@
         {
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine($"Hello {name.ToUpper()}. It's {date.DayOfWeek}. This is your math's game\n");
+            Console.WriteLine("Press any key to show the menu");
+            Console.ReadLine();
 
             bool isGameOn = true;
 

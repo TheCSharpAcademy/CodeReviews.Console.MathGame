@@ -21,9 +21,10 @@ namespace MathGame.AndreasGuy54
                 int result = firstNumber + secondNumber;
 
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
-                int userAnswer = int.Parse(Console.ReadLine());
+                string userAnswer = Console.ReadLine();
+                userAnswer = Helpers.ValidateResult(userAnswer);
 
-                if (userAnswer == result)
+                if (int.Parse(userAnswer) == result)
                 {
                     Console.WriteLine("Correct! Type any key for the next question:");
                     score++;
@@ -63,9 +64,10 @@ Press any key to go back to the game menu:");
                 int result = firstNumber - secondNumber;
 
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
-                int userAnswer = int.Parse(Console.ReadLine());
+                string userAnswer = Console.ReadLine();
+                userAnswer = Helpers.ValidateResult(userAnswer);
 
-                if (userAnswer == result)
+                if (int.Parse(userAnswer) == result)
                 {
                     Console.WriteLine("Correct! Type any key for the next question:");
                     score++;
@@ -105,9 +107,10 @@ Press any key to go back to the game menu:");
                 int result = firstNumber * secondNumber;
 
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
-                int userAnswer = int.Parse(Console.ReadLine());
+                string userAnswer = Console.ReadLine();
+                userAnswer = Helpers.ValidateResult(userAnswer);
 
-                if (userAnswer == result)
+                if (int.Parse(userAnswer) == result)
                 {
                     Console.WriteLine("Correct! Type any key for the next question:");
                     score++;
@@ -145,9 +148,10 @@ Press any key to go back to the game menu:");
                 int result = firstNumber / secondNumber;
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
-                int userAnswer = int.Parse(Console.ReadLine());
+                string userAnswer = Console.ReadLine();
+                userAnswer = Helpers.ValidateResult(userAnswer);
 
-                if (userAnswer == result)
+                if (int.Parse(userAnswer) == result)
                 {
                     Console.WriteLine("Correct! Type any key for the next question:");
                     score++;

@@ -1,17 +1,8 @@
 ﻿using MathGame.AndreasGuy54;
 
-var menu = new Menu();
+Menu menu = new();
 
 DateTime date = DateTime.UtcNow;
-string? name = GetName();
+string name = Helpers.GetName();
 
 menu.ShowMenu(name, date);
-
-string? GetName()
-{
-    Console.WriteLine("Please type your name");
-
-    string? name = Console.ReadLine();
-    return name;
-}
-
