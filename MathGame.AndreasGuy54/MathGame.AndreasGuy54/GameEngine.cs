@@ -1,4 +1,6 @@
-﻿namespace MathGame.AndreasGuy54
+﻿using MathGame.AndreasGuy54.Models;
+
+namespace MathGame.AndreasGuy54
 {
     internal class GameEngine
     {
@@ -41,7 +43,7 @@ Press any key to go back to the game menu:");
                 }
             }
 
-            Helpers.AddToHistory(score, "Addition");
+            Helpers.AddToHistory(score, GameType.Addition);
         }
 
         internal void SubtractionGame(string message)
@@ -83,7 +85,7 @@ Press any key to go back to the game menu:");
                 }
             }
 
-            Helpers.AddToHistory(score, "Subtraction");
+            Helpers.AddToHistory(score, GameType.Subtraction);
         }
 
         internal void MultiplicationGame(string message)
@@ -125,7 +127,7 @@ Press any key to go back to the game menu:");
                 }
             }
 
-            Helpers.AddToHistory(score, "Multiplication");
+            Helpers.AddToHistory(score, GameType.Multiplication);
         }
 
         internal void DivisionGame(string message)
@@ -165,7 +167,7 @@ Press any key to go back to the game menu:");
                 }
             }
 
-            Helpers.AddToHistory(score, "Division");
+            Helpers.AddToHistory(score, GameType.Division);
         }
     }
 }

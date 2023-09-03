@@ -27,7 +27,7 @@
                 switch (gameSelected)
                 {
                     case "v":
-                        Helpers.GetGames();
+                        Helpers.PrintGames();
                         Console.Clear();
                         break;
                     case "a":
