@@ -2,7 +2,7 @@ namespace MathGame.pcjb.Models;
 
 internal class AdditionQuestion : MathQuestion
 {
-    public AdditionQuestion() : base(GameType.Addition)
+    public AdditionQuestion(GameDifficulty difficulty) : base(GameType.Addition, difficulty)
     {
         Random rnd = new();
         var a = rnd.Next(0, maxNumber);

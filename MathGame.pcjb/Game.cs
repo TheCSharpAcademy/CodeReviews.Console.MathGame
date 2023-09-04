@@ -3,6 +3,7 @@ using MathGame.pcjb.Models;
 internal class Game
 {
     private GameType type = GameType.None;
+    private GameDifficulty difficulty = GameDifficulty.Normal;
     private int presentedQuestions = 0;
     private readonly int maxQuestions = 3;
     private int score = 0;
@@ -16,6 +17,7 @@ internal class Game
             state = state switch
             {
                 GameState.Menu => Menu(),
+                GameState.Difficulty => Difficulty(),
                 GameState.NewGame => NewGame(),
                 GameState.Question => Question(),
                 GameState.Score => Score(),
@@ -29,7 +31,7 @@ internal class Game
 
     private GameState Menu()
     {
-        var selection = Screen.ShowMenu();
+        var selection = Screen.ShowMenu(difficulty);
         switch (selection)
         {
             case 'A':
@@ -47,6 +49,8 @@ internal class Game
             case 'H':
                 type = GameType.None;
                 return GameState.History;
+            case 'L':
+                return GameState.Difficulty;
             case 'Q':
                 type = GameType.None;
                 return GameState.Quit;
@@ -66,7 +70,7 @@ internal class Game
     private GameState Question()
     {
         presentedQuestions++;
-        var question = MathQuestionFactory.CreateQuestion(type);
+        var question = MathQuestionFactory.CreateQuestion(type, difficulty);
         question.ActualAnswer = Screen.ShowQuestion(type, question);
         if (question.HasCorrrectAnswer())
         {
@@ -85,7 +89,7 @@ internal class Game
 
     private GameState Score()
     {
-        history.Add(new GameResult(type, score));
+        history.Add(new GameResult(type, difficulty, score));
         Screen.ShowScore(type, score);
         return GameState.Menu;
     }
@@ -94,6 +98,25 @@ internal class Game
     {
         Screen.ShowHistory(history);
         return GameState.Menu;
+    }
+
+    private GameState Difficulty()
+    {
+        var selection = Screen.ShowDifficultySelection();
+        switch (selection)
+        {
+            case 'E':
+                difficulty = GameDifficulty.Easy;
+                return GameState.Menu;
+            case 'N':
+                difficulty = GameDifficulty.Normal;
+                return GameState.Menu;
+            case 'H':
+                difficulty = GameDifficulty.Hard;
+                return GameState.Menu;
+            default:
+                return GameState.Difficulty;
+        }
     }
 
     private GameState Quit()

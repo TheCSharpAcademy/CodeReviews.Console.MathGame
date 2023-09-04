@@ -2,7 +2,7 @@ namespace MathGame.pcjb.Models;
 
 internal class SubtractionQuestion : MathQuestion
 {
-    public SubtractionQuestion() : base(GameType.Subtraction)
+    public SubtractionQuestion(GameDifficulty difficulty) : base(GameType.Subtraction, difficulty)
     {
         Random rnd = new();
         var a = rnd.Next(0, maxNumber);

@@ -2,7 +2,7 @@ namespace MathGame.pcjb.Models;
 
 internal class MultiplicationQuestion : MathQuestion
 {
-    public MultiplicationQuestion() : base (GameType.Multiplication)
+    public MultiplicationQuestion(GameDifficulty difficulty) : base (GameType.Multiplication, difficulty)
     {
         Random rnd = new();
         var a = rnd.Next(0, maxNumber);

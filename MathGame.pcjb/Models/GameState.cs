@@ -7,6 +7,7 @@ internal enum GameState
         Question,
         Score,
         History,
+        Difficulty,
         Quit,
         Exit
 }

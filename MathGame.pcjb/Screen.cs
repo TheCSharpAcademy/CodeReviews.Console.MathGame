@@ -2,7 +2,7 @@ using MathGame.pcjb.Models;
 
 internal static class Screen
 {
-    internal static char ShowMenu()
+    internal static char ShowMenu(GameDifficulty difficulty)
     {
         Console.Clear();
         Console.WriteLine("### Math Game ###");
@@ -11,6 +11,7 @@ internal static class Screen
         Console.WriteLine("(M)ultiplication Game");
         Console.WriteLine("(D)ivision Game");
         Console.WriteLine("(H)istory of previous games");
+        Console.WriteLine($"(L)evel of difficulty: {difficulty}");
         Console.WriteLine("(Q)uit");
         return char.ToUpper(Console.ReadKey().KeyChar);
     }
@@ -66,10 +67,10 @@ internal static class Screen
 
         if (history != null && history.Count > 0)
         {
-            Console.WriteLine(String.Format("{0,-15}{1,4}", "Game", "Score"));
+            Console.WriteLine(String.Format("{0,-15}{1,-11}{2,5}", "Game", "Difficulty", "Score"));
             foreach (var result in history)
             {
-                Console.WriteLine($"{result.Type,-15}\t{result.Score,4}");
+                Console.WriteLine($"{result.Type,-15}{result.Difficulty,-11}{result.Score,5}");
             }
         }
         else
@@ -79,5 +80,15 @@ internal static class Screen
 
         Console.WriteLine("Type any key to return to the main menu.");
         Console.ReadKey();
+    }
+
+    internal static char ShowDifficultySelection()
+    {
+        Console.Clear();
+        Console.WriteLine("Level of difficulty");
+        Console.WriteLine("(E)asy");
+        Console.WriteLine("(N)ormal");
+        Console.WriteLine("(H)ard");
+        return char.ToUpper(Console.ReadKey().KeyChar);
     }
 }
