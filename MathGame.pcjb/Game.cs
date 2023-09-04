@@ -73,7 +73,7 @@ internal class Game
     {
         presentedQuestions++;
         var question = MathQuestionFactory.CreateQuestion(type, difficulty);
-        question.ActualAnswer = Screen.ShowQuestion(type, question);
+        question.ActualAnswer = Screen.ShowQuestion(question);
         if (question.HasCorrrectAnswer())
         {
             score++;

@@ -16,10 +16,10 @@ internal static class Screen
         return char.ToUpper(Console.ReadKey().KeyChar);
     }
 
-    internal static string ShowQuestion(GameType type, MathQuestion question)
+    internal static string ShowQuestion(MathQuestion question)
     {
         Console.Clear();
-        Console.WriteLine($"{type} game");
+        Console.WriteLine($"{question.Type} game");
         Console.WriteLine($"{question.Text}");
 
         var answer = Console.ReadLine();
