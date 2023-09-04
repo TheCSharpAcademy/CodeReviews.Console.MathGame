@@ -50,6 +50,9 @@ internal class Game
             case 'D':
                 type = GameType.Division;
                 return GameState.NewGame;
+            case 'R':
+                type = GameType.Random;
+                return GameState.NewGame;
             case 'H':
                 type = GameType.None;
                 return GameState.History;

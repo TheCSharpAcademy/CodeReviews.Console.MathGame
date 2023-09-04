@@ -10,6 +10,7 @@ internal static class Screen
         Console.WriteLine("(S)ubtraction Game");
         Console.WriteLine("(M)ultiplication Game");
         Console.WriteLine("(D)ivision Game");
+        Console.WriteLine("(R)andom Game");
         Console.WriteLine("(H)istory of previous games");
         Console.WriteLine($"(L)evel of difficulty: {difficulty}");
         Console.WriteLine($"(N)umber of questions: {numberOfQuestions}");
