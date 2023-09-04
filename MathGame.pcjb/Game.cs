@@ -4,6 +4,7 @@ internal class Game
 {
     private GameType type = GameType.None;
     private GameDifficulty difficulty = GameDifficulty.Normal;
+    private DateTime startedAt;
     private int presentedQuestions = 0;
     private readonly int maxQuestions = 3;
     private int score = 0;
@@ -64,6 +65,7 @@ internal class Game
     {
         presentedQuestions = 0;
         score = 0;
+        startedAt = DateTime.Now;
         return GameState.Question;
     }
 
@@ -89,8 +91,10 @@ internal class Game
 
     private GameState Score()
     {
-        history.Add(new GameResult(type, difficulty, score));
-        Screen.ShowScore(type, score);
+        var duration = DateTime.Now.Subtract(startedAt);
+        var result = new GameResult(type, difficulty, score, duration);
+        history.Add(result);
+        Screen.ShowScore(result);
         return GameState.Menu;
     }
 

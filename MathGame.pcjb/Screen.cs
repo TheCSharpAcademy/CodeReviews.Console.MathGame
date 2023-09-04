@@ -45,11 +45,12 @@ internal static class Screen
         Console.ReadKey();
     }
 
-    internal static void ShowScore(GameType type, int score)
+    internal static void ShowScore(GameResult result)
     {
         Console.Clear();
-        Console.WriteLine($"{type} game completed.");
-        Console.WriteLine($"Your score: {score}");
+        Console.WriteLine($"{result.Type} game completed.");
+        Console.WriteLine($"Your score: {result.Score}");
+        Console.WriteLine($"Time elapsed: {FormatDuration(result.Duration)}");
         Console.WriteLine("Type any key to return to the main menu.");
         Console.ReadKey();
     }
@@ -67,10 +68,10 @@ internal static class Screen
 
         if (history != null && history.Count > 0)
         {
-            Console.WriteLine(String.Format("{0,-15}{1,-11}{2,5}", "Game", "Difficulty", "Score"));
+            Console.WriteLine(String.Format("{0,-15}{1,-11}{2,5}{3,9}", "Game", "Difficulty", "Score", "Duration"));
             foreach (var result in history)
             {
-                Console.WriteLine($"{result.Type,-15}{result.Difficulty,-11}{result.Score,5}");
+                Console.WriteLine($"{result.Type,-15}{result.Difficulty,-11}{result.Score,5}{FormatDuration(result.Duration),9}");
             }
         }
         else
@@ -90,5 +91,10 @@ internal static class Screen
         Console.WriteLine("(N)ormal");
         Console.WriteLine("(H)ard");
         return char.ToUpper(Console.ReadKey().KeyChar);
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        return duration.ToString(@"mm\:ss"); // No hours displayed as a game should barely take minutes
     }
 }
