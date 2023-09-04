@@ -6,7 +6,9 @@ internal class Game
     private GameDifficulty difficulty = GameDifficulty.Normal;
     private DateTime startedAt;
     private int presentedQuestions = 0;
-    private readonly int maxQuestions = 3;
+    private int numberOfQuestions = 3;
+    private readonly int minNumberOfQuestions = 1;
+    private readonly int maxNumberOfQuestions = 99;
     private int score = 0;
     private readonly List<GameResult> history = new();
 
@@ -23,6 +25,7 @@ internal class Game
                 GameState.Question => Question(),
                 GameState.Score => Score(),
                 GameState.History => History(),
+                GameState.NumberOfQuestions => NumberOfQuestions(),
                 GameState.Quit => Quit(),
                 _ => GameState.Menu,
             };
@@ -32,7 +35,7 @@ internal class Game
 
     private GameState Menu()
     {
-        var selection = Screen.ShowMenu(difficulty);
+        var selection = Screen.ShowMenu(difficulty, numberOfQuestions);
         switch (selection)
         {
             case 'A':
@@ -52,6 +55,8 @@ internal class Game
                 return GameState.History;
             case 'L':
                 return GameState.Difficulty;
+            case 'N':
+                return GameState.NumberOfQuestions;
             case 'Q':
                 type = GameType.None;
                 return GameState.Quit;
@@ -79,7 +84,7 @@ internal class Game
             score++;
         }
         Screen.ShowResult(question);
-        if (presentedQuestions < maxQuestions)
+        if (presentedQuestions < numberOfQuestions)
         {
             return GameState.Question;
         }
@@ -121,6 +126,23 @@ internal class Game
             default:
                 return GameState.Difficulty;
         }
+    }
+
+    private GameState NumberOfQuestions()
+    {
+        var input = Screen.ShowNumberOfQuestions(minNumberOfQuestions, maxNumberOfQuestions);
+        if (!int.TryParse(input, out int number))
+        {
+            return GameState.NumberOfQuestions;
+        }
+
+        if (number < minNumberOfQuestions || number > maxNumberOfQuestions)
+        {
+            return GameState.NumberOfQuestions;
+        }
+
+        numberOfQuestions = number;
+        return GameState.Menu;
     }
 
     private GameState Quit()

@@ -2,7 +2,7 @@ using MathGame.pcjb.Models;
 
 internal static class Screen
 {
-    internal static char ShowMenu(GameDifficulty difficulty)
+    internal static char ShowMenu(GameDifficulty difficulty, int numberOfQuestions)
     {
         Console.Clear();
         Console.WriteLine("### Math Game ###");
@@ -12,6 +12,7 @@ internal static class Screen
         Console.WriteLine("(D)ivision Game");
         Console.WriteLine("(H)istory of previous games");
         Console.WriteLine($"(L)evel of difficulty: {difficulty}");
+        Console.WriteLine($"(N)umber of questions: {numberOfQuestions}");
         Console.WriteLine("(Q)uit");
         return char.ToUpper(Console.ReadKey().KeyChar);
     }
@@ -91,6 +92,13 @@ internal static class Screen
         Console.WriteLine("(N)ormal");
         Console.WriteLine("(H)ard");
         return char.ToUpper(Console.ReadKey().KeyChar);
+    }
+
+    internal static string? ShowNumberOfQuestions(int minNumberOfQuestions, int maxNumberOfQuestions)
+    {
+        Console.Clear();
+        Console.WriteLine($"Enter number of questions per game ({minNumberOfQuestions}-{maxNumberOfQuestions}):");
+        return Console.ReadLine();
     }
 
     private static string FormatDuration(TimeSpan duration)
