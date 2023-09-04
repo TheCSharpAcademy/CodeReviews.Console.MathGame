@@ -6,10 +6,10 @@ internal static class MathQuestionFactory
     {
         return type switch
         {
-            GameType.Addition => new AdditionQuestion(type),
-            GameType.Subtraction => new SubtractionQuestion(type),
-            GameType.Multiplication => new MultiplicationQuestion(type),
-            GameType.Division => new DivisionQuestion(type),
+            GameType.Addition => new AdditionQuestion(),
+            GameType.Subtraction => new SubtractionQuestion(),
+            GameType.Multiplication => new MultiplicationQuestion(),
+            GameType.Division => new DivisionQuestion(),
             _ => throw new NotImplementedException(),
         };
     }

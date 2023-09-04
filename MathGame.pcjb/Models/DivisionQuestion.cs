@@ -2,7 +2,7 @@ namespace MathGame.pcjb.Models;
 
 internal class DivisionQuestion : MathQuestion
 {
-    public DivisionQuestion(GameType type) : base(type)
+    public DivisionQuestion() : base(GameType.Division)
     {
         Random rnd = new();
         int dividend, divisor;
