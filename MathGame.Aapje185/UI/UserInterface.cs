@@ -42,10 +42,13 @@ public class UserInterface : IUserInterface
         {
             Console.WriteLine($"The chosen option is not available, please enter a valid option.");
         }
-
-        if (userChoice == 5) return;
         
         _options[userChoice].Item2.Invoke();
+        
+        if (userChoice.Equals(6))
+        {
+            return;
+        }
         PresentMenuToUser();
         GetOptionFromUser();
     }
