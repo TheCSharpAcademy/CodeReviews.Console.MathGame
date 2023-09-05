@@ -5,11 +5,11 @@ internal class Game
     private GameType type = GameType.None;
     private GameDifficulty difficulty = GameDifficulty.Normal;
     private DateTime startedAt;
-    private int presentedQuestions = 0;
+    private int presentedQuestions;
     private int numberOfQuestions = 3;
     private readonly int minNumberOfQuestions = 1;
     private readonly int maxNumberOfQuestions = 99;
-    private int score = 0;
+    private int score;
     private readonly List<GameResult> history = new();
 
     internal void Run()
