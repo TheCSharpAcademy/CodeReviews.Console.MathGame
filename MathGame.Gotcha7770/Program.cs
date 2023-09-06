@@ -4,32 +4,63 @@
 using MathGame.Gotcha7770;
 using Spectre.Console;
 
-AnsiConsole.Clear();
-AnsiConsole.Write(new FigletText("Math Game project for The C# Academy")
-    .Centered()
-    .Color(Color.Green));
+var playersChoice = Choice.MainMenu;
 
-AnsiConsole.WriteLine();
-var whatsNext = AnsiConsole.Prompt(
-    new SelectionPrompt<Choice>
-        {
-            Converter = value => value is Choice.PlayAgain ? "Let`s start the game!" : "I`m busy, not now..."
-        }
-        .Title("Hi! Do you want play or quit?")
-        .AddChoices(Choice.PlayAgain, Choice.Quit));
-
-while (whatsNext is not Choice.Quit)
+do
 {
-    if (whatsNext == Choice.ShowHistory)
-    {
-        AnsiConsole.Write(Game.History.ToRows());
-    }
-    else
-    {
-        var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>()
-            .Title("Choose Math operation:")
-            .AddChoices(Enum.GetValues<MathOperation>()));
+    AnsiConsole.Clear();
 
+    switch (playersChoice)
+    {
+        case Choice.MainMenu:
+            playersChoice = PrintMainMenu();
+            break;
+        case Choice.TrainExample:
+            StartTrainLoop();
+            playersChoice = Choice.MainMenu;
+            break;
+        case Choice.GameHistory:
+            PrintHistory();
+            playersChoice = Choice.MainMenu;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException(nameof(playersChoice));
+    }
+} while (playersChoice is not Choice.Quit);
+
+AnsiConsole.Clear();
+
+void PrintTitle()
+{
+    AnsiConsole.Write(new FigletText("Math Game project for")
+        .Centered()
+        .Color(Color.Green));
+    AnsiConsole.Write(new FigletText("The C# Academy")
+        .Centered()
+        .Color(Color.Purple));
+    AnsiConsole.WriteLine();
+}
+
+Choice PrintMainMenu()
+{
+    PrintTitle();
+
+    return AnsiConsole.Prompt(new SelectionPrompt<Choice>()
+        .Title("What`s next?")
+        .AddChoices(Choice.TrainExample, Choice.GameHistory, Choice.Quit));
+}
+
+void StartTrainLoop()
+{
+    PrintTitle();
+
+    var input = AnsiConsole.Prompt(new SelectionPrompt<MathOperation>()
+        .Title("Choose Math operation:")
+        .AddChoices(Enum.GetValues<MathOperation>()));
+
+    bool tryAgain;
+    do
+    {
         var gameTurn = Game.NextTurn(input);
         AnsiConsole.WriteLine(gameTurn.Expression);
         int answer = AnsiConsole.Ask<int>("Enter the answer:");
@@ -42,26 +73,29 @@ while (whatsNext is not Choice.Quit)
         {
             AnsiConsole.MarkupLine($"Sorry, but answer is {gameTurn.Value} :pensive_face:");
         }
-        
+
+        tryAgain = AnsiConsole.Prompt(new SelectionPrompt<bool> { Converter = value => value ? "Yes give me a chance!" : "No i`m done" }
+            .Title("Try again?")
+            .AddChoices(true, false));
+
         Game.SaveAnswer(gameTurn, answer);
-    }
-
-    AnsiConsole.WriteLine();
-    whatsNext = AnsiConsole.Prompt(new SelectionPrompt<Choice>()
-        .Title("What`s next?")
-        .AddChoices(Enum.GetValues<Choice>()));
-
-    AnsiConsole.Clear();
-    AnsiConsole.Write(new FigletText("Math Game project for The C# Academy")
-        .Centered()
-        .Color(Color.Green));
+    } while (tryAgain);
 }
 
-AnsiConsole.Clear();
+void PrintHistory()
+{
+    AnsiConsole.Write(Game.History.ToRows());
+    
+    AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("Back to main menu?")
+            .AddChoices("Press enter"));
+}
 
 public enum Choice
 {
-    PlayAgain,
-    ShowHistory,
+    MainMenu,
+    TrainExample,
+    GameHistory,
     Quit
 }
