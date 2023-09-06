@@ -46,9 +46,13 @@ public static class Game
     {
         public static GameTurn GetNext(Random random)
         {
-            int x = random.Next(0, 999);
-            int y = random.Next(0, 999);
-            
+            int x, y;
+            do
+            {
+                x = random.Next(0, 999);
+                y = random.Next(0, 999);
+            } while (x < y);
+
             return new GameTurn(x - y, $"{x} - {y}");
         }
     }
@@ -73,7 +77,7 @@ public static class Game
             {
                 x = random.Next(0, 999);
                 y = random.Next(1, 99);
-            } while ( x < y || x % y != 0);
+            } while (x < y || x % y != 0);
        
             return new GameTurn(x / y, $"{x} / {y}");
         }
