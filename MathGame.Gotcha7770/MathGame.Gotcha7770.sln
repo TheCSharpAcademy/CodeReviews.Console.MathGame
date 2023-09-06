@@ -2,12 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathGame.Gotcha7770", "MathGame.Gotcha7770.csproj", "{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{007C85ED-3343-4F11-827C-5B28CEF64F3A}"
-	ProjectSection(SolutionItems) = preProject
-		activity.puml = activity.puml
-		state-machine.puml = state-machine.puml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
