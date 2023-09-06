@@ -1,6 +1,6 @@
-﻿namespace Math_Game
-{
-    internal class Menu
+﻿namespace Math_Game;
+
+internal class Menu
     {
         GameEngine gameEngine = new();
         internal void ShowMenu(string name, DateTime date)
@@ -53,9 +53,5 @@ Q - Quit the program");
                 }
             }
             while (isGameOn);
-
-
         }
-
     }
-}

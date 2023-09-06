@@ -1,9 +1,11 @@
 ﻿using Math_Game.Models;
 
-namespace Math_Game
-{
-    internal class Helpers
+namespace Math_Game;
+
+internal class Helpers
     {
+        internal static List<Game> games = new();
+
         internal static void AddToHistory(int gameScore, GameType gameType)
         {
             games.Add(new Game
@@ -14,7 +16,6 @@ namespace Math_Game
             });
         }
 
-        internal static List<Game> games = new();
         internal static void PrintGames()
         {
             Console.Clear();
@@ -22,13 +23,13 @@ namespace Math_Game
             Console.WriteLine("--------------------");
             foreach (var game in games)
             {
-
                 Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points");
             }
             Console.WriteLine("--------------------\n");
             Console.WriteLine("Press any key to return to main menu");
             Console.ReadLine();
         }
+
         internal static int[] GetDivisionNumbers()
         {
             var random = new Random();
@@ -69,8 +70,6 @@ namespace Math_Game
                 Console.WriteLine("Name can't be empty. Please enter your name");
                 name = Console.ReadLine();
             }
-
             return name;
         }
     }
-}
