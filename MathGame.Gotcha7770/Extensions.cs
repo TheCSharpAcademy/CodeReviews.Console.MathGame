@@ -2,7 +2,7 @@
 
 namespace MathGame.Gotcha7770;
 
-public static class Extensions
+internal static class Extensions
 {
     public static Rows ToRows<T>(this IEnumerable<T> source, Func<T, string> convertion = default)
     {
