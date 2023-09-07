@@ -8,78 +8,71 @@ public enum MathOperation
     Division
 }
 
-public static class Game
+public class Game
 {
-    private static readonly Random Random = new Random((int)DateTime.Now.Ticks);
-    private static readonly List<GameTurn> _history = new List<GameTurn>();
-    public static IReadOnlyCollection<GameTurn> History => _history;
+    private readonly Random _random = new Random((int)DateTime.Now.Ticks);
+    private readonly List<GameTurn> _history = new List<GameTurn>();
+    public IReadOnlyCollection<GameTurn> History => _history;
 
-    public static GameTurn NextTurn(MathOperation operation)
+    public void StartTraining()
+    {
+        throw new NotImplementedException();
+    }
+
+    public GameTurn NextTurn(MathOperation operation)
     {
         return operation switch
         {
-            MathOperation.Addition => Addition.GetNext(Random),
-            MathOperation.Subtraction => Subtraction.GetNext(Random),
-            MathOperation.Multiplication => Multiplication.GetNext(Random),
-            MathOperation.Division => Division.GetNext(Random),
+            MathOperation.Addition => GetAddition(_random),
+            MathOperation.Subtraction => GetSubtraction(_random),
+            MathOperation.Multiplication => GetMultiplication(_random),
+            MathOperation.Division => GetDivision(_random),
             _ => throw new ArgumentOutOfRangeException(nameof(operation))
         };
     }
-    
-    public static void SaveAnswer(GameTurn gameTurn, int answer)
+
+    public void SaveAnswer(GameTurn gameTurn, int answer)
     {
         _history.Add(gameTurn with { PlayerAnswer = answer });
     }
 
-    private class Addition
+    private GameTurn GetAddition(Random random)
     {
-        public static GameTurn GetNext(Random random)
-        {
-            int x = random.Next(0, 999);
-            int y = random.Next(0, 999);
-            
-            return new GameTurn(x + y, $"{x} + {y}");
-        }
+        int x = random.Next(0, 999);
+        int y = random.Next(0, 999);
+
+        return new GameTurn(x + y, $"{x} + {y}");
     }
 
-    private class Subtraction
+    private GameTurn GetSubtraction(Random random)
     {
-        public static GameTurn GetNext(Random random)
+        int x, y;
+        do
         {
-            int x, y;
-            do
-            {
-                x = random.Next(0, 999);
-                y = random.Next(0, 999);
-            } while (x < y);
+            x = random.Next(0, 999);
+            y = random.Next(0, 999);
+        } while (x < y);
 
-            return new GameTurn(x - y, $"{x} - {y}");
-        }
+        return new GameTurn(x - y, $"{x} - {y}");
     }
 
-    private class Multiplication
+    private GameTurn GetMultiplication(Random random)
     {
-        public static GameTurn GetNext(Random random)
-        {
-            int x = random.Next(0, 99);
-            int y = random.Next(0, 99);
-            
-            return new GameTurn(x * y, $"{x} * {y}");
-        }
+        int x = random.Next(0, 99);
+        int y = random.Next(0, 99);
+
+        return new GameTurn(x * y, $"{x} * {y}");
     }
 
-    private class Division
+    private GameTurn GetDivision(Random random)
     {
-        public static GameTurn GetNext(Random random)
+        int x, y;
+        do
         {
-            int x, y;
-            do
-            {
-                x = random.Next(0, 999);
-                y = random.Next(1, 99);
-            } while (x < y || x % y != 0);
-       
-            return new GameTurn(x / y, $"{x} / {y}");
-        }
+            x = random.Next(0, 999);
+            y = random.Next(1, 99);
+        } while (x < y || x % y != 0);
+
+        return new GameTurn(x / y, $"{x} / {y}");
     }
 }
