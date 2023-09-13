@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathGame.Gotcha7770", "MathGame.Gotcha7770.csproj", "{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEA993C-4D5E-4CCA-8D34-A6F4AC61AAD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
