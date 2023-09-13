@@ -14,11 +14,6 @@ public class Game
     private readonly List<GameTurn> _history = new List<GameTurn>();
     public IReadOnlyCollection<GameTurn> History => _history;
 
-    public void StartTraining()
-    {
-        throw new NotImplementedException();
-    }
-
     public GameTurn NextTurn(MathOperation operation)
     {
         return operation switch
