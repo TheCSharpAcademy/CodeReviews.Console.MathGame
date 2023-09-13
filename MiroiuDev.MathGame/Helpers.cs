@@ -49,7 +49,7 @@ internal class Helpers
         Console.WriteLine("Games History");
         Console.WriteLine("----------------------------------");
 
-        foreach (var game in _games)
+        foreach (var game in gamesToPrint)
         {
             Console.WriteLine($"{game.Date} - {game.Type}: Score = {game.Score}");
         }
