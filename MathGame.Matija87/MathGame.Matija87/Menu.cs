@@ -1,4 +1,4 @@
-﻿using MathGame.Matija87;
+﻿namespace MathGame.Matija87;
 
 public class Menu
 {
@@ -17,6 +17,7 @@ public class Menu
             Console.Clear();
             Console.WriteLine("-------------------------------------------------------");
             Console.WriteLine(@"Choose your game: 
+View Previous Games (V)
 Addition (A)
 Subtraction (S)
 Multiplication (M)
@@ -32,6 +33,10 @@ Quit (Q)");
                 Console.WriteLine();
                 switch (gameSelected)
                 {
+                    case 'v':
+                        Helpers.GetGames();
+                        correctInput = true;
+                        break;
                     case 'a':
                         GameEngine.Addition();
                         correctInput = true;
