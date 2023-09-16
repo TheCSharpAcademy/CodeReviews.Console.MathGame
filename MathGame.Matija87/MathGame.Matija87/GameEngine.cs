@@ -37,7 +37,7 @@
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
 
-            Helpers.games.Add($"{DateTime.Now} - Addition: Score = {score}");
+            Helpers.AddToHistory(score, "Addition");
         }
 
         public static void Subtraction()
@@ -74,7 +74,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.games.Add($"{DateTime.Now} - Subtraction: Score = {score}");
+            Helpers.AddToHistory(score, "Subtraction");
         }
 
         public static void Multiplication()
@@ -111,7 +111,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.games.Add($"{DateTime.Now} - Multiplication: Score = {score}");
+            Helpers.AddToHistory(score, "Multiplication");
         }
 
         public static void Division()
@@ -150,7 +150,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.games.Add($"{DateTime.Now} - Division: Score = {score}");
+            Helpers.AddToHistory(score, "Division");
         }
 
     }

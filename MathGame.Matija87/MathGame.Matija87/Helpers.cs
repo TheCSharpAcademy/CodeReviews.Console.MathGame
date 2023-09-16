@@ -53,5 +53,10 @@
             Console.ReadKey();
             Console.Clear();
         }
+
+        public static void AddToHistory(int gameScore, string gameType)
+        {
+            games.Add($"{DateTime.Now} - {gameType}: {gameScore}");
+        }
     }
 }
