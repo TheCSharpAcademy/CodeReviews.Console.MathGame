@@ -1,5 +1,4 @@
-﻿using MathGame.Matija87.Models;
-using static MathGame.Matija87.Models.Game;
+﻿using static MathGame.Matija87.Models.Game;
 
 namespace MathGame.Matija87
 {
@@ -21,12 +20,10 @@ namespace MathGame.Matija87
                 firstNumber = random.Next(1, 10);
                 secondNumber = random.Next(1, 10);
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
-                
-                do
-                {
-                    result = Console.ReadLine();
-                } while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _));
 
+                result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+                               
                 if (int.Parse(result) == firstNumber + secondNumber)
                 {
                     score++;
@@ -60,10 +57,8 @@ namespace MathGame.Matija87
                 secondNumber = random.Next(1, 10);
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
 
-                do
-                {
-                    result = Console.ReadLine();
-                } while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _));
+                result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber - secondNumber)
                 {
@@ -97,10 +92,8 @@ namespace MathGame.Matija87
                 secondNumber = random.Next(1, 10);
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
-                do
-                {
-                    result = Console.ReadLine();
-                } while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _));
+                result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
@@ -136,10 +129,8 @@ namespace MathGame.Matija87
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
 
-                do
-                {
-                    result = Console.ReadLine();
-                } while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _));
+                result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber / secondNumber)
                 {

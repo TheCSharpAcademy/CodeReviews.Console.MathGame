@@ -7,6 +7,7 @@ public class Menu
         char gameSelected;
         bool isGameOn = true;
 
+        Console.Clear();
         Console.WriteLine($"Hi {name}! Welcome to Math Game!");
         Console.WriteLine($"Today is {dateTime}");
         Console.WriteLine("Press any key to start the game!");

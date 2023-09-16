@@ -65,5 +65,15 @@ namespace MathGame.Matija87
                 Type = gameType
             });
         }
+
+        internal static string? ValidateResult(string result)
+        {
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+            {
+                Console.WriteLine("Answer needs to be an integer. Try again!");
+                result = Console.ReadLine();
+            }
+            return result;
+        }
     }
 }
