@@ -1,4 +1,5 @@
 ﻿using MathGame.Matija87.Models;
+using static MathGame.Matija87.Models.Game;
 
 namespace MathGame.Matija87
 {
@@ -55,7 +56,7 @@ namespace MathGame.Matija87
             Console.Clear();
         }
 
-        internal static void AddToHistory(int gameScore, string gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType)
         {
             games.Add(new Game
             {

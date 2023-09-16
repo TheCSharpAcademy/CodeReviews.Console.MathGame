@@ -1,4 +1,7 @@
-﻿namespace MathGame.Matija87
+﻿using MathGame.Matija87.Models;
+using static MathGame.Matija87.Models.Game;
+
+namespace MathGame.Matija87
 {
     internal static class GameEngine
     {
@@ -37,7 +40,7 @@
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
 
-            Helpers.AddToHistory(score, "Addition");
+            Helpers.AddToHistory(score, GameType.Addition);
         }
 
         internal static void Subtraction()
@@ -74,7 +77,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, "Subtraction");
+            Helpers.AddToHistory(score, GameType.Subtraction);
         }
 
         internal static void Multiplication()
@@ -111,7 +114,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, "Multiplication");
+            Helpers.AddToHistory(score, GameType.Multiplication);
         }
 
         internal static void Division()
@@ -150,7 +153,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, "");
+            Helpers.AddToHistory(score, GameType.Division);
         }
 
     }
