@@ -2,7 +2,7 @@
 
 public class Menu
 {
-    public void DisplayMenu(string name, DateTime dateTime)
+    internal void DisplayMenu(string name, DateTime dateTime)
     {
         char gameSelected;
         bool isGameOn = true;

@@ -1,8 +1,11 @@
-﻿namespace MathGame.Matija87
+﻿using MathGame.Matija87.Models;
+
+namespace MathGame.Matija87
 {
-    public static class Helpers
+    internal static class Helpers
     {
-        public static string GetName()
+        internal static List<Game> games = new();
+        internal static string GetName()
         {
             Console.Write("Enter your name: ");
             string? name = Console.ReadLine();
@@ -15,7 +18,7 @@
             return name;
         }
 
-        public static int[] GetDivisionNumbers()
+        internal static int[] GetDivisionNumbers()
         {
             Random random = new();
             int firstNumber = random.Next(0, 99);
@@ -34,18 +37,16 @@
 
             return result;
         }
-
-        internal static List<string> games = new();
-
-        public static void GetGames()
+              
+        internal static void GetGames()
         {
             Console.Clear();
             Console.WriteLine("Games History:");
             Console.WriteLine("---------------------------");
             
-            foreach (string game in games) 
+            foreach (Game game in games) 
             {
-                Console.WriteLine(game);
+                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Score} pts");
             }
 
             Console.WriteLine("---------------------------");
@@ -54,9 +55,14 @@
             Console.Clear();
         }
 
-        public static void AddToHistory(int gameScore, string gameType)
+        internal static void AddToHistory(int gameScore, string gameType)
         {
-            games.Add($"{DateTime.Now} - {gameType}: {gameScore}");
+            games.Add(new Game
+            {
+                DateTime = DateTime.Now,
+                Score = gameScore,
+                Type = gameType
+            });
         }
     }
 }

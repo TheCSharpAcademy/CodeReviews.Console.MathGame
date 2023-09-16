@@ -2,7 +2,7 @@
 {
     internal static class GameEngine
     {
-        public static void Addition()
+        internal static void Addition()
         {
             Random random = new();
             Console.WriteLine("Addition game");
@@ -40,7 +40,7 @@
             Helpers.AddToHistory(score, "Addition");
         }
 
-        public static void Subtraction()
+        internal static void Subtraction()
         {
             Random random = new();
             Console.WriteLine("Subtraction game");
@@ -77,7 +77,7 @@
             Helpers.AddToHistory(score, "Subtraction");
         }
 
-        public static void Multiplication()
+        internal static void Multiplication()
         {
             Random random = new();
             Console.WriteLine("Multiplication game");
@@ -114,7 +114,7 @@
             Helpers.AddToHistory(score, "Multiplication");
         }
 
-        public static void Division()
+        internal static void Division()
         {
             Console.WriteLine("Division game");
             Console.WriteLine("-------------");
@@ -150,7 +150,7 @@
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, "Division");
+            Helpers.AddToHistory(score, "");
         }
 
     }
