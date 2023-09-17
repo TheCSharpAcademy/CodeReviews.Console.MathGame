@@ -107,7 +107,7 @@ namespace MathGame.Matija87
                         difficultyChoice = Console.ReadKey().KeyChar;
                         break;
                 }
-            };
+            }
          }
 
         internal static int NumberOfQuestions ()

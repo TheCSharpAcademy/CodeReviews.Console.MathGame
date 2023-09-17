@@ -61,7 +61,7 @@ Quit (Q)");
                     default:
                         Console.WriteLine("Wrong selection! Try again!");
                         break;
-                };
+                }
             } while (!correctInput && isGameOn);
 
         } while (isGameOn);
