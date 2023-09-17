@@ -2,6 +2,7 @@
 internal class Game
 {
     public int Score { get; set; }
+    public int NumberOfQuestions { get; set; }
     public GameType Type { get; set; }
     public DateTime DateTime { get; set; }
     public double Time { get; set; }

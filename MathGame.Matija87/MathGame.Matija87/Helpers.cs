@@ -47,7 +47,7 @@ namespace MathGame.Matija87
             
             foreach (Game game in games) 
             {
-                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Difficulty}: {game.Time}s: {game.Score} pts");
+                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Difficulty}: {game.Time}s: {game.Score}/{game.NumberOfQuestions} pts");
             }
 
             Console.WriteLine("---------------------------");
@@ -56,12 +56,13 @@ namespace MathGame.Matija87
             Console.Clear();
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType, DifficultyLevel difficuly, double time)
+        internal static void AddToHistory(int gameScore, int numberOfQuestions, GameType gameType, DifficultyLevel difficuly, double time)
         {
             games.Add(new Game
             {
                 DateTime = DateTime.Now,
                 Score = gameScore,
+                NumberOfQuestions = numberOfQuestions,
                 Type = gameType,
                 Difficulty = difficuly,
                 Time = time
@@ -108,6 +109,19 @@ namespace MathGame.Matija87
                 }
             };
             
+        }
+
+        internal static int NumberOfQuestions ()
+        {
+            Console.WriteLine("How many questions do you want:");
+            string input = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(input) || !Int32.TryParse(input, out _) || Convert.ToInt32(input) < 1)
+            {                
+                Console.WriteLine("Answer needs to be positive integer. Try again!");
+                input = Console.ReadLine();
+            }
+            return Convert.ToInt32(input);            
         }
 
     }

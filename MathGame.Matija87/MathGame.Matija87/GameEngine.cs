@@ -27,6 +27,8 @@ namespace MathGame.Matija87
                     break;
             };
 
+            int numberOfQuestions = Helpers.NumberOfQuestions();
+
             Console.WriteLine("Addition game");
             Console.WriteLine("-------------");
 
@@ -37,7 +39,7 @@ namespace MathGame.Matija87
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 firstNumber = random.Next(min, max);
                 secondNumber = random.Next(min, max);
@@ -65,7 +67,7 @@ namespace MathGame.Matija87
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
 
-            Helpers.AddToHistory(score, GameType.Addition, difficulty, Time);
+            Helpers.AddToHistory(score, numberOfQuestions, GameType.Addition, difficulty, Time);
         }
 
         internal static void Subtraction()
@@ -90,6 +92,9 @@ namespace MathGame.Matija87
                     max = 50;
                     break;
             };
+
+            int numberOfQuestions = Helpers.NumberOfQuestions();
+
             Console.WriteLine("Subtraction game");
             Console.WriteLine("-----------------");
 
@@ -100,7 +105,7 @@ namespace MathGame.Matija87
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 firstNumber = random.Next(min, max);
                 secondNumber = random.Next(min, max);
@@ -126,7 +131,7 @@ namespace MathGame.Matija87
 
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Subtraction, difficulty, Time);
+            Helpers.AddToHistory(score,numberOfQuestions, GameType.Subtraction, difficulty, Time);
         }
 
         internal static void Multiplication()
@@ -151,6 +156,9 @@ namespace MathGame.Matija87
                     max = 50;
                     break;
             };
+
+            int numberOfQuestions = Helpers.NumberOfQuestions();
+
             Console.WriteLine("Multiplication game");
             Console.WriteLine("--------------------");
 
@@ -161,7 +169,7 @@ namespace MathGame.Matija87
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 firstNumber = random.Next(min, max);
                 secondNumber = random.Next(min, max);
@@ -187,7 +195,7 @@ namespace MathGame.Matija87
 
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Multiplication, difficulty, Time);
+            Helpers.AddToHistory(score, numberOfQuestions, GameType.Multiplication, difficulty, Time);
         }
 
         internal static void Division()
@@ -212,6 +220,8 @@ namespace MathGame.Matija87
                     break;
             };
 
+            int numberOfQuestions = Helpers.NumberOfQuestions();
+
             Console.WriteLine("Division game");
             Console.WriteLine("-------------");
 
@@ -222,7 +232,7 @@ namespace MathGame.Matija87
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 int[] divisionNumbers = Helpers.GetDivisionNumbers(min, max);
                 firstNumber = divisionNumbers[0];
@@ -251,7 +261,7 @@ namespace MathGame.Matija87
 
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Division, difficulty, Time);
+            Helpers.AddToHistory(score, numberOfQuestions, GameType.Division, difficulty, Time);
         }
 
     }
