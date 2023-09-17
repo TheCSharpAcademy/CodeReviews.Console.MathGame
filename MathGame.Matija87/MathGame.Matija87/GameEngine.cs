@@ -90,7 +90,7 @@ namespace MathGame.Matija87
                     min = 10;
                     max = 50;
                     break;
-            };
+            }
 
             int numberOfQuestions = Helpers.NumberOfQuestions();
 
