@@ -59,7 +59,6 @@ namespace MathGame.Matija87
                 }
             }
 
-
             DateTime stop = DateTime.Now;
             TimeSpan TimeElapsed = stop - start;
             double Time = TimeElapsed.TotalSeconds;
@@ -238,7 +237,6 @@ namespace MathGame.Matija87
                 firstNumber = divisionNumbers[0];
                 secondNumber = divisionNumbers[1];
 
-
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
 
                 result = Console.ReadLine();
@@ -263,6 +261,5 @@ namespace MathGame.Matija87
             Console.ReadKey();
             Helpers.AddToHistory(score, numberOfQuestions, GameType.Division, difficulty, Time);
         }
-
     }
 }

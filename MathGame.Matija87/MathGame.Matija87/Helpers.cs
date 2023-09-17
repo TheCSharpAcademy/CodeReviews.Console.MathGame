@@ -69,7 +69,7 @@ namespace MathGame.Matija87
             }) ;
         }
 
-        internal static string? ValidateResult(string result)
+        internal static string? ValidateResult(string? result)
         {
             while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
             {
@@ -108,13 +108,12 @@ namespace MathGame.Matija87
                         break;
                 }
             };
-            
-        }
+         }
 
         internal static int NumberOfQuestions ()
         {
             Console.WriteLine("How many questions do you want:");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
 
             while (string.IsNullOrEmpty(input) || !Int32.TryParse(input, out _) || Convert.ToInt32(input) < 1)
             {                
@@ -123,6 +122,5 @@ namespace MathGame.Matija87
             }
             return Convert.ToInt32(input);            
         }
-
     }
 }
