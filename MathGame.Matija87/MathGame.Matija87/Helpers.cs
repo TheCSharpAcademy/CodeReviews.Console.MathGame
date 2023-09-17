@@ -47,7 +47,7 @@ namespace MathGame.Matija87
             
             foreach (Game game in games) 
             {
-                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Difficulty}: {game.Score} pts");
+                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Difficulty}: {game.Time}s: {game.Score} pts");
             }
 
             Console.WriteLine("---------------------------");
@@ -56,14 +56,15 @@ namespace MathGame.Matija87
             Console.Clear();
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType, DifficultyLevel difficuly)
+        internal static void AddToHistory(int gameScore, GameType gameType, DifficultyLevel difficuly, double time)
         {
             games.Add(new Game
             {
                 DateTime = DateTime.Now,
                 Score = gameScore,
                 Type = gameType,
-                Difficulty = difficuly
+                Difficulty = difficuly,
+                Time = time
             }) ;
         }
 

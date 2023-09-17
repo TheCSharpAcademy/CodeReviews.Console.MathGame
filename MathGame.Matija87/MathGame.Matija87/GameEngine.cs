@@ -35,6 +35,8 @@ namespace MathGame.Matija87
             int score = 0;
             string? result;
 
+            DateTime start = DateTime.Now;
+
             for (int i = 0; i < 5; i++)
             {
                 firstNumber = random.Next(min, max);
@@ -54,10 +56,16 @@ namespace MathGame.Matija87
                     Console.WriteLine($"Wrong answer! Your score is {score} / {i + 1}");
                 }
             }
+
+
+            DateTime stop = DateTime.Now;
+            TimeSpan TimeElapsed = stop - start;
+            double Time = TimeElapsed.TotalSeconds;
+
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
 
-            Helpers.AddToHistory(score, GameType.Addition, difficulty);
+            Helpers.AddToHistory(score, GameType.Addition, difficulty, Time);
         }
 
         internal static void Subtraction()
@@ -90,6 +98,8 @@ namespace MathGame.Matija87
             int score = 0;
             string? result;
 
+            DateTime start = DateTime.Now;
+
             for (int i = 0; i < 5; i++)
             {
                 firstNumber = random.Next(min, max);
@@ -109,9 +119,14 @@ namespace MathGame.Matija87
                     Console.WriteLine($"Wrong answer! Your score is {score} / {i + 1}");
                 }
             }
+
+            DateTime stop = DateTime.Now;
+            TimeSpan TimeElapsed = stop - start;
+            double Time = TimeElapsed.TotalSeconds;
+
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Subtraction, difficulty);
+            Helpers.AddToHistory(score, GameType.Subtraction, difficulty, Time);
         }
 
         internal static void Multiplication()
@@ -144,6 +159,8 @@ namespace MathGame.Matija87
             int score = 0;
             string? result;
 
+            DateTime start = DateTime.Now;
+
             for (int i = 0; i < 5; i++)
             {
                 firstNumber = random.Next(min, max);
@@ -163,9 +180,14 @@ namespace MathGame.Matija87
                     Console.WriteLine($"Wrong answer! Your score is {score} / {i + 1}");
                 }
             }
+
+            DateTime stop = DateTime.Now;
+            TimeSpan TimeElapsed = stop - start;
+            double Time = TimeElapsed.TotalSeconds;
+
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Multiplication, difficulty);
+            Helpers.AddToHistory(score, GameType.Multiplication, difficulty, Time);
         }
 
         internal static void Division()
@@ -198,6 +220,8 @@ namespace MathGame.Matija87
             int score = 0;
             string? result;
 
+            DateTime start = DateTime.Now;
+
             for (int i = 0; i < 5; i++)
             {
                 int[] divisionNumbers = Helpers.GetDivisionNumbers(min, max);
@@ -220,9 +244,14 @@ namespace MathGame.Matija87
                     Console.WriteLine($"Wrong answer! Your score is {score} / {i + 1}");
                 }
             }
+
+            DateTime stop = DateTime.Now;
+            TimeSpan TimeElapsed = stop - start;
+            double Time = TimeElapsed.TotalSeconds;
+
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Division, difficulty);
+            Helpers.AddToHistory(score, GameType.Division, difficulty, Time);
         }
 
     }
