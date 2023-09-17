@@ -19,18 +19,18 @@ namespace MathGame.Matija87
             return name;
         }
 
-        internal static int[] GetDivisionNumbers()
+        internal static int[] GetDivisionNumbers(int min, int max)
         {
             Random random = new();
-            int firstNumber = random.Next(0, 99);
-            int secondNumber = random.Next(1, 99); //Prevents dividing by 0
+            int firstNumber = random.Next(min, max);
+            int secondNumber = random.Next(min, max); 
 
             int[] result = new int[2];
 
             while (firstNumber % secondNumber != 0)
             {
-                firstNumber = random.Next(0, 99);
-                secondNumber = random.Next(1, 99);
+                firstNumber = random.Next(min, max);
+                secondNumber = random.Next(min, max);
             }
 
             result[0] = firstNumber;
@@ -47,7 +47,7 @@ namespace MathGame.Matija87
             
             foreach (Game game in games) 
             {
-                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Score} pts");
+                Console.WriteLine($"{game.DateTime} - {game.Type}: {game.Difficulty}: {game.Score} pts");
             }
 
             Console.WriteLine("---------------------------");
@@ -56,14 +56,15 @@ namespace MathGame.Matija87
             Console.Clear();
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType, DifficultyLevel difficuly)
         {
             games.Add(new Game
             {
                 DateTime = DateTime.Now,
                 Score = gameScore,
-                Type = gameType
-            });
+                Type = gameType,
+                Difficulty = difficuly
+            }) ;
         }
 
         internal static string? ValidateResult(string result)
@@ -75,5 +76,38 @@ namespace MathGame.Matija87
             }
             return result;
         }
+
+        internal static DifficultyLevel Difficulty()
+        {
+            Console.WriteLine("Choose difficulty: ");
+            Console.WriteLine("Easy (E)\nMedium (M)\nHard(H)");
+
+            char difficultyChoice;
+                        
+            difficultyChoice = Console.ReadKey().KeyChar;
+            difficultyChoice = Char.ToLower(difficultyChoice);
+
+            while (true)
+            {
+                switch (difficultyChoice) 
+                {
+                    case 'e':
+                        Console.WriteLine();
+                        return DifficultyLevel.Easy;
+                    case 'm':
+                        Console.WriteLine();
+                        return DifficultyLevel.Medium;
+                    case 'h':
+                        Console.WriteLine();
+                        return DifficultyLevel.Hard;
+                    default:
+                        Console.WriteLine("\nWrong input! Try again!\n");
+                        difficultyChoice = Console.ReadKey().KeyChar;
+                        break;
+                }
+            };
+            
+        }
+
     }
 }

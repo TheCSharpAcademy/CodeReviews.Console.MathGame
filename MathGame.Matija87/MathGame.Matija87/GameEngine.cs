@@ -7,6 +7,26 @@ namespace MathGame.Matija87
         internal static void Addition()
         {
             Random random = new();
+            int min=0, max=0;
+
+            DifficultyLevel difficulty = Helpers.Difficulty();
+
+            switch (difficulty)
+            {
+                case DifficultyLevel.Easy:
+                    min = 1;
+                    max = 10;
+                    break;
+                case DifficultyLevel.Medium:
+                    min = 5;
+                    max = 20;
+                    break;
+                case DifficultyLevel.Hard:
+                    min = 10;
+                    max = 50;
+                    break;
+            };
+
             Console.WriteLine("Addition game");
             Console.WriteLine("-------------");
 
@@ -17,8 +37,8 @@ namespace MathGame.Matija87
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 10);
-                secondNumber = random.Next(1, 10);
+                firstNumber = random.Next(min, max);
+                secondNumber = random.Next(min, max);
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
 
                 result = Console.ReadLine();
@@ -37,12 +57,31 @@ namespace MathGame.Matija87
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
 
-            Helpers.AddToHistory(score, GameType.Addition);
+            Helpers.AddToHistory(score, GameType.Addition, difficulty);
         }
 
         internal static void Subtraction()
         {
             Random random = new();
+            int min = 0, max = 0;
+
+            DifficultyLevel difficulty = Helpers.Difficulty();
+
+            switch (difficulty)
+            {
+                case DifficultyLevel.Easy:
+                    min = 1;
+                    max = 10;
+                    break;
+                case DifficultyLevel.Medium:
+                    min = 5;
+                    max = 20;
+                    break;
+                case DifficultyLevel.Hard:
+                    min = 10;
+                    max = 50;
+                    break;
+            };
             Console.WriteLine("Subtraction game");
             Console.WriteLine("-----------------");
 
@@ -53,8 +92,8 @@ namespace MathGame.Matija87
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 10);
-                secondNumber = random.Next(1, 10);
+                firstNumber = random.Next(min, max);
+                secondNumber = random.Next(min, max);
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
 
                 result = Console.ReadLine();
@@ -72,12 +111,31 @@ namespace MathGame.Matija87
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Subtraction);
+            Helpers.AddToHistory(score, GameType.Subtraction, difficulty);
         }
 
         internal static void Multiplication()
         {
             Random random = new();
+            int min = 0, max = 0;
+
+            DifficultyLevel difficulty = Helpers.Difficulty();
+
+            switch (difficulty)
+            {
+                case DifficultyLevel.Easy:
+                    min = 1;
+                    max = 10;
+                    break;
+                case DifficultyLevel.Medium:
+                    min = 5;
+                    max = 20;
+                    break;
+                case DifficultyLevel.Hard:
+                    min = 10;
+                    max = 50;
+                    break;
+            };
             Console.WriteLine("Multiplication game");
             Console.WriteLine("--------------------");
 
@@ -88,8 +146,8 @@ namespace MathGame.Matija87
 
             for (int i = 0; i < 5; i++)
             {
-                firstNumber = random.Next(1, 10);
-                secondNumber = random.Next(1, 10);
+                firstNumber = random.Next(min, max);
+                secondNumber = random.Next(min, max);
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 result = Console.ReadLine();
@@ -107,11 +165,31 @@ namespace MathGame.Matija87
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Multiplication);
+            Helpers.AddToHistory(score, GameType.Multiplication, difficulty);
         }
 
         internal static void Division()
         {
+            int min = 0, max = 0;
+
+            DifficultyLevel difficulty = Helpers.Difficulty();
+
+            switch (difficulty)
+            {
+                case DifficultyLevel.Easy:
+                    min = 1;
+                    max = 20;
+                    break;
+                case DifficultyLevel.Medium:
+                    min = 2;
+                    max = 100;
+                    break;
+                case DifficultyLevel.Hard:
+                    min = 3;
+                    max = 200;
+                    break;
+            };
+
             Console.WriteLine("Division game");
             Console.WriteLine("-------------");
 
@@ -122,7 +200,7 @@ namespace MathGame.Matija87
 
             for (int i = 0; i < 5; i++)
             {
-                int[] divisionNumbers = Helpers.GetDivisionNumbers();
+                int[] divisionNumbers = Helpers.GetDivisionNumbers(min, max);
                 firstNumber = divisionNumbers[0];
                 secondNumber = divisionNumbers[1];
 
@@ -144,7 +222,7 @@ namespace MathGame.Matija87
             }
             Console.WriteLine("\nPress any key to go back to main menu");
             Console.ReadKey();
-            Helpers.AddToHistory(score, GameType.Division);
+            Helpers.AddToHistory(score, GameType.Division, difficulty);
         }
 
     }
