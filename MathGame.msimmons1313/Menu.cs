@@ -67,7 +67,7 @@ Q - Quit the program");
                         Console.WriteLine("Invalid Input");
                         Environment.Exit(1);
                         break;
-                };
+                }
 
             } while (isGameOn);
 

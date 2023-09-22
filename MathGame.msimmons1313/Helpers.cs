@@ -29,7 +29,6 @@ namespace MyFirstProgram
 
         internal static void AddToHistory(int gameScore, GameType gameType)
         {
-            //games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
             games.Add(new Game
             {
                 Date = DateTime.Now,
@@ -41,8 +40,6 @@ namespace MyFirstProgram
 
         internal static void PrintGames()
         {
-            //var gamesToPrint = games.Where(x => x.Date >= new DateTime(2023, 09, 25));
-
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("-----------------------------------------");
@@ -108,12 +105,10 @@ H - Hard");
                         default:
                             SetGameDifficulty();
                             break;
-                    };
+                    }
 
             Console.WriteLine($"Difficulty set to {difficulty}. Press any key to go back to the main menu.");
             Console.ReadLine();
-
-
         }
 
         internal static Int32 GetNumberUpperBound(GameDifficulty gameDifficulty)
