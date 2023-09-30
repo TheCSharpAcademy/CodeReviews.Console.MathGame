@@ -12,7 +12,7 @@ public class PreviousGames
         foreach (GameModel game in Games)
         {
             Console.WriteLine($"Date: {game.Date}\n- Username: {game.Username}\n- Game: {game.GameType} - {game.Difficulty}\n- Score: {game.Score}/{game.Total}\n- Time Played: {game.TotalTime}");
-        };
+        }
         
         Console.WriteLine("\nPress Any Key To Go Back To Main Menu");
         Console.ReadLine();

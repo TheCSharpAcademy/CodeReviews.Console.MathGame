@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace MathGame.mekasu0124;
+﻿namespace MathGame.mekasu0124;
 
 public class GameModel
 {

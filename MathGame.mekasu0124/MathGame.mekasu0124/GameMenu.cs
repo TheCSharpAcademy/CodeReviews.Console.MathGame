@@ -21,7 +21,7 @@ public class GameMenu
         foreach (string line in menuOptions)
         {
             Console.WriteLine(line);
-        };
+        }
         
         Console.Write("\nWhat Game Would You Like To Play: ");
         
