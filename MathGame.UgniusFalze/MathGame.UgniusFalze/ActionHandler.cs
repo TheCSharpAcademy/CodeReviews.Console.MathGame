@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathGame
 {
@@ -11,26 +9,26 @@ namespace MathGame
         public static string HandleAddition()
         {
             List<int> numbers = GetRandomInts();
-            static int addition(int a, int b) => a + b;
-            return HandleOperation('+', addition, numbers[0], numbers[1]);
+            static int Addition(int a, int b) => a + b;
+            return HandleOperation('+', Addition, numbers[0], numbers[1]);
         }
         public static string HandleSubtraction()
         {
             List<int> numbers = GetRandomInts();
-            static int subtraction(int a, int b) => b - a;
-            return HandleOperation('-', subtraction, numbers[0], numbers[1]);
+            static int Subtraction(int a, int b) => b - a;
+            return HandleOperation('-', Subtraction, numbers[0], numbers[1]);
         }
         public static string HandleMultiplication()
         {
             List<int> numbers = GetRandomInts();
-            static int multiplication(int a, int b) => a * b;
-            return HandleOperation('*', multiplication, numbers[0], numbers[1]);
+            static int Multiplication(int a, int b) => a * b;
+            return HandleOperation('*', Multiplication, numbers[0], numbers[1]);
         }
         public static string HandleDivision()
         {
             List<int> numbers = GetRandomDivisableInts();
-            static int division(int a, int b) => b / a;
-            return HandleOperation('/', division, numbers[0], numbers[1]);
+            static int Division(int a, int b) => b / a;
+            return HandleOperation('/', Division, numbers[0], numbers[1]);
         }
 
         public static List<int> GetRandomInts()

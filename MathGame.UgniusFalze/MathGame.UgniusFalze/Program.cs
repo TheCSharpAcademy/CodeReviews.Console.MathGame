@@ -1,7 +1,5 @@
-﻿
-using System.Runtime.Intrinsics.Arm;
-using MathGame;
-void handleChoices(List<string> results)
+﻿using MathGame;
+void HandleChoices(List<string> results)
 {
     bool onGoingGame;
     do
@@ -41,7 +39,7 @@ void handleChoices(List<string> results)
         }
     } while (onGoingGame) ;
 }
-bool playAgain()
+bool PlayAgain()
 {
     Display.DisplayPlayAgainQuestion();
     var choice = Console.ReadLine();
@@ -66,7 +64,7 @@ bool playAgain()
     return true;
 }
 
-void game()
+void Game()
 {
     List<string> results = new();
     Display display = new();
@@ -74,8 +72,8 @@ void game()
     do
     {
         display.DisplayMenu();
-        handleChoices(results);
-        onGoing = playAgain();
+        HandleChoices(results);
+        onGoing = PlayAgain();
         if (!onGoing)
         {
             Display.DisplayResults(results);
@@ -83,4 +81,4 @@ void game()
     }while(onGoing);
 }
 
-game();
+Game();
