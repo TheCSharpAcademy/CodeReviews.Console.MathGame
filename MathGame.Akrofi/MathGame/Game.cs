@@ -17,7 +17,7 @@ namespace MathGame
             }
 
         //Method to generate a random number based on a. user input b. level of difficult
-        public int firstRandom(int choice)
+        public int FirstRandom(int choice)
             {
             Random random = new Random();
             int firstNumber = 0;
@@ -37,7 +37,7 @@ namespace MathGame
             }
 
         //Method to generate a random number based on a. user input b. level of difficult
-        public int secondRandom(int choice)
+        public int SecondRandom(int choice)
             {
             Random random = new Random();
             int secondNumber = 0;
@@ -97,7 +97,7 @@ namespace MathGame
             do
                 {
 
-                Console.Write("Select a number on the Menu :");
+                Console.Write("Select a number on the Menu between 1 & 7 :");
                 selection = validator.Validate(Console.ReadLine());
                 if ( selection == 6 ) { selection = rand.Next(1, 4); }
 
@@ -119,8 +119,8 @@ namespace MathGame
                         int userChoice = validator.Validate(Console.ReadLine());
 
                         //Logic to decide difficulty
-                        firstNumber = level.firstRandom(userChoice);//
-                        secondNumber = level.secondRandom(userChoice);
+                        firstNumber = level.FirstRandom(userChoice);//
+                        secondNumber = level.SecondRandom(userChoice);
                         Console.Write("{0} + {1} = ", firstNumber, secondNumber);
 
                         //calculate time spent on question
@@ -152,8 +152,8 @@ namespace MathGame
                         int userChoice = validator.Validate(Console.ReadLine());
 
                         //Logic to decide difficulty
-                        firstNumber = level.firstRandom(userChoice);//
-                        secondNumber = level.secondRandom(userChoice);
+                        firstNumber = level.FirstRandom(userChoice);//
+                        secondNumber = level.SecondRandom(userChoice);
                         Console.Write("{0} - {1} = ", firstNumber, secondNumber);
 
                         //calculate time spent on question
@@ -185,8 +185,8 @@ namespace MathGame
                         int userChoice = validator.Validate(Console.ReadLine());
 
                         //Logic to decide difficulty
-                        firstNumber = level.firstRandom(userChoice);//
-                        secondNumber = level.secondRandom(userChoice);
+                        firstNumber = level.FirstRandom(userChoice);//
+                        secondNumber = level.SecondRandom(userChoice);
                         Console.Write("{0} * {1} = ", firstNumber, secondNumber);
 
                         //calculate time spent on question
@@ -218,8 +218,8 @@ namespace MathGame
                         int userChoice = validator.Validate(Console.ReadLine());
 
                         //Logic to decide difficulty
-                        firstNumber = level.firstRandom(userChoice);//
-                        secondNumber = level.secondRandom(userChoice);
+                        firstNumber = level.FirstRandom(userChoice);//
+                        secondNumber = level.SecondRandom(userChoice);
 
                         while ( firstNumber % secondNumber != 0 && userChoice == 1 )
                             {
@@ -258,7 +258,8 @@ namespace MathGame
                     break;
 
                     }
-                } while ( selection != 7 );
+
+                } while ( selection != 7 || selection !> 7 ); ;
             }
         }
     }
