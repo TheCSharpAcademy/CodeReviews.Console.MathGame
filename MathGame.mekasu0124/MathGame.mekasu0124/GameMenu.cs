@@ -38,10 +38,11 @@ public class GameMenu
             
             Console.Clear();
             Console.WriteLine($"Username: {username}");
-            Console.WriteLine($"Todays Date: {date}");
+            Console.WriteLine($"Today's Date: {date}");
             Console.WriteLine($"Total Questions: {numOfQuestions}");
             Console.WriteLine($"Game Type: {game}");
-            Console.WriteLine($"Selected Difficulty: {difficulty}\n");
+            Console.WriteLine($"Selected Difficulty: {difficulty}");
+            Console.WriteLine($"Selected Game: {game}\n");
             Console.WriteLine("\nStarting Game...");
             
             Thread.Sleep(3000);
@@ -57,9 +58,10 @@ public class GameMenu
             
             Console.Clear();
             Console.WriteLine($"Username: {username}");
-            Console.WriteLine($"Todays Date: {date}");
+            Console.WriteLine($"Today's Date: {date}");
             Console.WriteLine($"Total Questions: {numOfQuestions}");
-            Console.WriteLine($"Selected Difficulty: {difficulty}\n");
+            Console.WriteLine($"Selected Difficulty: {difficulty}");
+            Console.WriteLine($"Selected Game: {game}\n");
             Console.WriteLine("\nStarting Game...");
             
             Thread.Sleep(3000);
@@ -75,9 +77,10 @@ public class GameMenu
             
             Console.Clear();
             Console.WriteLine($"Username: {username}");
-            Console.WriteLine($"Todays Date: {date}");
+            Console.WriteLine($"Today's Date: {date}");
             Console.WriteLine($"Total Questions: {numOfQuestions}");
-            Console.WriteLine($"Selected Difficulty: {difficulty}\n");
+            Console.WriteLine($"Selected Difficulty: {difficulty}");
+            Console.WriteLine($"Selected Game: {game}\n");
             Console.WriteLine("\nStarting Game...");
             
             Thread.Sleep(3000);
@@ -93,15 +96,35 @@ public class GameMenu
             
             Console.Clear();
             Console.WriteLine($"Username: {username}");
-            Console.WriteLine($"Todays Date: {date}");
+            Console.WriteLine($"Today's Date: {date}");
             Console.WriteLine($"Total Questions: {numOfQuestions}");
-            Console.WriteLine($"Selected Difficulty: {difficulty}\n");
+            Console.WriteLine($"Selected Difficulty: {difficulty}");
+            Console.WriteLine($"Selected Game: {game}\n");
             Console.WriteLine("\nStarting Game...");
             
             Thread.Sleep(3000);
             Console.Clear();
 
             gameEngine.StartDivGame(username, date, numOfQuestions, difficulty);
+        }
+        else if (game == "Random Game")
+        {
+            string difficulty = GetDifficulty();
+            string numOfQues = GetNumberOfQuestions();
+            int numOfQuestions = Convert.ToInt32(numOfQues);
+
+            Console.Clear();
+            Console.WriteLine($"Username: {username}");
+            Console.WriteLine($"Today's Date: {date}");
+            Console.WriteLine($"TOtal Questions: {numOfQuestions}");
+            Console.WriteLine($"Selected Difficulty: {difficulty}");
+            Console.WriteLine($"Selected Game: {game}\n");
+            Console.WriteLine("\nStarting Game...");
+
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            gameEngine.StartRandGame(username, date, numOfQuestions, difficulty);
         }
         else if (game == "Previous Games")
         {

@@ -261,6 +261,201 @@ public class GameEngine
         GameMenu.ShowMenu(username, date);
     }
 
+    public void StartRandGame(string username, DateTime date, int totalQuestions, string difficulty)
+    {
+        int score = 0;
+        Stopwatch timer = new Stopwatch();
+
+        timer.Start();
+        for (int i = 0; i < totalQuestions; i++)
+        {
+            Random rng = new Random();
+
+            List<string> games = new() { "Addition", "Subtraction", "Multiplication", "Division" };
+
+            int randGame = rng.Next(0, games.Count());
+            int[] numbers = GetNumber(difficulty);
+            
+            int number1 = numbers[0];
+            int number2 = numbers[1];
+            int solution;
+            string question;
+            string guess;
+            int input;
+
+            switch (games[randGame])
+            {
+                case "Addition":
+                    solution = number1 + number2;
+                    question = $"{number1} + {number2} = ";
+            
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(question);
+                    guess = Console.ReadLine();
+                    input = Helpers.ValidateNumericInput(question, guess);
+
+                    if (input == solution)
+                    {
+                        score++;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\nYou Got It Right! Score: {score}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nOh No. You Got It Wrong. Next Question");
+
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"Correct Solution: {solution}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+
+                    Console.Clear();
+                    break;
+                
+                case "Subtraction":
+                    if (number2 > number1)
+                    {
+                        solution = number2 - number1;
+                        question = $"{number2} - {number1} = ";
+                    }
+                    else
+                    {
+                        solution = number1 - number2;
+                        question = $"{number1} - {number2} = ";
+                    }
+            
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(question);
+                    guess = Console.ReadLine();
+                    input = Helpers.ValidateNumericInput(question, guess);
+
+                    if (input == solution)
+                    {
+                        score++;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\nYou Got It Right! Score: {score}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nOh No. You Got It Wrong. Next Question");
+
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"Correct Solution: {solution}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+
+                    Console.Clear();
+                    break;
+
+                case "Multiplication":
+                    solution = number1 * number2;
+                    question = $"{number2} * {number1} = ";
+            
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(question);
+                    guess = Console.ReadLine();
+                    input = Helpers.ValidateNumericInput(question, guess);
+
+                    if (input == solution)
+                    {
+                        score++;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\nYou Got It Right! Score: {score}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nOh No. You Got It Wrong. Next Question");
+
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"Correct Solution: {solution}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+
+                    Console.Clear();
+                    break;
+
+                case "Division":
+                    while (number1 % number2 != 0)
+                    {
+                        numbers = GetNumber(difficulty);
+
+                        number1 = numbers[0];
+                        number2 = numbers[1];
+                    }
+
+                    solution = number1 / number2;
+                    question = $"{number1} / {number2} = ";
+            
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(question);
+                    guess = Console.ReadLine();
+                    input = Helpers.ValidateNumericInput(question, guess);
+
+                    if (input == solution)
+                    {
+                        score++;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\nYou Got It Right! Score: {score}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nOh No. You Got It Wrong. Next Question");
+
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"Correct Solution: {solution}");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress Any Key For Next Question");
+                        Console.ReadLine();
+                    }
+
+                    Console.Clear();
+                    break;
+
+            }
+        }
+
+        timer.Stop();
+        
+        GameModel newGame = CreateGame(username, date, "Random", score, totalQuestions, difficulty, timer.Elapsed.ToString(@"hh\:mm\:ss"));
+        PreviousGames.SaveGame(newGame);
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine("Game Over! Press Any Key To Go To Main Menu");
+        Console.ReadLine();
+        
+        GameMenu.ShowMenu(username, date);
+    }
+
     private static GameModel CreateGame(string username, DateTime date, string gameType, int score, int total, string difficulty, string timer)
     {
         GameModel newGame = new()
