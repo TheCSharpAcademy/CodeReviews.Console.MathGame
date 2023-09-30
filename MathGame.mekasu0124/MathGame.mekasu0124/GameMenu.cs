@@ -135,7 +135,7 @@ public class GameMenu
         foreach (string line in difficultyOptions)
         {
             Console.WriteLine(line);
-        };
+        }
         
         Console.Write("\nWhat Difficulty Would You Like To Play: ");
 
