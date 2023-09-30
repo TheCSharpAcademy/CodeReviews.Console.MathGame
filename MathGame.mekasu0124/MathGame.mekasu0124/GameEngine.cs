@@ -210,11 +210,10 @@ public class GameEngine
             while (number1 % number2 != 0)
             {
                 numbers = GetNumber(difficulty);
-
                 number1 = numbers[0];
                 number2 = numbers[1];
             }
-
+            
             int solution = number1 / number2;
             string question = $"{number1} / {number2} = ";
             
@@ -259,6 +258,35 @@ public class GameEngine
         Console.ReadLine();
         
         GameMenu.ShowMenu(username, date);
+    }
+
+    private static int[] GetNumber(string difficulty)
+    {
+        Random rng = new();
+        int firstNumber = 0;
+        int secondNumber = 0;
+        var result = new int[2];
+        
+        if (difficulty == "Easy")
+        {
+            firstNumber = rng.Next(1, 100);
+            secondNumber = rng.Next(1, 100);
+        }
+        else if (difficulty == "Medium")
+        {
+            firstNumber = rng.Next(1, 200);
+            secondNumber = rng.Next(1,200);
+        }
+        else if (difficulty == "Hard")
+        {
+            firstNumber = rng.Next(1,300);
+            secondNumber = rng.Next(1,300);
+        }
+
+        result[0] = firstNumber;
+        result[1] = secondNumber;
+
+        return result;
     }
 
     public void StartRandGame(string username, DateTime date, int totalQuestions, string difficulty)
@@ -470,34 +498,5 @@ public class GameEngine
         };
 
         return newGame;
-    }
-
-    private static int[] GetNumber(string difficulty)
-    {
-        Random rng = new();
-        int firstNumber = 0;
-        int secondNumber = 0;
-        var result = new int[2];
-        
-        if (difficulty == "Easy")
-        {
-            firstNumber = rng.Next(0, 99);
-            secondNumber = rng.Next(0, 99);
-        }
-        else if (difficulty == "Medium")
-        {
-            firstNumber = rng.Next(100, 199);
-            secondNumber = rng.Next(100,199);
-        }
-        else if (difficulty == "Hard")
-        {
-            firstNumber = rng.Next(200,299);
-            secondNumber = rng.Next(200,299);
-        }
-
-        result[0] = firstNumber;
-        result[1] = secondNumber;
-
-        return result;
     }
 }
