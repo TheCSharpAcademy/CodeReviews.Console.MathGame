@@ -1,0 +1,15 @@
+C# Academy - Math Game
+
+- Requirements
+    - 4 Basic Operations
+    - The division should result in integers only and dividends should go from 0 to 100
+    - menu to choose operation
+    - record previous games in a list
+        - option in menu
+        - record deleted on game close, no storage
+
+- Challenges
+    - implement difficulty levels
+    - game time tracker
+    - function to allow user to pick number of questions to answer
+    - random game option
