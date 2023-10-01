@@ -259,7 +259,7 @@ namespace MathGame
 
                     }
 
-                } while ( selection != 7 || selection !> 7 ); ;
+                } while ( selection != 7 || selection !> 7 ); 
             }
         }
     }
