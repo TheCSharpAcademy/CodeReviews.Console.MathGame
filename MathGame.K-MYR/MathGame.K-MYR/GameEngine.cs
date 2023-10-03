@@ -117,8 +117,7 @@ namespace MathGame.K_MYR
 
         internal int DivisionGame(int NumberOfGames, DifficultyMode difficulty, bool randomGame = false)
         {
-            DateTime startDate = DateTime.UtcNow;
-            Random random = new Random();
+            DateTime startDate = DateTime.UtcNow;      
             int score = 0;
             for (int i = 0; i < NumberOfGames; i++)
             {
