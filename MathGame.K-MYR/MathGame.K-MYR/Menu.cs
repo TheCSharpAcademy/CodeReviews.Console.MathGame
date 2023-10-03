@@ -1,4 +1,6 @@
-﻿namespace MathGame.K_MYR
+﻿using MathGame.K_MYR.Models;
+
+namespace MathGame.K_MYR
 {
     internal class Menu
     {
@@ -7,25 +9,30 @@
         internal void ShowMenu(string name, DateTime date)
         {
             Console.Clear();
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is your math's game. That's great that you're working on imporving yourself\n");
+            Console.WriteLine("--------------------------------------------------------------------------");
+            Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is your math's game. That's great that you're working on improving yourself\n");
             Console.WriteLine("Press enter to show menu");
             Console.ReadLine();
+
             bool isGameOn = true;
 
             do
             {
                 Console.Clear();
-                Console.WriteLine($@"What   game would you like to play today? Choose from the options below?:\n
-                        V - View Previous Games
-                        A-Addition
-                        S- Subtraction
-                        M-Multiplication
-                        D-Division
-                        Q-Quit the program");
-                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("What game would you like to play today? Choose from the options below?:");
+                Console.WriteLine("--------------------------------------------------------------------------");
+                Console.WriteLine("V - View Previous Games");
+                Console.WriteLine("A - Addition");
+                Console.WriteLine("S - Subtraction");
+                Console.WriteLine("M - Multiplication");
+                Console.WriteLine("D - Division");
+                Console.WriteLine("R - Random Mode");
+                Console.WriteLine("Q - Quit the program");
+                Console.WriteLine("--------------------------------------------------------------------------");
 
                 var gameSelected = Console.ReadLine();
+                int NumberOfGames;
+                DifficultyMode difficulty;
 
                 switch (gameSelected.Trim().ToLower())
                 {
@@ -33,25 +40,38 @@
                         Helpers.PrintGames();
                         break;
                     case "a":
-                        engine.AdditionGame();
+                        NumberOfGames = Helpers.GetNumberOfGames();
+                        difficulty = Helpers.GetDifficulty();
+                        engine.AdditionGame(NumberOfGames, difficulty);
                         break;
                     case "s":
-                        engine.SubtractionGame();
+                        NumberOfGames = Helpers.GetNumberOfGames();
+                        difficulty = Helpers.GetDifficulty();
+                        engine.SubtractionGame(NumberOfGames, difficulty);
                         break;
                     case "m":
-                        engine.MultiplicationGame();
+                        NumberOfGames = Helpers.GetNumberOfGames();
+                        difficulty = Helpers.GetDifficulty();
+                        engine.MultiplicationGame(NumberOfGames, difficulty);
                         break;
                     case "d":
-                        engine.DivisionGame();
+                        NumberOfGames = Helpers.GetNumberOfGames();
+                        difficulty = Helpers.GetDifficulty();
+                        engine.DivisionGame(NumberOfGames, difficulty);
+                        break;
+                    case "r":
+                        NumberOfGames = Helpers.GetNumberOfGames();
+                        difficulty = Helpers.GetDifficulty();
+                        engine.RandomGame(NumberOfGames, difficulty);
                         break;
                     case "q":
+                        Console.Clear();
                         Console.WriteLine("Goodbye!");
                         isGameOn = false;
                         break;
-                    default:
-                        Console.WriteLine("Invalid Input");
+                    default:                                         
                         break;
-                }
+                } 
             } while (isGameOn);
         }
     }
