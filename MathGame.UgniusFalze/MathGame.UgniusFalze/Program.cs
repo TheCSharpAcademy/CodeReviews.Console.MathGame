@@ -42,12 +42,11 @@ void HandleChoices(List<string> results)
 bool PlayAgain()
 {
     Display.DisplayPlayAgainQuestion();
-    var choice = Console.ReadLine();
-    choice ??= "";
     bool incorrectChoice;
     do
     {
-        incorrectChoice = false;
+        var choice = Console.ReadLine();
+        choice ??= "";
         switch (choice.ToLower())
         {
             case "yes":
