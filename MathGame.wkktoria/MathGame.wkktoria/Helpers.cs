@@ -38,24 +38,50 @@ internal static class Helpers
         PreviousGames.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType });
     }
 
-
-    internal static int[] GetDivisionNumbers()
+    internal static int[] GetNumbers(DifficultyLevel difficultyLevel)
     {
         var random = new Random();
 
-        var firstNumber = random.Next(1, 99);
-        var secondNumber = random.Next(1, 99);
+        var numbers = new int[2];
 
-        var divisionNumbers = new int[2];
+        int firstNumber;
+        int secondNumber;
 
-        while (firstNumber % secondNumber != 0)
+        switch (difficultyLevel)
         {
-            firstNumber = random.Next(0, 99);
-            secondNumber = random.Next(0, 99);
+            case DifficultyLevel.Easy:
+                firstNumber = random.Next(1, 10);
+                secondNumber = random.Next(1, 10);
+                break;
+            case DifficultyLevel.Medium:
+                firstNumber = random.Next(10, 100);
+                secondNumber = random.Next(10, 100);
+                break;
+            case DifficultyLevel.Hard:
+                firstNumber = random.Next(100, 1000);
+                secondNumber = random.Next(100, 1000);
+                break;
+            default:
+                firstNumber = random.Next(1, 99);
+                secondNumber = random.Next(1, 99);
+                break;
         }
 
-        divisionNumbers[0] = firstNumber;
-        divisionNumbers[1] = secondNumber;
+        numbers[0] = firstNumber;
+        numbers[1] = secondNumber;
+
+        return numbers;
+    }
+
+
+    internal static int[] GetDivisionNumbers(DifficultyLevel difficultyLevel)
+    {
+        var random = new Random();
+
+        var divisionNumbers = GetNumbers(difficultyLevel);
+
+        while (divisionNumbers[0] % divisionNumbers[1] != 0 || divisionNumbers[0] == divisionNumbers[1])
+            divisionNumbers = GetNumbers(difficultyLevel);
 
         return divisionNumbers;
     }
@@ -79,5 +105,46 @@ internal static class Helpers
         result = ValidateResult(result);
 
         return int.Parse(result);
+    }
+
+    private static string ValidateDifficultyLevel(string difficultyLevel)
+    {
+        var isValid = false;
+
+        while (!isValid)
+            switch (difficultyLevel.Trim().ToLower())
+            {
+                case "e":
+                case "m":
+                case "h":
+                    isValid = true;
+                    break;
+                default:
+                    Console.WriteLine("Invalid difficulty level. Try again.");
+                    Console.Write("> ");
+                    difficultyLevel = Console.ReadLine();
+                    break;
+            }
+
+        return difficultyLevel;
+    }
+
+    internal static DifficultyLevel ChooseDifficulty()
+    {
+        Console.WriteLine("Choose difficulty from options below:");
+        foreach (var difficultyLevel in Enum.GetNames(typeof(DifficultyLevel)))
+            Console.WriteLine($"{difficultyLevel[0]} - {difficultyLevel}");
+
+        Console.Write("> ");
+        var difficulty = Console.ReadLine();
+        difficulty = ValidateDifficultyLevel(difficulty);
+
+        return difficulty.Trim().ToLower() switch
+        {
+            "e" => DifficultyLevel.Easy,
+            "m" => DifficultyLevel.Medium,
+            "h" => DifficultyLevel.Hard,
+            _ => DifficultyLevel.Easy
+        };
     }
 }

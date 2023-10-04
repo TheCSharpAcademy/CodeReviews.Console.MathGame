@@ -2,9 +2,10 @@ namespace MathGame.wkktoria.Models;
 
 internal class Game
 {
-    public DateTime Date { get; set; }
-    public int Score { get; set; }
-    public GameType Type { get; set; }
+    public DateTime Date { get; init; }
+    public int Score { get; init; }
+    public GameType Type { get; init; }
+    public DifficultyLevel Difficulty { get; init; }
 }
 
 internal enum GameType
@@ -13,4 +14,11 @@ internal enum GameType
     Subtraction,
     Multiplication,
     Division
+}
+
+internal enum DifficultyLevel
+{
+    Easy,
+    Medium,
+    Hard
 }

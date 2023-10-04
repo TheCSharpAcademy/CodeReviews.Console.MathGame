@@ -4,10 +4,8 @@ namespace MathGame.wkktoria;
 
 internal static class GameEngine
 {
-    internal static void AdditionGame(string message)
+    internal static void AdditionGame(string message, DifficultyLevel difficultyLevel)
     {
-        var random = new Random();
-
         var score = 0;
 
         for (var i = 0; i < 5; i++)
@@ -15,8 +13,9 @@ internal static class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
-            var firstNumber = random.Next(1, 9);
-            var secondNumber = random.Next(1, 9);
+            var numbers = Helpers.GetNumbers(difficultyLevel);
+            var firstNumber = numbers[0];
+            var secondNumber = numbers[1];
 
             Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
             var result = Helpers.GetResult();
@@ -44,10 +43,8 @@ internal static class GameEngine
         Console.ReadLine();
     }
 
-    internal static void SubtractionGame(string message)
+    internal static void SubtractionGame(string message, DifficultyLevel difficultyLevel)
     {
-        var random = new Random();
-
         var score = 0;
 
         for (var i = 0; i < 5; i++)
@@ -55,8 +52,9 @@ internal static class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
-            var firstNumber = random.Next(1, 9);
-            var secondNumber = random.Next(1, 9);
+            var numbers = Helpers.GetNumbers(difficultyLevel);
+            var firstNumber = numbers[0];
+            var secondNumber = numbers[1];
 
             Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
             var result = Helpers.GetResult();
@@ -84,10 +82,8 @@ internal static class GameEngine
         Console.ReadLine();
     }
 
-    internal static void MultiplicationGame(string message)
+    internal static void MultiplicationGame(string message, DifficultyLevel difficultyLevel)
     {
-        var random = new Random();
-
         var score = 0;
 
         for (var i = 0; i < 5; i++)
@@ -95,8 +91,9 @@ internal static class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
-            var firstNumber = random.Next(1, 9);
-            var secondNumber = random.Next(1, 9);
+            var numbers = Helpers.GetNumbers(difficultyLevel);
+            var firstNumber = numbers[0];
+            var secondNumber = numbers[1];
 
             Console.WriteLine($"{firstNumber} * {secondNumber} = ?");
             var result = Helpers.GetResult();
@@ -124,7 +121,7 @@ internal static class GameEngine
         Console.ReadLine();
     }
 
-    internal static void DivisionGame(string message)
+    internal static void DivisionGame(string message, DifficultyLevel difficultyLevel)
     {
         var score = 0;
 
@@ -133,7 +130,7 @@ internal static class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
-            var divisionNumbers = Helpers.GetDivisionNumbers();
+            var divisionNumbers = Helpers.GetDivisionNumbers(difficultyLevel);
             var firstNumber = divisionNumbers[0];
             var secondNumber = divisionNumbers[1];
 
