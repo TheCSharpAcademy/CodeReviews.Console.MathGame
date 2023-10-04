@@ -5,22 +5,32 @@ namespace MathGame.wkktoria;
 
 internal static class GameEngine
 {
+    private static readonly Array GameTypes = typeof(GameType).GetEnumValues();
+
+
     internal static void Play(GameType gameType, DifficultyLevel difficultyLevel, int questions)
     {
         var score = 0;
+
+        var random = new Random();
 
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
         for (var i = 0; i < questions; i++)
         {
+            var questionGameType = gameType;
+
+            while (questionGameType == GameType.Random)
+                questionGameType = (GameType)GameTypes.GetValue(random.Next(GameTypes.Length));
+
             Console.Clear();
-            Console.WriteLine($"{gameType} game");
+            Console.WriteLine($"{questionGameType} game");
 
             int[] numbers;
             int correctAnswer;
 
-            switch (gameType)
+            switch (questionGameType)
             {
                 case GameType.Addition:
                     numbers = GetNumbers(difficultyLevel);
@@ -44,7 +54,7 @@ internal static class GameEngine
                     break;
             }
 
-            Console.WriteLine($"{numbers[0]} {((char)gameType).ToString()} {numbers[1]} = ?");
+            Console.WriteLine($"{numbers[0]} {((char)questionGameType).ToString()} {numbers[1]} = ?");
             var result = Helpers.GetResult();
 
             if (result == correctAnswer)
@@ -65,7 +75,7 @@ internal static class GameEngine
         stopwatch.Stop();
         var totalTime = stopwatch.Elapsed.TotalSeconds;
 
-        Helpers.AddToHistory(score, GameType.Addition, totalTime, questions);
+        Helpers.AddToHistory(score, gameType, totalTime, questions);
         PrintGameOver(score, totalTime, questions);
     }
 

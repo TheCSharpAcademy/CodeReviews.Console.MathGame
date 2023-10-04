@@ -28,6 +28,7 @@ internal class Menu
                               S - Subtraction
                               M - Multiplication
                               D - Division
+                              R - Random game
                               Q - Quit the program
                               """);
             Console.WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
@@ -61,6 +62,11 @@ internal class Menu
                     questions = Helpers.GetNumberOfQuestions();
                     difficulty = Helpers.GetDifficulty();
                     GameEngine.Play(GameType.Division, difficulty, questions);
+                    break;
+                case "r":
+                    questions = Helpers.GetNumberOfQuestions();
+                    difficulty = Helpers.GetDifficulty();
+                    GameEngine.Play(GameType.Random, difficulty, questions);
                     break;
                 case "q":
                     Console.WriteLine("Quiting...");
