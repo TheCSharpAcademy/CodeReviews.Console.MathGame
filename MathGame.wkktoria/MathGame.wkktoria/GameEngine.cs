@@ -5,7 +5,7 @@ namespace MathGame.wkktoria;
 
 internal static class GameEngine
 {
-    internal static void AdditionGame(string message, DifficultyLevel difficultyLevel)
+    internal static void Play(GameType gameType, DifficultyLevel difficultyLevel)
     {
         var score = 0;
 
@@ -15,16 +15,39 @@ internal static class GameEngine
         for (var i = 0; i < 5; i++)
         {
             Console.Clear();
-            Console.WriteLine(message);
+            Console.WriteLine($"{gameType} game");
 
-            var numbers = Helpers.GetNumbers(difficultyLevel);
-            var firstNumber = numbers[0];
-            var secondNumber = numbers[1];
+            int[] numbers;
+            int correctAnswer;
 
-            Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
+            switch (gameType)
+            {
+                case GameType.Addition:
+                    numbers = GetNumbers(difficultyLevel);
+                    correctAnswer = numbers[0] + numbers[1];
+                    break;
+                case GameType.Subtraction:
+                    numbers = GetNumbers(difficultyLevel);
+                    correctAnswer = numbers[0] - numbers[1];
+                    break;
+                case GameType.Multiplication:
+                    numbers = GetNumbers(difficultyLevel);
+                    correctAnswer = numbers[0] * numbers[1];
+                    break;
+                case GameType.Division:
+                    numbers = GetDivisionNumbers(difficultyLevel);
+                    correctAnswer = numbers[0] / numbers[1];
+                    break;
+                default:
+                    numbers = new int[2];
+                    correctAnswer = 0;
+                    break;
+            }
+
+            Console.WriteLine($"{numbers[0]} {((char)gameType).ToString()} {numbers[1]} = ?");
             var result = Helpers.GetResult();
 
-            if (result == firstNumber + secondNumber)
+            if (result == correctAnswer)
             {
                 Console.WriteLine("Your answer was correct.");
                 score++;
@@ -33,7 +56,7 @@ internal static class GameEngine
             }
             else
             {
-                Console.WriteLine("Your answer was incorrect.");
+                Console.WriteLine($"Your answer was incorrect. The correct answer is: {correctAnswer}.");
                 Console.WriteLine("Type any key for the next question.");
                 Console.ReadLine();
             }
@@ -43,144 +66,59 @@ internal static class GameEngine
         var totalTime = stopwatch.Elapsed.TotalSeconds;
 
         Helpers.AddToHistory(score, GameType.Addition, totalTime);
-
-        Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
-        Console.WriteLine("Press any key to go back to the main menu.");
-        Console.ReadLine();
+        PrintGameOver(score, totalTime);
     }
 
-    internal static void SubtractionGame(string message, DifficultyLevel difficultyLevel)
+    private static int[] GetNumbers(DifficultyLevel difficultyLevel)
     {
-        var score = 0;
+        var random = new Random();
 
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
+        var numbers = new int[2];
 
-        for (var i = 0; i < 5; i++)
+        int firstNumber;
+        int secondNumber;
+
+        switch (difficultyLevel)
         {
-            Console.Clear();
-            Console.WriteLine(message);
-
-            var numbers = Helpers.GetNumbers(difficultyLevel);
-            var firstNumber = numbers[0];
-            var secondNumber = numbers[1];
-
-            Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
-            var result = Helpers.GetResult();
-
-            if (result == firstNumber - secondNumber)
-            {
-                Console.WriteLine("Your answer was correct.");
-                score++;
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
+            case DifficultyLevel.Easy:
+                firstNumber = random.Next(1, 10);
+                secondNumber = random.Next(1, 10);
+                break;
+            case DifficultyLevel.Medium:
+                firstNumber = random.Next(10, 100);
+                secondNumber = random.Next(10, 100);
+                break;
+            case DifficultyLevel.Hard:
+                firstNumber = random.Next(100, 1000);
+                secondNumber = random.Next(100, 1000);
+                break;
+            default:
+                firstNumber = random.Next(1, 99);
+                secondNumber = random.Next(1, 99);
+                break;
         }
 
-        stopwatch.Stop();
-        var totalTime = stopwatch.Elapsed.TotalSeconds;
+        numbers[0] = firstNumber;
+        numbers[1] = secondNumber;
 
-        Helpers.AddToHistory(score, GameType.Subtraction, totalTime);
-
-        Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
-        Console.WriteLine("Press any key to go back to the main menu.");
-        Console.ReadLine();
+        return numbers;
     }
 
-    internal static void MultiplicationGame(string message, DifficultyLevel difficultyLevel)
+
+    private static int[] GetDivisionNumbers(DifficultyLevel difficultyLevel)
     {
-        var score = 0;
+        var divisionNumbers = GetNumbers(difficultyLevel);
 
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
+        while (divisionNumbers[0] % divisionNumbers[1] != 0)
+            divisionNumbers = GetNumbers(difficultyLevel);
 
-        for (var i = 0; i < 5; i++)
-        {
-            Console.Clear();
-            Console.WriteLine(message);
-
-            var numbers = Helpers.GetNumbers(difficultyLevel);
-            var firstNumber = numbers[0];
-            var secondNumber = numbers[1];
-
-            Console.WriteLine($"{firstNumber} * {secondNumber} = ?");
-            var result = Helpers.GetResult();
-
-            if (result == firstNumber * secondNumber)
-            {
-                Console.WriteLine("Your answer was correct.");
-                score++;
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
-        }
-
-        stopwatch.Stop();
-        var totalTime = stopwatch.Elapsed.TotalSeconds;
-
-        Helpers.AddToHistory(score, GameType.Multiplication, totalTime);
-
-        Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
-        Console.WriteLine("Press any key to go back to the main menu.");
-        Console.ReadLine();
+        return divisionNumbers;
     }
 
-    internal static void DivisionGame(string message, DifficultyLevel difficultyLevel)
+    private static void PrintGameOver(int gameScore, double gameTime)
     {
-        var score = 0;
-
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
-
-        for (var i = 0; i < 5; i++)
-        {
-            Console.Clear();
-            Console.WriteLine(message);
-
-            var divisionNumbers = Helpers.GetDivisionNumbers(difficultyLevel);
-            var firstNumber = divisionNumbers[0];
-            var secondNumber = divisionNumbers[1];
-
-            Console.WriteLine($"{firstNumber} / {secondNumber} = ?");
-            var result = Helpers.GetResult();
-
-            if (result == firstNumber / secondNumber)
-            {
-                Console.WriteLine("Your answer was correct.");
-                score++;
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                Console.WriteLine("Type any key for the next question.");
-                Console.ReadLine();
-            }
-        }
-
-        stopwatch.Stop();
-        var totalTime = stopwatch.Elapsed.TotalSeconds;
-
-        Helpers.AddToHistory(score, GameType.Division, totalTime);
-
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
+        Console.WriteLine($"Game over. Your final score is {gameScore} and your time was {gameTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }

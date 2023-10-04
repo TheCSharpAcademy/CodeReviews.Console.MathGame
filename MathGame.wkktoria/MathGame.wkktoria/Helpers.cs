@@ -39,52 +39,6 @@ internal static class Helpers
         PreviousGames.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType, Time = time });
     }
 
-    internal static int[] GetNumbers(DifficultyLevel difficultyLevel)
-    {
-        var random = new Random();
-
-        var numbers = new int[2];
-
-        int firstNumber;
-        int secondNumber;
-
-        switch (difficultyLevel)
-        {
-            case DifficultyLevel.Easy:
-                firstNumber = random.Next(1, 10);
-                secondNumber = random.Next(1, 10);
-                break;
-            case DifficultyLevel.Medium:
-                firstNumber = random.Next(10, 100);
-                secondNumber = random.Next(10, 100);
-                break;
-            case DifficultyLevel.Hard:
-                firstNumber = random.Next(100, 1000);
-                secondNumber = random.Next(100, 1000);
-                break;
-            default:
-                firstNumber = random.Next(1, 99);
-                secondNumber = random.Next(1, 99);
-                break;
-        }
-
-        numbers[0] = firstNumber;
-        numbers[1] = secondNumber;
-
-        return numbers;
-    }
-
-
-    internal static int[] GetDivisionNumbers(DifficultyLevel difficultyLevel)
-    {
-        var divisionNumbers = GetNumbers(difficultyLevel);
-
-        while (divisionNumbers[0] % divisionNumbers[1] != 0 || divisionNumbers[0] == divisionNumbers[1])
-            divisionNumbers = GetNumbers(difficultyLevel);
-
-        return divisionNumbers;
-    }
-
     private static string ValidateResult(string result)
     {
         while (string.IsNullOrEmpty(result) || !int.TryParse(result, out _))
@@ -143,7 +97,7 @@ internal static class Helpers
             "e" => DifficultyLevel.Easy,
             "m" => DifficultyLevel.Medium,
             "h" => DifficultyLevel.Hard,
-            _ => DifficultyLevel.Easy
+            _ => DifficultyLevel.NotSelected
         };
     }
 }

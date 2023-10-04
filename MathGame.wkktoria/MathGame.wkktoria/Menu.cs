@@ -8,7 +8,7 @@ internal class Menu
     {
         Console.Clear();
         Console.WriteLine(
-            $"Hello {Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower())}. It's {DateTime.UtcNow.DayOfWeek}. This is math's game.\n");
+            $"Hello {Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower())}. It's {DateTime.UtcNow.DayOfWeek}. This is math's game.");
         Console.WriteLine("Press any key to go to the main menu.");
         Console.ReadLine();
 
@@ -40,19 +40,19 @@ internal class Menu
                     break;
                 case "a":
                     difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.AdditionGame($"{GameType.Addition} game", difficulty);
+                    GameEngine.Play(GameType.Addition, difficulty);
                     break;
                 case "s":
                     difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.SubtractionGame($"{GameType.Subtraction} game", difficulty);
+                    GameEngine.Play(GameType.Subtraction, difficulty);
                     break;
                 case "m":
                     difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.MultiplicationGame($"{GameType.Multiplication} game", difficulty);
+                    GameEngine.Play(GameType.Multiplication, difficulty);
                     break;
                 case "d":
                     difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.DivisionGame($"{GameType.Division} game", difficulty);
+                    GameEngine.Play(GameType.Division, difficulty);
                     break;
                 case "q":
                     Console.WriteLine("Quiting...");
