@@ -4,6 +4,8 @@ namespace MathGame.wkktoria;
 
 internal class Menu
 {
+    private const int DefaultNumberOfQuestions = 5;
+
     internal void ShowMenu(string name)
     {
         Console.Clear();
@@ -31,7 +33,9 @@ internal class Menu
             Console.WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
             Console.Write("> ");
             var gameSelected = Console.ReadLine();
-            var difficulty = DifficultyLevel.Easy;
+
+            var questions = DefaultNumberOfQuestions;
+            var difficulty = DifficultyLevel.NotSelected;
 
             switch (gameSelected.Trim().ToLower())
             {
@@ -39,20 +43,24 @@ internal class Menu
                     Helpers.PrintPreviousGames();
                     break;
                 case "a":
-                    difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.Play(GameType.Addition, difficulty);
+                    questions = Helpers.GetNumberOfQuestions();
+                    difficulty = Helpers.GetDifficulty();
+                    GameEngine.Play(GameType.Addition, difficulty, questions);
                     break;
                 case "s":
-                    difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.Play(GameType.Subtraction, difficulty);
+                    questions = Helpers.GetNumberOfQuestions();
+                    difficulty = Helpers.GetDifficulty();
+                    GameEngine.Play(GameType.Subtraction, difficulty, questions);
                     break;
                 case "m":
-                    difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.Play(GameType.Multiplication, difficulty);
+                    questions = Helpers.GetNumberOfQuestions();
+                    difficulty = Helpers.GetDifficulty();
+                    GameEngine.Play(GameType.Multiplication, difficulty, questions);
                     break;
                 case "d":
-                    difficulty = Helpers.ChooseDifficulty();
-                    GameEngine.Play(GameType.Division, difficulty);
+                    questions = Helpers.GetNumberOfQuestions();
+                    difficulty = Helpers.GetDifficulty();
+                    GameEngine.Play(GameType.Division, difficulty, questions);
                     break;
                 case "q":
                     Console.WriteLine("Quiting...");

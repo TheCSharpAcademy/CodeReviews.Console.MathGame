@@ -5,14 +5,14 @@ namespace MathGame.wkktoria;
 
 internal static class GameEngine
 {
-    internal static void Play(GameType gameType, DifficultyLevel difficultyLevel)
+    internal static void Play(GameType gameType, DifficultyLevel difficultyLevel, int questions)
     {
         var score = 0;
 
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < questions; i++)
         {
             Console.Clear();
             Console.WriteLine($"{gameType} game");
@@ -65,8 +65,8 @@ internal static class GameEngine
         stopwatch.Stop();
         var totalTime = stopwatch.Elapsed.TotalSeconds;
 
-        Helpers.AddToHistory(score, GameType.Addition, totalTime);
-        PrintGameOver(score, totalTime);
+        Helpers.AddToHistory(score, GameType.Addition, totalTime, questions);
+        PrintGameOver(score, totalTime, questions);
     }
 
     private static int[] GetNumbers(DifficultyLevel difficultyLevel)
@@ -115,10 +115,11 @@ internal static class GameEngine
         return divisionNumbers;
     }
 
-    private static void PrintGameOver(int gameScore, double gameTime)
+    private static void PrintGameOver(int gameScore, double gameTime, int gameQuestions)
     {
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {gameScore} and your time was {gameTime} seconds.");
+        Console.WriteLine(
+            $"Game over. Your final score is {gameScore}/{gameQuestions} and your time was {gameTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }

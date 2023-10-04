@@ -7,6 +7,7 @@ internal class Game
     public GameType Type { get; init; }
     public DifficultyLevel Difficulty { get; init; }
     public double Time { get; init; }
+    public double Questions { get; init; }
 }
 
 internal enum GameType
