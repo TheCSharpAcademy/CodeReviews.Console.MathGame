@@ -31,7 +31,7 @@ internal class Menu
             Console.WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
             Console.Write("> ");
             var gameSelected = Console.ReadLine();
-            var difficulty = Helpers.ChooseDifficulty();
+            var difficulty = DifficultyLevel.Easy;
 
             switch (gameSelected.Trim().ToLower())
             {
@@ -39,15 +39,19 @@ internal class Menu
                     Helpers.PrintPreviousGames();
                     break;
                 case "a":
+                    difficulty = Helpers.ChooseDifficulty();
                     GameEngine.AdditionGame($"{GameType.Addition} game", difficulty);
                     break;
                 case "s":
+                    difficulty = Helpers.ChooseDifficulty();
                     GameEngine.SubtractionGame($"{GameType.Subtraction} game", difficulty);
                     break;
                 case "m":
+                    difficulty = Helpers.ChooseDifficulty();
                     GameEngine.MultiplicationGame($"{GameType.Multiplication} game", difficulty);
                     break;
                 case "d":
+                    difficulty = Helpers.ChooseDifficulty();
                     GameEngine.DivisionGame($"{GameType.Division} game", difficulty);
                     break;
                 case "q":

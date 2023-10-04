@@ -27,15 +27,16 @@ internal static class Helpers
         Console.Clear();
         Console.WriteLine("Games history");
         Console.WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
-        foreach (var game in gamesToPrint) Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points");
+        foreach (var game in gamesToPrint)
+            Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points; {game.Time} seconds");
         Console.WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
         Console.WriteLine("Press any key to return to the main menu.");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, GameType gameType)
+    internal static void AddToHistory(int gameScore, GameType gameType, double time)
     {
-        PreviousGames.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType });
+        PreviousGames.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType, Time = time });
     }
 
     internal static int[] GetNumbers(DifficultyLevel difficultyLevel)
@@ -76,8 +77,6 @@ internal static class Helpers
 
     internal static int[] GetDivisionNumbers(DifficultyLevel difficultyLevel)
     {
-        var random = new Random();
-
         var divisionNumbers = GetNumbers(difficultyLevel);
 
         while (divisionNumbers[0] % divisionNumbers[1] != 0 || divisionNumbers[0] == divisionNumbers[1])

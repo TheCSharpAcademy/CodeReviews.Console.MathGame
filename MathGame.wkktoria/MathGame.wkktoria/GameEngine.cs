@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using MathGame.wkktoria.Models;
 
 namespace MathGame.wkktoria;
@@ -7,6 +8,9 @@ internal static class GameEngine
     internal static void AdditionGame(string message, DifficultyLevel difficultyLevel)
     {
         var score = 0;
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         for (var i = 0; i < 5; i++)
         {
@@ -35,10 +39,13 @@ internal static class GameEngine
             }
         }
 
-        Helpers.AddToHistory(score, GameType.Addition);
+        stopwatch.Stop();
+        var totalTime = stopwatch.Elapsed.TotalSeconds;
+
+        Helpers.AddToHistory(score, GameType.Addition, totalTime);
 
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score}.");
+        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }
@@ -46,6 +53,9 @@ internal static class GameEngine
     internal static void SubtractionGame(string message, DifficultyLevel difficultyLevel)
     {
         var score = 0;
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         for (var i = 0; i < 5; i++)
         {
@@ -74,10 +84,13 @@ internal static class GameEngine
             }
         }
 
-        Helpers.AddToHistory(score, GameType.Subtraction);
+        stopwatch.Stop();
+        var totalTime = stopwatch.Elapsed.TotalSeconds;
+
+        Helpers.AddToHistory(score, GameType.Subtraction, totalTime);
 
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score}.");
+        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }
@@ -85,6 +98,9 @@ internal static class GameEngine
     internal static void MultiplicationGame(string message, DifficultyLevel difficultyLevel)
     {
         var score = 0;
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         for (var i = 0; i < 5; i++)
         {
@@ -113,10 +129,13 @@ internal static class GameEngine
             }
         }
 
-        Helpers.AddToHistory(score, GameType.Multiplication);
+        stopwatch.Stop();
+        var totalTime = stopwatch.Elapsed.TotalSeconds;
+
+        Helpers.AddToHistory(score, GameType.Multiplication, totalTime);
 
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score}.");
+        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }
@@ -124,6 +143,9 @@ internal static class GameEngine
     internal static void DivisionGame(string message, DifficultyLevel difficultyLevel)
     {
         var score = 0;
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         for (var i = 0; i < 5; i++)
         {
@@ -152,10 +174,13 @@ internal static class GameEngine
             }
         }
 
-        Helpers.AddToHistory(score, GameType.Division);
+        stopwatch.Stop();
+        var totalTime = stopwatch.Elapsed.TotalSeconds;
+
+        Helpers.AddToHistory(score, GameType.Division, totalTime);
 
         Console.Clear();
-        Console.WriteLine($"Game over. Your final score is {score}.");
+        Console.WriteLine($"Game over. Your final score is {score} and your time was {totalTime} seconds.");
         Console.WriteLine("Press any key to go back to the main menu.");
         Console.ReadLine();
     }
