@@ -1,7 +1,7 @@
 ﻿Console.WriteLine("Please type your name");
 var username = Console.ReadLine();
 var date = DateTime.UtcNow;
-Console.WriteLine($"Hello {username.ToUpper()}, now time is {date}. Let's start the game.\n");
+Console.WriteLine($"Hello {username?.ToUpper()}, now time is {date}. Let's start the game.\n");
 
 string menu = @"Please choose the option:
 A - Addition
@@ -17,7 +17,7 @@ var option =  Console.ReadLine();
 switch(option.Trim().ToUpper())
 {
     case "A":
-        Console.WriteLine("Addition Game");
+        Add();
         break;
     case "S":
         Console.WriteLine("Subtraction Game");
@@ -37,3 +37,22 @@ switch(option.Trim().ToUpper())
         break;
 }
 
+void Add()
+{
+    Console.WriteLine("Addition Game");
+    var rand = new Random();
+    var num1 = rand.Next(0, 99);
+    var num2 = rand.Next(0, 99);
+    Console.WriteLine($"Please enter the result of {num1} + {num2}:");
+    var res = 0;
+    var input = Console.ReadLine();
+    if(String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+    {
+        Console.WriteLine("Invalid Input");
+    }else if(res == num1 + num2)
+    {
+        Console.WriteLine("Answer Correct!");
+    }else {
+        Console.WriteLine("Answer Error.");
+    };
+}
