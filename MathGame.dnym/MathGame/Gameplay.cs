@@ -121,15 +121,14 @@ Press a number or letter key to choose.");
                 if (int.TryParse(response, out int responseInt))
                 {
                     warning = "";
-                    {
-                        // This is a hack to clear the the warning.
-                        var currentCursorHorizontalPosition = Console.CursorLeft;
-                        var currentCursorVerticalPosition = Console.CursorTop;
-                        Console.WriteLine(new string(' ', Console.WindowWidth));
-                        Console.WriteLine(new string(' ', Console.WindowWidth));
-                        Console.WriteLine(new string(' ', Console.WindowWidth));
-                        Console.SetCursorPosition(currentCursorHorizontalPosition, currentCursorVerticalPosition);
-                    }
+                    // This is a hack to clear the the warning.
+                    var currentCursorHorizontalPosition = Console.CursorLeft;
+                    var currentCursorVerticalPosition = Console.CursorTop;
+                    Console.WriteLine(new string(' ', Console.WindowWidth));
+                    Console.WriteLine(new string(' ', Console.WindowWidth));
+                    Console.WriteLine(new string(' ', Console.WindowWidth));
+                    Console.SetCursorPosition(currentCursorHorizontalPosition, currentCursorVerticalPosition);
+
                     timer.Stop();
                     if (responseInt == result)
                     {
