@@ -109,9 +109,8 @@ class Game
                 Console.WriteLine(Constants.ERROR);
             };
         }
-        score += addScore;
-        scoreHistory.Add($"Time: {date}, Type:{Constants.ADD_GAME}, AddScore: {addScore}, Score: {score}.");
-        Console.WriteLine($"Game Finish! Your addition game score is {addScore} and total score is {score}!");
+        AddScore(Constants.ADD_GAME, addScore);
+        PrintScore(Constants.ADD_GAME, addScore);
     }
 
     public void Sub()
@@ -149,9 +148,8 @@ class Game
                 Console.WriteLine(Constants.ERROR);
             };
         }
-        score += subScore;
-        scoreHistory.Add($"Time: {date}, Type:{Constants.SUB_GAME}, SubScore: {subScore}, Score: {score}.");
-        Console.WriteLine($"Game Finish! Your subtraction game score is {subScore} and total score is {score}!");
+        AddScore(Constants.SUB_GAME, subScore);
+        PrintScore(Constants.SUB_GAME, subScore);
     }
 
     public void Mul()
@@ -189,9 +187,8 @@ class Game
                 Console.WriteLine(Constants.ERROR);
             };
         }
-        score += mulScore;
-        scoreHistory.Add($"Time: {date}, Type:{Constants.MUL_GAME}, MulScore: {mulScore}, Score: {score}.");
-        Console.WriteLine($"Game Finish! Your multiplication game score is {mulScore} and total score is {score}!");
+        AddScore(Constants.MUL_GAME, mulScore);
+        PrintScore(Constants.MUL_GAME, mulScore);
     }
 
     public void Div()
@@ -234,8 +231,18 @@ class Game
                 Console.WriteLine(Constants.ERROR);
             };
         }
-        score += divScore;
-        scoreHistory.Add($"Time: {date}, Type:{Constants.DIV_GAME}, DivScore: {divScore}, Score: {score}.");
-        Console.WriteLine($"Game Finish! Your division game score is {divScore} and total score is {score}!");
+        AddScore(Constants.DIV_GAME, divScore);
+        PrintScore(Constants.DIV_GAME, divScore);
+    }
+
+    public void AddScore(string gameType, int s)
+    {
+        score += s;
+        scoreHistory.Add($"Time: {date}, Type:{gameType}, Score: {s}, Total Score: {score}.");
+    }
+
+    public void PrintScore(string gameType, int s)
+    {
+        Console.WriteLine($"Game Finish! Your {gameType} score is {s} and total score is {score}!");
     }
 }
