@@ -5,7 +5,7 @@ class Game
     private string username;
     private DateTime date;
     private int score = 0;
-    private List<string> scoreHistory = new();
+    private List<Score> scoreHistory = new();
 
     public Game(string username, DateTime date)
     {
@@ -70,7 +70,8 @@ class Game
         Console.Clear();
         Console.WriteLine(Constants.SCORE_HISTORY);
         Console.WriteLine("----------------------------------------------------------------------");
-        scoreHistory.ForEach(s => Console.WriteLine(s + "\t"));
+        scoreHistory.ForEach(s => 
+            Console.WriteLine($"Time: {s.Date}, Type:{s.Type}, Score: {s.GetTypeScore()}, Total Score: {s.GetScore()}."));
         Console.WriteLine("----------------------------------------------------------------------");
     }
 
@@ -238,7 +239,7 @@ class Game
     public void AddScore(string gameType, int s)
     {
         score += s;
-        scoreHistory.Add($"Time: {date}, Type:{gameType}, Score: {s}, Total Score: {score}.");
+        scoreHistory.Add(new Score(date, gameType, s, score));
     }
 
     public void PrintScore(string gameType, int s)
