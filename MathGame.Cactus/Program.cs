@@ -1,4 +1,7 @@
-﻿Console.WriteLine("Please type your name");
+﻿using MathGame.Cactus;
+
+// user information
+Console.WriteLine("Please type your name");
 var username = Console.ReadLine();
 var date = DateTime.UtcNow;
 var score = 0;
@@ -8,20 +11,12 @@ Console.WriteLine($"Hello {username?.ToUpper()}, now time is {date}. Let's start
 Console.WriteLine("Please enter any key to start the game.");
 var key = Console.ReadLine();
 
-string menu = @"Please choose the option:
-A - Addition
-S - Subtraction
-M - Multiplication
-D - Division
-H - ScoreHistory
-Q - Quit
-";
-
+// game menu
 bool isQuit = false;
 do
 {
     Console.Clear();
-    Console.WriteLine(menu);
+    Console.WriteLine(Constants.MENU);
     var input = Console.ReadLine();
     var option = input?.Trim().ToUpper();
     switch (option)
@@ -59,22 +54,22 @@ do
 void PrintScoreHistory()
 {
     Console.Clear();
-    Console.WriteLine("Score History");
-    Console.WriteLine("-------------------------------------------------------------");
-    scoreHistory.ForEach(s => Console.WriteLine(s));
-    Console.WriteLine("-------------------------------------------------------------");
+    Console.WriteLine(Constants.SCORE_HISTORY);
+    Console.WriteLine("----------------------------------------------------------------------");
+    scoreHistory.ForEach(s => Console.WriteLine(s + "\t"));
+    Console.WriteLine("----------------------------------------------------------------------");
 }
 
 void Add()
 {
     Console.Clear();
-    Console.WriteLine("Addition Game");
+    Console.WriteLine(Constants.ADD_GAME);
     Console.WriteLine("Please input the times you want to play:");
     int times;
     var input = Console.ReadLine();
-    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out times))
+    if (string.IsNullOrEmpty(input) || !int.TryParse(input, out times))
     {
-        Console.WriteLine("Invalid Input.");
+        Console.WriteLine(Constants.INVALID_INPUT);
         return; // go back to main menu
     }
     var rand = new Random();
@@ -86,35 +81,35 @@ void Add()
         Console.WriteLine($"Please enter the result of {num1} + {num2}:");
         int res;
         input = Console.ReadLine();
-        if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+        if (string.IsNullOrEmpty(input) || !int.TryParse(input, out res))
         {
-            Console.WriteLine("Invalid Input.");
+            Console.WriteLine(Constants.INVALID_INPUT);
         }
         else if (res == num1 + num2)
         {
-            Console.WriteLine("Answer Correct!");
+            Console.WriteLine(Constants.CORRECT);
             addScore++;
         }
         else
         {
-            Console.WriteLine("Answer Error.");
+            Console.WriteLine(Constants.ERROR);
         };
     }
     score += addScore;
-    scoreHistory.Add($"Time: {date}, Type:Addition Game, AddScore: {addScore}, Score: {score}.");
+    scoreHistory.Add($"Time: {date}, Type:{Constants.ADD_GAME}, AddScore: {addScore}, Score: {score}.");
     Console.WriteLine($"Game Finish! Your addition game score is {addScore} and total score is {score}!");
 }
 
 void Sub()
 {
     Console.Clear();
-    Console.WriteLine("Subtraction Game");
+    Console.WriteLine(Constants.SUB_GAME);
     Console.WriteLine("Please input the times you want to play:");
     int times;
     var input = Console.ReadLine();
-    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out times))
+    if (string.IsNullOrEmpty(input) || !int.TryParse(input, out times))
     {
-        Console.WriteLine("Invalid Input.");
+        Console.WriteLine(Constants.INVALID_INPUT);
         return; // go back to main menu
     }
     var rand = new Random();
@@ -126,75 +121,75 @@ void Sub()
         Console.WriteLine($"Please enter the result of {num1} - {num2}:");
         var res = 0;
         input = Console.ReadLine();
-        if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+        if (string.IsNullOrEmpty(input) || !int.TryParse(input, out res))
         {
-            Console.WriteLine("Invalid Input");
+            Console.WriteLine(Constants.INVALID_INPUT);
         }
         else if (res == num1 - num2)
         {
-            Console.WriteLine("Answer Correct!");
+            Console.WriteLine(Constants.CORRECT);
             subScore++;
         }
         else
         {
-            Console.WriteLine("Answer Error.");
+            Console.WriteLine(Constants.ERROR);
         };
     }
     score += subScore;
-    scoreHistory.Add($"Time: {date}, Type:Subtraction Game, SubScore: {subScore}, Score: {score}.");
+    scoreHistory.Add($"Time: {date}, Type:{Constants.SUB_GAME}, SubScore: {subScore}, Score: {score}.");
     Console.WriteLine($"Game Finish! Your subtraction game score is {subScore} and total score is {score}!");
 }
 
 void Mul()
 {
     Console.Clear();
-    Console.WriteLine("Muliplication Game");
+    Console.WriteLine(Constants.MUL_GAME);
     Console.WriteLine("Please input the times you want to play:");
     int times;
     var input = Console.ReadLine();
-    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out times))
+    if (string.IsNullOrEmpty(input) || !int.TryParse(input, out times))
     {
-        Console.WriteLine("Invalid Input.");
+        Console.WriteLine(Constants.INVALID_INPUT);
         return; // go back to main menu
     }
     var rand = new Random();
     var mulScore = 0;
-    for(int i = 0; i < times; i++)
+    for (int i = 0; i < times; i++)
     {
         var num1 = rand.Next(0, 10);
         var num2 = rand.Next(0, 10);
         Console.WriteLine($"Please enter the result of {num1} * {num2}:");
         var res = 0;
         input = Console.ReadLine();
-        if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+        if (string.IsNullOrEmpty(input) || !int.TryParse(input, out res))
         {
-            Console.WriteLine("Invalid Input");
+            Console.WriteLine(Constants.INVALID_INPUT);
         }
         else if (res == num1 * num2)
         {
-            Console.WriteLine("Answer Correct!");
+            Console.WriteLine(Constants.CORRECT);
             mulScore++;
         }
         else
         {
-            Console.WriteLine("Answer Error.");
+            Console.WriteLine(Constants.ERROR);
         };
     }
     score += mulScore;
-    scoreHistory.Add($"Time: {date}, Type:Multiplication Game, MulScore: {mulScore}, Score: {score}.");
+    scoreHistory.Add($"Time: {date}, Type:{Constants.MUL_GAME}, MulScore: {mulScore}, Score: {score}.");
     Console.WriteLine($"Game Finish! Your multiplication game score is {mulScore} and total score is {score}!");
 }
 
 void Div()
 {
     Console.Clear();
-    Console.WriteLine("Division Game");
+    Console.WriteLine(Constants.DIV_GAME);
     Console.WriteLine("Please input the times you want to play:");
     int times;
     var input = Console.ReadLine();
-    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out times))
+    if (string.IsNullOrEmpty(input) || !int.TryParse(input, out times))
     {
-        Console.WriteLine("Invalid Input.");
+        Console.WriteLine(Constants.INVALID_INPUT);
         return; // go back to main menu
     }
     var rand = new Random();
@@ -211,21 +206,21 @@ void Div()
         Console.WriteLine($"Please enter the result of {num1} / {num2}:");
         var res = 0;
         input = Console.ReadLine();
-        if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+        if (string.IsNullOrEmpty(input) || !int.TryParse(input, out res))
         {
-            Console.WriteLine("Invalid Input");
+            Console.WriteLine(Constants.INVALID_INPUT);
         }
         else if (res == num1 / num2)
         {
-            Console.WriteLine("Answer Correct!");
+            Console.WriteLine(Constants.CORRECT);
             divScore++;
         }
         else
         {
-            Console.WriteLine("Answer Error.");
+            Console.WriteLine(Constants.ERROR);
         };
     }
     score += divScore;
-    scoreHistory.Add($"Time: {date}, Type:Division Game, DivScore: {divScore}, Score: {score}.");
+    scoreHistory.Add($"Time: {date}, Type:{Constants.DIV_GAME}, DivScore: {divScore}, Score: {score}.");
     Console.WriteLine($"Game Finish! Your division game score is {divScore} and total score is {score}!");
 }
