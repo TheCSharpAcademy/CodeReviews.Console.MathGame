@@ -4,7 +4,7 @@ class Game
 {
     private string username;
     private DateTime date;
-    private int score = 0;
+    private int score;
     private List<Score> scoreHistory = new();
 
     public Game(string username, DateTime date)
@@ -108,7 +108,7 @@ class Game
             else
             {
                 Console.WriteLine(Constants.ERROR);
-            };
+            }
         }
         AddScore(Constants.ADD_GAME, addScore);
         PrintScore(Constants.ADD_GAME, addScore);
