@@ -5,7 +5,7 @@ class Menu
 	private string answer;
 	private int number1;
 	private int number2;
-	private int score = 0;
+	private int score;
 
 	internal void ShowMenu(string name)
 	{

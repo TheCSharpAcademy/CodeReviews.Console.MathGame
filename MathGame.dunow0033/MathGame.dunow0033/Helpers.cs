@@ -60,7 +60,7 @@ namespace MathGame
 			return numbers;
 		}
 
-		internal static string? validateNumber(string number)
+		internal static string? ValidateNumber(string number)
 		{
 			while (string.IsNullOrEmpty(number) || !Int32.TryParse(number, out _))
 			{

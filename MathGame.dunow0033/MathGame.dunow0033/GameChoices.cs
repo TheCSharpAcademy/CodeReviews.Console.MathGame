@@ -29,7 +29,7 @@ namespace MathGame
 					break;
 				}
 
-				var result = Helpers.validateNumber(answer);
+				var result = Helpers.ValidateNumber(answer);
 
 				if (result.Trim().ToLower() == "q")
 				{
@@ -76,7 +76,7 @@ namespace MathGame
 					break;
 				}
 
-				var result = Helpers.validateNumber(answer);
+				var result = Helpers.ValidateNumber(answer);
 
 				if (result.Trim().ToLower() == "q")
 				{
@@ -131,7 +131,7 @@ namespace MathGame
 					break;
 				}
 
-				var result = Helpers.validateNumber(answer);
+				var result = Helpers.ValidateNumber(answer);
 
 				if (result.Trim().ToLower() == "q")
 				{
@@ -189,7 +189,7 @@ namespace MathGame
 					break;
 				}
 
-				var result = Helpers.validateNumber(answer);
+				var result = Helpers.ValidateNumber(answer);
 
 				if (result.Trim().ToLower() == "q")
 				{
