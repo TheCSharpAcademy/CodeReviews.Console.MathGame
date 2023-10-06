@@ -147,7 +147,7 @@ class Game
             else
             {
                 Console.WriteLine(Constants.ERROR);
-            };
+            }
         }
         AddScore(Constants.SUB_GAME, subScore);
         PrintScore(Constants.SUB_GAME, subScore);
@@ -186,7 +186,7 @@ class Game
             else
             {
                 Console.WriteLine(Constants.ERROR);
-            };
+            }
         }
         AddScore(Constants.MUL_GAME, mulScore);
         PrintScore(Constants.MUL_GAME, mulScore);
@@ -230,7 +230,7 @@ class Game
             else
             {
                 Console.WriteLine(Constants.ERROR);
-            };
+            }
         }
         AddScore(Constants.DIV_GAME, divScore);
         PrintScore(Constants.DIV_GAME, divScore);
