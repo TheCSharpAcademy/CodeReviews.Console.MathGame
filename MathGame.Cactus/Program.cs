@@ -7,7 +7,7 @@ string menu = @"Please choose the option:
 A - Addition
 S - Subtraction
 M - Multiplication
-D - Dovision
+D - Division
 Q - Quit
 ";
 
@@ -26,7 +26,7 @@ switch(option?.Trim().ToUpper())
         Mul();
         break;
     case "D":
-        Console.WriteLine("Division Game");
+        Div();
         break;
     case "Q":
         Console.WriteLine("Bye");
@@ -94,6 +94,34 @@ void Mul()
         Console.WriteLine("Invalid Input");
     }
     else if (res == num1 * num2)
+    {
+        Console.WriteLine("Answer Correct!");
+    }
+    else
+    {
+        Console.WriteLine("Answer Error.");
+    };
+}
+
+void Div()
+{
+    Console.WriteLine("Division Game");
+    var rand = new Random();
+    var num1 = 0;
+    var num2 = 0;
+    do
+    {
+        num1 = rand.Next(0, 100);
+        num2 = rand.Next(0, 100);
+    } while (num1 % num2 != 0);
+    Console.WriteLine($"Please enter the result of {num1} / {num2}:");
+    var res = 0;
+    var input = Console.ReadLine();
+    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+    {
+        Console.WriteLine("Invalid Input");
+    }
+    else if (res == num1 / num2)
     {
         Console.WriteLine("Answer Correct!");
     }
