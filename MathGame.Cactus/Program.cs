@@ -5,6 +5,8 @@ var score = 0;
 var scoreHistory = new List<string>();
 
 Console.WriteLine($"Hello {username?.ToUpper()}, now time is {date}. Let's start the game.\n");
+Console.WriteLine("Please enter any key to start the game.");
+var key = Console.ReadLine();
 
 string menu = @"Please choose the option:
 A - Addition
@@ -18,9 +20,11 @@ Q - Quit
 bool isQuit = false;
 do
 {
+    Console.Clear();
     Console.WriteLine(menu);
-    var option = Console.ReadLine();
-    switch (option?.Trim().ToUpper())
+    var input = Console.ReadLine();
+    var option = input?.Trim().ToUpper();
+    switch (option)
     {
         case "A":
             Add();
@@ -45,10 +49,17 @@ do
             Console.WriteLine("Invalid Input");
             break;
     }
+    if (option == "A" || option == "S" || option == "M" || option == "D" || option == "H")
+    {
+        Console.WriteLine("Please enter any key to go to the menu.");
+        key = Console.ReadLine();
+    }
 } while (!isQuit);
 
 void PrintScoreHistory()
 {
+    Console.Clear();
+    Console.WriteLine("Score History");
     Console.WriteLine("-------------------------------------------------------------");
     scoreHistory.ForEach(s => Console.WriteLine(s));
     Console.WriteLine("-------------------------------------------------------------");
@@ -56,6 +67,7 @@ void PrintScoreHistory()
 
 void Add()
 {
+    Console.Clear();
     Console.WriteLine("Addition Game");
     Console.WriteLine("Please input the times you want to play:");
     int times;
@@ -95,6 +107,7 @@ void Add()
 
 void Sub()
 {
+    Console.Clear();
     Console.WriteLine("Subtraction Game");
     Console.WriteLine("Please input the times you want to play:");
     int times;
@@ -134,6 +147,7 @@ void Sub()
 
 void Mul()
 {
+    Console.Clear();
     Console.WriteLine("Muliplication Game");
     Console.WriteLine("Please input the times you want to play:");
     int times;
@@ -173,6 +187,7 @@ void Mul()
 
 void Div()
 {
+    Console.Clear();
     Console.WriteLine("Division Game");
     Console.WriteLine("Please input the times you want to play:");
     int times;
