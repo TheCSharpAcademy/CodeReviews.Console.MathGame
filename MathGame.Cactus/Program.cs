@@ -14,16 +14,16 @@ Q - Quit
 Console.WriteLine(menu);
 
 var option =  Console.ReadLine();
-switch(option.Trim().ToUpper())
+switch(option?.Trim().ToUpper())
 {
     case "A":
         Add();
         break;
     case "S":
-        Console.WriteLine("Subtraction Game");
+        Sub();
         break;
     case "M":
-        Console.WriteLine("Muliplication Game");
+        Mul();
         break;
     case "D":
         Console.WriteLine("Division Game");
@@ -53,6 +53,52 @@ void Add()
     {
         Console.WriteLine("Answer Correct!");
     }else {
+        Console.WriteLine("Answer Error.");
+    };
+}
+
+void Sub()
+{
+    Console.WriteLine("Subtraction Game");
+    var rand = new Random();
+    var num1 = rand.Next(0, 99);
+    var num2 = rand.Next(0, 99);
+    Console.WriteLine($"Please enter the result of {num1} - {num2}:");
+    var res = 0;
+    var input = Console.ReadLine();
+    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+    {
+        Console.WriteLine("Invalid Input");
+    }
+    else if (res == num1 - num2)
+    {
+        Console.WriteLine("Answer Correct!");
+    }
+    else
+    {
+        Console.WriteLine("Answer Error.");
+    };
+}
+
+void Mul()
+{
+    Console.WriteLine("Muliplication Game");
+    var rand = new Random();
+    var num1 = rand.Next(0, 10);
+    var num2 = rand.Next(0, 10);
+    Console.WriteLine($"Please enter the result of {num1} * {num2}:");
+    var res = 0;
+    var input = Console.ReadLine();
+    if (String.IsNullOrEmpty(input) || !int.TryParse(input, out res))
+    {
+        Console.WriteLine("Invalid Input");
+    }
+    else if (res == num1 * num2)
+    {
+        Console.WriteLine("Answer Correct!");
+    }
+    else
+    {
         Console.WriteLine("Answer Error.");
     };
 }
