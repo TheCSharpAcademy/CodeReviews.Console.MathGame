@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace mathGame.czerviik;
+﻿namespace mathGame.czerviik;
 
 public class MainMenu
 {

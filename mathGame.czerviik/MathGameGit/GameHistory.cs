@@ -1,7 +1,4 @@
-﻿using System;
-using static System.Formats.Asn1.AsnWriter;
-
-namespace mathGame.czerviik;
+﻿namespace mathGame.czerviik;
 
 //singleton pattern
 public class GameHistory
