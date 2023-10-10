@@ -204,7 +204,7 @@ static Question CreateNewQuestion(int difficulty, string operation)
     if (operation == "/")
     {
         int dividend = rand.Next(0, 101);
-        int divisor = rand.Next(1, 101); // Prevent division by 0;
+        int divisor = rand.Next(1, 101);
 
         while (dividend % divisor != 0 || !CheckDivision(difficulty, dividend, divisor) || dividend < divisor) 
         { 
@@ -296,7 +296,7 @@ static bool CheckDifficulty(int difficulty, int leftNumber, int rightNumber)
         if (leftNumber > 15 || rightNumber > 15) 
         { 
             return false; 
-        };
+        }
     }
     else
     {
@@ -350,7 +350,7 @@ static int ValidateInput(string prompt, int minInput, int maxInput)
 
 class Question
 {
-    public int LeftNumeral { get; set; } = 0;
-    public int RightNumeral { get; set; } = 0;
+    public int LeftNumeral { get; set; }
+    public int RightNumeral { get; set; }
     public string Operand { get; set; } = "";
 }
