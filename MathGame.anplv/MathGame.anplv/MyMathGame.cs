@@ -1,2 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MathGame.anplv;
+
+
+var menu = new Menu();
+
+var date = DateTime.UtcNow;
+
+string name = Helpers.GetName();
+
+menu.ShowMenu(name, date);
+
+
+
+
