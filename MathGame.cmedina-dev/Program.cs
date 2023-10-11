@@ -54,7 +54,7 @@ static void DisplayHistory(List<List<string>> history)
     Console.WriteLine("Previous games:\n");
     for (int i = 0; i < history.Count; i++)
     {
-        Console.WriteLine($"Game {i + 1}");
+        Console.WriteLine($"{i + 1}. Game {i + 1}");
     }
 
     string prompt = "Select which game you want to view:";
@@ -211,8 +211,6 @@ static Question CreateNewQuestion(int difficulty, string operation)
             divisor = rand.Next(1, 101);
             dividend = rand.Next(0, 101);
         } // Only create whole quotients
-
-        Console.WriteLine($"{dividend}, {divisor}, {dividend % divisor}");
 
         question.LeftNumeral = dividend;
         question.RightNumeral = divisor;
