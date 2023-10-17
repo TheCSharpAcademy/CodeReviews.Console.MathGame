@@ -188,7 +188,7 @@ namespace MathGame.SadePauw
                     Console.WriteLine($"You selected an infinite amount of questions.");
                     return 0;
                 }
-                else if (numberOfQuestions == String.Empty)
+                else if (numberOfQuestions == string.Empty)
                 {
                     Console.WriteLine($"You selected an infinite amount of questions.");
                     return 0;
