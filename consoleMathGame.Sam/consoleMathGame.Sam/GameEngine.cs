@@ -1,9 +1,6 @@
 ﻿using consoleMathGame.Sam.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace consoleMathGame.Sam
 {
@@ -134,7 +131,7 @@ namespace consoleMathGame.Sam
                     Console.WriteLine($"Game is over. Your final score is {score}. Press any key to continue");
                     Console.ReadLine();
                 }
-            };
+            }
 
             Helpers.AddToHistory(score, GameType.Multiplication);
         }

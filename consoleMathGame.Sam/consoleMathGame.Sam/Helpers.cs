@@ -8,8 +8,6 @@ namespace consoleMathGame.Sam
         static List<Game> games = new List<Game>();
         internal static void PrintGames()
         {
-            var gamesToPrint = games.Where(x => x.Type == GameType.Division);
-
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("----------------------------");
