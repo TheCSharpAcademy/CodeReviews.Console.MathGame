@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MathGame
+namespace MathGame.SadePauw
 {
     public static class History
     {

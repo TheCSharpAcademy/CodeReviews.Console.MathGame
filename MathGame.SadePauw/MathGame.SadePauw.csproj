@@ -5,11 +5,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{8A6DA0CF-98E3-4726-AEB5-8BF38AD6E7A7}</ProjectGuid>
+        <ProjectGuid>{833484B3-9685-4A5B-A48E-E102A02D5399}</ProjectGuid>
         <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>MathGame</RootNamespace>
-        <AssemblyName>MathGame</AssemblyName>
+        <RootNamespace>MathGame.SadePauw</RootNamespace>
+        <AssemblyName>MathGame.SadePauw</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

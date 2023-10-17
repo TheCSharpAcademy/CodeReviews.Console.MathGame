@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MathGame")]
+[assembly: AssemblyTitle("MathGame.SadePauw")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MathGame")]
+[assembly: AssemblyProduct("MathGame.SadePauw")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8A6DA0CF-98E3-4726-AEB5-8BF38AD6E7A7")]
+[assembly: Guid("833484B3-9685-4A5B-A48E-E102A02D5399")]
 
 // Version information for an assembly consists of the following four values:
 //

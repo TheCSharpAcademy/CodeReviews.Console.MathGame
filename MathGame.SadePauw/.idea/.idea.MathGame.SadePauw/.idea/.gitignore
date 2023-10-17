@@ -2,10 +2,10 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
+/.idea.MathGame.SadePauw.iml
 /contentModel.xml
-/.idea.MathGame.iml
-/modules.xml
 /projectSettingsUpdater.xml
+/modules.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files

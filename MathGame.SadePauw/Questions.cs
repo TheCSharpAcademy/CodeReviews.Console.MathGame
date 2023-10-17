@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathGame
+namespace MathGame.SadePauw
 {
     public static class Questions
     {
