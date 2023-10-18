@@ -12,7 +12,7 @@ namespace MathGame.SadePauw
             Console.WriteLine("\nPlease provide me the answer: ");
             Console.WriteLine($"{a} + {b} =");
             var answer = Console.ReadLine();
-            return Result(answer, result.ToString());
+            return GetResult(answer, result.ToString());
         }
         public static bool SubtractQuestion(int difficulty)
         {
@@ -22,7 +22,7 @@ namespace MathGame.SadePauw
             Console.WriteLine("\nPlease provide me the answer: ");
             Console.WriteLine($"{a} - {b} =");
             var answer = Console.ReadLine();
-            return Result(answer, result.ToString());
+            return GetResult(answer, result.ToString());
         }
         public static bool MultiplyQuestion(int difficulty)
         {
@@ -32,7 +32,7 @@ namespace MathGame.SadePauw
             Console.WriteLine("\nPlease provide me the answer: ");
             Console.WriteLine($"{a} * {b} =");
             var answer = Console.ReadLine();
-            return Result(answer, result.ToString());
+            return GetResult(answer, result.ToString());
         }
         public static bool DivideQuestion(int difficulty)
         {
@@ -48,7 +48,7 @@ namespace MathGame.SadePauw
             Console.WriteLine("\nPlease provide me the answer: ");
             Console.WriteLine($"{a} / {b} =");
             var answer = Console.ReadLine();
-            return Result(answer, result.ToString());
+            return GetResult(answer, result.ToString());
         }
         public static bool RandomQuestion(int difficulty)
         {
@@ -91,7 +91,7 @@ namespace MathGame.SadePauw
             }
             return a;
         }
-        private static bool Result(string answer, string result)
+        private static bool GetResult(string answer, string result)
         {
             if (answer == result)
             {
