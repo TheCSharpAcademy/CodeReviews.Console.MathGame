@@ -24,6 +24,8 @@ public class Game
 			choice = Console.ReadLine();
 			if (Helper.GetAllOperations().Any(op => op.Symbol == choice))
 			{
+				UpdateQuestionsCount();
+
 				Stopwatch watch = Stopwatch.StartNew();
 				PlayGame(choice);
 				watch.Stop();
@@ -41,6 +43,19 @@ public class Game
 				return;
             }
 		} while (true);
+	}
+
+	private static void UpdateQuestionsCount()
+	{
+		string? input;
+		int result;
+		do
+		{
+			Console.WriteLine("Enter question count: ");
+			input = Console.ReadLine();
+		} while (!int.TryParse(input, out result));
+
+		QuestionsCount = result;
 	}
 
 	private static void PlayGame(string? op)

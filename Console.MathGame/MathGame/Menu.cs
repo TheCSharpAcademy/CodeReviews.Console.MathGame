@@ -5,7 +5,6 @@ public class Menu
 	public static void ShowMenu()
 	{
         Console.WriteLine("Welcome to the math game. Choose any operation you'd like:");
-        Console.WriteLine("Any operator you choose, you will get 5 questions.");
 
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Press q to quit the game.");
