@@ -8,16 +8,13 @@ namespace consoleMathGame.Sam
         GameEngine gameEngine = new();
         internal void ShowMenu(string? name, DateTime date)
         {
-            Console.WriteLine($"Hello {name}. Today is {date}.");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("\n");
 
             var isGameOn = true;
 
             do
             {
                 Console.Clear();
-                Console.WriteLine($@"What game would you like to play today? Choose the options below:
+                Console.WriteLine($@"Hello {name} what game would you like to play today? Choose the options below:
         V - View Previous Games
         A - Addition
         S - Subtraction
