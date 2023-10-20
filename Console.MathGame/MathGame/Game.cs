@@ -3,14 +3,14 @@
 public class Game
 {
 	public static int QuestionsCount { get; set; } = 5;
+	public static List<History> GameHistory = new List<History>();
+
 	public static void Start()
 	{
 		while(true)
 		{
 			Menu.ShowMenu();
-
 			ChooseOption();
-			// PlayGame(choice, QuestionsCount);
 		}
     }
 
@@ -29,6 +29,11 @@ public class Game
 			{
 				Environment.Exit(0);
 			}
+			else if (choice == "l")
+			{
+				Menu.ShowHistory(GameHistory);
+				return;
+            }
 		} while (true);
 	}
 
@@ -50,6 +55,12 @@ public class Game
 		}
 
 		Menu.ShowScore(score, QuestionsCount);
+		GameHistory.Add(new History
+		{
+			Operator = op,
+			DateTime = DateTime.Now,
+			Score = score
+		});
 	}
 
 	private static void DetermineAnswer(int firstNum, int secondNum, int userInput, string? op, ref int score)

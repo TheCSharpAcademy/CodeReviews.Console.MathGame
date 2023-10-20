@@ -6,8 +6,13 @@ public class Menu
 	{
         Console.WriteLine("Welcome to the math game. Choose any operation you'd like:");
         Console.WriteLine("Any operator you choose, you will get 5 questions.");
+
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Press q to quit the game.");
+		Console.ForegroundColor = ConsoleColor.White;
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Press l to see history of all games.");
 		Console.ForegroundColor = ConsoleColor.White;
 
 		foreach (Operation op in Helper.GetAllOperations())
@@ -47,4 +52,14 @@ public class Menu
 		Console.WriteLine("Wrong.");
 		Console.ForegroundColor = ConsoleColor.White;
 	}
+
+    public static void ShowHistory(List<History> gameHistory)
+    {
+		Console.WriteLine("\nHistory of all games:");
+		foreach (History history in gameHistory)
+        {
+            Console.WriteLine($"{history.DateTime} [{history.Operator}] Score: {history.Score}");
+        }
+        Console.WriteLine();
+    }
 }
