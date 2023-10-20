@@ -2,13 +2,11 @@
 
 internal class Game
 {
-    private int _score;
-
+    public string userName { get; set; }
     public DateTime Date { get; set; }
     public int Score { get; set; }
 
     public GameType Type { get; set; }
-
 }
 
 internal enum GameType

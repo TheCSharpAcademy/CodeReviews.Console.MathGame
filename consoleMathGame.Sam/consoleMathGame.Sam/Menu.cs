@@ -28,16 +28,16 @@ namespace consoleMathGame.Sam
                 switch (gameSelected.Trim().ToLower())
                 {
                     case "a":
-                        gameEngine.AdditionGame("Addition game");
+                        gameEngine.AdditionGame("Addition game", name);
                         break;
                     case "s":
-                        gameEngine.SubtractionGame("division game");
+                        gameEngine.SubtractionGame("division game", name);
                         break;
                     case "m":
-                        gameEngine.MultiplicationGame("Multiplcation game");
+                        gameEngine.MultiplicationGame("Multiplcation game", name);
                         break;
                     case "d":
-                        gameEngine.DivisionGame("Division game");
+                        gameEngine.DivisionGame("Division game", name);
                         break;
                     case "v":
                         Helpers.PrintGames();
@@ -47,7 +47,8 @@ namespace consoleMathGame.Sam
                         isGameOn = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid Input");
+                        Console.WriteLine("Invalid Input. Press any key to contine to try again");
+                        Console.ReadLine();
                         break;
                 }
             } while (isGameOn);

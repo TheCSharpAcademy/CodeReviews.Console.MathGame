@@ -13,20 +13,21 @@ namespace consoleMathGame.Sam
             Console.WriteLine("----------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points set by {game.userName}");
             }
             Console.WriteLine("----------------------------\n");
-            Console.WriteLine("Press any key to go bak to the main menu");
+            Console.WriteLine("Press any key to go back to the main menu");
             Console.ReadLine();
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType, string? name)
         {
             games.Add(new Game
             {
                 Date = DateTime.Now,
                 Score = gameScore,
-                Type = gameType
+                Type = gameType,
+                userName = name
             });
         }
 
