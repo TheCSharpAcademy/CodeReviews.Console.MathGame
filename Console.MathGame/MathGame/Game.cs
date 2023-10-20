@@ -1,4 +1,6 @@
-﻿namespace MathGame;
+﻿using System.Diagnostics;
+
+namespace MathGame;
 
 public class Game
 {
@@ -22,8 +24,12 @@ public class Game
 			choice = Console.ReadLine();
 			if (Helper.GetAllOperations().Any(op => op.Symbol == choice))
 			{
+				Stopwatch watch = Stopwatch.StartNew();
 				PlayGame(choice);
-				return;
+				watch.Stop();
+
+				Menu.ShowElapsedTime(watch.ElapsedMilliseconds);
+                return;
 			}
 			else if (choice == "q")
 			{

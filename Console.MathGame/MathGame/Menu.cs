@@ -30,14 +30,20 @@ public class Menu
     public static void ShowScore(int score, int questionsCount)
     {
         Console.WriteLine($"You've reached a score of: {score}/{questionsCount}");
+    }
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("Press any key to continue.");
+    public static void ShowElapsedTime(long elapsedTime)
+    {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine($"You've finished the game in: {elapsedTime}ms\n");
 		Console.ForegroundColor = ConsoleColor.White;
 
+		Console.ForegroundColor = ConsoleColor.Yellow;
+		Console.WriteLine("Press any key to continue.");
+		Console.ForegroundColor = ConsoleColor.White;
 		Console.ReadKey();
-        Console.Clear();
-    }
+		Console.Clear();
+	}
 
     public static void ShowFeedbackCorrect()
     {
