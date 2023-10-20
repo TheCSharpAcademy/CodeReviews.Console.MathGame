@@ -52,7 +52,7 @@ namespace consoleMathGame.Sam
 
         internal static string? ValidateResult(string result)
         {
-            while (string.IsNullOrEmpty(result) || Int32.TryParse(result, out _))
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
             {
                 Console.WriteLine("Your answer should be an integer. Try again");
                 result = Console.ReadLine();

@@ -6,7 +6,7 @@ namespace consoleMathGame.Sam
 {
     internal class GameEngine
     {
-        internal void AdditionGame(string message)
+        internal void AdditionGame(string message, string? userName)
         {
             var random = new Random();
             int score = 0;
@@ -50,7 +50,7 @@ namespace consoleMathGame.Sam
             Helpers.AddToHistory(score, GameType.Addition);
         }
 
-        internal void SubtractionGame(string message)
+        internal void SubtractionGame(string message, string? userName)
         {
             var random = new Random();
             int score = 0;
@@ -93,7 +93,7 @@ namespace consoleMathGame.Sam
             Helpers.AddToHistory(score, GameType.Subtraction);
         }
 
-        internal void MultiplicationGame(string message)
+        internal void MultiplicationGame(string message, string? userName)
         {
             var random = new Random();
             int score = 0;
@@ -136,7 +136,7 @@ namespace consoleMathGame.Sam
             Helpers.AddToHistory(score, GameType.Multiplication);
         }
 
-        internal void DivisionGame(string message)
+        internal void DivisionGame(string message, string? userName)
         {
             int score = 0;
 
