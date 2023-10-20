@@ -12,13 +12,13 @@ public class Helper
 		};
 	}
 
-	public static int GetUserInput()
+	public static int GetUserInput(string text = "Enter a number: ")
 	{
 		string? userInput;
 		int result;
 		do
 		{
-			Console.WriteLine("Enter a number: ");
+			Console.WriteLine(text);
 			userInput = Console.ReadLine();
 		}
 		while (!int.TryParse(userInput, out result));
@@ -26,16 +26,39 @@ public class Helper
 		return result;
 	}
 
-	public static int GetRandomNumber()
+	public static int GetDifficulty()
 	{
-		return new Random().Next(101);
+		int input;
+		do
+		{
+			input = GetUserInput("Enter difficulty level: (1-3)");
+		} while (input < (int)Difficulty.Easy || input > (int)Difficulty.Hard);
+
+		return input;
 	}
 
-	public static void ModifyNumbersForDivision(ref int firstNum, ref int secondNum)
+	public static int GetRandomNumber(Difficulty? difficulty = null)
+	{
+		Random rnd = new Random();
+
+		switch(difficulty)
+		{
+			case Difficulty.Easy:
+				return rnd.Next(1, 30);
+			case Difficulty.Medium:
+				return rnd.Next(30, 60);
+			case Difficulty.Hard:
+				return rnd.Next(60, 100);
+			default:
+				return rnd.Next(0, 101);
+		}
+	}
+
+	public static void ModifyNumbersForDivision(ref int firstNum, ref int secondNum, Difficulty difficulty)
 	{
 		while(firstNum < secondNum || secondNum == 0 || firstNum % secondNum != 0)
 		{
-			firstNum = GetRandomNumber();
+			firstNum = GetRandomNumber(difficulty);
 			secondNum = GetRandomNumber();
 		}
 	}

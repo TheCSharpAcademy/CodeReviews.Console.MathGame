@@ -5,6 +5,7 @@ namespace MathGame;
 public class Game
 {
 	public static int QuestionsCount { get; set; } = 5;
+	public static int Difficulty { get; set; }
 	public static List<History> GameHistory = new List<History>();
 
 	public static void Start()
@@ -24,7 +25,8 @@ public class Game
 			choice = Console.ReadLine();
 			if (Helper.GetAllOperations().Any(op => op.Symbol == choice))
 			{
-				UpdateQuestionsCount();
+				QuestionsCount = Helper.GetUserInput("Enter number of questions:");
+				Difficulty = Helper.GetDifficulty();
 
 				Stopwatch watch = Stopwatch.StartNew();
 				PlayGame(choice);
@@ -45,29 +47,16 @@ public class Game
 		} while (true);
 	}
 
-	private static void UpdateQuestionsCount()
-	{
-		string? input;
-		int result;
-		do
-		{
-			Console.WriteLine("Enter question count: ");
-			input = Console.ReadLine();
-		} while (!int.TryParse(input, out result));
-
-		QuestionsCount = result;
-	}
-
 	private static void PlayGame(string? op)
 	{
 		int score = 0;
 
 		for (int i = 0; i < QuestionsCount; i++)
 		{
-			int firstNum = Helper.GetRandomNumber(), secondNum = Helper.GetRandomNumber();
+			int firstNum = Helper.GetRandomNumber((Difficulty)Difficulty), secondNum = Helper.GetRandomNumber((Difficulty)Difficulty);
 
 			if (op == "/")
-				Helper.ModifyNumbersForDivision(ref firstNum, ref secondNum);
+				Helper.ModifyNumbersForDivision(ref firstNum, ref secondNum, (Difficulty)Difficulty);
 
 			Menu.ShowEquation(firstNum, secondNum, op);
 			int userInput = Helper.GetUserInput(); 
