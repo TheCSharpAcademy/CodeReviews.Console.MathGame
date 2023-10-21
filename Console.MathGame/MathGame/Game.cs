@@ -30,7 +30,7 @@ public class Game
 				UpdatePreGameOptions();
 
 				Stopwatch watch = Stopwatch.StartNew();
-				PlayRandomGame();
+				PlayGame(null, true);
 				watch.Stop();
 
 				Menu.ShowElapsedTime(watch.ElapsedMilliseconds);
@@ -47,7 +47,7 @@ public class Game
 					UpdatePreGameOptions();
 
 					Stopwatch watch = Stopwatch.StartNew();
-					PlayNormalGame(choice);
+					PlayGame(choice);
 					watch.Stop();
 
 					Menu.ShowElapsedTime(watch.ElapsedMilliseconds);
@@ -73,9 +73,16 @@ public class Game
 		Difficulty = Helper.GetDifficultyInput();
 	}
 
-	private static void PlayNormalGame(string? op)
+	private static void PlayGame(string? op, bool isRandomGame = false)
 	{
 		int score = 0;
+
+		if (isRandomGame)
+		{
+			List<Operator> allOperators = Helper.GetAllOperators();
+			int randIdx = new Random().Next(allOperators.Count);
+			op = allOperators[randIdx].Symbol;
+		}
 
 		for (int i = 0; i < QuestionsCount; i++)
 		{
@@ -86,36 +93,6 @@ public class Game
 
 			Menu.ShowEquation(firstNum, secondNum, op);
 			int userInput = Helper.GetNumberInput(); 
-
-			DetermineAnswer(firstNum, secondNum, userInput, op, ref score);
-		}
-
-		Menu.ShowScore(score, QuestionsCount);
-		GameHistory.Add(new History
-		{
-			Operator = op,
-			DateTime = DateTime.Now,
-			Score = score
-		});
-	}
-
-	private static void PlayRandomGame()
-	{
-		int score = 0;
-
-		List<Operator> allOperators = Helper.GetAllOperators();
-		int randIdx = new Random().Next(allOperators.Count);
-		string op = allOperators[randIdx].Symbol;
-
-		for (int i = 0; i < QuestionsCount; i++)
-		{
-			int firstNum = Helper.GetRandomNumber((Difficulty)Difficulty), secondNum = Helper.GetRandomNumber((Difficulty)Difficulty);
-
-			if (op == "/")
-				Helper.ModifyNumbersForDivision(ref firstNum, ref secondNum, (Difficulty)Difficulty);
-
-			Menu.ShowEquation(firstNum, secondNum, op);
-			int userInput = Helper.GetNumberInput();
 
 			DetermineAnswer(firstNum, secondNum, userInput, op, ref score);
 		}
