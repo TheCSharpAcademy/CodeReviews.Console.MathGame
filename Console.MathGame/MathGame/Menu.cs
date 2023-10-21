@@ -4,21 +4,21 @@ public class Menu
 {
 	public static void ShowMenu()
 	{
-        Console.WriteLine("Welcome to the math game. Choose any operation you'd like:");
+        Console.Clear();
+        Console.WriteLine("Choose any operation you'd like:");
 
-        Console.ForegroundColor = ConsoleColor.Red;
+		Console.ForegroundColor = ConsoleColor.Cyan;
+		Console.WriteLine("Press n for normal game.".PadLeft(10));
+		Console.WriteLine("Press r for random game".PadLeft(10));
+		Console.ForegroundColor = ConsoleColor.White;
+
+		Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Press q to quit the game.");
 		Console.ForegroundColor = ConsoleColor.White;
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Press l to see history of all games.");
 		Console.ForegroundColor = ConsoleColor.White;
-
-		foreach (Operation op in Helper.GetAllOperations())
-		{
-            Console.Write(op.Symbol.PadRight(10));
-            Console.WriteLine(op.Name);
-        }
     }
 
     public static void ShowEquation(int firstNum, int secondNum, string? op)
@@ -66,5 +66,26 @@ public class Menu
             Console.WriteLine($"{history.DateTime} [{history.Operator}] Score: {history.Score}");
         }
         Console.WriteLine();
-    }
+
+		Console.ForegroundColor = ConsoleColor.Yellow;
+		Console.WriteLine("Press any key to continue.");
+		Console.ForegroundColor = ConsoleColor.White;
+		Console.ReadKey();
+	}
+
+	public static void ShowOperators()
+	{
+		Console.Clear();
+		foreach (Operator op in Helper.GetAllOperators())
+		{
+			Console.Write(op.Symbol.PadRight(10));
+			Console.WriteLine(op.Name);
+		}
+		Console.WriteLine("Enter operator: ");
+	}
+
+	public static void Clear()
+	{
+		Console.Clear();
+	}
 }

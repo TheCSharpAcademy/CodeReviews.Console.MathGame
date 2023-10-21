@@ -2,17 +2,17 @@
 
 public class Helper
 {
-	public static List<Operation> GetAllOperations()
+	public static List<Operator> GetAllOperators()
 	{
-		return new List<Operation>(){
-			new Operation("+", "Addition"),
-			new Operation("-", "Subtraction"),
-			new Operation("*", "Multiplication"),
-			new Operation("/", "Division"),
+		return new List<Operator>(){
+			new Operator("+", "Addition"),
+			new Operator("-", "Subtraction"),
+			new Operator("*", "Multiplication"),
+			new Operator("/", "Division"),
 		};
 	}
 
-	public static int GetUserInput(string text = "Enter a number: ")
+	public static int GetNumberInput(string text = "Enter a number: ")
 	{
 		string? userInput;
 		int result;
@@ -26,12 +26,12 @@ public class Helper
 		return result;
 	}
 
-	public static int GetDifficulty()
+	public static int GetDifficultyInput()
 	{
 		int input;
 		do
 		{
-			input = GetUserInput("Enter difficulty level: (1-3)");
+			input = GetNumberInput("Enter difficulty level: (1-3)");
 		} while (input < (int)Difficulty.Easy || input > (int)Difficulty.Hard);
 
 		return input;

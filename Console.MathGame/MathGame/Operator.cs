@@ -1,11 +1,11 @@
 ﻿namespace MathGame;
 
-public class Operation
+public class Operator
 {
 	public string Symbol { get; set; }
 	public string Name { get; set; }
 
-	public Operation(string symbol, string name)
+	public Operator(string symbol, string name)
 	{
 		Symbol = symbol;
 		Name = name;
