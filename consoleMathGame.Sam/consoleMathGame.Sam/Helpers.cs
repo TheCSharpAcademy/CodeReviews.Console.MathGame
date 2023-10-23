@@ -13,7 +13,7 @@ namespace consoleMathGame.Sam
             Console.WriteLine("----------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points set by {game.userName}");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points set by {game.UserName}");
             }
             Console.WriteLine("----------------------------\n");
             Console.WriteLine("Press any key to go back to the main menu");
@@ -27,7 +27,7 @@ namespace consoleMathGame.Sam
                 Date = DateTime.Now,
                 Score = gameScore,
                 Type = gameType,
-                userName = name
+                UserName = name
             });
         }
 
