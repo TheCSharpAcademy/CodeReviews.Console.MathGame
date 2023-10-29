@@ -5,24 +5,24 @@ public class GameInstance
 {
     public int DifficultyLevel;
     public int NumberOfQuestions;
-    public int[] GameType;
+    public int[] Operations;
     public int StartTime;
     public int FinishTime;
     public int[] Results;
     public int[] Operators;
 
-    public GameInstance(int difficultyLevel, int numberOfQuestions, int[] gameType, int[] operators) 
+    public GameInstance(int difficultyLevel, int numberOfQuestions, int[] operations, int[] operators) 
     {
         DifficultyLevel = difficultyLevel;
         NumberOfQuestions = numberOfQuestions;
         StartTime = 0;
         FinishTime = 0;
         Operators = operators;
-        GameType = gameType;
+        Operations = operations;
         Results = new int[numberOfQuestions];
-        for(int i=0; i<GameType.Length; i++)
+        for(int i=0; i<Operations.Length; i++)
         {
-            switch(GameType[i])
+            switch(Operations[i])
             {
                 case(1):
                     Results[i]=Operators[i*2]+Operators[i*2+1];

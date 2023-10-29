@@ -6,12 +6,13 @@ namespace MathGame.ManuelE_Osorio;
 internal class MathGame
 {
 
-    private int easyRange = 20;
-    private int mediumRange = 50;
-    private int hardRange = 100;
+    private readonly int easyRange = 20;
+    private readonly int mediumRange = 50;
+    private readonly int hardRange = 100;
 
     static void Main(string[] args)
     {
+        int answer = new();
         int difficultyLevel = 2;
         int numberOfQuestions = 3;
         int gameType = new();
@@ -31,7 +32,6 @@ internal class MathGame
         6: Records
         7: Configuration
         8: Exit");
-        
         try
         {
             gameType = Convert.ToInt32(Console.ReadLine());
@@ -46,6 +46,7 @@ internal class MathGame
         {
             case(>0 and <=5):
                 
+                // Block of code to generate random operations in case user selects option 5
                 Random rnd = new();
                 int[] operations = new int[numberOfQuestions];
                 if(gameType == 5)
@@ -60,16 +61,53 @@ internal class MathGame
                     Array.Fill(operations, gameType);
                 }
 
-                int[] numbers = game.RandomNumberGeneration(difficultyLevel, operations, numberOfQuestions);
+                int[] operators = game.RandomNumberGeneration(difficultyLevel, operations, numberOfQuestions);
+                
+                gameInstances.Add(new GameInstance(difficultyLevel, numberOfQuestions, operations, operators));
+
+                // Loop to ask the users the operations based on the properties of GameInstance last object                
+                for (int i=0; i<gameInstances[^1].NumberOfQuestions; i++)
+                {
+                    do
+                    {
+                        Console.Write("What is the result of: ");
+                        Console.Write(gameInstances[^1].Operators[i*2]+" ");
+                        Console.Write(OperationToStrig(gameInstances[^1].Operations[i]));
+                        Console.WriteLine(" "+gameInstances[^1].Operators[i*2+1]+"?");
+
+                        try
+                        {
+                            answer = Convert.ToInt32(Console.ReadLine());
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        if(answer != gameInstances[^1].Results[i])
+                        {
+                            Console.WriteLine("You've entered a wrong answer. Please Try again.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The answer is correct!");
+                        }
+                    }
+                    while(answer != gameInstances[^1].Results[i]);
+                }
+
                 break;
 
             case(6):
+                //Display records pending progress
                 break;
 
             case(7):
+
+                // Loop to select difficulty level from 1 to 3
                 do
                 {
-                    Console.WriteLine("Select your difficulty level");
+                    Console.WriteLine("Choose the difficulty level 1=easy, 2=medium, 3=hard");
                     try
                     {
                         difficultyLevel = Convert.ToInt32(Console.ReadLine());
@@ -86,6 +124,7 @@ internal class MathGame
                 }
                 while(difficultyLevel <= 0 || difficultyLevel>= 4);
 
+                // Loop to select quantity of questions
                 do
                 {
                     Console.WriteLine("Select the quantity of questions");
@@ -116,6 +155,36 @@ internal class MathGame
         Console.WriteLine("Thank you for playing the game");
     }
 
+    private static string OperationToStrig(int operationType)
+    {
+        string operationAsString = "+";
+
+        switch(operationType)
+        {
+            case(1):
+            {
+                operationAsString = "+";
+                break;
+            }
+            case(2):
+            {
+                operationAsString = "-";
+                break;
+            }
+            case(3):
+            {
+                operationAsString = "*";
+                break;
+            }
+            case(4):
+            {
+                operationAsString = "/";
+                break;
+            }
+        }
+        return operationAsString;
+    }
+
     public int[] RandomNumberGeneration(int difficultyLevel, int[] operations, int numberOfQuestions)
     {
         Random rnd = new();
@@ -123,6 +192,7 @@ internal class MathGame
         int max = new();
         int[] numbers = new int[numberOfQuestions*2];
 
+        // Selects the maximum range of the numbers based on the difficulty level
         switch(difficultyLevel)
         {
             case(1):
@@ -142,6 +212,8 @@ internal class MathGame
             }
         }
         
+
+        // Loop to generate random numbers. If the operation is division, it checks that the remainder is 0
         for(int i=0; i < numberOfQuestions; i++)
         {
             if (operations[i] == 4)
@@ -149,7 +221,7 @@ internal class MathGame
                 numbers[i*2] = rnd.Next(min+1,max+1);
                 do
                 {
-                   numbers[i*2+1] = rnd.Next(min+1, max+1);
+                   numbers[i*2+1] = rnd.Next(min+1, max);
                 }
                 while (numbers[i*2]%numbers[i*2+1]!=0);
 
@@ -163,5 +235,6 @@ internal class MathGame
 
         return numbers;
     }
+
 
 }
