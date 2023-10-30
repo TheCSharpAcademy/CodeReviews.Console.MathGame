@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 namespace MathGame.ManuelE_Osorio;
 
 public class GameInstance
@@ -5,6 +7,7 @@ public class GameInstance
     public int DifficultyLevel;
     public int GameType;
     public int NumberOfQuestions;
+    public int GameScore {get; set;}
     public int[] Operations;
     public long StartTime {get; set;}
     public long FinishTime {get; set;}
@@ -18,6 +21,7 @@ public class GameInstance
         NumberOfQuestions = numberOfQuestions;
         StartTime = 0;
         FinishTime = 0;
+        GameScore = 0;
         Operators = operators;
         Operations = operations;
         Results = new int[numberOfQuestions];
@@ -82,6 +86,7 @@ public class GameInstance
         string Records = $"Difficulty Level: {DifficultyLevelString}" +
         $", Number of Questions: {NumberOfQuestions}" +
         $", Game Type: {GameTypeString}" +
+        $", Score: {GameScore}/{NumberOfQuestions}"+
         $", Elapsed Time: {ElapsedTime}s";
 
         return Records;   

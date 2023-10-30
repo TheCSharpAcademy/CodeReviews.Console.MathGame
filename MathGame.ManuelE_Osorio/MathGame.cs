@@ -4,7 +4,7 @@ namespace MathGame.ManuelE_Osorio;
 
 internal class MathGame
 {  
-    // Ranges for random number generation
+    // Ranges for random number generation.
     private readonly int easyRange = 20;
     private readonly int mediumRange = 50;
     private readonly int hardRange = 100;
@@ -15,6 +15,7 @@ internal class MathGame
         int difficultyLevel = 2;
         int numberOfQuestions = 3;
         int gameType = new();
+        int gameScore = 0;
         MathGame game = new();
         Stopwatch clock = new();
         List<GameInstance> gameInstances = new();
@@ -46,7 +47,7 @@ internal class MathGame
         {
             case(>0 and <=5):
                 
-                // Block of code to generate random operations in case user selects option 5
+                // Block of code to generate random operations in case user selects option 5.
                 Random rnd = new();
                 int[] operations = new int[numberOfQuestions];
                 if(gameType == 5)
@@ -66,44 +67,50 @@ internal class MathGame
                 clock.Start();
                 gameInstances[^1].StartTime = clock.ElapsedMilliseconds;
 
-                // Loop to ask the users the operations based on the properties of GameInstance last object                
+                // Loop to ask the users the operations based on the properties of GameInstance last object.                
                 for (int i=0; i<gameInstances[^1].NumberOfQuestions; i++)
                 {
+                    Console.Write("What is the result of: ");
+                    Console.Write(gameInstances[^1].Operators[i*2]+" ");
+                    Console.Write(OperationToStrig(gameInstances[^1].Operations[i]));
+                    Console.WriteLine(" "+gameInstances[^1].Operators[i*2+1]+"?");
+                    bool j = false;
                     do
                     {
-                        Console.Write("What is the result of: ");
-                        Console.Write(gameInstances[^1].Operators[i*2]+" ");
-                        Console.Write(OperationToStrig(gameInstances[^1].Operations[i]));
-                        Console.WriteLine(" "+gameInstances[^1].Operators[i*2+1]+"?");
-
                         try
                         {
                             answer = Convert.ToInt32(Console.ReadLine());
+                            j = true;
                         }
                         catch(Exception e)
                         {
-                            Console.WriteLine(e.Message);
-                        }
-
-                        if(answer != gameInstances[^1].Results[i])
-                        {
-                            Console.WriteLine("You've entered a wrong answer. Please Try again.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("The answer is correct!");
+                            Console.WriteLine(e.Message + " Please try again.");
                         }
                     }
-                    while(answer != gameInstances[^1].Results[i]);
+                    while(j == false);
+
+
+                    if(answer != gameInstances[^1].Results[i])
+                    {
+                        Console.WriteLine("You've entered a wrong answer.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The answer is correct!");
+                        gameScore++;
+                    }
+
                 }
 
                 clock.Stop();
                 gameInstances[^1].FinishTime = clock.ElapsedMilliseconds;
+                gameInstances[^1].GameScore = gameScore;
+                gameScore = 0;
                 Console.Clear();
                 break;
 
             case(6):
-                //Display records pending progress
+                //Display records pending progress.
                 foreach(GameInstance gameInstance in gameInstances)
                 {
                     Console.WriteLine(gameInstance.SendRecords());
@@ -112,7 +119,7 @@ internal class MathGame
 
             case(7):
 
-                // Loop to select difficulty level from 1 to 3
+                // Loop to select difficulty level from 1 to 3.
                 do
                 {
                     Console.WriteLine("Choose the difficulty level 1=easy, 2=medium, 3=hard");
@@ -132,7 +139,7 @@ internal class MathGame
                 }
                 while(difficultyLevel <= 0 || difficultyLevel>= 4);
 
-                // Loop to select quantity of questions
+                // Loop to select quantity of questions.
                 do
                 {
                     Console.WriteLine("Select the quantity of questions");
@@ -201,7 +208,7 @@ internal class MathGame
         int max = new();
         int[] numbers = new int[numberOfQuestions*2];
 
-        // Selects the maximum range of the numbers based on the difficulty level
+        // Selects the maximum range of the numbers based on the difficulty level.
         switch(difficultyLevel)
         {
             case(1):
@@ -221,7 +228,7 @@ internal class MathGame
             }
         }
         
-        // Loop to generate random numbers. If the operation is division, it checks that the remainder is 0
+        // Loop to generate random numbers. If the operation is division, it checks that the remainder is 0.
         for(int i=0; i < numberOfQuestions; i++)
         {
             if (operations[i] == 4)
