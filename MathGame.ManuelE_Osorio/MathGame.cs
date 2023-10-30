@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.Net.WebSockets;
 using System.Security.Cryptography;
 
 namespace MathGame.ManuelE_Osorio;
 internal class MathGame
 {
-
+    
+    // Ranges for random number generation
     private readonly int easyRange = 20;
     private readonly int mediumRange = 50;
     private readonly int hardRange = 100;
@@ -17,24 +20,26 @@ internal class MathGame
         int numberOfQuestions = 3;
         int gameType = new();
         MathGame game = new();
+        Stopwatch clock = new();
         List<GameInstance> gameInstances = new();
 
         Console.WriteLine("Welcome to the Math Game");
 
         do
         {
-        Console.WriteLine(@"Please select an option:
-        1: Addition
-        2: Subtraction
-        3: Multiplication
-        4: Division
-        5: Random
-        6: Records
-        7: Configuration
-        8: Exit");
+        Console.WriteLine("Please select an option:\n" +
+        "1: Addition\n" +
+        "2: Subtraction\n" +
+        "3: Multiplication\n" +
+        "4: Division\n" +
+        "5: Random\n" +
+        "6: Records\n" +
+        "7: Configuration\n" +
+        "8: Exit");
         try
         {
             gameType = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
             Console.WriteLine("You've selected option " + gameType);
         }
         catch(Exception e)
@@ -63,7 +68,9 @@ internal class MathGame
 
                 int[] operators = game.RandomNumberGeneration(difficultyLevel, operations, numberOfQuestions);
                 
-                gameInstances.Add(new GameInstance(difficultyLevel, numberOfQuestions, operations, operators));
+                gameInstances.Add(new GameInstance(difficultyLevel, numberOfQuestions, operations, operators, gameType));
+                clock.Start();
+                gameInstances[^1].StartTime = clock.ElapsedMilliseconds;
 
                 // Loop to ask the users the operations based on the properties of GameInstance last object                
                 for (int i=0; i<gameInstances[^1].NumberOfQuestions; i++)
@@ -95,11 +102,19 @@ internal class MathGame
                     }
                     while(answer != gameInstances[^1].Results[i]);
                 }
+                clock.Stop();
+                gameInstances[^1].FinishTime = clock.ElapsedMilliseconds;
+                Console.Clear();
 
                 break;
 
             case(6):
                 //Display records pending progress
+                foreach(GameInstance gameInstance in gameInstances)
+                {
+                    Console.WriteLine(gameInstance.SendRecords());
+                }
+
                 break;
 
             case(7):
@@ -143,6 +158,7 @@ internal class MathGame
                     }
                 }
                 while(numberOfQuestions<=0);
+                Console.Clear();
 
                 break;
  
