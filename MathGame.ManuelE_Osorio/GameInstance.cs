@@ -1,6 +1,5 @@
-using System;
-
 namespace MathGame.ManuelE_Osorio;
+
 public class GameInstance
 {
     public int DifficultyLevel;
@@ -39,9 +38,9 @@ public class GameInstance
                     Results[i]=Operators[i*2]/Operators[i*2+1];
                     break;
             }
-        }
-        
+        }   
     }
+    
     public string SendRecords()
     {
         string DifficultyLevelString = "";
@@ -80,13 +79,11 @@ public class GameInstance
                 break;
         }
 
-        string Records = "Difficulty Level: " + DifficultyLevelString +
-        ", Number of Questions: " + NumberOfQuestions +
-        ", Game Type: " + GameTypeString +
-        ", Elapsed Time: " + ElapsedTime + "s";
+        string Records = $"Difficulty Level: {DifficultyLevelString}" +
+        $", Number of Questions: {NumberOfQuestions}" +
+        $", Game Type: {GameTypeString}" +
+        $", Elapsed Time: {ElapsedTime}s";
 
-        return Records;
-        
+        return Records;   
     }
-
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Net.WebSockets;
-using System.Security.Cryptography;
+﻿using System.Diagnostics;
 
 namespace MathGame.ManuelE_Osorio;
+
 internal class MathGame
-{
-    
+{  
     // Ranges for random number generation
     private readonly int easyRange = 20;
     private readonly int mediumRange = 50;
@@ -24,7 +20,6 @@ internal class MathGame
         List<GameInstance> gameInstances = new();
 
         Console.WriteLine("Welcome to the Math Game");
-
         do
         {
         Console.WriteLine("Please select an option:\n" +
@@ -65,7 +60,6 @@ internal class MathGame
                 {
                     Array.Fill(operations, gameType);
                 }
-
                 int[] operators = game.RandomNumberGeneration(difficultyLevel, operations, numberOfQuestions);
                 
                 gameInstances.Add(new GameInstance(difficultyLevel, numberOfQuestions, operations, operators, gameType));
@@ -102,10 +96,10 @@ internal class MathGame
                     }
                     while(answer != gameInstances[^1].Results[i]);
                 }
+
                 clock.Stop();
                 gameInstances[^1].FinishTime = clock.ElapsedMilliseconds;
                 Console.Clear();
-
                 break;
 
             case(6):
@@ -114,7 +108,6 @@ internal class MathGame
                 {
                     Console.WriteLine(gameInstance.SendRecords());
                 }
-
                 break;
 
             case(7):
@@ -228,7 +221,6 @@ internal class MathGame
             }
         }
         
-
         // Loop to generate random numbers. If the operation is division, it checks that the remainder is 0
         for(int i=0; i < numberOfQuestions; i++)
         {
@@ -251,6 +243,4 @@ internal class MathGame
 
         return numbers;
     }
-
-
 }
