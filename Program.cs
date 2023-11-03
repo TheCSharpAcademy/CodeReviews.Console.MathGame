@@ -8,41 +8,56 @@ namespace MathGame {
                           ">");
             string? name = Console.ReadLine();
             string date = DateTime.Now.ToString();
-            Menu(name, date);
+            
 
+
+            Menu(name, date);
         }
 
         private static void Menu(string? name, string date) {
-            Console.WriteLine("<--------------------------------->");
-            Console.WriteLine($"Hello, {name}. It's {date}.\n" +
-                              $"Welcome to the Math Game!");
-            Console.Write("What game would you like to play now? Choose one of the options below:\n" +
-                              "A -> Addition\n" +
-                              "S -> Subtraction\n" +
-                              "M -> Multiplication\n" +
-                              "D -> Division\n" +
-                              "Q -> Quit\n\n" +
+            
+            bool isGameOn = true;
 
-                              ">");
-            string selectedGame = Console.ReadLine().ToString().Trim().ToUpper();
+            do {
 
-            switch (selectedGame) {
-                case "A":
-                    Addition();
-                    break;
-                case "S":
-                    Subtraction();
-                    break;
-                case "M":
-                    Multiplication();
-                    break;
-                case "D":
-                    Division();
-                    break;
-                case "Q":
-                    Console.WriteLine("Goodbye! ;)");
-                    break;
-            }
+                Console.WriteLine("<--------------------------------->");
+                Console.WriteLine($"Hello, {name}. It's {date}.\n" +
+                                  $"Welcome to the Math Game!");
+                Console.WriteLine("\n");
+                Console.Write("What game would you like to play now? Choose one of the options below:\n" +
+                                  "A -> Addition\n" +
+                                  "S -> Subtraction\n" +
+                                  "M -> Multiplication\n" +
+                                  "D -> Division\n" +
+                                  "Q -> Quit\n\n" +
+
+                                  ">");
+                string selectedGame = Console.ReadLine().ToString().Trim().ToUpper();
+
+                switch (selectedGame) {
+                    case "A":
+                        Addition();
+                        break;
+                    case "S":
+                        Subtraction();
+                        break;
+                    case "M":
+                        Multiplication();
+                        break;
+                    case "D":
+                        Division();
+                        break;
+                    case "Q":
+                        Console.WriteLine("Goodbye! ;)");
+                        isGameOn = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        break;
+                }
+            } while (isGameOn);
+            
+
         }
 
         //Start of methods
@@ -187,7 +202,8 @@ namespace MathGame {
                 }
 
                 if (i == 4) {
-                    Console.WriteLine($"Game over! Your final score is {score}.");
+                    Console.WriteLine($"Game over! Your final score is {score}. Press any key to go back to main menu:");
+                    Console.ReadLine();
                 }
             }
         }
