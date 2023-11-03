@@ -1,17 +1,22 @@
 ﻿using static System.Formats.Asn1.AsnWriter;
 
 namespace MathGame {
-    internal class Program {
-        static void Main(string[] args) {
 
+    class Data {
+        public string? name;
+        public string date = DateTime.Now.ToString();
+
+        public List<string> games = new();
+    }
+
+    internal class Program {
+        public static void Main(string[] args) {
+            Data gameData = new Data();
             Console.Write("Please, type in your name. \n" +
                           ">");
-            string? name = Console.ReadLine();
-            string date = DateTime.Now.ToString();
+            gameData.name = Console.ReadLine();
             
-
-
-            Menu(name, date);
+            Menu(gameData.name, gameData.date);
         }
 
         private static void Menu(string? name, string date) {
@@ -25,6 +30,7 @@ namespace MathGame {
                                   $"Welcome to the Math Game!");
                 Console.WriteLine("\n");
                 Console.Write("What game would you like to play now? Choose one of the options below:\n" +
+                                  "V -> View previows games\n" +
                                   "A -> Addition\n" +
                                   "S -> Subtraction\n" +
                                   "M -> Multiplication\n" +
@@ -35,6 +41,9 @@ namespace MathGame {
                 string selectedGame = Console.ReadLine().ToString().Trim().ToUpper();
 
                 switch (selectedGame) {
+                    case "V":
+                        GetGames();
+                        break;
                     case "A":
                         Addition();
                         break;
@@ -60,8 +69,24 @@ namespace MathGame {
 
         }
 
-        //Start of methods
+        private static void GetGames() {
+            Data gameData = new Data();
 
+            Console.Clear();
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Games history:");
+            Console.WriteLine("\n");
+
+            foreach (var game in gameData.games) {
+                Console.WriteLine(gameData.games);
+            }
+
+            Console.WriteLine("----------------------------------\n");
+            Console.WriteLine("Press any key to go back to main menu:");
+            Console.ReadLine();
+        }
+
+        //Start of methods
         static int GenerateRandomNumber(int min, int limit) {
             Random random = new Random();
             int randomNumber = random.Next(min, limit);
@@ -115,6 +140,8 @@ namespace MathGame {
                     Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
+
+            AddToHistory(score, "Division");
         }
         
 
@@ -145,6 +172,8 @@ namespace MathGame {
                     Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
+
+            AddToHistory(score, "Multiplication");
         }
 
         private static void Subtraction() {
@@ -175,10 +204,11 @@ namespace MathGame {
                     Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
+
+            AddToHistory(score, "Subtraction");
         }
 
         private static void Addition() {
-
             int score = 0;
 
             for (int i = 0; i <= 4; i++) {
@@ -206,6 +236,13 @@ namespace MathGame {
                     Console.ReadLine();
                 }
             }
+
+            AddToHistory(score, "Addition");
+        }
+
+        private static void AddToHistory(int gameScore, string gameType) {
+            Data gameData = new Data();
+            gameData.games.Add($"{DateTime.Now} - Addition: Score = {gameScore}");
         }
         //End of methods
     }
