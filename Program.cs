@@ -72,11 +72,13 @@ namespace MathGame {
         }
 
         private static void Division() {
-            Console.WriteLine("You choose division mode!");
 
             int score = 0;
 
             for (int i = 0; i <= 4; i++) {
+                Console.WriteLine("You choose division mode!");
+                Console.Clear();
+
                 int[] divisionNumbers = GetDivisionNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
@@ -90,8 +92,12 @@ namespace MathGame {
                     Console.ReadLine();
                 }
                 else {
-                    Console.WriteLine("Your answer was incorrect! Type any key for the next question. Type any key for the next question.Type any key for the next question.");
+                    Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                     Console.ReadLine();
+                }
+
+                if (i == 4) {
+                    Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
         }
@@ -119,15 +125,20 @@ namespace MathGame {
                     Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                     Console.ReadLine();
                 }
+
+                if (i == 4) {
+                    Console.WriteLine($"Game over! Your final score is {score}.");
+                }
             }
         }
 
         private static void Subtraction() {
-            Console.WriteLine("You choose subtraction mode!");
 
             int score = 0;
 
             for (int i = 0; i <= 4; i++) {
+                Console.WriteLine("You choose subtraction mode!");
+                Console.Clear();
 
                 int firstNumber = GenerateRandomNumber(1, 9);
                 int secondNumber = GenerateRandomNumber(1, 9);
@@ -144,15 +155,20 @@ namespace MathGame {
                     Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                     Console.ReadLine();
                 }
+
+                if (i == 4) {
+                    Console.WriteLine($"Game over! Your final score is {score}.");
+                }
             }
         }
 
         private static void Addition() {
-            Console.WriteLine("You choose addition mode!");
 
             int score = 0;
 
             for (int i = 0; i <= 4; i++) {
+                Console.WriteLine("You choose addition mode!");
+                Console.Clear();
 
                 int firstNumber = GenerateRandomNumber(1, 9);
                 int secondNumber = GenerateRandomNumber(1, 9);
@@ -168,6 +184,10 @@ namespace MathGame {
                 else {
                     Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                     Console.ReadLine();
+                }
+
+                if (i == 4) {
+                    Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
         }
