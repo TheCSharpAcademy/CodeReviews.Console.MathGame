@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MathGame
 {
@@ -49,7 +48,7 @@ namespace MathGame
                 }
                 else if (userInput.ToLower() == "v")
                 {
-                    printGamesHistory();
+                    PrintGamesHistory();
                 }
                 else if (userInput.ToLower() == "q")
                 {
@@ -121,7 +120,7 @@ This is a division game. (5 correct answers)
             } while (exerciceCounter < 5);
 
             // add game info to List gameScores
-            gameScores.Add(new GameModel { timeStamp = DateTime.Now, scoreOfGame = score, attemptsOfGame = attempts, typeOfGame = "division" });
+            gameScores.Add(new GameModel { TimeStamp = DateTime.Now, ScoreOfGame = score, AttemptsOfGame = attempts, TypeOfGame = "division" });
 
             Console.WriteLine($"You had {score} correct answers out of {attempts} attempts.");
             Console.WriteLine("Press any key to return to the main menu.");
@@ -187,7 +186,7 @@ This is an addition game. (5 correct answers)
             } while (exerciceCounter < 5);
 
             // add game info to List gameScores
-            gameScores.Add(new GameModel { timeStamp = DateTime.Now, scoreOfGame = score, attemptsOfGame = attempts, typeOfGame = "addition" });
+            gameScores.Add(new GameModel { TimeStamp = DateTime.Now, ScoreOfGame = score, AttemptsOfGame = attempts, TypeOfGame = "addition" });
 
             Console.WriteLine($"You had {score} correct answers out of {attempts} attempts.");
             Console.WriteLine("Press any key to return to the main menu.");
@@ -252,7 +251,7 @@ This is a subtraction game. (5 correct answers)
             } while (exerciceCounter < 5);
 
             // add game info to List gameScores
-            gameScores.Add(new GameModel { timeStamp = DateTime.Now, scoreOfGame = score, attemptsOfGame = attempts, typeOfGame = "subtraction" });
+            gameScores.Add(new GameModel { TimeStamp = DateTime.Now, ScoreOfGame = score, AttemptsOfGame = attempts, TypeOfGame = "subtraction" });
 
             Console.WriteLine($"You had {score} correct answers out of {attempts} attempts.");
             Console.WriteLine("Press any key to return to the main menu.");
@@ -317,19 +316,19 @@ This is a multiplication game. (5 correct answers)
             } while (exerciceCounter < 5);
 
             // add game info to List gameScores
-            gameScores.Add(new GameModel { timeStamp = DateTime.Now, scoreOfGame = score, attemptsOfGame = attempts, typeOfGame = "multiplication" });
+            gameScores.Add(new GameModel { TimeStamp = DateTime.Now, ScoreOfGame = score, AttemptsOfGame = attempts, TypeOfGame = "multiplication" });
 
             Console.WriteLine($"You had {score} correct answers out of {attempts} attempts.");
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
             Console.Clear();
         }
-        internal void printGamesHistory()
+        internal void PrintGamesHistory()
         {
             Console.Clear();
             foreach (GameModel game in gameScores)
             {
-                Console.WriteLine($"{game.timeStamp} - {game.typeOfGame} - {game.scoreOfGame} out of {game.attemptsOfGame}.");
+                Console.WriteLine($"{game.TimeStamp} - {game.TypeOfGame} - {game.ScoreOfGame} out of {game.AttemptsOfGame}.");
             }
             Console.WriteLine("------------------------");
             Console.WriteLine();

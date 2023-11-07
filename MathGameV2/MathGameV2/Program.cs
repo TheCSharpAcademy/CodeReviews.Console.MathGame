@@ -8,8 +8,6 @@ namespace MathGame
     {
         static void Main(string[] args)
         {
-            DateTime date = DateTime.UtcNow;
-
             Engine newEngine = new Engine();
             newEngine.GenerateMainMenu();
 
