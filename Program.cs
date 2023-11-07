@@ -1,18 +1,24 @@
-﻿namespace MathGame {
+﻿using MathGame.Models;
 
-    internal class Program {
+namespace MathGame; 
 
-        public List<string> games = new();
+internal class Program {
 
-        public static void Main(string[] args) {
-            Menu menu = new Menu();
-            Console.Write("Please, type in your name. \n" +
-                          ">");
+    DateTime date = DateTime.Now;
 
+    internal static void Main(string[] args) {
+        Menu menu = new Menu();
 
-            Data.name = Console.ReadLine();
-            
-            menu.ShowMenu(Data.name, Data.date);
-        }
+        string name = GetName();
+        DateTime date = DateTime.Now;
+
+        menu.ShowMenu(name, date);
+    }
+
+    static string GetName() {
+        Console.Write("Please, type in your name. \n" +
+                      ">");
+        string name = Console.ReadLine();
+        return name;
     }
 }

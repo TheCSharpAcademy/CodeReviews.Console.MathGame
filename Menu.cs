@@ -26,7 +26,7 @@
 
                 switch (selectedGame) {
                     case "V":
-                        Helpers.GetGames();
+                        Helpers.PrintGames();
                         break;
                     case "A":
                         gameEngine.Addition();

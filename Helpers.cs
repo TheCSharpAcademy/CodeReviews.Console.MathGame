@@ -1,14 +1,18 @@
-﻿namespace MathGame {
+﻿using MathGame.Models;
+
+namespace MathGame {
     internal static class Helpers {
-        internal static void GetGames() {
+
+        internal static List<Game> games = new();
+        internal static void PrintGames() {
 
             Console.Clear();
             Console.WriteLine("----------------------------------");
             Console.WriteLine("Games history:");
             Console.WriteLine("\n");
 
-            foreach (string game in Data.games) {
-                Console.WriteLine(game);
+            foreach (Game game in games) {
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}");
             }
 
             Console.WriteLine("----------------------------------\n");
@@ -42,8 +46,13 @@
 
 
 
-        internal static void AddToHistory(int gameScore, string gameType) {
-            Data.games.Add($"{DateTime.Now} - Addition: Score = {gameScore}");
+        internal static void AddToHistory(int gameScore, GameType gameType) {
+            games.Add(new Game 
+            {
+                Date = DateTime.Now,
+                Score = gameScore,
+                Type = gameType
+            });
         }
     }
 }
