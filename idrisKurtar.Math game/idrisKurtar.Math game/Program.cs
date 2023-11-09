@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace idrisKurtar.Math_game
 {
@@ -11,8 +9,7 @@ namespace idrisKurtar.Math_game
         public static void Main(string[] args)
         {
             var date = DateTime.Now;
-            var menu = new Menu();
-            var games = new List<string>();
+            var menu = new Menu();            
             string name = GetName();
 
             menu.ShowMenu(name, date);
