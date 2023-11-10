@@ -5,7 +5,7 @@
             Console.Clear();
             Console.WriteLine($"Hello, {name}. It's {date}.\n" +
                                 $"Welcome to the Math Game!");
-            Console.WriteLine("Press any key to show menu\n" +
+            Console.Write("Press any key to show menu\n" +
                               ">");
             Console.ReadLine();
 

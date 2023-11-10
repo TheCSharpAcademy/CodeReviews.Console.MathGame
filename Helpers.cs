@@ -56,7 +56,7 @@ internal static class Helpers {
         });
     }
 
-    internal static string? ValidateResult(string result) {
+    internal static string ValidateResult(string result) {
         while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _)) {
             Console.WriteLine("Your answer needs to be an integer. Try again.");
             result = Console.ReadLine();
@@ -76,4 +76,16 @@ internal static class Helpers {
 
             return name;
         }
+
+    internal static void Selectors(string operationType) {
+
     }
+
+    internal static int NumberOfQuestions() {
+        Console.WriteLine("How many questions you would want to answer?");
+        string questionNum = Console.ReadLine();
+        questionNum = ValidateResult(questionNum);
+
+        return int.Parse(questionNum);
+    }
+}

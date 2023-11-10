@@ -3,11 +3,17 @@
 namespace MathGame {
     internal class GameEngine {
         internal void Division() {
-
             int score = 0;
 
-            for (int i = 0; i <= 4; i++) {
-                Console.WriteLine("You choose division mode!");
+            string operationType = GameType.Division.ToString();
+            Helpers.Selectors(operationType);
+
+            Console.WriteLine("You chose division mode!");
+            Console.ReadLine();
+
+            int questionNum = Helpers.NumberOfQuestions();
+
+            for (int i = 0; i <= questionNum; i++) {
                 Console.Clear();
 
                 int[] divisionNumbers = Helpers.GetDivisionNumbers();
@@ -40,9 +46,13 @@ namespace MathGame {
         internal void Multiplication() {
             int score = 0;
 
-            for (int i = 0; i <= 4; i++) {
+            Console.WriteLine("You choose multiplication mode!");
+            Console.ReadLine();
+
+            int questionNum = Helpers.NumberOfQuestions();
+
+            for (int i = 0; i <= questionNum; i++) {
                 Console.Clear();
-                Console.WriteLine("You choose multiplication mode!");
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
                 int secondNumber = Helpers.GenerateRandomNumber(1, 9);
@@ -74,8 +84,12 @@ namespace MathGame {
 
             int score = 0;
 
-            for (int i = 0; i <= 4; i++) {
-                Console.WriteLine("You choose subtraction mode!");
+            Console.WriteLine("You choose subtraction mode! Press any key to continue:");
+            Console.ReadLine();
+
+            int questionNum = Helpers.NumberOfQuestions();
+
+            for (int i = 0; i <= questionNum; i++) {
                 Console.Clear();
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
@@ -107,8 +121,12 @@ namespace MathGame {
         internal void Addition() {
             int score = 0;
 
-            for (int i = 0; i <= 4; i++) {
-                Console.WriteLine("You choose addition mode!");
+            Console.WriteLine("You choose addition mode! Press any key to continue:");
+            Console.ReadLine();
+
+            int questionNum = Helpers.NumberOfQuestions();
+
+            for (int i = 0; i <= questionNum; i++) {
                 Console.Clear();
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
