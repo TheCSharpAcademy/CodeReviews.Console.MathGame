@@ -6,11 +6,13 @@ internal class Game {
     public int Score { get; set; }
 
     public GameType Type { get; set; }
+
+    public string TimeSpent { get; set; }
 }
 
 internal enum GameType {
     Addition,
     Subtraction,
     Multiplication,
-    Division
+    Division,
 }

@@ -1,4 +1,5 @@
 ﻿using MathGame.Models;
+using System.Diagnostics;
 
 namespace MathGame {
     internal class GameEngine {
@@ -13,7 +14,10 @@ namespace MathGame {
 
             int questionNum = Helpers.NumberOfQuestions();
 
-            for (int i = 0; i <= questionNum; i++) {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            for (int i = 1; i <= questionNum; i++) {
                 Console.Clear();
 
                 int[] divisionNumbers = Helpers.GetDivisionNumbers();
@@ -39,8 +43,19 @@ namespace MathGame {
                     Console.WriteLine($"Game over! Your final score is {score}.");
                 }
             }
+            
+            // Timer
+            stopWatch.Stop();
 
-            Helpers.AddToHistory(score, GameType.Division);
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                               ts.Hours, ts.Minutes, ts.Seconds,
+                                               ts.Milliseconds / 10);
+
+            Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+            // Timer
+
+            Helpers.AddToHistory(score, GameType.Division, elapsedTime);
         }
 
         internal void Multiplication() {
@@ -51,7 +66,10 @@ namespace MathGame {
 
             int questionNum = Helpers.NumberOfQuestions();
 
-            for (int i = 0; i <= questionNum; i++) {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            for (int i = 1; i <= questionNum; i++) {
                 Console.Clear();
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
@@ -77,7 +95,18 @@ namespace MathGame {
                 }
             }
 
-            Helpers.AddToHistory(score, GameType.Multiplication);
+            // Timer
+            stopWatch.Stop();
+
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                               ts.Hours, ts.Minutes, ts.Seconds,
+                                               ts.Milliseconds / 10);
+
+            Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+            // Timer
+
+            Helpers.AddToHistory(score, GameType.Multiplication, elapsedTime);
         }
 
         internal void Subtraction() {
@@ -89,7 +118,10 @@ namespace MathGame {
 
             int questionNum = Helpers.NumberOfQuestions();
 
-            for (int i = 0; i <= questionNum; i++) {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            for (int i = 1; i <= questionNum; i++) {
                 Console.Clear();
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
@@ -115,7 +147,18 @@ namespace MathGame {
                 }
             }
 
-            Helpers.AddToHistory(score, GameType.Subtraction);
+            // Timer
+            stopWatch.Stop();
+
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                               ts.Hours, ts.Minutes, ts.Seconds,
+                                               ts.Milliseconds / 10);
+
+            Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+            // Timer
+
+            Helpers.AddToHistory(score, GameType.Subtraction, elapsedTime);
         }
 
         internal void Addition() {
@@ -126,7 +169,10 @@ namespace MathGame {
 
             int questionNum = Helpers.NumberOfQuestions();
 
-            for (int i = 0; i <= questionNum; i++) {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            for (int i = 1; i <= questionNum; i++) {
                 Console.Clear();
 
                 int firstNumber = Helpers.GenerateRandomNumber(1, 9);
@@ -153,7 +199,18 @@ namespace MathGame {
                 }
             }
 
-            Helpers.AddToHistory(score, GameType.Addition);
+            // Timer
+            stopWatch.Stop();
+
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                               ts.Hours, ts.Minutes, ts.Seconds,
+                                               ts.Milliseconds / 10);
+
+            Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+            // Timer
+
+            Helpers.AddToHistory(score, GameType.Addition, elapsedTime);
         }
     }
 }

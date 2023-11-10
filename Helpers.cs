@@ -14,6 +14,7 @@ internal static class Helpers {
 
         foreach (Game game in games) {
             Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}");
+            Console.WriteLine($"Time to finish: {game.TimeSpent}");
         }
 
         Console.WriteLine("----------------------------------\n");
@@ -47,12 +48,13 @@ internal static class Helpers {
 
 
 
-    internal static void AddToHistory(int gameScore, GameType gameType) {
+    internal static void AddToHistory(int gameScore, GameType gameType, string timeSpent) {
         games.Add(new Game 
         {
             Date = DateTime.Now,
             Score = gameScore,
-            Type = gameType
+            Type = gameType,
+            TimeSpent = timeSpent
         });
     }
 
