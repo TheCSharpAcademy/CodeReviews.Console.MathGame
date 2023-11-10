@@ -23,6 +23,7 @@
                                   "S -> Subtraction\n" +
                                   "M -> Multiplication\n" +
                                   "D -> Division\n" +
+                                  "R -> Random Game" +
                                   "Q -> Quit\n\n" +
 
                                   ">");
@@ -43,6 +44,9 @@
                         break;
                     case "D":
                         gameEngine.Division();
+                        break;
+                    case "R":
+                        gameEngine.Random();
                         break;
                     case "Q":
                         Console.WriteLine("Goodbye! ;)");
