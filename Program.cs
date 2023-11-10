@@ -9,16 +9,9 @@ internal class Program {
     internal static void Main(string[] args) {
         Menu menu = new Menu();
 
-        string name = GetName();
+        string name = Helpers.GetName();
         DateTime date = DateTime.Now;
 
         menu.ShowMenu(name, date);
-    }
-
-    static string GetName() {
-        Console.Write("Please, type in your name. \n" +
-                      ">");
-        string name = Console.ReadLine();
-        return name;
     }
 }

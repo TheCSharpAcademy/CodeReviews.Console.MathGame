@@ -15,9 +15,11 @@ namespace MathGame {
                 int secondNumber = divisionNumbers[1];
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
-                int? result = int.Parse(Console.ReadLine());
 
-                if (result == firstNumber / secondNumber) {
+                string? result = Console.ReadLine();
+                result = Helpers.ValidateResult(result); ;
+
+                if (int.Parse(result) == firstNumber / secondNumber) {
                     Console.WriteLine("Your answer was correct! Type any key for the next question.");
                     score++;
                     Console.ReadLine();
@@ -46,9 +48,11 @@ namespace MathGame {
                 int secondNumber = Helpers.GenerateRandomNumber(1, 9);
 
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
-                int? result = int.Parse(Console.ReadLine());
 
-                if (result == firstNumber * secondNumber) {
+                string? result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+
+                if (int.Parse(result) == firstNumber * secondNumber) {
                     Console.WriteLine("Your answer was correct! Type any key for the next question.");
                     score++;
                     Console.ReadLine();
@@ -78,9 +82,11 @@ namespace MathGame {
                 int secondNumber = Helpers.GenerateRandomNumber(1, 9);
 
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
-                int? result = int.Parse(Console.ReadLine());
 
-                if (result == firstNumber - secondNumber) {
+                string? result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+
+                if (int.Parse(result) == firstNumber - secondNumber) {
                     Console.WriteLine("Your answer was correct! Type any key for the next question.");
                     score++;
                     Console.ReadLine();
@@ -109,9 +115,11 @@ namespace MathGame {
                 int secondNumber = Helpers.GenerateRandomNumber(1, 9);
 
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
-                int? result = int.Parse(Console.ReadLine());
 
-                if (result == firstNumber + secondNumber) {
+                string? result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+
+                if (int.Parse(result) == firstNumber + secondNumber) {
                     Console.WriteLine("Your answer was correct! Type any key for the next question.");
                     score++;
                     Console.ReadLine();

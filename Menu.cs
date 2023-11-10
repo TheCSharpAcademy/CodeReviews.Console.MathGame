@@ -2,6 +2,12 @@
     internal class Menu {
 
         internal void ShowMenu(string? name, DateTime date) {
+            Console.Clear();
+            Console.WriteLine($"Hello, {name}. It's {date}.\n" +
+                                $"Welcome to the Math Game!");
+            Console.WriteLine("Press any key to show menu\n" +
+                              ">");
+            Console.ReadLine();
 
             GameEngine gameEngine = new();
 
@@ -10,9 +16,6 @@
             do {
 
                 Console.WriteLine("<--------------------------------->");
-                Console.WriteLine($"Hello, {name}. It's {date}.\n" +
-                                  $"Welcome to the Math Game!");
-                Console.WriteLine("\n");
                 Console.Write("What game would you like to play now? Choose one of the options below:\n" +
                                   "V -> View previows games\n" +
                                   "A -> Addition\n" +
