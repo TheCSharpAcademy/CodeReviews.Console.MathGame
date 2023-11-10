@@ -7,10 +7,15 @@ internal class GameEngine {
         int score = 0;
 
         string operationType = GameType.Division.ToString();
-        Helpers.Selectors(operationType);
 
         Console.WriteLine("You chose division mode!");
         Console.ReadLine();
+
+        Console.WriteLine("Please, select a level of difficulty for the game:\n" +
+                              "1 - Easy (Numbers from 1 to 100)\n" +
+                              "2 - Medium (Numbers from 1 to 500)\n" +
+                              "3 - Hard (Numbers from 1 to 100)");
+        int difficulty = int.Parse(Helpers.ValidateResult(Console.ReadLine()));
 
         int questionNum = Helpers.NumberOfQuestions();
 
@@ -20,9 +25,8 @@ internal class GameEngine {
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int[] divisionNumbers = Helpers.GetDivisionNumbers();
-            int firstNumber = divisionNumbers[0];
-            int secondNumber = divisionNumbers[1];
+            int firstNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[0];
+            int secondNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[1];
 
             Console.WriteLine($"{firstNumber} / {secondNumber}");
 
@@ -66,6 +70,12 @@ internal class GameEngine {
 
         Console.WriteLine("You choose multiplication mode!");
         Console.ReadLine();
+
+        Console.WriteLine("Please, select a level of difficulty for the game:\n" +
+                              "1 - Easy (Numbers from 1 to 10)\n" +
+                              "2 - Medium (Numbers from 1 to 50)\n" +
+                              "3 - Hard (Numbers from 1 to 100)");
+        int difficulty = int.Parse(Helpers.ValidateResult(Console.ReadLine()));
 
         int questionNum = Helpers.NumberOfQuestions();
 
@@ -122,6 +132,12 @@ internal class GameEngine {
         Console.WriteLine("You choose subtraction mode! Press any key to continue:");
         Console.ReadLine();
 
+        Console.WriteLine("Please, select a level of difficulty for the game:\n" +
+                              "1 - Easy (Numbers from 1 to 10)\n" +
+                              "2 - Medium (Numbers from 1 to 50)\n" +
+                              "3 - Hard (Numbers from 1 to 100)");
+        int difficulty = int.Parse(Helpers.ValidateResult(Console.ReadLine()));
+
         int questionNum = Helpers.NumberOfQuestions();
 
         Stopwatch stopWatch = new Stopwatch();
@@ -177,6 +193,12 @@ internal class GameEngine {
         Console.WriteLine("You choose addition mode! Press any key to continue:");
         Console.ReadLine();
 
+        Console.WriteLine("Please, select a level of difficulty for the game:\n" +
+                              "1 - Easy (Numbers from 1 to 10)\n" +
+                              "2 - Medium (Numbers from 1 to 50)\n" +
+                              "3 - Hard (Numbers from 1 to 100)");
+        int difficulty = int.Parse(Helpers.ValidateResult(Console.ReadLine()));
+
         int questionNum = Helpers.NumberOfQuestions();
 
         Stopwatch stopWatch = new Stopwatch();
@@ -185,8 +207,8 @@ internal class GameEngine {
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.GenerateRandomNumber(1, 10);
-            int secondNumber = Helpers.GenerateRandomNumber(1, 10);
+            int firstNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[0];
+            int secondNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[1];
 
             Console.WriteLine($"{firstNumber} + {secondNumber}");
 
@@ -231,7 +253,14 @@ internal class GameEngine {
         Console.WriteLine("You choose random mode! Press any key to continue:");
         Console.ReadLine();
 
+        Console.WriteLine("Please, select a level of difficulty for the game:\n" +
+                              "1 - Easy (Numbers from 1 to 10)\n" +
+                              "2 - Medium (Numbers from 1 to 50)\n" +
+                              "3 - Hard (Numbers from 1 to 100)");
+        int difficulty = int.Parse(Helpers.ValidateResult(Console.ReadLine()));
+
         int questionNum = Helpers.NumberOfQuestions();
+
 
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
@@ -239,8 +268,11 @@ internal class GameEngine {
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.GenerateRandomNumber(1, 10);
-            int secondNumber = Helpers.GenerateRandomNumber(1, 10);
+            int firstNumber = Helpers.DifficultySelector(GameType.Random, difficulty)[0];
+            int secondNumber = Helpers.DifficultySelector(GameType.Random, difficulty)[1];
+
+            int firstNumberDivision = Helpers.DifficultySelector(GameType.Division, difficulty)[0];
+            int secondNumberDivision = Helpers.DifficultySelector(GameType.Division, difficulty)[1];
 
             int randomOperation = Helpers.GenerateRandomNumber(1, 5);
 
@@ -314,12 +346,12 @@ internal class GameEngine {
 
                 // Division
                 case 4:
-                    Console.WriteLine($"{firstNumber} / {secondNumber}");
+                    Console.WriteLine($"{firstNumberDivision} / {secondNumberDivision}");
 
                     result = Console.ReadLine();
                     result = Helpers.ValidateResult(result); ;
 
-                    if (int.Parse(result) == firstNumber / secondNumber) {
+                    if (int.Parse(result) == firstNumberDivision / secondNumberDivision) {
                         Console.WriteLine("Your answer was correct! Type any key for the next question.");
                         score++;
                         Console.ReadLine();
