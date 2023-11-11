@@ -2,8 +2,10 @@
 using System.Diagnostics;
 
 namespace MathGame;
-internal class GameEngine {
-    internal void Division() {
+internal class GameEngine
+{
+    internal void Division()
+    {
         int score = 0;
 
         string operationType = GameType.Division.ToString();
@@ -22,7 +24,8 @@ internal class GameEngine {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start(); //Start Timer
 
-        for (int i = 1; i <= questionNum; i++) {
+        for (int i = 1; i <= questionNum; i++)
+        {
             Console.Clear();
 
             int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
@@ -32,17 +35,20 @@ internal class GameEngine {
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == gameNumbers[0] / gameNumbers[1]) {
+            if (int.Parse(result) == gameNumbers[0] / gameNumbers[1])
+            {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
             }
-            else {
+            else
+            {
                 Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                 Console.ReadLine();
             }
 
-            if (i == 4) {
+            if (i == 4)
+            {
                 Console.WriteLine($"Game over! Your final score is {score}.");
             }
         }
@@ -63,7 +69,8 @@ internal class GameEngine {
         Helpers.AddToHistory(score, GameType.Division, elapsedTime);
     }
 
-    internal void Multiplication() {
+    internal void Multiplication()
+    {
         int score = 0;
 
         Console.WriteLine("You choose multiplication mode!");
@@ -80,7 +87,8 @@ internal class GameEngine {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start(); //Start Timer
 
-        for (int i = 1; i <= questionNum; i++) {
+        for (int i = 1; i <= questionNum; i++)
+        {
             Console.Clear();
 
             int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
@@ -90,17 +98,20 @@ internal class GameEngine {
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == gameNumbers[0] * gameNumbers[1]) {
+            if (int.Parse(result) == gameNumbers[0] * gameNumbers[1])
+            {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
             }
-            else {
+            else
+            {
                 Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                 Console.ReadLine();
             }
 
-            if (i == 4) {
+            if (i == 4)
+            {
                 Console.WriteLine($"Game over! Your final score is {score}.");
             }
         }
@@ -121,7 +132,8 @@ internal class GameEngine {
         Helpers.AddToHistory(score, GameType.Multiplication, elapsedTime);
     }
 
-    internal void Subtraction() {
+    internal void Subtraction()
+    {
 
         int score = 0;
 
@@ -139,7 +151,8 @@ internal class GameEngine {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start(); //Start Timer
 
-        for (int i = 1; i <= questionNum; i++) {
+        for (int i = 1; i <= questionNum; i++)
+        {
             Console.Clear();
 
             int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
@@ -149,17 +162,20 @@ internal class GameEngine {
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == gameNumbers[0] - gameNumbers[1]) {
+            if (int.Parse(result) == gameNumbers[0] - gameNumbers[1])
+            {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
             }
-            else {
+            else
+            {
                 Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                 Console.ReadLine();
             }
 
-            if (i == 4) {
+            if (i == 4)
+            {
                 Console.WriteLine($"Game over! Your final score is {score}.");
             }
         }
@@ -180,7 +196,8 @@ internal class GameEngine {
         Helpers.AddToHistory(score, GameType.Subtraction, elapsedTime);
     }
 
-    internal void Addition() {
+    internal void Addition()
+    {
         int score = 0;
 
         Console.WriteLine("You choose addition mode! Press any key to continue:");
@@ -197,7 +214,8 @@ internal class GameEngine {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start(); //Start Timer
 
-        for (int i = 1; i <= questionNum; i++) {
+        for (int i = 1; i <= questionNum; i++)
+        {
             Console.Clear();
 
             int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
@@ -207,17 +225,20 @@ internal class GameEngine {
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == gameNumbers[0] + gameNumbers[1]) {
+            if (int.Parse(result) == gameNumbers[0] + gameNumbers[1])
+            {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
             }
-            else {
+            else
+            {
                 Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                 Console.ReadLine();
             }
 
-            if (i == 4) {
+            if (i == 4)
+            {
                 Console.WriteLine($"Game over! Your final score is {score}.");
             }
         }
@@ -238,7 +259,8 @@ internal class GameEngine {
         Helpers.AddToHistory(score, GameType.Addition, elapsedTime);
     }
 
-    internal void Random() {
+    internal void Random()
+    {
         int score = 0;
 
         Console.WriteLine("You choose random mode! Press any key to continue:");
@@ -255,7 +277,8 @@ internal class GameEngine {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start(); //Start Timer
 
-        for (int i = 1; i <= questionNum; i++) {
+        for (int i = 1; i <= questionNum; i++)
+        {
             Console.Clear();
 
             int firstNumber = Helpers.DifficultySelector(GameType.Random, difficulty)[0];
@@ -266,7 +289,8 @@ internal class GameEngine {
 
             int randomOperation = Helpers.GenerateRandomNumber(1, 5);
 
-            switch (randomOperation) {
+            switch (randomOperation)
+            {
                 // Addition operation:
                 case 1:
                     Console.WriteLine($"{firstNumber} + {secondNumber}");
@@ -274,17 +298,20 @@ internal class GameEngine {
                     string? result = Console.ReadLine();
                     result = Helpers.ValidateResult(result);
 
-                    if (int.Parse(result) == firstNumber + secondNumber) {
+                    if (int.Parse(result) == firstNumber + secondNumber)
+                    {
                         Console.WriteLine("Your answer was correct! Type any key for the next question.");
                         score++;
                         Console.ReadLine();
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                         Console.ReadLine();
                     }
 
-                    if (i == 4) {
+                    if (i == 4)
+                    {
                         Console.WriteLine($"Game over! Your final score is {score}. Press any key to go back to main menu:");
                         Console.ReadLine();
                     }
@@ -297,17 +324,20 @@ internal class GameEngine {
                     result = Console.ReadLine();
                     result = Helpers.ValidateResult(result);
 
-                    if (int.Parse(result) == firstNumber - secondNumber) {
+                    if (int.Parse(result) == firstNumber - secondNumber)
+                    {
                         Console.WriteLine("Your answer was correct! Type any key for the next question.");
                         score++;
                         Console.ReadLine();
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                         Console.ReadLine();
                     }
 
-                    if (i == 4) {
+                    if (i == 4)
+                    {
                         Console.WriteLine($"Game over! Your final score is {score}.");
                     }
                     break;
@@ -319,17 +349,20 @@ internal class GameEngine {
                     result = Console.ReadLine();
                     result = Helpers.ValidateResult(result);
 
-                    if (int.Parse(result) == firstNumber * secondNumber) {
+                    if (int.Parse(result) == firstNumber * secondNumber)
+                    {
                         Console.WriteLine("Your answer was correct! Type any key for the next question.");
                         score++;
                         Console.ReadLine();
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                         Console.ReadLine();
                     }
 
-                    if (i == 4) {
+                    if (i == 4)
+                    {
                         Console.WriteLine($"Game over! Your final score is {score}.");
                     }
                     break;
@@ -341,17 +374,20 @@ internal class GameEngine {
                     result = Console.ReadLine();
                     result = Helpers.ValidateResult(result); ;
 
-                    if (int.Parse(result) == firstNumberDivision / secondNumberDivision) {
+                    if (int.Parse(result) == firstNumberDivision / secondNumberDivision)
+                    {
                         Console.WriteLine("Your answer was correct! Type any key for the next question.");
                         score++;
                         Console.ReadLine();
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine("Your answer was incorrect! Type any key for the next question.");
                         Console.ReadLine();
                     }
 
-                    if (i == 4) {
+                    if (i == 4)
+                    {
                         Console.WriteLine($"Game over! Your final score is {score}.");
                     }
                     break;

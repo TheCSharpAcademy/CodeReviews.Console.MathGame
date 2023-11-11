@@ -1,12 +1,14 @@
 ﻿using MathGame.Models;
 
-namespace MathGame; 
+namespace MathGame;
 
-internal class Program {
+internal class Program
+{
 
     DateTime date = DateTime.Now;
 
-    internal static void Main(string[] args) {
+    internal static void Main(string[] args)
+    {
         Menu menu = new Menu();
 
         string name = Helpers.GetName();
