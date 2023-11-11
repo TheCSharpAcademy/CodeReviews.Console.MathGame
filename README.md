@@ -15,4 +15,4 @@
 	- Medium
 	- Hard
 
-Based on [Csharp Academy Math Game]{https://www.thecsharpacademy.com/project/53} project.
+Based on [Csharp Academy's Math Game](https://www.thecsharpacademy.com/project/53) project.
