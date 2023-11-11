@@ -19,8 +19,7 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
@@ -48,16 +47,7 @@ internal class GameEngine {
             }
         }
 
-        // Timer
-        stopWatch.Stop();
-
-        TimeSpan ts = stopWatch.Elapsed;
-        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                           ts.Hours, ts.Minutes, ts.Seconds,
-                                           ts.Milliseconds / 10);
-
-        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-        // Timer
+        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -140,8 +130,7 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
@@ -169,16 +158,7 @@ internal class GameEngine {
             }
         }
 
-        // Timer
-        stopWatch.Stop();
-
-        TimeSpan ts = stopWatch.Elapsed;
-        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                           ts.Hours, ts.Minutes, ts.Seconds,
-                                           ts.Milliseconds / 10);
-
-        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-        // Timer
+        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -188,7 +168,6 @@ internal class GameEngine {
 
     internal void Addition() {
         int score = 0;
-        string elapsedTime;
 
         Console.WriteLine("You choose addition mode! Press any key to continue:");
         Console.ReadLine();
@@ -201,8 +180,7 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
@@ -230,16 +208,7 @@ internal class GameEngine {
             }
         }
 
-        // Timer
-        stopWatch.Stop();
-
-        TimeSpan ts = stopWatch.Elapsed;
-        elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                           ts.Hours, ts.Minutes, ts.Seconds,
-                                           ts.Milliseconds / 10);
-
-        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-        // Timer
+        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -261,9 +230,7 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
@@ -368,16 +335,8 @@ internal class GameEngine {
 
             }
         }
-        // Timer
-        stopWatch.Stop();
 
-        TimeSpan ts = stopWatch.Elapsed;
-        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                           ts.Hours, ts.Minutes, ts.Seconds,
-                                           ts.Milliseconds / 10);
-
-        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-        // Timer
+        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();

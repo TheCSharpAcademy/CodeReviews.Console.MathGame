@@ -1,4 +1,5 @@
 ﻿using MathGame.Models;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MathGame;
@@ -43,8 +44,6 @@ internal static class Helpers {
         return result;
     }
 
-
-
     internal static void AddToHistory(int gameScore, GameType gameType, string timeSpent) {
         games.Add(new Game {
             Date = DateTime.Now,
@@ -83,9 +82,12 @@ internal static class Helpers {
         return int.Parse(questionNum);
     }
 
+    // Works by increasing or decreasing the range of possible values to be displayed on game
     internal static List<int> DifficultySelector(GameType gameType, int difficulty) {
         int firstNumber;
         int secondNumber;
+
+        // Default is "easy" mode
 
         //Division difficulty
         if (gameType == GameType.Division) {
@@ -125,6 +127,44 @@ internal static class Helpers {
             }
             return new List<int> { firstNumber, secondNumber };
         }
+    }
+
+    internal static string Timer(TimerState timerState) {
+        Stopwatch stopWatch = new Stopwatch();
+        string elapsedTime;
+
+        switch (timerState) {
+            case TimerState.Start:
+                stopWatch.Start();
+
+                TimeSpan ts = stopWatch.Elapsed;
+                elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                                   ts.Hours, ts.Minutes, ts.Seconds,
+                                                   ts.Milliseconds / 10);
+
+                return elapsedTime;
+
+            case TimerState.Stop:
+                stopWatch.Stop();
+
+                ts = stopWatch.Elapsed;
+                elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                                   ts.Hours, ts.Minutes, ts.Seconds,
+                                                   ts.Milliseconds / 10);
+
+                Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+                return elapsedTime;
+            default:
+                string message = "Use Helpers.Timer.Start or Helpers.Timer.Stop to use this function";
+                Console.WriteLine(message);
+
+                return message;
+        }
+    }
+
+    internal enum TimerState {
+        Start,
+        Stop
     }
 }
 
