@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 
 namespace MathGame;
-internal static class Helpers {
+internal class Helpers {
 
     internal static List<Game> games = new();
 
@@ -83,17 +83,17 @@ internal static class Helpers {
     }
 
     // Works by increasing or decreasing the range of possible values to be displayed on game
-    internal static List<int> DifficultySelector(GameType gameType, int difficulty) {
+    internal static int[] DifficultySelector(GameType gameType, int difficulty) {
         int firstNumber;
         int secondNumber;
 
-        // Default is "easy" mode
+        // Default difficulty is 'easy'
 
         //Division difficulty
         if (gameType == GameType.Division) {
             if (difficulty == 3) {
-                firstNumber = Helpers.GenerateRandomNumber(1, 101);
-                secondNumber = Helpers.GenerateRandomNumber(1, 101);
+                firstNumber = Helpers.GenerateRandomNumber(1, 1001);
+                secondNumber = Helpers.GenerateRandomNumber(1, 1001);
 
                 ValidateDivisionNumbers(firstNumber, secondNumber);
             }
@@ -104,32 +104,32 @@ internal static class Helpers {
                 ValidateDivisionNumbers(firstNumber, secondNumber);
             }
             else {
-                firstNumber = Helpers.GenerateRandomNumber(1, 1001);
-                secondNumber = Helpers.GenerateRandomNumber(1, 1001);
+                firstNumber = Helpers.GenerateRandomNumber(1, 101);
+                secondNumber = Helpers.GenerateRandomNumber(1, 101);
 
                 ValidateDivisionNumbers(firstNumber, secondNumber);
             }
-            return new List<int> { firstNumber, secondNumber };
+            return new int[] { firstNumber, secondNumber };
         }
         // Addition, Subtraction, Multiplication and Random difficulty
         else {
             if (difficulty == 3) {
-                firstNumber = Helpers.GenerateRandomNumber(1, 11);
-                secondNumber = Helpers.GenerateRandomNumber(1, 11);
+                firstNumber = Helpers.GenerateRandomNumber(1, 101);
+                secondNumber = Helpers.GenerateRandomNumber(1, 101);
             }
             else if (difficulty == 2) {
                 firstNumber = Helpers.GenerateRandomNumber(1, 51);
                 secondNumber = Helpers.GenerateRandomNumber(1, 51);
             }
             else {
-                firstNumber = Helpers.GenerateRandomNumber(1, 101);
-                secondNumber = Helpers.GenerateRandomNumber(1, 101);
+                firstNumber = Helpers.GenerateRandomNumber(1, 11);
+                secondNumber = Helpers.GenerateRandomNumber(1, 11);
             }
-            return new List<int> { firstNumber, secondNumber };
+            return new int[2] { firstNumber, secondNumber };
         }
     }
 
-    internal static string Timer(TimerState timerState) {
+    internal string Timer(TimerState timerState) {
         Stopwatch stopWatch = new Stopwatch();
         string elapsedTime;
 

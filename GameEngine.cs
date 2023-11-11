@@ -19,20 +19,20 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start(); //Start Timer
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[0];
-            int secondNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[1];
+            int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
 
-            Console.WriteLine($"{firstNumber} / {secondNumber}");
+            Console.WriteLine($"{gameNumbers[0]} / {gameNumbers[1]}");
 
             string? result = Console.ReadLine();
-            result = Helpers.ValidateResult(result); ;
+            result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == firstNumber / secondNumber) {
+            if (int.Parse(result) == gameNumbers[0] / gameNumbers[1]) {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
@@ -47,7 +47,15 @@ internal class GameEngine {
             }
         }
 
-        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
+        //Timer
+        stopWatch.Stop();
+
+        TimeSpan ts = stopWatch.Elapsed;
+        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                           ts.Hours, ts.Minutes, ts.Seconds,
+                                           ts.Milliseconds / 10);
+        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+        // Timer end
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -70,20 +78,19 @@ internal class GameEngine {
         int questionNum = Helpers.NumberOfQuestions();
 
         Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+        stopWatch.Start(); //Start Timer
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.GenerateRandomNumber(1, 10);
-            int secondNumber = Helpers.GenerateRandomNumber(1, 10);
+            int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
 
-            Console.WriteLine($"{firstNumber} * {secondNumber}");
+            Console.WriteLine($"{gameNumbers[0]} * {gameNumbers[1]}");
 
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == firstNumber * secondNumber) {
+            if (int.Parse(result) == gameNumbers[0] * gameNumbers[1]) {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
@@ -98,16 +105,15 @@ internal class GameEngine {
             }
         }
 
-        // Timer
+        //Timer
         stopWatch.Stop();
 
         TimeSpan ts = stopWatch.Elapsed;
         string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
                                            ts.Hours, ts.Minutes, ts.Seconds,
                                            ts.Milliseconds / 10);
-
         Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-        // Timer
+        // Timer end
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -130,20 +136,20 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start(); //Start Timer
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.GenerateRandomNumber(1, 10);
-            int secondNumber = Helpers.GenerateRandomNumber(1, 10);
+            int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
 
-            Console.WriteLine($"{firstNumber} - {secondNumber}");
+            Console.WriteLine($"{gameNumbers[0]} - {gameNumbers[1]}");
 
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == firstNumber - secondNumber) {
+            if (int.Parse(result) == gameNumbers[0] - gameNumbers[1]) {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
@@ -158,7 +164,15 @@ internal class GameEngine {
             }
         }
 
-        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
+        //Timer
+        stopWatch.Stop();
+
+        TimeSpan ts = stopWatch.Elapsed;
+        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                           ts.Hours, ts.Minutes, ts.Seconds,
+                                           ts.Milliseconds / 10);
+        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+        // Timer end
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -180,20 +194,20 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start(); //Start Timer
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
 
-            int firstNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[0];
-            int secondNumber = Helpers.DifficultySelector(GameType.Addition, difficulty)[1];
+            int[] gameNumbers = Helpers.DifficultySelector(GameType.Addition, difficulty);
 
-            Console.WriteLine($"{firstNumber} + {secondNumber}");
+            Console.WriteLine($"{gameNumbers[0]} + {gameNumbers[1]}");
 
             string? result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
 
-            if (int.Parse(result) == firstNumber + secondNumber) {
+            if (int.Parse(result) == gameNumbers[0] + gameNumbers[1]) {
                 Console.WriteLine("Your answer was correct! Type any key for the next question.");
                 score++;
                 Console.ReadLine();
@@ -208,7 +222,15 @@ internal class GameEngine {
             }
         }
 
-        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
+        //Timer
+        stopWatch.Stop();
+
+        TimeSpan ts = stopWatch.Elapsed;
+        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                           ts.Hours, ts.Minutes, ts.Seconds,
+                                           ts.Milliseconds / 10);
+        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+        // Timer end
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();
@@ -230,7 +252,8 @@ internal class GameEngine {
 
         int questionNum = Helpers.NumberOfQuestions();
 
-        Helpers.Timer(Helpers.TimerState.Start); // Starts Timer function
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start(); //Start Timer
 
         for (int i = 1; i <= questionNum; i++) {
             Console.Clear();
@@ -336,7 +359,15 @@ internal class GameEngine {
             }
         }
 
-        string elapsedTime = Helpers.Timer(Helpers.TimerState.Stop); //Stops Timer function
+        //Timer
+        stopWatch.Stop();
+
+        TimeSpan ts = stopWatch.Elapsed;
+        string elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
+                                           ts.Hours, ts.Minutes, ts.Seconds,
+                                           ts.Milliseconds / 10);
+        Console.WriteLine("Time elapsed during last game: " + elapsedTime);
+        // Timer end
 
         Console.WriteLine(" Press any key to go back to main menu:");
         Console.ReadLine();

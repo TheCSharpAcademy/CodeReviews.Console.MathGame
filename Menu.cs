@@ -23,7 +23,7 @@
                                   "S -> Subtraction\n" +
                                   "M -> Multiplication\n" +
                                   "D -> Division\n" +
-                                  "R -> Random Game" +
+                                  "R -> Random Game\n" +
                                   "Q -> Quit\n\n" +
 
                                   ">");
