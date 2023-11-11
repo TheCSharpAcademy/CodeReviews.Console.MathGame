@@ -8,8 +8,6 @@ internal class GameEngine
     {
         int score = 0;
 
-        string operationType = GameType.Division.ToString();
-
         Console.WriteLine("You chose division mode!");
         Console.ReadLine();
 
@@ -372,7 +370,7 @@ internal class GameEngine
                     Console.WriteLine($"{firstNumberDivision} / {secondNumberDivision}");
 
                     result = Console.ReadLine();
-                    result = Helpers.ValidateResult(result); ;
+                    result = Helpers.ValidateResult(result);
 
                     if (int.Parse(result) == firstNumberDivision / secondNumberDivision)
                     {
