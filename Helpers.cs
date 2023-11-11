@@ -129,39 +129,6 @@ internal class Helpers {
         }
     }
 
-    internal string Timer(TimerState timerState) {
-        Stopwatch stopWatch = new Stopwatch();
-        string elapsedTime;
-
-        switch (timerState) {
-            case TimerState.Start:
-                stopWatch.Start();
-
-                TimeSpan ts = stopWatch.Elapsed;
-                elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                                   ts.Hours, ts.Minutes, ts.Seconds,
-                                                   ts.Milliseconds / 10);
-
-                return elapsedTime;
-
-            case TimerState.Stop:
-                stopWatch.Stop();
-
-                ts = stopWatch.Elapsed;
-                elapsedTime = String.Format("{0:00}h:{1:00}m:{2:00}s.{3:00}ms",
-                                                   ts.Hours, ts.Minutes, ts.Seconds,
-                                                   ts.Milliseconds / 10);
-
-                Console.WriteLine("Time elapsed during last game: " + elapsedTime);
-                return elapsedTime;
-            default:
-                string message = "Use Helpers.Timer.Start or Helpers.Timer.Stop to use this function";
-                Console.WriteLine(message);
-
-                return message;
-        }
-    }
-
     internal enum TimerState {
         Start,
         Stop
