@@ -8,25 +8,25 @@ public class Game
     {
         while (true)
         {
-            showMenu();
-            string command = getUserInput("Enter a number: ");
+            ShowMenu();
+            string command = GetUserInput("Enter a number: ");
 
             switch (command)
             {
                 case "1":
-                    processAddition();
+                    ProcessAddition();
                     break;
                 case "2":
-                    processSubstraction();
+                    ProcessSubstraction();
                     break;
                 case "3":
-                    processMultiplication();
+                    ProcessMultiplication();
                     break;
                 case "4":
-                    processDivision();
+                    ProcessDivision();
                     break;
                 case "5":
-                    printLogs();
+                    PrintLogs();
                     break;
                 case "0":
                     Environment.Exit(0);
@@ -39,7 +39,7 @@ public class Game
         }
     }
 
-    private void printLogs()
+    private void PrintLogs()
     {
         Console.WriteLine("Previous games");
         Console.WriteLine("---------");
@@ -50,7 +50,7 @@ public class Game
         Console.WriteLine("---------");
     }
 
-    string getUserInput(string message)
+    string GetUserInput(string message)
     {
         string input = string.Empty;
         do
@@ -67,7 +67,7 @@ public class Game
         return input;
     }
 
-    void showMenu()
+    void ShowMenu()
     {
         Console.WriteLine("\nMain Menu");
         Console.WriteLine("---------\n");
@@ -81,7 +81,7 @@ public class Game
         Console.WriteLine("---------------------------\n");
     }
 
-    void processAddition()
+    void ProcessAddition()
     {
         Random random = new Random();
         int firstNumber = random.Next(0, 101);
@@ -111,7 +111,7 @@ public class Game
 
     }
 
-    void processSubstraction()
+    void ProcessSubstraction()
     {
         Random random = new Random();
         int firstNumber = random.Next(0, 101);
@@ -141,7 +141,7 @@ public class Game
 
     }
 
-    void processMultiplication()
+    void ProcessMultiplication()
     {
         Random random = new Random();
         int firstNumber = random.Next(0, 101);
@@ -171,7 +171,7 @@ public class Game
 
     }
 
-    void processDivision()
+    void ProcessDivision()
     {
         Random random = new Random();
         int firstNumber = random.Next(0, 101);
