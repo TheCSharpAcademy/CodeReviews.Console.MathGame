@@ -8,9 +8,7 @@
  */
 
 using MathGame;
-using System.Threading.Tasks.Sources;
 
 var menu = new Menu();
-var engine = new GameEngine();
 
 menu.ShowMenu();

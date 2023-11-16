@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace MathGame
 {
@@ -107,11 +105,11 @@ namespace MathGame
                 round++;
             }
 
-            timeString = getTime();
+            timeString = GetTime();
             Helpers.SaveScore(score, timeString);
         }
 
-        internal string getTime()
+        internal string GetTime()
         {
             timer.Stop();
             TimeSpan ts = timer.Elapsed;

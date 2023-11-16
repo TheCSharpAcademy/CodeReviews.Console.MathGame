@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace MathGame
@@ -14,7 +13,7 @@ namespace MathGame
         internal static int divProbLimit = 7 + 1;
         internal static string difficultyString = "Normal";
         internal static int totalRounds = 10;
-        internal static int gameType = 0;
+        internal static int gameType;
         internal static string gameTypeString = "";
 
         static List<string> scores = new List<string>();
