@@ -31,8 +31,6 @@ namespace MyFirstProgram
 
         internal static void PrintGames()
         {
-            //var gamesToPrint = games.Where(x => x.Date > new DateTime(2022, 08, 09));
-
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("--------------------->");
