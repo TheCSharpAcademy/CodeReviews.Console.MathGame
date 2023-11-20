@@ -8,7 +8,7 @@ string name = Helpers.GetName();
 
 menu.ShowMenu(name, date);
 
-var games = new List<string>();
+
 
 Menu(name);
 
