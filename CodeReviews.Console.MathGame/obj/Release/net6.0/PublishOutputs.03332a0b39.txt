@@ -1,0 +1,5 @@
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\MyFirstProgram\MyFirstProgram.exe
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\MyFirstProgram\MyFirstProgram.dll
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\MyFirstProgram\MyFirstProgram.deps.json
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\MyFirstProgram\MyFirstProgram.runtimeconfig.json
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\MyFirstProgram\MyFirstProgram.pdb
