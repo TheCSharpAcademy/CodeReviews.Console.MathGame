@@ -6,19 +6,7 @@ namespace MyFirstProgram
     internal class Helpers
     {
         internal static List<Game> games = new(){
-        /*new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
-        new Game { Date = DateTime.Now.AddDays(2), Type = GameType.Multiplication, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(3), Type = GameType.Division, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(4), Type = GameType.Substraction, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(5), Type = GameType.Addition, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(6), Type = GameType.Multiplication, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(7), Type = GameType.Division, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(8), Type = GameType.Substraction, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(9), Type = GameType.Addition, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(10), Type = GameType.Multiplication, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(11), Type = GameType.Substraction, Score = 0 },
-        new Game { Date = DateTime.Now.AddDays(12), Type = GameType.Division, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(13), Type = GameType.Substraction, Score = 5 },*/
+        
         };
 
         internal static int[] GetDivisionNumbers()
@@ -92,87 +80,11 @@ namespace MyFirstProgram
             return name;
         }
 
-        public void SelectDifficult(GameEngine gameEngine)
-        {
-            //int numero = gameEngine.firstNumber;
-            //int numeroDos = gameEngine.secondNumber;
-
-            Console.WriteLine($@"Please select the difficult of this game:
-                E - Easy
-                M - Medium
-                H - Hard
-            
-                ");
-
-            Console.WriteLine("--------------------->");
-            var difficultSelected = Console.ReadLine();
-
-
-            var random = new Random();
-
-            switch (difficultSelected.Trim().ToLower())
-            {
-                case "e":
-                    gameEngine.firstNumber = random.Next(1, 10);
-                    gameEngine.secondNumber = random.Next(1, 10);
-                    break;
-
-                case "m":
-                    gameEngine.firstNumber = random.Next(1, 50);
-                    gameEngine.secondNumber  = random.Next(1, 50);
-                    break;
-
-                case "h":
-                    gameEngine.firstNumber = random.Next(1, 100);
-                    gameEngine.secondNumber = random.Next(1, 100);
-                    break;
-
-                default:
-                    Console.WriteLine("Opción no válida. Seleccionando dificultad por defecto.");
-                    gameEngine.firstNumber = random.Next(1, 10); ; // Dificultad por defecto
-                    gameEngine.secondNumber = random.Next(1, 10); ; // Rango por defecto
-                    break;
-            }
-
-        }
+        
     }
 
-        /*internal static string DifficultSelection()
-        {
-            Console.WriteLine($@"Please select the difficult of this game:
-                E - Easy
-                M - Medium
-                H - Hard
-            
-                ");
-
-            Console.WriteLine("--------------------->");
-            var difficultSelected = Console.ReadLine();
-
-
-            var random = new Random();
-
-            switch (difficultSelected.Trim().ToLower())
-            {
-                case "e":
-                    firstNumber = random.Next(1, 10);
-                    secondNumber = random.Next(1, 10);
-                    break;
-
-                case "m":
-                    firstNumber = random.Next(1, 50);
-                    secondNumber = random.Next(1, 50);
-                    break;
-
-                case "h":
-                    firstNumber = random.Next(1, 100);
-                    secondNumber = random.Next(1, 100);
-                    break;
-            }
-
-            return difficultSelected;
-        }*/
-    }
+        
+ }
 
        
 
