@@ -1,57 +1,62 @@
-﻿namespace MathGame.nwdorian
+﻿namespace MathGame.nwdorian;
+
+internal class Menu
 {
-    internal class Menu
+    GameEngine gameEngine = new GameEngine();
+    internal void ShowMenu(string name, DateTime date)
     {
-        GameEngine gameEngine = new GameEngine();
-        internal void ShowMenu(string name, DateTime date)
+        Console.WriteLine($"Hello {name.ToLower()}! Today is {date.DayOfWeek}. Welcome to the Math Game.");
+        Console.WriteLine("Press any key to show menu");
+        Console.ReadKey();
+
+        bool isGameOn = true;
+        do
         {
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine($"Hello {name}! It's {date.DayOfWeek}. This is your Math Game!");
-            Console.WriteLine("Press any key to show menu");
-            Console.ReadKey();
-
-            bool isGameOn = true;
-
-            do
+            Console.Clear();
+            Console.WriteLine("Choose an option from the main menu:");
+            Console.WriteLine("X - Select Difficulty");
+            Console.WriteLine("A - Addition");
+            Console.WriteLine("S - Subtraction");
+            Console.WriteLine("M - Multiplication");
+            Console.WriteLine("D - Division");
+            Console.WriteLine("V - View results");
+            Console.WriteLine("Q - Quit the program");
+            string menuSelection = "";
+            string? userInput = Console.ReadLine();
+            if (userInput != null)
             {
-                Console.Clear();
-                Console.WriteLine(@$"Choose what game you would like to play from the options below:
-V - View previous games
-A - Addition
-S - Subtraction
-M - Multiplication
-D - Division
-Q - Quit the game");
-                Console.WriteLine("-----------------------------------------");
-                Console.Write("Enter selection: ");
-                string? gameSelected = Console.ReadLine();
+                menuSelection = userInput.ToUpper().Trim();
+            }
 
-                switch (gameSelected.ToUpper().Trim())
-                {
-                    case "V":
-                        Helpers.PrintGames();
-                        break;
-                    case "A":
-                        gameEngine.AdditionGame("Addition game");
-                        break;
-                    case "S":
-                        gameEngine.SubtractionGame("Subtraction game");
-                        break;
-                    case "M":
-                        gameEngine.MultiplicationGame("Multiplication game");
-                        break;
-                    case "D":
-                        gameEngine.DivisionGame("Division game");
-                        break;
-                    case "Q":
-                        Console.WriteLine("Goodbye!");
-                        isGameOn = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input!");
-                        break;
-                }
-            } while (isGameOn);
-        }
+            switch (menuSelection)
+            {
+                case "X":
+                    Helpers.SelectDifficulty();
+                    break;
+                case "A":
+                    gameEngine.AdditionGame("Addition Selected");
+                    break;
+                case "S":
+                    gameEngine.SubtractionGame("Subtraction selected");
+                    break;
+                case "M":
+                    gameEngine.MultiplicationGame("Multiplication selected");
+                    break;
+                case "D":
+                    gameEngine.DivisionGame("Division selected");
+                    break;
+                case "V":
+                    Helpers.PrintGames();
+                    break;
+                case "Q":
+                    Console.WriteLine("Goodbye");
+                    isGameOn = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input!");
+                    break;
+            }
+        } while (isGameOn);
     }
 }
+
