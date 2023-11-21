@@ -233,7 +233,6 @@ namespace MyFirstProgram
 
         internal void RandomGame(string difficulty)
         {
-            var random = new Random();
 
             int firstNumber;
             int secondNumber;
