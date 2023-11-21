@@ -9,7 +9,6 @@ namespace MyFirstProgram
 
         internal static void GetGames()
         {
-            // var gamesToPrint = games.Where(x => x.Date > new DateTime(2023, 11, 24) && x.Score > 3).OrderByDescending(x => x.Score);
             Console.Clear();
             Console.WriteLine("Games History:");
             Console.WriteLine("--------------------\n");

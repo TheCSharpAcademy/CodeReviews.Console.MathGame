@@ -178,7 +178,6 @@ namespace MyFirstProgram
 
         internal void DivisionGame(string difficulty)
         {
-            var random = new Random();
 
             int firstNumber;
             int secondNumber;
