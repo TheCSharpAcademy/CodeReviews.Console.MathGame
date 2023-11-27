@@ -35,6 +35,5 @@ internal class Context
     internal bool GetGameOn()
     {
         return _state != null;
-
     }
 }

@@ -1,7 +1,4 @@
-
-
 namespace Branch_Console;
-
 
 internal class Helpers
 {
@@ -9,10 +6,12 @@ internal class Helpers
     {
         return DateTime.UtcNow;
     }
+
     internal static int ConsoleWidth()
     {
         return Console.WindowWidth;
     }
+
     internal static string GetName()
     {
         var result = Console.ReadLine();
@@ -88,8 +87,6 @@ internal class Helpers
                 }
                 break;
         }
-
-
         return result;
     }
 
@@ -112,7 +109,6 @@ internal class Helpers
                 resultLowerBound = -80;
                 break;
         }
-
         return new int[] { resultLowerBound, resultUpperBound };
     }
 
@@ -129,32 +125,21 @@ internal class Helpers
         };
         return operationSymbol;
     }
+
     internal static OperationType GetRandomGameType()
     {
-        OperationType toReturn;
         Random rnd = new Random();
-        rnd.Next(1, 4);
-        switch (rnd.Next(1, 4))
+        var toReturn = rnd.Next(1, 4) switch
         {
-            case 1:
-                toReturn = OperationType.Addition;
-                break;
-            case 2:
-                toReturn = OperationType.Subtration;
-                break;
-            case 3:
-                toReturn = OperationType.Multiplication;
-                break;
-            case 4:
-                toReturn = OperationType.Division;
-                break;
-            default:
-                toReturn = OperationType.Addition;
-                break;
-        }
-
+            1 => OperationType.Addition,
+            2 => OperationType.Subtration,
+            3 => OperationType.Multiplication,
+            4 => OperationType.Division,
+            _ => OperationType.Addition,
+        };
         return toReturn;
     }
+
     internal static MathOperation GetOperation(OperationType? gameType, Difficulty difficulty)
     {
         int[] OperationResultBounds = Helpers.GetOperationBounds(difficulty);
@@ -174,9 +159,9 @@ internal class Helpers
             operands = Helpers.GetOperands(difficulty);
             operationResult = Helpers.GetResult(opType, operands);
         }
-
         return new MathOperation() { Operator = opType, OperationDifficulty = difficulty, Operands = operands, OperationResult = (int)operationResult };
     }
+
     internal static string OperationTitle(OperationType operationType)
     {
         string operationName = "";
@@ -208,7 +193,4 @@ internal class Helpers
         }
         return baseScore + timerBonus;
     }
-
-
-
 }

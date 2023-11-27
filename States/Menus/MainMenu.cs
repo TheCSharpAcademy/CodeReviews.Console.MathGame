@@ -1,5 +1,3 @@
-using System.Runtime.Serialization;
-
 namespace Branch_Console;
 
 internal class MainMenu : State
@@ -63,8 +61,6 @@ internal class MainMenu : State
                 newState = this;
                 break;
         }
-
         return newState;
-
     }
 }

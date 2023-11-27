@@ -4,6 +4,7 @@ internal class SetUpRun : State
 {
     internal OperationType? operationType;
     private List<MathOperation> operations = new();
+
     public override void Print()
     {
         Console.Clear();
@@ -17,14 +18,11 @@ internal class SetUpRun : State
             operations.Add(Helpers.GetOperation(operationType, _context._settings.Difficulty));
         }
         Console.WriteLine($"Finished. Good Luck!\nPress any key to start.");
-
     }
 
     public override State? Process()
     {
-
         Console.ReadLine();
-
         return new GameRun() { operations = this.operations };
     }
 }

@@ -1,15 +1,11 @@
 using System.Drawing;
-using System.Threading;
 using System.Timers;
-
 
 namespace Branch_Console;
 
 internal class GameRun : State
 {
-
     private System.Timers.Timer timer;
-
     internal List<MathOperation> operations;
     internal int RunScore = 0;
     private int operationIndex = 0;
@@ -25,6 +21,7 @@ internal class GameRun : State
         timer.Enabled = true;
         timeCounter = 20;
     }
+
     private void OnTimedEvent(Object? source, ElapsedEventArgs e)
     {
         if (timeCounter > 0)
@@ -36,9 +33,9 @@ internal class GameRun : State
             Console.SetCursorPosition(point.X, point.Y);
         }
     }
+
     public override void Print()
     {
-
         SetTimer();
         MathOperation op = operations[operationIndex];
         Console.Clear();
@@ -48,7 +45,6 @@ internal class GameRun : State
         Console.WriteLine($"Question: {op.GetExpression()} ?");
         Console.WriteLine("Type your answer:");
         timer.Start();
-
     }
 
     public override State? Process()

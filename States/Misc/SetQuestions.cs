@@ -13,7 +13,6 @@ internal class SetQuestions : State
     public override State? Process()
     {
         State? newState = null;
-
         var input = Console.ReadLine();
 
         if (!int.TryParse(input, out int result))

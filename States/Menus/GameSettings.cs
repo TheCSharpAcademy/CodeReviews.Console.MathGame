@@ -20,7 +20,6 @@ Current question per round is: {_context._settings.QuestionsCount}.");
     public override State? Process()
     {
         State? newState = null;
-
         var input = Console.ReadLine();
 
         if (!int.TryParse(input, out int result))
@@ -46,7 +45,6 @@ Current question per round is: {_context._settings.QuestionsCount}.");
                 newState = this;
                 break;
         }
-
         return newState;
     }
 }

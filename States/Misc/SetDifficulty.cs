@@ -18,7 +18,6 @@ internal class SetDifficulty : State
     public override State? Process()
     {
         State? newState = null;
-
         var input = Console.ReadLine();
 
         if (!int.TryParse(input, out int result))
@@ -51,7 +50,6 @@ internal class SetDifficulty : State
                 newState = this;
                 break;
         }
-
         return newState;
     }
 }
