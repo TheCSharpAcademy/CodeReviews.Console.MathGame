@@ -22,7 +22,7 @@ internal class GameRun : State
         timeCounter = 20;
     }
 
-    private void OnTimedEvent(ElapsedEventArgs e)
+    private void OnTimedEvent(Object? source, ElapsedEventArgs e) //codacy tells me these have erros becaus source and e are unused but they are part of the method signature. I can't change them
     {
         if (timeCounter > 0)
         {
