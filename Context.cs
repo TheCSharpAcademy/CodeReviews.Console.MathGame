@@ -4,7 +4,7 @@ internal class Context
 {
     private State? _state = null;
     internal Settings? _settings = null;
-    internal int SessionScore = 0;
+    internal int SessionScore;
     internal List<Game> gameHistory = new List<Game>();
     internal Context(State state)
     {
