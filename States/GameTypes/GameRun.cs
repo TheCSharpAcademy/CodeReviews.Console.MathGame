@@ -8,7 +8,7 @@ internal class GameRun : State
     private System.Timers.Timer timer;
     internal List<MathOperation> operations;
     internal int RunScore;
-    private int operationIndex = 0;
+    private int operationIndex;
     internal int timeCounter = 20;
 
     private void SetTimer()
