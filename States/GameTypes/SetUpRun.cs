@@ -2,7 +2,7 @@ namespace Branch_Console;
 
 internal class SetUpRun : State
 {
-    internal OperationType operationType;
+    internal OperationType? operationType;
     private List<MathOperation> operations = new();
     public override void Print()
     {

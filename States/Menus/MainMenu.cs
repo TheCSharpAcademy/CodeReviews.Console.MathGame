@@ -17,6 +17,7 @@ internal class MainMenu : State
             4 - Subtraction
             5 - Multiplication
             6 - Division
+            7 - Random Game
             0 - Quit the program");
         Console.WriteLine(new string('-', Helpers.ConsoleWidth()));
     }
@@ -54,7 +55,7 @@ internal class MainMenu : State
                 newState = new SetUpRun() { operationType = OperationType.Division };
                 break;
             case 7:
-                newState = null;
+                newState = new SetUpRun() { operationType = null };
                 break;
             default:
                 Console.WriteLine($"Invalid input. Select an option from above.\nPress Any Key");

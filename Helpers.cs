@@ -129,19 +129,53 @@ internal class Helpers
         };
         return operationSymbol;
     }
+    internal static OperationType GetRandomGameType()
+    {
+        OperationType toReturn;
+        Random rnd = new Random();
+        rnd.Next(1, 4);
+        switch (rnd.Next(1, 4))
+        {
+            case 1:
+                toReturn = OperationType.Addition;
+                break;
+            case 2:
+                toReturn = OperationType.Subtration;
+                break;
+            case 3:
+                toReturn = OperationType.Multiplication;
+                break;
+            case 4:
+                toReturn = OperationType.Division;
+                break;
+            default:
+                toReturn = OperationType.Addition;
+                break;
+        }
 
-    internal static MathOperation GetOperation(OperationType gameType, Difficulty difficulty)
+        return toReturn;
+    }
+    internal static MathOperation GetOperation(OperationType? gameType, Difficulty difficulty)
     {
         int[] OperationResultBounds = Helpers.GetOperationBounds(difficulty);
         int? operationResult = null;
         List<int> operands = new();
+        OperationType opType;
+        if (gameType == null)
+        {
+            opType = Helpers.GetRandomGameType();
+        }
+        else
+        {
+            opType = (OperationType)gameType;
+        }
         while (operationResult == null || operationResult < OperationResultBounds[0] || operationResult > OperationResultBounds[1])
         {
             operands = Helpers.GetOperands(difficulty);
-            operationResult = Helpers.GetResult(gameType, operands);
+            operationResult = Helpers.GetResult(opType, operands);
         }
 
-        return new MathOperation() { Operator = gameType, OperationDifficulty = difficulty, Operands = operands, OperationResult = (int)operationResult };
+        return new MathOperation() { Operator = opType, OperationDifficulty = difficulty, Operands = operands, OperationResult = (int)operationResult };
     }
     internal static string OperationTitle(OperationType operationType)
     {
