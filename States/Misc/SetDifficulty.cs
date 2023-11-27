@@ -40,10 +40,6 @@ internal class SetDifficulty : State
                 _context._settings.Difficulty = Difficulty.Hard;
                 newState = new GameSettings();
                 break;
-            /* case 4:
-                _context._settings.Difficulty = Difficulty.Impossible;
-                newState = new GameSettings();
-                break; */
             default:
                 Console.WriteLine($"Invalid input. Select an option from above.\nPress Any Key");
                 Console.ReadLine();
