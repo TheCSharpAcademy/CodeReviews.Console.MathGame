@@ -22,7 +22,7 @@ internal class GameRun : State
         timeCounter = 20;
     }
 
-    private void OnTimedEvent(Object? source, ElapsedEventArgs e)
+    private void OnTimedEvent(ElapsedEventArgs e)
     {
         if (timeCounter > 0)
         {
