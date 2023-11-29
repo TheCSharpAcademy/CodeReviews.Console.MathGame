@@ -1,0 +1,3 @@
+﻿using ConsoleMathsGame;
+
+Menu.MainProgramRepeat();
