@@ -10,7 +10,6 @@
         }
         internal static void MenuLogic()
         {
-            int score = 0;
             Console.WriteLine("Welcome! Which game would you like to play?");
             Console.WriteLine("+ = Addition\n- = Subtraction\n* = Multiplication\n/ = Division\nR = Random Game\nV = View Previous Games\nQ = Quit");
             Console.WriteLine("-----");
