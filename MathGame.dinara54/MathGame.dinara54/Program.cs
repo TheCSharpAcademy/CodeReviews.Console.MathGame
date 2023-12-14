@@ -1,10 +1,9 @@
 ﻿// Initializing variables
-string[] savedGames = new string[100];
-int k = 0;
+List<string> savedGames = new List<string>();
 int maxNumber = 100;
 
 Random generateRandom = new Random();
-int choice = 0;
+
 int score = 0;
 
 MainMenu();
@@ -12,6 +11,7 @@ MainMenu();
 void MainMenu()
 {
     bool exit = false;
+    int choice = 0;
     do
     {
         Console.WriteLine("Choose game\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. show saved games");
@@ -39,7 +39,7 @@ void MainMenu()
                         MainMenu();
                         break;
                     case 5:
-                        ShowSavedGames();
+                        ShowSavedGames(0);
                         MainMenu();
                         break;
                 }
@@ -53,14 +53,14 @@ void MainMenu()
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Please enter a number");
+                        Console.WriteLine("Please enter a number or \"exit\"");
                         break;
 
                 }
             }   
         }
 
-    } while ((choice < 1 && choice > 4 ) || !exit);
+    } while ((choice < 1 && choice > 4) || !exit);
 }
 
 void PlayAdditionGame()
@@ -74,10 +74,7 @@ void PlayAdditionGame()
         string prompt = $"{number1} + {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt);
-        
-
-
+        exit = AnswerLoop(answer, prompt, 1);
     } while (!exit);
     
 }
@@ -93,7 +90,7 @@ void PlaySubtractionGame()
         string prompt = $"{number1} - {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt);
+        exit = AnswerLoop(answer, prompt, 2);
     } while (!exit);
 }
 
@@ -108,7 +105,7 @@ void PlayMultiplicationGame()
         string prompt = $"{number1} * {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt);
+        exit = AnswerLoop(answer, prompt, 3);
     } while (!exit);
 }
 
@@ -129,7 +126,7 @@ void PlayDivisionGame()
         string prompt = $"{dividend} / {divisor} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt);
+        exit = AnswerLoop(answer, prompt, 4);
     } while (!exit);
 }
 
@@ -138,7 +135,7 @@ void ShowScore()
     Console.WriteLine($"Score: {score}");
 }
 
-bool AnswerLoop(int answer, string prompt)
+bool AnswerLoop(int answer, string prompt, int game)
 {
     bool validEntry = false;
     bool exit = false;
@@ -155,15 +152,13 @@ bool AnswerLoop(int answer, string prompt)
                 if (userAnswer == answer)
                 {
                     Console.WriteLine("Right answer!");
-                    savedGames[k] = prompt + $"{userAnswer}: correct";
-                    k++;
+                    savedGames.Add(prompt + $"{userAnswer}:\tcorrect");
                     score += 1;
                 }
                 else
                 {
                     Console.WriteLine("Wrong answer");
-                    savedGames[k] = prompt + $"{userAnswer}: incorrect";
-                    k++;
+                    savedGames.Add(prompt + $"{userAnswer}:\tincorrect");
                 }
             }
             else
@@ -179,10 +174,13 @@ bool AnswerLoop(int answer, string prompt)
                         ShowScore();
                         break;
                     case "show saved games":
-                        ShowSavedGames();
+                        ShowSavedGames(game);
+                        break;
+                    case "list commands":
+                        Console.WriteLine("list commands: lists commands\nshow score: shows score\nshow saved games: lists saved games\nexit: quit to main menu");
                         break;
                     default:
-                        Console.WriteLine("Please enter number");
+                        Console.WriteLine("Please enter a number or command");
                         break;
                 }
             }
@@ -192,13 +190,36 @@ bool AnswerLoop(int answer, string prompt)
     return exit;
 }
 
-void ShowSavedGames()
-{   if (k == 0)
+void ShowSavedGames(int previousGame)
+{   if (!savedGames.Any())
     {
         Console.WriteLine("No saved games!");
     }
-    for (int i = 0; i < k; i++)
+    else
     {
-        Console.WriteLine(savedGames[i]);
+        foreach (string game in savedGames)
+        {
+            Console.WriteLine(game);
+        }
+    }
+    Console.WriteLine("Press any key to continue.");
+    Console.ReadLine();
+    switch (previousGame)
+    {
+        case 0:
+            MainMenu();
+            break;
+        case 1:
+            PlayAdditionGame();
+            break;
+        case 2:
+            PlaySubtractionGame();
+            break;
+        case 3:
+            PlayMultiplicationGame();
+            break;
+        case 4:
+            PlayDivisionGame();
+            break;
     }
 }
