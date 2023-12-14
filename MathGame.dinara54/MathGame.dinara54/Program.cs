@@ -1,7 +1,8 @@
 ﻿// Initializing variables
-List<string> savedGames = new List<string>();
-int maxNumber = 100;
+using System.Collections;
 
+List<string> savedGames = new List<string>();
+int difficulty = 0;
 Random generateRandom = new Random();
 
 int score = 0;
@@ -14,7 +15,22 @@ void MainMenu()
     int choice = 0;
     do
     {
-        Console.WriteLine("Choose game\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. show saved games");
+        Console.WriteLine("Choose game\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. show saved games\n6. change difficulty");
+        switch (difficulty)
+        {
+            case 0:
+                Console.WriteLine("Difficulty setting: Easy");
+                break;
+            case 1:
+                Console.WriteLine("Difficulty setting: Medium");
+                break;
+            case 2:
+                Console.WriteLine("Difficulty setting: Hard");
+                break;
+            case 3:
+                Console.WriteLine("Difficulty setting: Impossible");
+                break;
+        }
         string? readChoice = Console.ReadLine();
         if (readChoice != null)
         {
@@ -24,24 +40,22 @@ void MainMenu()
                 {
                     case 1:
                         PlayAdditionGame();
-                        MainMenu();
-                        break;
+                        continue;
                     case 2:
                         PlaySubtractionGame();
-                        MainMenu();
-                        break;
+                        continue;
                     case 3:
                         PlayMultiplicationGame();
-                        MainMenu();
-                        break;
+                        continue;
                     case 4:
                         PlayDivisionGame();
-                        MainMenu();
-                        break;
+                        continue;
                     case 5:
-                        ShowSavedGames(0);
-                        MainMenu();
-                        break;
+                        ShowSavedGames();
+                        continue;
+                    case 6:
+                        ChangeDifficulty();
+                        continue;
                 }
             }
             else
@@ -53,14 +67,14 @@ void MainMenu()
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Please enter a number or \"exit\"");
+                        Console.WriteLine("Please enter a number or \"exit\".");
                         break;
 
                 }
             }   
         }
 
-    } while ((choice < 1 && choice > 4) || !exit);
+    } while ((choice < 1 && choice > 6) || !exit);
 }
 
 void PlayAdditionGame()
@@ -68,13 +82,29 @@ void PlayAdditionGame()
     bool exit = false;
     do
     {
+        int maxNumber = -1;
+        switch (difficulty)
+        {
+            case 0:
+                maxNumber = 10;
+                break;
+            case 1:
+                maxNumber = 20;
+                break;
+            case 2:
+                maxNumber = 50;
+                break;
+            case 3:
+                maxNumber = 100;
+                break;
+        }
         int number1 = generateRandom.Next(0, maxNumber + 1);
         int number2 = generateRandom.Next(0, maxNumber + 1);
         int answer = number1 + number2;
         string prompt = $"{number1} + {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt, 1);
+        exit = AnswerLoop(answer, prompt);
     } while (!exit);
     
 }
@@ -83,14 +113,39 @@ void PlaySubtractionGame()
 {
     bool exit = false;
     do
-    {
+    {   
+        int maxNumber = -1;
+        bool notGreater = false;
+        switch (difficulty)
+        {
+            case 0:
+                maxNumber = 10;
+                notGreater = true;
+                break;
+            case 1:
+                maxNumber = 20;
+                notGreater = true; 
+                break;
+            case 2:
+                maxNumber = 50;
+                notGreater = false;
+                break;
+            case 3:
+                maxNumber = 100;
+                notGreater = false;
+                break;
+        }
         int number1 = generateRandom.Next(0, maxNumber + 1);
-        int number2 = generateRandom.Next(0, maxNumber + 1);
+        int number2 = -1;
+        if (notGreater)
+            number2 = generateRandom.Next(0, number1 + 1);
+        else
+            number2 = generateRandom.Next(0, maxNumber + 1);
         int answer = number1 - number2;
         string prompt = $"{number1} - {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt, 2);
+        exit = AnswerLoop(answer, prompt);
     } while (!exit);
 }
 
@@ -99,13 +154,29 @@ void PlayMultiplicationGame()
     bool exit = false;
     do
     {
+        int maxNumber = -1;
+        switch (difficulty)
+        {
+            case 0:
+                maxNumber = 5;
+                break;
+            case 1:
+                maxNumber = 10;
+                break;
+            case 2:
+                maxNumber = 25;
+                break;
+            case 3:
+                maxNumber = 50;
+                break;
+        }
         int number1 = generateRandom.Next(0, maxNumber + 1);
         int number2 = generateRandom.Next(0, maxNumber + 1);
         int answer = number1 * number2;
         string prompt = $"{number1} * {number2} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt, 3);
+        exit = AnswerLoop(answer, prompt);
     } while (!exit);
 }
 
@@ -114,7 +185,23 @@ void PlayDivisionGame()
     bool exit = false;
     do
     {
-        int dividend = generateRandom.Next(0, 100);
+        int maxNumber = -1;
+        switch (difficulty)
+        {
+            case 0:
+                maxNumber = 10;
+                break;
+            case 1:
+                maxNumber = 20;
+                break;
+            case 2:
+                maxNumber = 50;
+                break;
+            case 3:
+                maxNumber = 100;
+                break;
+        }
+        int dividend = generateRandom.Next(0, maxNumber);
         int divisor = dividend;
         do 
         {
@@ -126,7 +213,7 @@ void PlayDivisionGame()
         string prompt = $"{dividend} / {divisor} = ";
         Console.WriteLine(prompt + "?");
         
-        exit = AnswerLoop(answer, prompt, 4);
+        exit = AnswerLoop(answer, prompt);
     } while (!exit);
 }
 
@@ -135,7 +222,7 @@ void ShowScore()
     Console.WriteLine($"Score: {score}");
 }
 
-bool AnswerLoop(int answer, string prompt, int game)
+bool AnswerLoop(int answer, string prompt)
 {
     bool validEntry = false;
     bool exit = false;
@@ -157,7 +244,7 @@ bool AnswerLoop(int answer, string prompt, int game)
                 }
                 else
                 {
-                    Console.WriteLine("Wrong answer");
+                    Console.WriteLine("Wrong answer.");
                     savedGames.Add(prompt + $"{userAnswer}:\tincorrect");
                 }
             }
@@ -172,15 +259,19 @@ bool AnswerLoop(int answer, string prompt, int game)
                         break;
                     case "show score":
                         ShowScore();
+                        Console.WriteLine(prompt + "?");
                         break;
                     case "show saved games":
-                        ShowSavedGames(game);
+                        ShowSavedGames();
+                        Console.WriteLine(prompt + "?");
                         break;
-                    case "list commands":
-                        Console.WriteLine("list commands: lists commands\nshow score: shows score\nshow saved games: lists saved games\nexit: quit to main menu");
+                    case "help":
+                        Console.WriteLine("help: lists commands\nshow score: shows score\nshow saved games: lists saved games\nexit: quit to main menu");
+                        Console.WriteLine(prompt + "?");
                         break;
                     default:
-                        Console.WriteLine("Please enter a number or command");
+                        Console.WriteLine("Please enter a number or command.");
+                        Console.WriteLine(prompt + "?");
                         break;
                 }
             }
@@ -190,8 +281,9 @@ bool AnswerLoop(int answer, string prompt, int game)
     return exit;
 }
 
-void ShowSavedGames(int previousGame)
-{   if (!savedGames.Any())
+void ShowSavedGames()
+{   
+    if (!savedGames.Any())
     {
         Console.WriteLine("No saved games!");
     }
@@ -204,22 +296,32 @@ void ShowSavedGames(int previousGame)
     }
     Console.WriteLine("Press any key to continue.");
     Console.ReadLine();
-    switch (previousGame)
+}
+
+void ChangeDifficulty()
+{   
+    bool validEntry = false;
+    do
     {
-        case 0:
-            MainMenu();
-            break;
-        case 1:
-            PlayAdditionGame();
-            break;
-        case 2:
-            PlaySubtractionGame();
-            break;
-        case 3:
-            PlayMultiplicationGame();
-            break;
-        case 4:
-            PlayDivisionGame();
-            break;
-    }
+        Console.WriteLine("Choose difficulty:\n0. Easy\n1. Medium\n2. Hard\n3. Impossible");
+        string? readResult = Console.ReadLine();
+        if (readResult != null)
+        {
+            if (int.TryParse(readResult, out int difficultyInput))
+            {
+                if (difficultyInput >= 0 && difficultyInput <= 3)
+                {
+                    difficulty = difficultyInput;
+                    validEntry = true;
+                }
+                else
+                {
+                    Console.WriteLine("Please input a number.");
+                }
+            }
+
+        }
+        
+    } while (!validEntry);
+    
 }
