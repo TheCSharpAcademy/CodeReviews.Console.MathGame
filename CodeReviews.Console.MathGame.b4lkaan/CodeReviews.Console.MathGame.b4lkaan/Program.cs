@@ -1,13 +1,8 @@
-﻿using System.Diagnostics.Metrics;
-using static System.Formats.Asn1.AsnWriter;
-
-Random rand = new();
+﻿Random rand = new();
 List<string> playedGames = [];
 bool exitGame = false;
 int gameRounds = 0;
 int globalScore = 0;
-
-
 
 //GameLoop
 Greeting();
@@ -15,10 +10,6 @@ while (exitGame == false)
 {
     Menu();
 }
-
-
-
-
 
 // -------------------- METHODS -------------------------------
 void Greeting()
@@ -53,6 +44,7 @@ void Menu()
                     exitGame = true;
                 }
                 break;
+
             case "s":
                 gameRounds = SetNumberOfRounds();
                 Substraction(gameRounds);
@@ -67,6 +59,7 @@ void Menu()
                     exitGame = true;
                 }
                 break;
+
             case "m":
                 gameRounds = SetNumberOfRounds();
                 Multiplication(gameRounds);
@@ -81,6 +74,7 @@ void Menu()
                     exitGame = true;
                 }
                 break;
+
             case "d":
                 gameRounds = SetNumberOfRounds();
                 Division(gameRounds);
@@ -95,6 +89,7 @@ void Menu()
                     exitGame = true;
                 }
                 break;
+
             case "p":
                 printPlayedGames();
                 Console.WriteLine("Would you like to play another game? (Y/N): ");
@@ -108,9 +103,11 @@ void Menu()
                     exitGame = true;
                 }
                 break;
+
             case "e":
                 exitGame = true;
                 break;
+
             default:
                 Console.WriteLine("Incorrect input. Please choose again.");
                 break;
@@ -118,7 +115,6 @@ void Menu()
         break;
     }
 }
-
 
 void Addition(int rounds)
 {
@@ -131,7 +127,7 @@ void Addition(int rounds)
     int score = 0;
     while (counter <= rounds)
     {
-        // Create variables 
+        // Create variables
         a = rand.Next(1, 11);
         b = rand.Next(1, 11);
         result = a + b;
@@ -142,7 +138,6 @@ void Addition(int rounds)
         //Get answer
         answerAsInt = GetAnswerAsInt();
 
-
         //Check the result
         if (result == answerAsInt)
         {
@@ -151,16 +146,12 @@ void Addition(int rounds)
         }
         else { Console.WriteLine("I'm sorry. You are wrong"); }
 
-
         counter++;
-
     }
     Console.WriteLine($"You answered {score} right out of {rounds}");
     globalScore += score;
 
     playedGames.Add($"Score: {score}/{gameRounds} Time: {DateTime.Now}");
-
-
 }
 
 void Substraction(int rounds)
@@ -175,7 +166,7 @@ void Substraction(int rounds)
 
     while (counter <= rounds)
     {
-        // Create variables 
+        // Create variables
         a = rand.Next(1, 11);
         b = rand.Next(1, 11);
         result = a - b;
@@ -186,7 +177,6 @@ void Substraction(int rounds)
         //Get answer
         answerAsInt = GetAnswerAsInt();
 
-
         //Check the result
         if (result == answerAsInt)
         {
@@ -195,7 +185,6 @@ void Substraction(int rounds)
         }
         else { Console.WriteLine("I'm sorry. You are wrong"); }
         counter++;
-
     }
     Console.WriteLine($"You answered {score} right out of {rounds}");
     globalScore += score;
@@ -214,7 +203,7 @@ void Multiplication(int rounds)
 
     while (counter <= rounds)
     {
-        // Create variables 
+        // Create variables
         a = rand.Next(1, 11);
         b = rand.Next(1, 11);
         result = a * b;
@@ -224,7 +213,6 @@ void Multiplication(int rounds)
 
         //Get answer
         answerAsInt = GetAnswerAsInt();
-
 
         //Check the result
         if (result == answerAsInt)
@@ -242,7 +230,7 @@ void Multiplication(int rounds)
 
 void Division(int rounds)
 {
-    // Create variables 
+    // Create variables
 
     int result = 0;
     int answerAsInt = 0;
