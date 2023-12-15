@@ -91,7 +91,7 @@ void Menu()
                 break;
 
             case "p":
-                printPlayedGames();
+                PrintPlayedGames();
                 Console.WriteLine("Would you like to play another game? (Y/N): ");
                 playAgain = Console.ReadLine()!.ToLower();
                 if (playAgain.Equals("y", StringComparison.OrdinalIgnoreCase))
@@ -297,7 +297,7 @@ int SetNumberOfRounds()
     return rounds;
 }
 
-void printPlayedGames()
+void PrintPlayedGames()
 {
     foreach (string game in playedGames)
     {
