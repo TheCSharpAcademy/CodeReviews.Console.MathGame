@@ -1,8 +1,10 @@
 ﻿// Initializing variables
 using System.Collections;
+using System.Globalization;
 
 List<string> savedGames = new List<string>();
 int difficulty = 0;
+int gameMode = -1;
 Random generateRandom = new Random();
 
 int score = 0;
@@ -15,7 +17,7 @@ void MainMenu()
     int choice = 0;
     do
     {
-        Console.WriteLine("Choose game\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. show saved games\n6. change difficulty");
+        Console.WriteLine("Choose game\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. random game\n6. show saved games\n7. change difficulty");
         switch (difficulty)
         {
             case 0:
@@ -39,22 +41,33 @@ void MainMenu()
                 switch (choice)
                 {
                     case 1:
-                        PlayAdditionGame();
+                        ChooseGameMode();
+                        PlayGame(choice);
                         continue;
                     case 2:
-                        PlaySubtractionGame();
+                        ChooseGameMode();
+                        PlayGame(choice);
                         continue;
                     case 3:
-                        PlayMultiplicationGame();
+                        ChooseGameMode();
+                        PlayGame(choice);
                         continue;
                     case 4:
-                        PlayDivisionGame();
+                        ChooseGameMode();
+                        PlayGame(choice);
                         continue;
                     case 5:
-                        ShowSavedGames();
+                        ChooseGameMode();
+                        PlayGame(choice);
                         continue;
                     case 6:
+                        ShowSavedGames();
+                        continue;
+                    case 7:
                         ChangeDifficulty();
+                        continue;
+                    default:
+                        Console.WriteLine("Please enter a number between 1 and 7");
                         continue;
                 }
             }
@@ -77,145 +90,61 @@ void MainMenu()
     } while ((choice < 1 && choice > 6) || !exit);
 }
 
-void PlayAdditionGame()
+void PlayGame(int gameType)
 {   
     bool exit = false;
-    do
+    if (gameMode == 0)
     {
-        int maxNumber = -1;
-        switch (difficulty)
+        do
         {
-            case 0:
-                maxNumber = 10;
-                break;
-            case 1:
-                maxNumber = 20;
-                break;
-            case 2:
-                maxNumber = 50;
-                break;
-            case 3:
-                maxNumber = 100;
-                break;
-        }
-        int number1 = generateRandom.Next(0, maxNumber + 1);
-        int number2 = generateRandom.Next(0, maxNumber + 1);
-        int answer = number1 + number2;
-        string prompt = $"{number1} + {number2} = ";
-        Console.WriteLine(prompt + "?");
-        
-        exit = AnswerLoop(answer, prompt);
-    } while (!exit);
-    
-}
-
-void PlaySubtractionGame()
-{
-    bool exit = false;
-    do
-    {   
-        int maxNumber = -1;
-        bool notGreater = false;
-        switch (difficulty)
-        {
-            case 0:
-                maxNumber = 10;
-                notGreater = true;
-                break;
-            case 1:
-                maxNumber = 20;
-                notGreater = true; 
-                break;
-            case 2:
-                maxNumber = 50;
-                notGreater = false;
-                break;
-            case 3:
-                maxNumber = 100;
-                notGreater = false;
-                break;
-        }
-        int number1 = generateRandom.Next(0, maxNumber + 1);
-        int number2 = -1;
-        if (notGreater)
-            number2 = generateRandom.Next(0, number1 + 1);
-        else
-            number2 = generateRandom.Next(0, maxNumber + 1);
-        int answer = number1 - number2;
-        string prompt = $"{number1} - {number2} = ";
-        Console.WriteLine(prompt + "?");
-        
-        exit = AnswerLoop(answer, prompt);
-    } while (!exit);
-}
-
-void PlayMultiplicationGame()
-{
-    bool exit = false;
-    do
+            switch(gameType)
+            {
+                case 1:
+                    exit = GenerateAdditionGame();
+                    break;
+                case 2:
+                    exit = GenerateSubtractionGame();
+                    break;
+                case 3:
+                    exit = GenerateMultiplicationGame();
+                    break;
+                case 4:
+                    exit = GenerateDivisionGame();
+                    break;
+                case 5:
+                    exit = GenerateRandomGame();
+                    break;
+            }
+            
+        } while (!exit);
+    }
+    else
     {
-        int maxNumber = -1;
-        switch (difficulty)
+        for (int i = 0; i < gameMode; i++)
         {
-            case 0:
-                maxNumber = 5;
-                break;
-            case 1:
-                maxNumber = 10;
-                break;
-            case 2:
-                maxNumber = 25;
-                break;
-            case 3:
-                maxNumber = 50;
-                break;
+            switch(gameType)
+            {
+                case 1:
+                    exit = GenerateAdditionGame();
+                    break;
+                case 2:
+                    exit = GenerateSubtractionGame();
+                    break;
+                case 3:
+                    exit = GenerateMultiplicationGame();
+                    break;
+                case 4:
+                    exit = GenerateDivisionGame();
+                    break;
+                case 5:
+                    exit = GenerateRandomGame();
+                    break;
+            }
         }
-        int number1 = generateRandom.Next(0, maxNumber + 1);
-        int number2 = generateRandom.Next(0, maxNumber + 1);
-        int answer = number1 * number2;
-        string prompt = $"{number1} * {number2} = ";
-        Console.WriteLine(prompt + "?");
-        
-        exit = AnswerLoop(answer, prompt);
-    } while (!exit);
+    }
 }
 
-void PlayDivisionGame()
-{
-    bool exit = false;
-    do
-    {
-        int maxNumber = -1;
-        switch (difficulty)
-        {
-            case 0:
-                maxNumber = 10;
-                break;
-            case 1:
-                maxNumber = 20;
-                break;
-            case 2:
-                maxNumber = 50;
-                break;
-            case 3:
-                maxNumber = 100;
-                break;
-        }
-        int dividend = generateRandom.Next(0, maxNumber);
-        int divisor = dividend;
-        do 
-        {
-            divisor = generateRandom.Next(1, dividend + 1);
-        }
-        while (dividend % divisor != 0);
 
-        int answer = dividend / divisor;
-        string prompt = $"{dividend} / {divisor} = ";
-        Console.WriteLine(prompt + "?");
-        
-        exit = AnswerLoop(answer, prompt);
-    } while (!exit);
-}
 
 void ShowScore()
 {
@@ -324,4 +253,221 @@ void ChangeDifficulty()
         
     } while (!validEntry);
     
+}
+
+void ChooseGameMode()
+{
+    bool validEntry = false;
+    int gameModeInput = -1;
+    do
+    {
+        Console.WriteLine("Choose game mode:\n0. Infinite\n1. Finite");
+        string? readResult = Console.ReadLine();
+        if (readResult != null)
+        {
+            if (int.TryParse(readResult, out gameModeInput))
+            {
+                if (gameModeInput >= 0 && gameModeInput <= 1)
+                {
+                    validEntry = true;
+                }
+                else
+                {
+                    Console.WriteLine("Please input either 0 or 1.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please input a number.");
+            }
+
+        }
+        
+    } while (!validEntry);
+
+    validEntry = false;
+
+    if (gameModeInput == 1)
+    {
+        do
+        {
+            Console.WriteLine("Please enter the number of questions");
+            string? readResult = Console.ReadLine();
+            if (readResult != null)
+            {
+                if (int.TryParse(readResult, out gameModeInput))
+                {
+                    if (gameModeInput > 0)
+                    {
+                        gameMode = gameModeInput;
+                        validEntry = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please input a number greater than zero.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please input a number");
+                }
+
+            }
+        
+        } while (!validEntry);
+    }
+    else
+    {
+        gameMode = 0;
+    }
+}
+
+bool GenerateAdditionGame()
+{
+    int maxNumber = -1;
+    switch (difficulty)
+    {
+        case 0:
+            maxNumber = 10;
+            break;
+        case 1:
+            maxNumber = 20;
+            break;
+        case 2:
+            maxNumber = 50;
+            break;
+        case 3:
+            maxNumber = 100;
+            break;
+    }
+    int number1 = generateRandom.Next(0, maxNumber + 1);
+    int number2 = generateRandom.Next(0, maxNumber + 1);
+    int answer = number1 + number2;
+    string prompt = $"{number1} + {number2} = ";
+    Console.WriteLine(prompt + "?");
+    bool exit = AnswerLoop(answer, prompt);
+    return exit;
+}
+
+bool GenerateSubtractionGame()
+{
+    int maxNumber = -1;
+    bool notGreater = false;
+    switch (difficulty)
+    {
+        case 0:
+            maxNumber = 10;
+            notGreater = true;
+            break;
+        case 1:
+            maxNumber = 20;
+            notGreater = true; 
+            break;
+        case 2:
+            maxNumber = 50;
+            notGreater = false;
+            break;
+        case 3:
+            maxNumber = 100;
+            notGreater = false;
+            break;
+    }
+    int number1 = generateRandom.Next(0, maxNumber + 1);
+    int number2 = -1;
+    if (notGreater)
+        number2 = generateRandom.Next(0, number1 + 1);
+    else
+        number2 = generateRandom.Next(0, maxNumber + 1);
+    int answer = number1 - number2;
+    string prompt = $"{number1} - {number2} = ";
+    Console.WriteLine(prompt + "?");
+    
+    bool exit = AnswerLoop(answer, prompt);
+    return exit;
+
+}
+
+bool GenerateMultiplicationGame()
+{
+    int maxNumber = -1;
+    switch (difficulty)
+    {
+        case 0:
+            maxNumber = 5;
+            break;
+        case 1:
+            maxNumber = 10;
+            break;
+        case 2:
+            maxNumber = 25;
+            break;
+        case 3:
+            maxNumber = 50;
+            break;
+    }
+    int number1 = generateRandom.Next(0, maxNumber + 1);
+    int number2 = generateRandom.Next(0, maxNumber + 1);
+    int answer = number1 * number2;
+    string prompt = $"{number1} * {number2} = ";
+    Console.WriteLine(prompt + "?");
+    
+    bool exit = AnswerLoop(answer, prompt);
+    return exit;
+}
+
+bool GenerateDivisionGame()
+{
+    int maxNumber = -1;
+    switch (difficulty)
+    {
+        case 0:
+            maxNumber = 10;
+            break;
+        case 1:
+            maxNumber = 20;
+            break;
+        case 2:
+            maxNumber = 50;
+            break;
+        case 3:
+            maxNumber = 100;
+            break;
+    }
+    int dividend = generateRandom.Next(0, maxNumber);
+    int divisor = dividend;
+    do 
+    {
+        divisor = generateRandom.Next(1, dividend + 1);
+    }
+    while (dividend % divisor != 0);
+
+    int answer = dividend / divisor;
+    string prompt = $"{dividend} / {divisor} = ";
+    Console.WriteLine(prompt + "?");
+    
+    bool exit = AnswerLoop(answer, prompt);
+    return exit;
+}
+
+bool GenerateRandomGame()
+{
+    bool exit = false;
+    int nextGameType = generateRandom.Next(1, 5);
+    switch(nextGameType)
+    {
+        case 1:
+            exit = GenerateAdditionGame();
+            return exit;
+        case 2:
+            exit = GenerateSubtractionGame();
+            return exit;
+        case 3:
+            exit = GenerateMultiplicationGame();
+            return exit;
+        case 4:
+            exit = GenerateDivisionGame();
+            return exit;
+        default:
+            throw new ArgumentOutOfRangeException("Generated a number less than 1 or greater than 4");
+    }
 }
