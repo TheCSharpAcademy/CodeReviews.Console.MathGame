@@ -1,9 +1,9 @@
 ﻿namespace MathGame.ltc870
 {
-    internal class Helpers
+    internal static class Helpers
     {
         //@ Get operands method
-        public int[] GetOperands(char difficultyLevel, char gameType)
+        public static int[] GetOperands(char difficultyLevel, char gameType)
         {
             int topRange = 0;
 
@@ -39,7 +39,7 @@
         }
 
         //@ Get difficulty level methods
-        public char GetDifficultyLevel()
+        public static char GetDifficultyLevel()
         {
             Console.WriteLine(@"Choose your difficulty level:
         E - Easy
@@ -59,9 +59,9 @@
         }
 
         //@ Get game history method
-        public List<string> gameHistory = new List<string>();
+        public static List<string> gameHistory = new List<string>();
 
-        public void ViewScoreHistory()
+        public static void ViewScoreHistory()
         {
             foreach (string score in gameHistory)
             {
@@ -72,7 +72,7 @@
         }
 
         //@ Validate name method
-        public string ValidateName()
+        public static string ValidateName()
         {
             string name;
             bool isInputValid;
@@ -91,7 +91,7 @@
         }
 
         //@ Validate menu input method
-        public char ValidateMenuInput()
+        public static char ValidateMenuInput()
         {
             char userInput;
             bool isInputValid;
@@ -113,7 +113,7 @@
         }
 
         //@ Validate number to play method
-        public int ValidateNumToPlay()
+        public static int ValidateNumToPlay()
         {
             int numToPlay;
             bool isInputValid;
@@ -142,7 +142,7 @@
         }
 
         //@ Validate answer input method
-        public int ValidateAnswerInput()
+        public static int ValidateAnswerInput()
         {
             int answer;
             bool isInputValid;

@@ -5,9 +5,9 @@
         static void Main(string[] args)
         {
 
-            Helpers helpers = new Helpers();
+
             Console.WriteLine("What is your name?");
-            string name = helpers.ValidateName();
+            string name = Helpers.ValidateName();
             DateTime date = DateTime.Now;
             char userOption;
             bool gameIsOn = true;
@@ -27,7 +27,7 @@
       V - View Score History
       Q - Quit");
 
-                userOption = helpers.ValidateMenuInput();
+                userOption = Helpers.ValidateMenuInput();
                 Console.Clear();
 
                 switch (char.ToLower(userOption))
@@ -48,7 +48,7 @@
                         PlayGame('r', true);
                         break;
                     case 'v':
-                        helpers.ViewScoreHistory();
+                        Helpers.ViewScoreHistory();
                         break;
                     case 'q':
                         Console.WriteLine("Thanks for playing! Goodbye!");
@@ -70,9 +70,9 @@
 
                 Console.WriteLine("How many times would you like to play?");
 
-                int numTimes = helpers.ValidateNumToPlay();
+                int numTimes = Helpers.ValidateNumToPlay();
 
-                char difficultyLevel = helpers.GetDifficultyLevel();
+                char difficultyLevel = Helpers.GetDifficultyLevel();
 
                 var startTime = DateTime.Now;
 
@@ -101,12 +101,12 @@
                         'd' => (x, y) => x / y,
                     };
 
-                    var operands = helpers.GetOperands(difficultyLevel, gameType);
+                    var operands = Helpers.GetOperands(difficultyLevel, gameType);
                     int firstNumber = operands[0];
                     int secondNumber = operands[1];
 
                     Console.WriteLine($"{firstNumber} {sign} {secondNumber}");
-                    int answer = helpers.ValidateAnswerInput();
+                    int answer = Helpers.ValidateAnswerInput();
 
                     if (answer == operation(firstNumber, secondNumber))
                     {
@@ -124,7 +124,7 @@
 
                 Console.WriteLine($"You got {score} out of {numTimes} correct in {totalTime.TotalSeconds} seconds!");
 
-                helpers.gameHistory.Add($"{gameType} - {score} out of {numTimes} correct in {totalTime.TotalSeconds} seconds!");
+                Helpers.gameHistory.Add($"{gameType} - {score} out of {numTimes} correct in {totalTime.TotalSeconds} seconds!");
             }
         }
     }
