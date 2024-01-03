@@ -7,6 +7,10 @@ internal class GameEngine
         Console.Clear();
         Console.WriteLine($"{type} game");
 
+        GameDifficulty difficulty = Helpers.SelectDifficulty();
+        Console.WriteLine();
+        Console.WriteLine($"Difficulty = {difficulty}");
+
         var random = new Random();
         var score = 0;
 
@@ -16,14 +20,14 @@ internal class GameEngine
 
             if (type == GameType.Division)
             {
-                var numbers = Helpers.GetValidDivisionNumbers();
+                var numbers = Helpers.GetValidDivisionNumbers(difficulty);
                 firstNumber = numbers[0];
                 secondNumber = numbers[1];
             }
             else
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                firstNumber = random.Next(1, (int)difficulty);
+                secondNumber = random.Next(1, (int)difficulty);
             }
 
             DisplayEquation(type, firstNumber, secondNumber);
@@ -47,7 +51,7 @@ internal class GameEngine
             }
         }
 
-        Helpers.AddToGames(type, score);
+        Helpers.AddToGames(type, score, difficulty);
     }
 
     private static void DisplayEquation(GameType type, int firstNumber, int secondNumber)
