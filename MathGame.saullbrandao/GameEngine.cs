@@ -12,6 +12,7 @@ internal class GameEngine
         Console.WriteLine($"Difficulty = {difficulty}");
 
         var random = new Random();
+        var startTime = DateTime.Now;
         var score = 0;
 
         for (int i = 0; i < 5; i++)
@@ -50,8 +51,10 @@ internal class GameEngine
                 Console.WriteLine($"Game Over. Your final score is {score}");
             }
         }
+        var endTime = DateTime.Now;
+        var timeSpan = endTime - startTime;
 
-        Helpers.AddToGames(type, score, difficulty);
+        Helpers.AddToGames(type, score, difficulty, timeSpan);
     }
 
     private static void DisplayEquation(GameType type, int firstNumber, int secondNumber)

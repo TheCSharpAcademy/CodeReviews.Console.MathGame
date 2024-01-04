@@ -4,9 +4,9 @@ internal class Helpers
 {
     internal static List<Game> games = [];
 
-    internal static void AddToGames(GameType type, int gameScore, GameDifficulty difficulty)
+    internal static void AddToGames(GameType type, int gameScore, GameDifficulty difficulty, TimeSpan time)
     {
-        games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = type, Difficulty = difficulty });
+        games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = type, Difficulty = difficulty, Time = time });
     }
 
     internal static void PrintGames()
@@ -22,7 +22,7 @@ internal class Helpers
 
         foreach (var game in games)
         {
-            Console.WriteLine($"{game.Date} - {game.Type}: Score = {game.Score} Difficulty = {game.Difficulty}");
+            Console.WriteLine($"{game.Date} - {game.Type}: Score = {game.Score}, Difficulty = {game.Difficulty}, Time = {game.Time.Seconds} seconds");
         }
         Console.WriteLine("Press any key to return to menu");
         Console.ReadLine();
