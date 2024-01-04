@@ -4,9 +4,9 @@ internal class Helpers
 {
     internal static List<Game> games = [];
 
-    internal static void AddToGames(GameType type, int gameScore, GameDifficulty difficulty, TimeSpan time)
+    internal static void AddToGames(GameType type, int gameScore, GameDifficulty difficulty, TimeSpan time, int totalQuestions)
     {
-        games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = type, Difficulty = difficulty, Time = time });
+        games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = type, Difficulty = difficulty, Time = time, TotalQuestions = totalQuestions });
     }
 
     internal static void PrintGames()
@@ -22,7 +22,7 @@ internal class Helpers
 
         foreach (var game in games)
         {
-            Console.WriteLine($"{game.Date} - {game.Type}: Score = {game.Score}, Difficulty = {game.Difficulty}, Time = {game.Time.Seconds} seconds");
+            Console.WriteLine($"{game.Date} - {game.Type}: Total Questions = {game.TotalQuestions}, Score = {game.Score}, Difficulty = {game.Difficulty}, Time = {game.Time.Seconds} seconds");
         }
         Console.WriteLine("Press any key to return to menu");
         Console.ReadLine();
@@ -44,15 +44,18 @@ internal class Helpers
         return [firstNumber, secondNumber];
     }
 
-    internal static string ValidateAnswer(string? answer)
+    internal static int GetValidAnswer()
     {
-        while (string.IsNullOrEmpty(answer) || !int.TryParse(answer, out _))
+        int validAnswer;
+        var answer = Console.ReadLine();
+
+        while (string.IsNullOrEmpty(answer) || !int.TryParse(answer, out validAnswer))
         {
             Console.WriteLine("Your answer needs to be an integer. Try again.");
             answer = Console.ReadLine();
         }
 
-        return answer;
+        return validAnswer;
     }
 
     internal static string GetName()

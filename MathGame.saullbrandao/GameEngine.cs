@@ -11,11 +11,14 @@ internal class GameEngine
         Console.WriteLine();
         Console.WriteLine($"Difficulty = {difficulty}");
 
+        Console.WriteLine("How many questions you want?");
+        var totalQuestions = Helpers.GetValidAnswer();
+
         var random = new Random();
         var startTime = DateTime.Now;
         var score = 0;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < totalQuestions; i++)
         {
             int firstNumber, secondNumber;
 
@@ -31,12 +34,11 @@ internal class GameEngine
                 secondNumber = random.Next(1, (int)difficulty);
             }
 
-            DisplayEquation(type, firstNumber, secondNumber);
+            DisplayEquation(type, i + 1, firstNumber, secondNumber);
 
-            var answer = Console.ReadLine();
-            answer = Helpers.ValidateAnswer(answer);
+            var answer = Helpers.GetValidAnswer();
 
-            if (int.Parse(answer) == GetCorrectAnswer(type, firstNumber, secondNumber))
+            if (answer == GetCorrectAnswer(type, firstNumber, secondNumber))
             {
                 Console.WriteLine("Your answer was correct!");
                 score++;
@@ -46,7 +48,7 @@ internal class GameEngine
                 Console.WriteLine("Your answer was incorrect.");
             }
 
-            if (i == 4)
+            if (i == totalQuestions - 1)
             {
                 Console.WriteLine($"Game Over. Your final score is {score}");
             }
@@ -54,13 +56,13 @@ internal class GameEngine
         var endTime = DateTime.Now;
         var timeSpan = endTime - startTime;
 
-        Helpers.AddToGames(type, score, difficulty, timeSpan);
+        Helpers.AddToGames(type, score, difficulty, timeSpan, totalQuestions);
     }
 
-    private static void DisplayEquation(GameType type, int firstNumber, int secondNumber)
+    private static void DisplayEquation(GameType type, int questionNumber, int firstNumber, int secondNumber)
     {
         string operatorSymbol = GetOperatorSymbol(type);
-        Console.WriteLine($"{firstNumber} {operatorSymbol} {secondNumber}");
+        Console.WriteLine($"Question {questionNumber}: {firstNumber} {operatorSymbol} {secondNumber}");
     }
 
     private static int GetCorrectAnswer(GameType type, int firstNumber, int secondNumber)
