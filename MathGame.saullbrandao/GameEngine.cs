@@ -7,7 +7,7 @@ internal class GameEngine
         Console.Clear();
         Console.WriteLine($"{type} game");
 
-        GameDifficulty difficulty = Helpers.SelectDifficulty();
+        GameDifficulty difficulty = Menu.SelectDifficulty();
         Console.WriteLine();
         Console.WriteLine($"Difficulty = {difficulty}");
 

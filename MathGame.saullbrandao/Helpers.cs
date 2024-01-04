@@ -71,31 +71,4 @@ internal class Helpers
 
         return name;
     }
-
-    internal static GameDifficulty SelectDifficulty()
-    {
-        do
-        {
-            Console.WriteLine();
-            Console.WriteLine(@$"Choose the game difficulty:
-1 - Easy
-2 - Normal
-3 - Hard");
-
-            var difficulty = Console.ReadLine();
-
-            switch (difficulty?.Trim())
-            {
-                case "1":
-                    return GameDifficulty.Easy;
-                case "2":
-                    return GameDifficulty.Normal;
-                case "3":
-                    return GameDifficulty.Hard;
-                default:
-                    Console.WriteLine("Invalid input. Try again.");
-                    break;
-            }
-        } while (true);
-    }
 }
