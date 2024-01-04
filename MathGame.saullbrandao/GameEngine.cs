@@ -20,9 +20,19 @@ internal class GameEngine
 
         for (int i = 0; i < totalQuestions; i++)
         {
+            GameType gameType;
+            if (type == GameType.Random)
+            {
+                gameType = (GameType)random.Next(0, 4);
+            }
+            else
+            {
+                gameType = type;
+            }
+
             int firstNumber, secondNumber;
 
-            if (type == GameType.Division)
+            if (gameType == GameType.Division)
             {
                 var numbers = Helpers.GetValidDivisionNumbers(difficulty);
                 firstNumber = numbers[0];
@@ -34,11 +44,11 @@ internal class GameEngine
                 secondNumber = random.Next(1, (int)difficulty);
             }
 
-            DisplayEquation(type, i + 1, firstNumber, secondNumber);
+            DisplayEquation(gameType, i + 1, firstNumber, secondNumber);
 
             var answer = Helpers.GetValidAnswer();
 
-            if (answer == GetCorrectAnswer(type, firstNumber, secondNumber))
+            if (answer == GetCorrectAnswer(gameType, firstNumber, secondNumber))
             {
                 Console.WriteLine("Your answer was correct!");
                 score++;

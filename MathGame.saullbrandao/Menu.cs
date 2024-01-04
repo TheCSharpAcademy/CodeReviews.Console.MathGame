@@ -14,6 +14,7 @@ A - Addition
 S - Subtraction
 M - Multiplication
 D - Division
+R - Random
 V - View Games History
 Q - Quit");
 
@@ -32,6 +33,9 @@ Q - Quit");
                     break;
                 case "d":
                     GameEngine.StartGame(GameType.Division);
+                    break;
+                case "r":
+                    GameEngine.StartGame(GameType.Random);
                     break;
                 case "v":
                     Helpers.PrintGames();
