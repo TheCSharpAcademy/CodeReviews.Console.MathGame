@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace MathGame.frockett
 {
@@ -6,24 +8,11 @@ namespace MathGame.frockett
     {
         static void Main(string[] args)
         {
-            /* 
-             * 4. Record previous games (from same session) in a list and have an option in menu to visualize history of previous games
-             * 
-             * Challenge:
+            /* Challenge:
              * 1. Levels of difficulty
              * 2. Add a timer to track how long the user takes to finish the game
              * 3. Let user pick number of questions
              * 4. 'Random game' function where player gets random operations
-             */
-
-            /* - variables for input
-             * - declare list to store game history
-             * 
-             * do (menu) while (input is not exit)
-             * 
-             * switch statement for game logic
-             * write each operation as an external method
-             * 
              */
 
             DateTime date = DateTime.UtcNow;
@@ -147,7 +136,7 @@ namespace MathGame.frockett
                 Console.WriteLine($"Your final score is {score}");
                 Console.ReadLine();
 
-                gameHistory.Add($"{DateTime.Now} - {gameTitle[index]}: Score = {score}");
+                AddToHistory(score, gameTitle[index]);
             }
 
             int PerformCalculation(char operation, int firstNum, int secondNum)
@@ -170,6 +159,8 @@ namespace MathGame.frockett
             void PrintHistory()
             {
                 Console.Clear();
+                Console.WriteLine("Session History");
+                Console.WriteLine("---------------");
                 foreach (string game in gameHistory)
                 {
                     Console.WriteLine(game);
@@ -177,6 +168,14 @@ namespace MathGame.frockett
                 Console.WriteLine("\nPress any key to return to main menu");
                 Console.ReadLine();
             }
+
+
+            void AddToHistory(int score, string gameType)
+            {
+                gameHistory.Add($"{DateTime.Now} - {gameType}: {score} points");
+            }
         }
+
+
     }
 }
