@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathGame.frockett.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,11 @@ internal class GameEngine
         int firstNum;
         int secondNum;
         
-        string? difficultySelect;
-        int upperBound;
+        //string? difficultySelect;
+        //int upperBound;
+        Level currentDiff = new Level();
 
-        upperBound = AuxFunctions.ProcessDifficulty();
+        currentDiff = AuxFunctions.ProcessDifficulty();
 
 
         Console.Clear();
@@ -32,15 +34,12 @@ internal class GameEngine
         {
             index = Array.IndexOf(operations, operation);
             Console.WriteLine($"{gameTitle[index]} Game\n");
+            Console.WriteLine($"Current Difficulty: {currentDiff.difficulty.ToString()}");
         }
         else
         {
             throw new ArgumentException("Unexpected operator char: " + operation);
         }
-
-
-        //Console.Clear();
-        //Console.WriteLine($"{gameTitle[index]} Game\n");
 
         for (int i = 0; i < 5; i++)
         {
@@ -48,14 +47,14 @@ internal class GameEngine
             {
                 do // This do while loop ensures that division operations only result in integers while keeping game logic modular
                 {
-                    firstNum = random.Next(1, 10);
-                    secondNum = random.Next(1, 10);
+                    firstNum = random.Next(1, currentDiff.maximum);
+                    secondNum = random.Next(1, currentDiff.maximum);
                 } while (firstNum % secondNum != 0);
             }
             else
             {
-                firstNum = random.Next(1, 10);
-                secondNum = random.Next(1, 10);
+                firstNum = random.Next(1, currentDiff.maximum);
+                secondNum = random.Next(1, currentDiff.maximum);
             }
 
             Console.WriteLine($"\n{firstNum} {operation} {secondNum}");

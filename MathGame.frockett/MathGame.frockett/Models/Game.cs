@@ -21,13 +21,13 @@ internal class Game
     public string Type { get; set; }
     public Difficulty Difficulty { get; set; }
 }
-/*
-internal struct level
+
+internal struct Level
 {
-    public int multiplier { get; set; }
+    public int maximum { get; set; }
     public Difficulty difficulty { get; set; }
 }
-*/
+
 internal enum Difficulty
 {
     Easy,

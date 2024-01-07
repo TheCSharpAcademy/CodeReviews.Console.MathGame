@@ -10,6 +10,7 @@ namespace MathGame.frockett;
 internal class AuxFunctions
 {
     static List<Game> gameHistory = new();
+    //Level difficultyLevel = new Level();
 
     internal static void PrintHistory()
     {
@@ -34,8 +35,9 @@ internal class AuxFunctions
         });
     }
 
-    internal static int ProcessDifficulty()
+    internal static Level ProcessDifficulty()
     {
+        Level level = new Level();
         string? input;
 
         Console.WriteLine("\nSelect Difficulty:");
@@ -51,23 +53,30 @@ internal class AuxFunctions
             Console.WriteLine("Please input a valid numbered choice");
             input = Console.ReadLine();
         }
-        return int.Parse(input);
         
-        /*
         switch (input)
         {
             case "1":
-                break;
+                level.maximum = 10;
+                level.difficulty = Difficulty.Easy;
+                return level;
             case "2":
-                break;
+                level.maximum = 25;
+                level.difficulty = Difficulty.Medium;
+                return level;
             case "3":
-                break;
+                level.maximum = 100;
+                level.difficulty = Difficulty.Hard;
+                return level;
             case "4":
-                break;
+                level.maximum = 1000;
+                level.difficulty = Difficulty.Insane;
+                return level;
             default:
-                break;
+                Console.WriteLine("You must input a number between 1 and 4");
+                throw new ArgumentException("Invalid input");
 
         }
-        */
+        
     }
 }
