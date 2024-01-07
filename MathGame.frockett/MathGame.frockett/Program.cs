@@ -27,9 +27,11 @@ namespace MathGame.frockett
              */
 
             DateTime date = DateTime.UtcNow;
+            List<string> gameHistory = new List<string>();
             char[] operations = { '+', '-', '*', '/' };
             string[] gameTitle = { "Addition", "Subtraction", "Multiplication", "Division" };
             bool isGameOn = true;
+
 
             Menu(date);
 
@@ -74,8 +76,10 @@ namespace MathGame.frockett
                             MainGameLoop('/');
                             break;
                         case "5":
+                            PrintHistory();
                             break;
                         case "exit":
+                            Console.WriteLine("\nGoodbye");
                             isGameOn = false;
                             break;
                         default:
@@ -142,6 +146,8 @@ namespace MathGame.frockett
                 }
                 Console.WriteLine($"Your final score is {score}");
                 Console.ReadLine();
+
+                gameHistory.Add($"{DateTime.Now} - {gameTitle[index]}: Score = {score}");
             }
 
             int PerformCalculation(char operation, int firstNum, int secondNum)
@@ -163,7 +169,13 @@ namespace MathGame.frockett
 
             void PrintHistory()
             {
-                return;
+                Console.Clear();
+                foreach (string game in gameHistory)
+                {
+                    Console.WriteLine(game);
+                }
+                Console.WriteLine("\nPress any key to return to main menu");
+                Console.ReadLine();
             }
         }
     }
