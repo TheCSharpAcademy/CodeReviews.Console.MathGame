@@ -22,19 +22,17 @@ internal class GameEngine
         int firstNum;
         int secondNum;
         
-        //string? difficultySelect;
-        //int upperBound;
-        Level currentDiff = new Level();
+        Level currentDifficulty = new Level();
 
-        currentDiff = AuxFunctions.ProcessDifficulty();
-
+        currentDifficulty = AuxFunctions.ProcessDifficulty();
 
         Console.Clear();
+
         if (operations.Contains(operation))
         {
             index = Array.IndexOf(operations, operation);
             Console.WriteLine($"{gameTitle[index]} Game\n");
-            Console.WriteLine($"Current Difficulty: {currentDiff.difficulty.ToString()}");
+            Console.WriteLine($"Current Difficulty: {currentDifficulty.difficulty.ToString()}");
         }
         else
         {
@@ -47,14 +45,14 @@ internal class GameEngine
             {
                 do // This do while loop ensures that division operations only result in integers while keeping game logic modular
                 {
-                    firstNum = random.Next(1, currentDiff.maximum);
-                    secondNum = random.Next(1, currentDiff.maximum);
+                    firstNum = random.Next(1, currentDifficulty.maximum);
+                    secondNum = random.Next(1, currentDifficulty.maximum);
                 } while (firstNum % secondNum != 0);
             }
             else
             {
-                firstNum = random.Next(1, currentDiff.maximum);
-                secondNum = random.Next(1, currentDiff.maximum);
+                firstNum = random.Next(1, currentDifficulty.maximum);
+                secondNum = random.Next(1, currentDifficulty.maximum);
             }
 
             Console.WriteLine($"\n{firstNum} {operation} {secondNum}");
@@ -77,7 +75,7 @@ internal class GameEngine
         Console.WriteLine($"Your final score is {score}");
         Console.ReadLine();
 
-        AuxFunctions.AddToHistory(score, gameTitle[index]);
+        AuxFunctions.AddToHistory(score, gameTitle[index], currentDifficulty.difficulty);
     }
 
     internal int PerformCalculation(char operation, int firstNum, int secondNum)

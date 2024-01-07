@@ -19,19 +19,20 @@ internal class AuxFunctions
         Console.WriteLine("---------------");
         foreach (Game game in gameHistory)
         {
-            Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} points");
+            Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score} points");
         }
         Console.WriteLine("\nPress any key to return to main menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int score, string gameType)
+    internal static void AddToHistory(int score, string gameType, Difficulty difficulty)
     {
         gameHistory.Add(new Game
         {
             Date = DateTime.Now,
             Score = score,
             Type = gameType,
+            Difficulty = difficulty,
         });
     }
 
