@@ -1,9 +1,5 @@
 ﻿using MathGame.frockett.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MathGame.frockett;
 
@@ -11,6 +7,7 @@ internal class GameEngine
 {
     char[] operations = { '+', '-', '*', '/' };
     string[] gameTitle = { "Addition", "Subtraction", "Multiplication", "Division" };
+    Stopwatch stopwatch = new Stopwatch();
 
     internal void MainGameLoop(char operation, int difficulty = 1)
     {
@@ -22,17 +19,19 @@ internal class GameEngine
         int firstNum;
         int secondNum;
         
-        Level currentDifficulty = new Level();
+        Level currentDifficulty = new Level(); //declare instance of struct in game engine
 
-        currentDifficulty = AuxFunctions.ProcessDifficulty();
+        currentDifficulty = AuxFunctions.ProcessDifficulty(); // method gets user input about difficulty and assigns level of current game
 
         Console.Clear();
+
+        stopwatch.Start();
 
         if (operations.Contains(operation))
         {
             index = Array.IndexOf(operations, operation);
             Console.WriteLine($"{gameTitle[index]} Game\n");
-            Console.WriteLine($"Current Difficulty: {currentDifficulty.difficulty.ToString()}");
+            Console.WriteLine($"Current Difficulty: {currentDifficulty.Difficulty.ToString()}");
         }
         else
         {
@@ -43,22 +42,22 @@ internal class GameEngine
         {
             if (operation == '/')
             {
-                do // This do while loop ensures that division operations only result in integers while keeping game logic modular
+                do // This do while loop ensures that division operations only result in integers while keeping game logic modular (only one method for all operations)
                 {
-                    firstNum = random.Next(1, currentDifficulty.maximum);
-                    secondNum = random.Next(1, currentDifficulty.maximum);
+                    firstNum = random.Next(1, currentDifficulty.Maximum);
+                    secondNum = random.Next(1, currentDifficulty.Maximum);
                 } while (firstNum % secondNum != 0);
             }
             else
             {
-                firstNum = random.Next(1, currentDifficulty.maximum);
-                secondNum = random.Next(1, currentDifficulty.maximum);
+                firstNum = random.Next(1, currentDifficulty.Maximum);
+                secondNum = random.Next(1, currentDifficulty.Maximum);
             }
 
             Console.WriteLine($"\n{firstNum} {operation} {secondNum}");
             result = Console.ReadLine();
 
-            // This while loop remains in this method because it does not need to be repeated
+            // This while loop remains in this method because it does not need to be repeated, unlike in the tutorial
             while (string.IsNullOrEmpty(result) || !int.TryParse(result, out _)) 
             {
                 Console.WriteLine("Your answer must be an integer. Try again.");
@@ -73,9 +72,13 @@ internal class GameEngine
             else { Console.WriteLine("Your Answer is incorrect!\n"); }
         }
         Console.WriteLine($"Your final score is {score}");
+        stopwatch.Stop(); // Stop the stopwatch then use ReadLine to pause the app, allowing the player to view their score
         Console.ReadLine();
+        
+        var elapsedSeconds = stopwatch.Elapsed.TotalSeconds; // Elapsed.TotalSeconds returns a double. I declare and assign this var to store it before resetting the watch
+        stopwatch.Reset();
 
-        AuxFunctions.AddToHistory(score, gameTitle[index], currentDifficulty.difficulty);
+        AuxFunctions.AddToHistory(score, gameTitle[index], currentDifficulty.Difficulty, elapsedSeconds);
     }
 
     internal int PerformCalculation(char operation, int firstNum, int secondNum)

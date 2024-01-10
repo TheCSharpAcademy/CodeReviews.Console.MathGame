@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathGame.frockett.Models;
+﻿using MathGame.frockett.Models;
 
 namespace MathGame.frockett;
 
 internal class AuxFunctions
 {
     static List<Game> gameHistory = new();
-    //Level difficultyLevel = new Level();
 
     internal static void PrintHistory()
     {
@@ -19,13 +13,13 @@ internal class AuxFunctions
         Console.WriteLine("---------------");
         foreach (Game game in gameHistory)
         {
-            Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score} points");
+            Console.WriteLine($"{game.Date} - {game.Type} - {game.Difficulty}: {game.Score} points in {game.Time:F2} seconds");
         }
         Console.WriteLine("\nPress any key to return to main menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int score, string gameType, Difficulty difficulty)
+    internal static void AddToHistory(int score, string gameType, Difficulty difficulty, double time)
     {
         gameHistory.Add(new Game
         {
@@ -33,6 +27,7 @@ internal class AuxFunctions
             Score = score,
             Type = gameType,
             Difficulty = difficulty,
+            Time = time,
         });
     }
 
@@ -49,29 +44,31 @@ internal class AuxFunctions
         
         input = Console.ReadLine();
 
-        while(string.IsNullOrEmpty(input) || !int.TryParse(input, out _) || int.Parse(input) > 4)
+        // This while loop condition is really ugly, is there a better way to validate the input?
+        while(string.IsNullOrEmpty(input) || !int.TryParse(input, out _) || int.Parse(input) > 4 || int.Parse(input) < 1)
         {
             Console.WriteLine("Please input a valid numbered choice");
             input = Console.ReadLine();
         }
         
+        // Switch statement matches the selection with the level struct
         switch (input)
         {
             case "1":
-                level.maximum = 10;
-                level.difficulty = Difficulty.Easy;
+                level.Maximum = 10;
+                level.Difficulty = Difficulty.Easy;
                 return level;
             case "2":
-                level.maximum = 25;
-                level.difficulty = Difficulty.Medium;
+                level.Maximum = 25;
+                level.Difficulty = Difficulty.Medium;
                 return level;
             case "3":
-                level.maximum = 100;
-                level.difficulty = Difficulty.Hard;
+                level.Maximum = 100;
+                level.Difficulty = Difficulty.Hard;
                 return level;
             case "4":
-                level.maximum = 1000;
-                level.difficulty = Difficulty.Insane;
+                level.Maximum = 1000;
+                level.Difficulty = Difficulty.Insane;
                 return level;
             default:
                 Console.WriteLine("You must input a number between 1 and 4");
