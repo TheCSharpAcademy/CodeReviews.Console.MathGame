@@ -475,3 +475,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Rider git ignore.
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
