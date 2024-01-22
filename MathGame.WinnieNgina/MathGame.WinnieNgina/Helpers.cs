@@ -44,7 +44,7 @@ namespace MathGame.WinnieNgina
                 Date = DateTime.Now,
                 Score = gameScore,
                 Type = gameType,
-                Level =level
+                Level = level
 
             });
 
@@ -127,9 +127,9 @@ namespace MathGame.WinnieNgina
         {
             Console.WriteLine("Please enter your name");
             var name = Console.ReadLine();
-            while (string.IsNullOrEmpty (name))
+            while (string.IsNullOrEmpty(name))
             {
-                Console.WriteLine ("Name can't be empty");
+                Console.WriteLine("Name can't be empty");
                 name = Console.ReadLine();
             }
             return name;

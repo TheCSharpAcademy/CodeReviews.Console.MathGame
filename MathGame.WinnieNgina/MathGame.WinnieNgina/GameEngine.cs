@@ -38,7 +38,6 @@ namespace MathGame.WinnieNgina
         internal void MultiplicationGame(string message)
         {
             Console.WriteLine(message);
-            var random = new Random();
             var score = 0;
             string count = Helpers.GetQuestions();
             for (int i = 0; i < int.Parse(count); i++)
@@ -70,7 +69,6 @@ namespace MathGame.WinnieNgina
         internal void AdditionGame(string message)
         {
             Console.WriteLine(message);
-            var random = new Random();
             var score = 0;
             string count = Helpers.GetQuestions();
             for (int i = 0; i < int.Parse(count); i++)
@@ -97,12 +95,11 @@ namespace MathGame.WinnieNgina
             }
             Console.WriteLine($"Game over! Your score is {score}.Length Press any key to go back to the main menu.");
             Console.ReadLine();
-            
+
         }
         internal void SubtractionGame(string message)
         {
             Console.WriteLine(message);
-            var random = new Random();
             var score = 0;
             string count = Helpers.GetQuestions();
             for (int i = 0; i < int.Parse(count); i++)
@@ -129,7 +126,7 @@ namespace MathGame.WinnieNgina
             }
             Console.WriteLine($"Game over! Your score is {score}.Length Press any key to go back to the main menu.");
             Console.ReadLine();
-            
+
         }
 
         internal void RandomGame(string message)
@@ -137,7 +134,7 @@ namespace MathGame.WinnieNgina
             Console.WriteLine(message);
             var random = new Random();
             var game = random.Next(0, 4);
-            switch(game)
+            switch (game)
             {
                 case 0:
                     DivisionGame("We are planning division game now");
