@@ -157,7 +157,7 @@ namespace ShihabudheenSha.MathGame
                 GameType = gameType,
             });
         }
-        internal void showGameScore()
+        internal void ShowGameScore()
         {
             Console.Clear();
             Console.WriteLine("Your Score");
