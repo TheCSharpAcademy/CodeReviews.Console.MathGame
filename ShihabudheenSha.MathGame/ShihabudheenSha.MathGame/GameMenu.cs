@@ -47,7 +47,7 @@ Q - Quit
                         Environment.Exit(0);
                         break;
                     case "v":
-                        gameEngine.showGameScore();
+                        gameEngine.ShowGameScore();
                         break;
                     default:
                         Console.WriteLine("Invalid input. Press any key to continue");
