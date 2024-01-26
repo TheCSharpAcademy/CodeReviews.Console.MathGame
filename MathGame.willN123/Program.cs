@@ -322,7 +322,7 @@ void CalculateCorrectAnswer(string operation)
     }
 }
 
-double GetUserAnswer()
+void GetUserAnswer()
 {
     validInput = false;
 
@@ -338,11 +338,9 @@ double GetUserAnswer()
             Console.WriteLine("Invalid input. Please enter a number.");
         }
     } while (!validInput);
-
-    return answer;
 }
 
-string SetAnswerText()
+void SetAnswerText()
 {
     if (answer == calculationResult)
     {
@@ -352,8 +350,6 @@ string SetAnswerText()
     {
         outcomeText = "Incorrect!";
     }
-
-    return outcomeText;
 }
 
 void IncreaseScore()
