@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pugnetta.MathGame", "Pugnetta.MathGame\Pugnetta.MathGame.csproj", "{FD4E8382-EA5F-4006-B51A-CC6C9AEE13CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pugnetta.MathGame", "Pugnetta.MathGame\Pugnetta.MathGame.csproj", "{8FD0BBAF-0281-4A64-9C8F-621A12C65637}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FD4E8382-EA5F-4006-B51A-CC6C9AEE13CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD4E8382-EA5F-4006-B51A-CC6C9AEE13CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD4E8382-EA5F-4006-B51A-CC6C9AEE13CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD4E8382-EA5F-4006-B51A-CC6C9AEE13CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD0BBAF-0281-4A64-9C8F-621A12C65637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD0BBAF-0281-4A64-9C8F-621A12C65637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD0BBAF-0281-4A64-9C8F-621A12C65637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD0BBAF-0281-4A64-9C8F-621A12C65637}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5AC0318E-E1E2-4BD1-8733-C3EA63ED8F37}
+		SolutionGuid = {4475A423-2EC8-4F2B-A6AF-FF1FFE35BF90}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
-﻿namespace Pugnetta.MathGame.Game;
+﻿
+namespace Pugnetta.MathGame;
 
 public record Game
 {

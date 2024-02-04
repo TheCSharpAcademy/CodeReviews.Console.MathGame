@@ -1,5 +1,5 @@
 ﻿
-using Pugnetta.MathGame.Game;
+using Pugnetta.MathGame;
 
 var dict = new Dictionary<Game, Result>();
 var x = Enum.GetValues(typeof(Operation))
