@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pugnetta.MathGame.Game;
+﻿namespace Pugnetta.MathGame.Game;
 
 public record Game
 {
