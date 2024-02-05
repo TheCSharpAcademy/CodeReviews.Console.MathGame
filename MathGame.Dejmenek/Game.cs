@@ -13,8 +13,8 @@ namespace MathGame.Dejmenek
         public string FormattedTimeTaken {
             get => _TimeTaken.ToString(@"mm\:ss");
         }
-        public int Score = 0;
-        public int NumberOfQuestions = 0;
+        public int Score;
+        public int NumberOfQuestions;
 
         public Game() { }
 
