@@ -3,7 +3,7 @@
     internal class Menu
     {
         private readonly static GamesHistory gamesHistory = new();
-        public bool Exit { get; set; } = false;
+        public bool Exit = false;
         public MenuOptions Choice { get; set; }
 
         public Menu() { }

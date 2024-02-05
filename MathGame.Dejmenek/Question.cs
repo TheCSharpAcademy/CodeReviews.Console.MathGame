@@ -8,7 +8,7 @@
         private int _CorrectAnswer;
         private readonly Operations _Operation;
         private readonly DifficultyLevels _DifficultyLevel;
-        public string Title { get; set; } = "";
+        public string Title = "";
 
         public Question(Operations operation, DifficultyLevels difficulty) {
             _Operation = operation;
