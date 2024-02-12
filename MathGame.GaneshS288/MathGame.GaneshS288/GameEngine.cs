@@ -10,10 +10,10 @@ internal class GameEngine
 
     int firstNum;
     int secondNum;
-    int result = 0;
+    int result;
 
     List<string> gameRecords = new List<string>();
-    int recordCounter = 0;
+    int recordCounter;
 
     internal string PlayGame(string? userInput, int index)
     {

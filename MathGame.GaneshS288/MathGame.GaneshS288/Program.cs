@@ -4,8 +4,6 @@ Random random = new Random();
 Menu menu = new Menu();
 GameEngine gameEngine = new GameEngine();
 
-List<string> gameRecords = new List<string>();
-
 int index;
 string? userInput;
 bool isValidInput;
