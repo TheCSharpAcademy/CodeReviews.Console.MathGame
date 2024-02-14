@@ -30,13 +30,13 @@ Q - Quit");
                     GameEngine.AdditionGame("Addition game");
                     break;
                 case "S":
-                    Console.WriteLine("Subtraction game");
+                    GameEngine.SubtractionGame("Subtraction game");
                     break;
                 case "M":
-                    Console.WriteLine("Multiplication game");
+                    GameEngine.MultiplicationGame("Multiplication game");
                     break;
                 case "D":
-                    Console.WriteLine("Division Game");
+                    GameEngine.SubtractionGame("Division Game");
                     break;
                 case "Q":
                     Console.WriteLine("Thank you for playing!");
