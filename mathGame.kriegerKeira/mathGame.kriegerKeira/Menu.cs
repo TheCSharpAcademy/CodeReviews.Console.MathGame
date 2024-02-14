@@ -41,11 +41,12 @@ Q - Quit");
                     break;
                 case "Q":
                     Console.WriteLine("Thank you for playing!");
+                    Thread.Sleep(2000);
                     gameRunning = false;
                     break;
                 default:
                     Console.WriteLine("Invalid selection, press any key to try again!");
-                    Console.ReadKey();
+                    Thread.Sleep(2000);
                     break;
             }
         } while (gameRunning);

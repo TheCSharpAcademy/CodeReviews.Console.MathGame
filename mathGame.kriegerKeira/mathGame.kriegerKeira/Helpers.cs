@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace mathGame.kriegerKeira;
+﻿namespace mathGame.kriegerKeira;
 using Models;
 public static class Helpers
 {

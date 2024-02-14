@@ -21,20 +21,20 @@ public class GameEngine
 
             if (int.Parse(result) == firstNumber + secondNumber)
             {
-                Console.WriteLine("That is correct! Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is correct! Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
                 score++;
             }
             else
             {
-                Console.WriteLine("That is incorrect... Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is incorrect... Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
             }
             if(i != 4) continue;
-            Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
-            Console.ReadKey();
+            Console.WriteLine($"Game over! Your score was: {score}pts. Returning to main menu...");
+            Thread.Sleep(3000);
         }
         Helpers.AddToHistory(score, GameType.Addition);
     }
@@ -57,21 +57,21 @@ public class GameEngine
 
             if (int.Parse(result) == firstNumber - secondNumber)
             {
-                Console.WriteLine("That is correct! Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is correct! Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
                 score++;
             }
             else
             {
-                Console.WriteLine("That is incorrect... Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is incorrect... Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
             }
 
             if (i != 4) continue;
-            Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
-            Console.ReadKey();
+            Console.WriteLine($"Game over! Your score was: {score}pts. Returning to main menu...");
+            Thread.Sleep(3000);
         }
         Helpers.AddToHistory(score, GameType.Subtraction);
     }
@@ -94,21 +94,21 @@ public class GameEngine
 
             if (int.Parse(result) == firstNumber * secondNumber)
             {
-                Console.WriteLine("That is correct! Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is correct! Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
                 score++;
             }
             else
             {
-                Console.WriteLine("That is incorrect... Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is incorrect... Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
             }
 
             if (i != 4) continue;
-            Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
-            Console.ReadKey();
+            Console.WriteLine($"Game over! Your score was: {score}pts. Returning to main menu...");
+            Thread.Sleep(3000);
         }
         Helpers.AddToHistory(score, GameType.Multiplication);
     }
@@ -133,21 +133,21 @@ public class GameEngine
 
             if (int.Parse(result) == firstNumber / secondNumber)
             {
-                Console.WriteLine("That is correct! Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is correct! Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
                 score++;
             }
             else
             {
-                Console.WriteLine("That is incorrect... Press any key to continue.");
-                Console.ReadKey();
+                Console.WriteLine("That is incorrect... Moving to the next question.");
+                Thread.Sleep(2000);
                 Console.Clear();
             }
 
             if (i != 4) continue;
-            Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
-            Console.ReadKey();
+            Console.WriteLine($"Game over! Your score was: {score}pts. Returning to main menu...");
+            Thread.Sleep(3000);
         }
         Helpers.AddToHistory(score, GameType.Division);
     }
