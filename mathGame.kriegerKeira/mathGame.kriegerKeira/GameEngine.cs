@@ -1,4 +1,7 @@
-﻿public class GameEngine
+﻿using mathGame.kriegerKeira.Models;
+
+namespace mathGame.kriegerKeira;
+public class GameEngine
 {
     public static void AdditionGame(string message)
     {
@@ -33,7 +36,7 @@
             Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
             Console.ReadKey();
         }
-
+        Helpers.AddToHistory(score, GameType.Addition);
     }
 
     public static void SubtractionGame(string message)
@@ -70,6 +73,7 @@
             Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
             Console.ReadKey();
         }
+        Helpers.AddToHistory(score, GameType.Subtraction);
     }
 
     public static void MultiplicationGame(string message)
@@ -106,6 +110,7 @@
             Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
             Console.ReadKey();
         }
+        Helpers.AddToHistory(score, GameType.Multiplication);
     }
 
     public static void DivisionGame(string message)
@@ -144,5 +149,6 @@
             Console.WriteLine($"Game over! Your score was: {score}pts. Press any key to return to the main menu");
             Console.ReadKey();
         }
+        Helpers.AddToHistory(score, GameType.Division);
     }
 }

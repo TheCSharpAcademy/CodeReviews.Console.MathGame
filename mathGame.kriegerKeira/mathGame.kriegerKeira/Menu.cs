@@ -1,4 +1,5 @@
-﻿public class Menu
+﻿namespace mathGame.kriegerKeira;
+public class Menu
 {
     public void ShowMenu(string name, DateTime date)
     {
@@ -24,7 +25,7 @@ Q - Quit");
             switch (gameSelection)
             {
                 case "V":
-                    Console.WriteLine("View history");
+                    Helpers.PrintGames();
                     break;
                 case "A":
                     GameEngine.AdditionGame("Addition game");

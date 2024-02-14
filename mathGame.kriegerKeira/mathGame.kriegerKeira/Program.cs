@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Design;
+﻿using mathGame.kriegerKeira;
 
 var menu = new Menu();
 var name = Helpers.GetName();
