@@ -37,7 +37,7 @@ Q - Quit");
                     GameEngine.MultiplicationGame("Multiplication game");
                     break;
                 case "D":
-                    GameEngine.SubtractionGame("Division Game");
+                    GameEngine.DivisionGame("Division Game");
                     break;
                 case "Q":
                     Console.WriteLine("Thank you for playing!");
