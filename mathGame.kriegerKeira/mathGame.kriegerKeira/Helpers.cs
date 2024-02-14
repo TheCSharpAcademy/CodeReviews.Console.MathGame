@@ -4,7 +4,21 @@ namespace mathGame.kriegerKeira;
 using Models;
 public static class Helpers
 {
-    public static List<Game> Games = [];
+    public static List<Game> Games = [
+        new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
+        new Game { Date = DateTime.Now.AddDays(2), Type = GameType.Multiplication, Score = 4 },
+        new Game { Date = DateTime.Now.AddDays(3), Type = GameType.Division, Score = 4 },
+        new Game { Date = DateTime.Now.AddDays(4), Type = GameType.Subtraction, Score = 3 },
+        new Game { Date = DateTime.Now.AddDays(5), Type = GameType.Addition, Score = 1 },
+        new Game { Date = DateTime.Now.AddDays(6), Type = GameType.Multiplication, Score = 2 },
+        new Game { Date = DateTime.Now.AddDays(7), Type = GameType.Division, Score = 3 },
+        new Game { Date = DateTime.Now.AddDays(8), Type = GameType.Subtraction, Score = 4 },
+        new Game { Date = DateTime.Now.AddDays(9), Type = GameType.Addition, Score = 4 },
+        new Game { Date = DateTime.Now.AddDays(10), Type = GameType.Multiplication, Score = 1 },
+        new Game { Date = DateTime.Now.AddDays(11), Type = GameType.Subtraction, Score = 0 },
+        new Game { Date = DateTime.Now.AddDays(12), Type = GameType.Division, Score = 2 },
+        new Game { Date = DateTime.Now.AddDays(13), Type = GameType.Subtraction, Score = 5 },
+    ];
     public static string GetName()
     {
         Console.Write("Please enter your name: ");
@@ -81,35 +95,35 @@ Q - Quit to main menu");
                 case "E":
                     var allGameHistory = Games.OrderBy(g => g.Type).ThenByDescending(g => g.Score);
                     foreach (var game in allGameHistory)
-                    { Console.WriteLine(game); }
+                    { Console.WriteLine($"{game.Date} - {game.Type} - {game.Score}pts"); }
                     Console.WriteLine("Press any key to return to the history menu");
                     Console.ReadKey();
                     break;
                 case "A":
                     var additionGameHistory = Games.Where(g => g.Type == GameType.Addition).OrderByDescending(g => g.Score);
                     foreach (var game in additionGameHistory)
-                    { Console.WriteLine(game); }
+                    { Console.WriteLine($"{game.Date} - {game.Type} - {game.Score}pts"); }
                     Console.WriteLine("Press any key to return to the history menu");
                     Console.ReadKey();
                     break;
                 case "S":
                     var subtractionGameHistory = Games.Where(g => g.Type == GameType.Subtraction).OrderByDescending(g => g.Score);
                     foreach (var game in subtractionGameHistory)
-                    { Console.WriteLine(game); }
+                    { Console.WriteLine($"{game.Date} - {game.Type} - {game.Score}pts"); }
                     Console.WriteLine("Press any key to return to the history menu");
                     Console.ReadKey();
                     break;
                 case "M":
                     var multiplicationGameHistory = Games.Where(g => g.Type == GameType.Multiplication).OrderByDescending(g => g.Score);
                     foreach (var game in multiplicationGameHistory)
-                    { Console.WriteLine(game); }
+                    { Console.WriteLine($"{game.Date} - {game.Type} - {game.Score}pts"); }
                     Console.WriteLine("Press any key to return to the history menu");
                     Console.ReadKey();
                     break;
                 case "D":
                     var divisionGameHistory = Games.Where(g => g.Type == GameType.Division).OrderByDescending(g => g.Score);
                     foreach (var game in divisionGameHistory)
-                    { Console.WriteLine(game); }
+                    { Console.WriteLine($"{game.Date} - {game.Type} - {game.Score}pts"); }
                     Console.WriteLine("Press any key to return to the history menu");
                     Console.ReadKey();
                     break;
