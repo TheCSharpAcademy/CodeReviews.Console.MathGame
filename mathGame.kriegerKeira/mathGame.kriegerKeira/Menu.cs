@@ -27,7 +27,7 @@ Q - Quit");
                     Console.WriteLine("View history");
                     break;
                 case "A":
-                    Console.WriteLine("Addition game");
+                    GameEngine.AdditionGame("Addition game");
                     break;
                 case "S":
                     Console.WriteLine("Subtraction game");
