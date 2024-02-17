@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MathGameUI;
+
+string name = UserInputHandler.AskForUserName();
+
+MessageHandler.WelcomeMessage(name);
+
+Menu.ShowMenu();
+
+Console.ReadLine();
