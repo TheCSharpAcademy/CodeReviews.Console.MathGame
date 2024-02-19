@@ -15,6 +15,7 @@ namespace MathGame
 
         public SavedGame()
         {
+            Operands = new List<int>();
         }
 
         public SavedGame(string username, MathOperation operation, List<int> operands, bool isAnswerCorrect)
