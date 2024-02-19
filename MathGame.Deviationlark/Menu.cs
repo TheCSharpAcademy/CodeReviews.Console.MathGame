@@ -134,7 +134,7 @@ namespace MathGame
             Console.WriteLine("4. Impossible");
             result = Console.ReadLine();
 
-            result = Helpers.ValidateResult(result);
+            result = Helpers.Validate(result);
             return result;
         }
     }

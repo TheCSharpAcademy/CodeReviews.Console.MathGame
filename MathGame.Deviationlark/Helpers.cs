@@ -18,7 +18,7 @@ internal class Helpers
         int num;
         Console.WriteLine("Enter the amount of questions you want to answer: ");
         result = Console.ReadLine();
-        result = ValidateResult(result);
+        result = Validate(result);
         num = Convert.ToInt32(result);
         return num;
     }
@@ -128,5 +128,17 @@ internal class Helpers
                 break;
         }
         return Numbers;
+    }
+
+    internal static string Validate(string? result)
+    {
+        bool valid = int.TryParse(result, out _);
+        while (!valid || Convert.ToInt32(result) <= 0)
+        {
+            Console.WriteLine("Enter a valid number!");
+            result = Console.ReadLine();
+            valid = int.TryParse(result, out _);
+        }
+        return result;
     }
 }
