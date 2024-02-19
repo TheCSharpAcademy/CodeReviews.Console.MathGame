@@ -3,7 +3,7 @@ internal class Game
 {
     public int Score {get; set;}
 
-    public string? difficulty {get; set;}
+    public string? Difficulty {get; set;}
     
     public GameType Mode {get; set;}
 }
