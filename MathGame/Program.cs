@@ -4,25 +4,23 @@ using System.Numerics;
 using System.Threading.Channels;
 using MathGame;
 
-var current = new SavedGame();
-
-OpeningSequence(current);
+var username = OpeningSequence();
 
 var isPlaying = true;
 
 while (isPlaying)
 {
-    PrintMenu(current);
+    PrintMenu(username);
     var selection = Console.ReadLine() ?? "a";
     
     if (selection != "r")
     {
-        MathPlay.PlayGame(current, selection);
+        MathPlay.PlayGame(username, selection);
     }
     else
     {
-        var games = FileIO.RetrieveGames(current.Username);
-        FileIO.PrintPastGames(current.Username, games);
+        var games = FileIO.RetrieveGames(username);
+        FileIO.PrintPastGames(username, games);
     }
 
     Console.WriteLine("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~");
@@ -31,18 +29,18 @@ while (isPlaying)
 }
 Console.WriteLine("Thanks for playing! :)");
 
-static void OpeningSequence(SavedGame sg)
+static string OpeningSequence()
 {
     Console.WriteLine("Welcome to the Math Game!");
     Console.Write("Please enter your name: ");
 
-    sg.Username = Console.ReadLine();
+    return Console.ReadLine();
 }
 
-static void PrintMenu(SavedGame sg)
+static void PrintMenu(string username)
 {
     Console.WriteLine();
-    Console.WriteLine($"Hello, {sg.Username}! Please select which operation you'd like to practice today.");
+    Console.WriteLine($"Hello, {username}! Please select which operation you'd like to practice today.");
     Console.WriteLine(" * a - Addition");
     Console.WriteLine(" * d - Division");
     Console.WriteLine(" * m - Multiplication");

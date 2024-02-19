@@ -36,10 +36,11 @@ namespace MathGame
             _ => throw new ArgumentException("Mathematical operation not recognized."),
         };
 
-        public static void PlayGame(SavedGame currentGame, string selection)
+        public static void PlayGame(string username, string selection)
         {
-            currentGame.Operation = MathPlay.ToMathOpEnum(selection);
-            Func<int, int, int> operation = MathPlay.GetMathOp(selection);
+            var currentGame = new SavedGame { Username = username };
+            currentGame.Operation = ToMathOpEnum(selection);
+            Func<int, int, int> operation = GetMathOp(selection);
 
             var n1 = new Random().Next(1, 101);
             var n2 = new Random().Next(1, 101);
@@ -56,9 +57,9 @@ namespace MathGame
             currentGame.Operands = Tuple.Create(n1, n2);
 
             Console.WriteLine();
-            Console.WriteLine($"What is {n1} {MathPlay.GetMathOpPhrase(selection)} {n2}?");
+            Console.WriteLine($"What is {n1} {GetMathOpPhrase(selection)} {n2}?");
 
-            var answer = String.Empty;
+            var answer = string.Empty;
 
             do
             {
