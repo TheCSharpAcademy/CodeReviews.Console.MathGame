@@ -26,9 +26,14 @@ namespace MathGame
             IsAnswerCorrect = isAnswerCorrect;
         }
 
-        public override string ToString()
+        public string ToFileString()
         {
             return $"{Username};{Operation};{Operands};{IsAnswerCorrect}";
+        }
+
+        public string ToGameString()
+        {
+            return $"Operation: {Operation}, Operands: {Operands}, Answer guessed {(IsAnswerCorrect ? "in" : String.Empty)}correctly";
         }
 
         public static SavedGame ParseFromFile(string line)
