@@ -42,16 +42,23 @@ namespace MathGame
             currentGame.Operation = ToMathOpEnum(selection);
             Func<int, int, int> operation = GetMathOp(selection);
 
-            var n1 = new Random().Next(2, 101);
+            var n1 = new Random().Next(1, 101);
             var n2 = new Random().Next(1, 101);
 
             if (currentGame.Operation is MathOperation.Division)
             {
-                var possibleDivisors = Enumerable.Range(1, n1)
-                    .Where(n => n1 % n == 0 && n1 != n)
-                    .ToList()
-                    ;
+                var possibleDivisors = new List<int>();
+                do
+                {
+                    n1 = new Random().Next(1, 101);
+                    possibleDivisors = Enumerable
+                        .Range(2, n1 - 1)
+                        .Where(n => n1 % n == 0 && n1 != n)
+                        .ToList()
+                        ;
+                } while (possibleDivisors.Count() <= 1);
                 n2 = possibleDivisors[new Random().Next(possibleDivisors.Count())];
+
             }
 
             currentGame.Operands = Tuple.Create(n1, n2);

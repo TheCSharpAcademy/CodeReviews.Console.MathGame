@@ -28,12 +28,12 @@ namespace MathGame
 
         public string ToFileString()
         {
-            return $"{Username};{Operation};{Operands};{IsAnswerCorrect}";
+            return $"{Username};{Operation};{Operands};{IsAnswerCorrect}\n";
         }
 
         public string ToGameString()
         {
-            return $"Operation: {Operation}, Operands: {Operands}, Answer guessed {(IsAnswerCorrect ? "in" : String.Empty)}correctly";
+            return $"Operation: {Operation}, Operands: {Operands}, Answer guessed {(IsAnswerCorrect ? String.Empty : "in")}correctly";
         }
 
         public static SavedGame ParseFromFile(string line)
@@ -43,7 +43,7 @@ namespace MathGame
             {
                 Username = data[0],
                 Operation = (MathOperation)Enum.Parse(typeof(MathOperation), data[1]),
-                Operands = ToTuple(data[2]),                
+                Operands = ToTuple(data[2]),
                 IsAnswerCorrect = bool.Parse(data[3])
             };
         }
@@ -51,7 +51,7 @@ namespace MathGame
         private static Tuple<int, int> ToTuple(string data)
         {
             var nums = data
-                .Trim(['(',')'])
+                .Trim(['(', ')'])
                 .Split(',')
                 .Select(int.Parse)
                 .ToList();
