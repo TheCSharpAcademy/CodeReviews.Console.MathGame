@@ -42,14 +42,14 @@ while (isPlaying)
         Console.WriteLine();
     } while (!int.TryParse(answer, out _));
 
-    if(int.Parse(answer) == operation(n1, n2))
+    if (int.Parse(answer) == operation(n1, n2))
     {
         Console.WriteLine("Congratulations! That's correct.");
         sg.IsAnswerCorrect = true;
     }
     else
     {
-        Console.WriteLine($"Sorry, that's wrong. The correct answer is {operation(n1,n2)}");
+        Console.WriteLine($"Sorry, that's wrong. The correct answer is {operation(n1, n2)}");
     }
 
     Save(sg);
@@ -102,14 +102,30 @@ static void PrintMenu(SavedGame sg)
     Console.WriteLine(" * d - Division");
     Console.WriteLine(" * m - Multiplication");
     Console.WriteLine(" * s - Subtraction");
+    Console.WriteLine();
+    Console.WriteLine("If you've like to see your past game results, enter \"r\"");
 }
 
 static void Save(SavedGame sg)
 {
-
+    var path = AppDomain.CurrentDomain.BaseDirectory + "games.txt";
+    File.AppendAllText(path, sg.ToFileString());
 }
 
 static List<SavedGame> RetrieveGames(string username)
 {
-    return null;
+    var path = AppDomain.CurrentDomain.BaseDirectory + "games.txt";
+    return File.ReadAllLines(path)
+        .Select(SavedGame.ParseFromFile)
+        .Where(s => s.Username == username)
+        .ToList()
+        ;
+}
+
+static void PrintPastGames(List<SavedGame> games)
+{
+    foreach(var g in games)
+    {
+        Console.WriteLine(g.ToGameString());
+    }
 }
