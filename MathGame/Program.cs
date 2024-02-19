@@ -1,83 +1,55 @@
 ﻿using System.IO.Pipes;
+using System.Numerics;
 using MathGame;
 
-OpeningSequence();
+var sg = new SavedGame();
 
-static void OpeningSequence()
+OpeningSequence(sg);
+
+var playing = true;
+
+while (playing)
 {
-    var sg = new SavedGame();
+    var selection = Console.ReadLine();
+    sg.Operation = ToMathOpEnum(selection);
+    Func<int, int, int> operation = GetMathOp(selection);
+}
 
+static Func<int, int, int> GetMathOp(string operation) => operation switch
+{
+    "a" => (n1, n2) => n1 + n2,
+    "d" => (n1, n2) => n1 / n2,
+    "m" => (n1, n2) => n1 * n2,
+    "s" => (n1, n2) => n1 - n2,
+    _ => throw new ArgumentException("Mathematical operation not recognized."),
+};
+
+static MathOperation ToMathOpEnum(string operation) => operation switch
+{
+    "a" => MathOperation.Addition,
+    "d" => MathOperation.Division,
+    "m" => MathOperation.Multiplication,
+    "s" => MathOperation.Subtraction,
+    _ => throw new ArgumentException("Mathematical operation not recognized."),
+};
+
+static string GetMathOpPhrase(string operation) => operation switch
+{
+    "a" => "plus",
+    "d" => "divided by",
+    "m" => "times",
+    "s" => "minus",
+    _ => throw new ArgumentException("Mathematical operation not recognized."),
+};
+
+static void OpeningSequence(SavedGame sg)
+{
     Console.WriteLine("Welcome to the Math Game!");
-
     Console.Write("Please enter your name: ");
+
     sg.Username = Console.ReadLine();
 
     PrintMenu(sg);
-
-    var playing = true;
-
-    while (playing)
-    {
-        var operation = Console.ReadLine();
-
-        switch (operation)
-        {
-            case "a":
-                Addition(sg);
-                break;
-            case "d":
-                break;
-            case "m":
-                break;
-            case "s":
-                break;
-            default:
-                Console.WriteLine("Looks ");
-                break;
-        }
-    }
-}
-
-static void Addition(SavedGame sg)
-{
-    Console.Write("You've chosen addition!");
-    sg.Operation = MathOperation.Addition;
-
-    var firstNum = new Random().Next(1, 101);
-    var secondNum = new Random().Next(1, 101);
-
-    sg.Operands = new List<int>() { firstNum, secondNum };
-
-    Console.WriteLine($"What is {firstNum} + {secondNum}?");
-    Console.Write("Your answer: ");
-
-    var answer = Console.ReadLine();
-
-    try
-    {
-        if (int.Parse(answer) == firstNum + secondNum)
-        {
-            sg.IsAnswerCorrect = true;
-            Console.WriteLine("Congratulations, that's correct! You win!");
-        }
-        else
-        {
-            Console.WriteLine($"Sorry, that's not correct. The correct answer is {firstNum + secondNum}");
-        }
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Something went wrong! Make sure your answer uses numerical characters only.");
-    }
-    finally
-    {
-        Save(sg);
-    }
-}
-
-static void Save(SavedGame sg)
-{
-
 }
 
 static void PrintMenu(SavedGame sg)
@@ -88,6 +60,11 @@ static void PrintMenu(SavedGame sg)
     Console.WriteLine(" * d - Division");
     Console.WriteLine(" * m - Multiplication");
     Console.WriteLine(" * s - Subtraction");
+}
+
+static void Save(SavedGame sg)
+{
+
 }
 
 static List<SavedGame> RetrieveGames(string username)
