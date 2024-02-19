@@ -15,7 +15,14 @@ while (isPlaying)
     
     if (selection != "r")
     {
-        MathPlay.PlayGame(username, selection);
+        try
+        {
+            MathPlay.PlayGame(username, selection);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
     else
     {

@@ -47,18 +47,17 @@ namespace MathGame
 
             if (currentGame.Operation is MathOperation.Division)
             {
-                var possibleDivisors = new List<int>();
+                var divisors = new List<int>();
                 do
                 {
                     n1 = new Random().Next(1, 101);
-                    possibleDivisors = Enumerable
+                    divisors = Enumerable
                         .Range(2, n1 - 1)
                         .Where(n => n1 % n == 0 && n1 != n)
                         .ToList()
                         ;
-                } while (possibleDivisors.Count() <= 1);
-                n2 = possibleDivisors[new Random().Next(possibleDivisors.Count())];
-
+                } while (divisors.Count() <= 1);
+                n2 = divisors[new Random().Next(divisors.Count())];
             }
 
             currentGame.Operands = Tuple.Create(n1, n2);
