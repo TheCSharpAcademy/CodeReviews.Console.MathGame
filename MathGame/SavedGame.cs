@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,15 +11,14 @@ namespace MathGame
     {
         public string Username { get; set; }
         public MathOperation Operation { get; set; }
-        public List<int> Operands { get; set; }
+        public Tuple<int, int> Operands { get; set; }
         public bool IsAnswerCorrect { get; set; }
 
         public SavedGame()
         {
-            Operands = new List<int>();
         }
 
-        public SavedGame(string username, MathOperation operation, List<int> operands, bool isAnswerCorrect)
+        public SavedGame(string username, MathOperation operation, Tuple<int, int> operands, bool isAnswerCorrect)
         {
             Username = username;
             Operation = operation;
@@ -28,7 +28,7 @@ namespace MathGame
 
         public override string ToString()
         {
-            return $"{Username};{Operation};{String.Join(',', Operands)};{IsAnswerCorrect}";
+            return $"{Username};{Operation};{Operands};{IsAnswerCorrect}";
         }
 
         public static SavedGame ParseFromFile(string line)
@@ -38,12 +38,19 @@ namespace MathGame
             {
                 Username = data[0],
                 Operation = (MathOperation)Enum.Parse(typeof(MathOperation), data[1]),
-                Operands = data[2]
-                .Split(',')
-                .Select(int.Parse)
-                .ToList(),
+                Operands = ToTuple(data[2]),                
                 IsAnswerCorrect = bool.Parse(data[3])
             };
+        }
+
+        private static Tuple<int, int> ToTuple(string data)
+        {
+            var nums = data
+                .Trim(['(',')'])
+                .Split(',')
+                .Select(int.Parse)
+                .ToList();
+            return Tuple.Create(nums[0], nums[1]);
         }
     }
 }
