@@ -1,4 +1,4 @@
-﻿namespace MathGameUI;
+﻿namespace MathGame;
 
 public static class UserInputHandler
 {

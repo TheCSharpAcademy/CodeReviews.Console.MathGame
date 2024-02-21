@@ -1,4 +1,6 @@
-﻿namespace MathGameUI;
+﻿using MathGameLibrary.Models;
+
+namespace MathGame;
 
 public static class Menu
 {
@@ -29,17 +31,22 @@ Q -  Quit");
             switch (selection.Trim().ToLower())
             {
                 case "+":
+                    GameEngine.GameInit(GameType.Addition, "+");
                     break;
                 case "-":
+                    GameEngine.GameInit(GameType.Subtraction, "-");
                     break;
                 case "*":
+                    GameEngine.GameInit(GameType.Multiplication, "*");
                     break;
                 case "/":
+                    GameEngine.GameInit(GameType.Division, "/");
                     break;
                 case "h":
+                    GameEngine.PrintGamesHistory();
                     break;
                 case "q":
-                    Console.WriteLine("Thanks for playing. \nExiting game ...");
+                    Console.WriteLine("Thanks for playing. \nGame Over ...");
                     shouldGameContinue = false;
                     break;
                 default:
