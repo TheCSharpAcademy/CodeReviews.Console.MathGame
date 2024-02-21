@@ -10,13 +10,14 @@
 // GameHistory(string quizName = null)
 //
 
-using System.Runtime.CompilerServices;
-
 string? userInput = "";
 int menuOption;
 bool inputIsValid;
+bool exit = false;
 
-do
+
+// Main Menu
+while (!exit)
 {
     Console.WriteLine("\t\tMath Game");
     Console.WriteLine();
@@ -32,15 +33,21 @@ do
         userInput = Console.ReadLine();
 
         if (userInput == null || userInput == "")
+        {
             throw new NullReferenceException("Menu option cannot be empty.");
-            userInput = "";
-        
+            
+        }
+        else if (userInput.ToLower() == "exit")
+        {
+            exit = true;
+            continue;
+        }
         inputIsValid = int.TryParse(userInput, out menuOption);
         if (!inputIsValid)
         {
             throw new FormatException("Menu option must be an integral number between 1 and 5.");
         }
-        
+
         try
         {
             StartGame(menuOption);
@@ -48,6 +55,7 @@ do
         catch (Exception ex)
         {
             Console.WriteLine($"An error has occured: {ex.Message}");
+            Thread.Sleep(1000);
         }
     }
     catch (FormatException ex)
@@ -60,7 +68,8 @@ do
         Console.WriteLine($"Error: {ex.Message}");
         Thread.Sleep(1000);
     }
-} while (!String.Equals(userInput, "exit"));
+}
+
 
 void StartGame(int userSelection)
 {
