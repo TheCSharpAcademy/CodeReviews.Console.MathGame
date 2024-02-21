@@ -10,7 +10,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetDivisionNumbers();
+                var divisionNumbers = Helpers.GetNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 
@@ -48,7 +48,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetDivisionNumbers();
+                var divisionNumbers = Helpers.GetNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 
@@ -80,7 +80,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetDivisionNumbers();
+                var divisionNumbers = Helpers.GetNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 
@@ -124,12 +124,10 @@
                 {
                     Console.WriteLine("Your answer was correct!");
                     score++;
-                    Console.ReadLine();
                 }
                 else
                 {
                     Console.WriteLine("Your answer was incorrect. Type any key for the next question");
-                    Console.ReadLine();
                 }
 
                 if (i == 4) Console.WriteLine($"Game over. Your final score is {score}, Press any key to go back to the menu.");

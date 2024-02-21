@@ -8,7 +8,7 @@
         {
             Console.Clear();
             Console.WriteLine("------------------------------");
-            Console.WriteLine($"Hello {name}, It's {date}. This is your math's game. That's greate that you're working on improving yourself");
+            Console.WriteLine($"Hello {name}, It's {date}. This is your math's game. That's great that you're working on improving yourself");
             Console.WriteLine("\n");
             var isGameOn = true;
             do

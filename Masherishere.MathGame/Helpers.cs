@@ -28,22 +28,29 @@
             games.Add(gameItem);
         }
 
+        private int[] GenerateRandomNumbers()
+        {
+            var random = new Random();
+
+            return [random.Next(1, 9), random.Next(1, 9)];
+        }
+
+        internal static int[] GetNumbers()
+        {
+            return GetRandomNumbers();
+        }
+
         internal static int[] GetDivisionNumbers()
         {
             var random = new Random();
-            var firstNumber = random.Next(1, 9);
-            var secondNumber = random.Next(1, 9);
 
-            var result = new int[2];
+            var result = GetRandomNumbers();
 
-            while (firstNumber % secondNumber != 0)
+            while (result[0] % result[1] != 0)
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                result[0] = random.Next(1, 9);
+                result[1] = random.Next(1, 9);
             }
-
-            result[0] = firstNumber;
-            result[1] = secondNumber;
 
             return result;
         }
@@ -55,6 +62,20 @@
                 Console.WriteLine("Your Input should be an integer");
                 result = Console.ReadLine();
             }
+
+            return result;
+        }
+
+        internal static int[] GetRandomNumbers()
+        {
+            var random = new Random();
+            var firstNumber = random.Next(1, 9);
+            var secondNumber = random.Next(1, 9);
+
+            var result = new int[2];
+
+            result[0] = firstNumber;
+            result[1] = secondNumber;
 
             return result;
         }
