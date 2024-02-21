@@ -10,7 +10,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetNumbers();
+                var divisionNumbers = Helpers.GetRandomNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 
@@ -48,7 +48,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetNumbers();
+                var divisionNumbers = Helpers.GetRandomNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 
@@ -80,7 +80,7 @@
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                var divisionNumbers = Helpers.GetNumbers();
+                var divisionNumbers = Helpers.GetRandomNumbers();
                 int firstNumber = divisionNumbers[0];
                 int secondNumber = divisionNumbers[1];
 

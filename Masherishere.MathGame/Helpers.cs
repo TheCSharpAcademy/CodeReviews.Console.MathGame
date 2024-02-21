@@ -28,18 +28,6 @@
             games.Add(gameItem);
         }
 
-        private int[] GenerateRandomNumbers()
-        {
-            var random = new Random();
-
-            return [random.Next(1, 9), random.Next(1, 9)];
-        }
-
-        internal static int[] GetNumbers()
-        {
-            return GetRandomNumbers();
-        }
-
         internal static int[] GetDivisionNumbers()
         {
             var random = new Random();
