@@ -9,7 +9,7 @@ string? userInput = "";
 int menuOption;
 bool inputIsValid;
 bool exit = false;
-int questionCount;
+List<string> gameHistory = new List<string>();
 
 // Main Menu
 while (!exit)
@@ -44,31 +44,28 @@ while (!exit)
 
     try // Removed StartGame() - Felt it did not make sense to have code that did not need to be reused in a method.
     {
-        questionCount = QuestionCount();
-
         switch (menuOption)
         {
             // Addition Quiz
             case 1:
-                Quiz(1, questionCount);
+                Quiz(1, QuestionCount());
                 break;
             // Subtraction Quiz
             case 2:
-                Quiz(2, questionCount);
+                Quiz(2, QuestionCount());
                 break;
             // Multiplication Quiz
             case 3:
-                Quiz(3, questionCount);
+                Quiz(3, QuestionCount());
                 break;
             // Division Quiz
             case 4:
-                Quiz(4, questionCount);
+                Quiz(4, QuestionCount());
                 break;
-            // Game History
             case 5:
-                GameHistory();
+                ViewGameHistory();
                 break;
-            // menuOption does not equal 1 through 5 (return to menu)
+            // menuOption does not equal 1 through 5 (return to menu).
             default:
                 break;
         }
@@ -132,6 +129,7 @@ void Quiz(int mode, int questionCount)
     int userAnswer;
     bool inputIsValid;
     int score = 0;
+    string gamemodeSelected;
 
     switch (mode)
     {
@@ -162,6 +160,8 @@ void Quiz(int mode, int questionCount)
                 } while (inputIsValid == false);
             }
             Console.WriteLine($"You got {score}/{questionCount}");
+            gamemodeSelected = "Addition";
+            AddGameHistory(gamemodeSelected, score, questionCount);
             Console.WriteLine();
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
@@ -188,6 +188,8 @@ void Quiz(int mode, int questionCount)
             }
             Console.WriteLine($"You got {score}/{questionCount}");
             Console.WriteLine();
+            gamemodeSelected = "Subtraction";
+            AddGameHistory(gamemodeSelected, score, questionCount);
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
             break;
@@ -211,8 +213,11 @@ void Quiz(int mode, int questionCount)
                         continue;
                 } while (inputIsValid == false);
             }
+
             Console.WriteLine($"You got {score}/{questionCount}");
             Console.WriteLine();
+            gamemodeSelected = "Multiplication";
+            AddGameHistory(gamemodeSelected, score, questionCount);
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
             break;
@@ -236,10 +241,17 @@ void Quiz(int mode, int questionCount)
                         continue;
                 } while (inputIsValid == false);
             }
+            Console.WriteLine($"You got {score}/{questionCount}");
+            Console.WriteLine();
+            gamemodeSelected = "Division";
+            AddGameHistory(gamemodeSelected, score, questionCount);
+            Console.WriteLine("Press Enter to continue.");
+            Console.ReadLine();
             break;
         default:
             throw new ArgumentOutOfRangeException($"{mode} is not a valid mode.\n Possible Modes are: 1 - Addition\n2 - Subtraction\n3 - Multiplication\n4 - Division");
     }
+
 }
 
 
@@ -277,9 +289,9 @@ int[] GenerateNumbers(int questionCount, bool isDivision = false)
             {
                 do
                 {
-                    generatedNumbers[i] = random.Next(2,10);
+                    generatedNumbers[i] = random.Next(2, 10);
 
-                }while (generatedNumbers[i-1] % generatedNumbers[i] != 0);
+                } while (generatedNumbers[i - 1] % generatedNumbers[i] != 0);
             }
         }
     }
@@ -295,21 +307,34 @@ int[] GenerateNumbers(int questionCount, bool isDivision = false)
 }
 
 // displays game history - TODO
-void GameHistory()
+void ViewGameHistory()
 {
+    Console.Clear();
+    Console.WriteLine("\t\tPrevious Games\n\n");
+    Console.WriteLine();
+    foreach (string game in gameHistory)
+    {
+        Console.WriteLine($"\t\t{game}");
+    }
+    Console.WriteLine("\nPlease press Enter to continue.");
+    Console.ReadLine();
+}
 
+void AddGameHistory(string gamemode, int score, int questionCount)
+{
+    gameHistory.Add($"{gamemode} - Score: {score}/{questionCount}");
 }
 
 // Method determines whether a number is a prime number. - Required for division gamemode.
 bool IsPrime(int number)
 {
-    if (number <=1) return false;
+    if (number <= 1) return false;
     if (number == 2) return true;
     if (number % 2 == 0) return false;
 
     var boundary = (int)Math.Floor(Math.Sqrt(number));
 
-    for (int i = 3; i <= boundary; i+=2)
+    for (int i = 3; i <= boundary; i += 2)
     {
         if (number % i == 0)
             return false;
