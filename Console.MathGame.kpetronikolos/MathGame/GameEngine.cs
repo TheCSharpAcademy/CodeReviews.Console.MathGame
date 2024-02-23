@@ -18,11 +18,16 @@ public static class GameEngine
         {
             var operands = GameLogic.GenerateOperands(gameType);
 
+            if (operands.Length != 2)
+            {
+                throw new ArgumentException("Invalid number of operands", "operands");
+            }
+
             MessageHandler.DisplayOperation(operands, operatorSymbol);
-            string answer = Console.ReadLine();
+            int answer = UserInputHandler.GetAnswer();
             int correctAnswer = GameLogic.GenerateCorrectAnswer(operands, gameType);
 
-            if (int.Parse(answer) == correctAnswer)
+            if (answer == correctAnswer)
             {
                 Console.WriteLine("Correct Answer!\n");
                 score++;

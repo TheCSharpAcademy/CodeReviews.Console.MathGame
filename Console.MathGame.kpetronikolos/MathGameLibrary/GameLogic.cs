@@ -23,8 +23,7 @@ public static class GameLogic
             case GameType.Division:
                 return operands[0] / operands[1];
             default:
-                Console.WriteLine("Invalid Game Type.");
-                break;
+                throw new ArgumentException("Invalid Game Type", "gameType");
 
         }
         throw new NotImplementedException();
