@@ -1,4 +1,6 @@
-﻿namespace MathGame;
+﻿using MathGameLibrary.Models;
+
+namespace MathGame;
 
 public static class UserInputHandler
 {
@@ -34,5 +36,36 @@ public static class UserInputHandler
         }
 
         return output;
+    }
+
+    public static Difficulty GetGameDifficulty()
+    {
+        do
+        {
+            Console.WriteLine(@"Please select the Game Difficulty:
+1. Easy
+2. Medium
+3. Hard");
+
+            Console.WriteLine();
+
+            string selection = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (selection.Trim())
+            {
+                case "1":
+                    return Difficulty.Easy;
+                case "2":
+                    return Difficulty.Medium;
+                case "3":
+                    return Difficulty.Hard;
+                default:
+                    Console.WriteLine("Invalid input. Please try again.\n");
+                    break;
+            }
+
+        } while (true);
     }
 }

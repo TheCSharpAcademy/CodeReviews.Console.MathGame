@@ -9,14 +9,16 @@ public static class GameEngine
 
     public static void GameInit(GameType gameType, string operatorSymbol)
     {
-        Console.WriteLine($"Generating Questions for {gameType} game");
+        var difficulty = UserInputHandler.GetGameDifficulty();
+
+        Console.WriteLine($"Generating Questions for {gameType} game - {difficulty} Level\n");
 
         int score = 0;
         int numOfQuestions = 5;
 
         for (int i = 0; i < numOfQuestions; i++)
         {
-            var operands = GameLogic.GenerateOperands(gameType);
+            var operands = GameLogic.GenerateOperands(gameType, (int) difficulty);
 
             if (operands.Length != 2)
             {
@@ -38,7 +40,7 @@ public static class GameEngine
             }
         }
 
-        StoreGame(gameType, score);
+        StoreGame(gameType, score, difficulty);
 
         MessageHandler.PrintScore(score);
 
@@ -55,7 +57,7 @@ public static class GameEngine
         {
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.GameType}: {game.Score}pts");
+                Console.WriteLine($"{game.Date} - {game.Difficulty} Level - {game.GameType}: {game.Score}pts");
             }
         }
         else
@@ -66,13 +68,14 @@ public static class GameEngine
         MessageHandler.AskToContinueToMenu();
     }
 
-    private static void StoreGame(GameType gameType, int score)
+    private static void StoreGame(GameType gameType, int score, Difficulty difficulty)
     {
         games.Add(new Game
         {
             Date = DateTime.Now,
             GameType = gameType,
-            Score = score
+            Score = score,
+            Difficulty = difficulty
         });
     }
 

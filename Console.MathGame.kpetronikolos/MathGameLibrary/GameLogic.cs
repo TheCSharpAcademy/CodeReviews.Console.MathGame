@@ -22,19 +22,19 @@ public static class GameLogic
         }
     }
 
-    public static int[] GenerateOperands(GameType gameType)
+    public static int[] GenerateOperands(GameType gameType, int upperBound)
     {
         var random = new Random();
 
-        int firstOperand = random.Next(0, 100);
-        int secondOperand = (gameType == GameType.Division) ? random.Next(1, 100) : random.Next(0, 100);
+        int firstOperand = random.Next(0, upperBound);
+        int secondOperand = (gameType == GameType.Division) ? random.Next(1, upperBound) : random.Next(0, upperBound);
 
         if (gameType == GameType.Division)
         {
             while (IsEvenlyDivisable(firstOperand, secondOperand) == false)
             {
-                firstOperand = random.Next(0, 100);
-                secondOperand = random.Next(1, 100);
+                firstOperand = random.Next(0, upperBound);
+                secondOperand = random.Next(1, upperBound);
             }
             
         }
