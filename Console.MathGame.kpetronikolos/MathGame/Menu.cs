@@ -17,6 +17,7 @@ public static class Menu
 -    Subtraction
 *    Multiplication
 /    Division
+R -  Random Game
 H -  Game History
 Q -  Quit");
 
@@ -39,6 +40,9 @@ Q -  Quit");
                     break;
                 case "/":
                     GameEngine.GameInit(GameType.Division, "/");
+                    break;
+                case "r":
+                    GameEngine.GameInit(GameType.Random, "");
                     break;
                 case "h":
                     GameEngine.PrintGamesHistory();

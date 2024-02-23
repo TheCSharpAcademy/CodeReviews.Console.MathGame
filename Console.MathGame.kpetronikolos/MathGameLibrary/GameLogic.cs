@@ -43,6 +43,24 @@ public static class GameLogic
 
     }
 
+    public static string GetOperatorSymbol(GameType gameType)
+    {
+        switch (gameType)
+        {
+            case GameType.Addition:
+                return "+";
+            case GameType.Subtraction:
+                return "-";
+            case GameType.Multiplication:
+                return "*";
+            case GameType.Division:
+                return "/";
+            default:
+                throw new ArgumentException("Invalid Game Type", "gameType");
+
+        }
+    }
+
     private static bool IsEvenlyDivisable(int divident, int divisor)
     {
         return divident % divisor == 0;

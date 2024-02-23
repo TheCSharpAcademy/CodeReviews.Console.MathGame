@@ -9,9 +9,12 @@ public static class GameEngine
 
     public static void GameInit(GameType gameType, string operatorSymbol)
     {
-        var difficulty = UserInputHandler.GetGameDifficulty();
-
         int score = 0;
+        var random = new Random();
+        GameType typeOfGame;
+
+        var difficulty = UserInputHandler.GetGameDifficulty();
+        
         int numOfQuestions = UserInputHandler.GetNumberOfQuestions();
 
         Console.WriteLine($"Generating Questions for {gameType} game - {difficulty} Level\n");
@@ -20,7 +23,17 @@ public static class GameEngine
 
         for (int i = 0; i < numOfQuestions; i++)
         {
-            var operands = GameLogic.GenerateOperands(gameType, (int) difficulty);
+            if (gameType == GameType.Random)
+            {
+                typeOfGame = (GameType)random.Next(0, 4);
+                operatorSymbol = GameLogic.GetOperatorSymbol(typeOfGame);
+            }
+            else
+            {
+                typeOfGame = gameType;
+            }
+
+            var operands = GameLogic.GenerateOperands(typeOfGame, (int) difficulty);
 
             if (operands.Length != 2)
             {
@@ -29,7 +42,8 @@ public static class GameEngine
 
             MessageHandler.DisplayOperation(operands, operatorSymbol);
             int answer = UserInputHandler.GetAnswer();
-            int correctAnswer = GameLogic.GenerateCorrectAnswer(operands, gameType);
+
+            int correctAnswer = GameLogic.GenerateCorrectAnswer(operands, typeOfGame);
 
             if (answer == correctAnswer)
             {
