@@ -25,7 +25,7 @@ Q - Quit");
 
             while (operation != "a" && operation != "s"&& operation != "m" && operation !="d" && operation != "v")
             {
-                Console.WriteLine($"{operation.ToString()} is not an option...");
+                Console.WriteLine($"{operation} is not an option...");
                 operation = Console.ReadLine().ToLower().Trim();
             }
 
