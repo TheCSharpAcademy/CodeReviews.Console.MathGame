@@ -16,6 +16,8 @@ public static class GameEngine
         int score = 0;
         int numOfQuestions = 5;
 
+        var startTime = DateTime.Now;
+
         for (int i = 0; i < numOfQuestions; i++)
         {
             var operands = GameLogic.GenerateOperands(gameType, (int) difficulty);
@@ -40,7 +42,10 @@ public static class GameEngine
             }
         }
 
-        StoreGame(gameType, score, difficulty);
+        var endTime = DateTime.Now;
+        var timeSpan = endTime - startTime;
+
+        StoreGame(gameType, score, difficulty, timeSpan);
 
         MessageHandler.PrintScore(score);
 
@@ -57,7 +62,7 @@ public static class GameEngine
         {
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Difficulty} Level - {game.GameType}: {game.Score}pts");
+                Console.WriteLine($"{game.Date} - {game.Difficulty} Level - {game.GameType}: {game.Score}pts in {game.TimeSpan.Seconds} seconds");
             }
         }
         else
@@ -68,14 +73,15 @@ public static class GameEngine
         MessageHandler.AskToContinueToMenu();
     }
 
-    private static void StoreGame(GameType gameType, int score, Difficulty difficulty)
+    private static void StoreGame(GameType gameType, int score, Difficulty difficulty, TimeSpan timeSpan)
     {
         games.Add(new Game
         {
             Date = DateTime.Now,
             GameType = gameType,
             Score = score,
-            Difficulty = difficulty
+            Difficulty = difficulty,
+            TimeSpan = timeSpan
         });
     }
 
