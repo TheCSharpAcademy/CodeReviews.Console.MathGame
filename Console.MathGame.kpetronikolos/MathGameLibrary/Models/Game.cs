@@ -7,4 +7,5 @@ public class Game
     public GameType GameType { get; set; }
     public Difficulty Difficulty { get; set; }
     public TimeSpan TimeSpan { get; set; }
+    public int NumberOfQuestions { get; set; }
 }

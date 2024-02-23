@@ -68,4 +68,15 @@ public static class UserInputHandler
 
         } while (true);
     }
+
+    public static int GetNumberOfQuestions()
+    {
+        Console.Write("Please enter the number of questions: ");
+        int output = GetAnswer();
+
+        Console.Clear();
+
+        return output;
+
+    }
 }

@@ -11,10 +11,10 @@ public static class GameEngine
     {
         var difficulty = UserInputHandler.GetGameDifficulty();
 
-        Console.WriteLine($"Generating Questions for {gameType} game - {difficulty} Level\n");
-
         int score = 0;
-        int numOfQuestions = 5;
+        int numOfQuestions = UserInputHandler.GetNumberOfQuestions();
+
+        Console.WriteLine($"Generating Questions for {gameType} game - {difficulty} Level\n");
 
         var startTime = DateTime.Now;
 
@@ -45,7 +45,7 @@ public static class GameEngine
         var endTime = DateTime.Now;
         var timeSpan = endTime - startTime;
 
-        StoreGame(gameType, score, difficulty, timeSpan);
+        StoreGame(gameType, score, difficulty, timeSpan, numOfQuestions);
 
         MessageHandler.PrintScore(score);
 
@@ -62,7 +62,7 @@ public static class GameEngine
         {
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Difficulty} Level - {game.GameType}: {game.Score}pts in {game.TimeSpan.Seconds} seconds");
+                Console.WriteLine($"{game.Date} - {game.Difficulty} Level - {game.GameType}: {game.Score} out of {game.NumberOfQuestions} correct in {game.TimeSpan.Seconds} seconds");
             }
         }
         else
@@ -73,7 +73,7 @@ public static class GameEngine
         MessageHandler.AskToContinueToMenu();
     }
 
-    private static void StoreGame(GameType gameType, int score, Difficulty difficulty, TimeSpan timeSpan)
+    private static void StoreGame(GameType gameType, int score, Difficulty difficulty, TimeSpan timeSpan, int numberOfQuestions)
     {
         games.Add(new Game
         {
@@ -81,7 +81,8 @@ public static class GameEngine
             GameType = gameType,
             Score = score,
             Difficulty = difficulty,
-            TimeSpan = timeSpan
+            TimeSpan = timeSpan,
+            NumberOfQuestions = numberOfQuestions
         });
     }
 
