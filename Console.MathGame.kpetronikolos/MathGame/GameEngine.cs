@@ -40,10 +40,10 @@ public static class GameEngine
 
         StoreGame(gameType, score);
 
-        Console.WriteLine($"Your score is {score}");
-        Console.WriteLine("Press any key to proceed to the Menu.");
-        Console.ReadLine();
-        Console.Clear();
+        MessageHandler.PrintScore(score);
+
+        MessageHandler.AskToContinueToMenu();
+        
     }
     
     public static void PrintGamesHistory()
@@ -62,10 +62,8 @@ public static class GameEngine
         {
             Console.WriteLine("You haven't played any game yet.");
         }
-        
-        Console.WriteLine("\nPress any key to proceed to the Menu.");
-        Console.ReadLine();
-        Console.Clear();
+
+        MessageHandler.AskToContinueToMenu();
     }
 
     private static void StoreGame(GameType gameType, int score)

@@ -11,5 +11,17 @@ public static class MessageHandler
     {
         Console.Write($"{operands[0]} {operatorSymbol} {operands[1]} = ");
     }
+
+    public static void PrintScore(int score)
+    {
+        Console.WriteLine($"Your score is {score}");
+    }
+
+    public static void AskToContinueToMenu()
+    {
+        Console.WriteLine("\nPress any key to proceed to the Menu.");
+        Console.ReadLine();
+        Console.Clear();
+    }
 }
 

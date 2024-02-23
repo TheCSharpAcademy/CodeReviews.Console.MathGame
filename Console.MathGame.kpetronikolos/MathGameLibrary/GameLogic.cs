@@ -1,10 +1,4 @@
 ﻿using MathGameLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathGameLibrary;
 
@@ -26,7 +20,6 @@ public static class GameLogic
                 throw new ArgumentException("Invalid Game Type", "gameType");
 
         }
-        throw new NotImplementedException();
     }
 
     public static int[] GenerateOperands(GameType gameType)

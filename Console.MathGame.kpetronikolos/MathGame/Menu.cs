@@ -8,9 +8,7 @@ public static class Menu
     {
         bool shouldGameContinue = true;
 
-        Console.WriteLine("\nPress any key to show the Menu.");
-        Console.ReadLine();
-        Console.Clear();
+        MessageHandler.AskToContinueToMenu();
 
         do
         {
