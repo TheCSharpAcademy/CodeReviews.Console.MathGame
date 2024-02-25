@@ -164,8 +164,4 @@ internal class GameEngine
         }
         Helpers.AddToHistory(score, GameType.Subtraction);
     }
-
-
-
-
 }
