@@ -27,10 +27,7 @@ M - Multiplication
 D - Division
 Q - Quit the program");
             Console.WriteLine("------------------------------------------");
-
-
             var gameSelected = Console.ReadLine().Trim().ToLower();
-
 
             switch (gameSelected.Trim().ToLower())
             {

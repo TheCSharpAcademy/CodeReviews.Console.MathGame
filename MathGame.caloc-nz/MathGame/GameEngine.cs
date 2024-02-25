@@ -9,7 +9,6 @@ internal class GameEngine
         Console.WriteLine(message);
         var random = new Random();
         var score = 0;
-
         int firstNumber;
         int secondNumber;
 
@@ -37,14 +36,12 @@ internal class GameEngine
                 Console.WriteLine($"Your answer was incorrect. Type any key for the next question");
                 Console.ReadLine();
             }
-
             if (i == 4)
             {
                 Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu.");
                 Console.ReadLine();
             }
         }
-
         Helpers.AddToHistory(score, GameType.Addition);
 
     }
@@ -78,14 +75,12 @@ internal class GameEngine
                 Console.WriteLine($"Your answer was incorrect. Type any key for the next question");
                 Console.ReadLine();
             }
-
             if (i == 4)
             {
                 Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu.");
                 Console.ReadLine();
             }
         }
-
         Helpers.AddToHistory(score, GameType.Division);
     }
 
@@ -94,7 +89,6 @@ internal class GameEngine
         Console.WriteLine(message);
         var random = new Random();
         var score = 0;
-
         int firstNumber;
         int secondNumber;
 
@@ -122,14 +116,12 @@ internal class GameEngine
                 Console.WriteLine($"Your answer was incorrect. Type any key for the next question");
                 Console.ReadLine();
             }
-
             if (i == 4)
             {
                 Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu.");
                 Console.ReadLine();
             }
         }
-
         Helpers.AddToHistory(score, GameType.Multiplication);
     }
 
@@ -138,7 +130,6 @@ internal class GameEngine
         Console.WriteLine(message);
         var random = new Random();
         var score = 0;
-
         int firstNumber;
         int secondNumber;
 
@@ -152,7 +143,6 @@ internal class GameEngine
 
             Console.WriteLine($"{firstNumber} - {secondNumber}");
             var result = Console.ReadLine();
-
             result = Helpers.ValidateResult(result);
 
             if (int.Parse(result) == firstNumber - secondNumber)
@@ -166,14 +156,12 @@ internal class GameEngine
                 Console.WriteLine($"Your answer was incorrect. Type any key for the next question");
                 Console.ReadLine();
             }
-
             if (i == 4)
             {
                 Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu.");
                 Console.ReadLine();
             }
         }
-
         Helpers.AddToHistory(score, GameType.Subtraction);
     }
 
