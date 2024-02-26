@@ -2,68 +2,59 @@
 internal class Menu
 {
     GameLogic logic = new GameLogic();
+    private int selectedIndex = 0;
+
+    string[] options = new string[6] { "Addition", "Subtraction", "Multiplication", "Division", "View History", "Quit", };
     public void ShowMenu(string name)
     {
         bool playAgain = true;
         while (playAgain)
         {
-            Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Math Game"));
-            Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine($"Hello, {name}, it's {DateTime.Now}");
-            Console.WriteLine();
-            Console.WriteLine($@"What game would you like to play today?
-A - Addition
-S - Subtraction
-M - Multiplication
-D - Division
-V - View History
-Q - Quit");
-            Console.WriteLine("----------------------------------------------------");
+            selectedIndex = Helpers.MenuRun(name, options, selectedIndex);
+            
 
-            string operation = (Console.ReadLine().ToLower());
+
             Console.Clear();
 
-            while (operation != "a" && operation != "s"&& operation != "m" && operation !="d" && operation != "v")
-            {
-                Console.WriteLine($"{operation} is not an option...");
-                operation = Console.ReadLine().ToLower().Trim();
-            }
+            
 
-            switch (char.Parse(operation.Trim()))
+            switch (selectedIndex)
             {
-                case 'a':
+                case 0:
                     Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Addition"));
                     logic.AdditionGame("Addition game selected");
                     break;
-                case 's':
+                case 1:
                     Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Subtraction"));
                     logic.SubtractionGame("Subtraction game selected");
                     break;
-                case 'm':
+                case 2:
                     Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Multiplication"));
                     logic.MultiplicationGame("Multiplication game selected");
                     break;
-                case 'd':
+                case 3:
                     Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Division"));
                     logic.DivisionGame("Division game selected");
                     break;
-                case 'q':
+                case 4:
+                    Helpers.GetGames();
+                    break;
+                case 5:
                     Console.WriteLine("Bye");
                     Environment.Exit(1);
-                    break;
-                case 'v':
-                    Helpers.GetGames();
                     break;
                 default:
                     Console.WriteLine("Invalid Input...");
                     break;
             }
 
-            if (char.Parse(operation.Trim()) != 'v')
+            if (selectedIndex != 4)
             {
-                Console.WriteLine("Type (Y) to play again:");
-                string sPlayAgain = Console.ReadLine().Trim().ToLower();
-                if (sPlayAgain == "y")
+                Console.WriteLine("Press ENTER key to go back");
+                ConsoleKeyInfo pAKey = Console.ReadKey(true);
+                ConsoleKey kPressed = pAKey.Key;
+                
+                if (kPressed == ConsoleKey.Enter)
                 {
                     playAgain = true;
                     Console.Clear();

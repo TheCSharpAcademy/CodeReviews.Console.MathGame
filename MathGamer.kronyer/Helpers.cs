@@ -1,4 +1,5 @@
 ﻿using MathGamer.Models;
+using System.Xml.Linq;
 using static MathGamer.Models.Game;
 
 namespace MathGamer;
@@ -73,5 +74,68 @@ internal class Helpers
         }
         Console.Clear();
         return name;
+    }
+
+    public static void PrintMenu(string name, string[] options, int selectedIndex)
+    {
+        Console.WriteLine(Figgle.FiggleFonts.Ogre.Render("Math Game"));
+        Console.WriteLine("----------------------------------------------------");
+        Console.WriteLine($"Hello, {name}, it's {DateTime.Now}");
+        Console.WriteLine();
+        Console.WriteLine($@"What game would you like to play today?");
+        for (int i = 0; i < options.Length; i++)
+        {
+
+            if (i == selectedIndex)
+            {
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.White;
+
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+
+
+
+            }
+            Console.WriteLine($"<<{options[i]}>>");
+
+        }
+        Console.ResetColor();
+        Console.WriteLine("----------------------------------------------------");
+
+    }
+
+    public static int MenuRun(string name, string[] options, int selectedIndex)
+    {
+        ConsoleKey keypressed;
+        do
+        {
+            
+            Helpers.PrintMenu(name, options, selectedIndex);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            keypressed = keyInfo.Key;
+
+            Console.Clear();
+            if (selectedIndex>0)
+            {
+                
+                if (keypressed == ConsoleKey.UpArrow) { 
+                    selectedIndex -= 1; 
+                }
+            }
+            if (selectedIndex <5)
+            {
+                if (keypressed == ConsoleKey.DownArrow)
+                {
+                    selectedIndex += 1;
+                }
+            }
+        }
+        while (keypressed != ConsoleKey.Enter);
+
+        return selectedIndex;
     }
 }
