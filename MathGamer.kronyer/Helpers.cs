@@ -1,5 +1,4 @@
 ﻿using MathGamer.Models;
-using System.Xml.Linq;
 using static MathGamer.Models.Game;
 
 namespace MathGamer;
@@ -47,7 +46,7 @@ internal class Helpers
             Console.WriteLine(game);
         }
         Console.WriteLine("------------------------------");
-        Console.WriteLine("Press any key to retun...");
+        Console.WriteLine("Press ENTER to retun...");
         Console.ReadLine();
         Console.Clear();
     }

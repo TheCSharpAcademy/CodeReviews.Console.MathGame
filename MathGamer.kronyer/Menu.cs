@@ -2,7 +2,7 @@
 internal class Menu
 {
     GameLogic logic = new GameLogic();
-    private int selectedIndex = 0;
+    private int selectedIndex;
 
     string[] options = new string[6] { "Addition", "Subtraction", "Multiplication", "Division", "View History", "Quit", };
     public void ShowMenu(string name)
@@ -50,10 +50,17 @@ internal class Menu
 
             if (selectedIndex != 4)
             {
+                
                 Console.WriteLine("Press ENTER key to go back");
                 ConsoleKeyInfo pAKey = Console.ReadKey(true);
                 ConsoleKey kPressed = pAKey.Key;
-                
+
+                while (kPressed != ConsoleKey.Enter)
+                {
+                    pAKey = Console.ReadKey(true);
+                    kPressed = pAKey.Key;
+                    Console.WriteLine("Press ENTER key to go back");
+                }
                 if (kPressed == ConsoleKey.Enter)
                 {
                     playAgain = true;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-
+﻿
 using static MathGamer.Models.Game;
 
 namespace MathGamer
