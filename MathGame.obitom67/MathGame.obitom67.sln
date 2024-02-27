@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathGame.obitom67", "MathGame.obitom67.csproj", "{AB63A6D1-D00A-4799-BD8C-3AB363FEA7C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB63A6D1-D00A-4799-BD8C-3AB363FEA7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB63A6D1-D00A-4799-BD8C-3AB363FEA7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB63A6D1-D00A-4799-BD8C-3AB363FEA7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB63A6D1-D00A-4799-BD8C-3AB363FEA7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92736A9F-19D8-422F-B53A-A472F9A951E2}
+	EndGlobalSection
+EndGlobal
