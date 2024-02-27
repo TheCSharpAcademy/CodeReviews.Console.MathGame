@@ -143,7 +143,7 @@ class MathGame
                     // Division
                     num1 = random.Next(1, 100);
                     num2 = random.Next(1, 100);
-                    while((num1/num2) != (decimal)((decimal)num1 /(decimal) num2))
+                    while((num1/num2) != ((decimal)num1 /(decimal) num2))
                     {
                         num1 = random.Next(1, 100);
                         num2 = random.Next(1, 100);
