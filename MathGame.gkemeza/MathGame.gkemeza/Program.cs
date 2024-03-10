@@ -139,7 +139,6 @@ void PrintQuestions(Dictionary<string, string> questionsAndAnswers)
 
 void GetRandomQuestion(Dictionary<string, string> chosenGroup)
 {
-    Random random = new Random();
     string randomKey = chosenGroup.Keys.ElementAt(new Random().Next(0, chosenGroup.Count));
 
     Console.WriteLine(randomKey);
