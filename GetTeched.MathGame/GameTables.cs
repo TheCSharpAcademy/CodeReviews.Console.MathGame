@@ -16,11 +16,3 @@ internal enum GameType
     Division,
     Random
 }
-
-//internal enum DifficultyType
-//{
-//    Easy,
-//    Normal,
-//    Hard,
-//    Impossible
-//}

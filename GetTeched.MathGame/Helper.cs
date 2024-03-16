@@ -90,16 +90,16 @@ internal class Helper
         switch (difficulty)
         {
             case "Easy":
-                value = random.Next(1, 10); ;
+                value = random.Next(1, 10);
                 break;
             case "Normal":
-                value = random.Next(1, 50); ;
+                value = random.Next(1, 50);
                 break;
             case "Hard":
-                value = random.Next(50, 200); ;
+                value = random.Next(50, 200);
                 break;
             case "Impossible":
-                value = random.Next(1000, 999999); ;
+                value = random.Next(1000, 999999);
                 break;
         }
 

@@ -5,9 +5,9 @@ namespace CSharp_Study_ConsoleMathGame;
 internal class Engine
 {
 
-    int firstNumber = 0;
-    int secondNumber = 0;
-    int score = 0;
+    int firstNumber;
+    int secondNumber;
+    int score;
 
     internal void AdditionGame(string name, string difficulty, int questions = 5, bool randomGame = false)
     {
