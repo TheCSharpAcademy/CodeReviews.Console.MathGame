@@ -1,6 +1,4 @@
-﻿
-
-namespace CSharp_Study_ConsoleMathGame;
+﻿namespace CSharp_Study_ConsoleMathGame;
 
 internal class GameMenu
 {
@@ -21,7 +19,6 @@ internal class GameMenu
             difficulty = DifficultySelection();
             numberOfQuestions = NumberOfQuestions();
         }
-
 
         while (gameRunning == true)
         {
