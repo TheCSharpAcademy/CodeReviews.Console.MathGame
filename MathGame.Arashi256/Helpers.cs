@@ -8,12 +8,10 @@ namespace MathGame.Arashi256
 
         internal static void PrintGames()
         {
-            //var gamesToPrint = games.Where(x => x.Type  == GameType.Division).ToList();
             Console.Clear();
             Console.WriteLine("Games History\n");
             foreach (var game in games)
             {
-                //Console.WriteLine(game);
                 Console.WriteLine($"{game.Date} - {game.Type} on {game.Difficulty} difficulty: {game.Score} pts in {game.Time} time");
             }
             Console.WriteLine("\nPress any key to go back to the main menu");
@@ -22,7 +20,6 @@ namespace MathGame.Arashi256
 
         internal static void AddToHistory(int gamescore, GameType gametype, int difficulty, string? time)
         {
-            //games.Add($"{DateTime.Now} - {gametype}: Score = {gamescore} pts");
             games.Add(new Game { Date = DateTime.Now, Score = gamescore, Type = gametype, Difficulty = (Difficulty)difficulty, Time = time });
         }
 

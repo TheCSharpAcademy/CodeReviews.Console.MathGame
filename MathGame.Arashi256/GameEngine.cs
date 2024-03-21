@@ -6,7 +6,7 @@ namespace MathGame.Arashi256
 {
     internal class GameEngine
     {
-        int _score = 0;
+        int _score;
         private int _difficulty = 2;
         private Stopwatch _stopWatch = new Stopwatch();
         private string? _elapsedTime = String.Empty;
@@ -110,7 +110,6 @@ namespace MathGame.Arashi256
         internal void RandomGame(string message)
         {
             int[] numbers = new int[2];
-            string result;
             Console.WriteLine(message);
             _difficulty = GetDifficulty();
             int rounds = Helpers.GetNumberOfRounds(GameType.Random);
