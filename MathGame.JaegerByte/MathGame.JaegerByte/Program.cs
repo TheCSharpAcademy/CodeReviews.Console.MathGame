@@ -32,7 +32,7 @@ namespace MathGame.JaegerByte
         static GameDifficulty selectedDifficulty = GameDifficulty.NotSelected;
         static GameState gamestate = GameState.Selecting;
 
-        static int correctAnswers = 0;
+        static int correctAnswers;
 
         static Stopwatch stopwatch = new Stopwatch();
 
@@ -78,12 +78,10 @@ namespace MathGame.JaegerByte
 
         static void DefineConsole()
         {
-            {
-                Title = "Math Game";
-                SetWindowSize(windowWidth, windowHeight);
-                SetBufferSize(windowWidth, windowHeight);
-                CursorVisible = false;
-            }
+            Title = "Math Game";
+            SetWindowSize(windowWidth, windowHeight);
+            SetBufferSize(windowWidth, windowHeight);
+            CursorVisible = false;
         }
 
         static void DefineHeader()
