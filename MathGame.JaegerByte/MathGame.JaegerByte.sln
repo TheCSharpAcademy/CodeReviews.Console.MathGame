@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34114.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathGame.JaegerByte", "MathGame.JaegerByte\MathGame.JaegerByte.csproj", "{4094D4AB-3E6B-45AB-8A28-0F017F60BB5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4094D4AB-3E6B-45AB-8A28-0F017F60BB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4094D4AB-3E6B-45AB-8A28-0F017F60BB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4094D4AB-3E6B-45AB-8A28-0F017F60BB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4094D4AB-3E6B-45AB-8A28-0F017F60BB5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A8CA651-6C8C-4A0A-8488-6947BF56D7DD}
+	EndGlobalSection
+EndGlobal
