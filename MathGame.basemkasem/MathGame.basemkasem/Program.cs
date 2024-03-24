@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MathGame.basemkasem;
+
+var menu = new Menu();
+
+string name = Helpers.GetName();
+
+menu.ShowMenu(name);
