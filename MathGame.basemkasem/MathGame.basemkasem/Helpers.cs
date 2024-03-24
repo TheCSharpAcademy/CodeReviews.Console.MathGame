@@ -20,8 +20,6 @@ namespace MathGame.basemkasem
         }
         internal static void PrintGames()
         {
-            var gamesToPrint = games.Where(x => x.Date > new DateTime(2024, 03, 30)).OrderByDescending(x => x.Score);
-
             Console.Clear();
             Console.WriteLine("Games History: ");
             foreach (var game in games)
