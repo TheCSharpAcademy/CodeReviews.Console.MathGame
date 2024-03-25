@@ -21,7 +21,7 @@ namespace MyFirstProject;
         };
         internal static void AddToHistory(int gameScore, GameType gameType, GameDifficulty gameDifficulty, int playTimeInSeconds, int numberOfQuestions)
         {
-            games.Add( new Game{ Date = DateTime.Now, Score = gameScore, Type = gameType, Difficulty = gameDifficulty, playTime = playTimeInSeconds, Questions = numberOfQuestions } );
+            games.Add( new Game{ Date = DateTime.Now, Score = gameScore, Type = gameType, Difficulty = gameDifficulty, PlayTime = playTimeInSeconds, Questions = numberOfQuestions } );
         }
         internal static void PrintGames()
         {
@@ -31,7 +31,7 @@ namespace MyFirstProject;
             Console.WriteLine("---------------------------");
             foreach (var game in gamesToPrint)
             {
-                Console.WriteLine($"{game.Date} - {game.Type} - Level: {game.Difficulty} - {game.Score}pts - Time:{game.playTime}s - Number of Questions:{game.Questions}");
+                Console.WriteLine($"{game.Date} - {game.Type} - Level: {game.Difficulty} - {game.Score}pts - Time:{game.PlayTime}s - Number of Questions:{game.Questions}");
             }
             Console.WriteLine("---------------------------\n");
             Console.WriteLine("Press any key to return to Main Menu");

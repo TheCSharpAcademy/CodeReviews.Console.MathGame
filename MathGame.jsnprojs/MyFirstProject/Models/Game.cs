@@ -6,7 +6,7 @@ internal class Game
     public GameType Type {  get; set; }
     public GameDifficulty Difficulty { get; set; }   
     public int Score { get; set; }
-    public int playTime { get; set; } 
+    public int PlayTime { get; set; } 
     public int Questions { get; set; }
 
     internal enum GameType
