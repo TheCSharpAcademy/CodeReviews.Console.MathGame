@@ -9,13 +9,19 @@ MenuItemAction(menuItemChosen);
 // Greets the user
 void Greetings()
 {
-
+    Console.WriteLine("Welcome to the Math Game !\n");
 }
 
 // Displays the menu
 void DisplayMenu()
 {
-
+    Console.WriteLine(@"Menu
+----------
+A - Addition Game
+S - Subtraction Game
+M - Multiplication Game
+D - Division Game
+H - History of previous games");
 }
 
 // Asks the user to choose a menu item
