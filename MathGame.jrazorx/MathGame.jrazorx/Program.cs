@@ -118,22 +118,18 @@ void AdditionGame()
     Console.Clear();
     Console.WriteLine(@"Addition Game
 --------------------");
-
-    // The 2 random numbers used for the game
-    int[] gameNumbers = new int[2];
+    
     Random random = new Random();
 
-    gameNumbers[0] = random.Next(0, 10);
-    gameNumbers[1] = random.Next(0, 10);
+    // The random numbers used for the game
+    int firstNumber = random.Next(0, 10);
+    int secondNumber = random.Next(0, 10);
 
-    Console.WriteLine($"{gameNumbers[0]} + {gameNumbers[1]} = ?");
+    Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
 
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
-    if (playerNumberAnswer == gameNumbers[0] + gameNumbers[1])
-        Console.WriteLine("You win !");
-    else
-        Console.WriteLine("You lose ...");
+    bool gameResult = winOrLose(playerNumberAnswer, firstNumber + secondNumber);
 }
 
 // Play Subtraction Game
@@ -157,6 +153,20 @@ void DivisionGame()
 int GetPlayerNumberAnswer()
 {
     return 0;
+}
+
+bool winOrLose(int playerNumberAnswer, int operationResult)
+{
+    if (playerNumberAnswer == operationResult)
+    {
+        Console.WriteLine("You win !");
+        return true;
+    }
+    else
+    {
+        Console.WriteLine("You lose ...");
+        return false;
+    }
 }
 
 // Display the List containing the history of previous games played
