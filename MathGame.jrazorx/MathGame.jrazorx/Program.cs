@@ -29,6 +29,8 @@ while (true)
     menuItemChosen = ChooseMenuItem();
     MenuItemAction(menuItemChosen);
 
+    Console.WriteLine("Press any key to return to the menu...");
+    Console.ReadKey();
     Console.Clear();
 }
 
