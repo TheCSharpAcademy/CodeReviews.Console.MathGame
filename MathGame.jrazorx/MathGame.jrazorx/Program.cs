@@ -1,13 +1,38 @@
-﻿const string validMenuItems = "ASMDHQ";
+﻿// --------------------------------------------------
+// CONSTANTS
+// --------------------------------------------------
+
+// Letters corresponding to valid menu items
+const string validMenuItems = "ASMDHQ";
+
+// --------------------------------------------------
+// VARIABLES
+// --------------------------------------------------
+
 // Generic string for reading user input
 string? readResult;
+
 // Menu item chosen by the user
 char menuItemChosen;
+
+
+
+
+// --------------------------------------------------
+// EXECUTION
+// --------------------------------------------------
 
 Greetings();
 DisplayMenu();
 menuItemChosen = ChooseMenuItem();
 MenuItemAction(menuItemChosen);
+
+
+
+
+// --------------------------------------------------
+// METHODS
+// --------------------------------------------------
 
 // Greets the user
 void Greetings()
@@ -57,32 +82,49 @@ void MenuItemAction(char menuItemChosen)
         case 'A':
             AdditionGame();
             break;
+
         case 'S':
             SubtractionGame();
             break;
+
         case 'M':
             MultiplicationGame();
             break;
+
         case 'D':
             DivisionGame();
             break;
+
         case 'H':
             DisplayGameHistory();
             break;
-        case 'Q':
+
+        default:
             Console.WriteLine("Goodbye");
             Environment.Exit(0);
             break;
-        default:
-            AdditionGame();
-            break;
+
     }
 }
 
 // Play Addition Game
 void AdditionGame()
 {
+    // The 2 random numbers used for the game
+    int[] gameNumbers = new int[2];
+    Random random = new Random();
 
+    gameNumbers[0] = random.Next(0, 10);
+    gameNumbers[1] = random.Next(0, 10);
+
+    Console.WriteLine($"{gameNumbers[0]} + {gameNumbers[1]} = ?");
+
+    int playerNumberAnswer = GetPlayerNumberAnswer();
+
+    if (playerNumberAnswer == gameNumbers[0] + gameNumbers[1])
+        Console.WriteLine("You win !");
+    else
+        Console.WriteLine("You lose ...");
 }
 
 // Play Subtraction Game
@@ -101,6 +143,11 @@ void MultiplicationGame()
 void DivisionGame()
 {
 
+}
+
+int GetPlayerNumberAnswer()
+{
+    return 0;
 }
 
 // Display the List containing the history of previous games played
