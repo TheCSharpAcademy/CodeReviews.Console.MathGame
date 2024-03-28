@@ -115,6 +115,10 @@ void MenuItemAction(char menuItemChosen)
 // Play Addition Game
 void AdditionGame()
 {
+    Console.Clear();
+    Console.WriteLine(@"Addition Game
+--------------------");
+
     // The 2 random numbers used for the game
     int[] gameNumbers = new int[2];
     Random random = new Random();
