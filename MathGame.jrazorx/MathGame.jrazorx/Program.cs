@@ -181,15 +181,35 @@ string[] MultiplicationGame()
 }
 
 // Play Division Game
-void DivisionGame()
+string[] DivisionGame()
 {
+    Console.Clear();
+    Console.WriteLine(@"Addition Game
+--------------------");
 
+    Random random = new Random();
+
+    // The random numbers used for the game
+    int firstNumber;
+    int secondNumber;
+    do
+    {
+        firstNumber = random.Next(0, 101);
+        secondNumber = random.Next(1, 101);
+    } while (firstNumber % secondNumber != 0);
+
+    Console.WriteLine($"{firstNumber} / {secondNumber} = ?");
+
+    int playerNumberAnswer = GetPlayerNumberAnswer();
+
+    bool gameResult = winOrLose(playerNumberAnswer, firstNumber / secondNumber);
+
+    return new string[] { "Addition", $"{firstNumber} / {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Get the player input for the answer of the game until it is a valid number
 int GetPlayerNumberAnswer()
 {
-    int playerNumberAnswer;
     while (true)
     {
         readResult = Console.ReadLine();
