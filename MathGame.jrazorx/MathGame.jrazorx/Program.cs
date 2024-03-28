@@ -1,4 +1,7 @@
-﻿// Menu item chosen by the user
+﻿const string validMenuItems = "ASMDHQ";
+// Generic string for reading user input
+string? readResult;
+// Menu item chosen by the user
 char menuItemChosen;
 
 Greetings();
@@ -21,14 +24,29 @@ A - Addition Game
 S - Subtraction Game
 M - Multiplication Game
 D - Division Game
-H - History of previous games");
+H - History of previous games
+Q - Quit");
 }
 
-// Asks the user to choose a menu item
-// returns user input
+// returns a valid user selected menu item
 char ChooseMenuItem()
 {
-    return ' ';
+    while (true)
+    {
+        readResult = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(readResult) || readResult.Trim().Length != 1)
+        {
+            Console.WriteLine("Please enter a letter corresponding to a menu item.");
+            continue;
+        }
+
+        char menuItem = readResult.Trim().ToUpper()[0];
+        if (validMenuItems.Contains(menuItem))
+            return menuItem;
+        else
+            Console.WriteLine("Invalid option, please try again.");
+    }
 }
 
 // Executes the action corresponding to the menu item chosen by the user
