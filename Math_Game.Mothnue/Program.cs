@@ -12,117 +12,114 @@ using System.Timers;
 
 class Program
 {
-    //variavel Random para gerar os numeros
+    // Random variable to generate numbers
     static Random random = new Random();
     static List<string> historyArray = new List<string>();
+
     static void Main()
     {
         while (true)
         {
-            Console.WriteLine("Bem vindo ao jogo de matemática. Meu primeiro projeto em C# btw.");
+            Console.WriteLine("Welcome to the math game. My first project in C# btw.");
             Menu();
             string userInput = Console.ReadLine().Trim();
 
-            if (userInput == "1")
+            switch (userInput)
             {
-                Somar();
-            }
-            else if (userInput == "2")
-            {
-                Subtrair();
-            }
-            else if (userInput == "3")
-            {
-                Multiplicar();
-            }
-            else if (userInput == "4")
-            {
-                Dividir();
-            } else if (userInput == "9")
-            {
-                Console.WriteLine("Histórico:");
-                foreach (string item in historyArray)
-                {
-                    Console.WriteLine(item);
-                }
-            }
-            else if (userInput == "0")
-            {
-                Console.WriteLine("Obrigado por jogar. Até logo!");
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Opção inválida. Tente novamente.");
+                case "1":
+                    Add();
+                    break;
+                case "2":
+                    Subtract();
+                    break;
+                case "3":
+                    Multiply();
+                    break;
+                case "4":
+                    Divide();
+                    break;
+                case "9":
+                    Console.WriteLine("History:");
+                    foreach (string item in historyArray)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+                case "0":
+                    Console.WriteLine("Thank you for playing. See you soon!");
+                    return;
+                default:
+                    Console.WriteLine("Invalid option. Try again.");
+                    break;
             }
         }
     }
 
 
-    static void Somar()
+
+    static void Add()
     {
         int score = 0;
 
-        // Exibe o menu de dificuldade e obtém a escolha do usuário
-        MenuDificuldade();
+        // Displays the difficulty menu and gets the user's choice
+        DifficultyMenu();
         string input = Console.ReadLine();
 
-        // Obtém a dificuldade com base na escolha do usuário
-        int diff = ObterDificuldade(input);
+        // Gets the difficulty based on the user's choice
+        int diff = GetDifficulty(input);
 
-        // Gera 10 perguntas e verifica as respostas do usuário
+        // Generates 10 questions and checks the user's answers
         for (int i = 0; i < 10; i++)
         {
-            // Gera dois números aleatórios dentro da faixa de dificuldade
+            // Generates two random numbers within the difficulty range
             int x = random.Next(1, diff);
             int y = random.Next(1, diff);
             int result = x + y;
 
-            // Exibe a pergunta ao usuário
+            // Displays the question to the user
             Console.WriteLine($"{x} + {y} = ?");
-
 
             int usr;
 
-            // Loop para garantir que a entrada do usuário seja um número inteiro válido
+            // Loop to ensure that the user's input is a valid integer
             while (true)
             {
-                Console.Write("Sua resposta: ");
+                Console.Write("Your answer: ");
                 string userInput = Console.ReadLine();
-                historyArray.Add($"{x} + {y} = {result} | Sua resposta: {userInput}");
+                historyArray.Add($"{x} + {y} = {result} | Your answer: {userInput}");
 
-                // Tenta converter a entrada do usuário para um número inteiro
+                // Tries to convert the user's input to an integer
                 if (int.TryParse(userInput, out usr))
                 {
-                    break; // Sai do loop se a conversão for bem-sucedida
+                    break; // Exits the loop if the conversion is successful
                 }
                 else
                 {
-                    Console.WriteLine("Por favor, insira um valor numérico válido.");
+                    Console.WriteLine("Please enter a valid numeric value.");
                 }
             }
 
-
-            // Verifica se a resposta do usuário está correta e atualiza a pontuação
+            // Checks if the user's answer is correct and updates the score
             if (usr == result)
             {
                 score++;
             }
         }
 
-        // Exibe a pontuação final ao usuário
-        Console.WriteLine($"Sua pontuação final é {score}");
+        // Displays the final score to the user
+        Console.WriteLine($"Your final score is {score}");
     }
 
 
-    static void Subtrair()
+
+    static void Subtract()
     {
         int score = 0;
 
-        MenuDificuldade();
+        DifficultyMenu();
         string input = Console.ReadLine();
 
-        int diff = ObterDificuldade(input);
+        int diff = GetDifficulty(input);
 
         for (int i = 0; i < 10; i++)
         {
@@ -130,26 +127,24 @@ class Program
             int y = random.Next(1, diff);
             int result = x - y;
 
-
             Console.WriteLine($"{x} - {y} = ?");
-
 
             int usr;
             while (true)
             {
-                Console.Write("Sua resposta: ");
+                Console.Write("Your answer: ");
                 string userInput = Console.ReadLine();
-                historyArray.Add($"{x} - {y} = {result}");
+                historyArray.Add($"{x} - {y} = {result} | Your answer: {userInput}");
 
                 if (int.TryParse(userInput, out usr))
                 {
                     break;
-                } else
+                }
+                else
                 {
-                    Console.WriteLine("Valor incorreto.");
+                    Console.WriteLine("Incorrect value.");
                 }
             }
-
 
             if (usr == result)
             {
@@ -157,20 +152,18 @@ class Program
             }
         }
 
-
         Console.WriteLine($"Your Score is {score}");
     }
 
-    static void Multiplicar()
+
+    static void Multiply()
     {
         int score = 0;
 
-
-        MenuDificuldade();
+        DifficultyMenu();
         string input = Console.ReadLine();
 
-        int diff = ObterDificuldade(input);
-
+        int diff = GetDifficulty(input);
 
         for (int i = 0; i < 10; i++)
         {
@@ -178,26 +171,25 @@ class Program
             int y = random.Next(1, diff);
             int result = x * y;
 
-
             Console.WriteLine($"{x} x {y} = ?");
 
             int usr;
             while (true)
             {
-                Console.Write("Sua resposta: ");
+                Console.Write("Your answer: ");
                 string userInput = Console.ReadLine();
 
-                historyArray.Add($"{x} - {y} = {result}");
+                historyArray.Add($"{x} x {y} = {result} | Your answer: {userInput}");
 
                 if (int.TryParse(userInput, out usr))
                 {
                     break;
-                } else
+                }
+                else
                 {
-                    Console.WriteLine("Valor incorreto.");
+                    Console.WriteLine("Incorrect value.");
                 }
             }
-
 
             if (usr == result)
             {
@@ -205,45 +197,50 @@ class Program
             }
         }
 
-
         Console.WriteLine($"Your Score is {score}");
     }
 
-    static void Dividir()
+
+    static void Divide()
     {
         int score = 0;
 
-
-        MenuDificuldade();
+        DifficultyMenu();
         string input = Console.ReadLine();
 
-        int diff = ObterDificuldade(input);
-
+        int diff = GetDifficulty(input);
 
         for (int i = 0; i < 10; i++)
         {
-            int x = random.Next(1, diff);
-            int y = random.Next(1, diff);
-            int result = x / y;
+            int number1, number2;
+            int result;
+            do
+            {
+                number2 = random.Next(1, diff);
+                number1 = number2 * random.Next(2, diff);
+                result = number1 / number2;
+            } while (number1 % 2 != 0 || number2 % 2 != 0);
+            ;
 
 
-            Console.WriteLine($"{x} / {y} = ?");
 
+            Console.WriteLine($"{number1} / {number2} = ?");
 
             int usr;
             while (true)
             {
-                Console.Write("Sua resposta: ");
+                Console.Write("Your answer: ");
                 string userInput = Console.ReadLine();
 
-                historyArray.Add($"{x} / {y} = {result}");
+                historyArray.Add($"{number1} / {number2} = {result} | Your answer: {userInput}");
 
                 if (int.TryParse(userInput, out usr))
                 {
                     break;
-                } else
+                }
+                else
                 {
-                    Console.WriteLine("Valor incorreto.");
+                    Console.WriteLine("Incorrect value.");
                 }
             }
 
@@ -253,11 +250,11 @@ class Program
             }
         }
 
-
         Console.WriteLine($"Your Score is {score}");
     }
 
-    static int ObterDificuldade(string input)
+
+    static int GetDifficulty(string input)
     {
         int diff = 0;
 
@@ -273,36 +270,34 @@ class Program
                 diff = 30;
                 break;
             default:
-                Console.WriteLine("Opção de dificuldade inválida. Definindo para Fácil por padrão.");
+                Console.WriteLine("Invalid difficulty option. Setting to Easy by default.");
                 diff = 10;
                 break;
         }
         return diff;
     }
+
     static void Menu()
     {
         Console.WriteLine("╔═════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                       Escolha uma opção:                    ║");
+        Console.WriteLine("║                       Choose an option:                     ║");
         Console.WriteLine("║                                                             ║");
-        Console.WriteLine("║   1 - Somar                                                  ║");
-        Console.WriteLine("║   2 - Subtrair                                               ║");
-        Console.WriteLine("║   3 - Multiplicar                                            ║");
-        Console.WriteLine("║   4 - Dividir                                                ║");
-        Console.WriteLine("║   9 - Histórico                                              ║");
-        Console.WriteLine("║   0 - Sair                                                   ║");
+        Console.WriteLine("║   1 - Add                                                    ║");
+        Console.WriteLine("║   2 - Subtract                                               ║");
+        Console.WriteLine("║   3 - Multiply                                               ║");
+        Console.WriteLine("║   4 - Divide                                                 ║");
+        Console.WriteLine("║   9 - History                                                ║");
+        Console.WriteLine("║   0 - Exit                                                   ║");
         Console.WriteLine("╚═════════════════════════════════════════════════════════════╝");
-
     }
 
-
-    static void MenuDificuldade()
+    static void DifficultyMenu()
     {
         Console.WriteLine("---------------------------------------------------------------");
-        Console.WriteLine("Escolha uma dificuldade para as operações matemáticas:");
-        Console.WriteLine("1 - Fácil");
-        Console.WriteLine("2 - Médio");
-        Console.WriteLine("3 - Difícil");
+        Console.WriteLine("Choose a difficulty for the math operations:");
+        Console.WriteLine("1 - Easy");
+        Console.WriteLine("2 - Medium");
+        Console.WriteLine("3 - Hard");
         Console.WriteLine("---------------------------------------------------------------");
     }
-
 }
