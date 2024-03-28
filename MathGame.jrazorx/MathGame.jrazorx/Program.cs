@@ -137,9 +137,25 @@ string[] AdditionGame()
 }
 
 // Play Subtraction Game
-void SubtractionGame()
+string[] SubtractionGame()
 {
+    Console.Clear();
+    Console.WriteLine(@"Addition Game
+--------------------");
 
+    Random random = new Random();
+
+    // The random numbers used for the game
+    int firstNumber = random.Next(0, 10);
+    int secondNumber = random.Next(0, 10);
+
+    Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
+
+    int playerNumberAnswer = GetPlayerNumberAnswer();
+
+    bool gameResult = winOrLose(playerNumberAnswer, firstNumber - secondNumber);
+
+    return new string[] { "Addition", $"{firstNumber} - {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Play Multiplication Game
