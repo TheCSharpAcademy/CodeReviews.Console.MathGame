@@ -220,7 +220,7 @@ class Program
                 number1 = number2 * random.Next(2, diff);
                 result = number1 / number2;
             } while (number1 % 2 != 0 || number2 % 2 != 0);
-            ;
+            
 
 
 
