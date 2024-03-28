@@ -23,9 +23,14 @@ char menuItemChosen;
 // --------------------------------------------------
 
 Greetings();
-DisplayMenu();
-menuItemChosen = ChooseMenuItem();
-MenuItemAction(menuItemChosen);
+while (true)
+{
+    DisplayMenu();
+    menuItemChosen = ChooseMenuItem();
+    MenuItemAction(menuItemChosen);
+
+    Console.Clear();
+}
 
 
 
@@ -44,7 +49,7 @@ void Greetings()
 void DisplayMenu()
 {
     Console.WriteLine(@"Menu
-----------
+--------------------
 A - Addition Game
 S - Subtraction Game
 M - Multiplication Game
