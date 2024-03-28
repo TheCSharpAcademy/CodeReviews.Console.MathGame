@@ -203,6 +203,7 @@ bool winOrLose(int playerNumberAnswer, int operationResult)
     else
     {
         Console.WriteLine("You lose ...");
+        Console.WriteLine($"The answer was {operationResult}");
         return false;
     }
 }
