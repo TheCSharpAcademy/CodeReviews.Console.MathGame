@@ -115,7 +115,7 @@ void MenuItemAction(char menuItemChosen)
 }
 
 // Play Addition Game
-void AdditionGame()
+string[] AdditionGame()
 {
     Console.Clear();
     Console.WriteLine(@"Addition Game
@@ -132,6 +132,8 @@ void AdditionGame()
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
     bool gameResult = winOrLose(playerNumberAnswer, firstNumber + secondNumber);
+
+    return new string[] { "Addition", $"{firstNumber} + {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE"};
 }
 
 // Play Subtraction Game
@@ -152,6 +154,7 @@ void DivisionGame()
 
 }
 
+// Get the player input for the answer of the game until it is a valid number
 int GetPlayerNumberAnswer()
 {
     int playerNumberAnswer;
@@ -173,6 +176,7 @@ int GetPlayerNumberAnswer()
     }
 }
 
+// Win (true) or lose (false) the game and displays a message
 bool winOrLose(int playerNumberAnswer, int operationResult)
 {
     if (playerNumberAnswer == operationResult)
