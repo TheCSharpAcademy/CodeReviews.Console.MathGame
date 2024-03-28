@@ -159,9 +159,25 @@ string[] SubtractionGame()
 }
 
 // Play Multiplication Game
-void MultiplicationGame()
+string[] MultiplicationGame()
 {
+    Console.Clear();
+    Console.WriteLine(@"Addition Game
+--------------------");
 
+    Random random = new Random();
+
+    // The random numbers used for the game
+    int firstNumber = random.Next(0, 10);
+    int secondNumber = random.Next(0, 10);
+
+    Console.WriteLine($"{firstNumber} x {secondNumber} = ?");
+
+    int playerNumberAnswer = GetPlayerNumberAnswer();
+
+    bool gameResult = winOrLose(playerNumberAnswer, firstNumber * secondNumber);
+
+    return new string[] { "Addition", $"{firstNumber} x {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Play Division Game
