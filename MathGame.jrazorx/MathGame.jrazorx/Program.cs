@@ -52,7 +52,31 @@ char ChooseMenuItem()
 // Executes the action corresponding to the menu item chosen by the user
 void MenuItemAction(char menuItemChosen)
 {
-
+    switch (menuItemChosen)
+    {
+        case 'A':
+            AdditionGame();
+            break;
+        case 'S':
+            SubtractionGame();
+            break;
+        case 'M':
+            MultiplicationGame();
+            break;
+        case 'D':
+            DivisionGame();
+            break;
+        case 'H':
+            DisplayGameHistory();
+            break;
+        case 'Q':
+            Console.WriteLine("Goodbye");
+            Environment.Exit(0);
+            break;
+        default:
+            AdditionGame();
+            break;
+    }
 }
 
 // Play Addition Game
