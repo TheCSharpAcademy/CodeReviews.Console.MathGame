@@ -154,7 +154,23 @@ void DivisionGame()
 
 int GetPlayerNumberAnswer()
 {
-    return 0;
+    int playerNumberAnswer;
+    while (true)
+    {
+        readResult = Console.ReadLine();
+        try
+        {
+            return int.Parse(readResult.Trim());
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Invalid number : too big ! Please enter a valid number");
+        }
+        catch
+        {
+            Console.WriteLine("Please enter a valid number");
+        }
+    }
 }
 
 bool winOrLose(int playerNumberAnswer, int operationResult)
