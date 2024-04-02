@@ -29,7 +29,7 @@ namespace MathGame.jrazorx
         // Constructor, requires game mode letter input (A, S, M, D)
         public Game(char gameLetter)
         {
-            Random random = new Random();
+            Random random = new ();
 
             switch (gameLetter)
             {
@@ -91,7 +91,7 @@ namespace MathGame.jrazorx
         {
             string? readResult;
 
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new ();
             stopwatch.Start();
 
             while (true)
@@ -140,7 +140,7 @@ namespace MathGame.jrazorx
         }
 
         // Print the time it took the user to answer, in English
-        private void PrintTimeTakenToAnswer(TimeSpan timeTakenToAnswer)
+        private static void PrintTimeTakenToAnswer(TimeSpan timeTakenToAnswer)
         {
             string result = "Time taken to answer: ";
 

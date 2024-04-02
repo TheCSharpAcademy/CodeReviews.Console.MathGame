@@ -19,10 +19,8 @@ char menuItemChosen;
 
 // game occurence
 int gameOccurence = 0;
-// last game data, to save in the list of previous games
-string[] lastGameData = new string[4];
 // List of previous games
-List<string> gamesHistory = new List<string>();
+List<string> gamesHistory = new ();
 
 // current Game object
 Game currentGame;
