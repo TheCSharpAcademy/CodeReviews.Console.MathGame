@@ -15,6 +15,13 @@ string? readResult;
 // Menu item chosen by the user
 char menuItemChosen;
 
+// game occurence
+int gameOccurence = 0;
+// last game data, to save in the list of previous games
+string[] lastGameData = new string[4];
+// List of previous games
+List<string[]> gamesHistory = new List<string[]>();
+
 
 
 
@@ -87,23 +94,27 @@ void MenuItemAction(char menuItemChosen)
     switch (menuItemChosen)
     {
         case 'A':
-            AdditionGame();
+            lastGameData = AdditionGame();
+            SaveGame(lastGameData);
             break;
 
         case 'S':
-            SubtractionGame();
+            lastGameData = SubtractionGame();
+            SaveGame(lastGameData);
             break;
 
         case 'M':
-            MultiplicationGame();
+            lastGameData = MultiplicationGame();
+            SaveGame(lastGameData);
             break;
 
         case 'D':
-            DivisionGame();
+            lastGameData = DivisionGame();
+            SaveGame(lastGameData);
             break;
 
         case 'H':
-            DisplayGameHistory();
+            DisplayGameHistory(gamesHistory);
             break;
 
         default:
@@ -155,7 +166,7 @@ string[] SubtractionGame()
 
     bool gameResult = winOrLose(playerNumberAnswer, firstNumber - secondNumber);
 
-    return new string[] { "Addition", $"{firstNumber} - {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
+    return new string[] { "Subtraction", $"{firstNumber} - {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Play Multiplication Game
@@ -177,7 +188,7 @@ string[] MultiplicationGame()
 
     bool gameResult = winOrLose(playerNumberAnswer, firstNumber * secondNumber);
 
-    return new string[] { "Addition", $"{firstNumber} x {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
+    return new string[] { "Multiplication", $"{firstNumber} x {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Play Division Game
@@ -204,7 +215,7 @@ string[] DivisionGame()
 
     bool gameResult = winOrLose(playerNumberAnswer, firstNumber / secondNumber);
 
-    return new string[] { "Addition", $"{firstNumber} / {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
+    return new string[] { "Division", $"{firstNumber} / {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
 
 // Get the player input for the answer of the game until it is a valid number
@@ -244,14 +255,47 @@ bool winOrLose(int playerNumberAnswer, int operationResult)
     }
 }
 
-// Display the List containing the history of previous games played
-void DisplayGameHistory()
+/* Display the List containing the history of previous games played
+Example :
+#   | GAME           | CHALLENGE | ANSWER     | RESULT
+99  | Multiplication | 100 x 100 |      10000 | WIN
+100 | Addition       | 1 + 2     | 2000000000 | LOSE
+*/
+void DisplayGameHistory(List<string[]> gamesHistory)
 {
+    Console.Clear();
 
+    Console.WriteLine("#   | GAME           | CHALLENGE | ANSWER     | RESULT");
+    foreach (string[] game in gamesHistory)
+    {
+        Console.WriteLine(GameHistoryFormatLine(game));
+    }
+}
+
+string GameHistoryFormatLine(string[] gameHistoryData)
+{
+    string gamesHistoryLine = "";
+
+    gamesHistoryLine += gameHistoryData[0].PadRight(3) + " | ";
+    gamesHistoryLine += gameHistoryData[1].PadRight(14) + " | ";
+    gamesHistoryLine += gameHistoryData[2].PadRight(9) + " | ";
+    gamesHistoryLine += gameHistoryData[3].PadLeft(10) + " | ";
+    gamesHistoryLine += gameHistoryData[4];
+
+    return gamesHistoryLine;
 }
 
 // Saves the last game played in the List
-void SaveGame()
+void SaveGame(string[] gameData)
 {
+    try
+    {
+        gameOccurence++;
 
+        gamesHistory.Add(new string[] { gameOccurence.ToString(), gameData[0], gameData[1], gameData[2], gameData[3]});
+    }
+    catch (OverflowException)
+    {
+        Console.WriteLine("You have reached the limit of games that can be saved in one session. From now on, games will not be saved in history");
+    }
 }
