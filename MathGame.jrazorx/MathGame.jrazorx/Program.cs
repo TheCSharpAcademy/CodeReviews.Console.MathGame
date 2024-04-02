@@ -20,7 +20,7 @@ int gameOccurence = 0;
 // last game data, to save in the list of previous games
 string[] lastGameData = new string[4];
 // List of previous games
-List<string[]> gamesHistory = new List<string[]>();
+List<string> gamesHistory = new List<string>();
 
 
 
@@ -261,38 +261,39 @@ Example :
 99  | Multiplication | 100 x 100 |      10000 | WIN
 100 | Addition       | 1 + 2     | 2000000000 | LOSE
 */
-void DisplayGameHistory(List<string[]> gamesHistory)
+void DisplayGameHistory(List<string> gamesHistory)
 {
     Console.Clear();
-
     Console.WriteLine("#   | GAME           | CHALLENGE | ANSWER     | RESULT");
-    foreach (string[] game in gamesHistory)
+
+    foreach (string game in gamesHistory)
     {
-        Console.WriteLine(GameHistoryFormatLine(game));
+        Console.WriteLine(game);
     }
 }
 
-string GameHistoryFormatLine(string[] gameHistoryData)
+// Format the game data into a string for the history array to be displayed nicely on screen
+string GameHistoryFormatLine(int gameOccurence, string[] lastGameData)
 {
     string gamesHistoryLine = "";
 
-    gamesHistoryLine += gameHistoryData[0].PadRight(3) + " | ";
-    gamesHistoryLine += gameHistoryData[1].PadRight(14) + " | ";
-    gamesHistoryLine += gameHistoryData[2].PadRight(9) + " | ";
-    gamesHistoryLine += gameHistoryData[3].PadLeft(10) + " | ";
-    gamesHistoryLine += gameHistoryData[4];
+    gamesHistoryLine += gameOccurence.ToString().PadRight(3) + " | ";
+    gamesHistoryLine += lastGameData[0].PadRight(14) + " | ";
+    gamesHistoryLine += lastGameData[1].PadRight(9) + " | ";
+    gamesHistoryLine += lastGameData[2].PadLeft(10) + " | ";
+    gamesHistoryLine += lastGameData[3];
 
     return gamesHistoryLine;
 }
 
 // Saves the last game played in the List
-void SaveGame(string[] gameData)
+void SaveGame(string[] lastGameData)
 {
     try
     {
         gameOccurence++;
 
-        gamesHistory.Add(new string[] { gameOccurence.ToString(), gameData[0], gameData[1], gameData[2], gameData[3]});
+        gamesHistory.Add(GameHistoryFormatLine(gameOccurence, lastGameData));
     }
     catch (OverflowException)
     {
