@@ -142,7 +142,7 @@ string[] AdditionGame()
 
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
-    bool gameResult = winOrLose(playerNumberAnswer, firstNumber + secondNumber);
+    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber + secondNumber);
 
     return new string[] { "Addition", $"{firstNumber} + {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE"};
 }
@@ -164,7 +164,7 @@ string[] SubtractionGame()
 
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
-    bool gameResult = winOrLose(playerNumberAnswer, firstNumber - secondNumber);
+    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber - secondNumber);
 
     return new string[] { "Subtraction", $"{firstNumber} - {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
@@ -186,7 +186,7 @@ string[] MultiplicationGame()
 
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
-    bool gameResult = winOrLose(playerNumberAnswer, firstNumber * secondNumber);
+    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber * secondNumber);
 
     return new string[] { "Multiplication", $"{firstNumber} x {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
@@ -213,7 +213,7 @@ string[] DivisionGame()
 
     int playerNumberAnswer = GetPlayerNumberAnswer();
 
-    bool gameResult = winOrLose(playerNumberAnswer, firstNumber / secondNumber);
+    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber / secondNumber);
 
     return new string[] { "Division", $"{firstNumber} / {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
 }
@@ -240,7 +240,7 @@ int GetPlayerNumberAnswer()
 }
 
 // Win (true) or lose (false) the game and displays a message
-bool winOrLose(int playerNumberAnswer, int operationResult)
+bool WinOrLose(int playerNumberAnswer, int operationResult)
 {
     if (playerNumberAnswer == operationResult)
     {
