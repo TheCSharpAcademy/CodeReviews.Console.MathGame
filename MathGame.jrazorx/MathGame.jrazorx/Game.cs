@@ -1,4 +1,6 @@
-﻿namespace MathGame.jrazorx
+﻿using System.Diagnostics;
+
+namespace MathGame.jrazorx
 {
     internal class Game
     {
@@ -20,6 +22,8 @@
 
         // result of the game : True = WIN, False = LOSE
         public bool IsWin { get; private set; }
+
+        public TimeSpan TimeTakenToAnswer { get; private set; }
 
 
         // Constructor, requires game mode letter input (A, S, M, D)
@@ -79,13 +83,17 @@
 
             PlayerAnswer = GetPlayerAnswerInput();
 
-            IsWin = WinOrLose(PlayerAnswer);
+            WinOrLose(PlayerAnswer);
         }
 
         // Get the player input for the answer of the game until it is a valid number
         private int GetPlayerAnswerInput()
         {
             string? readResult;
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             while (true)
             {
                 readResult = Console.ReadLine();
@@ -96,7 +104,12 @@
                 }
                 try
                 {
-                    return int.Parse((readResult ?? "").Trim());
+                    int playerAnswerInput = int.Parse((readResult ?? "").Trim());
+
+                    stopwatch.Stop();
+                    TimeTakenToAnswer = stopwatch.Elapsed;
+
+                    return playerAnswerInput;
                 }
                 catch (OverflowException)
                 {
@@ -110,19 +123,34 @@
         }
 
         // Win (true) or lose (false) the game and displays a message
-        private bool WinOrLose(int playerAnswer)
+        private void WinOrLose(int playerAnswer)
         {
             if (playerAnswer == CorrectAnswer)
             {
                 Console.WriteLine("You win !");
-                return true;
+                IsWin = true;
             }
             else
             {
                 Console.WriteLine("You lose ...");
                 Console.WriteLine($"The answer was {CorrectAnswer}");
-                return false;
+                IsWin = false;
             }
+            PrintTimeTakenToAnswer(TimeTakenToAnswer);
+        }
+
+        private void PrintTimeTakenToAnswer(TimeSpan timeTakenToAnswer)
+        {
+            string result = "Time taken to answer: ";
+
+            if (timeTakenToAnswer.TotalMilliseconds < 1000)
+                result += $"{timeTakenToAnswer.Milliseconds} milliseconds";
+            else if (timeTakenToAnswer.TotalSeconds < 60)
+                result += $"{timeTakenToAnswer.TotalSeconds:N3} seconds";
+            else
+                result += "more than a minute";
+
+            Console.WriteLine(result);
         }
     }
 }

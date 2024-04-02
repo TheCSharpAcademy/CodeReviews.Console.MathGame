@@ -128,7 +128,7 @@ Example :
 void DisplayGameHistory(List<string> gamesHistory)
 {
     Console.Clear();
-    Console.WriteLine("#   | GAME           | CHALLENGE | ANSWER     | RESULT");
+    Console.WriteLine("#   | GAME           | CHALLENGE | ANSWER     | RESULT | TIME");
 
     foreach (string game in gamesHistory)
     {
@@ -145,7 +145,9 @@ string GameHistoryFormatLine(int gameOccurence, Game currentGame)
     gamesHistoryLine += currentGame.Mode.PadRight(14) + " | ";
     gamesHistoryLine += currentGame.Operation.PadRight(9) + " | ";
     gamesHistoryLine += currentGame.PlayerAnswer.ToString().PadLeft(10) + " | ";
-    gamesHistoryLine += currentGame.IsWin ? "WIN" : "LOSE";
+    gamesHistoryLine += (currentGame.IsWin ? "WIN" : "LOSE").PadRight(6) + " | ";
+    gamesHistoryLine += (currentGame.TimeTakenToAnswer.TotalMilliseconds < 1000 ? "<" : ">") + " 1 second";
+
 
     return gamesHistoryLine;
 }
