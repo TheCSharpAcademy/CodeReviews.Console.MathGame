@@ -18,7 +18,6 @@
         // Player's answer to the game
         public int PlayerAnswer { get; private set; }
 
-
         // result of the game : True = WIN, False = LOSE
         public bool IsWin { get; private set; }
 
@@ -70,6 +69,7 @@
             }
         }
 
+        // Play the game
         public void Play()
         {
             Console.Clear();
