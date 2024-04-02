@@ -148,7 +148,6 @@ string GameHistoryFormatLine(int gameOccurence, Game currentGame)
     gamesHistoryLine += (currentGame.IsWin ? "WIN" : "LOSE").PadRight(6) + " | ";
     gamesHistoryLine += (currentGame.TimeTakenToAnswer.TotalMilliseconds < 1000 ? "<" : ">") + " 1 second";
 
-
     return gamesHistoryLine;
 }
 

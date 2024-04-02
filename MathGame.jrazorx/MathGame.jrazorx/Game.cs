@@ -139,6 +139,7 @@ namespace MathGame.jrazorx
             PrintTimeTakenToAnswer(TimeTakenToAnswer);
         }
 
+        // Print the time it took the user to answer, in English
         private void PrintTimeTakenToAnswer(TimeSpan timeTakenToAnswer)
         {
             string result = "Time taken to answer: ";
