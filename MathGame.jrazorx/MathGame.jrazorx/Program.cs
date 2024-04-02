@@ -1,4 +1,6 @@
-﻿// --------------------------------------------------
+﻿using MathGame.jrazorx;
+
+// --------------------------------------------------
 // CONSTANTS
 // --------------------------------------------------
 
@@ -21,6 +23,9 @@ int gameOccurence = 0;
 string[] lastGameData = new string[4];
 // List of previous games
 List<string> gamesHistory = new List<string>();
+
+// current Game object
+Game currentGame;
 
 
 
@@ -94,23 +99,12 @@ void MenuItemAction(char menuItemChosen)
     switch (menuItemChosen)
     {
         case 'A':
-            lastGameData = AdditionGame();
-            SaveGame(lastGameData);
-            break;
-
         case 'S':
-            lastGameData = SubtractionGame();
-            SaveGame(lastGameData);
-            break;
-
         case 'M':
-            lastGameData = MultiplicationGame();
-            SaveGame(lastGameData);
-            break;
-
         case 'D':
-            lastGameData = DivisionGame();
-            SaveGame(lastGameData);
+            currentGame = new Game(menuItemChosen);
+            currentGame.Play();
+            SaveGame(currentGame);
             break;
 
         case 'H':
@@ -122,136 +116,6 @@ void MenuItemAction(char menuItemChosen)
             Environment.Exit(0);
             break;
 
-    }
-}
-
-// Play Addition Game
-string[] AdditionGame()
-{
-    Console.Clear();
-    Console.WriteLine(@"Addition Game
---------------------");
-    
-    Random random = new Random();
-
-    // The random numbers used for the game
-    int firstNumber = random.Next(0, 10);
-    int secondNumber = random.Next(0, 10);
-
-    Console.WriteLine($"{firstNumber} + {secondNumber} = ?");
-
-    int playerNumberAnswer = GetPlayerNumberAnswer();
-
-    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber + secondNumber);
-
-    return new string[] { "Addition", $"{firstNumber} + {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE"};
-}
-
-// Play Subtraction Game
-string[] SubtractionGame()
-{
-    Console.Clear();
-    Console.WriteLine(@"Addition Game
---------------------");
-
-    Random random = new Random();
-
-    // The random numbers used for the game
-    int firstNumber = random.Next(0, 10);
-    int secondNumber = random.Next(0, 10);
-
-    Console.WriteLine($"{firstNumber} - {secondNumber} = ?");
-
-    int playerNumberAnswer = GetPlayerNumberAnswer();
-
-    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber - secondNumber);
-
-    return new string[] { "Subtraction", $"{firstNumber} - {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
-}
-
-// Play Multiplication Game
-string[] MultiplicationGame()
-{
-    Console.Clear();
-    Console.WriteLine(@"Addition Game
---------------------");
-
-    Random random = new Random();
-
-    // The random numbers used for the game
-    int firstNumber = random.Next(0, 10);
-    int secondNumber = random.Next(0, 10);
-
-    Console.WriteLine($"{firstNumber} x {secondNumber} = ?");
-
-    int playerNumberAnswer = GetPlayerNumberAnswer();
-
-    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber * secondNumber);
-
-    return new string[] { "Multiplication", $"{firstNumber} x {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
-}
-
-// Play Division Game
-string[] DivisionGame()
-{
-    Console.Clear();
-    Console.WriteLine(@"Addition Game
---------------------");
-
-    Random random = new Random();
-
-    // The random numbers used for the game
-    int firstNumber;
-    int secondNumber;
-    do
-    {
-        firstNumber = random.Next(0, 101);
-        secondNumber = random.Next(1, 101);
-    } while (firstNumber % secondNumber != 0);
-
-    Console.WriteLine($"{firstNumber} / {secondNumber} = ?");
-
-    int playerNumberAnswer = GetPlayerNumberAnswer();
-
-    bool gameResult = WinOrLose(playerNumberAnswer, firstNumber / secondNumber);
-
-    return new string[] { "Division", $"{firstNumber} / {secondNumber}", playerNumberAnswer.ToString(), gameResult ? "WIN" : "LOSE" };
-}
-
-// Get the player input for the answer of the game until it is a valid number
-int GetPlayerNumberAnswer()
-{
-    while (true)
-    {
-        readResult = Console.ReadLine();
-        try
-        {
-            return int.Parse(readResult.Trim());
-        }
-        catch (OverflowException)
-        {
-            Console.WriteLine("Invalid number : too big ! Please enter a valid number");
-        }
-        catch
-        {
-            Console.WriteLine("Please enter a valid number");
-        }
-    }
-}
-
-// Win (true) or lose (false) the game and displays a message
-bool WinOrLose(int playerNumberAnswer, int operationResult)
-{
-    if (playerNumberAnswer == operationResult)
-    {
-        Console.WriteLine("You win !");
-        return true;
-    }
-    else
-    {
-        Console.WriteLine("You lose ...");
-        Console.WriteLine($"The answer was {operationResult}");
-        return false;
     }
 }
 
@@ -273,27 +137,27 @@ void DisplayGameHistory(List<string> gamesHistory)
 }
 
 // Format the game data into a string for the history array to be displayed nicely on screen
-string GameHistoryFormatLine(int gameOccurence, string[] lastGameData)
+string GameHistoryFormatLine(int gameOccurence, Game currentGame)
 {
     string gamesHistoryLine = "";
 
     gamesHistoryLine += gameOccurence.ToString().PadRight(3) + " | ";
-    gamesHistoryLine += lastGameData[0].PadRight(14) + " | ";
-    gamesHistoryLine += lastGameData[1].PadRight(9) + " | ";
-    gamesHistoryLine += lastGameData[2].PadLeft(10) + " | ";
-    gamesHistoryLine += lastGameData[3];
+    gamesHistoryLine += currentGame.Mode.PadRight(14) + " | ";
+    gamesHistoryLine += currentGame.Operation.PadRight(9) + " | ";
+    gamesHistoryLine += currentGame.PlayerAnswer.ToString().PadLeft(10) + " | ";
+    gamesHistoryLine += currentGame.IsWin ? "WIN" : "LOSE";
 
     return gamesHistoryLine;
 }
 
 // Saves the last game played in the List
-void SaveGame(string[] lastGameData)
+void SaveGame(Game currentGame)
 {
     try
     {
         gameOccurence++;
 
-        gamesHistory.Add(GameHistoryFormatLine(gameOccurence, lastGameData));
+        gamesHistory.Add(GameHistoryFormatLine(gameOccurence, currentGame));
     }
     catch (OverflowException)
     {
