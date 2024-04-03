@@ -16,7 +16,8 @@ internal enum GameMode
     Addition,
     Substraction,
     Multiplication,
-    Division
+    Division,
+    Random
 }
 
 internal enum Difficulty

@@ -1,8 +1,4 @@
 ﻿using GonzaLorenzo.MathGame;
-using System;
-using System.Linq.Expressions;
-using System.Numerics;
-using static System.Formats.Asn1.AsnWriter;
 
 Console.WriteLine("Welcome to the Math Game, please type your name.");
 
@@ -41,8 +37,9 @@ void GameMenu(string name)
         2 - Substraction
         3 - Multiplication
         4 - Division
-        5 - View games history.
-        6 - Quit the program");
+        5 - Random
+        6 - View games history.
+        7 - Quit the program");
 
         string gameSelected = Console.ReadLine();
 
@@ -74,10 +71,14 @@ void GameMenu(string name)
                 break;
 
             case "5":
-                ViewGamesHistory();
+                SetGameMode(GameMode.Random);
                 break;
 
             case "6":
+                ViewGamesHistory();
+                break;
+
+            case "7":
                 isGameOn = false;
                 break;
 
@@ -106,11 +107,11 @@ string GetName()
     return name;
 }
 
-void MathGame(GameMode gameMode) 
+void MathGame(GameMode gameMode)
 {
     Difficulty difficulty = ChooseDifficulty();
     int scoreValue = GetScoreValue(difficulty);
-    SetNumbersRange(gameMode, difficulty);
+    SetNumbersRange(difficulty);
     string operation = SetOperation(gameMode);
 
     int questions = ChooseNumberOfQuestions();
@@ -125,8 +126,13 @@ void MathGame(GameMode gameMode)
     {
         Console.Clear();
 
+        if (gameMode == GameMode.Random)
+        {
+            operation = SetOperation(gameMode);
+        }
+
         GetRandomNumbers(operation);
-        
+
         Console.WriteLine($"Question {i + 1}. What is {firstNumber} {operation} {secondNumber}");
 
         string result = Console.ReadLine();
@@ -182,7 +188,7 @@ void SetGameMode(GameMode gameMode)
 {
     GameMode selectedMode = GameMode.Addition;
 
-    switch(gameMode)
+    switch (gameMode)
     {
         case GameMode.Addition:
             Console.Clear();
@@ -207,6 +213,12 @@ void SetGameMode(GameMode gameMode)
             Console.WriteLine("Division game selected");
             selectedMode = GameMode.Division;
             break;
+
+        case GameMode.Random:
+            Console.Clear();
+            Console.WriteLine("Random game selected");
+            selectedMode = GameMode.Random;
+            break;
     }
 
     MathGame(selectedMode);
@@ -216,24 +228,50 @@ string SetOperation(GameMode gameMode)
 {
     string operation = "";
 
-    switch(gameMode)
+    if (gameMode != GameMode.Random)
     {
-        case GameMode.Addition:
-            operation = "+";
-            break;
+        switch (gameMode)
+        {
+            case GameMode.Addition:
+                operation = "+";
+                break;
 
-        case GameMode.Substraction:
-            operation = "-";
-            break;
+            case GameMode.Substraction:
+                operation = "-";
+                break;
 
-        case GameMode.Multiplication:
-            operation = "*";
-            break;
+            case GameMode.Multiplication:
+                operation = "*";
+                break;
 
-        case GameMode.Division:
-            operation = "/";
-            break;
+            case GameMode.Division:
+                operation = "/";
+                break;
+        }
     }
+    else
+    {
+        switch (random.Next(1, 5))
+        {
+            case 1:
+                operation = "+";
+                break;
+
+            case 2:
+                operation = "-";
+                break;
+
+            case 3:
+                operation = "*";
+                break;
+
+            case 4:
+                operation = "/";
+                break;
+        }
+    }
+
+
 
     return operation;
 }
@@ -259,56 +297,40 @@ bool CheckResults(int result, string operation, int firstNumber, int secondNumbe
     }
 }
 
-void SetNumbersRange(GameMode mode, Difficulty difficulty)
+void SetNumbersRange(Difficulty difficulty)
 {
-    if(mode == GameMode.Division)
+    switch (difficulty)
     {
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                randomMinDividend = 10;
-                randomMaxDividend = 100;
+        case Difficulty.Easy:
+            randomMinNumber = 1;
+            randomMaxNumber = 10;
 
-                randomMinDivisor = 2;
-                randomMaxDivisor = 10;
-                break;
+            randomMinDividend = 10;
+            randomMaxDividend = 100;
 
-            case Difficulty.Medium:
-                randomMinDividend = 100;
-                randomMaxDividend = 1000;
+            randomMinDivisor = 2;
+            randomMaxDivisor = 10;
+            break;
 
-                randomMinDivisor = 2;
-                randomMaxDivisor = 10;
-                break;
+        case Difficulty.Medium:
+            randomMinNumber = 10;
+            randomMaxNumber = 100;
+            randomMinDividend = 100;
+            randomMaxDividend = 1000;
 
-            case Difficulty.Hard:
-                randomMinDividend = 100;
-                randomMaxDividend = 1000;
+            randomMinDivisor = 2;
+            randomMaxDivisor = 10;
+            break;
 
-                randomMinDivisor = 10;
-                randomMaxDivisor = 100;
-                break;
-        }
-    }
-    else
-    {
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                randomMinNumber = 1;
-                randomMaxNumber = 10;
-                break;
+        case Difficulty.Hard:
+            randomMinNumber = 100;
+            randomMaxNumber = 1000;
+            randomMinDividend = 100;
+            randomMaxDividend = 1000;
 
-            case Difficulty.Medium:
-                randomMinNumber = 10;
-                randomMaxNumber = 100;
-                break;
-
-            case Difficulty.Hard:
-                randomMinNumber = 100;
-                randomMaxNumber = 1000;
-                break;
-        }
+            randomMinDivisor = 10;
+            randomMaxDivisor = 100;
+            break;
     }
 }
 
@@ -316,7 +338,7 @@ int GetScoreValue(Difficulty difficulty)
 {
     int scoreValue = 0;
 
-    switch(difficulty)
+    switch (difficulty)
     {
         case Difficulty.Easy:
             scoreValue = 1;
@@ -336,7 +358,7 @@ int GetScoreValue(Difficulty difficulty)
 
 void GetRandomNumbers(string operation)
 {
-    if(operation != "/")
+    if (operation != "/")
     {
         firstNumber = random.Next(randomMinNumber, randomMaxNumber);
         secondNumber = random.Next(randomMinNumber, randomMaxNumber);
