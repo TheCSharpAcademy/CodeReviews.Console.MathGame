@@ -1,14 +1,33 @@
-﻿using System.Numerics;
+﻿using GonzaLorenzo.MathGame;
+using System;
+using System.Linq.Expressions;
+using System.Numerics;
+using static System.Formats.Asn1.AsnWriter;
 
 Console.WriteLine("Welcome to the Math Game, please type your name.");
 
 string name = GetName();
 var date = DateTime.UtcNow;
 
-List<string> games = new();
+List<Game> games = new();
 int gameNumber = 0;
 
+var random = new Random();
+
+int firstNumber = 0;
+int secondNumber = 0;
+
+int randomMinNumber = 0;
+int randomMaxNumber = 0;
+
+int randomMinDividend = 0;
+int randomMaxDividend = 0;
+
+int randomMinDivisor = 0;
+int randomMaxDivisor = 0;
+
 GameMenu(name);
+
 void GameMenu(string name)
 {
     bool isGameOn = true;
@@ -22,9 +41,8 @@ void GameMenu(string name)
         2 - Substraction
         3 - Multiplication
         4 - Division
-        5 - Random Game
-        6 - View games history.
-        7 - Quit the program");
+        5 - View games history.
+        6 - Quit the program");
 
         string gameSelected = Console.ReadLine();
 
@@ -40,30 +58,26 @@ void GameMenu(string name)
         switch (gameSelected)
         {
             case "1":
-                AdditionGame();
+                SetGameMode(GameMode.Addition);
                 break;
 
             case "2":
-                SubstractionGame();
+                SetGameMode(GameMode.Substraction);
                 break;
 
             case "3":
-                MultiplicationGame();
+                SetGameMode(GameMode.Multiplication);
                 break;
 
             case "4":
-                DivisionGame();
+                SetGameMode(GameMode.Division);
                 break;
 
             case "5":
-                RandomGame();
-                break;
-
-            case "6":
                 ViewGamesHistory();
                 break;
 
-            case "7":
+            case "6":
                 isGameOn = false;
                 break;
 
@@ -92,450 +106,268 @@ string GetName()
     return name;
 }
 
-void AdditionGame()
+void MathGame(GameMode gameMode) 
 {
-    Console.Clear();
-    Console.WriteLine("Addition game selected");
-
-    string difficulty = ChooseDifficulty();
-
-    int randomMinNumber = 0;
-    int randomMaxNumber = 0;
-    int scoreValue = 0;
-
-    switch (difficulty)
-    {
-        case "easy":
-            randomMinNumber = 1;
-            randomMaxNumber = 10;
-            scoreValue = 1;
-            break;
-
-        case "medium":
-            randomMinNumber = 10;
-            randomMaxNumber = 100;
-            scoreValue = 2;
-            break;
-
-        case "hard":
-            randomMinNumber = 100;
-            randomMaxNumber = 1000;
-            scoreValue = 3;
-            break;
-    }
+    Difficulty difficulty = ChooseDifficulty();
+    int scoreValue = GetScoreValue(difficulty);
+    SetNumbersRange(gameMode, difficulty);
+    string operation = SetOperation(gameMode);
 
     int questions = ChooseNumberOfQuestions();
 
     Console.Clear();
     Console.WriteLine("Let's start the game.");
-
-    var random = new Random();
-
-    int firstNumber = 0;
-    int secondNumber = 0;
+    DateTime startTime = DateTime.Now;
 
     int score = 0;
 
     for (int i = 0; i < questions; i++)
     {
         Console.Clear();
+
+        GetRandomNumbers(operation);
+        
+        Console.WriteLine($"Question {i + 1}. What is {firstNumber} {operation} {secondNumber}");
+
+        string result = Console.ReadLine();
+        bool isValid = false;
+
+        while (!isValid)
+        {
+            if (!int.TryParse(result, out int validResult))
+            {
+                Console.WriteLine($"Invalid input. What is {firstNumber} {operation} {secondNumber}");
+                result = Console.ReadLine();
+            }
+            else
+            {
+                isValid = true;
+            }
+        }
+
+        if (CheckResults(int.Parse(result), operation, firstNumber, secondNumber))
+        {
+            score += scoreValue;
+
+            if (i == questions - 1)
+            {
+                Console.WriteLine("Your answer was correct!");
+                continue;
+            }
+
+            Console.WriteLine("Your answer was correct! Press enter for the next question.");
+            Console.ReadLine();
+        }
+        else
+        {
+            if (i == questions - 1)
+            {
+                Console.WriteLine("Your answer was incorrect.");
+                continue;
+            }
+
+            Console.WriteLine("Your answer was incorrect. Press enter key for the next question.");
+            Console.ReadLine();
+        }
+    }
+
+    DateTime endTime = DateTime.Now;
+    TimeSpan timeTaken = endTime - startTime;
+    AddToHistory(gameMode, difficulty, questions, score, timeTaken);
+    Console.WriteLine($"Game over. Your final score is {score}. Press enter to go back to the menu.");
+    Console.ReadLine();
+}
+
+void SetGameMode(GameMode gameMode)
+{
+    GameMode selectedMode = GameMode.Addition;
+
+    switch(gameMode)
+    {
+        case GameMode.Addition:
+            Console.Clear();
+            Console.WriteLine("Addition game selected");
+            selectedMode = GameMode.Addition;
+            break;
+
+        case GameMode.Substraction:
+            Console.Clear();
+            Console.WriteLine("Substraction game selected");
+            selectedMode = GameMode.Substraction;
+            break;
+
+        case GameMode.Multiplication:
+            Console.Clear();
+            Console.WriteLine("Multiplication game selected");
+            selectedMode = GameMode.Multiplication;
+            break;
+
+        case GameMode.Division:
+            Console.Clear();
+            Console.WriteLine("Division game selected");
+            selectedMode = GameMode.Division;
+            break;
+    }
+
+    MathGame(selectedMode);
+}
+
+string SetOperation(GameMode gameMode)
+{
+    string operation = "";
+
+    switch(gameMode)
+    {
+        case GameMode.Addition:
+            operation = "+";
+            break;
+
+        case GameMode.Substraction:
+            operation = "-";
+            break;
+
+        case GameMode.Multiplication:
+            operation = "*";
+            break;
+
+        case GameMode.Division:
+            operation = "/";
+            break;
+    }
+
+    return operation;
+}
+
+bool CheckResults(int result, string operation, int firstNumber, int secondNumber)
+{
+    switch (operation)
+    {
+        case "+":
+            return result == firstNumber + secondNumber;
+
+        case "-":
+            return result == firstNumber - secondNumber;
+
+        case "*":
+            return result == firstNumber * secondNumber;
+
+        case "/":
+            return result == firstNumber / secondNumber;
+
+        default:
+            throw new ArgumentException("Invalid operation");
+    }
+}
+
+void SetNumbersRange(GameMode mode, Difficulty difficulty)
+{
+    if(mode == GameMode.Division)
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                randomMinDividend = 10;
+                randomMaxDividend = 100;
+
+                randomMinDivisor = 2;
+                randomMaxDivisor = 10;
+                break;
+
+            case Difficulty.Medium:
+                randomMinDividend = 100;
+                randomMaxDividend = 1000;
+
+                randomMinDivisor = 2;
+                randomMaxDivisor = 10;
+                break;
+
+            case Difficulty.Hard:
+                randomMinDividend = 100;
+                randomMaxDividend = 1000;
+
+                randomMinDivisor = 10;
+                randomMaxDivisor = 100;
+                break;
+        }
+    }
+    else
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                randomMinNumber = 1;
+                randomMaxNumber = 10;
+                break;
+
+            case Difficulty.Medium:
+                randomMinNumber = 10;
+                randomMaxNumber = 100;
+                break;
+
+            case Difficulty.Hard:
+                randomMinNumber = 100;
+                randomMaxNumber = 1000;
+                break;
+        }
+    }
+}
+
+int GetScoreValue(Difficulty difficulty)
+{
+    int scoreValue = 0;
+
+    switch(difficulty)
+    {
+        case Difficulty.Easy:
+            scoreValue = 1;
+            break;
+
+        case Difficulty.Medium:
+            scoreValue = 2;
+            break;
+
+        case Difficulty.Hard:
+            scoreValue = 3;
+            break;
+    }
+
+    return scoreValue;
+}
+
+void GetRandomNumbers(string operation)
+{
+    if(operation != "/")
+    {
         firstNumber = random.Next(randomMinNumber, randomMaxNumber);
         secondNumber = random.Next(randomMinNumber, randomMaxNumber);
+    }
+    else
+    {
+        firstNumber = random.Next(randomMinDividend, randomMaxDividend);
+        secondNumber = random.Next(randomMinDivisor, randomMaxDivisor);
 
-        Console.WriteLine($"Question {i + 1}. What is {firstNumber} + {secondNumber}");
-
-        string result = Console.ReadLine();
-        bool isValid = false;
-
-        while (!isValid)
+        while (firstNumber % secondNumber != 0)
         {
-            if (!int.TryParse(result, out int validResult))
-            {
-                Console.WriteLine($"Invalid input. What is {firstNumber} + {secondNumber}");
-                result = Console.ReadLine();
-            }
-            else
-            {
-                isValid = true;
-            }
-        }
-
-        if (int.Parse(result) == firstNumber + secondNumber)
-        {
-            score += scoreValue;
-
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was correct!");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was correct! Press enter for the next question.");
-            Console.ReadLine();
-        }
-        else
-        {
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was incorrect. Press enter key for the next question.");
-            Console.ReadLine();
+            firstNumber = random.Next(randomMinDividend, randomMaxDividend);
+            secondNumber = random.Next(randomMinDivisor, randomMaxDivisor);
         }
     }
-
-    AddToHistory("Addition", difficulty, questions, score);
-    Console.WriteLine($"Game over. Your final score is {score}. Press enter to go back to the menu.");
-    Console.ReadLine();
 }
 
-void SubstractionGame()
-{
-    Console.Clear();
-    Console.WriteLine("Substraction game selected");
-
-    string difficulty = ChooseDifficulty();
-
-    int randomMinNumber = 0;
-    int randomMaxNumber = 0;
-    int scoreValue = 0;
-
-    switch (difficulty)
-    {
-        case "easy":
-            randomMinNumber = 1;
-            randomMaxNumber = 10;
-            scoreValue = 1;
-            break;
-
-        case "medium":
-            randomMinNumber = 10;
-            randomMaxNumber = 100;
-            scoreValue = 2;
-            break;
-
-        case "hard":
-            randomMinNumber = 100;
-            randomMaxNumber = 1000;
-            scoreValue = 3;
-            break;
-    }
-
-    int questions = ChooseNumberOfQuestions();
-
-    Console.Clear();
-    Console.WriteLine("Let's start the game.");
-
-    var random = new Random();
-
-    int firstNumber = 0;
-    int secondNumber = 0;
-
-    int score = 0;
-
-    for (int i = 0; i < questions; i++)
-    {
-        Console.Clear();
-        firstNumber = random.Next(randomMinNumber, randomMaxNumber);
-        secondNumber = random.Next(randomMinNumber, randomMaxNumber);
-
-        Console.WriteLine($"Question {i + 1}. What is {firstNumber} - {secondNumber}");
-
-        string result = Console.ReadLine();
-        bool isValid = false;
-
-        while (!isValid)
-        {
-            if (!int.TryParse(result, out int validResult))
-            {
-                Console.WriteLine($"Invalid input. What is {firstNumber} - {secondNumber}");
-                result = Console.ReadLine();
-            }
-            else
-            {
-                isValid = true;
-            }
-        }
-
-        if (int.Parse(result) == firstNumber - secondNumber)
-        {
-            score += scoreValue;
-
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was correct!");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was correct! Press enter for the next question.");
-            Console.ReadLine();
-        }
-        else
-        {
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was incorrect. Press enter key for the next question.");
-            Console.ReadLine();
-        }
-    }
-
-    AddToHistory("Substraction", difficulty, questions, score);
-    Console.WriteLine($"Game over. Your final score is {score}. Press enter to go back to the menu.");
-    Console.ReadLine();
-}
-
-void MultiplicationGame()
-{
-    Console.Clear();
-    Console.WriteLine("Multiplication game selected");
-
-    string difficulty = ChooseDifficulty();
-
-    int randomMinNumber = 0;
-    int randomMaxNumber = 0;
-    int scoreValue = 0;
-
-    switch (difficulty)
-    {
-        case "easy":
-            randomMinNumber = 1;
-            randomMaxNumber = 10;
-            scoreValue = 1;
-            break;
-
-        case "medium":
-            randomMinNumber = 10;
-            randomMaxNumber = 100;
-            scoreValue = 2;
-            break;
-
-        case "hard":
-            randomMinNumber = 100;
-            randomMaxNumber = 1000;
-            scoreValue = 3;
-            break;
-    }
-
-    int questions = ChooseNumberOfQuestions();
-
-    Console.Clear();
-    Console.WriteLine("Let's start the game.");
-
-    var random = new Random();
-
-    int firstNumber = 0;
-    int secondNumber = 0;
-
-    int score = 0;
-
-    for (int i = 0; i < questions; i++)
-    {
-        Console.Clear();
-        firstNumber = random.Next(randomMinNumber, randomMaxNumber);
-        secondNumber = random.Next(randomMinNumber, randomMaxNumber);
-
-        Console.WriteLine($"Question {i + 1}. What is {firstNumber} * {secondNumber}");
-
-        string result = Console.ReadLine();
-        bool isValid = false;
-
-        while (!isValid)
-        {
-            if (!int.TryParse(result, out int validResult))
-            {
-                Console.WriteLine($"Invalid input. What is {firstNumber} * {secondNumber}");
-                result = Console.ReadLine();
-            }
-            else
-            {
-                isValid = true;
-            }
-        }
-
-        if (int.Parse(result) == firstNumber * secondNumber)
-        {
-            score += scoreValue;
-
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was correct!");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was correct! Press enter for the next question.");
-            Console.ReadLine();
-        }
-        else
-        {
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was incorrect. Press enter key for the next question.");
-            Console.ReadLine();
-        }
-    }
-
-    AddToHistory("Multiplication", difficulty, questions, score);
-    Console.WriteLine($"Game over. Your final score is {score}. Press enter to go back to the menu.");
-    Console.ReadLine();
-}
-
-void DivisionGame()
-{
-    Console.Clear();
-    Console.WriteLine("Division game selected");
-
-    string difficulty = ChooseDifficulty();
-
-    int randomMinDividend = 0;
-    int randomMaxDividend = 0;
-
-    int randomMinDivisor = 0;
-    int randomMaxDivisor = 0;
-
-    int scoreValue = 0;
-
-    switch (difficulty)
-    {
-        case "easy":
-            randomMinDividend = 10;
-            randomMaxDividend = 100;
-
-            randomMinDivisor = 1;
-            randomMaxDivisor = 10;
-            scoreValue = 1;
-            break;
-
-        case "medium":
-            randomMinDividend = 100;
-            randomMaxDividend = 1000;
-
-            randomMinDivisor = 1;
-            randomMaxDivisor = 10;
-            scoreValue = 2;
-            break;
-
-        case "hard":
-            randomMinDividend = 100;
-            randomMaxDividend = 1000;
-
-            randomMinDivisor = 10;
-            randomMaxDivisor = 100;
-            scoreValue = 3;
-            break;
-    }
-
-    int questions = ChooseNumberOfQuestions();
-
-    Console.Clear();
-    Console.WriteLine("Let's start the game.");
-
-    var random = new Random();
-
-    int dividend = 0;
-    int divisor = 0;
-
-    int score = 0;
-
-    for (int i = 0; i < questions; i++)
-    {
-        Console.Clear();
-
-        int[] divisionNumbers = GetDivisionNumbers(randomMinDividend, randomMaxDividend, randomMinDivisor, randomMaxDivisor);
-
-        dividend = divisionNumbers[0];
-        divisor = divisionNumbers[1];
-
-        Console.WriteLine($"Question {i + 1}. What is {dividend} / {divisor}");
-
-        string result = Console.ReadLine();
-        bool isValid = false;
-
-        while (!isValid)
-        {
-            if (!int.TryParse(result, out int validResult))
-            {
-                Console.WriteLine($"Invalid input. What is {dividend} / {divisor}");
-                result = Console.ReadLine();
-            }
-            else
-            {
-                isValid = true;
-            }
-        }
-
-        if (int.Parse(result) == dividend / divisor)
-        {
-            score += scoreValue;
-
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was correct!");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was correct! Press enter for the next question.");
-            Console.ReadLine();
-        }
-        else
-        {
-            if (i == questions - 1)
-            {
-                Console.WriteLine("Your answer was incorrect.");
-                continue;
-            }
-
-            Console.WriteLine("Your answer was incorrect. Press enter key for the next question.");
-            Console.ReadLine();
-        }
-    }
-
-    AddToHistory("Division", difficulty, questions, score);
-    Console.WriteLine($"Game over. Your final score is {score}. Press enter to go back to the menu.");
-    Console.ReadLine();
-}
-
-int[] GetDivisionNumbers(int randomMinDividend, int randomMaxDividend, int randomMinDivisor, int randomMaxDivisor)
-{
-    var random = new Random();
-
-    int dividend = random.Next(randomMinDividend, randomMaxDividend);
-    int divisor = random.Next(randomMinDivisor, randomMaxDivisor);
-
-    int[] result = new int[2];
-
-    while(dividend % divisor != 0)
-    {
-        dividend = random.Next(randomMinDividend, randomMaxDividend);
-        divisor = random.Next(randomMinDivisor, randomMaxDivisor);
-    }
-
-    result[0] = dividend;
-    result[1] = divisor;
-
-    return result;
-}
-
-void AddToHistory(string gameMode, string difficulty, int questions, int score)
+void AddToHistory(GameMode gameMode, Difficulty difficulty, int questions, int score, TimeSpan timeTaken)
 {
     gameNumber++;
 
-    games.Add($@"{DateTime.Now} - Game {gameNumber}
-    Game mode: {gameMode}
-    Difficulty: {difficulty}
-    Number of questions: {questions}
-    
-    Final score: {score}
-    ");
+    games.Add(new Game
+    {
+        ID = gameNumber,
+        Date = DateTime.Now,
+        Mode = gameMode,
+        Difficulty = difficulty,
+        Questions = questions,
+        Score = score,
+        Time = timeTaken
+    });
 }
 
 void ViewGamesHistory()
@@ -546,7 +378,14 @@ void ViewGamesHistory()
     Console.WriteLine("--------------------------------\n");
     foreach (var game in games)
     {
-        Console.WriteLine(game);
+        Console.WriteLine($@"{game.Date} - Game {game.ID}
+        Game mode: {game.Mode}
+        Difficulty: {game.Difficulty}
+        Number of questions: {game.Questions}
+    
+        Final score: {game.Score}
+        Time taken: {game.Time.TotalSeconds} seconds
+        ");
     }
     Console.WriteLine("---------------------------------\n");
 
@@ -554,13 +393,14 @@ void ViewGamesHistory()
     Console.ReadLine();
 }
 
-string ChooseDifficulty()
+Difficulty ChooseDifficulty()
 {
     Console.WriteLine("Please choose your difficulty. Easy, medium or hard.");
 
-    string validDifficulty = "";
+    Difficulty validDifficulty = Difficulty.Easy;
+    bool validInput = false;
 
-    while (validDifficulty == "")
+    while (!validInput)
     {
         string difficulty = Console.ReadLine();
 
@@ -568,17 +408,20 @@ string ChooseDifficulty()
         {
             case "easy":
                 Console.WriteLine("Easy difficulty selected");
-                validDifficulty = "easy";
+                validDifficulty = Difficulty.Easy;
+                validInput = true;
                 break;
 
             case "medium":
                 Console.WriteLine("Medium difficulty selected");
-                validDifficulty = "medium";
+                validDifficulty = Difficulty.Medium;
+                validInput = true;
                 break;
 
             case "hard":
                 Console.WriteLine("Hard difficulty selected");
-                validDifficulty = "hard";
+                validDifficulty = Difficulty.Hard;
+                validInput = true;
                 break;
 
             default:
