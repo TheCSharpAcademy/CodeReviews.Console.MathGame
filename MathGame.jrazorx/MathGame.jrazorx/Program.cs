@@ -1,4 +1,5 @@
-﻿using MathGame.jrazorx;
+﻿using System.Text;
+using MathGame.jrazorx;
 
 // --------------------------------------------------
 // CONSTANTS
@@ -137,16 +138,16 @@ void DisplayGameHistory(List<string> gamesHistory)
 // Format the game data into a string for the history array to be displayed nicely on screen
 string GameHistoryFormatLine(int gameOccurence, Game currentGame)
 {
-    string gamesHistoryLine = "";
+    StringBuilder gamesHistoryLine = new StringBuilder();
 
-    gamesHistoryLine += gameOccurence.ToString().PadRight(3) + " | ";
-    gamesHistoryLine += currentGame.Mode.PadRight(14) + " | ";
-    gamesHistoryLine += currentGame.Operation.PadRight(9) + " | ";
-    gamesHistoryLine += currentGame.PlayerAnswer.ToString().PadLeft(10) + " | ";
-    gamesHistoryLine += (currentGame.IsWin ? "WIN" : "LOSE").PadRight(6) + " | ";
-    gamesHistoryLine += (currentGame.TimeTakenToAnswer.TotalMilliseconds < 1000 ? "<" : ">") + " 1 second";
+    gamesHistoryLine.AppendFormat("{0, -3} | ", gameOccurence);
+    gamesHistoryLine.AppendFormat("{0, -14} | ", currentGame.Mode);
+    gamesHistoryLine.AppendFormat("{0, -9} | ", currentGame.Operation);
+    gamesHistoryLine.AppendFormat("{0, 10} | ", currentGame.PlayerAnswer);
+    gamesHistoryLine.AppendFormat("{0, -6} | ", currentGame.IsWin ? "WIN" : "LOSE");
+    gamesHistoryLine.Append(currentGame.TimeTakenToAnswer.TotalMilliseconds < 1000 ? "< 1 second" : "> 1 second");
 
-    return gamesHistoryLine;
+    return gamesHistoryLine.ToString();
 }
 
 // Saves the last game played in the List
