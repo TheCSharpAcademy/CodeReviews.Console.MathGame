@@ -11,14 +11,12 @@ string GetName()
 {
     string name = Console.ReadLine();
 
-    do
+    while (string.IsNullOrEmpty(name.Trim()) || int.TryParse(name, out _))
     {
-        if (string.IsNullOrEmpty(name))
-        {
-            Console.WriteLine("Please type your name.");
-            name = Console.ReadLine();
-        }
-    } while (string.IsNullOrEmpty(name));
+        Console.Clear();
+        Console.WriteLine("Invalid Input. Please type your name.");
+        name = Console.ReadLine();
+    } 
 
     name = char.ToUpper(name[0]) + name.Substring(1);
 

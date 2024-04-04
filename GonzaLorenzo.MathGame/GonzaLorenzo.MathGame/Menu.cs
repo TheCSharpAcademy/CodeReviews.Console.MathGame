@@ -19,18 +19,15 @@ internal class Menu
             4 - Division
             5 - Random
             6 - View games history.
-            7 - Quit the program");
+            7 - Exit the program");
 
             string gameSelected = Console.ReadLine();
 
-            do
+            while (string.IsNullOrEmpty(gameSelected) || !int.TryParse(gameSelected, out _))
             {
-                if (string.IsNullOrEmpty(gameSelected))
-                {
-                    Console.WriteLine("Please choose the game you would like to play.");
-                    gameSelected = Console.ReadLine();
-                }
-            } while (string.IsNullOrEmpty(gameSelected));
+                Console.WriteLine("Invalid input. Please choose the game you would like to play.");
+                gameSelected = Console.ReadLine();               
+            } 
 
             switch (gameSelected)
             {
@@ -60,10 +57,6 @@ internal class Menu
 
                 case "7":
                     isGameOn = false;
-                    break;
-
-                default:
-                    Console.WriteLine("Please choose the game you would like to play.");
                     break;
             }
         } while (isGameOn);

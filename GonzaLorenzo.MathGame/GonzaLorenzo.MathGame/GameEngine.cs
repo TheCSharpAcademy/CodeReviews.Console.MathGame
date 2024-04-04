@@ -27,8 +27,6 @@ internal class GameEngine
 
         int questions = ChooseNumberOfQuestions();
 
-        Console.Clear();
-        Console.WriteLine("Let's start the game.");
         DateTime startTime = DateTime.Now;
 
         int score = 0;
@@ -47,19 +45,12 @@ internal class GameEngine
             Console.WriteLine($"Question {i + 1}. What is {firstNumber} {operation} {secondNumber}?");
 
             string result = Console.ReadLine();
-            bool isValid = false;
 
-            while (!isValid)
+            while (!int.TryParse(result, out _))
             {
-                if (!int.TryParse(result, out int validResult))
-                {
-                    Console.WriteLine($"Invalid input. What is {firstNumber} {operation} {secondNumber}?");
-                    result = Console.ReadLine();
-                }
-                else
-                {
-                    isValid = true;
-                }
+                Console.Clear();
+                Console.WriteLine($"Invalid input. What is {firstNumber} {operation} {secondNumber}?");
+                result = Console.ReadLine();
             }
 
             if (CheckResults(int.Parse(result), operation, firstNumber, secondNumber))
@@ -103,31 +94,31 @@ internal class GameEngine
         {
             case GameMode.Addition:
                 Console.Clear();
-                Console.WriteLine("Addition game selected");
+                Console.WriteLine("Addition game selected.");
                 selectedMode = GameMode.Addition;
                 break;
 
             case GameMode.Substraction:
                 Console.Clear();
-                Console.WriteLine("Substraction game selected");
+                Console.WriteLine("Substraction game selected.");
                 selectedMode = GameMode.Substraction;
                 break;
 
             case GameMode.Multiplication:
                 Console.Clear();
-                Console.WriteLine("Multiplication game selected");
+                Console.WriteLine("Multiplication game selected.");
                 selectedMode = GameMode.Multiplication;
                 break;
 
             case GameMode.Division:
                 Console.Clear();
-                Console.WriteLine("Division game selected");
+                Console.WriteLine("Division game selected.");
                 selectedMode = GameMode.Division;
                 break;
 
             case GameMode.Random:
                 Console.Clear();
-                Console.WriteLine("Random game selected");
+                Console.WriteLine("Random game selected.");
                 selectedMode = GameMode.Random;
                 break;
         }
@@ -221,24 +212,28 @@ internal class GameEngine
             switch (difficulty.Trim().ToLower())
             {
                 case "easy":
-                    Console.WriteLine("Easy difficulty selected");
+                    Console.Clear();
+                    Console.WriteLine("Easy difficulty selected.");
                     validDifficulty = Difficulty.Easy;
                     validInput = true;
                     break;
 
                 case "medium":
-                    Console.WriteLine("Medium difficulty selected");
+                    Console.Clear();
+                    Console.WriteLine("Medium difficulty selected.");
                     validDifficulty = Difficulty.Medium;
                     validInput = true;
                     break;
 
                 case "hard":
-                    Console.WriteLine("Hard difficulty selected");
+                    Console.Clear();
+                    Console.WriteLine("Hard difficulty selected.");
                     validDifficulty = Difficulty.Hard;
                     validInput = true;
                     break;
 
                 default:
+                    Console.Clear();
                     Console.WriteLine("Invalid input. Please choose your difficulty. Easy, medium or hard.");
                     break;
             }
@@ -261,6 +256,7 @@ internal class GameEngine
 
             if (!int.TryParse(input, out numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 10)
             {
+                Console.Clear();
                 Console.WriteLine("Invalid input. Please choose the number of questions from 1 to 10.");
             }
             else
@@ -269,6 +265,18 @@ internal class GameEngine
                 numberOfQuestions = int.Parse(input);
             }
         }
+
+        Console.Clear();
+        if(numberOfQuestions == 1)
+        {
+            Console.WriteLine($"{numberOfQuestions} question selected. Press enter to start the game.");
+        }
+        else
+        {
+            Console.WriteLine($"{numberOfQuestions} questions selected. Press enter to start the game.");
+        }
+        
+        Console.ReadLine();
 
         return numberOfQuestions;
     }
