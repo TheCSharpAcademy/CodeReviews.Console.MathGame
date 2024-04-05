@@ -4,6 +4,8 @@ namespace MathGame.jrazorx
 {
     internal class Game
     {
+        private static Random random = new();
+
         // Game Mode (Addition, Subtraction, Multiplication, Division)
         public string Mode { get; }
 
@@ -29,8 +31,6 @@ namespace MathGame.jrazorx
         // Constructor, requires game mode letter input (A, S, M, D)
         public Game(char gameLetter)
         {
-            Random random = new ();
-
             switch (gameLetter)
             {
                 case 'A':
