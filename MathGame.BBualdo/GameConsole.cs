@@ -43,7 +43,7 @@ internal class GameConsole
   public static void ShowError(string message)
   {
     Console.WriteLine("");
-    Console.WriteLine($"Error: {message});
+    Console.WriteLine($"Error: {message}");
     Console.WriteLine("");
   }
 }

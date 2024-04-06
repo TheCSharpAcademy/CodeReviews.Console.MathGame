@@ -8,10 +8,10 @@ internal class Game
   public GameTypes Type { get; set; }
   public DateTime Date { get; set; }
   public DifficultyLevels DifficultyLevel { get; set; }
-  public int Score { get; set; };
+  public int Score { get; set; }
   public int NumberOfQuestions { get; set; }
   public int TimeInSeconds { get; set; }
-  public bool IsGameOn { get; set; };
+  public bool IsGameOn { get; set; }
 
   public Game()
   {
