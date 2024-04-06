@@ -4,7 +4,7 @@ namespace MathGame.BBualdo;
 
 internal class GameHistory
 {
-  public List<Game> gamesList { get; set; } = new List<Game>();
+  public List<Game> GamesList { get; set; } = new List<Game>();
 
   public void GetGamesHistory()
   {
@@ -13,7 +13,7 @@ internal class GameHistory
 
     GameConsole.ShowMessage(@"Games History
 --------------------");
-    if (gamesList.Count == 0)
+    if (GamesList.Count == 0)
     {
       GameConsole.ShowMessage("There are no games played yet.");
       GameConsole.ShowMessage("Please press any key to get back to main menu.");
@@ -21,7 +21,7 @@ internal class GameHistory
       return;
     }
 
-    foreach (Game game in gamesList)
+    foreach (Game game in GamesList)
     {
       GameConsole.ShowMessage($"{nameof(Game.Date)}: {DateTime.Parse(game.Date.ToString())} | {nameof(Game.Type)}: {game.Type} | {nameof(Game.DifficultyLevel)}: {game.DifficultyLevel} | {nameof(Game.Score)}: {game.Score}/{game.NumberOfQuestions} | {nameof(Game.TimeInSeconds)}: {game.TimeInSeconds}s");
     }
