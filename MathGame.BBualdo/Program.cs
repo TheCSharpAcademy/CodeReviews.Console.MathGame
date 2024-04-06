@@ -13,7 +13,7 @@ do
   {
     gameEngine.SelectDifficulty();
     gameEngine.SelectNumberOfQuestions();
-    gameEngine.CurrentGame.Run(gameEngine.MaxValue);
+    gameEngine.CurrentGame.Run();
     gameEngine.GamesHistory.GamesList.Add(gameEngine.CurrentGame);
   }
 } while (!gameEngine.CurrentGame.IsGameOn);

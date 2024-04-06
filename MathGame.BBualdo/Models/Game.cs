@@ -12,18 +12,32 @@ internal class Game
   public int NumberOfQuestions { get; set; }
   public int TimeInSeconds { get; set; }
   public bool IsGameOn { get; set; }
+  public int MaxValue { get; set; }
 
   public Game()
   {
     Date = DateTime.Now;
   }
 
-  public void Run(int maxValue)
+  public void Run()
   {
     Console.Clear();
     GameConsole.ShowTitle();
     GameConsole.ShowMessage(@$"{Type} Game
 --------------------");
+
+    if (DifficultyLevel == DifficultyLevels.Easy)
+    {
+      MaxValue = 11;
+    }
+    else if (DifficultyLevel == DifficultyLevels.Medium)
+    {
+      MaxValue = 51;
+    }
+    else
+    {
+      MaxValue = 101;
+    }
 
     GameTimer gameTimer = new GameTimer();
     gameTimer.EnableTimer();
@@ -43,22 +57,15 @@ internal class Game
 
       if (currentOperator == '/')
       {
-        int[] nums = DivisionNumbers.GetDivisionNumbers(maxValue);
+        int[] nums = DivisionNumbers.GetDivisionNumbers(MaxValue);
         num1 = nums[0];
         num2 = nums[1];
       }
       else
       {
         Random random = new Random();
-
-        // Decreased maxValue by one decimal to avoid huge numbers in * (did the same for /)
-        if (currentOperator == '*')
-        {
-          maxValue /= 10;
-        }
-
-        num1 = random.Next(1, maxValue);
-        num2 = random.Next(1, maxValue);
+        num1 = random.Next(1, MaxValue);
+        num2 = random.Next(1, MaxValue);
       }
 
       GameConsole.ShowMessage($"{num1} {currentOperator} {num2} ?");

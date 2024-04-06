@@ -7,7 +7,6 @@ internal class GameEngine
 {
   public Game CurrentGame { get; set; } = new Game();
   public GameHistory GamesHistory { get; set; } = new GameHistory();
-  public int MaxValue { get; set; }
 
   public void SelectMode()
   {
@@ -76,15 +75,12 @@ internal class GameEngine
     {
       case "e":
         CurrentGame.DifficultyLevel = DifficultyLevels.Easy;
-        MaxValue = 10;
         break;
       case "m":
         CurrentGame.DifficultyLevel = DifficultyLevels.Medium;
-        MaxValue = 100;
         break;
       case "h":
         CurrentGame.DifficultyLevel = DifficultyLevels.Hard;
-        MaxValue = 1000;
         break;
       default:
         GameConsole.ShowError("Wrong input!");
