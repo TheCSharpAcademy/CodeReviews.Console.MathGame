@@ -18,7 +18,8 @@ do
     Console.WriteLine("2. Division");
     Console.WriteLine("3. Addition");
     Console.WriteLine("4. Subtraction");
-    Console.WriteLine("5. History\n");
+    Console.WriteLine("5. Game History\n");
+    Console.WriteLine("\nType 'exit' to exit program.");
 
     userInput = Console.ReadLine();
 
@@ -169,6 +170,7 @@ int GenerateRandomNumber()
 
 void ShowHistory()
 {
+    Console.Clear();
     Console.WriteLine("Under Construction...Press Enter to return to Main menu.");
     Console.ReadLine();
 }
