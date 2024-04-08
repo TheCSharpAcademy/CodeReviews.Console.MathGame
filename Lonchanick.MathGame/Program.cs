@@ -1,6 +1,4 @@
 ﻿
-
-int op;
 List<string> operations = new();
 
 do
@@ -62,8 +60,8 @@ do
     Console.Clear();
     Console.WriteLine("\tDivition");
     bool flag = true;
-    int dividend=0;
-    int divisor=0;
+    int dividend;
+    int divisor;
     do
     {
         dividend = GetValidInteger("Dividend");
@@ -107,8 +105,8 @@ void Sum()
 {
     Console.Clear();
     Console.WriteLine("\tSum");
-    int n1 = 0;
-    int n2 = 0;
+    int n1;
+    int n2;
     n1 = GetValidInteger("first member");
     n2 = GetValidInteger("second member");
 
@@ -124,8 +122,8 @@ void Rest()
     Console.Clear();
 
     Console.WriteLine("\tRest");
-    int n1 = 0;
-    int n2 = 0;
+    int n1;
+    int n2;
     n1 = GetValidInteger("first member");
     n2 = GetValidInteger("second member");
 
@@ -139,8 +137,8 @@ void Mult()
     Console.Clear();
 
     Console.WriteLine("\tMult");
-    int n1 = 0;
-    int n2 = 0;
+    int n1;
+    int n2;
     n1 = GetValidInteger("first member");
     n2 = GetValidInteger("second member");
 
@@ -152,7 +150,7 @@ void Mult()
 int GetValidInteger(string param)
 {
     string aux = "";
-    int result = 0;
+    int result;
 
     while(!int.TryParse(aux, out result))
     {
