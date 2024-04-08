@@ -2,7 +2,7 @@
 
 Random randomNumbers = new();
 
-int x, y, answer, userAnswer;
+int x, y, answerToProblem, userAnswer;
 
 bool validInput = false;
 bool isDone = false;
@@ -70,22 +70,10 @@ void Multiplication()
         x = GenerateRandomNumber();
         y = GenerateRandomNumber();
 
-        answer = x * y;
+        answerToProblem = x * y;
         Console.WriteLine($"{x} x {y}");
 
-        userInput = Console.ReadLine();
-
-        if (userInput != null)
-        {
-            validInput = int.TryParse(userInput, out userAnswer);
-
-            if (userAnswer == answer)
-            {
-                answerStatement = "Correct";
-            }
-            else
-                answerStatement = "Incorrect";
-        }
+        answerStatement = CheckAnswer(answerToProblem);
     }
 
     Console.Clear();
@@ -115,20 +103,10 @@ void Division()
 
         } while (y > x || x % y != 0);
 
-        answer = x / y;
+        answerToProblem = x / y;
         Console.WriteLine($"{x} / {y}");
 
-        userInput = Console.ReadLine();
-
-        if (userInput != null)
-        {
-            validInput = int.TryParse(userInput, out userAnswer);
-
-            if (userAnswer == answer)
-            {
-                Console.WriteLine("Correct answer!");
-            }
-        }
+        answerStatement = CheckAnswer(answerToProblem);
     }
 
     Console.Clear();
@@ -147,20 +125,11 @@ void Addition()
         Console.WriteLine($"Addition({i + 1}/5) - {answerStatement}!");
         x = GenerateRandomNumber();
         y = GenerateRandomNumber();
-        answer = x + y;
+        answerToProblem = x + y;
 
         Console.WriteLine($"{x} + {y}");
-        userInput = Console.ReadLine();
 
-        if (userInput != null)
-        {
-            validInput = int.TryParse(userInput, out userAnswer);
-
-            if (userAnswer == answer)
-            {
-                Console.WriteLine("Correct answer!");
-            }
-        }
+        answerStatement = CheckAnswer(answerToProblem);
     }
 
     Console.Clear();
@@ -181,20 +150,10 @@ void Subtraction()
         x = GenerateRandomNumber();
         y = GenerateRandomNumber();
 
-        answer = x - y;
+        answerToProblem = x - y;
         Console.WriteLine($"{x} - {y}");
 
-        userInput = Console.ReadLine();
-
-        if (userInput != null)
-        {
-            validInput = int.TryParse(userInput, out userAnswer);
-
-            if (userAnswer == answer)
-            {
-                Console.WriteLine("Correct answer!");
-            }
-        }
+        answerStatement = CheckAnswer(answerToProblem);
     }
 
     Console.Clear();
@@ -212,4 +171,25 @@ void ShowHistory()
 {
     Console.WriteLine("Under Construction...Press Enter to return to Main menu.");
     Console.ReadLine();
+}
+
+string CheckAnswer(int answerToProblem)
+{
+    string answerStatement = "";
+    
+    userInput = Console.ReadLine();
+
+        if (userInput != null)
+        {
+            validInput = int.TryParse(userInput, out userAnswer);
+
+            if (userAnswer == answerToProblem)
+            {
+                answerStatement = "Correct";
+            }
+            else
+                answerStatement = "Incorrect";
+        }
+
+    return answerStatement;
 }
