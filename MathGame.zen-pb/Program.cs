@@ -8,13 +8,14 @@ bool validInput = false;
 
 string? userInput;
 
-Console.WriteLine("Welcome to MATH GAME!");
+Console.Clear();
+Console.WriteLine("Welcome to MATH GAME!\n");
 Console.WriteLine("Choose what type of game you want to play: ");
 Console.WriteLine("1. Multiplication");
 Console.WriteLine("2. Division");
 Console.WriteLine("3. Addition");
 Console.WriteLine("4. Subtraction");
-Console.WriteLine("5. History");
+Console.WriteLine("5. History\n");
 
 userInput = Console.ReadLine();
 
@@ -49,10 +50,13 @@ if (userInput != null)
 
 void Multiplication()
 {
+    Console.Clear();
     Console.WriteLine("Multiplication - Enter the correct answer!");
     x = GenerateRandomNumber();
     y = GenerateRandomNumber();
+    
     answer = x * y;
+    Console.WriteLine($"{x} x {y}");
 
     userInput = Console.ReadLine();
 
@@ -69,6 +73,7 @@ void Multiplication()
 
 void Division()
 {
+    Console.Clear();
     Console.WriteLine("Division - Enter the correct answer!");
     x = GenerateRandomNumber();
     y = GenerateRandomNumber();
@@ -79,6 +84,7 @@ void Division()
     }
 
     answer = x / y;
+    Console.WriteLine($"{x} / {y}");
 
     userInput = Console.ReadLine();
 
@@ -95,11 +101,13 @@ void Division()
 
 void Addition()
 {
+    Console.Clear();
     Console.WriteLine("Addition - Enter the correct answer!");
     x = GenerateRandomNumber();
     y = GenerateRandomNumber();
     answer = x + y;
 
+    Console.WriteLine($"{x} + {y}");
     userInput = Console.ReadLine();
 
     if (userInput != null)
@@ -115,10 +123,13 @@ void Addition()
 
 void Subtraction()
 {
+    Console.Clear();
     Console.WriteLine("Subtraction - Enter the correct answer!");
     x = GenerateRandomNumber();
     y = GenerateRandomNumber();
+
     answer = x - y;
+    Console.WriteLine($"{x} - {y}");
 
     userInput = Console.ReadLine();
 
