@@ -54,7 +54,7 @@ void Multiplication()
     Console.WriteLine("Multiplication - Enter the correct answer!");
     x = GenerateRandomNumber();
     y = GenerateRandomNumber();
-    
+
     answer = x * y;
     Console.WriteLine($"{x} x {y}");
 
@@ -75,13 +75,18 @@ void Division()
 {
     Console.Clear();
     Console.WriteLine("Division - Enter the correct answer!");
-    x = GenerateRandomNumber();
-    y = GenerateRandomNumber();
 
-    while (y == 0)
+    do
     {
+        x = GenerateRandomNumber();
         y = GenerateRandomNumber();
-    }
+
+        while (y == 0)
+        {
+            y = GenerateRandomNumber();
+        }
+
+    } while (y > x || x % y != 0);
 
     answer = x / y;
     Console.WriteLine($"{x} / {y}");
