@@ -77,17 +77,21 @@ do
             Console.WriteLine("Keep trying!");
         
         Console.ReadLine();
-        Console.WriteLine();
 
     } while (flag);
 }
 
 bool Checker(int dividend, int divisor)
 {
-    if(dividend >100 || divisor > 100)
+    if (divisor == 0)
+    {
+        Console.WriteLine("You can't divide by 0!");
+        return false;
+    }
+
+    if (dividend >100 || divisor > 100)
     {
         Console.WriteLine("Division members can't be > than 100");
-        Console.ReadLine();
         return false;
     }
     //var quotient = 
@@ -96,7 +100,7 @@ bool Checker(int dividend, int divisor)
         Console.WriteLine("Quotient can't be > 0");
         return false;
     }
-
+    
     return true;
 
 }
