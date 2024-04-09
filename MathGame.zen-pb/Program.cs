@@ -3,10 +3,6 @@
 int x, y, answerToProblem;
 
 List<List<string>> gameHistory = [];
-List<string> multiplicationHistory = [];
-List<string> divisionHistory = [];
-List<string> additionHistory = [];
-List<string> subtractionHistory = [];
 
 bool validInput = false;
 bool isDone = false;
