@@ -277,7 +277,7 @@ string CheckAnswer(int x, char ope, int y, int answerToProblem)
         expression += string.Concat(Enumerable.Repeat(" ", lengthDifference)); //Add spaces to the expression based on the difference in length between the 'expression' and 10 characters.
     }
 
-    gameHistory.Add([expression, $"{answerToProblem}", answerStatement + "  ", $"{userAnswer}"]); //Append to 'gameHistory' the expression, the correct answer, the evaluation, and the user's answer.
+    gameHistory.Add(new List<string> {expression, $"{answerToProblem}", answerStatement + "  ", $"{userAnswer}"}); //Append to 'gameHistory' the expression, the correct answer, the evaluation, and the user's answer.
 
     return answerStatement;
 }
