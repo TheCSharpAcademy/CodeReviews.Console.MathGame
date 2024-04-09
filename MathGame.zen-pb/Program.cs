@@ -2,7 +2,13 @@
 
 Random randomNumbers = new();
 
-int x, y, answerToProblem, userAnswer;
+int x, y, answerToProblem;
+
+List<List<string>> gameHistory = [];
+List<string> multiplicationHistory = [];
+List<string> divisionHistory = [];
+List<string> additionHistory = [];
+List<string> subtractionHistory = [];
 
 bool validInput = false;
 bool isDone = false;
@@ -13,16 +19,14 @@ do
 {
     Console.Clear();
     Console.WriteLine("Welcome to MATH GAME!\n");
-    Console.WriteLine("Choose what type of game you want to play: ");
+    Console.WriteLine("Choose what type of game you want to play. Type 'exit' to close the program: ");
     Console.WriteLine("1. Multiplication");
     Console.WriteLine("2. Division");
     Console.WriteLine("3. Addition");
     Console.WriteLine("4. Subtraction");
     Console.WriteLine("5. Game History\n");
-    Console.WriteLine("\nType 'exit' to exit program.");
 
     userInput = Console.ReadLine();
-
 
     if (userInput != null)
     {
@@ -37,18 +41,22 @@ do
             switch (chosenGame)
             {
                 case 1:
+                    gameHistory.Add(["Multiplication"]);
                     Multiplication();
                     break;
 
                 case 2:
+                    gameHistory.Add(["Division"]);
                     Division();
                     break;
 
                 case 3:
+                    gameHistory.Add(["Addition"]);
                     Addition();
                     break;
 
                 case 4:
+                    gameHistory.Add(["Subtraction"]);
                     Subtraction();
                     break;
 
@@ -74,7 +82,9 @@ void Multiplication()
         answerToProblem = x * y;
         Console.WriteLine($"{x} x {y}");
 
-        answerStatement = CheckAnswer(answerToProblem);
+        answerStatement = CheckAnswer(x, 'x', y, answerToProblem);
+
+
     }
 
     Console.Clear();
@@ -107,7 +117,7 @@ void Division()
         answerToProblem = x / y;
         Console.WriteLine($"{x} / {y}");
 
-        answerStatement = CheckAnswer(answerToProblem);
+        answerStatement = CheckAnswer(x, '/', y, answerToProblem);
     }
 
     Console.Clear();
@@ -130,7 +140,7 @@ void Addition()
 
         Console.WriteLine($"{x} + {y}");
 
-        answerStatement = CheckAnswer(answerToProblem);
+        answerStatement = CheckAnswer(x, '+', y, answerToProblem);
     }
 
     Console.Clear();
@@ -154,7 +164,7 @@ void Subtraction()
         answerToProblem = x - y;
         Console.WriteLine($"{x} - {y}");
 
-        answerStatement = CheckAnswer(answerToProblem);
+        answerStatement = CheckAnswer(x, '-', y, answerToProblem);
     }
 
     Console.Clear();
@@ -171,27 +181,70 @@ int GenerateRandomNumber()
 void ShowHistory()
 {
     Console.Clear();
-    Console.WriteLine("Under Construction...Press Enter to return to Main menu.");
+    Console.WriteLine("Game History:\n");
+
+    if (gameHistory.Count != 0)
+    {
+        Console.WriteLine("\t\tExpression\t\tAnswer\t\tEvaluation\t\tYour Answer");
+
+        foreach (var row in gameHistory)
+        {
+            if (row.Count != 1)
+            {
+                Console.Write("\t\t");
+            }
+
+            foreach (var element in row)
+            {
+                if (row.Count == 1)
+                {
+                    Console.Write(element);
+                }
+                else
+                {
+                    Console.Write(element + "\t\t");
+                }
+            }
+            Console.WriteLine();
+        }
+    }
+    else
+        Console.WriteLine("No history.");
+
+    Console.WriteLine("\n\rPress Enter to return to the Main menu.");
     Console.ReadLine();
 }
 
-string CheckAnswer(int answerToProblem)
+string CheckAnswer(int x, char ope, int y, int answerToProblem)
 {
+    int userAnswer = 0;
+
     string answerStatement = "";
-    
+
     userInput = Console.ReadLine();
 
-        if (userInput != null)
-        {
-            validInput = int.TryParse(userInput, out userAnswer);
+    if (userInput != null)
+    {
+        validInput = int.TryParse(userInput, out userAnswer);
 
-            if (userAnswer == answerToProblem)
-            {
-                answerStatement = "Correct";
-            }
-            else
-                answerStatement = "Incorrect";
+        if (userAnswer == answerToProblem)
+        {
+            answerStatement = "Correct";
         }
+        else
+            answerStatement = "Incorrect";
+    }
+
+    string expression = $"{x} {ope} {y}";
+
+    int lengthDifference = 10 - expression.Length;
+
+    if (lengthDifference != 0)
+    {
+        expression += string.Concat(Enumerable.Repeat(" ", lengthDifference));
+    }
+
+    gameHistory.Add([expression, $"{answerToProblem}", answerStatement + "  ", $"{userAnswer}"]);
 
     return answerStatement;
 }
