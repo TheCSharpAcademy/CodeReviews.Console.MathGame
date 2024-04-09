@@ -1,6 +1,4 @@
-﻿using System;
-
-Random randomNumbers = new();
+﻿Random randomNumbers = new();
 
 int x, y, answerToProblem;
 
