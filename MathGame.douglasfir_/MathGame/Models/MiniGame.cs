@@ -4,7 +4,7 @@ internal class MiniGame
 {
     public DateTime Date { get; set; }
     public int Score { get; set; }
-    public GameType gameType { get; set; }
-    public QuestionType questionType { get; set; }
-    public DifficultyLevel difficultyLevel { get; set; }
+    public GameType GameType { get; set; }
+    public QuestionType QuestionType { get; set; }
+    public DifficultyLevel DifficultyLevel { get; set; }
 }
