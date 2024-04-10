@@ -65,6 +65,11 @@ while (!gameOver)
             Console.WriteLine("\n");
             break;
         case 4:
+            // Making sure division will result on a whole number
+            while( firstNumber % secondNumber != 0)
+            {
+                secondNumber = random.Next(1,11);
+            }
             Console.WriteLine($"{firstNumber} / {secondNumber} = ??");
             result = mathGame.DivisionOperation(firstNumber, secondNumber);
             if (result != int.MaxValue)
