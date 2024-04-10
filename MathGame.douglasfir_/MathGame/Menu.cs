@@ -74,9 +74,9 @@ internal static class Menu
         Console.WriteLine("=====================================================================================================");
         foreach (var game in gameHistory)
         {
-            string gameType = game.gameType is GameType.Survival ? game.gameType.ToString() : game.questionType.ToString();
+            string gameType = game.GameType is GameType.Survival ? game.GameType.ToString() : game.QuestionType.ToString();
             string date = game.Date.ToString();
-            Console.WriteLine($"TimeStamp: {date}     \tGame: {gameType}    \tScore: {game.Score}   \t Difficulty: {game.difficultyLevel}");
+            Console.WriteLine($"TimeStamp: {date}     \tGame: {gameType}    \tScore: {game.Score}   \t Difficulty: {game.DifficultyLevel}");
         }
         Console.WriteLine();
         Console.WriteLine("=====================================================================================================\n");

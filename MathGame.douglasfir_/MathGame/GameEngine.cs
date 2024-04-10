@@ -76,20 +76,20 @@ internal partial class GameEngine
         MiniGame game = new MiniGame()
         {
             Date = DateTime.Now,
-            gameType = GameType.Standard,
-            questionType = questionType,
-            difficultyLevel = difficultyLevel,
+            GameType = GameType.Standard,
+            QuestionType = questionType,
+            DifficultyLevel = difficultyLevel,
             Score = 0
         };
 
         int questionsCorrect = 0;
-        string menuTitle = $"{game.questionType} Quiz";
+        string menuTitle = $"{game.QuestionType} Quiz";
 
         for (int i = 0; i < GameLength; i++)
         {
-            Question question = GenerateQuestion(game.questionType, game.difficultyLevel);
+            Question question = GenerateQuestion(game.QuestionType, game.DifficultyLevel);
             Console.Clear();
-            Menu.PrintInnerGameMenu($"{game.questionType} Quiz");
+            Menu.PrintInnerGameMenu($"{game.QuestionType} Quiz");
 
             Console.WriteLine($"{question.FirstNumber} {question.OperationSymbol} {question.SecondNumber} = ?");
             var userAnswer = Console.ReadLine();
@@ -119,12 +119,12 @@ internal partial class GameEngine
         MiniGame game = new MiniGame()
         {
             Date = DateTime.Now,
-            gameType = GameType.Survival,
-            difficultyLevel = difficultyLevel,
+            GameType = GameType.Survival,
+            DifficultyLevel = difficultyLevel,
             Score = 0
         };
 
-        string menuTitle = $"{game.gameType} Quiz";
+        string menuTitle = $"{game.GameType} Quiz";
         QuestionType[] questionTypes = { QuestionType.Addition, QuestionType.Subtraction, QuestionType.Multiplication, QuestionType.Division };
         bool continuePlaying = true;
         int questionsCorrect = 0;
@@ -132,7 +132,7 @@ internal partial class GameEngine
         while (continuePlaying)
         {
             QuestionType randomQuestionType = questionTypes[new Random().Next(questionTypes.Length)];
-            Question question = GenerateQuestion(randomQuestionType, game.difficultyLevel);
+            Question question = GenerateQuestion(randomQuestionType, game.DifficultyLevel);
 
             Console.Clear();
             Menu.PrintInnerGameMenu(menuTitle);

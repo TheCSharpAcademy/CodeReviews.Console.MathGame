@@ -85,7 +85,7 @@ namespace MathGame
             return difficultyLevel.Value;
         }
 
-        internal static string? ValidateResult(string result)
+        internal static string ValidateResult(string? result)
         {
             while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
             {
