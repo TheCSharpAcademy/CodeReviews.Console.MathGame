@@ -1,7 +1,10 @@
-﻿namespace jcast24.MathGame
+﻿using System.Numerics;
+
+namespace jcast24.MathGame
 {
     class Program
     {
+        
         static void Menu()
         {
             string? input;
@@ -14,13 +17,14 @@
                 Console.WriteLine("(m) Multiplication");
                         
                 input = Console.ReadLine();
+                
                 switch (input)
                 {
                     case "a":
-                        Console.WriteLine("Addition function!");
+                        Addition();
                         break;
                     case "s":
-                        Console.WriteLine("Subtraction function!");
+                        Subtraction();
                         break;
                     case "d":
                         Console.WriteLine("Division function!");
@@ -32,6 +36,48 @@
                         Console.WriteLine("Please ask again!");
                         break;
                 }
+            }
+        }
+
+        static void Addition()
+        {
+            var random = new Random();
+            int firstNum = random.Next(1, 9);
+            int secondNum = random.Next(1, 9);
+
+            int result = firstNum + secondNum;
+            
+            Console.WriteLine($"What is the result of {firstNum} + {secondNum}");
+            int getResult = Convert.ToInt32(Console.ReadLine());
+
+            if (getResult == result)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Not Correct!");
+            }
+        }
+
+        static void Subtraction()
+        {
+            var random = new Random();
+            int firstNum = random.Next(1, 9);
+            int secondNum = random.Next(1, 9);
+
+            int result = firstNum - secondNum;
+            
+            Console.WriteLine($"What is the result of {firstNum} - {secondNum}");
+            int getResult = Convert.ToInt32(Console.ReadLine());
+            
+            if (getResult == result)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Not Correct!");
             }
         }
         
