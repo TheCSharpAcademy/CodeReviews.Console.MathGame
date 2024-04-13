@@ -1,27 +1,35 @@
-﻿namespace jcast24.MathGame;
-
+﻿/*
+ * TODO: Ask the user how many games they would like to play, keep track of score
+ */
+namespace jcast24.MathGame;
 public class Engine
 {
-    public void Addition()
+    public void Addition(int numOfGames)
     {
-        var random = new Random();
-        int firstNum = random.Next(1, 9);
-        int secondNum = random.Next(1, 9);
-
-
-        int result = firstNum + secondNum;
+        int score = 0;
+        for (int i = 0; i < numOfGames; i++)
+        {
+            var random = new Random();
+            int firstNum = random.Next(1, 9);
+            int secondNum = random.Next(1, 9);
             
-        Console.WriteLine($"What is the result of {firstNum} + {secondNum}?");
-        int getResult = Convert.ToInt32(Console.ReadLine());
-
-        if (getResult == result)
-        {
-            Console.WriteLine("Correct!");
+            int result = firstNum + secondNum;
+                    
+            Console.WriteLine($"What is the result of {firstNum} + {secondNum}?");
+            int getResult = Convert.ToInt32(Console.ReadLine());
+        
+            if (getResult == result)
+            {
+                Console.WriteLine("Correct!");
+                score++;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect!");
+            }
+            
         }
-        else
-        {
-            Console.WriteLine("Incorrect!");
-        }
+        Console.WriteLine($"Final score: {score}");
     }
 
     public void Subtraction()

@@ -5,6 +5,8 @@ public class Menu
     {
         string? input;
         var engine = new Engine();
+        
+        // Menu
         while (true)
         {
             Console.WriteLine("Please choose an option: ");
@@ -14,10 +16,15 @@ public class Menu
             Console.WriteLine("(m) Multiplication");
                         
             input = Console.ReadLine();
+            
+            // Ask user how many games they would like to play?
+            Console.WriteLine("How many games would you like to play?: ");
+            int numOfGames = Convert.ToInt32(Console.ReadLine());
+            
             switch (input)
             {
                 case "a":
-                    engine.Addition();
+                    engine.Addition(numOfGames);
                     break;
                 case "s":
                     engine.Subtraction();
