@@ -1,28 +1,9 @@
 ﻿using System.Diagnostics;
 using MathGame.lilWe3zy;
 
-/*
- * Math game that contains 4 basic operations:
- *      1. - addition (+)
- *      2. - subtraction (-)
- *      3. - multiplication (*)
- *      4. - division (/)
- *
- * [x] - ! Division should result in an integer, and be done with integers in range of 1 - 100
- * [x] - ! Context menu to choose which operation to perform
- * [ ] - ! Keep record of previous games to view history
- *
- * [ ] - ! Challenge: Difficulty levels
- *         - Easy - range to 10, 5 questions
- *         - Medium - range to 50, 10 questions
- *         - Hard - range to 100, 15 questions
- * [ ] - ! Challenge: Timer to track how long game takes
- * [x] - ! Challenge: Function to allow choosing number of questions
- * [x] - ! Challenge: Random game option, with random operations
- */
-Dictionary<string, int> gameConfig = new();
 Random rand = new();
 List<History> historyList = [];
+Dictionary<string, int> gameConfig = new();
 int selection;
 
 Start:
@@ -37,10 +18,11 @@ do
     Console.WriteLine("\nPlease input a valid number");
 } while (selection is 0 or > 3);
 
-// New Game
 if (selection == 1)
 {
     NewGame:
+    // Avoids duplicate key error
+    gameConfig.Clear();
     UserInterfaces.DisplayNewGameMenu(true);
     do
     {
@@ -80,7 +62,9 @@ if (selection == 1)
 
     gameConfig.Add("length", selection);
 
-    int correct = 0;
+    int score = 0;
+    Stopwatch watch = new();
+    watch.Start();
     // Index at 1 to allow for easier question numbering
     for (int i = 1; i <= gameConfig["length"]; i++)
     {
@@ -89,20 +73,80 @@ if (selection == 1)
         int response = ValidateUserInput(Console.ReadLine());
 
         if (answer != response) continue;
-        correct++;
+        score++;
     }
 
+    watch.Stop();
     // Add to list of games
-    History entry = new(gameConfig["difficulty"], gameConfig["operation"], correct, gameConfig["length"]);
+    History entry = new(gameConfig["difficulty"], gameConfig["operation"], score, gameConfig["length"],
+        watch.Elapsed);
     historyList.Add(entry);
 
-    UserInterfaces.DisplayEndGameCard(correct, gameConfig["length"]);
-    UserInterfaces.DisplayHistory(historyList);
+    UserInterfaces.DisplayEndGameCard(score, gameConfig["length"]);
+    do
+    {
+        selection = ValidateUserInput(Console.ReadLine());
+        if (selection is not (0 or > 4)) continue;
+
+        UserInterfaces.DisplayDifficultySelection();
+        Console.WriteLine("\nPlease input a valid number");
+    } while (selection is 0 or > 4);
+
+    switch (selection)
+    {
+        case 1:
+            goto Start;
+
+        case 2:
+            UserInterfaces.DisplayHistory(historyList);
+            do
+            {
+                selection = ValidateUserInput(Console.ReadLine());
+                if (selection is not (0 or > 3)) continue;
+
+                UserInterfaces.DisplayDifficultySelection();
+                Console.WriteLine("\nPlease input a valid number");
+            } while (selection is 0 or > 3);
+
+            switch (selection)
+            {
+                case 1:
+                    goto Start;
+                case 2:
+                    return 0;
+            }
+
+            break;
+        case 3:
+            Console.WriteLine("Good - Bye!");
+            return 0;
+    }
 }
 
 // View History
-if (selection == 2) UserInterfaces.DisplayHistory(historyList);
+if (selection == 2)
+{
+    UserInterfaces.DisplayHistory(historyList);
+    do
+    {
+        selection = ValidateUserInput(Console.ReadLine());
+        if (selection is not (0 or > 3)) continue;
 
+        UserInterfaces.DisplayDifficultySelection();
+        Console.WriteLine("\nPlease input a valid number");
+    } while (selection is 0 or > 3);
+
+    switch (selection)
+    {
+        case 1:
+            goto Start;
+        case 2:
+            Console.WriteLine("Good x Bye!");
+            return 0;
+    }
+}
+
+if (selection == 3) Console.WriteLine("Good + Bye!");
 return 0;
 
 

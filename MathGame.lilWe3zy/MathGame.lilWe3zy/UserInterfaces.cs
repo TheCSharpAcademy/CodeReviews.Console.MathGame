@@ -8,11 +8,10 @@ public static class UserInterfaces
         if (printHeader)
         {
             // Redundant verbatim prefix left in to better visualize the header
-            Console.WriteLine(@"    _    ____  __  __    _");
-            Console.WriteLine(@"   / \  / ___||  \/  |  / \");
-            Console.WriteLine(@"  / _ \ \___ \| |\/| | / _ \");
-            Console.WriteLine(@" / ___ \ ___) | |  | |/ ___ \");
-            Console.WriteLine(@"/_/   \_\____/|_|  |_/_/   \_\");
+            Console.WriteLine(@"   _   ___ __  __   _   ");
+            Console.WriteLine(@"  /_\ / __|  \/  | /_\  ");
+            Console.WriteLine(@" / _ \\__ \ |\/| |/ _ \ ");
+            Console.WriteLine(@"/_/ \_\___/_|  |_/_/ \_\");
 
             Console.WriteLine("\nA (c)Sharp Math Application made with <3");
         }
@@ -67,15 +66,11 @@ public static class UserInterfaces
         if (printHeader)
         {
             // Redundant verbatim prefixes left in to better visualize the header
-            Console.WriteLine(@" (                                         ");
-            Console.WriteLine(@" )\ )    (    (                (    )      ");
-            Console.WriteLine(@"(()/( (  )\ ) )\ ) (        (  )\( /((     ");
-            Console.WriteLine(@" /(_)))\(()/((()/( )\  (   ))\((_)\())\ )  ");
-            Console.WriteLine(@"(_))_((_)/(_))/(_)|(_) )\ /((_)_(_))(()/(  ");
-            Console.WriteLine(@" |   \(_|_) _(_) _|(_)((_|_))(| | |_ )(_)) ");
-            Console.WriteLine(@" | |) | ||  _||  _|| / _|| || | |  _| || | ");
-            Console.WriteLine(@" |___/|_||_|  |_|  |_\__| \_,_|_|\__|\_, | ");
-            Console.WriteLine(@"                                     |__/  ");
+            Console.WriteLine(@" ___  _  __  __ _         _ _        ");
+            Console.WriteLine(@"|   \(_)/ _|/ _(_)__ _  _| | |_ _  _ ");
+            Console.WriteLine(@"| |) | |  _|  _| / _| || | |  _| || |");
+            Console.WriteLine(@"|___/|_|_| |_| |_\__|\_,_|_|\__|\_, |");
+            Console.WriteLine(@"                                |__/ ");
         }
 
         Console.WriteLine("\n Difficulty determines the amount of variation and size of the range of numbers.");
@@ -90,7 +85,6 @@ public static class UserInterfaces
 
     public static void DisplayEndGameCard(int score, int length)
     {
-        double percentage = (double)score / length * 100;
         Console.Clear();
         // Redundant verbatim prefixes left in to better visualize the header
         Console.WriteLine(@"  ___                        _      _ ");
@@ -98,21 +92,25 @@ public static class UserInterfaces
         Console.WriteLine(@"| (__/ _ \ ' \/ _` | '_/ _` |  _(_-<_|");
         Console.WriteLine(@" \___\___/_||_\__, |_| \__,_|\__/__(_)");
         Console.WriteLine(@"              |___/                   ");
-        Console.WriteLine(@"--------------------------------------");
 
         Console.WriteLine($"\nYou scored {score} out of {length}");
-        Console.WriteLine($"That's a cool {percentage}%!");
+        Console.WriteLine($"That's a solid {(double)score / length * 100:F1}%!");
 
         Console.WriteLine("\nPlease select an option:");
         Console.WriteLine("1) Return to main menu");
-        Console.WriteLine("2) View History");
+        Console.WriteLine("2) View history");
         Console.WriteLine("3) Quit");
     }
 
     public static void DisplayQuestionAmountSelection()
     {
         Console.Clear();
-        Console.WriteLine("Finally, please select the amount of questions I should throw your way?");
+        Console.WriteLine(@" _____    _        _    ___              _   _             ");
+        Console.WriteLine(@"|_   _|__| |_ __ _| |  / _ \ _  _ ___ __| |_(_)___ _ _  ___");
+        Console.WriteLine(@"  | |/ _ \  _/ _` | | | (_) | || / -_|_-<  _| / _ \ ' \(_-<");
+        Console.WriteLine(@"  |_|\___/\__\__,_|_|  \__\_\\_,_\___/__/\__|_\___/_||_/__/");
+
+        Console.WriteLine("\nFinally, please select the amount of questions I should throw your way?");
         Console.WriteLine("I'm not doing more than 100!");
     }
 
@@ -127,11 +125,41 @@ public static class UserInterfaces
         Console.WriteLine(@"                       |__/ ");
 
         Console.WriteLine("\nA nice in memory store of your previous games:");
-        Console.WriteLine("ID\tSCORE\tDIFFICULTY");
+        Console.WriteLine("\nTIMESTAMP\tOPERATION\tSCORE\tPERCENTAGE\tDIFFICULTY\tCOMPLETION TIME");
+
         foreach (History entry in historyList)
         {
-            Console.WriteLine($"\n{entry.Id}\t{entry.Score}\t{entry.Difficulty}");
-            Console.WriteLine(@"--------------------------------------");
+            string timeStamp = $"{entry.Id:d}";
+            string operation = entry.Operation switch
+            {
+                1 => "(+)",
+                2 => "(-)",
+                3 => "(x)",
+                4 => "(/)",
+                _ => "(?)"
+            };
+            string score = $"{entry.Score}/{entry.QuestionLength}";
+            string percentage = $"{(double)entry.Score / entry.QuestionLength * 100:F1}";
+            string difficulty = entry.Difficulty switch
+            {
+                1 => "easy",
+                2 => "medium",
+                _ => "hard"
+            };
+            string elapsedTime =
+                $"{entry.TimeElapsed.Hours:00}:{entry.TimeElapsed.Minutes:00}:{entry.TimeElapsed.Seconds:00}";
+
+            Console.WriteLine(
+                "----------------------------------------------------------------------------------------");
+            Console.WriteLine(
+                $"{timeStamp}{operation,12}{score,14}{percentage,10}%{difficulty,16}{elapsedTime,21}");
         }
+
+        Console.WriteLine(
+            "----------------------------------------------------------------------------------------");
+
+        Console.WriteLine("\nPlease select an option:");
+        Console.WriteLine("1) Return to main menu");
+        Console.WriteLine("2) Quit");
     }
 }
