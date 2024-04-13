@@ -4,6 +4,7 @@ public static class UserInterfaces
 {
     public static void DisplayUserMenu(bool printHeader = false)
     {
+        Console.Clear();
         if (printHeader)
         {
             // Redundant verbatim prefix left in to better visualize the header
@@ -24,6 +25,7 @@ public static class UserInterfaces
 
     public static void DisplayNewGameMenu(bool printHeader = false)
     {
+        Console.Clear();
         if (printHeader)
         {
             // Redundant verbatim prefix left in to better visualize the header
@@ -59,44 +61,77 @@ public static class UserInterfaces
         return $"{index + 1}) {gameOption}{symbol.PadLeft(printWidth - gameOption.Length)}";
     }
 
-    public static int MainMenu()
+    public static void DisplayDifficultySelection(bool printHeader = false)
     {
-        bool validInput = false;
-        int userSelection = 0;
-
-        DisplayUserMenu(true);
-
-        do
+        Console.Clear();
+        if (printHeader)
         {
-            string? userInput = Console.ReadLine();
-            if (userInput == null)
-            {
-                Console.WriteLine("Please enter a valid number");
-                DisplayUserMenu();
-                continue;
-            }
+            // Redundant verbatim prefixes left in to better visualize the header
+            Console.WriteLine(@" (                                         ");
+            Console.WriteLine(@" )\ )    (    (                (    )      ");
+            Console.WriteLine(@"(()/( (  )\ ) )\ ) (        (  )\( /((     ");
+            Console.WriteLine(@" /(_)))\(()/((()/( )\  (   ))\((_)\())\ )  ");
+            Console.WriteLine(@"(_))_((_)/(_))/(_)|(_) )\ /((_)_(_))(()/(  ");
+            Console.WriteLine(@" |   \(_|_) _(_) _|(_)((_|_))(| | |_ )(_)) ");
+            Console.WriteLine(@" | |) | ||  _||  _|| / _|| || | |  _| || | ");
+            Console.WriteLine(@" |___/|_||_|  |_|  |_\__| \_,_|_|\__|\_, | ");
+            Console.WriteLine(@"                                     |__/  ");
+        }
 
-            if (int.TryParse(userInput, out userSelection))
-            {
-                if (userSelection is <= 0 or > 3)
-                {
-                    Console.WriteLine("Please enter a valid number");
-                    DisplayUserMenu();
-                    continue;
-                }
+        Console.WriteLine("\n Difficulty determines the amount of variation and size of the range of numbers.");
 
-                validInput = true;
-            }
-            else
-            {
-                Console.WriteLine("Please enter a valid number");
-                DisplayUserMenu();
-            }
-        } while (validInput == false);
+        Console.WriteLine("\nPlease select an option:");
+        Console.WriteLine("1) Give me confidence");
+        Console.WriteLine("2) Give me challenge");
+        Console.WriteLine("3) Give me pain");
 
-        return userSelection;
+        Console.WriteLine("\n4) Back");
     }
 
-    public static void DisplayDifficultySelection() { }
-    public static void DisplayHistorySelection() { }
+    public static void DisplayEndGameCard(int score, int length)
+    {
+        double percentage = (double)score / length * 100;
+        Console.Clear();
+        // Redundant verbatim prefixes left in to better visualize the header
+        Console.WriteLine(@"  ___                        _      _ ");
+        Console.WriteLine(@" / __|___ _ _  __ _ _ _ __ _| |_ __| |");
+        Console.WriteLine(@"| (__/ _ \ ' \/ _` | '_/ _` |  _(_-<_|");
+        Console.WriteLine(@" \___\___/_||_\__, |_| \__,_|\__/__(_)");
+        Console.WriteLine(@"              |___/                   ");
+        Console.WriteLine(@"--------------------------------------");
+
+        Console.WriteLine($"\nYou scored {score} out of {length}");
+        Console.WriteLine($"That's a cool {percentage}%!");
+
+        Console.WriteLine("\nPlease select an option:");
+        Console.WriteLine("1) Return to main menu");
+        Console.WriteLine("2) View History");
+        Console.WriteLine("3) Quit");
+    }
+
+    public static void DisplayQuestionAmountSelection()
+    {
+        Console.Clear();
+        Console.WriteLine("Finally, please select the amount of questions I should throw your way?");
+        Console.WriteLine("I'm not doing more than 100!");
+    }
+
+    public static void DisplayHistory(List<History> historyList)
+    {
+        Console.Clear();
+        // Redundant verbatim prefixes left in to better visualize the header
+        Console.WriteLine(@" _  _ _    _                ");
+        Console.WriteLine(@"| || (_)__| |_ ___ _ _ _  _ ");
+        Console.WriteLine(@"| __ | (_-<  _/ _ \ '_| || |");
+        Console.WriteLine(@"|_||_|_/__/\__\___/_|  \_, |");
+        Console.WriteLine(@"                       |__/ ");
+
+        Console.WriteLine("\nA nice in memory store of your previous games:");
+        Console.WriteLine("ID\tSCORE\tDIFFICULTY");
+        foreach (History entry in historyList)
+        {
+            Console.WriteLine($"\n{entry.Id}\t{entry.Score}\t{entry.Difficulty}");
+            Console.WriteLine(@"--------------------------------------");
+        }
+    }
 }
