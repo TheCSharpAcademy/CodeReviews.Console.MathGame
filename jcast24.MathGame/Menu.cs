@@ -1,4 +1,8 @@
-﻿namespace jcast24.MathGame;
+﻿/*
+ * TODO: make sure to finish implementing the other methods
+ */
+
+namespace jcast24.MathGame;
 public class Menu
 {
     public void MenuSystem()
@@ -18,7 +22,7 @@ public class Menu
             input = Console.ReadLine();
             
             // Ask user how many games they would like to play?
-            Console.WriteLine("How many games would you like to play?: ");
+            Console.Write("How many games would you like to play?: ");
             int numOfGames = Convert.ToInt32(Console.ReadLine());
             
             switch (input)

@@ -1,5 +1,5 @@
 ﻿/*
- * TODO: Ask the user how many games they would like to play, keep track of score
+ * TODO: Implement history system
  */
 namespace jcast24.MathGame;
 public class Engine
@@ -27,9 +27,9 @@ public class Engine
             {
                 Console.WriteLine("Incorrect!");
             }
-            
+            if (i == numOfGames - 1) Console.WriteLine($"Final Score: {score}"); 
         }
-        Console.WriteLine($"Final score: {score}");
+        // Console.WriteLine($"Final score: {score}");
     }
 
     public void Subtraction()

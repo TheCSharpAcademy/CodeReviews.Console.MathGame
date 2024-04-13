@@ -1,7 +1,4 @@
-﻿/*
- * TODO: Implement score/amount of games played ask user if they want to play 1 or more games, show score at the end 
- */
-namespace jcast24.MathGame
+﻿namespace jcast24.MathGame
 {
     class Program
     {
