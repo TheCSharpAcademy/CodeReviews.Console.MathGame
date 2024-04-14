@@ -1,17 +1,19 @@
 ﻿using System.Diagnostics;
 using MathGame.lilWe3zy;
 
-Random rand = new();
-List<History> historyList = [];
 Dictionary<string, int> gameConfig = new();
-int selection;
+List<History> historyList = [];
+Random rand = new();
+Stopwatch watch = new();
+
+int selection, score = 0;
 
 Start:
 UserInterfaces.DisplayUserMenu(true);
 
 do
 {
-    selection = ValidateUserInput(Console.ReadLine());
+    selection = ValidateUserInput();
 
     if (selection is not (0 or > 3)) continue;
     UserInterfaces.DisplayUserMenu();
@@ -21,71 +23,76 @@ do
 if (selection == 1)
 {
     NewGame:
-    // Avoids duplicate key error
-    gameConfig.Clear();
     UserInterfaces.DisplayNewGameMenu(true);
+
+    gameConfig.Clear();
     do
     {
-        selection = ValidateUserInput(Console.ReadLine());
-        // On back selection, jump out to start of program execution
+        selection = ValidateUserInput();
+        // Main menu jump
         if (selection == 6) goto Start;
 
         if (selection is not (0 or > 6)) continue;
+
         UserInterfaces.DisplayNewGameMenu();
         Console.WriteLine("\nPlease input a valid number");
     } while (selection is 0 or > 6);
 
     gameConfig.Add("operation", selection);
-    // Difficulty selection for new game
+
     UserInterfaces.DisplayDifficultySelection(true);
+
     do
     {
-        selection = ValidateUserInput(Console.ReadLine());
-        // On back selection, jump out to new game screen, where changes can be made to operation selection.
+        selection = ValidateUserInput();
+        // New game menu jump
         if (selection == 4) goto NewGame;
 
         if (selection is not (0 or > 4)) continue;
+
         UserInterfaces.DisplayDifficultySelection();
         Console.WriteLine("\nPlease input a valid number");
     } while (selection is 0 or > 4);
 
     gameConfig.Add("difficulty", selection);
 
-    // Amount of questions
     UserInterfaces.DisplayQuestionAmountSelection();
+
     do
     {
-        selection = ValidateUserInput(Console.ReadLine());
+        selection = ValidateUserInput();
+
         if (selection is not (0 or > 100)) continue;
+
         Console.WriteLine(selection == 0 ? "\nPlease input a valid number" : $"No way I'm doing {selection}!");
     } while (selection is 0 or > 100);
 
     gameConfig.Add("length", selection);
 
-    int score = 0;
-    Stopwatch watch = new();
     watch.Start();
     // Index at 1 to allow for easier question numbering
-    for (int i = 1; i <= gameConfig["length"]; i++)
+    for (int index = 1; index <= gameConfig["length"]; index++)
     {
         Console.Clear();
-        int answer = GenerateOperation(gameConfig["operation"], gameConfig["difficulty"], rand, i);
-        int response = ValidateUserInput(Console.ReadLine());
+        int answer = GenerateOperation(gameConfig["operation"], gameConfig["difficulty"], index, rand);
+        selection = ValidateUserInput();
 
-        if (answer != response) continue;
+        if (answer != selection) continue;
         score++;
     }
 
     watch.Stop();
-    // Add to list of games
+
     History entry = new(gameConfig["difficulty"], gameConfig["operation"], score, gameConfig["length"],
         watch.Elapsed);
     historyList.Add(entry);
 
     UserInterfaces.DisplayEndGameCard(score, gameConfig["length"]);
+
     do
     {
-        selection = ValidateUserInput(Console.ReadLine());
+        selection = ValidateUserInput();
+
         if (selection is not (0 or > 4)) continue;
 
         UserInterfaces.DisplayDifficultySelection();
@@ -99,9 +106,11 @@ if (selection == 1)
 
         case 2:
             UserInterfaces.DisplayHistory(historyList);
+
             do
             {
-                selection = ValidateUserInput(Console.ReadLine());
+                selection = ValidateUserInput();
+
                 if (selection is not (0 or > 3)) continue;
 
                 UserInterfaces.DisplayDifficultySelection();
@@ -117,19 +126,21 @@ if (selection == 1)
             }
 
             break;
+
         case 3:
             Console.WriteLine("Good - Bye!");
             return 0;
     }
 }
 
-// View History
 if (selection == 2)
 {
     UserInterfaces.DisplayHistory(historyList);
+
     do
     {
-        selection = ValidateUserInput(Console.ReadLine());
+        selection = ValidateUserInput();
+
         if (selection is not (0 or > 3)) continue;
 
         UserInterfaces.DisplayDifficultySelection();
@@ -147,11 +158,12 @@ if (selection == 2)
 }
 
 if (selection == 3) Console.WriteLine("Good + Bye!");
+
 return 0;
 
-
-int ValidateUserInput(string? input)
+int ValidateUserInput()
 {
+    string? input = Console.ReadLine();
     if (input == null) return 0;
     return int.TryParse(input, out selection) ? selection : 0;
 }
@@ -179,7 +191,7 @@ int ValidateUserInput(string? input)
     return (firstOperand, secondOperand);
 }
 
-int GenerateOperation(int operand, int difficulty, Random random, int questionNumber)
+int GenerateOperation(int operand, int difficulty, int questionNumber, Random random)
 {
     int answer = 0;
     (int, int) range;
@@ -210,9 +222,8 @@ int GenerateOperation(int operand, int difficulty, Random random, int questionNu
             Console.WriteLine($"QUESTION {questionNumber}\n{range.Item1} / {range.Item2} = ?");
             break;
         case 5:
-            // Recursively call function with new operator within range
             int randomOperator = random.Next(1, 5);
-            answer = GenerateOperation(randomOperator, difficulty, random, questionNumber);
+            answer = GenerateOperation(randomOperator, difficulty, questionNumber, random);
             break;
     }
 

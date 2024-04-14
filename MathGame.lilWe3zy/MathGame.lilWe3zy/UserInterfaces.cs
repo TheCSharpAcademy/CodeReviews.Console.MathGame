@@ -83,6 +83,18 @@ public static class UserInterfaces
         Console.WriteLine("\n4) Back");
     }
 
+    public static void DisplayQuestionAmountSelection()
+    {
+        Console.Clear();
+        Console.WriteLine(@" _____    _        _    ___              _   _             ");
+        Console.WriteLine(@"|_   _|__| |_ __ _| |  / _ \ _  _ ___ __| |_(_)___ _ _  ___");
+        Console.WriteLine(@"  | |/ _ \  _/ _` | | | (_) | || / -_|_-<  _| / _ \ ' \(_-<");
+        Console.WriteLine(@"  |_|\___/\__\__,_|_|  \__\_\\_,_\___/__/\__|_\___/_||_/__/");
+
+        Console.WriteLine("\nFinally, please select the amount of questions I should throw your way?");
+        Console.WriteLine("I'm not doing more than 100!");
+    }
+
     public static void DisplayEndGameCard(int score, int length)
     {
         Console.Clear();
@@ -100,18 +112,6 @@ public static class UserInterfaces
         Console.WriteLine("1) Return to main menu");
         Console.WriteLine("2) View history");
         Console.WriteLine("3) Quit");
-    }
-
-    public static void DisplayQuestionAmountSelection()
-    {
-        Console.Clear();
-        Console.WriteLine(@" _____    _        _    ___              _   _             ");
-        Console.WriteLine(@"|_   _|__| |_ __ _| |  / _ \ _  _ ___ __| |_(_)___ _ _  ___");
-        Console.WriteLine(@"  | |/ _ \  _/ _` | | | (_) | || / -_|_-<  _| / _ \ ' \(_-<");
-        Console.WriteLine(@"  |_|\___/\__\__,_|_|  \__\_\\_,_\___/__/\__|_\___/_||_/__/");
-
-        Console.WriteLine("\nFinally, please select the amount of questions I should throw your way?");
-        Console.WriteLine("I'm not doing more than 100!");
     }
 
     public static void DisplayHistory(List<History> historyList)
