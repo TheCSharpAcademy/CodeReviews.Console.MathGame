@@ -32,24 +32,28 @@ public class Engine
         // Console.WriteLine($"Final score: {score}");
     }
 
-    public void Subtraction()
+    public void Subtraction(int numOfGames)
     {
-        var random = new Random();
-        int firstNum = random.Next(1, 9);
-        int secondNum = random.Next(1, 9);
-
-        int result = firstNum - secondNum;
-            
-        Console.WriteLine($"What is the result of {firstNum} - {secondNum}?");
-        int getResult = Convert.ToInt32(Console.ReadLine());
-            
-        if (getResult == result)
+        int score = 0;
+        for (int i = 0; i < numOfGames; i++)
         {
-            Console.WriteLine("Correct!");
-        }
-        else
-        {
-            Console.WriteLine("Incorrect!");
+            var random = new Random();
+            int firstNum = random.Next(1, 9);
+            int secondNum = random.Next(1, 9);
+            int result = firstNum - secondNum;
+            Console.WriteLine($"What is the result of {firstNum} - {secondNum}?");
+            int getResult = Convert.ToInt32(Console.ReadLine());
+                        
+            if (getResult == result)
+            {
+                Console.WriteLine("Correct!");
+                score++;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect!");
+            }
+            if (i == numOfGames - 1) Console.WriteLine($"Final score: {score}");
         }
     }
 
@@ -75,43 +79,58 @@ public class Engine
         return result;
     }
 
-    public void Division()
+    public void Division(int numOfGames)
     {
-        var divArray = GetDivisionNumbers();
-        var answer = divArray[0] / divArray[1];
-
-        Console.WriteLine($"What is the result of {divArray[0]} / {divArray[1]}?");
-        int getResult = Convert.ToInt32(Console.ReadLine());
-
-        if (answer == getResult)
+        int score = 0;
+        for (int i = 0; i < numOfGames; i++)
         {
-            Console.WriteLine("Correct!");
-        }
-        else
-        {
-            Console.WriteLine("Incorrect!");
+            var divArray = GetDivisionNumbers();
+            var answer = divArray[0] / divArray[1];
+            
+            Console.WriteLine($"What is the result of {divArray[0]} / {divArray[1]}?");
+            var getResult = Convert.ToInt32(Console.ReadLine());
+            
+            if (answer == getResult)
+            {
+                Console.WriteLine("Correct!");
+                score++;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect!");
+            }
+            
+            if (i==numOfGames-1) Console.WriteLine($"Final Score: {score}");
         }
     }
         
 
-    public void Multiplication()
+    public void Multiplication(int numOfGames)
     {
-        var random = new Random();
-        int firstNum = random.Next(1, 9);
-        int secondNum = random.Next(1, 9);
-
-        int result = firstNum * secondNum;
+        int score = 0;
+        for (int i = 0; i < numOfGames; i++)
+        {
+            var random = new Random();
+            int firstNum = random.Next(1, 9);
+            int secondNum = random.Next(1, 9);
             
-        Console.WriteLine($"What is the result of {firstNum} * {secondNum}?");
-        int getResult = Convert.ToInt32(Console.ReadLine());
-        if (getResult == result)
-        {
-            Console.WriteLine("Correct!");
+            int result = firstNum * secondNum;
+                        
+            Console.WriteLine($"What is the result of {firstNum} * {secondNum}?");
+            int getResult = Convert.ToInt32(Console.ReadLine());
+            if (getResult == result)
+            {
+                Console.WriteLine("Correct!");
+                score++;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect!");
+            }
+            
+            if (i == numOfGames - 1) Console.WriteLine($"Final Score: {score}");
         }
-        else
-        {
-            Console.WriteLine("Incorrect!");
-        }
+        
             
     }
 }
