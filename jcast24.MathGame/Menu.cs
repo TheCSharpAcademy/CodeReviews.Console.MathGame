@@ -9,10 +9,10 @@ public class Menu
     {
         string? input;
         var engine = new Engine();
-        
         // Menu
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Please choose an option: ");
             Console.WriteLine("(a) Addition");
             Console.WriteLine("(s) Subtraction");
@@ -31,13 +31,13 @@ public class Menu
                     engine.Addition(numOfGames);
                     break;
                 case "s":
-                    engine.Subtraction();
+                    engine.Subtraction(numOfGames);
                     break;
                 case "d":
-                    engine.Division();
+                    engine.Division(numOfGames);
                     break;
                 case "m":
-                    engine.Multiplication();
+                    engine.Multiplication(numOfGames);
                     break;
                 default:
                     Console.WriteLine("Please ask again!");
