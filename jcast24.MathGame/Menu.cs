@@ -12,6 +12,7 @@ public class Menu
         {
             Console.Clear();
             Console.WriteLine("Please choose an option: ");
+            Console.WriteLine("(v) View games!");
             Console.WriteLine("(a) Addition");
             Console.WriteLine("(s) Subtraction");
             Console.WriteLine("(d) Division");
@@ -23,6 +24,9 @@ public class Menu
 
             switch (input.Trim().ToLower())
             {
+                case "v":
+                    engine.GetGames();
+                    break;
                 case "a":
                     engine.Addition(numOfGames);
                     break;
