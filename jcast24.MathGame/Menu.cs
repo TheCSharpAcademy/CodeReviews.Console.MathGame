@@ -1,16 +1,14 @@
-﻿/*
- * TODO: make sure to finish implementing the other methods
- */
-
-namespace jcast24.MathGame;
+﻿namespace jcast24.MathGame;
 public class Menu
 {
-    public void MenuSystem()
+    public void MenuSystem(int numOfGames)
     {
         string? input;
         var engine = new Engine();
+        var isGameOn = true;
+        
         // Menu
-        while (true)
+        do
         {
             Console.Clear();
             Console.WriteLine("Please choose an option: ");
@@ -18,14 +16,12 @@ public class Menu
             Console.WriteLine("(s) Subtraction");
             Console.WriteLine("(d) Division");
             Console.WriteLine("(m) Multiplication");
-                        
+            Console.WriteLine("(q) quit");
+            Console.WriteLine("-------------------------------------");
+            
             input = Console.ReadLine();
-            
-            // Ask user how many games they would like to play?
-            Console.Write("How many games would you like to play?: ");
-            int numOfGames = Convert.ToInt32(Console.ReadLine());
-            
-            switch (input)
+
+            switch (input.Trim().ToLower())
             {
                 case "a":
                     engine.Addition(numOfGames);
@@ -39,10 +35,14 @@ public class Menu
                 case "m":
                     engine.Multiplication(numOfGames);
                     break;
+                case "q":
+                    Console.WriteLine("Goodbye!");
+                    isGameOn = false;
+                    break;
                 default:
                     Console.WriteLine("Please ask again!");
                     break;
             }
-        }
+        } while(isGameOn);
     }
 }
