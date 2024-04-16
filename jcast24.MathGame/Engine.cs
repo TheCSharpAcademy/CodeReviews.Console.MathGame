@@ -27,9 +27,13 @@ public class Engine
             {
                 Console.WriteLine("Incorrect!");
             }
-            if (i == numOfGames - 1) Console.WriteLine($"Final Score: {score}"); 
+
+            if (i == numOfGames - 1)
+            {
+                Console.WriteLine($"Final Score: {score}");
+                Console.ReadLine();
+            }
         }
-        // Console.WriteLine($"Final score: {score}");
     }
 
     public void Subtraction(int numOfGames)
@@ -53,7 +57,12 @@ public class Engine
             {
                 Console.WriteLine("Incorrect!");
             }
-            if (i == numOfGames - 1) Console.WriteLine($"Final score: {score}");
+
+            if (i == numOfGames - 1)
+            {
+                Console.WriteLine($"Final score: {score}");
+                Console.ReadLine();
+            }
         }
     }
 
@@ -99,8 +108,12 @@ public class Engine
             {
                 Console.WriteLine("Incorrect!");
             }
-            
-            if (i==numOfGames-1) Console.WriteLine($"Final Score: {score}");
+
+            if (i == numOfGames - 1)
+            {
+                Console.WriteLine($"Final Score: {score}");
+                Console.ReadLine();
+            }
         }
     }
         
@@ -127,10 +140,11 @@ public class Engine
             {
                 Console.WriteLine("Incorrect!");
             }
-            
-            if (i == numOfGames - 1) Console.WriteLine($"Final Score: {score}");
+
+            if (i == numOfGames - 1)
+            {
+                Console.WriteLine($"Final score: {score}");
+            }
         }
-        
-            
     }
 }
