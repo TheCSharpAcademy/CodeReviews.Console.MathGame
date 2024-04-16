@@ -1,9 +1,27 @@
 ﻿/*
  * TODO: Implement history system
  */
+
 namespace jcast24.MathGame;
 public class Engine
 {
+    private static List<string> games = new List<string>();
+    DateTime date = DateTime.UtcNow;
+    void AddToHistory(int gameScore, string gameType)
+    {
+        games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+    }
+
+    public void GetGames()
+    {
+        foreach(var game in games)
+        {
+            Console.WriteLine(game);
+        }
+
+        Console.ReadLine();
+    }
+    
     public void Addition(int numOfGames)
     {
         int score = 0;
@@ -34,6 +52,8 @@ public class Engine
                 Console.ReadLine();
             }
         }
+        
+        AddToHistory(score, "Addition");
     }
 
     public void Subtraction(int numOfGames)
@@ -66,7 +86,7 @@ public class Engine
         }
     }
 
-    public static int[] GetDivisionNumbers()
+    static int[] GetDivisionNumbers()
     {
         var random = new Random();
         int firstNum = random.Next(0, 99);
@@ -147,4 +167,6 @@ public class Engine
             }
         }
     }
+
+    
 }
