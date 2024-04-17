@@ -1,12 +1,9 @@
-﻿/*
- * TODO: Implement history system
- */
-
-namespace jcast24.MathGame;
+﻿namespace jcast24.MathGame;
 public class Engine
 {
-    private static List<string> games = new List<string>();
+    private List<string> games = new List<string>();
     DateTime date = DateTime.UtcNow;
+    
     void AddToHistory(int gameScore, string gameType)
     {
         games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
@@ -84,9 +81,10 @@ public class Engine
                 Console.ReadLine();
             }
         }
+        AddToHistory(score, "Subtraction");
     }
 
-    static int[] GetDivisionNumbers()
+    int[] GetDivisionNumbers()
     {
         var random = new Random();
         int firstNum = random.Next(0, 99);
@@ -134,6 +132,8 @@ public class Engine
                 Console.WriteLine($"Final Score: {score}");
                 Console.ReadLine();
             }
+            
+            AddToHistory(score, "Division");
         }
     }
         
@@ -166,7 +166,6 @@ public class Engine
                 Console.WriteLine($"Final score: {score}");
             }
         }
+        AddToHistory(score, "Multiplication");
     }
-
-    
 }
