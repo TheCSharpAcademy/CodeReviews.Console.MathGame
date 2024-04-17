@@ -3,7 +3,6 @@ public class Menu
 {
     public void MenuSystem(int numOfGames)
     {
-        string? input;
         var engine = new Engine();
         var isGameOn = true;
         
@@ -12,15 +11,16 @@ public class Menu
         {
             Console.Clear();
             Console.WriteLine("Please choose an option: ");
-            Console.WriteLine("(v) View games!");
             Console.WriteLine("(a) Addition");
             Console.WriteLine("(s) Subtraction");
             Console.WriteLine("(d) Division");
             Console.WriteLine("(m) Multiplication");
+            Console.WriteLine("(v) View games!");
+            Console.WriteLine("(r) Random Question");
             Console.WriteLine("(q) quit");
             Console.WriteLine("-------------------------------------");
             
-            input = Console.ReadLine();
+            var input = Console.ReadLine();
 
             switch (input.Trim().ToLower())
             {
@@ -38,6 +38,9 @@ public class Menu
                     break;
                 case "m":
                     engine.Multiplication(numOfGames);
+                    break;
+                case "r":
+                    engine.randomGame(numOfGames);
                     break;
                 case "q":
                     Console.WriteLine("Goodbye!");

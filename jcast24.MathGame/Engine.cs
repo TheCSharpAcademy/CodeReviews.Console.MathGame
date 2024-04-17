@@ -9,6 +9,32 @@ public class Engine
         games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
     }
 
+    public void randomGame(int numOfGames)
+    {
+        Random num = new Random();
+        var value = num.Next(0,4);
+
+        switch (value)
+        {
+            case 0:
+                Addition(numOfGames);
+                break;
+            case 1:
+                Subtraction(numOfGames);
+                break;
+            case 2:
+                Division(numOfGames);
+                break;
+            case 3:
+                Multiplication(numOfGames);
+                break;
+            default:
+                Console.WriteLine("Please enter a correct response: ");
+                break;
+        }
+        
+    }
+
     public void GetGames()
     {
         foreach(var game in games)
@@ -49,7 +75,6 @@ public class Engine
                 Console.ReadLine();
             }
         }
-        
         AddToHistory(score, "Addition");
     }
 
