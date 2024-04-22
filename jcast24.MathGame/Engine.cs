@@ -1,15 +1,20 @@
-﻿namespace jcast24.MathGame;
-public class Engine
+﻿using jcast24.MathGame.Models;
+namespace jcast24.MathGame;
+internal class Engine
 {
-    private List<string> games = new List<string>();
-    DateTime date = DateTime.UtcNow;
-    
-    void AddToHistory(int gameScore, string gameType)
+    private List<Game> games = [];
+
+    private void AddToHistory(int gameScore, GameType gameType)
     {
-        games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+        games.Add(new Game
+        {
+            Date = DateTime.Now,
+            Score = gameScore,
+            Type =  gameType
+        });
     }
 
-    public void randomGame(int numOfGames)
+    internal void RandomGame(int numOfGames)
     {
         Random num = new Random();
         var value = num.Next(0,4);
@@ -35,17 +40,17 @@ public class Engine
         
     }
 
-    public void GetGames()
+    internal void GetGames()
     {
         foreach(var game in games)
         {
-            Console.WriteLine(game);
+            Console.WriteLine($"{DateTime.Now} - {game.Type}: {game.Score} pts");
         }
-
+        Console.WriteLine("Press any key to continue!");
         Console.ReadLine();
     }
     
-    public void Addition(int numOfGames)
+    internal void Addition(int numOfGames)
     {
         int score = 0;
         for (int i = 0; i < numOfGames; i++)
@@ -54,12 +59,12 @@ public class Engine
             int firstNum = random.Next(1, 9);
             int secondNum = random.Next(1, 9);
             
-            int result = firstNum + secondNum;
-                    
             Console.WriteLine($"What is the result of {firstNum} + {secondNum}?");
-            int getResult = Convert.ToInt32(Console.ReadLine());
-        
-            if (getResult == result)
+            string? result = Console.ReadLine();
+            result = Helper.ValidateInput(result);
+
+            
+            if (int.Parse(result) == firstNum + secondNum)
             {
                 Console.WriteLine("Correct!");
                 score++;
@@ -75,10 +80,10 @@ public class Engine
                 Console.ReadLine();
             }
         }
-        AddToHistory(score, "Addition");
+        AddToHistory(score, GameType.Addition);
     }
 
-    public void Subtraction(int numOfGames)
+    internal void Subtraction(int numOfGames)
     {
         int score = 0;
         for (int i = 0; i < numOfGames; i++)
@@ -86,11 +91,11 @@ public class Engine
             var random = new Random();
             int firstNum = random.Next(1, 9);
             int secondNum = random.Next(1, 9);
-            int result = firstNum - secondNum;
             Console.WriteLine($"What is the result of {firstNum} - {secondNum}?");
-            int getResult = Convert.ToInt32(Console.ReadLine());
+            string? result = Console.ReadLine();
+            result = Helper.ValidateInput(result);
                         
-            if (getResult == result)
+            if (int.Parse(result) == firstNum - secondNum)
             {
                 Console.WriteLine("Correct!");
                 score++;
@@ -106,7 +111,7 @@ public class Engine
                 Console.ReadLine();
             }
         }
-        AddToHistory(score, "Subtraction");
+        AddToHistory(score, GameType.Subtraction);
     }
 
     int[] GetDivisionNumbers()
@@ -131,7 +136,7 @@ public class Engine
         return result;
     }
 
-    public void Division(int numOfGames)
+    internal void Division(int numOfGames)
     {
         int score = 0;
         for (int i = 0; i < numOfGames; i++)
@@ -141,8 +146,10 @@ public class Engine
             
             Console.WriteLine($"What is the result of {divArray[0]} / {divArray[1]}?");
             var getResult = Convert.ToInt32(Console.ReadLine());
+            var result = Console.ReadLine();
+            result = Helper.ValidateInput(result);
             
-            if (answer == getResult)
+            if (int.Parse(result) == answer)
             {
                 Console.WriteLine("Correct!");
                 score++;
@@ -158,12 +165,11 @@ public class Engine
                 Console.ReadLine();
             }
             
-            AddToHistory(score, "Division");
+            AddToHistory(score, GameType.Division);
         }
     }
         
-
-    public void Multiplication(int numOfGames)
+    internal void Multiplication(int numOfGames)
     {
         int score = 0;
         for (int i = 0; i < numOfGames; i++)
@@ -172,11 +178,13 @@ public class Engine
             int firstNum = random.Next(1, 9);
             int secondNum = random.Next(1, 9);
             
-            int result = firstNum * secondNum;
+            int answer = firstNum * secondNum;
                         
             Console.WriteLine($"What is the result of {firstNum} * {secondNum}?");
-            int getResult = Convert.ToInt32(Console.ReadLine());
-            if (getResult == result)
+            string result = Console.ReadLine();
+            result = Helper.ValidateInput(result);
+            
+            if (int.Parse(result) == answer)
             {
                 Console.WriteLine("Correct!");
                 score++;
@@ -191,6 +199,6 @@ public class Engine
                 Console.WriteLine($"Final score: {score}");
             }
         }
-        AddToHistory(score, "Multiplication");
+        AddToHistory(score, GameType.Multiplication);
     }
 }
