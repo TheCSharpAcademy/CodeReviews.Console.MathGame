@@ -1,6 +1,16 @@
 ﻿namespace jcast24.MathGame.Models;
 
-public class Game
+internal class Game
 {
-    
+    internal DateTime Date { get; set; }
+    internal int Score { get; set; }
+    internal GameType Type { get; set; }
+}
+
+internal enum GameType
+{
+    Addition, 
+    Subtraction, 
+    Multiplication,
+    Division,
 }
