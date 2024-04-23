@@ -10,14 +10,14 @@ internal class Engine
         {
             Date = DateTime.Now,
             Score = gameScore,
-            Type =  gameType
+            Type = gameType
         });
     }
 
     internal void RandomGame(int numOfGames)
     {
         Random num = new Random();
-        var value = num.Next(0,4);
+        var value = num.Next(0, 4);
 
         switch (value)
         {
@@ -37,19 +37,19 @@ internal class Engine
                 Console.WriteLine("Please enter a correct response: ");
                 break;
         }
-        
+
     }
 
     internal void GetGames()
     {
-        foreach(var game in games)
+        foreach (var game in games)
         {
             Console.WriteLine($"{DateTime.Now} - {game.Type}: {game.Score} pts");
         }
         Console.WriteLine("Press any key to continue!");
         Console.ReadLine();
     }
-    
+
     internal void Addition(int numOfGames)
     {
         int score = 0;
@@ -58,12 +58,12 @@ internal class Engine
             var random = new Random();
             int firstNum = random.Next(1, 9);
             int secondNum = random.Next(1, 9);
-            
+
             Console.WriteLine($"What is the result of {firstNum} + {secondNum}?");
             string? result = Console.ReadLine();
             result = Helper.ValidateInput(result);
 
-            
+
             if (int.Parse(result) == firstNum + secondNum)
             {
                 Console.WriteLine("Correct!");
@@ -94,7 +94,7 @@ internal class Engine
             Console.WriteLine($"What is the result of {firstNum} - {secondNum}?");
             string? result = Console.ReadLine();
             result = Helper.ValidateInput(result);
-                        
+
             if (int.Parse(result) == firstNum - secondNum)
             {
                 Console.WriteLine("Correct!");
@@ -117,19 +117,19 @@ internal class Engine
     int[] GetDivisionNumbers()
     {
         var random = new Random();
-        int firstNum = random.Next(0, 99);
-        int secondNum = random.Next(0, 99);
-                
+        int firstNum = random.Next(1, 99);
+        int secondNum = random.Next(1, 99);
+
         // if the remainder of the firstNum and secondNum isn't zero
         // get 2 other random numbers
         while (firstNum % secondNum != 0)
         {
-            firstNum = random.Next(0, 99);
-            secondNum = random.Next(0, 99);
+            firstNum = random.Next(1, 99);
+            secondNum = random.Next(1, 99);
         }
-            
+
         var result = new int[2];
-            
+
         result[0] = firstNum;
         result[1] = secondNum;
 
@@ -143,12 +143,11 @@ internal class Engine
         {
             var divArray = GetDivisionNumbers();
             var answer = divArray[0] / divArray[1];
-            
+
             Console.WriteLine($"What is the result of {divArray[0]} / {divArray[1]}?");
-            var getResult = Convert.ToInt32(Console.ReadLine());
-            var result = Console.ReadLine();
+            string? result = Console.ReadLine();
             result = Helper.ValidateInput(result);
-            
+
             if (int.Parse(result) == answer)
             {
                 Console.WriteLine("Correct!");
@@ -164,11 +163,11 @@ internal class Engine
                 Console.WriteLine($"Final Score: {score}");
                 Console.ReadLine();
             }
-            
+
             AddToHistory(score, GameType.Division);
         }
     }
-        
+
     internal void Multiplication(int numOfGames)
     {
         int score = 0;
@@ -177,13 +176,13 @@ internal class Engine
             var random = new Random();
             int firstNum = random.Next(1, 9);
             int secondNum = random.Next(1, 9);
-            
+
             int answer = firstNum * secondNum;
-                        
+
             Console.WriteLine($"What is the result of {firstNum} * {secondNum}?");
             string result = Console.ReadLine();
             result = Helper.ValidateInput(result);
-            
+
             if (int.Parse(result) == answer)
             {
                 Console.WriteLine("Correct!");
