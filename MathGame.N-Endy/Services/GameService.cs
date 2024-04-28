@@ -7,6 +7,12 @@ namespace MathGame.N_Endy.Services
             private readonly IPlayerService _playerService;
             private readonly IUserInteractionService _userInteraction;
 
+            public GameService(IPlayerService playerService, IUserInteractionService userInteraction)
+            {
+                _playerService = playerService;
+                _userInteraction = userInteraction;
+            }
+
             // Create player
             var name = _userInteraction.GetPlayerName();
             var player = _playerService.CreatePlayer(name);
