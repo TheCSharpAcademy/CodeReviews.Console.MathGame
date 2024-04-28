@@ -9,11 +9,13 @@ namespace MathGame.N_Endy.Services
     {
         private readonly IPlayerService _playerService;
         private readonly IUserInteraction _userInteraction;
+        private readonly IQuestionService _questionService;
 
-        public GameService(IPlayerService playerService, IUserInteraction userInteraction)
+        public GameService(IPlayerService playerService, IUserInteraction userInteraction, IQuestionService questionService)
         {
             _playerService = playerService;
             _userInteraction = userInteraction;
+            _questionService = questionService;
         }
 
         public void StartGame()
@@ -33,10 +35,13 @@ namespace MathGame.N_Endy.Services
             switch (userChoice)
             {
                 case "1":
-                    
+                    return _questionService.GenerateQuestion("+");
                 case "2":
+                    return _questionService.GenerateQuestion("-");
                 case "3":
+                    return _questionService.GenerateQuestion("*");
                 case "4":
+                    return _questionService.GenerateQuestion("/");
                 case "5":
                 default:
             }
