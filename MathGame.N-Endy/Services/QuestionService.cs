@@ -5,9 +5,34 @@ namespace MathGame.N_Endy.Services
 {
     public class QuestionService : IQuestionService
     {
-        public Question GenerateQuestion(Operation operation)
+        private readonly Random _random;
+        private readonly Question _question;
+
+        public QuestionService(Question question)
         {
-            return new Question();
+            _random = new Random();
+            _question = question;
+        }
+
+        public Question GenerateQuestion(string operation)
+        {
+            _question.Operation = operation;
+
+            if (operation == "/")
+            {
+                do
+                {
+                    _question.Operand1 = _random.Next(1, 99);
+                    _question.Operand2 = _random.Next(1, 99);
+                } while (operand1 % operand2 != 0);
+            }
+            else
+            {
+                _question.Operand1 = _random.Next(1, 11);
+                _question.Operand2 = _random.Next(1, 11);
+            }
+
+            return _question;
         }
     }
 }
