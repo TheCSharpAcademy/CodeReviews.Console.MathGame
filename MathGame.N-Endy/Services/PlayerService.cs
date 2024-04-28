@@ -1,3 +1,6 @@
+using MathGame.N_Endy.GameEntities;
+using MathGame.N_Endy.GameCore;
+
 namespace MathGame.N_Endy.Services
 {
     public class PlayerService : IPlayerService
