@@ -24,6 +24,31 @@ namespace MathGame.N_Endy.Services
 
             // Display game prompt
             _userInteraction.DisplayGamePrompt(player.Name);
+
+            ApplyUserChoice(_userInteraction.GetPlayerChoice());
+        }
+
+        public void ApplyUserChoice(string userChoice)
+        {
+            switch (userChoice)
+            {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                default:
+            }
+        }
+
+        public void PlayAgain()
+        {
+
+        }
+
+        public void EndGame()
+        {
+            _userInteraction.Exit();
         }
     }
 }

@@ -30,5 +30,10 @@ namespace MathGame.N_Endy.GameUserInteraction
             Console.WriteLine("6. Display previous games.");
             Console.WriteLine("\nPlease enter your choice:");
         }
+
+        public string GetUserChoice()
+        {
+            return Console.ReadLine();
+        }
     }
 }
