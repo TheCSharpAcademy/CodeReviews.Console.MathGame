@@ -7,7 +7,7 @@ namespace MathGame.N_Endy.Services
     {
         public Question GenerateQuestion(Operation operation)
         {
-            return;
+            return new Question();
         }
     }
 }
