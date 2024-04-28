@@ -20,15 +20,15 @@ namespace MathGame.N_Endy.GameUserInteraction
 
         public void DisplayGamePrompt(string name)
         {
-            Console.WriteLine($"Welcome to the Math Game {name}");
+            Console.WriteLine($"\nWelcome to the Math Game {name}\n");
             Console.WriteLine("Please choose a game from the following options:");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
             Console.WriteLine("5. Quit");
-            Console.WriteLine("Display previous games.");
-            Console.WriteLine("Please enter your choice:");
+            Console.WriteLine("6. Display previous games.");
+            Console.WriteLine("\nPlease enter your choice:");
         }
     }
 }
