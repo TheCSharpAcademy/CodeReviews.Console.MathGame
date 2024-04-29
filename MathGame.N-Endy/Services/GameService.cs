@@ -21,35 +21,44 @@ namespace MathGame.N_Endy.Services
 
         public void StartGame()
         {
+            // Ask user for number of games to play
+            int numberOfGames;
+            _userInteraction.ShowMessage("How many games would you like to play?: ");
+            while (!int.TryParse(_userInteraction.GetUserChoice(), out numberOfGames))
+            {
+                _userInteraction.ShowMessage("Please enter a valid number of games.");
+            }
+
             // Create player
             var name = _userInteraction.GetPlayerName();
             var player = _playerService.CreatePlayer(name);
+            _userInteraction.ShowMessage($"Welcome to the Math Game {player.Name}");
 
-            // // Ask user for number of games to play
-            // int numberOfGames = int.Parse(_userInteraction.GetUserChoice());
-
-            // Display game prompt
-            _userInteraction.DisplayGamePrompt(player.Name);
-
-            // Get user choice
-            // Display Question
-            var mathQuestion = GetQuestion(_userInteraction.GetUserChoice());
-            _userInteraction.DisplayQuestion(mathQuestion);
-
-            // Get user answer
-            var userAnswer = _userInteraction.GetUserChoice();
-            int userAnswerToInt;
-
-            // Check if answer is correct
-            if (int.TryParse(userAnswer, out userAnswerToInt) && _questionService.CheckAnswer() == userAnswerToInt)
+            for (var i = numberOfGames; i > 0; i--)
             {
-                // Update player score
-                _playerService.UpdatePlayerScore(player.Name, player.Score + 1);
-                _userInteraction.ShowMessage("Correct!");
-            }
-            else
-            {
-                _userInteraction.ShowMessage("Incorrect!");
+                // Display game prompt
+                _userInteraction.DisplayGamePrompt(player.Name);
+
+                // Get user choice
+                // Display Question
+                var mathQuestion = GetQuestion(_userInteraction.GetUserChoice());
+                _userInteraction.DisplayQuestion(mathQuestion);
+
+                // Get user answer
+                var userAnswer = _userInteraction.GetUserChoice();
+                int userAnswerToInt;
+
+                // Check if answer is correct
+                if (int.TryParse(userAnswer, out userAnswerToInt) && _questionService.CheckAnswer() == userAnswerToInt)
+                {
+                    // Update player score
+                    _playerService.UpdatePlayerScore(player.Name, player.Score + 1);
+                    _userInteraction.ShowMessage("Correct!");
+                }
+                else
+                {
+                    _userInteraction.ShowMessage("Incorrect!");
+                }
             }
         }
 

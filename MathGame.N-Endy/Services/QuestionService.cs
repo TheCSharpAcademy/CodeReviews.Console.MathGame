@@ -37,13 +37,6 @@ namespace MathGame.N_Endy.Services
 
         public int CheckAnswer()
         {
-            // string expression = $"{_question.Operand1}{_question.Operation}{_question.Operand2}";
-
-            // int result;
-            // if (int.TryParse(expression, out result))
-            //     return result;
-
-
             // Construct the arithmetic expression
             string expression = $"{_question.Operand1} {_question.Operation} {_question.Operand2}";
 

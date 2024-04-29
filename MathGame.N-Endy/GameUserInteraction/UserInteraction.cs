@@ -23,9 +23,7 @@ namespace MathGame.N_Endy.GameUserInteraction
         public void DisplayGamePrompt(string name)
         {
             Thread.Sleep(1000);
-            Console.WriteLine($"\nWelcome to the Math Game {name}\n");
-            Thread.Sleep(1000);
-            Console.WriteLine("Please choose a game from the following options:");
+            Console.WriteLine("\nPlease choose a game from the following options:");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
