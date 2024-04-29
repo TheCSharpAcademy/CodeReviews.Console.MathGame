@@ -6,7 +6,7 @@ namespace MathGame.N_Endy.GameCore
     {
         void StartGame();
         Question GetQuestion(string userChoice);
-        void PlayAgain();
+        bool PlayAgain();
         void EndGame();
     }
 }

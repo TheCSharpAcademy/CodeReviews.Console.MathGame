@@ -60,6 +60,12 @@ namespace MathGame.N_Endy.Services
                     _userInteraction.ShowMessage("Incorrect!");
                 }
             }
+
+            bool willPlayAgain = PlayAgain();
+            if (willPlayAgain)
+                StartGame();
+            else
+                EndGame();
         }
 
         public Question GetQuestion(string userChoice)
@@ -89,9 +95,11 @@ namespace MathGame.N_Endy.Services
             return question;
         }
 
-        public void PlayAgain()
+        public bool PlayAgain()
         {
-
+            _userInteraction.ShowMessage("Would you like to play again? (y/other keys)");
+            var userChoice = _userInteraction.GetUserChoice();
+            return userChoice.ToLower() == "y";
         }
 
         public void EndGame()
