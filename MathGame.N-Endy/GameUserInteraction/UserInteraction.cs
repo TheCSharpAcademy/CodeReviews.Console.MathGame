@@ -1,3 +1,5 @@
+using MathGame.N_Endy.GameEntities;
+
 namespace MathGame.N_Endy.GameUserInteraction
 {
     public class UserInteraction : IUserInteraction
@@ -33,7 +35,7 @@ namespace MathGame.N_Endy.GameUserInteraction
 
         public void DisplayQuestion(Question question)
         {
-            Console.WriteLine($"\nQuestion: {question.FirstNumber} {question.Operation} {question.SecondNumber}");
+            Console.WriteLine($"\nQuestion: {question.Operand1} {question.Operation} {question.Operand2}");
             Console.Write("Answer: ");
         }
 

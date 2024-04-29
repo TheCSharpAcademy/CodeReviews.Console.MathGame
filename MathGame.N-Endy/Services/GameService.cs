@@ -7,6 +7,7 @@ namespace MathGame.N_Endy.Services
 {
     public class GameService : IGameService
     {
+
         private readonly IPlayerService _playerService;
         private readonly IUserInteraction _userInteraction;
         private readonly IQuestionService _questionService;
@@ -24,21 +25,22 @@ namespace MathGame.N_Endy.Services
             var name = _userInteraction.GetPlayerName();
             var player = _playerService.CreatePlayer(name);
 
+            // // Ask user for number of games to play
+            // int numberOfGames = int.Parse(_userInteraction.GetUserChoice());
+
             // Display game prompt
             _userInteraction.DisplayGamePrompt(player.Name);
 
             // Get user choice
-            ApplyUserChoice(_userInteraction.GetPlayerChoice());
-
             // Display Question
-            var question = _questionService.GenerateQuestion();
-            _userInteraction.DisplayQuestion(question);
+            var mathQuestion = GetQuestion(_userInteraction.GetUserChoice());
+            _userInteraction.DisplayQuestion(mathQuestion);
 
             // Get user answer
             var userAnswer = _userInteraction.GetUserChoice();
 
             // Check if answer is correct
-            if (_questionService.CheckAnswer() == userAnswer)
+            if (_questionService.CheckAnswer() == int.Parse(userAnswer))
             {
                 // Update player score
                 _playerService.UpdatePlayerScore(player.Name, player.Score + 1);
@@ -50,21 +52,31 @@ namespace MathGame.N_Endy.Services
             }
         }
 
-        public void ApplyUserChoice(string userChoice)
+        public Question GetQuestion(string userChoice)
         {
+            Question question = null;
             switch (userChoice)
             {
                 case "1":
-                    return _questionService.GenerateQuestion("+");
+                    question = _questionService.GenerateQuestion("+");
+                    break;
                 case "2":
-                    return _questionService.GenerateQuestion("-");
+                    question = _questionService.GenerateQuestion("-");
+                    break;
                 case "3":
-                    return _questionService.GenerateQuestion("*");
+                    question = _questionService.GenerateQuestion("*");
+                    break;
                 case "4":
-                    return _questionService.GenerateQuestion("/");
+                    question = _questionService.GenerateQuestion("/");
+                    break;
                 case "5":
+                    break;
                 default:
+                    _userInteraction.Exit();
+                    break;
             }
+
+            return question;
         }
 
         public void PlayAgain()

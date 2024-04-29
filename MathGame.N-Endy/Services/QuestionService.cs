@@ -24,7 +24,7 @@ namespace MathGame.N_Endy.Services
                 {
                     _question.Operand1 = _random.Next(1, 99);
                     _question.Operand2 = _random.Next(1, 99);
-                } while (operand1 % operand2 != 0);
+                } while (_question.Operand1 % _question.Operand2 != 0);
             }
             else
             {
@@ -37,8 +37,8 @@ namespace MathGame.N_Endy.Services
 
         public int CheckAnswer()
         {
-            int answer = $"{_question.Operand1} {_question.Operation} {_question.Operand2}";
-            return int.Parse(answer);
+            string expression = $"{_question.Operand1}{_question.Operation}{_question.Operand2}";
+            return (int)new System.Data.DataTable().Compute(expression, null);
         }
     }
 }

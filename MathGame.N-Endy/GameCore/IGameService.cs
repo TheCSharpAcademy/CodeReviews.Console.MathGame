@@ -1,9 +1,11 @@
+using MathGame.N_Endy.GameEntities;
+
 namespace MathGame.N_Endy.GameCore
 {
     public interface IGameService
     {
         void StartGame();
-        void ApplyUserChoice();
+        Question GetQuestion(string userChoice);
         void PlayAgain();
         void EndGame();
     }

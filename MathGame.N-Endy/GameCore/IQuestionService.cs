@@ -4,7 +4,7 @@ namespace MathGame.N_Endy.GameCore
 {
     public interface IQuestionService
     {
-        Question GenerateQuestion(Operation operation);
+        Question GenerateQuestion(string operation);
         int CheckAnswer();
     }
 }
