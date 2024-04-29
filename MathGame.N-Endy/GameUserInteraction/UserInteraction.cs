@@ -22,7 +22,9 @@ namespace MathGame.N_Endy.GameUserInteraction
 
         public void DisplayGamePrompt(string name)
         {
+            Thread.Sleep(1000);
             Console.WriteLine($"\nWelcome to the Math Game {name}\n");
+            Thread.Sleep(1000);
             Console.WriteLine("Please choose a game from the following options:");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Subtraction");
@@ -30,6 +32,7 @@ namespace MathGame.N_Endy.GameUserInteraction
             Console.WriteLine("4. Division");
             Console.WriteLine("5. Quit");
             Console.WriteLine("6. Display previous games.");
+            Thread.Sleep(1000);
             Console.WriteLine("\nPlease enter your choice:");
         }
 

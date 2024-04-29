@@ -38,9 +38,10 @@ namespace MathGame.N_Endy.Services
 
             // Get user answer
             var userAnswer = _userInteraction.GetUserChoice();
+            int userAnswerToInt;
 
             // Check if answer is correct
-            if (_questionService.CheckAnswer() == int.Parse(userAnswer))
+            if (int.TryParse(userAnswer, out userAnswerToInt) && _questionService.CheckAnswer() == userAnswerToInt)
             {
                 // Update player score
                 _playerService.UpdatePlayerScore(player.Name, player.Score + 1);

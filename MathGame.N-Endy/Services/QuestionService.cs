@@ -37,8 +37,30 @@ namespace MathGame.N_Endy.Services
 
         public int CheckAnswer()
         {
-            string expression = $"{_question.Operand1}{_question.Operation}{_question.Operand2}";
-            return (int)new System.Data.DataTable().Compute(expression, null);
+            // string expression = $"{_question.Operand1}{_question.Operation}{_question.Operand2}";
+
+            // int result;
+            // if (int.TryParse(expression, out result))
+            //     return result;
+
+
+            // Construct the arithmetic expression
+            string expression = $"{_question.Operand1} {_question.Operation} {_question.Operand2}";
+
+            // Use System.Data.DataTable.Compute to evaluate the expression
+            object result = new System.Data.DataTable().Compute(expression, null);
+
+            // Check if the result is a valid integer
+            int parsedResult;
+            if (result != null && int.TryParse(result.ToString(), out parsedResult))
+            {
+                return parsedResult;
+            }
+            else
+            {
+                // Handle the case where the expression couldn't be evaluated or the result is not a valid integer
+                throw new InvalidOperationException("Failed to evaluate the arithmetic expression.");
+            }
         }
     }
 }
