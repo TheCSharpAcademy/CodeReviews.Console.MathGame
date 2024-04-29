@@ -34,5 +34,11 @@ namespace MathGame.N_Endy.Services
 
             return _question;
         }
+
+        public int CheckAnswer()
+        {
+            int answer = $"{_question.Operand1} {_question.Operation} {_question.Operand2}";
+            return int.Parse(answer);
+        }
     }
 }

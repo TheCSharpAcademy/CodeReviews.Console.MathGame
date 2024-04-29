@@ -31,6 +31,12 @@ namespace MathGame.N_Endy.GameUserInteraction
             Console.WriteLine("\nPlease enter your choice:");
         }
 
+        public void DisplayQuestion(Question question)
+        {
+            Console.WriteLine($"\nQuestion: {question.FirstNumber} {question.Operation} {question.SecondNumber}");
+            Console.Write("Answer: ");
+        }
+
         public string GetUserChoice()
         {
             return Console.ReadLine();

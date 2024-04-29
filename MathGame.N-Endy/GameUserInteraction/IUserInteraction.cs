@@ -5,7 +5,7 @@ namespace MathGame.N_Endy.GameUserInteraction
         void ShowMessage(string message);
         void Exit();
         void DisplayGamePrompt(string name);
-        //void DisplayQuestion(Question question);
+        void DisplayQuestion(Question question);
         string GetPlayerName();
         string GetUserChoice();
     }

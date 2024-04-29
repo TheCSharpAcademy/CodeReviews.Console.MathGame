@@ -27,7 +27,27 @@ namespace MathGame.N_Endy.Services
             // Display game prompt
             _userInteraction.DisplayGamePrompt(player.Name);
 
+            // Get user choice
             ApplyUserChoice(_userInteraction.GetPlayerChoice());
+
+            // Display Question
+            var question = _questionService.GenerateQuestion();
+            _userInteraction.DisplayQuestion(question);
+
+            // Get user answer
+            var userAnswer = _userInteraction.GetUserChoice();
+
+            // Check if answer is correct
+            if (_questionService.CheckAnswer() == userAnswer)
+            {
+                // Update player score
+                _playerService.UpdatePlayerScore(player.Name, player.Score + 1);
+                _userInteraction.ShowMessage("Correct!");
+            }
+            else
+            {
+                _userInteraction.ShowMessage("Incorrect!");
+            }
         }
 
         public void ApplyUserChoice(string userChoice)
