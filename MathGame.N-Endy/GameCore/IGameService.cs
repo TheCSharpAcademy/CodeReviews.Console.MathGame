@@ -5,7 +5,7 @@ namespace MathGame.N_Endy.GameCore
     public interface IGameService
     {
         void StartGame();
-        Question GetQuestion(string userChoice);
+        Question AnalyzeUserChoice(string userChoice);
         bool PlayAgain();
         void EndGame();
     }

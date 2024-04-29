@@ -2,6 +2,7 @@ using MathGame.N_Endy.GameCore;
 using MathGame.N_Endy.GameEntities;
 using MathGame.N_Endy.GameUserInteraction;
 using MathGame.N_Endy.Services;
+using MathGame.N_Endy.GameRepository;
 
 namespace MathGame.N_Endy.Services
 {
@@ -11,12 +12,14 @@ namespace MathGame.N_Endy.Services
         private readonly IPlayerService _playerService;
         private readonly IUserInteraction _userInteraction;
         private readonly IQuestionService _questionService;
+        private readonly IPreviousGame _previousGame;
 
-        public GameService(IPlayerService playerService, IUserInteraction userInteraction, IQuestionService questionService)
+        public GameService(IPlayerService playerService, IUserInteraction userInteraction, IQuestionService questionService, IPreviousGame previousGame)
         {
             _playerService = playerService;
             _userInteraction = userInteraction;
             _questionService = questionService;
+            _previousGame = previousGame;
         }
 
         public void StartGame()
@@ -34,6 +37,7 @@ namespace MathGame.N_Endy.Services
             var player = _playerService.CreatePlayer(name);
             _userInteraction.ShowMessage($"Welcome to the Math Game {player.Name}");
 
+            // Ask question the number of times as number of games
             for (var i = numberOfGames; i > 0; i--)
             {
                 // Display game prompt
@@ -41,7 +45,7 @@ namespace MathGame.N_Endy.Services
 
                 // Get user choice
                 // Display Question
-                var mathQuestion = GetQuestion(_userInteraction.GetUserChoice());
+                var mathQuestion = AnalyzeUserChoice(_userInteraction.GetUserChoice());
                 _userInteraction.DisplayQuestion(mathQuestion);
 
                 // Get user answer
@@ -52,7 +56,7 @@ namespace MathGame.N_Endy.Services
                 if (int.TryParse(userAnswer, out userAnswerToInt) && _questionService.CheckAnswer() == userAnswerToInt)
                 {
                     // Update player score
-                    _playerService.UpdatePlayerScore(player.Name, player.Score + 1);
+                    _playerService.UpdatePlayerScore(player.Score + 1);
                     _userInteraction.ShowMessage("Correct!");
                 }
                 else
@@ -61,38 +65,48 @@ namespace MathGame.N_Endy.Services
                 }
             }
 
-            bool willPlayAgain = PlayAgain();
-            if (willPlayAgain)
-                StartGame();
-            else
-                EndGame();
+            // Save the current game.
+            _previousGame.SaveGame(player.Name, player.Score);
+
+            // Ask user to play again.
+            WillPlayAgain();
+
+            
         }
 
-        public Question GetQuestion(string userChoice)
+        public Question AnalyzeUserChoice(string userChoice)
         {
             Question question = null;
             switch (userChoice)
             {
                 case "1":
-                    question = _questionService.GenerateQuestion("+");
-                    break;
                 case "2":
-                    question = _questionService.GenerateQuestion("-");
-                    break;
                 case "3":
-                    question = _questionService.GenerateQuestion("*");
-                    break;
                 case "4":
-                    question = _questionService.GenerateQuestion("/");
+                    question = _questionService.GetQuestion(userChoice);
                     break;
                 case "5":
+                    _userInteraction.Exit();
+                    break;
+                case "6":
+                    _previousGame.LoadPreviousGame();
+                    StartGame();
                     break;
                 default:
-                    _userInteraction.Exit();
+                    _userInteraction.ShowMessage("Enter a valid option.");
                     break;
             }
 
             return question;
+        }
+
+        public void WillPlayAgain()
+        {
+            bool willPlayAgain = PlayAgain();
+            if (willPlayAgain)
+                StartGame();
+            else
+                EndGame();
         }
 
         public bool PlayAgain()

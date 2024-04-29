@@ -35,6 +35,28 @@ namespace MathGame.N_Endy.Services
             return _question;
         }
 
+        public Question GetQuestion(string userChoice)
+        {
+            Question question = null;
+            switch (userChoice)
+            {
+                case "1":
+                    question = GenerateQuestion("+");
+                    break;
+                case "2":
+                    question = GenerateQuestion("-");
+                    break;
+                case "3":
+                    question = GenerateQuestion("*");
+                    break;
+                case "4":
+                    question = GenerateQuestion("/");
+                    break;
+            }
+
+            return question;
+        }
+
         public int CheckAnswer()
         {
             // Construct the arithmetic expression

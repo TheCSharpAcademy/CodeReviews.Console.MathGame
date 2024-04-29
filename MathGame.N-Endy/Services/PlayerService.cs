@@ -18,7 +18,7 @@ namespace MathGame.N_Endy.Services
             return _player;
         }
 
-        public void UpdatePlayerScore(string name, int score)
+        public void UpdatePlayerScore(int score)
         {
             _player.Score = score;
         }
