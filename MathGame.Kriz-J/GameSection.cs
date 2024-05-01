@@ -1,8 +1,8 @@
 ﻿namespace MathGame.Kriz_J;
 
-public abstract class PartOfGame
+public abstract class GameSection
 {
-    protected PartOfGame()
+    protected GameSection()
     {
         Console.WriteLine();
         Console.WriteLine();
@@ -16,7 +16,7 @@ public abstract class PartOfGame
 
     public abstract void Initialize();
 
-    public abstract void Menu();
+    public abstract void PrintMenu();
 
     private static void CountDown()
     {
@@ -29,7 +29,7 @@ public abstract class PartOfGame
     }
 }
 
-public class Addition : PartOfGame
+public class Addition : GameSection
 {
     public override void PrintSelection() => Console.Write("\tStarting addition!");
 
@@ -37,25 +37,59 @@ public class Addition : PartOfGame
     {
         do
         {
-            Menu();
+            PrintMenu();
         } while (char.ToUpper(Console.ReadKey().KeyChar) != 'Q');
     }
 
-    public override void Menu()
+    public override void PrintMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Addition}");
         Console.WriteLine("\tThe goal of this game is to answer correctly to the set of questions presented.");
         Console.WriteLine("\tEach question will be an addition problem of two terms.");
         Console.WriteLine("");
-        Console.WriteLine("\tSelect difficulty: [E]asy [M]edium [H]ard");
+        Console.WriteLine("\tSelect difficulty:");
+        SetDifficulty('H');
         Console.WriteLine("");
-        Console.WriteLine("\tSelect mode: [T]imed [F]ix");
+        Console.WriteLine("\tSelect mode:");
+        Console.WriteLine("\t\t[T]imed [F]ix");
         //Console.ReadKey();
+    }
+
+    private void SetDifficulty(char? difficulty = null)
+    {
+        switch (difficulty)
+        {
+            case 'E':
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\t\t[E]asy");
+                Console.ResetColor();
+                Console.Write(" [M]edium [H]ard");
+                break;
+            case 'M':
+                Console.Write("\t\t[E]asy ");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("[M]edium");
+                Console.ResetColor();
+                Console.Write(" [H]ard");
+                break;
+            case 'H':
+                Console.Write("\t\t[E]asy [M]edium ");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("[H]ard");
+                Console.ResetColor();
+                break;
+            default:
+                Console.WriteLine("\t\t[E]asy [M]edium [H]ard");
+                break;
+        }
     }
 }
 
-public class Subtraction : PartOfGame
+public class Subtraction : GameSection
 {
     public override void PrintSelection() => Console.Write("\tStarting subtraction!");
 
@@ -64,7 +98,7 @@ public class Subtraction : PartOfGame
         while (true) { };
     }
 
-    public override void Menu()
+    public override void PrintMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Subtraction}");
@@ -73,7 +107,7 @@ public class Subtraction : PartOfGame
     }
 }
 
-public class Multiplication : PartOfGame
+public class Multiplication : GameSection
 {
     public override void PrintSelection() => Console.Write("\tStarting multiplication!");
 
@@ -82,7 +116,7 @@ public class Multiplication : PartOfGame
         while (true) { };
     }
 
-    public override void Menu()
+    public override void PrintMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Multiplication}");
@@ -91,7 +125,7 @@ public class Multiplication : PartOfGame
     }
 }
 
-public class Division : PartOfGame
+public class Division : GameSection
 {
     public override void PrintSelection() => Console.Write("\tStarting division!");
 
@@ -100,7 +134,7 @@ public class Division : PartOfGame
         while (true) { };
     }
 
-    public override void Menu()
+    public override void PrintMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Division}");
@@ -109,14 +143,14 @@ public class Division : PartOfGame
     }
 }
 
-public class RecentGames : PartOfGame
+public class RecentGames : GameSection
 {
     public override void Initialize()
     {
         throw new NotImplementedException();
     }
 
-    public override void Menu()
+    public override void PrintMenu()
     {
         throw new NotImplementedException();
     }
@@ -127,20 +161,20 @@ public class RecentGames : PartOfGame
     }
 }
 
-public class Quit : PartOfGame
+public class Quit : GameSection
 {
     public override void PrintSelection() => Console.Write("\tThank you for playing! Exiting game . . .");
 
     public override void Initialize() { }
 
-    public override void Menu() { }
+    public override void PrintMenu() { }
 }
 
-public class NotImplemented : PartOfGame
+public class NotImplemented : GameSection
 {
     public override void PrintSelection() => Console.Write("\tNot a valid selection. Please select either of [A]/[S]/[M]/[D]/[R]/[Q] . . .");
 
     public override void Initialize() { }
 
-    public override void Menu() { }
+    public override void PrintMenu() { }
 }

@@ -6,7 +6,7 @@ public class MenuSelection(char? value = null)
 
     public void Route()
     {
-        PartOfGame _ = Value switch
+        GameSection _ = Value switch
         {
             'A' => new Addition(),
             'S' => new Subtraction(),
