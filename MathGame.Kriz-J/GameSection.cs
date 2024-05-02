@@ -49,14 +49,14 @@ public class Addition : GameSection
         Console.WriteLine("\tEach question will be an addition problem of two terms.");
         Console.WriteLine("");
         Console.WriteLine("\tSelect difficulty:");
-        SetDifficulty('H');
+        SetGameDifficulty('H');
         Console.WriteLine("");
         Console.WriteLine("\tSelect mode:");
         Console.WriteLine("\t\t[T]imed [F]ix");
         //Console.ReadKey();
     }
 
-    private void SetDifficulty(char? difficulty = null)
+    private void SetGameDifficulty(char? difficulty = null)
     {
         switch (difficulty)
         {
