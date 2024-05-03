@@ -1,6 +1,8 @@
-﻿namespace MathGame.Kriz_J;
+﻿using MathGame.Kriz_J.GameSections;
 
-public class MenuSelection(char? value = null)
+namespace MathGame.Kriz_J;
+
+public class MainMenuSelection(char? value = null)
 {
     public char? Value { get; } = value;
 

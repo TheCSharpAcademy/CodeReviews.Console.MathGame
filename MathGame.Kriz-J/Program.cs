@@ -6,7 +6,7 @@ class Program
 
     private static void MakeAndRouteSelection()
     {
-        var selection = new MenuSelection();
+        var selection = new MainMenuSelection();
 
         while (selection.Value != 'Q')
         {
@@ -33,10 +33,10 @@ class Program
         Console.Write("\t> ");
     }
 
-    private static MenuSelection SelectMenuOption()
+    private static MainMenuSelection SelectMenuOption()
     {
         var character = char.ToUpper(Console.ReadKey().KeyChar);
 
-        return new MenuSelection(character);
+        return new MainMenuSelection(character);
     }
 }
