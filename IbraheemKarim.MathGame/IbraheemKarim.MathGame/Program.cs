@@ -1,34 +1,16 @@
 ﻿using IbraheemKarim.MathGame;
 
-var dateAndTime = DateTime.UtcNow;
 
-string username = GetUserName();
+string username = Helpers.GetUserName();
 
-var menu = new Menu();
+var menu = new Menu(new GameEngine());
 
-menu.ShowGreetings(username, dateAndTime);
-
-ActionType action = menu.GetDesiredAction();
-
-menu.ProcessActionType(action);
+menu.StartMenu(username);
 
 
 
 
 
-
-    string GetUserName()
-{
-    string name ="";
-    do
-    {
-        Console.Clear();
-        Console.Write("Hello, please enter your name: ");
-        name = Console.ReadLine();
-    }while(string.IsNullOrWhiteSpace(name));
-
-    return name;
-}
 
 
 

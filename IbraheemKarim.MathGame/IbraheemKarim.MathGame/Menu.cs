@@ -1,22 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace IbraheemKarim.MathGame
 {
     internal class Menu
     {
-        public void ShowGreetings(string name, DateTime dateAndTime)
+        private GameEngine _gameEngine;
+
+        public Menu(GameEngine gameEngine)
         {
+            this._gameEngine = gameEngine;
+        }
+
+        public void StartMenu(string name)
+        {
+            this.ShowGreetings(name);
+
+            while (true)
+            {
+                ActionType action = this.GetDesiredAction();
+                this.ProcessActionType(action);
+            }
+        }
+        private void ShowGreetings(string name)
+        {
+            var dateAndTime = DateTime.Now;
             Console.Clear();
             Console.WriteLine($"Hello {name}. It's {dateAndTime}. This is your math's game.\nIt's great that you're working on improving yourself\n");
             Console.WriteLine("You can press any key to continue");
             Console.ReadKey();
         }
 
-        public ActionType GetDesiredAction()
+        private ActionType GetDesiredAction()
         {
             bool firstIteration = true;
             do
@@ -44,23 +58,22 @@ Choose one of the options below:
 
         }
 
-
-        public void ProcessActionType(ActionType action)
+        private void ProcessActionType(ActionType action)
         {
-            switch (action)
-            {
-                case ActionType.PlayTheGame:
-                    Console.WriteLine("play the game selected");
-                    break;
-                case ActionType.ViewPreviousGames:
-                    Console.WriteLine("View previous games selected");
-                    break;
-                case ActionType.QuitTheProgram:
-                    Console.WriteLine("Quit the program selected");
-                    Environment.Exit(0);
-                    break;
-            }
-
+                switch (action)
+                {
+                    case ActionType.PlayTheGame:
+                        _gameEngine.StartGame();
+                        break;
+                    case ActionType.ViewPreviousGames:
+                        GamesHistory.PrintHistory();
+                        break;
+                    case ActionType.QuitTheProgram:
+                        Console.Clear();
+                        Console.WriteLine("\nGoodbye!");
+                        Environment.Exit(0);
+                        break;
+                }
         }
 
     }
