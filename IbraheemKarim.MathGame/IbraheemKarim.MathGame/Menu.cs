@@ -1,6 +1,4 @@
-﻿
-
-namespace IbraheemKarim.MathGame
+﻿namespace IbraheemKarim.MathGame
 {
     internal class Menu
     {
@@ -10,7 +8,6 @@ namespace IbraheemKarim.MathGame
         {
             this._gameEngine = gameEngine;
         }
-
         public void StartMenu(string name)
         {
             this.ShowGreetings(name);
@@ -29,7 +26,6 @@ namespace IbraheemKarim.MathGame
             Console.WriteLine("You can press any key to continue");
             Console.ReadKey();
         }
-
         private ActionType GetDesiredAction()
         {
             bool firstIteration = true;
@@ -57,7 +53,6 @@ Choose one of the options below:
             } while (true);
 
         }
-
         private void ProcessActionType(ActionType action)
         {
                 switch (action)
@@ -75,6 +70,5 @@ Choose one of the options below:
                         break;
                 }
         }
-
     }
 }

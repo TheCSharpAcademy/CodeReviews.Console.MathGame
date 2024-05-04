@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IbraheemKarim.MathGame
+﻿namespace IbraheemKarim.MathGame
 {
     internal static class GamesHistory
     {
         private static List<GameRecord> games = new();
-
 
         internal static void AddToHistory(int gameScore, GameType gameType)
         {
@@ -20,8 +13,6 @@ namespace IbraheemKarim.MathGame
                 Type = gameType
             });
         }
-
-
         internal static void PrintHistory()
         {
             Console.Clear();
@@ -35,6 +26,5 @@ namespace IbraheemKarim.MathGame
             Console.WriteLine("Press any key to return to Main Menu");
             Console.ReadKey();
         }
-
     }
 }
