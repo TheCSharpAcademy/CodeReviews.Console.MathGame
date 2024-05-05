@@ -2,17 +2,12 @@
 
 public class RecentGames : GameSection
 {
-    public override void Initialize()
+    public override void GameLoop()
     {
         throw new NotImplementedException();
     }
 
-    public override void PrintMenu(char difficulty, char mode)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void PrintSelection()
+    public override void PrintGameMenu()
     {
         throw new NotImplementedException();
     }

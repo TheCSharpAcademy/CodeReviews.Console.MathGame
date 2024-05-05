@@ -2,15 +2,13 @@
 
 public class Subtraction : GameSection
 {
-    public override void PrintSelection() => Console.Write("\tStarting subtraction!");
-
-    public override void Initialize()
+    public override void GameLoop()
     {
         while (true) { };
 
     }
 
-    public override void PrintMenu(char difficulty, char mode)
+    public override void PrintGameMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Subtraction}");

@@ -2,14 +2,12 @@
 
 public class Multiplication : GameSection
 {
-    public override void PrintSelection() => Console.Write("\tStarting multiplication!");
-
-    public override void Initialize()
+    public override void GameLoop()
     {
         while (true) { };
     }
 
-    public override void PrintMenu(char difficulty, char mode)
+    public override void PrintGameMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Multiplication}");

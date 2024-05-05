@@ -2,9 +2,7 @@
 
 public class Quit : GameSection
 {
-    public override void PrintSelection() => Console.Write("\tThank you for playing!");
+    public override void GameLoop() { }
 
-    public override void Initialize() { }
-
-    public override void PrintMenu(char difficulty, char mode) { }
+    public override void PrintGameMenu() { }
 }

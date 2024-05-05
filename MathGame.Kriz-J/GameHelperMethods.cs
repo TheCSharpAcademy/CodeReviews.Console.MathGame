@@ -1,36 +1,44 @@
-﻿using static MathGame.Kriz_J.ConsoleHelperMethods;
-
-namespace MathGame.Kriz_J;
+﻿namespace MathGame.Kriz_J;
 
 public class GameHelperMethods
 {
-    public static void SetGameDifficulty(char difficulty)
+    public static void PrintMainMenu()
     {
-        switch (difficulty)
-        {
-            case 'E':
-                FormatWriteLineWithHighlight("", "\t\t[E]asy", " [M]edium [H]ard");
-                break;
-            case 'M':
-                FormatWriteLineWithHighlight("\t\t[E]asy ", "[M]edium", " [H]ard");
-                break;
-            case 'H':
-                FormatWriteLineWithHighlight("\t\t[E]asy [M]edium ", "[H]ard", "");
-                break;
-        }
+        Console.Clear();
+        Console.WriteLine($"{StylizedTexts.MainMenu}");
+        Console.WriteLine();
+        Console.WriteLine("\tSelect to play one of the following games:");
+        Console.WriteLine("\t\t[A]ddition");
+        Console.WriteLine("\t\t[S]ubtraction");
+        Console.WriteLine("\t\t[M]ultiplication");
+        Console.WriteLine("\t\t[D]ivision");
+        Console.WriteLine();
+        Console.WriteLine("\t\t[R]ecent games");
+        Console.WriteLine("\t\t[Q]uit");
+        Console.WriteLine();
+        Console.Write("\t> ");
     }
 
-    public static void SetGameMode(char mode)
+    public static void PrintGameMenu(string title, string description, Difficulty difficulty, Mode mode)
     {
-        switch (mode)
-        {
-            case 'S':
-                FormatWriteLineWithHighlight("", "\t\t[S]tandard", " [T]imed");
-                break;
-            case 'T':
-                FormatWriteLineWithHighlight("\t\t[S]tandard ", "[T]imed", "");
-                break;
-        }
+        Console.Clear();
+        Console.WriteLine($"{title}");
+        Console.WriteLine("\tThe goal of this game is to answer correctly to the set of questions presented.");
+        Console.WriteLine($"\t{description}");
+        Console.WriteLine("");
+        Console.WriteLine("\tSelect difficulty:");
+        GameSettings.PrintGameDifficulties(difficulty);
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("\tSelect mode:");
+        GameSettings.PrintGameModes(mode);
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("\tStart game: [ENTER] or [SPACE]");
+        Console.WriteLine();
+        Console.WriteLine("\t[Q]uit.");
+        Console.WriteLine();
+        Console.Write("\t> ");
     }
 
     public static void GameCountDown()
@@ -41,6 +49,4 @@ public class GameHelperMethods
             Thread.Sleep(1000);
         }
     }
-
 }
-
