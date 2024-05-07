@@ -1,80 +1,98 @@
-﻿namespace MathGame.Kriz_J.GameSections;
+﻿using Console = System.Console;
+
+namespace MathGame.Kriz_J.GameSections;
 
 public class Addition : GameSection
 {
-    public override void GameLoop()
+    protected override void SectionLoop()
     {
-        while (!QuitPressed)
+        while (!Quit)
         {
-            PrintGameMenu();
-            ReadAndRouteUserInput();
+            PrintMenu(
+                StylizedTexts.Addition,
+                "Each question will be an addition problem of two terms.",
+                Settings.Difficulty,
+                Settings.Mode);
+            ReadAndRouteUserSelection();
         }
     }
 
-    private void ReadAndRouteUserInput()
+    protected override void StandardGame()
     {
-        var input = char.ToUpper(Console.ReadKey().KeyChar);
-
-        switch (input)
-        {
-            case 'Q':
-                QuitPressed = true;
-                break;
-            case '\r' or ' ':
-                StartGame();
-                break;
-            default:
-                Settings.ChangeDifficultyOrMode(input);
-                break;
-        }
-    }
-
-    private void StartGame()
-    {
-        Console.Clear();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.Write("\t");
         GameHelperMethods.GameCountDown();
-        Console.Clear();
-        Console.WriteLine();
-        Console.WriteLine();
 
-        var score = 0;
-        var random = new Random();
-        for (int i = 0; i < 15; i++)
-        {
-            var a = random.Next(Settings.IntegerBounds.Lower, Settings.IntegerBounds.Upper);
-            var b = random.Next(Settings.IntegerBounds.Lower, Settings.IntegerBounds.Upper);
-            Console.Write($"\t{a} + {b} = ");
+        var score = GameLogic(Settings.NumberOfQuestions);
 
-            if (!int.TryParse(Console.ReadLine(), out var c))
-                return;
-
-            if (a + b == c)
-            {
-                //Console.Write("\tCorrect!");
-                score++;
-            }
-            //else
-            //Console.Write("\tINCORRECT!");
-            //Console.Write($"{Environment.NewLine}");
-        }
-
-        Console.WriteLine();
-        if (score < 3)
-            Console.WriteLine("\tYou can do better <3");
-        else
-            Console.WriteLine($"\tNot bad... {score}/{15}");
+        PrintScore(score, Settings.NumberOfQuestions);
+        Console.Write("\t\t\t. . . Press any key to go back.");
         Console.ReadKey();
     }
 
-    public override void PrintGameMenu()
+    protected override void TimedGame()
     {
-        GameHelperMethods.PrintGameMenu(
-            StylizedTexts.Addition,
-            "Each question will be an addition problem of two terms.",
-            Settings.Difficulty,
-            Settings.Mode);
+        GameHelperMethods.GameCountDown();
+
+        var start = DateTime.Now;
+        var score = GameLogic(Settings.NumberOfQuestions);
+        var stop = DateTime.Now;
+
+        PrintScore(score, Settings.NumberOfQuestions);
+        Console.Write($"\tTime: {(stop - start):mm\\:ss\\.fff}");
+        Console.Write("\t\t\t. . . Press any key to go back.");
+        Console.ReadKey();
+    }
+
+    protected override void CustomGame()
+    {
+        Console.Write("\tYou have selected custom! How many questions do you wish to try? ");
+        Settings.NumberOfQuestions = ConsoleHelperMethods.ReadUserInteger();
+        
+        GameHelperMethods.GameCountDown();
+
+        var score = GameLogic(Settings.NumberOfQuestions);
+
+        PrintScore(score, Settings.NumberOfQuestions);
+        Console.Write("\t\t\t. . . Press any key to go back.");
+        Console.ReadKey();
+    }
+
+    private int GameLogic(int nrOfQuestions)
+    {
+        var generator = new Random();
+        var lower = Settings.IntegerBounds.Lower;
+        var upper = Settings.IntegerBounds.Upper;
+
+        var score = 0;
+        for (int i = 0; i < nrOfQuestions; i++)
+        {
+            var a = generator.Next(lower, upper);
+            var b = generator.Next(lower, upper);
+
+            Console.Write($"\t{a} + {b} = ");
+
+            var c = ConsoleHelperMethods.ReadUserInteger();
+
+            if (a + b == c)
+                score++;
+        }
+
+        return score;
+    }
+
+    private static void PrintScore(int score, int nrOfQuestions)
+    {
+        var percentage = 1.0 * score / nrOfQuestions;
+
+        Console.WriteLine();
+        if (score == nrOfQuestions)
+            Console.Write($"\tPerfect score! {score}/{nrOfQuestions}.");
+        else if (percentage >= 0.8)
+            Console.Write($"\tImpressive! {score}/{nrOfQuestions}.");
+        else if (percentage >= 0.6)
+            Console.Write($"\tPretty good! {score}/{nrOfQuestions}.");
+        else if (percentage >= 0.4)
+            Console.Write($"\tYou can do better: {score}/{nrOfQuestions}.");
+        else
+            Console.Write($"\tTry again: {score}/{nrOfQuestions}.");
     }
 }

@@ -2,6 +2,16 @@
 
 public class ConsoleHelperMethods
 {
+    public static int ReadUserInteger()
+    {
+        int input;
+        while (!int.TryParse(Console.ReadLine(), out input)) { }
+
+        return input;
+    }
+
+    public static char ReadUserSelection() => char.ToUpper(Console.ReadKey().KeyChar);
+
     public static void FormatWriteLineWithHighlight(string before, string highlight, string after)
     {
         Console.Write($"{before}");

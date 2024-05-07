@@ -2,13 +2,28 @@
 
 public class Subtraction : GameSection
 {
-    public override void GameLoop()
+    protected override void SectionLoop()
     {
         while (true) { };
 
     }
 
-    public override void PrintGameMenu()
+    protected override void StandardGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void TimedGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void CustomGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void PrintGameMenu()
     {
         Console.Clear();
         Console.WriteLine($"{StylizedTexts.Subtraction}");

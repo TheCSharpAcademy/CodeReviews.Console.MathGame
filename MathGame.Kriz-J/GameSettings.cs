@@ -10,7 +10,8 @@ public enum Difficulty
 public enum Mode
 {
     Standard = 'S',
-    Timed = 'T'
+    Timed = 'T',
+    Custom = 'C'
 }
 
 public class GameSettings
@@ -19,25 +20,27 @@ public class GameSettings
 
     public Mode Mode { get; set; } = Mode.Standard;
 
+    public int NumberOfQuestions { get; set; } = 10;
+
     public (int Lower, int Upper) IntegerBounds => SetIntegerBounds(Difficulty);
 
     private static (int lower, int upper) SetIntegerBounds(Difficulty difficulty)
     {
         return difficulty switch
         {
-            Difficulty.Easy => (lower: 0, upper: 9),
-            Difficulty.Medium => (lower: 10, upper: 99),
-            Difficulty.Hard => (lower: 100, upper: 999),
+            Difficulty.Easy => (lower: 1, upper: 10),
+            Difficulty.Medium => (lower: 11, upper: 100),
+            Difficulty.Hard => (lower: 101, upper: 1000),
             _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, "Only '[E]asy', '[M]edium', and '[H]ard' are accepted as difficulties.")
         };
     }
 
     public void ChangeDifficultyOrMode(char input)
     {
-        if (Enum.IsDefined(typeof(Difficulty), input))
+        if (Enum.IsDefined(typeof(Difficulty), (int)input))
             Difficulty = (Difficulty)input;
 
-        if (Enum.IsDefined(typeof(Mode), input))
+        if (Enum.IsDefined(typeof(Mode), (int)input))
             Mode = (Mode)input;
     }
 
@@ -64,10 +67,13 @@ public class GameSettings
         switch (mode)
         {
             case Mode.Standard:
-                ConsoleHelperMethods.FormatWriteLineWithHighlight("", "\t\t[S]tandard", " [T]imed");
+                ConsoleHelperMethods.FormatWriteLineWithHighlight("", "\t\t[S]tandard", " [T]imed [C]ustom");
                 break;
             case Mode.Timed:
-                ConsoleHelperMethods.FormatWriteLineWithHighlight("\t\t[S]tandard ", "[T]imed", "");
+                ConsoleHelperMethods.FormatWriteLineWithHighlight("\t\t[S]tandard ", "[T]imed", " [C]ustom");
+                break;
+            case Mode.Custom:
+                ConsoleHelperMethods.FormatWriteLineWithHighlight("\t\t[S]tandard [T]imed ", "[C]ustom", "");
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(mode), mode, null);

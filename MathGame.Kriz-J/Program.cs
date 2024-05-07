@@ -2,24 +2,14 @@
 
 public class Program
 {
-    private static void Main() => MakeAndRouteSelection();
-
-    private static void MakeAndRouteSelection()
+    private static void Main()
     {
-        var selection = new MainMenuSelection();
-
-        while (selection.Value != 'Q')
+        var mainMenu = new MainMenu();
+        while (!mainMenu.Quit)
         {
-            GameHelperMethods.PrintMainMenu();
-            selection = SelectMainMenuOption();
-            selection.Route();
+            MainMenu.Print();
+            mainMenu.Selection = ConsoleHelperMethods.ReadUserSelection();
+            mainMenu.Route();
         }
-    }
-    
-    private static MainMenuSelection SelectMainMenuOption()
-    {
-        var character = char.ToUpper(Console.ReadKey().KeyChar);
-
-        return new MainMenuSelection(character);
     }
 }

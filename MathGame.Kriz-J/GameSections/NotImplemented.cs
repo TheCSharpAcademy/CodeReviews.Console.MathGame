@@ -2,7 +2,26 @@
 
 public class NotImplemented : GameSection
 {
-    public override void GameLoop() => Console.ReadKey();
+    protected override void SectionLoop()
+    {
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.Write("\tNot a valid selection.");
+        _ = ConsoleHelperMethods.ReadUserSelection();
+    }
 
-    public override void PrintGameMenu() { }
+    protected override void StandardGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void TimedGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void CustomGame()
+    {
+        throw new NotImplementedException();
+    }
 }
