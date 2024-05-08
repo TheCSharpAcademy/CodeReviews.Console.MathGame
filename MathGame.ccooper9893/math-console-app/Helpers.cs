@@ -108,9 +108,9 @@ namespace math_console_app
         {
             Console.Clear();
             Console.WriteLine($@"Please choose a difficulty. 
-                E - Easy
-                M - Medium
-                H - Hard
+            E - Easy
+            M - Medium
+            H - Hard
             ");
             var difficultySelected = Console.ReadLine()?.ToLower().Trim();
 
