@@ -4,7 +4,7 @@ namespace math_console_app
     internal class Menu
     {
 
-        GameEngine gameEngine = new(); //Same as var gameEngine = new GameEngine();
+        GameEngine gameEngine = new();
 
         internal void ShowMenu(string name, DateTime date)
         {

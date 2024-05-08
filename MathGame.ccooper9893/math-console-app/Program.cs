@@ -1,6 +1,6 @@
 ﻿using math_console_app;
 
-var menu = new Menu(); //Same as Menu menu = new();
+var menu = new Menu();
 
 var date = DateTime.UtcNow;
 
