@@ -1,11 +1,10 @@
 ﻿namespace MathGame.Kriz_J.GameSections;
 
-public class Subtraction : GameSection
+public class Multiplication : Game
 {
-    protected override void SectionLoop()
+    protected override void Loop()
     {
         while (true) { };
-
     }
 
     protected override void StandardGame()
@@ -26,7 +25,7 @@ public class Subtraction : GameSection
     public void PrintGameMenu()
     {
         Console.Clear();
-        Console.WriteLine($"{StylizedTexts.Subtraction}");
+        Console.WriteLine($"{StylizedTexts.Multiplication}");
         Console.WriteLine("\tThe goal of this game is to....");
         Console.ReadKey();
     }

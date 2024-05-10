@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace MathGame.Kriz_J;
+﻿namespace MathGame.Kriz_J;
 
 public class GameHelperMethods
 {

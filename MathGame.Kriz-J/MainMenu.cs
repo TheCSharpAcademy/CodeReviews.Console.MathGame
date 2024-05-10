@@ -1,4 +1,5 @@
 ﻿using MathGame.Kriz_J.GameSections;
+using static MathGame.Kriz_J.ConsoleHelperMethods;
 
 namespace MathGame.Kriz_J;
 
@@ -8,17 +9,37 @@ public class MainMenu
 
     public bool Quit => Selection == 'Q';
 
-    public void Route()
+    public List<ScoreRecord> History { get; set; } = [];
+
+    public void RouteSelection()
     {
-        GameSection _ = Selection switch
+        switch (Selection)
+        {
+            case 'A' or 'S' or 'M' or 'D':
+                RouteGameSection();
+                break;
+            case 'R':
+                // Recent Games
+            case 'H':
+                // High Score?
+            case 'Q':
+                PrintMessage("Exiting game . . .");
+                break;
+            default:
+                PrintMessage("Not a valid selection . . .");
+                break;
+        }
+    }
+
+    private void RouteGameSection()
+    {
+        Game _ = Selection switch
         {
             'A' => new Addition(),
             'S' => new Subtraction(),
             'M' => new Multiplication(),
             'D' => new Division(),
-            'R' => new RecentGames(),
-            'Q' => new Quit(),
-            _ => new NotImplemented()
+            _ => throw new ArgumentOutOfRangeException()
         };
     }
 

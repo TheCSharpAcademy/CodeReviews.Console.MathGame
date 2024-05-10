@@ -1,10 +1,10 @@
 ﻿namespace MathGame.Kriz_J.GameSections;
 
-public class RecentGames : GameSection
+public class Division : Game
 {
-    protected override void SectionLoop()
+    protected override void Loop()
     {
-        throw new NotImplementedException();
+        while (true) { };
     }
 
     protected override void StandardGame()
@@ -24,6 +24,9 @@ public class RecentGames : GameSection
 
     public void PrintGameMenu()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine($"{StylizedTexts.Division}");
+        Console.WriteLine("\tThe goal of this game is to....");
+        Console.ReadKey();
     }
 }

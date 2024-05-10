@@ -2,6 +2,14 @@
 
 public class ConsoleHelperMethods
 {
+    public static void PrintMessage(string message)
+    {
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.Write($"\t{message}");
+        _ = ReadUserSelection();
+    }
+
     public static int ReadUserInteger()
     {
         int input;

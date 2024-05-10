@@ -9,7 +9,7 @@ public class Program
         {
             MainMenu.Print();
             mainMenu.Selection = ConsoleHelperMethods.ReadUserSelection();
-            mainMenu.Route();
+            mainMenu.RouteSelection();
         }
     }
 }

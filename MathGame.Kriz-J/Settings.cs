@@ -14,7 +14,7 @@ public enum Mode
     Custom = 'C'
 }
 
-public class GameSettings
+public class Settings
 {
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
@@ -44,7 +44,7 @@ public class GameSettings
             Mode = (Mode)input;
     }
 
-    public static void PrintGameDifficulties(Difficulty difficulty)
+    public static void PrintDifficulties(Difficulty difficulty)
     {
         switch (difficulty)
         {
@@ -62,7 +62,7 @@ public class GameSettings
         }
     }
 
-    public static void PrintGameModes(Mode mode)
+    public static void PrintModes(Mode mode)
     {
         switch (mode)
         {
