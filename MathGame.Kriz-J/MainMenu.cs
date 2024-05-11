@@ -22,7 +22,8 @@ public class MainMenu
                 ShowRecentGames();
                 break;
             case 'H':
-            // High Score?
+                ShowHighScore();
+                break;
             case 'Q':
                 PrintMessage("Exiting game . . .");
                 break;
@@ -34,29 +35,48 @@ public class MainMenu
 
     private void ShowRecentGames()
     {
+        ShowRecords(StylizedTexts.RecentGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
+    }
+    private void ShowHighScore()
+    {
+        ShowRecords(StylizedTexts.HighScore, _scoreKeeper.OrderByDescending(s => s.PercentageScore));
+    }
+
+    private void ShowRecords(string title, IEnumerable<ScoreRecord> records)
+    {
         Console.Clear();
-        Console.WriteLine($"{StylizedTexts.RecentGames}");
+        Console.WriteLine($"{title}");
         Console.WriteLine();
 
-        Console.WriteLine($"{"\tGAME TYPE",-15} {"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
+        Console.WriteLine($"{"\tGAME TYPE",-15}{"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
 
-        foreach (var record in _scoreKeeper.OrderByDescending(s => s.Timestamp))
-        {
-            Console.Write("\t");
-            Console.Write($"{record.Game,-15}");
-            Console.Write($"{record.Mode,-15}");
-            Console.Write($"{record.Difficulty,-15}");
-            Console.Write($"{$"{record.Score}/{record.NumberOfQuestions} - {record.PercentageScore} %",-15}");
-
-            if (record.TimeNeeded is not null)
-                Console.Write($"{$@"{record.TimeNeeded:mm\:ss\.fff}",-15}");
-
-            Console.WriteLine();
-        }
+        PrintScoreRecords(records);
 
         Console.WriteLine();
         Console.WriteLine("\t. . . Press any key to go back.");
         Console.ReadKey();
+    }
+
+    private void PrintScoreRecords(IEnumerable<ScoreRecord> records)
+    {
+        foreach (var record in records)
+        {
+            PrintScoreRecord(record);
+        }
+    }
+
+    private static void PrintScoreRecord(ScoreRecord record)
+    {
+        Console.Write("\t");
+        Console.Write($"{record.Game,-15}");
+        Console.Write($"{record.Mode,-15}");
+        Console.Write($"{record.Difficulty,-15}");
+        Console.Write($"{$"{record.Score}/{record.NumberOfQuestions} - {record.PercentageScore} %",-15}");
+
+        if (record.TimeNeeded is not null)
+            Console.Write($"{$@"{record.TimeNeeded:mm\:ss\.fff}",-15}");
+
+        Console.WriteLine();
     }
 
     private void RouteGameSection()
