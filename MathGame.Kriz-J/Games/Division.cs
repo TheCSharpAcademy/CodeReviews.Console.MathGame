@@ -1,6 +1,6 @@
-﻿namespace MathGame.Kriz_J.GameSections;
+﻿namespace MathGame.Kriz_J.Games;
 
-public class Division : Game
+public class Division(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {

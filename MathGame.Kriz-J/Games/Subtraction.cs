@@ -1,6 +1,6 @@
-﻿namespace MathGame.Kriz_J.GameSections;
+﻿namespace MathGame.Kriz_J.Games;
 
-public class Subtraction : Game
+public class Subtraction(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {

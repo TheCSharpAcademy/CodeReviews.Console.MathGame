@@ -2,12 +2,15 @@
 
 public abstract class Game
 {
+    protected readonly List<ScoreRecord> ScoreKeeper;
+
     public Settings Settings { get; set; } = new();
 
     public bool Quit { get; set; }
 
-    protected Game()
+    protected Game(List<ScoreRecord> scoreKeeper)
     {
+        ScoreKeeper = scoreKeeper;
         Loop();
     }
 

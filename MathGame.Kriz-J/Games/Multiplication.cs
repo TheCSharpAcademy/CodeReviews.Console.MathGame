@@ -1,6 +1,6 @@
-﻿namespace MathGame.Kriz_J.GameSections;
+﻿namespace MathGame.Kriz_J.Games;
 
-public class Multiplication : Game
+public class Multiplication(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {

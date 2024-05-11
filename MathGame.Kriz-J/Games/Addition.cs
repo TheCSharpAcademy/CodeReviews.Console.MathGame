@@ -1,6 +1,6 @@
-﻿namespace MathGame.Kriz_J.GameSections;
+﻿namespace MathGame.Kriz_J.Games;
 
-public class Addition : Game
+public class Addition(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
@@ -19,9 +19,10 @@ public class Addition : Game
     {
         GameHelperMethods.GameCountDown();
 
-        var score = GameLogic(Settings.NumberOfQuestions);
+        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
+        SaveScoreRecord(scoreRecord);
 
-        GameOverPresentation(score);
+        GameOverPresentation(scoreRecord);
     }
 
     protected override void TimedGame()
@@ -29,37 +30,39 @@ public class Addition : Game
         GameHelperMethods.GameCountDown();
 
         var start = DateTime.Now;
-        var score = GameLogic(Settings.NumberOfQuestions);
+        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
         var stop = DateTime.Now;
+        SaveScoreRecord(scoreRecord, stop - start);
 
-        GameOverPresentation(score, stop - start);
+        GameOverPresentation(scoreRecord);
     }
 
     protected override void CustomGame()
     {
         SetNumberOfQuestions();
-
+        
         GameHelperMethods.GameCountDown();
 
-        var score = GameLogic(Settings.NumberOfQuestions);
+        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
+        SaveScoreRecord(scoreRecord);
 
-        GameOverPresentation(score);
+        GameOverPresentation(scoreRecord);
     }
 
-    private void GameOverPresentation(int score, TimeSpan? duration = null)
+    private void GameOverPresentation(ScoreRecord scoreRecord)
     {
-        PrintScore(score);
+        PrintScore(scoreRecord.Score);
 
-        if (duration is not null)
+        if (scoreRecord.TimeNeeded is not null)
         {
-            Console.Write($"\tTime: {duration:mm\\:ss\\.fff}");
+            Console.Write($"\tTime: {scoreRecord.TimeNeeded:mm\\:ss\\.fff}");
         }
         
         Console.Write("\t\t\t. . . Press any key to go back.");
         Console.ReadKey();
     }
-
-    private int GameLogic(int nrOfQuestions)
+    
+    private ScoreRecord GameLogic(int nrOfQuestions)
     {
         var score = 0;
         var generator = new Random();
@@ -79,6 +82,16 @@ public class Addition : Game
                 score++;
         }
 
-        return score;
+        return new ScoreRecord(score);
+    }
+
+    private void SaveScoreRecord(ScoreRecord scoreRecord, TimeSpan? duration = null)
+    {
+        scoreRecord.Game = "Addition";
+        scoreRecord.Difficulty = Settings.Difficulty;
+        scoreRecord.Mode = Settings.Mode;
+        scoreRecord.NumberOfQuestions = Settings.NumberOfQuestions;
+        scoreRecord.TimeNeeded = duration;
+        ScoreKeeper.Add(scoreRecord);
     }
 }
