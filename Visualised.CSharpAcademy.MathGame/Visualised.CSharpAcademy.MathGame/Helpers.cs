@@ -117,7 +117,6 @@ internal class Helpers
         return char.ToUpper(input[0]) + input.Substring(1).ToLower();
     }
 
-    // usage ex. Helpers.PrintMenuFromEnumType("Select Game Type:" new GameType());
     internal static void PrintMenuFromEnumType(string question, Enum inputEnum)
     {
         string[] options = Enum.GetNames(inputEnum.GetType());
@@ -132,7 +131,6 @@ internal class Helpers
         Console.Write("\n====> ");
     }
 
-    // usage ex. Helpers.PrintMenuFromObjProperties("Select Game Type:" new Game());
     internal static void PrintMenuFromObjProperties(string question, object inputObj)
     {
         Console.WriteLine(question);

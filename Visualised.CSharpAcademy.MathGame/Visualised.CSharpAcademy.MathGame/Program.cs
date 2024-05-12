@@ -6,8 +6,6 @@ var menu = new Menu();
 var date = DateTime.Now;
 string userName = Helpers.GetUserName();
 
-var games = new List<string>();
-
 menu.PrintMenu(userName, date);
 
 Console.ReadLine();
