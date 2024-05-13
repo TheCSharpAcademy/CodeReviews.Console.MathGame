@@ -49,9 +49,10 @@ public class MainMenu
         Console.WriteLine();
 
         Console.WriteLine($"{"\tGAME TYPE",-15}{"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
-
+        
         PrintScoreRecords(records);
 
+        Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine("\t. . . Press any key to go back.");
         Console.ReadKey();
@@ -59,6 +60,12 @@ public class MainMenu
 
     private void PrintScoreRecords(IEnumerable<ScoreRecord> records)
     {
+        if (!records.Any())
+        {
+            Console.WriteLine("\tNo records yet . . .");
+            return;
+        }
+
         foreach (var record in records)
         {
             PrintScoreRecord(record);
