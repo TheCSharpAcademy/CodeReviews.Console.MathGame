@@ -2,13 +2,13 @@
 
 public abstract class Game
 {
-    protected readonly List<ScoreRecord> ScoreKeeper;
+    protected readonly List<GameResult> ScoreKeeper;
 
     public Settings Settings { get; set; } = new();
 
     public bool Quit { get; set; }
 
-    protected Game(List<ScoreRecord> scoreKeeper)
+    protected Game(List<GameResult> scoreKeeper)
     {
         ScoreKeeper = scoreKeeper;
         Loop();
@@ -109,5 +109,29 @@ public abstract class Game
             > 30 => 30,
             _ => nrOfQuestions
         };
+    }
+
+    protected static void GameCountDown()
+    {
+        Console.CursorVisible = false;
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Three);
+        Console.Beep();
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Two);
+        Console.Beep();
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.One);
+        Console.Beep();
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Go);
+        Console.Beep();
+        Console.Beep();
+        Console.Beep();
+
+        Console.CursorVisible = true;
     }
 }

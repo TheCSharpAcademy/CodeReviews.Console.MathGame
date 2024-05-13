@@ -5,11 +5,27 @@ namespace MathGame.Kriz_J;
 
 public class MainMenu
 {
-    private readonly List<ScoreRecord> _scoreKeeper = [];
+    private readonly List<GameResult> _scoreKeeper = [];
 
     public char Selection { get; set; }
 
     public bool Quit => Selection == 'Q';
+    
+    public static void Print()
+    {
+        PrintTitle(StylizedTitles.MainMenu);
+        Console.WriteLine("\tSelect to play one of the following games:");
+        Console.WriteLine("\t\t[A]ddition");
+        Console.WriteLine("\t\t[S]ubtraction");
+        Console.WriteLine("\t\t[M]ultiplication");
+        Console.WriteLine("\t\t[D]ivision");
+        Console.WriteLine();
+        Console.WriteLine("\t\t[R]ecent Games");
+        Console.WriteLine("\t\t[H]igh Score");
+        Console.WriteLine("\t\t[Q]uit");
+        Console.WriteLine();
+        Console.Write("\t> ");
+    }
 
     public void RouteSelection()
     {
@@ -25,65 +41,14 @@ public class MainMenu
                 ShowHighScore();
                 break;
             case 'Q':
-                PrintMessage("Exiting game . . .");
+                var response = PrintMessage("doo youuu really want to??? [Y/N]");
+                if (response == 'N')
+                    Selection = ' ';
                 break;
             default:
                 PrintMessage("Not a valid selection . . .");
                 break;
         }
-    }
-
-    private void ShowRecentGames()
-    {
-        ShowRecords(StylizedTexts.RecentGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
-    }
-    private void ShowHighScore()
-    {
-        ShowRecords(StylizedTexts.HighScore, _scoreKeeper.OrderByDescending(s => s.PercentageScore));
-    }
-
-    private void ShowRecords(string title, IEnumerable<ScoreRecord> records)
-    {
-        Console.Clear();
-        Console.WriteLine($"{title}");
-        Console.WriteLine();
-
-        Console.WriteLine($"{"\tGAME TYPE",-15}{"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
-        
-        PrintScoreRecords(records);
-
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine("\t. . . Press any key to go back.");
-        Console.ReadKey();
-    }
-
-    private void PrintScoreRecords(IEnumerable<ScoreRecord> records)
-    {
-        if (!records.Any())
-        {
-            Console.WriteLine("\tNo records yet . . .");
-            return;
-        }
-
-        foreach (var record in records)
-        {
-            PrintScoreRecord(record);
-        }
-    }
-
-    private static void PrintScoreRecord(ScoreRecord record)
-    {
-        Console.Write("\t");
-        Console.Write($"{record.Game,-15}");
-        Console.Write($"{record.Mode,-15}");
-        Console.Write($"{record.Difficulty,-15}");
-        Console.Write($"{$"{record.Score}/{record.NumberOfQuestions} - {record.PercentageScore} %",-15}");
-
-        if (record.TimeNeeded is not null)
-            Console.Write($"{$@"{record.TimeNeeded:mm\:ss\.fff}",-15}");
-
-        Console.WriteLine();
     }
 
     private void RouteGameSection()
@@ -98,21 +63,13 @@ public class MainMenu
         };
     }
 
-    public static void Print()
+    private void ShowRecentGames()
     {
-        Console.Clear();
-        Console.WriteLine($"{StylizedTexts.MainMenu}");
-        Console.WriteLine();
-        Console.WriteLine("\tSelect to play one of the following games:");
-        Console.WriteLine("\t\t[A]ddition");
-        Console.WriteLine("\t\t[S]ubtraction");
-        Console.WriteLine("\t\t[M]ultiplication");
-        Console.WriteLine("\t\t[D]ivision");
-        Console.WriteLine();
-        Console.WriteLine("\t\t[R]ecent Games");
-        Console.WriteLine("\t\t[H]igh Score");
-        Console.WriteLine("\t\t[Q]uit");
-        Console.WriteLine();
-        Console.Write("\t> ");
+        GameResult.PrintGameResults(StylizedTitles.RecentGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
+    }
+    
+    private void ShowHighScore()
+    {
+        GameResult.PrintGameResults(StylizedTitles.HighScore, _scoreKeeper.OrderByDescending(s => s.PercentageScore));
     }
 }

@@ -2,12 +2,18 @@
 
 public class ConsoleHelperMethods
 {
-    public static void PrintMessage(string message)
+    public static void PrintTitle(string title)
+    {
+        Console.Clear();
+        Console.WriteLine($"{title}");
+    }
+
+    public static char PrintMessage(string message)
     {
         Console.WriteLine();
         Console.WriteLine();
         Console.Write($"\t{message}");
-        _ = ReadUserSelection();
+        return ReadUserSelection();
     }
 
     public static int ReadUserInteger()
@@ -18,7 +24,10 @@ public class ConsoleHelperMethods
         return input;
     }
 
-    public static char ReadUserSelection() => char.ToUpper(Console.ReadKey().KeyChar);
+    public static char ReadUserSelection()
+    {
+        return char.ToUpper(Console.ReadKey().KeyChar);
+    }
 
     public static void FormatWriteLineWithHighlight(string before, string highlight, string after)
     {

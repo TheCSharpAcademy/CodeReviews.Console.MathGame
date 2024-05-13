@@ -1,6 +1,6 @@
 ﻿namespace MathGame.Kriz_J.Games;
 
-public class Subtraction(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
+public class Subtraction(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
@@ -26,7 +26,7 @@ public class Subtraction(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
     public void PrintGameMenu()
     {
         Console.Clear();
-        Console.WriteLine($"{StylizedTexts.Subtraction}");
+        Console.WriteLine($"{StylizedTitles.Subtraction}");
         Console.WriteLine("\tThe goal of this game is to....");
         Console.ReadKey();
     }

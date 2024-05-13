@@ -1,33 +1,34 @@
 ﻿namespace MathGame.Kriz_J.Games;
 
-public class Addition(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
+public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
         while (!Quit)
         {
             PrintMenu(
-                StylizedTexts.Addition,
+                StylizedTitles.Addition,
                 "Each question will be an addition problem of two terms.",
                 Settings.Difficulty,
                 Settings.Mode);
+            Settings.NumberOfQuestions = 10;
             ReadAndRouteUserSelection();
         }
     }
 
     protected override void StandardGame()
     {
-        GameHelperMethods.GameCountDown();
+        GameCountDown();
 
-        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
-        SaveScoreRecord(scoreRecord);
+        var gameResult = GameLogic(Settings.NumberOfQuestions);
+        SaveScoreRecord(gameResult);
 
-        GameOverPresentation(scoreRecord);
+        GameOverPresentation(gameResult);
     }
 
     protected override void TimedGame()
     {
-        GameHelperMethods.GameCountDown();
+        GameCountDown();
 
         var start = DateTime.Now;
         var scoreRecord = GameLogic(Settings.NumberOfQuestions);
@@ -41,7 +42,7 @@ public class Addition(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
     {
         SetNumberOfQuestions();
         
-        GameHelperMethods.GameCountDown();
+        GameCountDown();
 
         var scoreRecord = GameLogic(Settings.NumberOfQuestions);
         SaveScoreRecord(scoreRecord);
@@ -49,20 +50,20 @@ public class Addition(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
         GameOverPresentation(scoreRecord);
     }
 
-    private void GameOverPresentation(ScoreRecord scoreRecord)
+    private void GameOverPresentation(GameResult gameResult)
     {
-        PrintScore(scoreRecord.Score);
+        PrintScore(gameResult.Score);
 
-        if (scoreRecord.TimeNeeded is not null)
+        if (gameResult.TimeNeeded is not null)
         {
-            Console.Write($"\tTime: {scoreRecord.TimeNeeded:mm\\:ss\\.fff}");
+            Console.Write($"\tTime: {gameResult.TimeNeeded:mm\\:ss\\.fff}");
         }
         
         Console.Write("\t\t\t. . . Press any key to go back.");
         Console.ReadKey();
     }
     
-    private ScoreRecord GameLogic(int nrOfQuestions)
+    private GameResult GameLogic(int nrOfQuestions)
     {
         var score = 0;
         var generator = new Random();
@@ -82,16 +83,16 @@ public class Addition(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
                 score++;
         }
 
-        return new ScoreRecord(score);
+        return new GameResult(score);
     }
 
-    private void SaveScoreRecord(ScoreRecord scoreRecord, TimeSpan? duration = null)
+    private void SaveScoreRecord(GameResult gameResult, TimeSpan? duration = null)
     {
-        scoreRecord.Game = "Addition";
-        scoreRecord.Difficulty = Settings.Difficulty;
-        scoreRecord.Mode = Settings.Mode;
-        scoreRecord.NumberOfQuestions = Settings.NumberOfQuestions;
-        scoreRecord.TimeNeeded = duration;
-        ScoreKeeper.Add(scoreRecord);
+        gameResult.Game = "Addition";
+        gameResult.Difficulty = Settings.Difficulty;
+        gameResult.Mode = Settings.Mode;
+        gameResult.NumberOfQuestions = Settings.NumberOfQuestions;
+        gameResult.TimeNeeded = duration;
+        ScoreKeeper.Add(gameResult);
     }
 }

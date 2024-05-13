@@ -1,6 +1,6 @@
 ﻿namespace MathGame.Kriz_J.Games;
 
-public class Division(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
+public class Division(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
@@ -25,7 +25,7 @@ public class Division(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
     public void PrintGameMenu()
     {
         Console.Clear();
-        Console.WriteLine($"{StylizedTexts.Division}");
+        Console.WriteLine($"{StylizedTitles.Division}");
         Console.WriteLine("\tThe goal of this game is to....");
         Console.ReadKey();
     }

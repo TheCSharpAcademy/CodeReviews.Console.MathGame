@@ -1,6 +1,6 @@
 ﻿namespace MathGame.Kriz_J.Games;
 
-public class Multiplication(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
+public class Multiplication(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
@@ -25,7 +25,7 @@ public class Multiplication(List<ScoreRecord> scoreKeeper) : Game(scoreKeeper)
     public void PrintGameMenu()
     {
         Console.Clear();
-        Console.WriteLine($"{StylizedTexts.Multiplication}");
+        Console.WriteLine($"{StylizedTitles.Multiplication}");
         Console.WriteLine("\tThe goal of this game is to....");
         Console.ReadKey();
     }

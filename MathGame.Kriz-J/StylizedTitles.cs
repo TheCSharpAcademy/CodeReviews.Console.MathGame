@@ -1,6 +1,6 @@
 ﻿namespace MathGame.Kriz_J;
 
-public class StylizedTexts
+public class StylizedTitles
 {
     public const string MainMenu = """
      

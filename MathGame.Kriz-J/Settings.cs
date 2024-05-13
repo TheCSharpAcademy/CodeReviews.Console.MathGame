@@ -20,7 +20,7 @@ public class Settings
 
     public Mode Mode { get; set; } = Mode.Standard;
 
-    public int NumberOfQuestions { get; set; } = 10;
+    public int NumberOfQuestions { get; set; }
 
     public (int Lower, int Upper) IntegerBounds => SetIntegerBounds(Difficulty);
 
