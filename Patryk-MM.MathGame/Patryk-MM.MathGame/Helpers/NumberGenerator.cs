@@ -6,7 +6,7 @@
             if (gameMode == '*') {
                 a = random.Next(2, 16);
                 b = random.Next(2, 16);
-                return (a, b);  
+                return (a, b);
             }
             a = random.Next(1, 101);
             b = random.Next(1, 101);
@@ -15,7 +15,7 @@
                     a = random.Next(1, 101);
                     b = random.Next(1, 101);
                 }
-            };
+            }
             return (a, b);
         }
     }
