@@ -1,11 +1,4 @@
 ﻿using Patryk_MM.MathGame.Helpers;
-using System;
-using System.Buffers;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patryk_MM.MathGame {
     internal class GameInstance {

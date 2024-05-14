@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Patryk_MM.MathGame.Helpers {
+﻿namespace Patryk_MM.MathGame.Helpers {
     public static class NumberGenerator {
         public static (int, int) GenerateNumbers(char gameMode) {
             int a, b;
