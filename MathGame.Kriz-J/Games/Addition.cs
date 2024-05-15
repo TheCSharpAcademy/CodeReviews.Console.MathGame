@@ -11,7 +11,10 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
                 "Each question will be an addition problem of two terms.",
                 Settings.Difficulty,
                 Settings.Mode);
-            Settings.NumberOfQuestions = 10;
+
+            if (Settings.Mode is Mode.Custom)
+                Settings.NumberOfQuestions = 10;
+            
             ReadAndRouteUserSelection();
         }
     }
@@ -20,10 +23,10 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
     {
         GameCountDown();
 
-        var gameResult = GameLogic(Settings.NumberOfQuestions);
-        SaveScoreRecord(gameResult);
+        var result = GameLogic(Settings.NumberOfQuestions);
+        result.Save(scoreKeeper, Settings, this.GetType().Name);
 
-        GameOverPresentation(gameResult);
+        GameOverPresentation(result);
     }
 
     protected override void TimedGame()
@@ -31,11 +34,11 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var start = DateTime.Now;
-        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
+        var result = GameLogic(Settings.NumberOfQuestions);
         var stop = DateTime.Now;
-        SaveScoreRecord(scoreRecord, stop - start);
+        result.Save(scoreKeeper, Settings, this.GetType().Name, stop - start);
 
-        GameOverPresentation(scoreRecord);
+        GameOverPresentation(result);
     }
 
     protected override void CustomGame()
@@ -44,26 +47,13 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         
         GameCountDown();
 
-        var scoreRecord = GameLogic(Settings.NumberOfQuestions);
-        SaveScoreRecord(scoreRecord);
+        var result = GameLogic(Settings.NumberOfQuestions);
+        result.Save(scoreKeeper, Settings, this.GetType().Name);
 
-        GameOverPresentation(scoreRecord);
+        GameOverPresentation(result);
     }
 
-    private void GameOverPresentation(GameResult gameResult)
-    {
-        PrintScore(gameResult.Score);
-
-        if (gameResult.TimeNeeded is not null)
-        {
-            Console.Write($"\tTime: {gameResult.TimeNeeded:mm\\:ss\\.fff}");
-        }
-        
-        Console.Write("\t\t\t. . . Press any key to go back.");
-        Console.ReadKey();
-    }
-    
-    private GameResult GameLogic(int nrOfQuestions)
+    protected override GameResult GameLogic(int nrOfQuestions)
     {
         var score = 0;
         var generator = new Random();
@@ -84,15 +74,5 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         }
 
         return new GameResult(score);
-    }
-
-    private void SaveScoreRecord(GameResult gameResult, TimeSpan? duration = null)
-    {
-        gameResult.Game = "Addition";
-        gameResult.Difficulty = Settings.Difficulty;
-        gameResult.Mode = Settings.Mode;
-        gameResult.NumberOfQuestions = Settings.NumberOfQuestions;
-        gameResult.TimeNeeded = duration;
-        ScoreKeeper.Add(gameResult);
     }
 }

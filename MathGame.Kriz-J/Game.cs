@@ -22,6 +22,8 @@ public abstract class Game
     
     protected abstract void CustomGame();
 
+    protected abstract GameResult GameLogic(int nrOfQuestions);
+
     protected static void PrintMenu(string title, string description, Difficulty difficulty, Mode mode)
     {
         Console.Clear();
@@ -77,7 +79,20 @@ public abstract class Game
                 throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
         }
     }
-    
+
+    protected void GameOverPresentation(GameResult gameResult)
+    {
+        PrintScore(gameResult.Score);
+
+        if (gameResult.TimeNeeded is not null)
+        {
+            Console.Write($"\tTime: {gameResult.TimeNeeded:mm\\:ss\\.fff}");
+        }
+
+        Console.Write("\t\t\t. . . Press any key to go back.");
+        Console.ReadKey();
+    }
+
     protected void PrintScore(int score)
     {
         var nrOfQuestions = Settings.NumberOfQuestions;
@@ -116,21 +131,15 @@ public abstract class Game
         Console.CursorVisible = false;
 
         ConsoleHelperMethods.PrintTitle(StylizedTitles.Three);
-        Console.Beep();
         Thread.Sleep(1000);
 
         ConsoleHelperMethods.PrintTitle(StylizedTitles.Two);
-        Console.Beep();
         Thread.Sleep(1000);
 
         ConsoleHelperMethods.PrintTitle(StylizedTitles.One);
-        Console.Beep();
         Thread.Sleep(1000);
 
         ConsoleHelperMethods.PrintTitle(StylizedTitles.Go);
-        Console.Beep();
-        Console.Beep();
-        Console.Beep();
 
         Console.CursorVisible = true;
     }

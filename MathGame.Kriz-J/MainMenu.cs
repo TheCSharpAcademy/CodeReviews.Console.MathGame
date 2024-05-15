@@ -19,8 +19,9 @@ public class MainMenu
         Console.WriteLine("\t\t[S]ubtraction");
         Console.WriteLine("\t\t[M]ultiplication");
         Console.WriteLine("\t\t[D]ivision");
+        Console.WriteLine("\t\t[R]andom");
         Console.WriteLine();
-        Console.WriteLine("\t\t[R]ecent Games");
+        Console.WriteLine("\t\t[L]atest Games");
         Console.WriteLine("\t\t[H]igh Score");
         Console.WriteLine("\t\t[Q]uit");
         Console.WriteLine();
@@ -31,17 +32,17 @@ public class MainMenu
     {
         switch (Selection)
         {
-            case 'A' or 'S' or 'M' or 'D':
+            case 'A' or 'S' or 'M' or 'D' or 'R':
                 RouteGameSection();
                 break;
-            case 'R':
-                ShowRecentGames();
+            case 'L':
+                ShowLatestGames();
                 break;
             case 'H':
                 ShowHighScore();
                 break;
             case 'Q':
-                var response = PrintMessage("doo youuu really want to??? [Y/N]");
+                var response = PrintMessage("Do you really want to? [Y/N]");
                 if (response == 'N')
                     Selection = ' ';
                 break;
@@ -59,13 +60,14 @@ public class MainMenu
             'S' => new Subtraction(_scoreKeeper),
             'M' => new Multiplication(_scoreKeeper),
             'D' => new Division(_scoreKeeper),
+            'R' => new RandomOperation(_scoreKeeper),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
-    private void ShowRecentGames()
+    private void ShowLatestGames()
     {
-        GameResult.PrintGameResults(StylizedTitles.RecentGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
+        GameResult.PrintGameResults(StylizedTitles.LatestGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
     }
     
     private void ShowHighScore()

@@ -1,26 +1,12 @@
 ﻿namespace MathGame.Kriz_J;
 
-public enum Difficulty
-{
-    Easy = 'E',
-    Medium = 'M',
-    Hard = 'H'
-}
-
-public enum Mode
-{
-    Standard = 'S',
-    Timed = 'T',
-    Custom = 'C'
-}
-
 public class Settings
 {
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
     public Mode Mode { get; set; } = Mode.Standard;
 
-    public int NumberOfQuestions { get; set; }
+    public int NumberOfQuestions { get; set; } = 10;
 
     public (int Lower, int Upper) IntegerBounds => SetIntegerBounds(Difficulty);
 

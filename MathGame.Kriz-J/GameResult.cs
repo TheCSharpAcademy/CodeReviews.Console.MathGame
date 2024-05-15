@@ -16,6 +16,16 @@ public record GameResult(int Score)
 
     public double PercentageScore => 100.0 * Score / NumberOfQuestions;
 
+    public void Save(IList<GameResult> scoreKeeper, Settings settings, string game, TimeSpan? duration = null)
+    {
+        Game = game;
+        Difficulty = settings.Difficulty;
+        Mode = settings.Mode;
+        NumberOfQuestions = settings.NumberOfQuestions;
+        TimeNeeded = duration;
+        scoreKeeper.Add(this);
+    }
+
     public static void PrintGameResults(string title, IEnumerable<GameResult> results)
     {
         ConsoleHelperMethods.PrintTitle(title);

@@ -4,29 +4,75 @@ public class Multiplication(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
     protected override void Loop()
     {
-        while (true) { };
+        while (!Quit)
+        {
+            PrintMenu(
+                StylizedTitles.Multiplication,
+                "Each question will be a multiplication problem between two factors.",
+                Settings.Difficulty,
+                Settings.Mode);
+
+            if (Settings.Mode is Mode.Custom)
+                Settings.NumberOfQuestions = 10;
+
+            ReadAndRouteUserSelection();
+        }
     }
 
     protected override void StandardGame()
     {
-        throw new NotImplementedException();
+        GameCountDown();
+
+        var result = GameLogic(Settings.NumberOfQuestions);
+        result.Save(scoreKeeper, Settings, this.GetType().Name);
+
+        GameOverPresentation(result);
     }
 
     protected override void TimedGame()
     {
-        throw new NotImplementedException();
+        GameCountDown();
+
+        var start = DateTime.Now;
+        var result = GameLogic(Settings.NumberOfQuestions);
+        var stop = DateTime.Now;
+        result.Save(scoreKeeper, Settings, this.GetType().Name, stop - start);
+
+        GameOverPresentation(result);
     }
 
     protected override void CustomGame()
     {
-        throw new NotImplementedException();
+        SetNumberOfQuestions();
+
+        GameCountDown();
+
+        var result = GameLogic(Settings.NumberOfQuestions);
+        result.Save(scoreKeeper, Settings, this.GetType().Name);
+
+        GameOverPresentation(result);
     }
 
-    public void PrintGameMenu()
+    protected override GameResult GameLogic(int nrOfQuestions)
     {
-        Console.Clear();
-        Console.WriteLine($"{StylizedTitles.Multiplication}");
-        Console.WriteLine("\tThe goal of this game is to....");
-        Console.ReadKey();
+        var score = 0;
+        var generator = new Random();
+        var lower = Settings.IntegerBounds.Lower;
+        var upper = Settings.IntegerBounds.Upper;
+
+        for (int i = 0; i < nrOfQuestions; i++)
+        {
+            var a = generator.Next(lower, upper);
+            var b = generator.Next(lower, upper);
+
+            Console.Write($"\t{a} * {b} = ");
+
+            var c = ConsoleHelperMethods.ReadUserInteger();
+
+            if (a * b == c)
+                score++;
+        }
+
+        return new GameResult(score);
     }
 }
