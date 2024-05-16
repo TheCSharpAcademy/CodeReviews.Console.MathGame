@@ -22,7 +22,7 @@ while (isRunning && numberOfQuestions > 0)
     }
     else
     {
-        Game game = new Game(questionTypeChoice, difficultyChoice);
+        new Game(questionTypeChoice, difficultyChoice);
         numberOfQuestions -= 1;
     }
 }
