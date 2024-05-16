@@ -14,9 +14,9 @@ public class Settings
     {
         return difficulty switch
         {
-            Difficulty.Easy => (lower: 1, upper: 10),
-            Difficulty.Medium => (lower: 11, upper: 100),
-            Difficulty.Hard => (lower: 101, upper: 1000),
+            Difficulty.Easy => (lower: 1, upper: 11),
+            Difficulty.Medium => (lower: 11, upper: 101),
+            Difficulty.Hard => (lower: 101, upper: 1001),
             _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, "Only '[E]asy', '[M]edium', and '[H]ard' are accepted as difficulties.")
         };
     }
