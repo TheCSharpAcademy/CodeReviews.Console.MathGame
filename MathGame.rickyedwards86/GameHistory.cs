@@ -1,9 +1,9 @@
-﻿namespace MathGame.Constants
+﻿namespace MathGame
 {
     internal class GameHistory
     {
         static readonly GameHistory _instance = new GameHistory();
-        static List<GameScore> _gameScores { get; set; }
+        static List<GameScore> _scores { get; set; }
 
         static GameHistory() { }
         private GameHistory() { }
@@ -12,11 +12,11 @@
 
         public void SaveScore(GameScore gameScore)
         {
-            if (_gameScores == null) _gameScores = new List<GameScore> { };
+            if (_scores == null) _scores = new List<GameScore> { };
 
-            _gameScores.Add(gameScore);
+            _scores.Add(gameScore);
         }
 
-        public List<GameScore> GameScores { get { return _gameScores??new List<GameScore> {  }; } }
+        public List<GameScore> Scores { get { return _scores ?? new List<GameScore> { }; } }
     }
 }

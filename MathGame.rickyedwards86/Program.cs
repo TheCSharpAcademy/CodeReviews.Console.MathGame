@@ -62,7 +62,7 @@ void Start()
             default:
                 Console.WriteLine("\r\nInvalid input. Please try again");
                 break;
-        };
+        }
 
     } while (!ExitApp);
 }
@@ -81,7 +81,7 @@ void ShowHistory()
     Console.Clear();
     Console.WriteLine("\r______________________________________________");
     Console.WriteLine("\r||GameType      ||Score ||TimeTaken(s) ||");
-    foreach (var score in GameHistory.Instance.GameScores)
+    foreach (var score in GameHistory.Instance.Scores)
     {
         var gameTypeText = score.Operand switch
         {
@@ -89,8 +89,9 @@ void ShowHistory()
             Operand.Subtraction => nameof(Operand.Subtraction),
             Operand.Division => nameof(Operand.Division),
             Operand.Multiplication => nameof(Operand.Multiplication)
-        }; ;
-        Console.WriteLine($"\r\n||{gameTypeText,-14}||{score.Score+"/"+score.TotalQuestions,-6}||{score.TimeTaken,-13}||");
+        };
+
+        Console.WriteLine($"\r\n||{gameTypeText,-14}||{score.Score + "/" + score.TotalQuestions,-6}||{score.TimeTaken,-13}||");
 
     }
     Console.WriteLine("\r______________________________________________");

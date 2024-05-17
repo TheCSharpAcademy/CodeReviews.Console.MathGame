@@ -7,9 +7,9 @@ namespace MathGame
     {
         static readonly GameEngine _instance = new GameEngine();
         string GameType { get; set; }
-        int firstNumber = 0;
-        int secondNumber = 0;
-        int score = 0;
+        int firstNumber;
+        int secondNumber;
+        int score;
         int totalQuestions = 10;
         int questionsLeft;
         static Stopwatch sw = Stopwatch.StartNew();
@@ -82,11 +82,6 @@ namespace MathGame
                     break;
             }
 
-            if (GameType == Operand.Division)
-            {
-
-            }
-
             AskQuestion();
         }
 
@@ -94,7 +89,7 @@ namespace MathGame
         {
             var random = new Random();
 
-            return gameType != Operand.Division ? random.Next(1, 19) : random.Next(1, 99);
+            return gameType != Operand.Division ? random.Next(1, 20) : random.Next(1, 100);
         }
 
         void AskQuestion()
