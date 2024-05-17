@@ -3,7 +3,7 @@
     internal class GameHistory
     {
         static readonly GameHistory _instance = new GameHistory();
-        static List<GameScore> _scores { get; set; }
+        static List<GameScore> GameScores { get; set; }
 
         static GameHistory() { }
         private GameHistory() { }
@@ -12,11 +12,11 @@
 
         public void SaveScore(GameScore gameScore)
         {
-            if (_scores == null) _scores = new List<GameScore> { };
+            if (GameScores == null) GameScores = new List<GameScore> { };
 
-            _scores.Add(gameScore);
+            GameScores.Add(gameScore);
         }
 
-        public List<GameScore> Scores { get { return _scores ?? new List<GameScore> { }; } }
+        public List<GameScore> Scores { get { return GameScores ?? new List<GameScore> { }; } }
     }
 }
