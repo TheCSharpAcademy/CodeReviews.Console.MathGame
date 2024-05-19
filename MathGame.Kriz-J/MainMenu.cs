@@ -5,7 +5,7 @@ namespace MathGame.Kriz_J;
 
 public class MainMenu
 {
-    private readonly List<GameResult> _scoreKeeper = [];
+    private readonly List<GameResult> _resultKeeper = [];
 
     public char Selection { get; set; }
 
@@ -56,22 +56,22 @@ public class MainMenu
     {
         Game _ = Selection switch
         {
-            'A' => new Addition(_scoreKeeper),
-            'S' => new Subtraction(_scoreKeeper),
-            'M' => new Multiplication(_scoreKeeper),
-            'D' => new Division(_scoreKeeper),
-            'R' => new RandomOperation(_scoreKeeper),
+            'A' => new Addition(_resultKeeper),
+            'S' => new Subtraction(_resultKeeper),
+            'M' => new Multiplication(_resultKeeper),
+            'D' => new Division(_resultKeeper),
+            'R' => new RandomOperation(_resultKeeper),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
     private void ShowLatestGames()
     {
-        GameResult.PrintGameResults(StylizedTitles.LatestGames, _scoreKeeper.OrderByDescending(s => s.Timestamp));
+        GameResult.PrintGameResults(StylizedTitles.LatestGames, _resultKeeper.OrderByDescending(s => s.Timestamp));
     }
     
     private void ShowHighScore()
     {
-        GameResult.PrintGameResults(StylizedTitles.HighScore, _scoreKeeper.OrderByDescending(s => s.PercentageScore));
+        GameResult.PrintGameResults(StylizedTitles.HighScore, _resultKeeper.OrderByDescending(s => s.PercentageScore));
     }
 }

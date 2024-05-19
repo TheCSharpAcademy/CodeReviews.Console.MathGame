@@ -1,4 +1,6 @@
-﻿namespace MathGame.Kriz_J;
+﻿using MathGame.Kriz_J.Enums;
+
+namespace MathGame.Kriz_J;
 
 public record GameResult(int Score)
 {
@@ -60,7 +62,7 @@ public record GameResult(int Score)
         Console.Write($"\t{result.Game,-15}");
         Console.Write($"{result.Mode,-15}");
         Console.Write($"{result.Difficulty,-15}");
-        Console.Write($"{$"{result.Score}/{result.NumberOfQuestions} - {result.PercentageScore} %",-15}");
+        Console.Write($"{$"{result.Score}/{result.NumberOfQuestions} - {result.PercentageScore:F2} %",-15}");
 
         if (result.TimeNeeded is not null)
             Console.Write($"{$@"{result.TimeNeeded:mm\:ss\.fff}",-15}");

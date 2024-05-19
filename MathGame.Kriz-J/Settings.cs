@@ -1,4 +1,6 @@
-﻿namespace MathGame.Kriz_J;
+﻿using MathGame.Kriz_J.Enums;
+
+namespace MathGame.Kriz_J;
 
 public class Settings
 {
@@ -8,9 +10,10 @@ public class Settings
 
     public int NumberOfQuestions { get; set; } = 10;
 
-    public (int Lower, int Upper) IntegerBounds => SetIntegerBounds(Difficulty);
+    public (int Lower, int Upper) NumberLimits => SetNumberLimits(Difficulty);
 
-    private static (int lower, int upper) SetIntegerBounds(Difficulty difficulty)
+    //TODO: Customize the difficulty for multiplication and divisions to be fair.
+    private static (int lower, int upper) SetNumberLimits(Difficulty difficulty)
     {
         return difficulty switch
         {
@@ -30,6 +33,7 @@ public class Settings
             Mode = (Mode)input;
     }
 
+    //TODO: Make both of these below not redraw the whole console between switching
     public static void PrintDifficulties(Difficulty difficulty)
     {
         switch (difficulty)

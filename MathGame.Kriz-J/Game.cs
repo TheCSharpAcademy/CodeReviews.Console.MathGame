@@ -1,4 +1,6 @@
-﻿namespace MathGame.Kriz_J;
+﻿using MathGame.Kriz_J.Enums;
+
+namespace MathGame.Kriz_J;
 
 public abstract class Game
 {

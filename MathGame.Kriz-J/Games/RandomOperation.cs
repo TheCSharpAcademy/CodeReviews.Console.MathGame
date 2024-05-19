@@ -1,4 +1,6 @@
-﻿namespace MathGame.Kriz_J.Games;
+﻿using MathGame.Kriz_J.Enums;
+
+namespace MathGame.Kriz_J.Games;
 
 internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
 {
@@ -57,8 +59,8 @@ internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
     {
         var score = 0;
         var generator = new Random();
-        var lower = Settings.IntegerBounds.Lower;
-        var upper = Settings.IntegerBounds.Upper;
+        var lower = Settings.NumberLimits.Lower;
+        var upper = Settings.NumberLimits.Upper;
 
         for (int i = 0; i < nrOfQuestions; i++)
         {
