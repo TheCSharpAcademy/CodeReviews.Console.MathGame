@@ -24,7 +24,7 @@ internal class Menu
             Console.Clear();
             Console.WriteLine(@$"
 What game would you like to play today? Choose from the options below:
-V - View Previous Games ({Helpers.getGamesNumber()})
+V - View Previous Games ({Helpers.GetGamesNumber()})
 C = Change Number of Questions({gamesClass.NumberOfQuestions})
 H = Change Game Difficulty({gamesClass.Difficulty})
 A - Addition
@@ -65,7 +65,7 @@ Q - Quit the program");
                     break;
                 case "q":
                     gamesClass.EndTime = DateTime.UtcNow;
-                    Console.WriteLine($"Goodbye {gamesClass.PlayerName}. You started the Game at {gamesClass.StartTime.ToLongDateString()} and Ended at {gamesClass.EndTime.ToLongDateString()}\n Press any Key");
+                    Console.WriteLine($"Goodbye {gamesClass.PlayerName}. You started the Game at {gamesClass.StartTime} and Ended at {gamesClass.EndTime}\n Press any Key");
                     Console.ReadLine();
                     isGameOn = false;
                     break;

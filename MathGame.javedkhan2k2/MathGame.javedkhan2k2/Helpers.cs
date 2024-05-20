@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.ExceptionServices;
-using MathGame.javedkhan2k2.Models;
+﻿using MathGame.javedkhan2k2.Models;
 
 namespace MathGame.javedkhan2k2;
 
@@ -8,7 +6,7 @@ internal class Helpers
 {
     internal static List<Game> games = new List<Game>();
 
-    internal static int getGamesNumber() => games.Count;
+    internal static int GetGamesNumber() => games.Count;
 
     internal static (int firstNumber, int secondNumber) GetDivisionNumbers(int difficulty)
     {
@@ -69,7 +67,7 @@ internal class Helpers
         return name;
     }
 
-    internal static char generateGameType()
+    internal static char GenerateGameType()
     {
         var random = new Random();
         switch (random.Next(1, 5))
@@ -87,7 +85,7 @@ internal class Helpers
         }
     }
 
-    internal static int getResult(int firstNumber, int secondNumber, char op)
+    internal static int GetResult(int firstNumber, int secondNumber, char op)
     {
         switch (op)
         {
@@ -104,7 +102,7 @@ internal class Helpers
         }
     }
 
-    internal static GameType generateGameType(char op)
+    internal static GameType GenerateGameType(char op)
     {
         switch (op)
         {

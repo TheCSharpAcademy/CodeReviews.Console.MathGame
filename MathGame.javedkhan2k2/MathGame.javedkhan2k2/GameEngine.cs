@@ -34,7 +34,7 @@ internal class GameEngine
             Console.Clear();
             Console.WriteLine(message);
 
-            op = Helpers.generateGameType();
+            op = Helpers.GenerateGameType();
             if (op == '/')
             {
                 (firstNumber, secondNumber) = Helpers.GetDivisionNumbers(Convert.ToInt32(Difficulty));
@@ -47,7 +47,7 @@ internal class GameEngine
             Console.WriteLine($"{firstNumber} {op} {secondNumber}");
             var result = Console.ReadLine();
             result = Helpers.ValidateResult(result);
-            if (int.Parse(result) == Helpers.getResult(firstNumber, secondNumber, op))
+            if (int.Parse(result) == Helpers.GetResult(firstNumber, secondNumber, op))
             {
                 Console.WriteLine("Your answer was correct! Type any key for the next question");
                 score++;
