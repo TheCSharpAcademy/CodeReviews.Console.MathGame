@@ -2,15 +2,15 @@
 
 namespace MathGame.Kriz_J;
 
-public record GameResult(int Score)
+public record GameResult(int Score, TimeSpan? TimeNeeded = null)
 {
     public DateTime Timestamp { get; } = DateTime.Now;
 
     public string? Game { get; set; }
 
-    public Mode Mode { get; set; }
-
     public Difficulty Difficulty { get; set; }
+
+    public Mode Mode { get; set; }
 
     public int NumberOfQuestions { get; set; }
 
@@ -18,26 +18,19 @@ public record GameResult(int Score)
 
     public double PercentageScore => 100.0 * Score / NumberOfQuestions;
 
-    public void Save(IList<GameResult> scoreKeeper, Settings settings, string game, TimeSpan? duration = null)
+    public void SaveGameSettings(Settings settings)
     {
-        Game = game;
+        Game = settings.Game;
         Difficulty = settings.Difficulty;
         Mode = settings.Mode;
         NumberOfQuestions = settings.NumberOfQuestions;
-        TimeNeeded = duration;
-        scoreKeeper.Add(this);
     }
 
-    public static void PrintGameResults(string title, IEnumerable<GameResult> results)
+    //TODO: Fix column width/spacing
+    public static void PrintGameResults(IEnumerable<GameResult> results)
     {
-        ConsoleHelperMethods.PrintTitle(title);
-
-        //TODO: Fix column width/spacing
         Console.WriteLine($"{"\tGAME TYPE",-15}{"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
-
         PrintResultRows(results);
-
-        ConsoleHelperMethods.PrintMessage(". . . Press any key to go back.");
     }
 
     private static void PrintResultRows(IEnumerable<GameResult> results)
@@ -56,16 +49,19 @@ public record GameResult(int Score)
         }
     }
 
+    //TODO: Fix column width/spacing
     private static void PrintResultRow(GameResult result)
     {
-        //TODO: Fix column width/spacing
-        Console.Write($"\t{result.Game,-15}");
+        var score = $"{result.Score}/{result.NumberOfQuestions} - {result.PercentageScore:F2} %";
+        var timeNeeded = $@"{result.TimeNeeded:mm\:ss\.fff}";
+
+        Console.Write("\t");
+        Console.Write($"{result.Game,-15}");
         Console.Write($"{result.Mode,-15}");
         Console.Write($"{result.Difficulty,-15}");
-        Console.Write($"{$"{result.Score}/{result.NumberOfQuestions} - {result.PercentageScore:F2} %",-15}");
-
+        Console.Write($"{score,-15}");
         if (result.TimeNeeded is not null)
-            Console.Write($"{$@"{result.TimeNeeded:mm\:ss\.fff}",-15}");
+            Console.Write($"{timeNeeded,-15}");
 
         Console.WriteLine();
     }

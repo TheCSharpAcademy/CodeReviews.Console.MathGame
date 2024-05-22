@@ -26,6 +26,7 @@ public class MainMenu
         Console.WriteLine("\t\t[Q]uit");
         Console.WriteLine();
         Console.Write("\t> ");
+        Console.CursorVisible = true;
     }
 
     public void RouteSelection()
@@ -33,7 +34,7 @@ public class MainMenu
         switch (Selection)
         {
             case 'A' or 'S' or 'M' or 'D' or 'R':
-                RouteGameSection();
+                RouteGame();
                 break;
             case 'L':
                 ShowLatestGames();
@@ -42,17 +43,17 @@ public class MainMenu
                 ShowHighScore();
                 break;
             case 'Q':
-                var response = PrintMessage("Do you really want to? [Y/N]");
+                var response = PrintMessage("Do you really want to? [N] to stay.");
                 if (response == 'N')
                     Selection = ' ';
                 break;
             default:
-                PrintMessage("Not a valid selection . . .");
+                _ = PrintMessage("Not a valid selection. Press any key . . .");
                 break;
         }
     }
 
-    private void RouteGameSection()
+    private void RouteGame()
     {
         Game _ = Selection switch
         {
@@ -67,11 +68,15 @@ public class MainMenu
 
     private void ShowLatestGames()
     {
-        GameResult.PrintGameResults(StylizedTitles.LatestGames, _resultKeeper.OrderByDescending(s => s.Timestamp));
+        PrintTitle(StylizedTitles.LatestGames);
+        GameResult.PrintGameResults(_resultKeeper.OrderByDescending(s => s.Timestamp));
+        _ = PrintMessage(". . . Press any key to go back.");
     }
     
     private void ShowHighScore()
     {
-        GameResult.PrintGameResults(StylizedTitles.HighScore, _resultKeeper.OrderByDescending(s => s.PercentageScore));
+        PrintTitle(StylizedTitles.HighScore);
+        GameResult.PrintGameResults(_resultKeeper.OrderByDescending(s => s.PercentageScore));
+        _ = PrintMessage(". . . Press any key to go back.");
     }
 }

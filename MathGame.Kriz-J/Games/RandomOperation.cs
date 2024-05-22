@@ -2,7 +2,7 @@
 
 namespace MathGame.Kriz_J.Games;
 
-internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
+internal class RandomOperation(List<GameResult> resultKeeper) : Game(resultKeeper)
 {
     protected override void Loop()
     {
@@ -26,7 +26,7 @@ internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, "Random");
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
@@ -38,7 +38,7 @@ internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         var start = DateTime.Now;
         var result = GameLogic(Settings.NumberOfQuestions);
         var stop = DateTime.Now;
-        result.Save(scoreKeeper, Settings, "Random", stop - start);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
@@ -50,7 +50,7 @@ internal class RandomOperation(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, "Random");
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }

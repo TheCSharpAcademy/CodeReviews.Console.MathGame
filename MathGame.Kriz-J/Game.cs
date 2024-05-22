@@ -4,15 +4,15 @@ namespace MathGame.Kriz_J;
 
 public abstract class Game
 {
-    protected readonly List<GameResult> ScoreKeeper;
+    protected readonly List<GameResult> ResultKeeper;
 
     public Settings Settings { get; set; } = new();
 
     public bool Quit { get; set; }
 
-    protected Game(List<GameResult> scoreKeeper)
+    protected Game(List<GameResult> resultKeeper)
     {
-        ScoreKeeper = scoreKeeper;
+        ResultKeeper = resultKeeper;
         Loop();
     }
 

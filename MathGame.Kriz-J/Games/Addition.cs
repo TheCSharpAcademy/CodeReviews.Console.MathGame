@@ -2,8 +2,16 @@
 
 namespace MathGame.Kriz_J.Games;
 
-public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
+public class Addition : Game
 {
+    private readonly List<GameResult> _resultKeeper;
+
+    public Addition(List<GameResult> resultKeeper) : base(resultKeeper)
+    {
+        _resultKeeper = resultKeeper;
+        Settings.Game = GetType().Name;
+    }
+
     protected override void Loop()
     {
         while (!Quit)
@@ -26,7 +34,9 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, this.GetType().Name);
+        
+        result.SaveGameSettings(Settings);
+        _resultKeeper.Add(result);
 
         GameOverPresentation(result);
     }
@@ -38,7 +48,7 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         var start = DateTime.Now;
         var result = GameLogic(Settings.NumberOfQuestions);
         var stop = DateTime.Now;
-        result.Save(scoreKeeper, Settings, this.GetType().Name, stop - start);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
@@ -50,7 +60,7 @@ public class Addition(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, this.GetType().Name);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }

@@ -13,6 +13,7 @@ public class ConsoleHelperMethods
         Console.WriteLine();
         Console.WriteLine();
         Console.Write($"\t{message}");
+        Console.CursorVisible = false;
         return ReadUserSelection();
     }
 
@@ -26,7 +27,7 @@ public class ConsoleHelperMethods
 
     public static char ReadUserSelection()
     {
-        return char.ToUpper(Console.ReadKey().KeyChar);
+        return char.ToUpper(Console.ReadKey(intercept: true).KeyChar);
     }
 
     public static void FormatWriteLineWithHighlight(string before, string highlight, string after)

@@ -4,6 +4,8 @@ namespace MathGame.Kriz_J;
 
 public class Settings
 {
+    public string? Game { get; set; }
+
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
     public Mode Mode { get; set; } = Mode.Standard;
@@ -33,7 +35,7 @@ public class Settings
             Mode = (Mode)input;
     }
 
-    //TODO: Make both of these below not redraw the whole console between switching
+    //TODO: Make both of these below not redraw the whole console between switching selection
     public static void PrintDifficulties(Difficulty difficulty)
     {
         switch (difficulty)

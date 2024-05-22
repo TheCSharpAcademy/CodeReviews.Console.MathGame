@@ -2,7 +2,7 @@
 
 namespace MathGame.Kriz_J.Games;
 
-public class Subtraction(List<GameResult> scoreKeeper) : Game(scoreKeeper)
+public class Subtraction(List<GameResult> resultKeeper) : Game(resultKeeper)
 {
     protected override void Loop()
     {
@@ -26,7 +26,7 @@ public class Subtraction(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, this.GetType().Name);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
@@ -38,7 +38,7 @@ public class Subtraction(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         var start = DateTime.Now;
         var result = GameLogic(Settings.NumberOfQuestions);
         var stop = DateTime.Now;
-        result.Save(scoreKeeper, Settings, this.GetType().Name, stop - start);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
@@ -50,7 +50,7 @@ public class Subtraction(List<GameResult> scoreKeeper) : Game(scoreKeeper)
         GameCountDown();
 
         var result = GameLogic(Settings.NumberOfQuestions);
-        result.Save(scoreKeeper, Settings, this.GetType().Name);
+        result.SaveGameSettings(Settings);
 
         GameOverPresentation(result);
     }
