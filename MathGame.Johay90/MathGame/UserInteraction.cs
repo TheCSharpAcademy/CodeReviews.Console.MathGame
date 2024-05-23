@@ -1,8 +1,6 @@
-﻿using System.Numerics;
-
-public class UserInteraction
+﻿public class UserInteraction
 {
-    public Operation OperationsMenu()
+    public static Operation OperationsMenu()
     {
         do
         {
@@ -11,7 +9,7 @@ public class UserInteraction
             Console.WriteLine("2. Subtract (-)");
             Console.WriteLine("3. Multiply (*)");
             Console.WriteLine("4. Divide (/)");
-            var input = Console.ReadLine();
+            string? input = Console.ReadLine();
 
             if (int.TryParse(input, out int result) && result is >= 1 and <= 4)
             {

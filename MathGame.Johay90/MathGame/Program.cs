@@ -1,7 +1,5 @@
-﻿using System.Collections;
-
-var userInteraction = new UserInteraction();
-var game = new Game(userInteraction);
+﻿UserInteraction userInteraction = new();
+Game game = new(userInteraction);
 game.Run();
 
 public class Game
@@ -16,11 +14,11 @@ public class Game
 
     public void Run()
     {
-        var list = new List<Question>();
+        List<Question> list = new();
 
         while (true)
         {
-            var operationType = UserInteraction.OperationsMenu();
+            Operation operationType = UserInteraction.OperationsMenu();
 
             // TODO future refactoring: Should get rid of the code reuse. Could do this by using delegates for each type of question and binding the operation to a specific symbol/delegate
 
@@ -30,12 +28,12 @@ public class Game
 
                     for (int i = 1; i < 6; i++)
                     {
-                        var question = new Question(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Add);
+                        Question question = new(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Add);
 
                         question.CorrectAnswer = question.number1 + question.number2;
                         Console.WriteLine($"{i}. {question.number1} + {question.number2}");
 
-                        var input = Console.ReadLine();
+                        string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
                         list.Add(question);
@@ -47,12 +45,12 @@ public class Game
 
                     for (int i = 1; i < 6; i++)
                     {
-                        var question = new Question(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Subtract);
+                        Question question = new(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Subtract);
 
                         question.CorrectAnswer = question.number1 - question.number2;
                         Console.WriteLine($"{i}. {question.number1} - {question.number2}");
 
-                        var input = Console.ReadLine();
+                        string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
                         list.Add(question);
@@ -64,12 +62,12 @@ public class Game
 
                     for (int i = 1; i < 6; i++)
                     {
-                        var question = new Question(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Multiply);
+                        Question question = new(Helpers.RandomNumber(1, 100), Helpers.RandomNumber(1, 100), Operation.Multiply);
 
                         question.CorrectAnswer = question.number1 * question.number2;
                         Console.WriteLine($"{i}. {question.number1} * {question.number2}");
 
-                        var input = Console.ReadLine();
+                        string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
                         list.Add(question);
@@ -93,12 +91,12 @@ public class Game
 
                         } while (a % 1 != 0);
 
-                        var question = new Question((int)num1, (int)num2, Operation.Divide);
+                        Question question = new((int)num1, (int)num2, Operation.Divide);
 
                         question.CorrectAnswer = question.number1 / question.number2;
                         Console.WriteLine($"{i}. {question.number1} / {question.number2}");
 
-                        var input = Console.ReadLine();
+                        string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
                         list.Add(question);
@@ -110,7 +108,7 @@ public class Game
 
 
             Console.WriteLine("Would you like to view previous games (v) and start a new game, or exit (e)");
-            var endInput = Console.ReadLine();
+            string? endInput = Console.ReadLine();
             switch (endInput)
             {
                 case "v":

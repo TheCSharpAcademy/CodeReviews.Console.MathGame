@@ -1,8 +1,8 @@
 ﻿public class Question
 {
-    public int number1;
-    public int number2;
-    public Operation operation;
+    public readonly int number1;
+    public readonly int number2;
+    private readonly Operation operation;
     public int CorrectAnswer;
     public int UserAnswer;
 
