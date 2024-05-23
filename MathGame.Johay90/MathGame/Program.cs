@@ -109,7 +109,7 @@ public class Game
             }
 
 
-            Console.WriteLine("Would you like to view previous games (v), exit (e), or play another game (n)?");
+            Console.WriteLine("Would you like to view previous games (v) and start a new game, or exit (e)");
             var endInput = Console.ReadLine();
             switch (endInput)
             {
@@ -122,9 +122,6 @@ public class Game
                     break;
                 case "e": 
                     Environment.Exit(0);
-                    break;
-                case "n":
-                    Run();
                     break;
                 default:
                     Console.WriteLine("Invalid option, application will exit after button press.");
