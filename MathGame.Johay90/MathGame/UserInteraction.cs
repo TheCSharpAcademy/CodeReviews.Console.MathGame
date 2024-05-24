@@ -1,4 +1,6 @@
-﻿public class UserInteraction
+﻿using System.Linq;
+
+public class UserInteraction
 {
     public static Operation OperationsMenu()
     {
@@ -27,5 +29,27 @@
             Console.WriteLine();
 
         } while (true);
+    }
+
+    public void GameHistory(List<Game> games)
+    {
+        for (int i = 0; i < games.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {games[i]}");
+        }
+
+        Console.WriteLine("Pick a number of a game above to see the history, or type anything else to move on.");
+        var input = Console.ReadLine();
+
+        if (!int.TryParse(input, out int result)) return;
+
+        result -= 1;
+
+        if (games.ElementAtOrDefault(result) == null) return;
+
+        foreach (var item in games[result].Games)
+        {
+            Console.WriteLine(item);
+        }
     }
 }

@@ -1,20 +1,22 @@
 ﻿UserInteraction userInteraction = new();
-Game game = new(userInteraction);
-game.Run();
+App app = new(userInteraction);
+app.Run();
 
-public class Game
+public class App
 {
     // TODO future refactoring: Inject these via interfaces later (DIP)
     private UserInteraction UserInteraction { get; set; }
 
-    public Game(UserInteraction userInteraction)
+    public App(UserInteraction userInteraction)
     {
         UserInteraction = userInteraction;
     }
 
     public void Run()
     {
-        List<Question> list = new();
+        List<Question> questions = new();
+        List<Game> games = new();
+        Game currentGame;
 
         while (true)
         {
@@ -25,6 +27,8 @@ public class Game
             switch (operationType)
             {
                 case Operation.Add:
+                    currentGame = new Game(Operation.Add);
+                    games.Add(currentGame);
 
                     for (int i = 1; i < 6; i++)
                     {
@@ -36,12 +40,15 @@ public class Game
                         string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
-                        list.Add(question);
-
+                        currentGame.Games.Add(question);
+                        if (question.CorrectAnswer == question.UserAnswer) currentGame.Score += 1;
+                        
                         Console.WriteLine();
                     }
                     break;
                 case Operation.Subtract:
+                    currentGame = new Game(Operation.Subtract);
+                    games.Add(currentGame);
 
                     for (int i = 1; i < 6; i++)
                     {
@@ -53,12 +60,15 @@ public class Game
                         string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
-                        list.Add(question);
+                        currentGame.Games.Add(question);
+                        if (question.CorrectAnswer == question.UserAnswer) currentGame.Score += 1;
 
                         Console.WriteLine();
                     }
                     break;
                 case Operation.Multiply:
+                    currentGame = new Game(Operation.Multiply);
+                    games.Add(currentGame);
 
                     for (int i = 1; i < 6; i++)
                     {
@@ -70,12 +80,15 @@ public class Game
                         string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
-                        list.Add(question);
+                        currentGame.Games.Add(question);
+                        if (question.CorrectAnswer == question.UserAnswer) currentGame.Score += 1;
 
                         Console.WriteLine();
                     }
                     break;
                 case Operation.Divide:
+                    currentGame = new Game(Operation.Divide);
+                    games.Add(currentGame);
                     for (int i = 1; i < 6; i++)
                     {
 
@@ -99,7 +112,8 @@ public class Game
                         string? input = Console.ReadLine();
                         question.UserAnswer = int.TryParse(input, out int result) ? result : 0;
 
-                        list.Add(question);
+                        currentGame.Games.Add(question);
+                        if (question.CorrectAnswer == question.UserAnswer) currentGame.Score += 1;
 
                         Console.WriteLine();
                     }
@@ -112,11 +126,9 @@ public class Game
             switch (endInput)
             {
                 case "v":
-                    for (int index = 0; index < list.Count; index++)
-                    {
-                        Question? item = list[index];
-                        Console.WriteLine($"{index + 1}. {item}");
-                    }
+                    Console.Clear();
+                    UserInteraction.GameHistory(games);
+                    Console.WriteLine();
                     break;
                 case "e": 
                     Environment.Exit(0);
@@ -129,7 +141,5 @@ public class Game
             }
 
         }
-
-
     }
 }
