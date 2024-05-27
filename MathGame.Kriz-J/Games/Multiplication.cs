@@ -2,8 +2,16 @@
 
 namespace MathGame.Kriz_J.Games;
 
-public class Multiplication(List<GameResult> resultKeeper) : Game(resultKeeper)
+public class Multiplication : Game
 {
+    private readonly ResultKeeper _resultKeeper;
+
+    public Multiplication(ResultKeeper resultKeeper) : base(resultKeeper)
+    {
+        _resultKeeper = resultKeeper;
+        Settings.GameType = GameType.Multiplication;
+    }
+
     protected override void Loop()
     {
         while (!Quit)

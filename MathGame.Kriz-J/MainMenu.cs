@@ -1,19 +1,18 @@
 ﻿using MathGame.Kriz_J.Games;
-using static MathGame.Kriz_J.ConsoleHelperMethods;
 
 namespace MathGame.Kriz_J;
 
 public class MainMenu
 {
-    private readonly List<GameResult> _resultKeeper = [];
-
+    private readonly ResultKeeper _resultKeeper = [];
+    
     public char Selection { get; set; }
 
     public bool Quit => Selection == 'Q';
     
     public static void Print()
     {
-        PrintTitle(StylizedTitles.MainMenu);
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.MainMenu);
         Console.WriteLine("\tSelect to play one of the following games:");
         Console.WriteLine("\t\t[A]ddition");
         Console.WriteLine("\t\t[S]ubtraction");
@@ -43,12 +42,12 @@ public class MainMenu
                 ShowHighScore();
                 break;
             case 'Q':
-                var response = PrintMessage("Do you really want to? [N] to stay.");
+                var response = ConsoleHelperMethods.PrintMessageAwaitResponse("Do you really want to quit? [N] to stay.");
                 if (response == 'N')
-                    Selection = ' ';
+                    Selection = '\0';
                 break;
             default:
-                _ = PrintMessage("Not a valid selection. Press any key . . .");
+                _ = ConsoleHelperMethods.PrintMessageAwaitResponse("Not a valid selection. Press any key . . .");
                 break;
         }
     }
@@ -68,15 +67,15 @@ public class MainMenu
 
     private void ShowLatestGames()
     {
-        PrintTitle(StylizedTitles.LatestGames);
-        GameResult.PrintGameResults(_resultKeeper.OrderByDescending(s => s.Timestamp));
-        _ = PrintMessage(". . . Press any key to go back.");
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.LatestGames);
+        _resultKeeper.PrintLatestGames();
+        _ = ConsoleHelperMethods.PrintMessageAwaitResponse(". . . Press any key to go back.");
     }
     
     private void ShowHighScore()
     {
-        PrintTitle(StylizedTitles.HighScore);
-        GameResult.PrintGameResults(_resultKeeper.OrderByDescending(s => s.PercentageScore));
-        _ = PrintMessage(". . . Press any key to go back.");
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.HighScore);
+        _resultKeeper.PrintHighScore();
+        _ = ConsoleHelperMethods.PrintMessageAwaitResponse(". . . Press any key to go back.");
     }
 }

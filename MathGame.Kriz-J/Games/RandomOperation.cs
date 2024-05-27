@@ -2,8 +2,16 @@
 
 namespace MathGame.Kriz_J.Games;
 
-internal class RandomOperation(List<GameResult> resultKeeper) : Game(resultKeeper)
+public class RandomOperation : Game
 {
+    private readonly ResultKeeper _resultKeeper;
+
+    public RandomOperation(ResultKeeper resultKeeper) : base(resultKeeper)
+    {
+        _resultKeeper = resultKeeper;
+        Settings.GameType = GameType.Random;
+    }
+
     protected override void Loop()
     {
         while (!Quit)

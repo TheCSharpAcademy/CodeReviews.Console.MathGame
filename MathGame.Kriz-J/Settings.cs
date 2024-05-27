@@ -4,13 +4,28 @@ namespace MathGame.Kriz_J;
 
 public class Settings
 {
-    public string? Game { get; set; }
+    public GameType GameType { get; set; }
 
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
     public Mode Mode { get; set; } = Mode.Standard;
 
-    public int NumberOfQuestions { get; set; } = 10;
+    private int _numberOfQuestions = 10;
+
+    public const int MaxNumberOfQuestions = 30;
+
+    public const int MinNumberOfQuestions = 0;
+    
+    public int NumberOfQuestions
+    {
+        get => _numberOfQuestions;
+        set => _numberOfQuestions = value switch
+        {
+            < MinNumberOfQuestions => MinNumberOfQuestions,
+            > MaxNumberOfQuestions => MaxNumberOfQuestions,
+            _ => value
+        };
+    }
 
     public (int Lower, int Upper) NumberLimits => SetNumberLimits(Difficulty);
 

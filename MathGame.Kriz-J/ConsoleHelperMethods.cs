@@ -8,7 +8,7 @@ public class ConsoleHelperMethods
         Console.WriteLine($"{title}");
     }
 
-    public static char PrintMessage(string message)
+    public static char PrintMessageAwaitResponse(string message)
     {
         Console.WriteLine();
         Console.WriteLine();
@@ -17,12 +17,43 @@ public class ConsoleHelperMethods
         return ReadUserSelection();
     }
 
+    public static void ClearInputAndDisplayError((int Left, int Top) cursorPosition, string input, string errorMessage)
+    {
+        ClearInputFromPosition(cursorPosition, input.Length);
+        PrintError(errorMessage);
+        Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+    }
+
+    private static void PrintError(string message)
+    {
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.BackgroundColor = ConsoleColor.DarkRed;
+        Console.Write($"{message}");
+        Console.ResetColor();
+    }
+
     public static int ReadUserInteger()
     {
-        int input;
-        while (!int.TryParse(Console.ReadLine(), out input)) { }
+        while (true)
+        {
+            var cursorPosition = Console.GetCursorPosition();
+            var input = Console.ReadLine();
 
-        return input;
+            if (int.TryParse(input, out var integer))
+            {
+                return integer;
+            }
+
+            ClearInputFromPosition(cursorPosition, input!.Length);
+        }
+    }
+
+    private static void ClearInputFromPosition((int Left, int Top) position, int length)
+    {
+        Console.SetCursorPosition(position.Left, position.Top);
+        Console.Write(new string(' ', length));
+        Console.SetCursorPosition(position.Left, position.Top);
     }
 
     public static char ReadUserSelection()

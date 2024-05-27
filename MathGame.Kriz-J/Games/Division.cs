@@ -2,8 +2,16 @@
 
 namespace MathGame.Kriz_J.Games;
 
-public class Division(List<GameResult> resultKeeper) : Game(resultKeeper)
+public class Division : Game
 {
+    private readonly ResultKeeper _resultKeeper;
+
+    public Division(ResultKeeper resultKeeper) : base(resultKeeper)
+    {
+        _resultKeeper = resultKeeper;
+        Settings.GameType = GameType.Division;
+    }
+
     protected override void Loop()
     {
         while (!Quit)

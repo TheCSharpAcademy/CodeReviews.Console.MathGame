@@ -2,8 +2,16 @@
 
 namespace MathGame.Kriz_J.Games;
 
-public class Subtraction(List<GameResult> resultKeeper) : Game(resultKeeper)
+public class Subtraction : Game
 {
+    private readonly ResultKeeper _resultKeeper;
+
+    public Subtraction(ResultKeeper resultKeeper) : base(resultKeeper)
+    {
+        _resultKeeper = resultKeeper;
+        Settings.GameType = GameType.Subtraction;
+    }
+
     protected override void Loop()
     {
         while (!Quit)

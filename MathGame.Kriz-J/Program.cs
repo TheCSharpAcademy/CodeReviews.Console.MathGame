@@ -1,15 +1,10 @@
-﻿namespace MathGame.Kriz_J;
+﻿using MathGame.Kriz_J;
 
-public class Program
+var mainMenu = new MainMenu();
+
+while (!mainMenu.Quit)
 {
-    private static void Main()
-    {
-        var mainMenu = new MainMenu();
-        while (!mainMenu.Quit)
-        {
-            MainMenu.Print();
-            mainMenu.Selection = ConsoleHelperMethods.ReadUserSelection();
-            mainMenu.RouteSelection();
-        }
-    }
+    MainMenu.Print();
+    mainMenu.Selection = ConsoleHelperMethods.ReadUserSelection();
+    mainMenu.RouteSelection();
 }

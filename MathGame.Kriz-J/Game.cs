@@ -4,13 +4,13 @@ namespace MathGame.Kriz_J;
 
 public abstract class Game
 {
-    protected readonly List<GameResult> ResultKeeper;
+    protected readonly ResultKeeper ResultKeeper;
 
     public Settings Settings { get; set; } = new();
 
     public bool Quit { get; set; }
 
-    protected Game(List<GameResult> resultKeeper)
+    protected Game(ResultKeeper resultKeeper)
     {
         ResultKeeper = resultKeeper;
         Loop();
@@ -19,9 +19,9 @@ public abstract class Game
     protected abstract void Loop();
 
     protected abstract void StandardGame();
-    
+
     protected abstract void TimedGame();
-    
+
     protected abstract void CustomGame();
 
     protected abstract GameResult GameLogic(int nrOfQuestions);
@@ -64,7 +64,7 @@ public abstract class Game
         }
     }
 
-    private void RouteMode(Mode mode) 
+    private void RouteMode(Mode mode)
     {
         switch (mode)
         {
@@ -116,16 +116,24 @@ public abstract class Game
 
     protected void SetNumberOfQuestions()
     {
-        //TODO: Repeat question if bad value
-        Console.Write("\tYou've selected custom! How many questions do you wish to try? (max 30): ");
-        var nrOfQuestions = ConsoleHelperMethods.ReadUserInteger();
+        const int max = Settings.MaxNumberOfQuestions;
+        const int min = Settings.MinNumberOfQuestions;
 
-        Settings.NumberOfQuestions = nrOfQuestions switch
+        Console.Write($"You've selected custom! How many questions do you wish to try? (max {max}): ");
+        while (true)
         {
-            < 0 => 0,
-            > 30 => 30,
-            _ => nrOfQuestions
-        };
+            var cursorPosition = Console.GetCursorPosition();
+            var numberOfQuestions = ConsoleHelperMethods.ReadUserInteger();
+
+            if (numberOfQuestions is < min or > max)
+            {
+                ConsoleHelperMethods.ClearInputAndDisplayError(cursorPosition, numberOfQuestions.ToString(), $"\t! Please enter a valid number ({min} - {max}).");
+                continue;
+            }
+
+            Settings.NumberOfQuestions = numberOfQuestions;
+            break;
+        }
     }
 
     protected static void GameCountDown()

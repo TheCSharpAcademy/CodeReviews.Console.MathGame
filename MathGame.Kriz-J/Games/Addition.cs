@@ -4,12 +4,12 @@ namespace MathGame.Kriz_J.Games;
 
 public class Addition : Game
 {
-    private readonly List<GameResult> _resultKeeper;
+    private readonly ResultKeeper _resultKeeper;
 
-    public Addition(List<GameResult> resultKeeper) : base(resultKeeper)
+    public Addition(ResultKeeper resultKeeper) : base(resultKeeper)
     {
         _resultKeeper = resultKeeper;
-        Settings.Game = GetType().Name;
+        Settings.GameType = GameType.Addition;
     }
 
     protected override void Loop()
