@@ -33,7 +33,7 @@ public class MainMenu
         switch (Selection)
         {
             case 'A' or 'S' or 'M' or 'D' or 'R':
-                RouteGame();
+                InitializeAndStartGame();
                 break;
             case 'L':
                 ShowLatestGames();
@@ -52,9 +52,9 @@ public class MainMenu
         }
     }
 
-    private void RouteGame()
+    private void InitializeAndStartGame()
     {
-        Game _ = Selection switch
+        Game game = Selection switch
         {
             'A' => new Addition(_resultKeeper),
             'S' => new Subtraction(_resultKeeper),
@@ -63,6 +63,8 @@ public class MainMenu
             'R' => new RandomOperation(_resultKeeper),
             _ => throw new ArgumentOutOfRangeException()
         };
+
+        game.Start();
     }
 
     private void ShowLatestGames()

@@ -41,7 +41,7 @@ public record GameResult(int Score, TimeSpan? TimeNeeded = null)
         Console.Write($"{result.Mode,-15}");
         Console.Write($"{result.Difficulty,-15}");
         Console.Write($"{score,-15}");
-        if (result.TimeNeeded is not null)
+        if (result.TimeNeeded.HasValue)
             Console.Write($"{timeNeeded,-15}");
 
         Console.WriteLine();

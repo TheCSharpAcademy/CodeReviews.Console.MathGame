@@ -4,72 +4,30 @@ namespace MathGame.Kriz_J.Games;
 
 public class RandomOperation : Game
 {
-    private readonly ResultKeeper _resultKeeper;
-
     public RandomOperation(ResultKeeper resultKeeper) : base(resultKeeper)
     {
-        _resultKeeper = resultKeeper;
         Settings.GameType = GameType.Random;
     }
 
-    protected override void Loop()
+    public override void Start()
     {
         while (!Quit)
         {
-            PrintMenu(
-                StylizedTitles.Random,
-                "Each question will be a random operation between two numbers.",
-                Settings.Difficulty,
-                Settings.Mode);
-
-            if (Settings.Mode is Mode.Custom)
-                Settings.NumberOfQuestions = 10;
+            PrintMenu(StylizedTitles.Random,
+                "Each question will be a random operation between two numbers.");
 
             ReadAndRouteUserSelection();
         }
     }
 
-    protected override void StandardGame()
-    {
-        GameCountDown();
-
-        var result = GameLogic(Settings.NumberOfQuestions);
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override void TimedGame()
-    {
-        GameCountDown();
-
-        var start = DateTime.Now;
-        var result = GameLogic(Settings.NumberOfQuestions);
-        var stop = DateTime.Now;
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override void CustomGame()
-    {
-        SetNumberOfQuestions();
-
-        GameCountDown();
-
-        var result = GameLogic(Settings.NumberOfQuestions);
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override GameResult GameLogic(int nrOfQuestions)
+    protected override GameResult GameLogic(int nrOfQuestions, bool timed)
     {
         var score = 0;
         var generator = new Random();
         var lower = Settings.NumberLimits.Lower;
         var upper = Settings.NumberLimits.Upper;
 
+        var start = DateTime.Now;
         for (int i = 0; i < nrOfQuestions; i++)
         {
             var operation = RandomizeOperations();
@@ -90,11 +48,12 @@ public class RandomOperation : Game
             if (operatorCondition(a, b, c))
                 score++;
         }
+        var stop = DateTime.Now;
 
-        return new GameResult(score);
+        return timed ? new GameResult(score, TimeNeeded: stop - start) : new GameResult(score);
     }
 
-    private char RandomizeOperations()
+    private static char RandomizeOperations()
     {
         return new Random().Next(1, 5) switch
         {
@@ -106,21 +65,7 @@ public class RandomOperation : Game
         };
     }
 
-    private OperatorCondition LoadOperatorConditionDelegate(char operation)
-    {
-        OperatorCondition? operatorCondition = null;
-
-        return operatorCondition += operation switch
-        {
-            '+' => ValidAddition,
-            '-' => ValidSubtraction,
-            '*' => ValidMultiplication,
-            '/' => ValidDivision,
-            _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
-        };
-    }
-
-    private NumberGeneratorCondition LoadNumberGeneratorConditionDelegate(char operation)
+    private static NumberGeneratorCondition LoadNumberGeneratorConditionDelegate(char operation)
     {
         NumberGeneratorCondition? numberGeneratorCondition = null;
 
@@ -134,14 +79,28 @@ public class RandomOperation : Game
         };
     }
 
-    private delegate bool OperatorCondition(int a, int b, int c);
-    private static bool ValidAddition(int a, int b, int c) => a + b == c;
-    private static bool ValidSubtraction(int a, int b, int c) => a - b == c;
-    private static bool ValidMultiplication(int a, int b, int c) => a * b == c;
-    private static bool ValidDivision(int a, int b, int c) => a / b == c;
+    private static OperatorCondition LoadOperatorConditionDelegate(char operation)
+    {
+        OperatorCondition? operatorCondition = null;
+
+        return operatorCondition += operation switch
+        {
+            '+' => ValidAddition,
+            '-' => ValidSubtraction,
+            '*' => ValidMultiplication,
+            '/' => ValidDivision,
+            _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
+        };
+    }
 
     private delegate bool NumberGeneratorCondition(int a, int b);
     private static bool NoConditionNecessary(int a, int b) => false;
     private static bool SubtractionLessThanZero(int a, int b) => a - b < 0;
     private static bool DivisionHasRemainder(int a, int b) => a % b != 0;
+
+    private delegate bool OperatorCondition(int a, int b, int c);
+    private static bool ValidAddition(int a, int b, int c) => a + b == c;
+    private static bool ValidSubtraction(int a, int b, int c) => a - b == c;
+    private static bool ValidMultiplication(int a, int b, int c) => a * b == c;
+    private static bool ValidDivision(int a, int b, int c) => a / b == c;
 }

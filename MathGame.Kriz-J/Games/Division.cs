@@ -4,72 +4,30 @@ namespace MathGame.Kriz_J.Games;
 
 public class Division : Game
 {
-    private readonly ResultKeeper _resultKeeper;
-
     public Division(ResultKeeper resultKeeper) : base(resultKeeper)
     {
-        _resultKeeper = resultKeeper;
         Settings.GameType = GameType.Division;
     }
 
-    protected override void Loop()
+    public override void Start()
     {
         while (!Quit)
         {
-            PrintMenu(
-                StylizedTitles.Division,
-                "Each question will be a division problem between two factors.",
-                Settings.Difficulty,
-                Settings.Mode);
-
-            if (Settings.Mode is Mode.Custom)
-                Settings.NumberOfQuestions = 10;
+            PrintMenu(StylizedTitles.Division,
+                "Each question will be a division problem between two factors.");
 
             ReadAndRouteUserSelection();
         }
     }
 
-    protected override void StandardGame()
-    {
-        GameCountDown();
-
-        var result = GameLogic(Settings.NumberOfQuestions);
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override void TimedGame()
-    {
-        GameCountDown();
-
-        var start = DateTime.Now;
-        var result = GameLogic(Settings.NumberOfQuestions);
-        var stop = DateTime.Now;
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override void CustomGame()
-    {
-        SetNumberOfQuestions();
-
-        GameCountDown();
-
-        var result = GameLogic(Settings.NumberOfQuestions);
-        result.SaveGameSettings(Settings);
-
-        GameOverPresentation(result);
-    }
-
-    protected override GameResult GameLogic(int nrOfQuestions)
+    protected override GameResult GameLogic(int nrOfQuestions, bool timed)
     {
         var score = 0;
         var generator = new Random();
         var lower = Settings.NumberLimits.Lower;
         var upper = Settings.NumberLimits.Upper;
 
+        var start = DateTime.Now;
         for (int i = 0; i < nrOfQuestions; i++)
         {
             int a, b;
@@ -87,7 +45,8 @@ public class Division : Game
             if (a / b == c)
                 score++;
         }
+        var stop = DateTime.Now;
 
-        return new GameResult(score);
+        return timed ? new GameResult(score, TimeNeeded: stop - start) : new GameResult(score);
     }
 }

@@ -2,31 +2,15 @@
 
 namespace MathGame.Kriz_J;
 
-public abstract class Game
+public abstract class Game(ResultKeeper resultKeeper)
 {
-    protected readonly ResultKeeper ResultKeeper;
-
     public Settings Settings { get; set; } = new();
 
     public bool Quit { get; set; }
 
-    protected Game(ResultKeeper resultKeeper)
-    {
-        ResultKeeper = resultKeeper;
-        Loop();
-    }
+    public abstract void Start();
 
-    protected abstract void Loop();
-
-    protected abstract void StandardGame();
-
-    protected abstract void TimedGame();
-
-    protected abstract void CustomGame();
-
-    protected abstract GameResult GameLogic(int nrOfQuestions);
-
-    protected static void PrintMenu(string title, string description, Difficulty difficulty, Mode mode)
+    protected void PrintMenu(string title, string description)
     {
         Console.Clear();
         Console.WriteLine($"{title}");
@@ -34,11 +18,11 @@ public abstract class Game
         Console.WriteLine($"\t{description}");
         Console.WriteLine("");
         Console.WriteLine("\tSelect difficulty:");
-        Settings.PrintDifficulties(difficulty);
+        Settings.PrintDifficulties(Settings.Difficulty);
         Console.WriteLine("");
         Console.WriteLine("");
         Console.WriteLine("\tSelect mode:");
-        Settings.PrintModes(mode);
+        Settings.PrintModes(Settings.Mode);
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine("\t[ENTER] / [SPACE] to start game, [Q] to quit.");
@@ -64,57 +48,76 @@ public abstract class Game
         }
     }
 
-    private void RouteMode(Mode mode)
+    private void RouteMode(Mode mode) 
     {
         switch (mode)
         {
             case Mode.Standard:
-                StandardGame();
+                PlayGame();
                 break;
             case Mode.Timed:
-                TimedGame();
+                PlayGame(timed: true);
                 break;
             case Mode.Custom:
-                CustomGame();
+                SetNumberOfQuestions();
+                PlayGame();
+                Settings.NumberOfQuestions = Settings.DefaultNumberOfQuestions;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
         }
     }
 
-    protected void GameOverPresentation(GameResult gameResult)
+    private void PlayGame(bool timed = false)
     {
-        PrintScore(gameResult.Score);
+        GameCountDown();
 
-        if (gameResult.TimeNeeded is not null)
-        {
+        var result = GameLogic(Settings.NumberOfQuestions, timed);
+
+        result.SaveGameSettings(Settings);
+        resultKeeper.Add(result);
+
+        GameOverPresentation(result);
+    }
+    
+    private static void GameOverPresentation(GameResult gameResult)
+    {
+        Console.WriteLine();
+
+        PrintScore(gameResult);
+
+        if (gameResult.TimeNeeded.HasValue)
             Console.Write($"\tTime: {gameResult.TimeNeeded:mm\\:ss\\.fff}");
-        }
 
         Console.Write("\t\t\t. . . Press any key to go back.");
-        Console.ReadKey();
+        _ = Console.ReadKey();
     }
 
-    protected void PrintScore(int score)
+    private static void PrintScore(GameResult gameResult)
     {
-        var nrOfQuestions = Settings.NumberOfQuestions;
+        var result = $"{gameResult.Score}/{gameResult.NumberOfQuestions}";
 
-        var percentage = 1.0 * score / nrOfQuestions;
-
-        Console.WriteLine();
-        if (score == nrOfQuestions)
-            Console.Write($"\tPerfect score! {score}/{nrOfQuestions}.");
-        else if (percentage >= 0.8)
-            Console.Write($"\tImpressive! {score}/{nrOfQuestions}.");
-        else if (percentage >= 0.6)
-            Console.Write($"\tPretty good! {score}/{nrOfQuestions}.");
-        else if (percentage >= 0.4)
-            Console.Write($"\tYou can do better: {score}/{nrOfQuestions}.");
-        else
-            Console.Write($"\tTry again: {score}/{nrOfQuestions}.");
+        switch (gameResult.PercentageScore)
+        {
+            case >= 100:
+                Console.Write($"\tPerfect score! {result}.");
+                break;
+            case >= 80:
+                Console.Write($"\tImpressive! {result}.");
+                break;
+            case >= 60:
+                Console.Write($"\tPretty good! {result}.");
+                break;
+            case >= 40:
+                Console.Write($"\tYou can do better: {result}.");
+                break;
+            default:
+                Console.Write($"\tTry again: {result}.");
+                break;
+        }
     }
 
-    protected void SetNumberOfQuestions()
+    private void SetNumberOfQuestions()
     {
         const int max = Settings.MaxNumberOfQuestions;
         const int min = Settings.MinNumberOfQuestions;
@@ -136,7 +139,7 @@ public abstract class Game
         }
     }
 
-    protected static void GameCountDown()
+    private static void GameCountDown()
     {
         Console.CursorVisible = false;
 
@@ -153,4 +156,6 @@ public abstract class Game
 
         Console.CursorVisible = true;
     }
+
+    protected abstract GameResult GameLogic(int nrOfQuestions, bool timed);
 }

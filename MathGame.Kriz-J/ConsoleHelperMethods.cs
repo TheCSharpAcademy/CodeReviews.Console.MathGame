@@ -19,7 +19,7 @@ public class ConsoleHelperMethods
 
     public static void ClearInputAndDisplayError((int Left, int Top) cursorPosition, string input, string errorMessage)
     {
-        ClearInputFromPosition(cursorPosition, input.Length);
+        ClearInputFromPosition(cursorPosition, input);
         PrintError(errorMessage);
         Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
     }
@@ -45,14 +45,14 @@ public class ConsoleHelperMethods
                 return integer;
             }
 
-            ClearInputFromPosition(cursorPosition, input!.Length);
+            ClearInputFromPosition(cursorPosition, input!);
         }
     }
 
-    private static void ClearInputFromPosition((int Left, int Top) position, int length)
+    private static void ClearInputFromPosition((int Left, int Top) position, string input)
     {
         Console.SetCursorPosition(position.Left, position.Top);
-        Console.Write(new string(' ', length));
+        Console.Write(new string(' ', input.Length));
         Console.SetCursorPosition(position.Left, position.Top);
     }
 

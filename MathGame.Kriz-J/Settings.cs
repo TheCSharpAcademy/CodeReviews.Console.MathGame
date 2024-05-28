@@ -4,17 +4,19 @@ namespace MathGame.Kriz_J;
 
 public class Settings
 {
+    public const int MaxNumberOfQuestions = 30;
+    
+    public const int DefaultNumberOfQuestions = 10;
+
+    public const int MinNumberOfQuestions = 0;
+
+    private int _numberOfQuestions = DefaultNumberOfQuestions;
+
     public GameType GameType { get; set; }
 
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
     public Mode Mode { get; set; } = Mode.Standard;
-
-    private int _numberOfQuestions = 10;
-
-    public const int MaxNumberOfQuestions = 30;
-
-    public const int MinNumberOfQuestions = 0;
     
     public int NumberOfQuestions
     {
