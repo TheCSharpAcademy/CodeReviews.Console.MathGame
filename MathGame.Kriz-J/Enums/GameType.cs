@@ -2,9 +2,9 @@
 
 public enum GameType
 {
-    Addition = 0,
-    Subtraction = 1,
-    Multiplication = 2,
-    Division = 3,
-    Random = 4
+    Addition = '+',
+    Subtraction = '-',
+    Multiplication = '*',
+    Division = '/',
+    Random = '?'
 }
