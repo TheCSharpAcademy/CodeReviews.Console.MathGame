@@ -102,19 +102,19 @@ namespace MathGame
         {
             var answerText = Console.ReadLine();
 
-            if (string.IsNullOrEmpty(answerText))
+            if (answerText == "stop")
+            {
+                return;
+            }
+
+            double answer;
+            if (string.IsNullOrEmpty(answerText) || !double.TryParse(answerText, out answer))
             {
                 Console.WriteLine("Invalid Entry, please try again");
                 this.AskQuestion();
                 return;
             }
 
-            if (answerText == "stop")
-            {
-                return;
-            }
-
-            var answer = Double.Parse(answerText);
             var isCorrect = false;
 
             switch (GameType)
