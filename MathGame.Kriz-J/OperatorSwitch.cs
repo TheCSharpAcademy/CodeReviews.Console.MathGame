@@ -4,9 +4,9 @@ namespace MathGame.Kriz_J;
 
 public class OperatorSwitch
 {
-    public NumberGeneratorCondition NumberGeneratorConditionDelegate { get; set; }
-    
-    public OperatorCondition OperatorConditionDelegate { get; set; }
+    public NumberGeneratorCondition NumberGeneratorConditionDelegate => LoadNumberGeneratorConditionDelegate((GameType)Operator);
+
+    public OperatorCondition OperatorConditionDelegate => LoadOperatorConditionDelegate((GameType)Operator);
 
     public char Operator { get; set; }
 
@@ -18,9 +18,6 @@ public class OperatorSwitch
         {
             Operator = (char)RandomizeOperation();
         }
-
-        NumberGeneratorConditionDelegate = LoadNumberGeneratorConditionDelegate((GameType)Operator);
-        OperatorConditionDelegate = LoadOperatorConditionDelegate((GameType)Operator);
     }
 
     public static GameType RandomizeOperation()
@@ -35,11 +32,9 @@ public class OperatorSwitch
         };
     }
 
-    public static NumberGeneratorCondition LoadNumberGeneratorConditionDelegate(GameType gameType)
+    private static NumberGeneratorCondition LoadNumberGeneratorConditionDelegate(GameType gameType)
     {
-        NumberGeneratorCondition? numberGeneratorCondition = null;
-
-        return numberGeneratorCondition += gameType switch
+        NumberGeneratorCondition numberGeneratorCondition = gameType switch
         {
             GameType.Addition => NoConditionNecessary,
             GameType.Subtraction => SubtractionLessThanZero,
@@ -47,13 +42,13 @@ public class OperatorSwitch
             GameType.Division => DivisionHasRemainder,
             _ => throw new ArgumentOutOfRangeException(nameof(gameType), gameType, null)
         };
+
+        return numberGeneratorCondition;
     }
 
-    public static OperatorCondition LoadOperatorConditionDelegate(GameType gameType)
+    private static OperatorCondition LoadOperatorConditionDelegate(GameType gameType)
     {
-        OperatorCondition? operatorCondition = null;
-
-        return operatorCondition += gameType switch
+        OperatorCondition operatorCondition = gameType switch
         {
             GameType.Addition=> ValidAddition,
             GameType.Subtraction => ValidSubtraction,
@@ -61,16 +56,16 @@ public class OperatorSwitch
             GameType.Division => ValidDivision,
             _ => throw new ArgumentOutOfRangeException(nameof(gameType), gameType, null)
         };
+
+        return operatorCondition;
     }
 
     public delegate bool NumberGeneratorCondition(int a, int b);
-
     private static bool NoConditionNecessary(int a, int b) => false;
     private static bool SubtractionLessThanZero(int a, int b) => a - b < 0;
     private static bool DivisionHasRemainder(int a, int b) => a % b != 0;
 
     public delegate bool OperatorCondition(int a, int b, int c);
-
     private static bool ValidAddition(int a, int b, int c) => a + b == c;
     private static bool ValidSubtraction(int a, int b, int c) => a - b == c;
     private static bool ValidMultiplication(int a, int b, int c) => a * b == c;
