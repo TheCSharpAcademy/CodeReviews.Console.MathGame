@@ -221,6 +221,7 @@ namespace MathGame
                         score += gameEngine.DivisionGame("Division Game", 1, mathNums, false); break;
                 }
             }
+            stopwatch.Stop();
             int secondsTaken = (int)Math.Floor(stopwatch.Elapsed.TotalSeconds);
             Helpers.AddToHistory(score, GameType.Random, (GameDifficulty)mathNums[2], secondsTaken);
             Console.WriteLine($"You answered in {secondsTaken} seconds");
