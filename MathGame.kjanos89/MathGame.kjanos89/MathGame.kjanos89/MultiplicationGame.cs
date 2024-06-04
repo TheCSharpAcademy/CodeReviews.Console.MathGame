@@ -1,6 +1,12 @@
-﻿namespace MathGame.kjanos89
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MathGame.kjanos89
 {
-    public class AdditionGame
+    public class MultiplicationGame
     {
         int c = 0;
         Start startObject = new Start();
@@ -12,7 +18,7 @@
             Console.Clear();
             Console.WriteLine("__________________________________________________________________");
             Console.WriteLine($"You currently have {GameData.Points} amount of points.");
-            Console.WriteLine("Your choice was Addition Game mode. The rules are simple: type in the sum of the numbers below.");
+            Console.WriteLine("Your choice was Multiplication Game mode. The rules are simple: multiply the numbers");
             Console.WriteLine($"First number is {a}");
             Console.WriteLine($"Second number is {b}");
             Console.WriteLine("Pressing B will return you to the main menu.");
@@ -30,7 +36,7 @@
             }
             else if (Int32.TryParse(input, out c))
             {
-                if (c == a + b)
+                if (c == a*b)
                 {
                     Console.WriteLine("Nice one! You just earned one point for Gryffindor!");
                     Console.WriteLine("Starting again in 3 seconds!");

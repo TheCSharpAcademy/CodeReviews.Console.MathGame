@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MathGame.kjanos89
 {
     public class Start
     {
         public void StartMenu()
         {
+            //Clearing up the console window, listing the options and taking the first character as input.
             Console.Clear();
             Console.WriteLine("__________________________________________________________________");
             Console.WriteLine($"Hello! {GameData.Name}, Choose an option from the menu below by pressing the proper key:");
@@ -19,44 +15,40 @@ namespace MathGame.kjanos89
             Console.WriteLine("D - Division");
             Console.WriteLine("Q - Quit the program");
             Console.WriteLine("__________________________________________________________________");
-            string selection = Console.ReadLine().ToLower();
-            char firstChar = selection[0];
-            Console.WriteLine(GameSelected(firstChar));
+            string selection = Console.ReadLine().ToLower(); //Converting the input to lowercase in case someone presses shift or has caps-lock on
+            GameSelected(selection[0]);
         }
 
-        public static string GameSelected(char selected)
+        public static void GameSelected(char selected)
         {
-            string result = "";
             switch (selected)
             {
                 case 'a':
-                    AdditionGame addition = new AdditionGame();
+                    AdditionGame addition = new AdditionGame(); //The pattern for every option inside the switch is the same. Creating an object and calling the method off of it.
                     addition.Result();
                     break;
                 case 's':
-                    result = "You chose Subtraction.";
+                    SubtractionGame subtraction = new SubtractionGame();
+                    subtraction.Result();
                     break;
                 case 'm':
-                    result = "You chose Multiplication.";
+                    MultiplicationGame multiplication = new MultiplicationGame();
+                    multiplication.Result();
                     break;
                 case 'd':
-                    result = "You chose Division.";
+                    DivisionGame division = new DivisionGame();
+                    division.Result();
                     break;
                 case 'q':
-                    result = "Program closes. Hope to see you soon!";
+                    Environment.Exit(3);
+                    Console.Clear();
+                    Console.WriteLine("The program closes in 3 seconds. Hope to see you soon!");
                     break;
 
                 default:
-                    result = "Wrong input, please choose from the menu.";
+                    Console.WriteLine("Wrong input, please choose from the menu."); //In case someone presses anything but letters
                     break;
             }
-            return result;
-        }
-        public void QuitGame()
-        {
-            Console.Clear();
-            Console.WriteLine("Bye-Bye!");
-            Environment.Exit(2);
         }
     }
 }

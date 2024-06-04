@@ -1,6 +1,12 @@
-﻿namespace MathGame.kjanos89
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MathGame.kjanos89
 {
-    public class AdditionGame
+    public class DivisionGame
     {
         int c = 0;
         Start startObject = new Start();
@@ -9,12 +15,16 @@
             Random numberGen = new Random();
             int a = numberGen.Next(1, 101);
             int b = numberGen.Next(1, 101);
+            if(Math.Max(a,b)%Math.Min(a,b)!=0)
+            {
+                Result();
+            }
             Console.Clear();
             Console.WriteLine("__________________________________________________________________");
             Console.WriteLine($"You currently have {GameData.Points} amount of points.");
-            Console.WriteLine("Your choice was Addition Game mode. The rules are simple: type in the sum of the numbers below.");
-            Console.WriteLine($"First number is {a}");
-            Console.WriteLine($"Second number is {b}");
+            Console.WriteLine("Your choice was Division Game mode. The rules are simple: divine the bigger number with the smaller one");
+            Console.WriteLine($"First number is {Math.Max(a, b)}");
+            Console.WriteLine($"Second number is {Math.Min(a, b)}");
             Console.WriteLine("Pressing B will return you to the main menu.");
             Console.WriteLine("__________________________________________________________________");
             Validation(a, b);
@@ -30,7 +40,7 @@
             }
             else if (Int32.TryParse(input, out c))
             {
-                if (c == a + b)
+                if (c == Math.Max(a, b) / Math.Min(a, b))
                 {
                     Console.WriteLine("Nice one! You just earned one point for Gryffindor!");
                     Console.WriteLine("Starting again in 3 seconds!");

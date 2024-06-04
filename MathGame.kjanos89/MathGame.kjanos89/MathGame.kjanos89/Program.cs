@@ -1,9 +1,6 @@
 ﻿using MathGame.kjanos89;
-using System.Linq.Expressions;
-
 public class Program
 {
-    int points = 0;
     static void Main(string[] args)
     {
         Console.WriteLine("Hello! Please type in your name below:");
@@ -11,18 +8,4 @@ public class Program
         Start start = new Start();
         start.StartMenu();
     }
-    public void QuitGame()
-    {
-        Console.Clear();
-        Console.WriteLine("Bye-Bye!");
-        Environment.Exit(2);
-    }
-
-
 }
-
-
-
-
-
-
