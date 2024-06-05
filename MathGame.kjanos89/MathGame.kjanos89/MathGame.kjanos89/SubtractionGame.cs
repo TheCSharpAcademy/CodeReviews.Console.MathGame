@@ -2,8 +2,8 @@
 {
     public class SubtractionGame
     {
-            int c = 0;
-            int points = 0;
+            int c;
+            int points;
             Start startObject = new Start();
             public void Result()
             {

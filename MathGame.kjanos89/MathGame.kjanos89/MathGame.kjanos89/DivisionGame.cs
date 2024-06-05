@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MathGame.kjanos89
 {
     public class DivisionGame
     {
-        int c = 0;
-        int points = 0;
+        int c;
+        int points;
         Start startObject = new Start();
         public void Result()
         {

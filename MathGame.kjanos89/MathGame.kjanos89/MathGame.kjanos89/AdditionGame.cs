@@ -3,8 +3,8 @@
     public class AdditionGame
     {
         //declaring and initializing helper "c" variable and creating start object for the return menu option
-        int c = 0;
-        int points = 0;
+        int c;
+        int points;
         Start startObject = new Start();
         public void Result()
         {
