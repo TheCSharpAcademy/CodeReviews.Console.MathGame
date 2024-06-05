@@ -9,6 +9,7 @@ namespace MathGame.kjanos89
     public class MultiplicationGame
     {
         int c = 0;
+        int points = 0;
         Start startObject = new Start();
         public void Result()
         {
@@ -17,7 +18,7 @@ namespace MathGame.kjanos89
             int b = numberGen.Next(1, 101);
             Console.Clear();
             Console.WriteLine("__________________________________________________________________");
-            Console.WriteLine($"You currently have {GameData.Points} amount of points.");
+            Console.WriteLine($"You currently have {GameData.Points} number of total points and this session {points} amount of points.");
             Console.WriteLine("Your choice was Multiplication Game mode. The rules are simple: multiply the numbers");
             Console.WriteLine($"First number is {a}");
             Console.WriteLine($"Second number is {b}");
@@ -32,16 +33,18 @@ namespace MathGame.kjanos89
 
             if (input.ToLower() == "b")
             {
+                GameData.Games.Add($"{DateTime.Now}, Multiplication Game Mode, Score earned: {points}");
                 startObject.StartMenu();
             }
             else if (Int32.TryParse(input, out c))
             {
                 if (c == a*b)
                 {
-                    Console.WriteLine("Nice one! You just earned one point for Gryffindor!");
+                    Console.WriteLine("Nice one! You just earned one point for yourself!");
                     Console.WriteLine("Starting again in 3 seconds!");
                     Thread.Sleep(3000);
                     GameData.Points++;
+                    points++;
                     Result();
                 }
                 else

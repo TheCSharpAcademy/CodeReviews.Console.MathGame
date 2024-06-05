@@ -9,6 +9,7 @@ namespace MathGame.kjanos89
     public class DivisionGame
     {
         int c = 0;
+        int points = 0;
         Start startObject = new Start();
         public void Result()
         {
@@ -21,7 +22,7 @@ namespace MathGame.kjanos89
             }
             Console.Clear();
             Console.WriteLine("__________________________________________________________________");
-            Console.WriteLine($"You currently have {GameData.Points} amount of points.");
+            Console.WriteLine($"You currently have {GameData.Points} number of total points and this session {points} amount of points.");
             Console.WriteLine("Your choice was Division Game mode. The rules are simple: divine the bigger number with the smaller one");
             Console.WriteLine($"First number is {Math.Max(a, b)}");
             Console.WriteLine($"Second number is {Math.Min(a, b)}");
@@ -36,16 +37,18 @@ namespace MathGame.kjanos89
 
             if (input.ToLower() == "b")
             {
+                GameData.Games.Add($"{DateTime.Now}, Division Game Mode, Score earned in session: {points}");
                 startObject.StartMenu();
             }
             else if (Int32.TryParse(input, out c))
             {
                 if (c == Math.Max(a, b) / Math.Min(a, b))
                 {
-                    Console.WriteLine("Nice one! You just earned one point for Gryffindor!");
+                    Console.WriteLine("Nice one! You just earned one point for yourself!");
                     Console.WriteLine("Starting again in 3 seconds!");
                     Thread.Sleep(3000);
                     GameData.Points++;
+                    points++;
                     Result();
                 }
                 else
