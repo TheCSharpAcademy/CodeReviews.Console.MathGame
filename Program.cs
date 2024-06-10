@@ -46,7 +46,7 @@ void PlayGame(string operation)
         {
             Console.WriteLine("Invalid selection.");
             answer = Console.ReadLine() ?? "";
-        };
+        }
         
         long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         totalTime += (end - start) / 1000.0f;
