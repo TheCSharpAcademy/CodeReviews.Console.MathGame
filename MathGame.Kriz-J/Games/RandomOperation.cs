@@ -13,7 +13,10 @@ public class RandomOperation : Game
     {
         while (!Quit)
         {
-            PrintMenu(StylizedTitles.Random, "Each question will be a random operation between two numbers.");
+            if (NewGame)
+            {
+                PrintMenu(StylizedTitles.Random, "Each question will be a random operation between two numbers.");
+            }
 
             ReadAndRouteUserSelection();
         }

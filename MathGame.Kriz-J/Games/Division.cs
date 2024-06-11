@@ -13,7 +13,10 @@ public class Division : Game
     {
         while (!Quit)
         {
-            PrintMenu(StylizedTitles.Division, "Each question will be a division problem between two factors.");
+            if (NewGame)
+            {
+                PrintMenu(StylizedTitles.Division, "Each question will be a division problem between two factors.");
+            }
 
             ReadAndRouteUserSelection();
         }

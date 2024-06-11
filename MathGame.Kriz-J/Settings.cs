@@ -46,13 +46,32 @@ public class Settings
     public void ChangeDifficultyOrMode(char input)
     {
         if (Enum.IsDefined(typeof(Difficulty), (int)input))
+        {
             Difficulty = (Difficulty)input;
+            UpdateDifficultyPresentation();
+        }
 
         if (Enum.IsDefined(typeof(Mode), (int)input))
+        {
             Mode = (Mode)input;
+            UpdateModePresentation();
+        }
     }
 
-    //TODO: Make both of these below not redraw the whole console between switching selection
+    private void UpdateDifficultyPresentation()
+    {
+        Console.SetCursorPosition(0, 15); //15 = Difficulty row
+        PrintDifficulties(Difficulty);
+        Console.SetCursorPosition(10, 22); //(10,22) = Input position
+    }
+
+    private void UpdateModePresentation()
+    {
+        Console.SetCursorPosition(0, 18); //18 = Mode row
+        PrintModes(Mode);
+        Console.SetCursorPosition(10, 22); //(10,22) = Input position
+    }
+
     public static void PrintDifficulties(Difficulty difficulty)
     {
         switch (difficulty)

@@ -13,7 +13,10 @@ public class Multiplication : Game
     {
         while (!Quit)
         {
-            PrintMenu(StylizedTitles.Multiplication, "Each question will be a multiplication problem between two factors.");
+            if (NewGame)
+            {
+                PrintMenu(StylizedTitles.Multiplication,"Each question will be a multiplication problem between two factors.");
+            }
 
             ReadAndRouteUserSelection();
         }

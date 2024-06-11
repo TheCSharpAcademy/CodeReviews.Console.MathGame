@@ -8,6 +8,8 @@ public abstract class Game(ResultKeeper resultKeeper)
 
     public bool Quit { get; set; }
 
+    public bool NewGame { get; set; } = true;
+
     public abstract void Start();
 
     protected void PrintMenu(string title, string description)
@@ -40,9 +42,11 @@ public abstract class Game(ResultKeeper resultKeeper)
                 Quit = true;
                 break;
             case '\r' or ' ':
+                NewGame = true;
                 RouteMode(Settings.Mode);
                 break;
             default:
+                NewGame = false;
                 Settings.ChangeDifficultyOrMode(input);
                 break;
         }
