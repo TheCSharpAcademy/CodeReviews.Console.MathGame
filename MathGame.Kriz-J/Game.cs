@@ -48,7 +48,7 @@ public abstract class Game(ResultKeeper resultKeeper)
         }
     }
 
-    private void RouteMode(Mode mode) 
+    private void RouteMode(Mode mode)
     {
         switch (mode)
         {
@@ -59,9 +59,7 @@ public abstract class Game(ResultKeeper resultKeeper)
                 PlayGame(timed: true);
                 break;
             case Mode.Custom:
-                SetNumberOfQuestions();
-                PlayGame();
-                Settings.NumberOfQuestions = Settings.DefaultNumberOfQuestions;
+                PlayCustomGame();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
@@ -79,7 +77,94 @@ public abstract class Game(ResultKeeper resultKeeper)
 
         GameOverPresentation(result);
     }
-    
+
+    private static void GameCountDown()
+    {
+        Console.CursorVisible = false;
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Three);
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Two);
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.One);
+        Thread.Sleep(1000);
+
+        ConsoleHelperMethods.PrintTitle(StylizedTitles.Go);
+
+        Console.CursorVisible = true;
+    }
+
+    private GameResult GameLogic(int nrOfQuestions, bool timed)
+    {
+        var score = 0;
+        var generator = new Random();
+        var start = DateTime.Now;
+
+        for (int i = 0; i < nrOfQuestions; i++)
+        {
+            score += ProcessQuestion(timed, generator);
+        }
+
+        return timed ? new GameResult(score, TimeNeeded: DateTime.Now - start) : new GameResult(score);
+    }
+
+    private int ProcessQuestion(bool timed, Random generator)
+    {
+        int scoreIncrement = 0;
+        var isAnswerCorrect = false;
+
+        while (!isAnswerCorrect)
+        {
+            var operatorSwitch = new OperatorSwitch(Settings.GameType);
+            var (a, b) = GenerateNumbers(generator, operatorSwitch);
+
+            var startPosition = Console.GetCursorPosition();
+            Console.Write($"\t{a} {operatorSwitch.Operator} {b} = ");
+            var endPosition = Console.GetCursorPosition();
+
+            var answer = ConsoleHelperMethods.ReadUserInteger();
+
+            if (operatorSwitch.OperatorConditionDelegate(a, b, answer))
+            {
+                isAnswerCorrect = true;
+                scoreIncrement = 1;
+            }
+            else if (timed)
+            {
+                ClearAnswer(startPosition, endPosition, answer);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return scoreIncrement;
+    }
+
+    private (int a, int b) GenerateNumbers(Random generator, OperatorSwitch operatorSwitch)
+    {
+        var lower = Settings.NumberLimits.Lower;
+        var upper = Settings.NumberLimits.Upper;
+
+        int a, b;
+        do
+        {
+            a = generator.Next(lower, upper);
+            b = generator.Next(lower, upper);
+        } while (operatorSwitch.NumberGeneratorConditionDelegate(a, b));
+
+        return (a, b);
+    }
+
+    private static void ClearAnswer((int Left, int Top) startPosition, (int Left, int Top) endPosition, int answer)
+    {
+        var length = (endPosition.Left - startPosition.Left + answer.ToString().Length);
+        ConsoleHelperMethods.ClearInputFromPosition((startPosition.Left, startPosition.Top), new string(' ', length));
+    }
+
     private static void GameOverPresentation(GameResult gameResult)
     {
         Console.WriteLine();
@@ -87,7 +172,9 @@ public abstract class Game(ResultKeeper resultKeeper)
         PrintScore(gameResult);
 
         if (gameResult.TimeNeeded.HasValue)
+        {
             Console.Write($"\tTime: {gameResult.TimeNeeded:mm\\:ss\\.fff}");
+        }
 
         Console.Write("\t\t\t. . . Press any key to go back.");
         _ = Console.ReadKey();
@@ -116,6 +203,13 @@ public abstract class Game(ResultKeeper resultKeeper)
                 break;
         }
     }
+    
+    private void PlayCustomGame()
+    {
+        SetNumberOfQuestions();
+        PlayGame();
+        Settings.NumberOfQuestions = Settings.DefaultNumberOfQuestions;
+    }
 
     private void SetNumberOfQuestions()
     {
@@ -137,54 +231,5 @@ public abstract class Game(ResultKeeper resultKeeper)
             Settings.NumberOfQuestions = numberOfQuestions;
             break;
         }
-    }
-
-    private static void GameCountDown()
-    {
-        Console.CursorVisible = false;
-
-        ConsoleHelperMethods.PrintTitle(StylizedTitles.Three);
-        Thread.Sleep(1000);
-
-        ConsoleHelperMethods.PrintTitle(StylizedTitles.Two);
-        Thread.Sleep(1000);
-
-        ConsoleHelperMethods.PrintTitle(StylizedTitles.One);
-        Thread.Sleep(1000);
-
-        ConsoleHelperMethods.PrintTitle(StylizedTitles.Go);
-
-        Console.CursorVisible = true;
-    }
-
-    private GameResult GameLogic(int nrOfQuestions, bool timed)
-    {
-        var score = 0;
-        var generator = new Random();
-        var lower = Settings.NumberLimits.Lower;
-        var upper = Settings.NumberLimits.Upper;
-
-        var start = DateTime.Now;
-        for (int i = 0; i < nrOfQuestions; i++)
-        {
-            var operatorSwitch = new OperatorSwitch(Settings.GameType);
-
-            int a, b;
-            do
-            {
-                a = generator.Next(lower, upper);
-                b = generator.Next(lower, upper);
-            } while (operatorSwitch.NumberGeneratorConditionDelegate(a, b));
-
-            Console.Write($"\t{a} {operatorSwitch.Operator} {b} = ");
-
-            var c = ConsoleHelperMethods.ReadUserInteger();
-
-            if (operatorSwitch.OperatorConditionDelegate(a, b, c))
-                score++;
-        }
-        var stop = DateTime.Now;
-
-        return timed ? new GameResult(score, TimeNeeded: stop - start) : new GameResult(score);
     }
 }

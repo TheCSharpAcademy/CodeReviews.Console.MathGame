@@ -16,14 +16,6 @@ public record GameResult(int Score, TimeSpan? TimeNeeded = null)
 
     public double PercentageScore => 100.0 * Score / NumberOfQuestions;
 
-    public void SaveGameSettings(Settings settings)
-    {
-        GameType = settings.GameType;
-        Difficulty = settings.Difficulty;
-        Mode = settings.Mode;
-        NumberOfQuestions = settings.NumberOfQuestions;
-    }
-
     //TODO: Fix column width/spacing
     public static void PrintResultRowHeaders()
     {
@@ -41,9 +33,20 @@ public record GameResult(int Score, TimeSpan? TimeNeeded = null)
         Console.Write($"{result.Mode,-15}");
         Console.Write($"{result.Difficulty,-15}");
         Console.Write($"{score,-15}");
+
         if (result.TimeNeeded.HasValue)
+        {
             Console.Write($"{timeNeeded,-15}");
+        }
 
         Console.WriteLine();
+    }
+    
+    public void SaveGameSettings(Settings settings)
+    {
+        GameType = settings.GameType;
+        Difficulty = settings.Difficulty;
+        Mode = settings.Mode;
+        NumberOfQuestions = settings.NumberOfQuestions;
     }
 }

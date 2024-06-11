@@ -13,9 +13,8 @@ public class Addition : Game
     {
         while (!Quit)
         {
-            PrintMenu(StylizedTitles.Addition,
-                "Each question will be an addition problem of two terms.");
-            
+            PrintMenu(StylizedTitles.Addition, "Each question will be an addition problem of two terms.");
+
             ReadAndRouteUserSelection();
         }
     }

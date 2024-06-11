@@ -1,4 +1,4 @@
-﻿using MathGame.Kriz_J.Games;
+﻿ using MathGame.Kriz_J.Games;
 
 namespace MathGame.Kriz_J;
 
@@ -42,9 +42,7 @@ public class MainMenu
                 ShowHighScore();
                 break;
             case 'Q':
-                var response = ConsoleHelperMethods.PrintMessageAwaitResponse("Do you really want to quit? [N] to stay.");
-                if (response == 'N')
-                    Selection = '\0';
+                ConfirmQuit();
                 break;
             default:
                 _ = ConsoleHelperMethods.PrintMessageAwaitResponse("Not a valid selection. Press any key . . .");
@@ -79,5 +77,14 @@ public class MainMenu
         ConsoleHelperMethods.PrintTitle(StylizedTitles.HighScore);
         _resultKeeper.PrintHighScore();
         _ = ConsoleHelperMethods.PrintMessageAwaitResponse(". . . Press any key to go back.");
+    }
+
+    private void ConfirmQuit()
+    {
+        var response = ConsoleHelperMethods.PrintMessageAwaitResponse("Do you really want to quit? [N] to stay.");
+        if (response == 'N')
+        {
+            Selection = '\0';
+        }
     }
 }

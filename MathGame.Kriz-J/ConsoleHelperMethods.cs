@@ -1,4 +1,6 @@
-﻿namespace MathGame.Kriz_J;
+﻿using System.Numerics;
+
+namespace MathGame.Kriz_J;
 
 public class ConsoleHelperMethods
 {
@@ -16,23 +18,12 @@ public class ConsoleHelperMethods
         Console.CursorVisible = false;
         return ReadUserSelection();
     }
-
-    public static void ClearInputAndDisplayError((int Left, int Top) cursorPosition, string input, string errorMessage)
+    
+    public static char ReadUserSelection()
     {
-        ClearInputFromPosition(cursorPosition, input);
-        PrintError(errorMessage);
-        Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+        return char.ToUpper(Console.ReadKey(intercept: true).KeyChar);
     }
-
-    private static void PrintError(string message)
-    {
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.BackgroundColor = ConsoleColor.DarkRed;
-        Console.Write($"{message}");
-        Console.ResetColor();
-    }
-
+    
     public static int ReadUserInteger()
     {
         while (true)
@@ -49,16 +40,27 @@ public class ConsoleHelperMethods
         }
     }
 
-    private static void ClearInputFromPosition((int Left, int Top) position, string input)
+    public static void ClearInputFromPosition((int Left, int Top) position, string input)
     {
         Console.SetCursorPosition(position.Left, position.Top);
         Console.Write(new string(' ', input.Length));
         Console.SetCursorPosition(position.Left, position.Top);
     }
 
-    public static char ReadUserSelection()
+    public static void ClearInputAndDisplayError((int Left, int Top) cursorPosition, string input, string errorMessage)
     {
-        return char.ToUpper(Console.ReadKey(intercept: true).KeyChar);
+        ClearInputFromPosition(cursorPosition, input);
+        PrintError(errorMessage);
+        Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+    }
+
+    private static void PrintError(string message)
+    {
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.BackgroundColor = ConsoleColor.DarkRed;
+        Console.Write($"{message}");
+        Console.ResetColor();
     }
 
     public static void FormatWriteLineWithHighlight(string before, string highlight, string after)

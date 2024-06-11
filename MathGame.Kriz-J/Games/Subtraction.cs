@@ -13,8 +13,7 @@ public class Subtraction : Game
     {
         while (!Quit)
         {
-            PrintMenu(StylizedTitles.Subtraction,
-                "Each question will be a subtraction problem between two terms.");
+            PrintMenu(StylizedTitles.Subtraction, "Each question will be a subtraction problem between two terms.");
 
             ReadAndRouteUserSelection();
         }
