@@ -5,19 +5,19 @@ using System.Runtime.InteropServices;
 
 //Math Game completed including difficulty level challenge
 
-string  menuSelection = "";
+string menuSelection = "";
 string? inputResult;
 int userResponse = 0;
 int firstNum = 0;
 int seconNum = 0;
-
+int operationResult = 0;
+string operationSymbol = string.Empty;
 string gameLevelSelected = "";
+bool operationCompleted = false;
 
 Random rd = new Random();
 
 var prevGamesList = new List<string>();
-
-// Difficulty level menu
 do
 {
     Console.Clear();
@@ -30,13 +30,11 @@ do
     inputResult = Console.ReadLine();
     if (inputResult != null)
     {
-
         if (inputResult == "1")
         {
             gameLevelSelected = "1";
             break;
         }
-           
         else if (inputResult == "2")
         {
             gameLevelSelected = "2";
@@ -47,14 +45,10 @@ do
             gameLevelSelected = "3";
             break;
         }
-
     }
-
-
 } while (true);
 
-
-//display Main menu for operations selection
+SetNumbersDifficultyLevel(gameLevelSelected);
 do
 {
     Console.Clear();
@@ -65,25 +59,30 @@ do
     Console.WriteLine("4. Division");
     Console.WriteLine("5. See Previous Games");
     Console.WriteLine("6. To exit program");
- 
+
     inputResult = Console.ReadLine();
     if (inputResult != null)
     {
         menuSelection = inputResult;
     }
-    switch(menuSelection)
+    switch (menuSelection)
     {
         case "1":
             Addition();
+            operationCompleted = true;
             break;
         case "2":
             Substraction();
+            operationCompleted = true;
             break;
         case "3":
             Multiplication();
+            operationCompleted = true;
             break;
         case "4":
+            SetDivisionDifficultyLevel(gameLevelSelected);
             Division();
+            operationCompleted = true;
             break;
         case "5":
             Console.Clear();
@@ -105,10 +104,82 @@ do
             break;
         default:
             break;
-
     }
-
+    if (operationCompleted)
+    {
+        OperationLoop();
+        operationCompleted = false;
+    }
 } while (menuSelection != "6");
+
+void ClearPreviousLine()
+{
+    Console.SetCursorPosition(0, Console.CursorTop - 1);
+    Console.Write(new string(' ', Console.BufferWidth));
+    Console.SetCursorPosition(0, Console.CursorTop);
+}
+void Addition()
+{
+    Console.WriteLine("Please provide the result of the addition below: ");
+    operationResult = firstNum + seconNum;
+    operationSymbol = "+";
+}
+void Substraction()
+{
+    Console.WriteLine("Please provide the result of the substraction below: ");
+    operationResult = firstNum - seconNum;
+    operationSymbol = "-";
+}
+void Multiplication()
+{
+    Console.WriteLine("Please provide the result of the division below: ");
+    operationResult = firstNum * seconNum;
+    operationSymbol = "x";
+}
+void Division()
+{
+    Console.WriteLine("Please provide the result of the division below: ");
+    operationResult = firstNum / seconNum;
+    operationSymbol = "/";
+}
+void OperationLoop()
+{
+    bool validEntry = false;
+    Console.Clear();
+
+    Console.WriteLine($"{firstNum} {operationSymbol} {seconNum}");
+    do//loop through the inputs 
+    {
+        inputResult = Console.ReadLine();
+        if (inputResult != null)
+        {
+            validEntry = int.TryParse(inputResult, out userResponse);
+            ClearPreviousLine();//clear last entry
+            if (validEntry)
+            {
+                string result = "";
+                if (userResponse == (operationResult))
+                {
+                    result = $"{firstNum} {operationSymbol} {seconNum} = {operationResult} Great answer !!";
+                    Console.WriteLine(result);
+                    prevGamesList.Add(result);
+                }
+                else
+                {
+                    result = $"{firstNum} {operationSymbol} {seconNum} = {userResponse} Wrong answer !!";
+                    Console.WriteLine(result);
+                    prevGamesList.Add(result);
+                }
+                Console.WriteLine("\nPress Enter Key to continue");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Try again with numbers only & press Enter");
+            }
+        }
+    } while (validEntry == false);
+}
 
 void SetNumbersDifficultyLevel(string level)
 {
@@ -137,8 +208,8 @@ void SetDivisionDifficultyLevel(string level)
         {
             seconNum = rd.Next(101);
             if (firstNum % seconNum == 0)
-                break;
-        }      
+               break;
+        }
     }
     else if (level == "2")
     {
@@ -149,7 +220,6 @@ void SetDivisionDifficultyLevel(string level)
             if (firstNum % seconNum == 0)
                 break;
         }
- 
     }
     else if (level == "3")
     {
@@ -161,202 +231,4 @@ void SetDivisionDifficultyLevel(string level)
                 break;
         }
     }
-}
-
-void Addition( )
-{
-
-
-
-    bool validEntry = false;
-    SetNumbersDifficultyLevel(gameLevelSelected);
-
-    Console.Clear();
-    Console.WriteLine("Please provide the result of the addition below: ");
-
-    Console.WriteLine($"{firstNum} + {seconNum}");
-
-    do//loop through the inputs 
-    {
-        inputResult = Console.ReadLine();
-        if (inputResult != null)
-        {
-            validEntry = int.TryParse(inputResult, out userResponse);
-
-            ClearPreviousLine();//clear last entry
-            if (validEntry)
-            {
-                string result = "";
-                if (userResponse == (firstNum + seconNum))
-                {
-                    result = $"{firstNum} + {seconNum} = {firstNum + seconNum} Great answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                else
-                {
-                    result = $"{firstNum} + {seconNum} = {userResponse} Wrong answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                Console.WriteLine("\nPress Enter Key to continue");
-                Console.ReadKey();
-
-            }
-
-            else
-            {            
-                Console.WriteLine("Try again with numbers only & press Enter");
-            }
-
-        }
-
-
-
-    } while (validEntry == false);
-
-}
-
-void Substraction()
-{
-    bool validEntry = false;
-    SetNumbersDifficultyLevel(gameLevelSelected);
-
-    Console.Clear();
-    Console.WriteLine("Please provide the result of the substraction below: ");
-    Console.WriteLine($"{firstNum} - {seconNum}");
-
-    do//loop through the inputs 
-    {
-        inputResult = Console.ReadLine();
-        if (inputResult != null)
-        {   
-            validEntry = int.TryParse(inputResult, out userResponse);
-
-            ClearPreviousLine();//clear last entry
-            if (validEntry)
-            {
-                string result = "";
-                if (userResponse == (firstNum - seconNum))
-                {
-                    result = $"{firstNum} - {seconNum} = {firstNum - seconNum} Great answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                else
-                {
-                    result = $"{firstNum} - {seconNum} = {userResponse} Wrong answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                Console.WriteLine("\nPress Enter Key to continue");
-                Console.ReadKey();
-
-            }
-
-            else
-            {
-                Console.WriteLine("Try again with numbers only & press Enter");
-            }
-
-        }
-
-    } while (validEntry == false) ;
-
-}
-void Multiplication()
-{
-    bool validEntry = false;
-    SetNumbersDifficultyLevel(gameLevelSelected);
-
-    Console.Clear();
-    Console.WriteLine("Please provide the result of the multiplication below: ");
-    Console.WriteLine($"{firstNum} x {seconNum}");
-    do//loop through the inputs 
-    {
-        inputResult = Console.ReadLine();
-        if (inputResult != null)
-        {
-            validEntry = int.TryParse(inputResult, out userResponse);
-
-            ClearPreviousLine();//clear last entry
-            if (validEntry)
-            {
-                string result = "";
-                if (userResponse == (firstNum * seconNum))
-                {
-                    result = $"{firstNum} x {seconNum} = {firstNum * seconNum} Great answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                else
-                {
-                    result = $"{firstNum} x {seconNum} = {userResponse} Wrong answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                Console.WriteLine("\nPress Enter Key to continue");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("Try again with numbers only & press Enter");
-            }
-        }
-
-    } while (validEntry == false);
-
-}
-void Division()
-{
-    bool validEntry = false;
-    SetDivisionDifficultyLevel(gameLevelSelected);
-
-    Console.Clear();
-    Console.WriteLine("Please provide the result of the division below: ");
-    Console.WriteLine($"{firstNum} / {seconNum}");
-
-    //Get user input 
-    do
-    {
-        inputResult = Console.ReadLine();
-        if (inputResult != null)
-        {
-            validEntry = int.TryParse(inputResult, out userResponse);
-
-            ClearPreviousLine();//clear last entry
-            if (validEntry)
-            {
-                string result = "";
-                if (userResponse == (firstNum/seconNum))
-                {
-                    result = $"{firstNum} / {seconNum} = {firstNum/seconNum} Great answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-                }
-                else
-                {
-
-                    result = $"{firstNum} / {seconNum} = {userResponse} Wrong answer !!";
-                    Console.WriteLine(result);
-                    prevGamesList.Add(result);
-
-                }
-                Console.WriteLine("\nPress Enter Key to continue");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("Try again with numbers only & press Enter");
-            }
-        }
-
-    } while (validEntry == false);
-
-}
-void ClearPreviousLine()
-{
-    Console.SetCursorPosition(0, Console.CursorTop - 1);
-    Console.Write(new string(' ', Console.BufferWidth));
-    Console.SetCursorPosition(0, Console.CursorTop);
 }
