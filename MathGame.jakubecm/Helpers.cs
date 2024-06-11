@@ -1,9 +1,4 @@
 ﻿using MathGame.jakubecm.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathGame.jakubecm
 {
@@ -68,15 +63,49 @@ namespace MathGame.jakubecm
             Console.ReadLine();
         }
 
-        internal static string? ValidateResult(string result)
+        internal static string ValidateResult(string? result)
         {
-            while (string.IsNullOrEmpty(result) || Int32.TryParse(result, out _)
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
             {
-                Console.WriteLine("Invalid input. Try again.");
+                Console.WriteLine("Your answer needs to be an integer. Try again.");
                 result = Console.ReadLine();
             }
 
             return result;
+        }
+
+        internal static string GetGameOperator(GameType gameType)
+        {
+            switch (gameType)
+            {
+                case GameType.Addition:
+                    return "+";
+                case GameType.Multiplication:
+                    return "*";
+                case GameType.Division:
+                    return "/";
+                case GameType.Subtraction:
+                    return "-";
+                default:
+                    throw new InvalidDataException("Invalid game type");
+            }
+        }
+
+        internal static int GetOperationResult(string currentGameOperator, int num1, int num2)
+        {
+            switch (currentGameOperator)
+            {
+                case "+":
+                    return num1+num2;
+                case "*":
+                    return num1*num2;
+                case "-":
+                    return num1-num2;
+                case "/":
+                    return num1 / num2;
+                default:
+                    throw new InvalidDataException("Invalid operator");
+            }
         }
     }
 }

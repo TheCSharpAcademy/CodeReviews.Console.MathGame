@@ -4,12 +4,14 @@ namespace MathGame.jakubecm
 {
     internal class GameEngine
     {
-        internal void AdditionGame(string message)
+
+        internal void Game(string message, GameType gameType) 
         {
             var random = new Random();
             var score = 0;
             int firstNumber;
             int secondNumber;
+            string currentGameOperator = Helpers.GetGameOperator(gameType);
 
             for (int i = 0; i < 5; i++)
             {
@@ -19,11 +21,18 @@ namespace MathGame.jakubecm
                 firstNumber = random.Next(1, 9);
                 secondNumber = random.Next(1, 9);
 
-                Console.WriteLine($"{firstNumber} + {secondNumber}");
+                if (currentGameOperator == "/")
+                {
+                    var divisionNumbers = Helpers.GetDivisionNumbers();
+                    firstNumber = divisionNumbers[0];
+                    secondNumber = divisionNumbers[1];
+                }
+
+                Console.WriteLine($"{firstNumber} {currentGameOperator} {secondNumber}");
                 var result = Console.ReadLine();
                 result = Helpers.ValidateResult(result);
 
-                if (int.Parse(result!) == firstNumber + secondNumber)
+                if (int.Parse(result!) == Helpers.GetOperationResult(currentGameOperator, firstNumber, secondNumber))
                 {
                     score++;
                     Console.WriteLine("Your answer was correct! Type any key for the next question.");
@@ -36,115 +45,8 @@ namespace MathGame.jakubecm
                 }
             }
             Console.WriteLine($"Game over. Your final score is {score}");
-            Helpers.AddToHistory(score, GameType.Addition);
+            Helpers.AddToHistory(score, gameType);
 
-        }
-
-        internal void SubtractionGame(string message)
-        {
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.Clear();
-                Console.WriteLine(message);
-
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
-
-                Console.WriteLine($"{firstNumber} - {secondNumber}");
-                var result = Console.ReadLine();
-                result = Helpers.ValidateResult(result);
-
-                if (int.Parse(result!) == firstNumber - secondNumber)
-                {
-                    score++;
-                    Console.WriteLine("Your answer was correct! Type any key for the next question.");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("Your answer was incorrect. Type any key for the next question.");
-                    Console.ReadLine();
-                }
-            }
-            Console.WriteLine($"Game over. Your final score is {score}");
-            Helpers.AddToHistory(score, GameType.Subtraction);
-        }
-
-        internal void MultiplicationGame(string message)
-        {
-            var random = new Random();
-            var score = 0;
-            int firstNumber;
-            int secondNumber;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.Clear();
-                Console.WriteLine(message);
-
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
-
-                Console.WriteLine($"{firstNumber} * {secondNumber}");
-                var result = Console.ReadLine();
-                result = Helpers.ValidateResult(result);
-
-                if (int.Parse(result!) == firstNumber * secondNumber)
-                {
-                    score++;
-                    Console.WriteLine("Your answer was correct! Type any key for the next question.");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("Your answer was incorrect. Type any key for the next question.");
-                    Console.ReadLine();
-                }
-            }
-            Console.WriteLine($"Game over. Your final score is {score}");
-            Helpers.AddToHistory(score, GameType.Multiplication);
-        }
-
-        internal void DivisionGame(string message)
-        {
-
-            var score = 0;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.Clear();
-                Console.WriteLine(message);
-
-                var divisionNumbers = Helpers.GetDivisionNumbers();
-                var firstNumber = divisionNumbers[0];
-                var secondNumber = divisionNumbers[1];
-
-                Console.WriteLine($"{firstNumber} / {secondNumber}");
-                var result = Console.ReadLine();
-                result = Helpers.ValidateResult(result);
-
-
-
-                if (int.Parse(result!) == firstNumber / secondNumber)
-                {
-                    score++;
-                    Console.WriteLine("Your answer was correct! Type any key for the next question.");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("Your answer was incorrect. Type any key for the next question.");
-                    Console.ReadLine();
-                }
-            }
-
-            Console.WriteLine($"Game over. Your final score is {score}");
-            Helpers.AddToHistory(score, GameType.Division);
         }
     }
 }

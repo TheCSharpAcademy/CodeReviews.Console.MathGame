@@ -1,4 +1,6 @@
-﻿namespace MathGame.jakubecm
+﻿using MathGame.jakubecm.Models;
+
+namespace MathGame.jakubecm
 {
     internal class Menu
     {
@@ -14,29 +16,29 @@
                 Console.WriteLine("Press any key to show menu");
                 Console.ReadLine();
                 Console.Write(@"Choose game from the options bellow:
-        A - Addition
-        S - Subtraction
-        M - Multiplication
-        D - Division
-        V - View Previous Games
-        Q - Quit the program
-        Selected action:  ");
+                A - Addition
+                S - Subtraction
+                M - Multiplication
+                D - Division
+                V - View Previous Games
+                Q - Quit the program
+                Selected action:  ");
 
                 var selectedGame = Console.ReadLine();
 
                 switch (selectedGame?.Trim().ToLower())
                 {
                     case "a":
-                        gameEngine.AdditionGame("Addition game");
+                        gameEngine.Game("Addition game", GameType.Addition);
                         break;
                     case "s":
-                        gameEngine.SubtractionGame("S game");
+                        gameEngine.Game("Subtraction game", GameType.Subtraction);
                         break;
                     case "m":
-                        gameEngine.MultiplicationGame("M game");
+                        gameEngine.Game("Multiplication game", GameType.Multiplication);
                         break;
                     case "d":
-                        gameEngine.DivisionGame("D game");
+                        gameEngine.Game("Division game", GameType.Division);
                         break;
                     case "v":
                         Helpers.PrintGames();
