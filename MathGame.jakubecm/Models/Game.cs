@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace MathGame.jakubecm.Models;
+﻿namespace MathGame.jakubecm.Models;
 
 internal class Game
 {
