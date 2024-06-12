@@ -11,9 +11,10 @@ namespace MathGame.jakubecm
             var score = 0;
             int firstNumber;
             int secondNumber;
+            int questionAmount = Helpers.GetQuestionAmount();
             string currentGameOperator = Helpers.GetGameOperator(gameType);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < questionAmount; i++)
             {
                 Console.Clear();
                 Console.WriteLine(message);

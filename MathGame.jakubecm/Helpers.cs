@@ -107,5 +107,43 @@ namespace MathGame.jakubecm
                     throw new InvalidDataException("Invalid operator");
             }
         }
+
+        internal static int GetQuestionAmount()
+        {
+            Console.Clear();
+            Console.WriteLine("How many questions would you like?\n Insert a number or press enter to keep the default value (5)");
+            Console.Write("Your answer: ");
+
+            bool validInput = false;
+            int defaultAmount = 5;
+            int questionAmount = 0; // default value
+
+            while (!validInput)
+            {
+                var userInput = Console.ReadLine();
+                validInput = int.TryParse(userInput, out questionAmount);
+
+                if (String.IsNullOrEmpty(userInput))
+                {
+                    return defaultAmount; 
+                }
+                else if(validInput)
+                {
+                    if (questionAmount <= 0)
+                    {
+                        validInput = false;
+                        Console.WriteLine("Invalid input. Amount of questions must be higher than 0.");
+                        Console.Write("Your answer: ");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. You need to insert a number.");
+                    Console.Write("Your answer: ");
+                }
+            }
+
+            return questionAmount;
+        }
     }
 }
