@@ -26,13 +26,14 @@ namespace MathGame.jakubecm
             return result;
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType, TimeSpan elapsedTime)
         {
             games.Add(new Game
             {
                 Date = DateTime.Now,
                 Score = gameScore,
-                Type = gameType
+                Type = gameType,
+                Time = elapsedTime
             });
         }
 
@@ -56,7 +57,7 @@ namespace MathGame.jakubecm
             Console.WriteLine("---------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} pts");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} pts Time: {game.Time.ToString(@"hh\:mm\:ss")}");
             }
             Console.WriteLine("---------------------");
             Console.WriteLine("Press any key to return to the Main Menu");

@@ -1,4 +1,5 @@
 ﻿using MathGame.jakubecm.Models;
+using System.Diagnostics;
 
 namespace MathGame.jakubecm
 {
@@ -13,9 +14,11 @@ namespace MathGame.jakubecm
             int secondNumber;
             int questionAmount = Helpers.GetQuestionAmount();
             string currentGameOperator = Helpers.GetGameOperator(gameType);
+            Stopwatch stopWatch = new Stopwatch();
 
             for (int i = 0; i < questionAmount; i++)
             {
+                stopWatch.Start();
                 Console.Clear();
                 Console.WriteLine(message);
 
@@ -45,9 +48,10 @@ namespace MathGame.jakubecm
                     Console.ReadLine();
                 }
             }
-            Console.WriteLine($"Game over. Your final score is {score}");
-            Helpers.AddToHistory(score, gameType);
-
+            stopWatch.Stop();
+            Console.WriteLine($"Game over. Your final score is {score}. Press any key to return to menu.");
+            Console.ReadLine();
+            Helpers.AddToHistory(score, gameType, stopWatch.Elapsed);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MathGame.jakubecm
             do
             {
                 Console.Clear();
-                Console.WriteLine($"\nCurrent player: {playerName}");
+                Console.WriteLine($"Welcome to the Math game!\nCurrent player: {playerName}");
                 Console.WriteLine("Press any key to show menu");
                 Console.ReadLine();
                 Console.Write(@"Choose game from the options bellow:
