@@ -20,6 +20,7 @@ namespace MathGame.jakubecm
                 S - Subtraction
                 M - Multiplication
                 D - Division
+                R - Random Game (mix of operations)
                 V - View Previous Games
                 Q - Quit the program
                 Selected action:  ");
@@ -39,6 +40,9 @@ namespace MathGame.jakubecm
                         break;
                     case "d":
                         gameEngine.Game("Division game", GameType.Division);
+                        break;
+                    case "r":
+                        gameEngine.Game("Random game", GameType.Random);
                         break;
                     case "v":
                         Helpers.PrintGames();

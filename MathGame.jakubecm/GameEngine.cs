@@ -47,11 +47,16 @@ namespace MathGame.jakubecm
                     Console.WriteLine("Your answer was incorrect. Type any key for the next question.");
                     Console.ReadLine();
                 }
+
+                if(gameType == GameType.Random)
+                {
+                    currentGameOperator = Helpers.GetRandomGameOperator();
+                }
             }
             stopWatch.Stop();
-            Console.WriteLine($"Game over. Your final score is {score}. Press any key to return to menu.");
+            Console.WriteLine($"Game over. Your final score is {score}/{questionAmount}. Press any key to return to menu.");
             Console.ReadLine();
-            Helpers.AddToHistory(score, gameType, stopWatch.Elapsed);
+            Helpers.AddToHistory(score, questionAmount, gameType, stopWatch.Elapsed);
         }
     }
 }

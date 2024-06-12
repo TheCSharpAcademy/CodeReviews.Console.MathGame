@@ -26,12 +26,13 @@ namespace MathGame.jakubecm
             return result;
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType, TimeSpan elapsedTime)
+        internal static void AddToHistory(int gameScore, int maxScore, GameType gameType, TimeSpan elapsedTime)
         {
             games.Add(new Game
             {
                 Date = DateTime.Now,
                 Score = gameScore,
+                MaxScore = maxScore,
                 Type = gameType,
                 Time = elapsedTime
             });
@@ -57,7 +58,7 @@ namespace MathGame.jakubecm
             Console.WriteLine("---------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score} pts Time: {game.Time.ToString(@"hh\:mm\:ss")}");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}/{game.MaxScore} pts Time: {game.Time.ToString(@"hh\:mm\:ss")}");
             }
             Console.WriteLine("---------------------");
             Console.WriteLine("Press any key to return to the Main Menu");
@@ -87,9 +88,21 @@ namespace MathGame.jakubecm
                     return "/";
                 case GameType.Subtraction:
                     return "-";
+                case GameType.Random:
+                    string randomOperator = GetRandomGameOperator();
+                    return randomOperator;
                 default:
                     throw new InvalidDataException("Invalid game type");
             }
+        }
+
+        internal static string GetRandomGameOperator()
+        {
+            string[] operatorsPool = { "+", "-", "*", "/" };
+            Random dice = new();
+            int index = dice.Next(operatorsPool.Length);
+
+            return operatorsPool[index];
         }
 
         internal static int GetOperationResult(string currentGameOperator, int num1, int num2)
