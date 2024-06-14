@@ -1,6 +1,4 @@
-﻿using mathGame.mtmattei;
-
-namespace mathGame.mtmattei
+﻿namespace mathGame.mtmattei
 {
     internal class Menu
     {

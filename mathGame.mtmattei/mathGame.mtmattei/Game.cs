@@ -17,16 +17,3 @@ internal enum GameType
     Multiplication,
     Divsion
 }
-
-
-
-
-
-
-/*private int _score;
-
-public int Score
-{
-    get { return _score; }
-    set { _score = value; }
-}*/

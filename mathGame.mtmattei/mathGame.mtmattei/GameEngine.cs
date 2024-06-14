@@ -1,5 +1,4 @@
-﻿using mathGame.mtmattei;
-using mathGame.mtmattei.Models;
+﻿using mathGame.mtmattei.Models;
 using System.Security.AccessControl;
 
 namespace mathGame.mtmattei
@@ -22,8 +21,6 @@ namespace mathGame.mtmattei
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
 
                 var result = Console.ReadLine();
-
-                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber / secondNumber)
                 {
