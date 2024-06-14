@@ -59,8 +59,6 @@ namespace mathGame.mtmattei
 
                 var result = Console.ReadLine();
 
-                result = Helpers.ValidateResult(result); ;
-
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
                     Console.WriteLine("your answer was correct.Type any key for the next question");
