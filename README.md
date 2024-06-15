@@ -1,15 +1,17 @@
-## MathGame
+# MathGame
+
+## Overview
+
+MathGame is a simple console application written in C# that helps 
+users practice basic
+arithmetic operations: addition, subtraction, multiplication, and division. The game
+presents random math problems and checks the user's answers, 
+providing immediate feedback.
+Additionally, it maintains a history of past games for review.
 
 Repository created to make the project
 [MathGame](https://thecsharpacademy.com/project/53/math-game) from
 [The C# Academy](https://thecsharpacademy.com/)
-
-## Overview
-
-MathGame is a simple console application written in C# that helps users practice basic
-arithmetic operations: addition, subtraction, multiplication, and division. The game
-presents random math problems and checks the user's answers, providing immediate feedback.
-Additionally, it maintains a history of past games for review.
 
 ## Features
 
