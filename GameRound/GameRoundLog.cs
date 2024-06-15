@@ -5,13 +5,13 @@ class GameRoundLog
 
     public double timeTaken;
 
-    public Difficulty difficulty { get; }
+    public Difficulty difficulty;
 
     public int score
     {
         get
         {
-            return problemLogs.Sum((log) => log.score); ;
+            return problemLogs.Sum((log) => log.score);
         }
     }
 

@@ -32,7 +32,7 @@ class GameRound
 
         int userResponse = Util.ReadNumericalInput();
 
-        return new ProblemLog(op, [num1, num2], userResponse, userResponse == expectedResponse ? (int)GameConfig.difficulty : 0, GameConfig.difficulty);
+        return new ProblemLog(op, [num1, num2], userResponse, userResponse == expectedResponse ? (int)GameConfig.difficulty : 0);
     }
 
 
