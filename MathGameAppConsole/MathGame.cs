@@ -90,13 +90,10 @@ public class MathGame
                 ShowHistoryGame(gameHistory);
                 Console.WriteLine("\nDo you want to play again? (y/n)");
                 playAgainResponse = Console.ReadLine();
-                //continue;
             }
 
             again = playAgainResponse.ToLower() == "y";
         }
-        Console.WriteLine("Thanks for playing MathGame!");
-        Console.ReadLine();
     }
 
 	private void ShowHistoryGame(List<string> gameHistory)
