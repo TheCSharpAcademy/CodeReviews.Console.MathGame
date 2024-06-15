@@ -16,7 +16,7 @@ class Util
     private static void PrintRoundLog(GameRoundLog log, int gameNumber)
     {
         Console.WriteLine($"Game {gameNumber}");
-        Console.WriteLine($"\tScore:\t{log.score}");
+        Console.WriteLine($"\tScore:\t{log.Score}");
         Console.WriteLine($"\tTime taken\t{log.timeTaken}");
         Console.WriteLine($"\tDifficulty: {log.difficulty}");
 

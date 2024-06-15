@@ -20,7 +20,7 @@ class GameRound
 
         GameRoundLog roundLog = new(probemLogs, elapsedTime.TotalSeconds, GameConfig.difficulty);
 
-        Console.WriteLine($"\nScore: {roundLog.score}, Time taken: {roundLog.timeTaken} seconds");
+        Console.WriteLine($"\nScore: {roundLog.Score}, Time taken: {roundLog.timeTaken} seconds");
 
         return roundLog;
     }

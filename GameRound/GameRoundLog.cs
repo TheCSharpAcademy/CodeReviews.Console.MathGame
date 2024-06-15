@@ -7,7 +7,7 @@ class GameRoundLog
 
     public Difficulty difficulty;
 
-    public int score
+    public int Score
     {
         get
         {
