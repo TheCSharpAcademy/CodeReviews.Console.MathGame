@@ -1,10 +1,15 @@
-# MathGame
+## MathGame
 
-Repository created to make the project [MathGame](https://thecsharpacademy.com/project/53/math-game) from [The C# Academy](https://thecsharpacademy.com/)
+Repository created to make the project
+[MathGame](https://thecsharpacademy.com/project/53/math-game) from
+[The C# Academy](https://thecsharpacademy.com/)
 
 ## Overview
 
-MathGame is a simple console application written in C# that helps users practice basic arithmetic operations: addition, subtraction, multiplication, and division. The game presents random math problems and checks the user's answers, providing immediate feedback. Additionally, it maintains a history of past games for review.
+MathGame is a simple console application written in C# that helps users practice basic
+arithmetic operations: addition, subtraction, multiplication, and division. The game
+presents random math problems and checks the user's answers, providing immediate feedback.
+Additionally, it maintains a history of past games for review.
 
 ## Features
 
@@ -22,17 +27,17 @@ MathGame is a simple console application written in C# that helps users practice
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/BarbosaThaissa/Console.MathGame.git
-    cd MathGame
-    ```
+   ```sh
+   git clone https://github.com/BarbosaThaissa/Console.MathGame.git
+   cd MathGame
+   ```
 
 2. Build and run the application:
 
-    ```sh
-    dotnet build
-    dotnet run
-    ```
+   ```sh
+   dotnet build
+   dotnet run
+   ```
 
 3. Follow the on-screen instructions to play the game.
 
@@ -78,4 +83,3 @@ Do you want to play again? (y/n)
 3. Commit your changes (`git commit -am 'Add new feature'`).
 4. Push to the branch (`git push origin feature-name`).
 5. Create a new Pull Request.
-
