@@ -1,6 +1,4 @@
-﻿using System.Security;
-
-namespace MathGame.Wolfieeex
+﻿namespace MathGame.Wolfieeex
 {
 
     internal class MainMenu
@@ -35,7 +33,7 @@ namespace MathGame.Wolfieeex
         private CurrentScreen currentScreen = CurrentScreen.Main;
         private GameDifficulty gameDifficulty = GameDifficulty.Easy;
         private GameModes gameMode = GameModes.Addition;
-        private int questionsCount = 0;
+        private int questionsCount;
 
         // Main loop that will decide which screen is queued to be displayed:
         internal void MainMenuFunctionality(string? name, DateTime date)

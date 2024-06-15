@@ -69,7 +69,7 @@
                         }
                         else if (isNumber && (inputInt < numberRange[0] || inputInt > numberRange[1]))
                         {
-                            throw new InvalidDataException("Your choice must be in range of 1 and 20: ");
+                            throw new InvalidDataException($"Your choice must be in range of {numberRange[0]} and {numberRange[1]}: ");
                         }
                     }
                     else
