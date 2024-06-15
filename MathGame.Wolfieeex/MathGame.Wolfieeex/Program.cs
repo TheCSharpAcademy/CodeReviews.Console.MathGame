@@ -8,15 +8,18 @@ Console.Write("Please insert your name: ");
 string? name = null;
 DateTime date = DateTime.UtcNow;
 Helpers.ReadInput(ref name, "Don't be shy! Please, introduce yourself: ");
+Console.Write($"\n\r{new string('-', Console.BufferWidth)}");
 name = Char.ToUpper(name[0]) + name.Substring(1);
 
-// Display main menu:
+// Menu toggling functionality (game mode, difficulty and question count selection with option to return to main menu):
 MainMenu menu = new MainMenu();
 menu.MainMenuFunctionality(name, date);
 
-// On program close:
+// On menu exit:
 Console.Clear();
 Console.WriteLine("Thanks for playing the Maths Game! See you soon!\n");
+
+
 
 
 
