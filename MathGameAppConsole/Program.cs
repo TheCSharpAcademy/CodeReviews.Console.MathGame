@@ -1,6 +1,4 @@
-﻿using System;
-
-class MathGameAppConsole
+﻿class MathGameAppConsole
 {
     static void Main()
     {

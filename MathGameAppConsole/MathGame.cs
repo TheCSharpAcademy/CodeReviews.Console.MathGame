@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-
-public class MathGame
+﻿public class MathGame
 {
 	public MathGame()
 	{
