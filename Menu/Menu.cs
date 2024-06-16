@@ -23,11 +23,11 @@ class Menu
     {
         while (true)
         {
-            Console.WriteLine("Enter difficulty (1 - Easy   2 - Medium  3 - Hard):\n");
+            Console.WriteLine("\nEnter difficulty (1 - Easy   2 - Medium  3 - Hard):\n");
 
             int difficulty = Util.ReadNumericalInput();
 
-            if (difficulty > 0 || difficulty < 4)
+            if (difficulty > 0 && difficulty < 4)
             {
                 return (Difficulty)difficulty;
             }
@@ -38,7 +38,7 @@ class Menu
 
     public static int ReadNumQuestionsPerGame()
     {
-        Console.WriteLine("Enter number of questions per game:\n");
+        Console.WriteLine("Enter number of questions per game:\t");
 
         int numberOfQuestions = Util.ReadNumericalInput();
 

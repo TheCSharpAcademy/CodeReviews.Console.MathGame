@@ -62,6 +62,8 @@ class Util
             {
                 return converted;
             }
+
+            Console.WriteLine("\n\tPlease enter a valid number");
         }
     }
 
