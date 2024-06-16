@@ -73,7 +73,7 @@ internal class Helpers
                     bool isNumber = int.TryParse(input, out inputInt);
                     if (!isNumber && !isOnList)
                     {
-                        throw new InvalidDataException($"{notInRangeFailMessage}(Your choice must be a number): ");
+                        throw new InvalidDataException($"{notInRangeFailMessage}(Your choice must be a valid, short number): ");
                     }
                     else if (isNumber && (inputInt < numberRange[0] || inputInt > numberRange[1]))
                     {
@@ -99,5 +99,18 @@ internal class Helpers
                 Helpers.ReinsertLine(ex.Message);
             }
         }
+    }
+
+    public static void DisplayPreviousGames()
+    {
+        Console.Clear();
+        Console.WriteLine("Previous games: ");
+        Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+
+        for (int i = 0; i < 4; i++)
+        {
+            //List<GameInstance> gameInstance = GameInstances.Where(x  => x.Type == 
+        }
+        Console.ReadLine();
     }
 }

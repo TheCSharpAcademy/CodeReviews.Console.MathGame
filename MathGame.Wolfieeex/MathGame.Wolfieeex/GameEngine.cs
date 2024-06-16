@@ -1,34 +1,36 @@
-﻿namespace MathGame.Wolfieeex;
+﻿using MathGame.Wolfieeex.Models;
+
+namespace MathGame.Wolfieeex;
 
 internal class GameEngine
 {
     // Value ranges for all difficulties and game modes:
-    private Dictionary<Tuple<MainMenu.GameModes, MainMenu.GameDifficulty>, int[]> numberRanges = new Dictionary<Tuple<MainMenu.GameModes, MainMenu.GameDifficulty>, int[]>
+    private Dictionary<Tuple<GameModes, GameDifficulty>, int[]> numberRanges = new Dictionary<Tuple<GameModes, GameDifficulty>, int[]>
     {
         // Easy numbers
-        { Tuple.Create(MainMenu.GameModes.Addition, MainMenu.GameDifficulty.Easy), new int[] {1, 100 } },
-        { Tuple.Create(MainMenu.GameModes.Subtraction, MainMenu.GameDifficulty.Easy), new int[] {1, 101 } },
-        { Tuple.Create(MainMenu.GameModes.Multiplication, MainMenu.GameDifficulty.Easy), new int[] {1, 11 } },
-        { Tuple.Create(MainMenu.GameModes.Division, MainMenu.GameDifficulty.Easy), new int[] {1, 101 } },
+        { Tuple.Create(GameModes.Addition, GameDifficulty.Easy), new int[] {1, 100 } },
+        { Tuple.Create(GameModes.Subtraction, GameDifficulty.Easy), new int[] {1, 101 } },
+        { Tuple.Create(GameModes.Multiplication, GameDifficulty.Easy), new int[] {1, 11 } },
+        { Tuple.Create(GameModes.Division, GameDifficulty.Easy), new int[] {1, 101 } },
 
         // Moderate numbers
-        { Tuple.Create(MainMenu.GameModes.Addition, MainMenu.GameDifficulty.Moderate), new int[] {50, 251 } },
-        { Tuple.Create(MainMenu.GameModes.Subtraction, MainMenu.GameDifficulty.Moderate), new int[] {10, 301 } },
-        { Tuple.Create(MainMenu.GameModes.Multiplication, MainMenu.GameDifficulty.Moderate), new int[] {1, 21} },
-        { Tuple.Create(MainMenu.GameModes.Division, MainMenu.GameDifficulty.Moderate), new int[] {3, 201 } },
+        { Tuple.Create(GameModes.Addition, GameDifficulty.Moderate), new int[] {50, 251 } },
+        { Tuple.Create(GameModes.Subtraction, GameDifficulty.Moderate), new int[] {10, 301 } },
+        { Tuple.Create(GameModes.Multiplication, GameDifficulty.Moderate), new int[] {1, 21} },
+        { Tuple.Create(GameModes.Division, GameDifficulty.Moderate), new int[] {3, 201 } },
 
         // Hard numbers
-        { Tuple.Create(MainMenu.GameModes.Addition, MainMenu.GameDifficulty.Hard), new int[] {100, 901 } },
-        { Tuple.Create(MainMenu.GameModes.Subtraction, MainMenu.GameDifficulty.Hard), new int[] {100, 501 } },
-        { Tuple.Create(MainMenu.GameModes.Multiplication, MainMenu.GameDifficulty.Hard), new int[] {5, 51 } },
-        { Tuple.Create(MainMenu.GameModes.Division, MainMenu.GameDifficulty.Hard), new int[] {3, 501 } },
+        { Tuple.Create(GameModes.Addition, GameDifficulty.Hard), new int[] {100, 901 } },
+        { Tuple.Create(GameModes.Subtraction, GameDifficulty.Hard), new int[] {100, 501 } },
+        { Tuple.Create(GameModes.Multiplication, GameDifficulty.Hard), new int[] {5, 51 } },
+        { Tuple.Create(GameModes.Division, GameDifficulty.Hard), new int[] {5, 501 } },
     };
 
-    public GameEngine(MainMenu.GameModes mode, MainMenu.GameDifficulty difficulty, int questionsCount)
+    public GameEngine(GameModes mode, GameDifficulty difficulty, int questionsCount, DateTime date)
     {
         // Prompt for user before the game starts:
         Console.Clear();
-        Console.WriteLine($"You are playing {mode} game. You will be challanged with {questionsCount} {difficulty.ToString().ToLower()} questions.");
+        Console.WriteLine($"You are playing {mode.ToString().ToLower()} game. You will be challanged with {questionsCount} {difficulty.ToString().ToLower()} questions.");
         Console.Write("\n\n\nPress Enter whenever you are ready to start: ");
         Console.ReadLine();
         Console.Clear();
@@ -46,31 +48,31 @@ internal class GameEngine
             Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
             // If random mode slected, decide how to calculate the numbers:
-            MainMenu.GameModes currentMode = mode;
-            if (mode == MainMenu.GameModes.Random)
+            GameModes currentMode = mode;
+            if (mode == GameModes.Random)
             {
                 Random generator = new Random();
                 int randomResult = generator.Next(0, 4);
                 switch (randomResult)
                 {
                     case 0:
-                        currentMode = MainMenu.GameModes.Addition;
+                        currentMode = GameModes.Addition;
                         break;
                     case 1:
-                        currentMode = MainMenu.GameModes.Subtraction;
+                        currentMode = GameModes.Subtraction;
                         break;
                     case 2:
-                        currentMode = MainMenu.GameModes.Multiplication;
+                        currentMode = GameModes.Multiplication;
                         break;
                     case 3:
-                        currentMode = MainMenu.GameModes.Division;
+                        currentMode = GameModes.Division;
                         break;
                 }
             }
 
             // Get numbers for calculation:
             int[] numbers;
-            if (currentMode == MainMenu.GameModes.Division)
+            if (currentMode == GameModes.Division)
                 numbers = SelectDivisionRange(currentMode, difficulty);
             else
                 numbers = SelectRange(currentMode, difficulty);
@@ -89,7 +91,7 @@ internal class GameEngine
             Helpers.ReadInput
                 (
                     ref userInput, 
-                    $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = (Please insert a valid guess): ", 
+                    $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = (Please put a valid guess): ", 
                     new string[] {"e"}, new int[] {-1000000, 1000000}, 
                     notInRangeFailMessage: $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = "
                 );
@@ -122,62 +124,74 @@ internal class GameEngine
             Console.ReadLine();
             Console.Clear();
         }
-        // After the loop is exited or ends by itself, on game finish, show user their results:
+        // After the loop is exited or ends by itself, on game finish, show user their results and log the game:
+        LogGame(date, mode, difficulty, questionsCount, score, time, !gameUnfinished);
         Console.WriteLine($"Your final score is {score} out of {questionsCount} questions!");
         Console.Write("\n\n\nPress Enter to return to the main menu: ");
         Console.ReadLine();
     }
 
-    private string GetSign(MainMenu.GameModes mode)
+    private void LogGame(DateTime date, GameModes mode, GameDifficulty difficulty, int questionsCount, int score, int time, bool gameFinished)
+    {
+        Helpers.GameInstances.Add(new GameInstance
+        {
+            Date = date,
+            Score = score,
+            Type = Enum.GetName(mode),
+            Difficulty = Enum.GetName(difficulty),
+            QuestionsCount = questionsCount,
+            Time = time
+        });
+    }
+    private string GetSign(GameModes mode)
     {
         switch (mode)
         {
-            case MainMenu.GameModes.Addition:
+            case GameModes.Addition:
                 return "+";
-            case MainMenu.GameModes.Subtraction:
+            case GameModes.Subtraction:
                 return "-";
-            case MainMenu.GameModes.Multiplication:
+            case GameModes.Multiplication:
                 return "*";
-            case MainMenu.GameModes.Division:
+            case GameModes.Division:
                 return "/";
         }
         return "";
     }
-    private string GetProductType(MainMenu.GameModes mode)
+    private string GetProductType(GameModes mode)
     {
         switch (mode)
         {
-            case MainMenu.GameModes.Addition:
+            case GameModes.Addition:
                 return "sum";
-                case MainMenu.GameModes.Subtraction:
+                case GameModes.Subtraction:
                 return "difference";
-            case MainMenu.GameModes.Multiplication:
+            case GameModes.Multiplication:
                 return "product";
-            case MainMenu.GameModes.Division:
+            case GameModes.Division:
                 return "quotient";
         }
         return "";
     }
-    private int CalculateResult(MainMenu.GameModes mode, int[] numbers)
+    private int CalculateResult(GameModes mode, int[] numbers)
     {;
         int result = 0;
 
         // Calculate based on game mode:
         switch (mode)
         {
-            case MainMenu.GameModes.Addition:
+            case GameModes.Addition:
                 return numbers[0] + numbers[1];
-            case MainMenu.GameModes.Subtraction:
+            case GameModes.Subtraction:
                 return numbers[0] - numbers[1];
-            case MainMenu.GameModes.Multiplication:
+            case GameModes.Multiplication:
                 return numbers[0] * numbers[1];
-            case MainMenu.GameModes.Division:
+            case GameModes.Division:
                 return numbers[0] / numbers[1];
         }
         return result;
     }
-
-    private int[] SelectRange(MainMenu.GameModes mode, MainMenu.GameDifficulty difficulty)
+    private int[] SelectRange(GameModes mode, GameDifficulty difficulty)
     {
         int[] numbers = new int[2];
         int[] range = numberRanges[Tuple.Create(mode, difficulty)];
@@ -186,8 +200,7 @@ internal class GameEngine
         numbers[1] = generator.Next(range[0], range[1]);
         return numbers;
     }
-
-    private int[] SelectDivisionRange(MainMenu.GameModes mode, MainMenu.GameDifficulty difficulty)
+    private int[] SelectDivisionRange(GameModes mode, GameDifficulty difficulty)
     {
         bool runTillNumbersCorrect = true;
         int[] numbersTocheck = new int[2];
@@ -200,10 +213,12 @@ internal class GameEngine
             numbersTocheck[0] = generator.Next(range[0], range[1]);
             numbersTocheck[1] = generator.Next(range[0], range[1]);
 
-            // Check if 2 numbers generated result in integer:
+            // Check if 2 numbers generated result in integer. Also, check if the quotient is appropriate to the
+            // level of difficulty:
             if (numbersTocheck[0] % numbersTocheck[1] == 0)
             {
-                runTillNumbersCorrect = false;
+                if (numbersTocheck[0] / numbersTocheck[1] >= range[0])
+                    runTillNumbersCorrect = false;
             }
         }
         return numbersTocheck;

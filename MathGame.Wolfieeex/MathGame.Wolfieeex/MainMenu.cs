@@ -1,33 +1,33 @@
 ﻿namespace MathGame.Wolfieeex;
+
+internal enum GameModes
+{
+    Addition,
+    Subtraction,
+    Multiplication,
+    Division,
+    Random
+};
+
+internal enum GameDifficulty
+{
+    Easy,
+    Moderate,
+    Hard,
+};
+
+internal enum CurrentScreen
+{
+    Main,
+    Difficulty,
+    Question,
+    PreviousGames,
+    InGame,
+    Exit
+};
 internal class MainMenu
 {
-    // Initiate enums and variables:
-    internal enum GameModes
-    {
-        Addition = 0,
-        Subtraction,
-        Multiplication,
-        Division,
-        Random
-    };
-
-    internal enum GameDifficulty
-    {
-        Easy,
-        Moderate,
-        Hard,
-    };
-
-    internal enum CurrentScreen
-    {
-        Main,
-        Difficulty,
-        Question,
-        PreviousGames,
-        InGame,
-        Exit
-    };
-
+    // Initiate variables:
     private CurrentScreen currentScreen = CurrentScreen.Main;
     private GameDifficulty gameDifficulty = GameDifficulty.Easy;
     private GameModes gameMode = GameModes.Addition;
@@ -56,7 +56,7 @@ internal class MainMenu
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.InGame:
-                    GameEngine gameEngine = new GameEngine(gameMode, gameDifficulty, questionsCount);
+                    GameEngine gameEngine = new GameEngine(gameMode, gameDifficulty, questionsCount, date);
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.Exit:
@@ -141,7 +141,7 @@ E - Exit Game");
     private void DifficultySelection()
     {
         // Print difficulty options:
-        Console.WriteLine($"You chose to play {gameMode} game. Please select the difficulty level: ");
+        Console.WriteLine($"You chose to play {gameMode.ToString().ToLower()} game. Please select the difficulty level: ");
         Console.WriteLine($@"
 E - Easy
 M - Moderate
@@ -195,8 +195,13 @@ R - Return to main menu");
     }
     private void QuestionSelection()
     {
+        // Initiate variables:
+        string? userInput = null;
+        string[] options = { "e" };
+        int[] numberRange = { 3, 20 };
+
         // Print difficulty options and exit prompt on the bootm of the console:
-        Console.WriteLine($"You chose to play {gameMode} game on {gameDifficulty} mode. Please select a number of questions for your game from 1 to 20: ");
+        Console.WriteLine($"You chose to play {gameMode.ToString().ToLower()} game on {gameDifficulty.ToString().ToLower()} mode. Please select a number of questions for your game from {numberRange[0]} to {numberRange[1]}: ");
         Console.WriteLine($"{new string('-', Console.BufferWidth)}");
         Console.Write("Your selection: ");
         Helpers.PrintExitPrompt();
@@ -205,9 +210,6 @@ R - Return to main menu");
         currentScreen = CurrentScreen.InGame;
 
         // Main method loop- check continously until valid input inserted by the user:
-        string? userInput = null;
-        string[] options = { "e" };
-        int[] numberRange = { 3, 20 };
         Helpers.ReadInput(ref userInput, $"Please chose a number of questions for your next game (it must be in range of {numberRange[0]} and {numberRange[1]}): ", options, numberRange);
         
         bool isNumber = int.TryParse(userInput, out questionsCount);

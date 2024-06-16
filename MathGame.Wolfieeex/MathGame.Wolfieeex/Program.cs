@@ -6,7 +6,7 @@ Console.Write("Please insert your name: ");
 
 // Get player's name and current date (if player tries to skip and presses enter instead, ask for input again). Also, capitalise the first letter of the name:
 string? name = null;
-DateTime date = DateTime.UtcNow;
+DateTime date = DateTime.Now;
 Helpers.ReadInput(ref name, "Don't be shy! Please, introduce yourself: ");
 Console.Write($"\n\r{new string('-', Console.BufferWidth)}");
 name = Char.ToUpper(name[0]) + name.Substring(1);
