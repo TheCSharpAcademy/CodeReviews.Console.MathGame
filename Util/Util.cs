@@ -17,7 +17,7 @@ class Util
     {
         Console.WriteLine($"Game {gameNumber}");
         Console.WriteLine($"\tScore:\t{log.Score}");
-        Console.WriteLine($"\tTime taken\t{log.timeTaken}");
+        Console.WriteLine($"\tTime taken\t{log.timeTaken}  seconds");
         Console.WriteLine($"\tDifficulty: {log.difficulty}");
 
 
@@ -34,7 +34,7 @@ class Util
 
             Console.WriteLine(
                 "\t\t" +
-                string.Join("\t\t", [correct, string.Join(problem.operation, problem.nums), problem.response])
+                string.Join("\t\t", [correct, string.Join((char)problem.operation, problem.nums), problem.response])
             );
         }
     }

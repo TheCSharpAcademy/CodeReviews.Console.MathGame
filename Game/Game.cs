@@ -11,31 +11,31 @@ class Game
             switch (menuOption)
             {
                 case 1:
-                    GameRoundLog additionLog = GameRound.Play([GameRound.AdditionGame]);
+                    GameRoundLog additionLog = GameRound.Play([Operation.Add]);
                     logs.Add(additionLog);
 
                     break;
                 case 2:
-                    GameRoundLog subtractLogs = GameRound.Play([GameRound.SubtractionGame]);
+                    GameRoundLog subtractLogs = GameRound.Play([Operation.Subtract]);
                     logs.Add(subtractLogs);
 
                     break;
                 case 3:
-                    GameRoundLog multiplyLogs = GameRound.Play([GameRound.MultiplicationGame]);
+                    GameRoundLog multiplyLogs = GameRound.Play([Operation.Multiply]);
                     logs.Add(multiplyLogs);
 
                     break;
                 case 4:
-                    GameRoundLog divideLogs = GameRound.Play([GameRound.DivisionGame]);
+                    GameRoundLog divideLogs = GameRound.Play([Operation.Divide]);
                     logs.Add(divideLogs);
 
                     break;
                 case 5:
                     GameRoundLog randomLogs = GameRound.Play([
-                        GameRound.AdditionGame,
-                        GameRound.DivisionGame,
-                        GameRound.MultiplicationGame,
-                        GameRound.SubtractionGame
+                        Operation.Add,
+                        Operation.Subtract,
+                        Operation.Multiply,
+                        Operation.Divide
                     ]);
 
                     logs.Add(randomLogs);

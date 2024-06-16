@@ -1,12 +1,12 @@
 
 class ProblemLog
 {
-    public string operation;
+    public Operation operation;
     public int[] nums;
     public int score;
     public int response;
 
-    public ProblemLog(string operation, int[] nums, int response, int score)
+    public ProblemLog(Operation operation, int[] nums, int response, int score)
     {
         this.operation = operation;
         this.nums = nums;
