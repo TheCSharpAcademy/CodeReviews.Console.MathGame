@@ -52,9 +52,7 @@ class Util
 
     public static int ReadNumericalInput()
     {
-        bool inputComplete = false;
-
-        do
+        while (true)
         {
             string? input = Console.ReadLine();
 
@@ -64,10 +62,7 @@ class Util
             {
                 return converted;
             }
-
-        } while (!inputComplete);
-
-        throw new IOException("Invalid input entered, whole number expected.");
+        }
     }
 
 }
