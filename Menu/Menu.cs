@@ -21,9 +21,7 @@ class Menu
 
     public static Difficulty ReadDifficultyInput()
     {
-        bool validDifficultyEntered = false;
-
-        do
+        while (true)
         {
             Console.WriteLine("Enter difficulty (1 - Easy   2 - Medium  3 - Hard):\n");
 
@@ -34,11 +32,8 @@ class Menu
                 return (Difficulty)difficulty;
             }
 
-            Console.WriteLine("Please enter valid difficulty");
-        } while (validDifficultyEntered == false);
-
-        throw new FormatException("Invalid difficulty entered");
-
+            Console.WriteLine("Please enter valid difficulty.");
+        }
     }
 
     public static int ReadNumQuestionsPerGame()
