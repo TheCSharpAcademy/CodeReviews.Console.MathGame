@@ -5,7 +5,7 @@ namespace MathGame.Wolfieeex;
 internal class Helpers
 {
     // List of all played games (if selected true, it assigns starter data to recorded games for code checks):
-    private static bool runTest = false;
+    private static bool runTest;
     public static List<GameInstance> GameInstances = !runTest ? new List<GameInstance>() : new List<GameInstance>
     {
         new GameInstance{Name = "Aleks", Date = DateTime.Now.AddDays(1), Score = 4, Type = GameModes.Subtraction, Difficulty = GameDifficulty.Moderate, QuestionsCount = 8, Time = 5},

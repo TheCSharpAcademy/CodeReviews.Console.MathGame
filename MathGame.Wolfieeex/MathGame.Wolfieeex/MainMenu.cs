@@ -56,6 +56,7 @@ internal class MainMenu
                     break;
                 case CurrentScreen.InGame:
                     GameEngine gameEngine = new GameEngine(name, gameMode, gameDifficulty, questionsCount);
+                    gameEngine.RunGame();
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.Exit:

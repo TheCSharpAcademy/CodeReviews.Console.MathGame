@@ -25,13 +25,26 @@ internal class GameEngine
         { Tuple.Create(GameModes.Multiplication, GameDifficulty.Hard), new int[] {5, 51 } },
         { Tuple.Create(GameModes.Division, GameDifficulty.Hard), new int[] {5, 501 } },
     };
-    private int time = 0;
+    private int time;
+
+    private string Name;
+    private GameModes Mode;
+    private GameDifficulty Difficulty;
+    private int QuestionsCount;
 
     public GameEngine(string name, GameModes mode, GameDifficulty difficulty, int questionsCount)
     {
+        Name = name;
+        Mode = mode;
+        Difficulty = difficulty;
+        QuestionsCount = questionsCount;
+    }
+
+    public void RunGame()
+    {
         // Prompt for user before the game starts:
         Console.Clear();
-        Console.WriteLine($"You are playing {mode.ToString().ToLower()} game. You will be challanged with {questionsCount} {difficulty.ToString().ToLower()} questions.");
+        Console.WriteLine($"You are playing {Mode.ToString().ToLower()} game. You will be challanged with {QuestionsCount} {Difficulty.ToString().ToLower()} questions.");
         Console.Write("\n\n\nPress Enter whenever you are ready to start: ");
         Console.ReadLine();
         Console.Clear();
@@ -46,17 +59,17 @@ internal class GameEngine
         int score = 0;
 
         // Start the game:
-        for (int i = questionsCount; i > 0; i--)
+        for (int i = QuestionsCount; i > 0; i--)
         {
             // Display a question that will prompt user to give an answer, also display a game timers:
-            Console.Write($"Question {questionsCount - i + 1} of {questionsCount}:");
+            Console.Write($"Question {QuestionsCount - i + 1} of {QuestionsCount}:");
             Console.SetCursorPosition(40, 0);
             Console.WriteLine($"Time elapsed: {time.ToString()} seconds");
             Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
             // If random mode slected, decide how to calculate the numbers:
-            GameModes currentMode = mode;
-            if (mode == GameModes.Random)
+            GameModes currentMode = Mode;
+            if (Mode == GameModes.Random)
             {
                 Random generator = new Random();
                 int randomResult = generator.Next(0, 4);
@@ -80,10 +93,10 @@ internal class GameEngine
             // Get numbers for calculation:
             int[] numbers;
             if (currentMode == GameModes.Division)
-                numbers = SelectDivisionRange(currentMode, difficulty);
+                numbers = SelectDivisionRange(currentMode, Difficulty);
             else
-                numbers = SelectRange(currentMode, difficulty);
-         
+                numbers = SelectRange(currentMode, Difficulty);
+
             // Resolve result:
             int result = CalculateResult(currentMode, numbers);
 
@@ -97,9 +110,9 @@ internal class GameEngine
             string? userInput = "";
             Helpers.ReadInput
                 (
-                    ref userInput, 
-                    $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = (Please put a valid guess): ", 
-                    new string[] {"e"}, new int[] {-1000000, 1000000}, 
+                    ref userInput,
+                    $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = (Please put a valid guess): ",
+                    new string[] { "e" }, new int[] { -1000000, 1000000 },
                     notInRangeFailMessage: $"{numbers[0]} {GetSign(currentMode)} {numbers[1]} = "
                 );
 
@@ -116,14 +129,14 @@ internal class GameEngine
             if (intInput == result)
             {
                 score++;
-                Console.WriteLine($"\nYour answer is correct! Current score: {score} out of {questionsCount} questions.");
+                Console.WriteLine($"\nYour answer is correct! Current score: {score} out of {QuestionsCount} questions.");
                 Console.WriteLine($"\n\n\r{new string(' ', Console.BufferWidth)}");
                 Console.Write($"\rPress Enter to continue: ");
             }
             else
             {
                 Console.WriteLine($"\nThat's incorrect... The {GetProductType(currentMode)} of {numbers[0]} and {numbers[1]} is {result}.");
-                Console.WriteLine($"Current score: {score} out of {questionsCount} questions.");
+                Console.WriteLine($"Current score: {score} out of {QuestionsCount} questions.");
                 Console.WriteLine($"\n\r{new string(' ', Console.BufferWidth)}");
                 Console.Write($"\rPress Enter to continue: ");
             }
@@ -132,8 +145,8 @@ internal class GameEngine
         }
         // After the loop is exited or ends by itself, on game finish, show user their results and log the game:
         gameTime.Enabled = false;
-        LogGame(name, DateTime.Now, mode, difficulty, questionsCount, score, time);
-        Console.WriteLine($"Your final score is {score} out of {questionsCount} questions!");
+        LogGame(Name, DateTime.Now, Mode, Difficulty, QuestionsCount, score, time);
+        Console.WriteLine($"Your final score is {score} out of {QuestionsCount} questions!");
         Console.WriteLine($"You finished the game in {time} seconds.");
         Console.Write("\n\n\nPress Enter to return to the main menu: ");
         Console.ReadLine();
@@ -201,9 +214,8 @@ internal class GameEngine
 
     // Depending on game mode, return the product of 2 numbers:
     private int CalculateResult(GameModes mode, int[] numbers)
-    {;
+    {
         int result = 0;
-
         // Calculate based on game mode:
         switch (mode)
         {
