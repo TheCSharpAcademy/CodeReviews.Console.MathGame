@@ -61,11 +61,7 @@ internal class Game : Utility
                 break;
         }
     }
-    /*private Tuple<int, int> NumberGenerator() //using tuples
-    {
-        Random random = new Random();
-        return new Tuple<int, int>(random.Next(1, 10), random.Next(1, 10));
-    }*/
+
     //Loop math operations
     private void QuestionLoop(Action<int> action, Operations operations)
     {
