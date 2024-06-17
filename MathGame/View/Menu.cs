@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using MathGame.Controller;
+﻿using MathGame.Controller;
 using MathGame.Model;
 
 namespace MathGame.View; 
@@ -43,9 +35,6 @@ internal class Menu
             Console.Write("Enter Your Choice: ");
             int.TryParse(Console.ReadLine()?.Trim(), out difficultyLevel);
 
-            /*Console.Write("Enter Number of Question: ");
-            int.TryParse(Console.ReadLine()?.Trim(), out int numberOfQuestions);
-            game.NumberOfQuestions = numberOfQuestions;*/
             Console.Clear();
         }
     }
@@ -87,7 +76,7 @@ internal class Menu
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
 
         Console.WriteLine("\nPress Enter to return to the main menu.");
-        while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+        while (Console.ReadKey().Key != ConsoleKey.Enter) ;
     }
 }
 

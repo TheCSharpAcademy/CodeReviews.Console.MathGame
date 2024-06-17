@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using MathGame.Model;
+﻿using MathGame.Model;
 using MathGame.View;
 
 namespace MathGame.Controller;
@@ -17,11 +10,6 @@ internal class Game : Utility
     internal int NumberOfQuestions
     {
         get => 5;
-        /*set
-        {
-            if (value <= 0) numberOfQuestions = 1;
-            else numberOfQuestions = value;
-        }*/
     }
     internal int RoundScore { get; set; }
     internal int DifficultyLevel { get; set; }
