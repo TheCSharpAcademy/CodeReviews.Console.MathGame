@@ -16,7 +16,7 @@ namespace MathGame
             Console.Clear();
             Console.WriteLine("Game History");
             Console.WriteLine("-------------------------------------");
-            foreach (Game game in games)
+            foreach (Game game in gamesToPrint)
             {
                 Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts");
             }
