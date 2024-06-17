@@ -52,11 +52,10 @@ internal class MainMenu
                     break;
                 case CurrentScreen.PreviousGames:
                     Helpers.DisplayPreviousGames();
-                    Console.ReadLine();
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.InGame:
-                    GameEngine gameEngine = new GameEngine(name, gameMode, gameDifficulty, questionsCount, date);
+                    GameEngine gameEngine = new GameEngine(name, gameMode, gameDifficulty, questionsCount);
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.Exit:
@@ -66,6 +65,8 @@ internal class MainMenu
             Console.Clear();
         }
     }
+
+    // Screens' functionalities:
     private void EntryMenu(string? name, DateTime date)
     {
         // Main menu functionality- show options of game modes available:
@@ -125,7 +126,7 @@ E - Exit Game");
                         throw new InvalidOperationException($"\r\"{userInput}\" is not a valid input and failed to be checked correctly in the Helpers.ReadInput method. Code needs to be reviewed: list all correct options in the \"Correct options\" array so they match switch statement options to fix. Application will exit now.");
                 }
 
-                // If user chose a correct option, exit main menu loop:
+                // If user chose a correct option, exit main menu loop (queue next screen):
                 if (currentScreen != CurrentScreen.Main)
                 {
                     menuSelectionLoop = false;
@@ -212,6 +213,7 @@ R - Return to main menu");
         // Main method loop- check continously until valid input inserted by the user:
         Helpers.ReadInput(ref userInput, $"Please chose a number of questions for your next game (it must be in range of {numberRange[0]} and {numberRange[1]}): ", options, numberRange);
         
+        // Queue next screen:
         bool isNumber = int.TryParse(userInput, out questionsCount);
         if (!isNumber && userInput.ToLower() == "e")
         {

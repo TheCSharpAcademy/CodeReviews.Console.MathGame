@@ -4,7 +4,7 @@ namespace MathGame.Wolfieeex;
 
 internal class GameEngine
 {
-    // Value ranges for all difficulties and game modes:
+    // Value ranges for all difficulties and game modes, public field for timer event:
     private Dictionary<Tuple<GameModes, GameDifficulty>, int[]> numberRanges = new Dictionary<Tuple<GameModes, GameDifficulty>, int[]>
     {
         // Easy numbers
@@ -25,8 +25,9 @@ internal class GameEngine
         { Tuple.Create(GameModes.Multiplication, GameDifficulty.Hard), new int[] {5, 51 } },
         { Tuple.Create(GameModes.Division, GameDifficulty.Hard), new int[] {5, 501 } },
     };
+    private int time = 0;
 
-    public GameEngine(string name, GameModes mode, GameDifficulty difficulty, int questionsCount, DateTime date)
+    public GameEngine(string name, GameModes mode, GameDifficulty difficulty, int questionsCount)
     {
         // Prompt for user before the game starts:
         Console.Clear();
@@ -35,16 +36,22 @@ internal class GameEngine
         Console.ReadLine();
         Console.Clear();
 
-        // Initiate variables:
+        // Initiate Timer:
+        System.Timers.Timer gameTime = new System.Timers.Timer(1000);
+        gameTime.Elapsed += GameTime_Elapsed;
+        gameTime.Enabled = true;
+        gameTime.AutoReset = true;
+
+        // Initiate other variables:
         int score = 0;
-        int time = 0;
-        bool gameUnfinished = false;
 
         // Start the game:
         for (int i = questionsCount; i > 0; i--)
         {
-            // Display a question that will prompt user to give an answer:
-            Console.WriteLine($"Question {questionsCount - i + 1} of {questionsCount}:");
+            // Display a question that will prompt user to give an answer, also display a game timers:
+            Console.Write($"Question {questionsCount - i + 1} of {questionsCount}:");
+            Console.SetCursorPosition(40, 0);
+            Console.WriteLine($"Time elapsed: {time.ToString()} seconds");
             Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
             // If random mode slected, decide how to calculate the numbers:
@@ -99,7 +106,6 @@ internal class GameEngine
             // If user pressed "e" to exit the game:
             if (userInput.ToLower() == "e")
             {
-                gameUnfinished = true; 
                 Console.Clear();
                 Console.WriteLine("You have exited the game. Come again soon?");
                 break;
@@ -125,16 +131,31 @@ internal class GameEngine
             Console.Clear();
         }
         // After the loop is exited or ends by itself, on game finish, show user their results and log the game:
-        LogGame(name, date, mode, difficulty, questionsCount, score, time, !gameUnfinished);
+        gameTime.Enabled = false;
+        LogGame(name, DateTime.Now, mode, difficulty, questionsCount, score, time);
         Console.WriteLine($"Your final score is {score} out of {questionsCount} questions!");
+        Console.WriteLine($"You finished the game in {time} seconds.");
         Console.Write("\n\n\nPress Enter to return to the main menu: ");
         Console.ReadLine();
     }
 
-    private void LogGame(string name, DateTime date, GameModes mode, GameDifficulty difficulty, int questionsCount, int score, int time, bool gameFinished)
+    // Timer displaying gameplay time:
+    private void GameTime_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    {
+        time++;
+        int cursorX = Console.CursorLeft;
+        int cursorY = Console.CursorTop;
+        Console.SetCursorPosition(40, 0);
+        Console.Write($"Time elapsed: {time.ToString()} seconds");
+        Console.SetCursorPosition(cursorX, cursorY);
+    }
+
+    // Save game details to public field. This list can be then displayed from the main menu:
+    private void LogGame(string name, DateTime date, GameModes mode, GameDifficulty difficulty, int questionsCount, int score, int time)
     {
         Helpers.GameInstances.Add(new GameInstance
         {
+            Name = name,
             Date = date,
             Score = score,
             Type = mode,
@@ -143,6 +164,8 @@ internal class GameEngine
             Time = time
         });
     }
+
+    // Returns +, -, *, or / depending on current game mode:
     private string GetSign(GameModes mode)
     {
         switch (mode)
@@ -158,6 +181,8 @@ internal class GameEngine
         }
         return "";
     }
+
+    // Returns "sum", "subtraction", "product", or "quotient" based on current game mode:
     private string GetProductType(GameModes mode)
     {
         switch (mode)
@@ -173,6 +198,8 @@ internal class GameEngine
         }
         return "";
     }
+
+    // Depending on game mode, return the product of 2 numbers:
     private int CalculateResult(GameModes mode, int[] numbers)
     {;
         int result = 0;
@@ -191,6 +218,10 @@ internal class GameEngine
         }
         return result;
     }
+
+    // Return 2 numbers for the next round randomised between minimal and maximal range returned from the Dictionary field "numberRanges",
+    // based on game mode and difficulty chosen. Range for division must return divisible numbers, so additional checks are added to
+    // a method below:
     private int[] SelectRange(GameModes mode, GameDifficulty difficulty)
     {
         int[] numbers = new int[2];

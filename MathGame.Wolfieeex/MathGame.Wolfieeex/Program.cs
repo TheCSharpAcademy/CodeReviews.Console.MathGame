@@ -11,7 +11,8 @@ Helpers.ReadInput(ref name, "Don't be shy! Please, introduce yourself: ");
 Console.Write($"\n\r{new string('-', Console.BufferWidth)}");
 name = Char.ToUpper(name[0]) + name.Substring(1);
 
-// Menu toggling functionality (game mode, difficulty and question count selection with option to return to main menu):
+// Menu toggling functionality (game mode, in-game engine, difficulty and question count selection, previous games preview and
+// option to return to previous screens at any stage):
 MainMenu menu = new MainMenu();
 menu.MainMenuFunctionality(name, date);
 

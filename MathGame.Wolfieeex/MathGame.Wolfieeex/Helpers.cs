@@ -4,8 +4,19 @@ namespace MathGame.Wolfieeex;
 
 internal class Helpers
 {
-    // List of all played games:
-    public static List<GameInstance> GameInstances = new List<GameInstance>();
+    // List of all played games (if selected true, it assigns starter data to recorded games for code checks):
+    private static bool runTest = false;
+    public static List<GameInstance> GameInstances = !runTest ? new List<GameInstance>() : new List<GameInstance>
+    {
+        new GameInstance{Name = "Aleks", Date = DateTime.Now.AddDays(1), Score = 4, Type = GameModes.Subtraction, Difficulty = GameDifficulty.Moderate, QuestionsCount = 8, Time = 5},
+        new GameInstance{Name = "Anastazja", Date = DateTime.Now.AddDays(0), Score = 5, Type = GameModes.Addition, Difficulty = GameDifficulty.Hard, QuestionsCount = 6, Time = 50},
+        new GameInstance{Name = "Bozena", Date = DateTime.Now.AddDays(0), Score = 6, Type = GameModes.Addition, Difficulty = GameDifficulty.Easy, QuestionsCount = 10, Time = 100},
+        new GameInstance{Name = "Julie", Date = DateTime.Now.AddDays(2), Score = 10, Type = GameModes.Addition, Difficulty = GameDifficulty.Moderate, QuestionsCount = 20, Time = 200},
+        new GameInstance{Name = "Kristine", Date = DateTime.Now.AddDays(3), Score = 20, Type = GameModes.Multiplication, Difficulty = GameDifficulty.Easy, QuestionsCount = 20, Time = 100},
+        new GameInstance{Name = "Pawel", Date = DateTime.Now.AddDays(-9), Score = 2, Type = GameModes.Random, Difficulty = GameDifficulty.Easy, QuestionsCount = 6, Time = 30},
+        new GameInstance{Name = "Pete", Date = DateTime.Now.AddDays(14), Score = 1, Type = GameModes.Addition, Difficulty = GameDifficulty.Moderate, QuestionsCount = 3, Time = 35},
+        new GameInstance{Name = "Ana", Date = DateTime.Now.AddDays(8), Score = 0, Type = GameModes.Subtraction, Difficulty = GameDifficulty.Hard, QuestionsCount = 5, Time = 95},
+    };
 
     // Remove previous line and insert a new one instead:
     public static void ReinsertLine(string message)
@@ -15,7 +26,8 @@ internal class Helpers
         Console.Write("\r" + message);
     }
 
-    // Prints message below the working area that will inform user they can return to a previous screen by pressing "E":
+    // Prints message below the working area that will inform user they can return to a previous screen by pressing "E"
+    // (custom message can be added):
     public static void PrintExitPrompt(string message = "Press \"E\" - to return to a previous menu.")
     {
         int xCursorPosition = Console.CursorLeft;
@@ -25,7 +37,8 @@ internal class Helpers
         Console.SetCursorPosition(xCursorPosition, Console.CursorTop - 5);
     }
 
-    // Reads user input and check if it's not empty or null. Optionally, compares it to array of options that are considered valid:
+    // Reads user input and check if it's not empty or null. Optionally, compares it to array of options that are considered valid.
+    // Runs in loop until the user input is considered correct:
     /// <param name="failMessage">
     /// Message that will replace the previous input prompt on console if ReadLine method fails.
     /// </param>
@@ -101,6 +114,7 @@ internal class Helpers
         }
     }
 
+    // Called from the MainMenu class under PreviousGames screen selection:
     public static void DisplayPreviousGames()
     {
         // Display the header:
@@ -112,22 +126,31 @@ internal class Helpers
         for (int i = 0; i < 5; i++)
         {
             // Try to get the list of games with certain mode. If there are no games with certain mode, skip the iteration and 
-            // continue checking for other modes:
+            // continue checking for other modes. Game order that is displayed is sorted by highest scores first:
             List<GameInstance> currentInstance;
             try
             {
                 currentInstance = GameInstances.Where(x => (int)x.Type == i).OrderByDescending(x => x.Score).ToList();
-                if (currentInstance == null)
+                if (currentInstance == null || currentInstance.Count == 0)
                     throw new NullReferenceException();
             }
             catch (NullReferenceException ex)
             {
                 continue;
             }
-            //Console.WriteLine(Enum.GetName(currentInstance[0].Type) + " games played:");
-            Console.WriteLine(new string("Name:").PadRight(30) + new string("Date: ").PadRight(30) + new string("Game mode:").PadRight(20) + new string("Difficulty:").PadRight(20) + new string("Score:").PadRight(10) + new string("Out of:").PadRight(10) + new string("Total time:").PadRight(10));
 
+            // Write all games that were played withe seperate headers for each game mode:
+            Console.WriteLine($"Previous {Enum.GetName(currentInstance[0].Type).ToLower()} games:");
+            Console.WriteLine($"{new string('.', 40)}");
+            Console.WriteLine(new string("Name:").PadRight(30) + new string("Date: ").PadRight(30) + new string("Difficulty:").PadRight(20) + new string("Score:").PadRight(10) + new string("Out of:").PadRight(10) + new string("Total time:").PadRight(10) + "\n");
+            foreach (GameInstance instance in currentInstance)
+            {
+                Console.WriteLine(instance.Name.PadRight(30) + instance.Date.ToString().PadRight(30) + Enum.GetName(instance.Difficulty).PadRight(20) + instance.Score.ToString().PadRight(10) + instance.QuestionsCount.ToString().PadRight(10) + (instance.Time.ToString() + " seconds").PadRight(15));
+            }
+            Console.WriteLine($"{new string('-', Console.BufferWidth)}");
         }
+        // After displaying the table, promt exit to main menu: 
+        Console.Write("\n\n\nPress Enter to return to back menu: ");
         Console.ReadLine();
     }
 }
