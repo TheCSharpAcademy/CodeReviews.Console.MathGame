@@ -51,12 +51,12 @@ internal class MainMenu
                     QuestionSelection();
                     break;
                 case CurrentScreen.PreviousGames:
-                    Console.WriteLine("Functionality to be added later");
+                    Helpers.DisplayPreviousGames();
                     Console.ReadLine();
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.InGame:
-                    GameEngine gameEngine = new GameEngine(gameMode, gameDifficulty, questionsCount, date);
+                    GameEngine gameEngine = new GameEngine(name, gameMode, gameDifficulty, questionsCount, date);
                     currentScreen = CurrentScreen.Main;
                     break;
                 case CurrentScreen.Exit:

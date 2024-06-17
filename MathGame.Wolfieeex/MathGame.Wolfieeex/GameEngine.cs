@@ -26,7 +26,7 @@ internal class GameEngine
         { Tuple.Create(GameModes.Division, GameDifficulty.Hard), new int[] {5, 501 } },
     };
 
-    public GameEngine(GameModes mode, GameDifficulty difficulty, int questionsCount, DateTime date)
+    public GameEngine(string name, GameModes mode, GameDifficulty difficulty, int questionsCount, DateTime date)
     {
         // Prompt for user before the game starts:
         Console.Clear();
@@ -125,20 +125,20 @@ internal class GameEngine
             Console.Clear();
         }
         // After the loop is exited or ends by itself, on game finish, show user their results and log the game:
-        LogGame(date, mode, difficulty, questionsCount, score, time, !gameUnfinished);
+        LogGame(name, date, mode, difficulty, questionsCount, score, time, !gameUnfinished);
         Console.WriteLine($"Your final score is {score} out of {questionsCount} questions!");
         Console.Write("\n\n\nPress Enter to return to the main menu: ");
         Console.ReadLine();
     }
 
-    private void LogGame(DateTime date, GameModes mode, GameDifficulty difficulty, int questionsCount, int score, int time, bool gameFinished)
+    private void LogGame(string name, DateTime date, GameModes mode, GameDifficulty difficulty, int questionsCount, int score, int time, bool gameFinished)
     {
         Helpers.GameInstances.Add(new GameInstance
         {
             Date = date,
             Score = score,
-            Type = Enum.GetName(mode),
-            Difficulty = Enum.GetName(difficulty),
+            Type = mode,
+            Difficulty = difficulty,
             QuestionsCount = questionsCount,
             Time = time
         });

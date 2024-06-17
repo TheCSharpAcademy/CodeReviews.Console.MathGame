@@ -103,13 +103,30 @@ internal class Helpers
 
     public static void DisplayPreviousGames()
     {
+        // Display the header:
         Console.Clear();
         Console.WriteLine("Previous games: ");
         Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
-        for (int i = 0; i < 4; i++)
+        // Query each GameInstance by its mode sorting them descending by score value:
+        for (int i = 0; i < 5; i++)
         {
-            //List<GameInstance> gameInstance = GameInstances.Where(x  => x.Type == 
+            // Try to get the list of games with certain mode. If there are no games with certain mode, skip the iteration and 
+            // continue checking for other modes:
+            List<GameInstance> currentInstance;
+            try
+            {
+                currentInstance = GameInstances.Where(x => (int)x.Type == i).OrderByDescending(x => x.Score).ToList();
+                if (currentInstance == null)
+                    throw new NullReferenceException();
+            }
+            catch (NullReferenceException ex)
+            {
+                continue;
+            }
+            //Console.WriteLine(Enum.GetName(currentInstance[0].Type) + " games played:");
+            Console.WriteLine(new string("Name:").PadRight(30) + new string("Date: ").PadRight(30) + new string("Game mode:").PadRight(20) + new string("Difficulty:").PadRight(20) + new string("Score:").PadRight(10) + new string("Out of:").PadRight(10) + new string("Total time:").PadRight(10));
+
         }
         Console.ReadLine();
     }
