@@ -82,17 +82,6 @@ internal class Game : Utility
     }
 
     //Math Operations
-    /*private void Addition()
-    {
-        var (num1, num2) = NumberGenerator(); //using tuples
-        int sum = num1 + num2;
-        Console.Write($"{num1} + {num2} = ");
-
-        string userInput = ReadInput();
-        Console.WriteLine(Judgement(userInput, sum));
-
-        if (Judgement(userInput, sum) == "Correct!") counter++;
-    }*/
     private void Random(int x)
     {
         Random random = new Random();

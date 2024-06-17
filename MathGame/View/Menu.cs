@@ -4,7 +4,7 @@ using MathGame.Model;
 namespace MathGame.View; 
 internal class Menu
 {
-    internal static void DisplayMenu(string? message, out int userChoice, out int difficultyLevel/*, Game game*/)
+    internal static void DisplayMenu(string? message, out int userChoice, out int difficultyLevel)
     {
         Console.Clear();
 
@@ -74,9 +74,10 @@ internal class Menu
         }
 
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
-
-        Console.WriteLine("\nPress Enter to return to the main menu.");
-        while (Console.ReadKey().Key != ConsoleKey.Enter) ;
+        while (Console.ReadKey().Key != ConsoleKey.Enter)
+        {
+            Console.WriteLine("\nPress Enter to return to the main menu.");
+        }
     }
 }
 

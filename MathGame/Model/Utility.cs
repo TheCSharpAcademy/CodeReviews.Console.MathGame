@@ -20,7 +20,6 @@ internal class Utility
     //Utility
     protected static string ReadInput()
     {
-        //allows printing of correct/wrong a tab space away from user input
         StringBuilder input = new StringBuilder();
         while (true)
         {
