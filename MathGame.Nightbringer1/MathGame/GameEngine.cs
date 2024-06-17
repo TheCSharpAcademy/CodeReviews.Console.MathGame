@@ -101,7 +101,7 @@ namespace MathGame
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 var result = Console.ReadLine();
-                
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
@@ -135,7 +135,9 @@ namespace MathGame
                 var secondNumber = divisionNumbers[1];
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
+                
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber / secondNumber)
                 {
