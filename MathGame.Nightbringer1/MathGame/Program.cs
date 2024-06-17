@@ -4,7 +4,6 @@
     {
         public static void Main(string[] args)
         {
-            GameEngine engine = new GameEngine();
             Menu menu = new Menu();
 
             var date = DateTime.UtcNow;
@@ -13,7 +12,7 @@
 
             string name = Helpers.GetName();
 
-            menu.ShowMenu(name);
+            menu.ShowMenu(name, date);
             
             
             

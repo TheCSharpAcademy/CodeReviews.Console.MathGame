@@ -4,7 +4,7 @@ namespace MathGame.Models
 {
     internal class Game
     {
-        private int _score;
+        
 
         public DateTime Date { get; set; }
 

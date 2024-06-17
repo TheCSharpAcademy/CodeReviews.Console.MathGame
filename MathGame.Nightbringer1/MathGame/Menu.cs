@@ -2,9 +2,11 @@
 {
     public class Menu
     {
-        internal void ShowMenu(string name)
+        GameEngine gameEngine = new ();
+        
+        internal void ShowMenu(string name, DateTime date)
         {
-            var menu = new Menu();
+            
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine($"Hello {name}. Which Math Game would you like to play today?");
@@ -30,16 +32,16 @@
                         Helpers.PrintGames();
                         break;
                     case "a":
-                        GameEngine.AdditionGame("Addition Game has been selected");
+                        gameEngine.AdditionGame("Addition Game has been selected");
                         break;
                     case "s":
-                        GameEngine.SubtractionGame("Subtraction Game has been selected");
+                        gameEngine.SubtractionGame("Subtraction Game has been selected");
                         break;
                     case "m":
-                        GameEngine.MultiplicationGame("Multiplication Game has been selected");
+                        gameEngine.MultiplicationGame("Multiplication Game has been selected");
                         break;
                     case "d":
-                        GameEngine.DivisionGame("Division Game has been selected");
+                        gameEngine.DivisionGame("Division Game has been selected");
                         break;
                     case "q":
                         Environment.Exit(1);

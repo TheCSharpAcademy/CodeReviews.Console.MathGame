@@ -7,7 +7,7 @@ namespace MathGame
 {
     internal class GameEngine
     {
-        internal static void AdditionGame(string message)
+        internal void AdditionGame(string message)
         {
             Console.WriteLine($"{message}");
 
@@ -46,7 +46,7 @@ namespace MathGame
             Console.WriteLine($"You scored {score}!");
             Helpers.AddToHistory(GameType.Addition, score);
         }
-        internal static void SubtractionGame(string message)
+        internal void SubtractionGame(string message)
         {
             Console.WriteLine($"{message}");
 
@@ -85,7 +85,7 @@ namespace MathGame
             Console.WriteLine($"You scored {score}!");
             Helpers.AddToHistory(GameType.Subtraction, score);
         }
-        internal static void MultiplicationGame(string message)
+        internal void MultiplicationGame(string message)
         {
             Console.WriteLine($"{message}");
 
@@ -101,6 +101,7 @@ namespace MathGame
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 var result = Console.ReadLine();
+                
 
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
@@ -123,7 +124,7 @@ namespace MathGame
             Console.WriteLine($"You scored {score}!");
             Helpers.AddToHistory(GameType.Multiplication, score);
         }
-        internal static void DivisionGame(string message)
+        internal void DivisionGame(string message)
         {
             int score = 0;
             int lives = 3;

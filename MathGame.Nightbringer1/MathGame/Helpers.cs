@@ -6,11 +6,13 @@ namespace MathGame
     {
         internal static List<Game> games = new List<Game>()
         {
-
+            new Game {Date = DateTime.Now.AddDays(1), Type = Game.GameType.Addition, Score = 5},
+            new Game {Date = DateTime.Now.AddDays(1), Type = Game.GameType.Subtraction, Score = 1}
         };
         internal static void PrintGames()
         {
-            
+            var gamesToPrint = games.Where(x => x.Date > new DateTime(2024, 06, 17)).OrderByDescending(x => x.Score);
+
             Console.Clear();
             Console.WriteLine("Game History");
             Console.WriteLine("-------------------------------------");
