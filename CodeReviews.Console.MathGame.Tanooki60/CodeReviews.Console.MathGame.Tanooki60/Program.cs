@@ -65,6 +65,7 @@ public class MathGame
             3. Multiplication
             4. Division
             5. Game History
+            6. End Game
             """);
     }
     private void DisplayGameHistory(Addition addition, Subtraction subtraction, Multiplication multiplication, Division division)
@@ -160,12 +161,19 @@ public class Division
     {
         int validatedNumberOne = number1;
         int validatedNumberTwo = number2;
+        MathGame random = new();
 
+        if (validatedNumberTwo == 0)
+        {
+            do
+            {
+                validatedNumberTwo = random.GetRandomNumber();
+            } while (validatedNumberTwo == 0);
+        }
         do
         {
             if (!ValidateDivision(validatedNumberOne, validatedNumberTwo))
             {
-                MathGame random = new();
                 validatedNumberOne = random.GetRandomNumber();
                 validatedNumberTwo = random.GetRandomNumber();
             }
