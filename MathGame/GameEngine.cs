@@ -34,7 +34,7 @@
 			}
 
 			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, "Addition");
+			Helpers.AddToHistory(score, GameType.Addition);
 
 
 			Console.Write("Press any key to return to main menu.");
@@ -73,7 +73,7 @@
 			}
 
 			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, "Subtraction");
+			Helpers.AddToHistory(score, GameType.Subtraction);
 			Console.Write("Press any key to return to main menu.");
 			Console.ReadLine();
 		}
@@ -110,7 +110,7 @@
 			}
 
 			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, "Multiplication");
+			Helpers.AddToHistory(score, GameType.Multiplication);
 			Console.Write("Press any key to return to main menu.");
 			Console.ReadLine();
 		}
@@ -147,7 +147,7 @@
 			}
 
 			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, "Division");
+			Helpers.AddToHistory(score, GameType.Division);
 			Console.Write("Press any key to return to main menu.");
 			Console.ReadLine();
 
