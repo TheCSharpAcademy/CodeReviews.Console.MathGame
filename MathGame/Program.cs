@@ -91,6 +91,30 @@ void AdditionGame(string message)
 void SubtractionGame(string message)
 {
 	Console.WriteLine(message);
+	Random random = new Random();
+	int firstNumber;
+	int secondNumber;
+	int score = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		firstNumber = random.Next(1, 11);
+		secondNumber = random.Next(1, 11);
+		Console.Write($"{firstNumber} - {secondNumber} = ");
+		string? result = Console.ReadLine();
+
+		if (int.Parse(result!) == firstNumber - secondNumber)
+		{
+			Console.WriteLine("Correct!");
+			score++;
+		}
+		else
+		{
+			Console.WriteLine("Bzzzt!!! Incorrect!");
+		}
+	}
+
+	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
 }
 
 // Multiplication Game
@@ -98,6 +122,30 @@ void MultiplicationGame(string message)
 {
 
 	Console.WriteLine(message);
+	Random random = new Random();
+	int firstNumber;
+	int secondNumber;
+	int score = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		firstNumber = random.Next(1, 11);
+		secondNumber = random.Next(1, 11);
+		Console.Write($"{firstNumber} x {secondNumber} = ");
+		string? result = Console.ReadLine();
+
+		if (int.Parse(result!) == firstNumber * secondNumber)
+		{
+			Console.WriteLine("Correct!");
+			score++;
+		}
+		else
+		{
+			Console.WriteLine("Bzzzt!!! Incorrect!");
+		}
+	}
+
+	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
 }
 
 // Divsion Game
@@ -105,6 +153,48 @@ void DivisionGame(string message)
 {
 	Console.WriteLine(message);
 
+
+	int score = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		int[] divisionNumbers = GetDivisionNumbers();
+		int firstNumber = divisionNumbers[0];
+		int secondNumber = divisionNumbers[1];
+
+		Console.Write($"{firstNumber} / {secondNumber} = ");
+		string? result = Console.ReadLine();
+
+		if (int.Parse(result!) == firstNumber / secondNumber)
+		{
+			Console.WriteLine("Correct!");
+			score++;
+		}
+		else
+		{
+			Console.WriteLine("Bzzzt!!! Incorrect!");
+		}
+	}
+
+	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+
+}
+
+int[] GetDivisionNumbers()
+{
+	Random random = new Random();
+	int[] result = new int[2];
+
+	result[0] = random.Next(1, 101);
+	result[1] = random.Next(1, 101);
+
+	while (result[0] % result[1] != 0)
+	{
+		result[0] = random.Next(1, 101);
+		result[1] = random.Next(1, 101);
+	}
+
+	return result;
 }
 
 // Random Game
