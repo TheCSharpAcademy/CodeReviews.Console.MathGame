@@ -1,4 +1,4 @@
-The Math Game
+# The Math Game
 
 - Alvin Graham
 
