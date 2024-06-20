@@ -20,36 +20,63 @@ Console.WriteLine("------------------------------------------------------");
 
 string? gameSelected = Console.ReadLine();
 if (gameSelected != null)
-switch (gameSelected.Trim().ToLower())
-{
-	case "a":
-		Console.WriteLine("You selected Addition Game.");
-		break;
-	case "s":
-		Console.WriteLine("You selected Subtraction Game.");
-		break;
-	case "m":
-		Console.WriteLine("You selected Multiplication Game.");
-		break;
-	case "d":
-		Console.WriteLine("You selected Division Game.");
-		break;
-	case "r":
-		Console.WriteLine("You selected Random Game.");
-		break;
-	case "q":
-		Console.WriteLine("You selected quit the game.");
-		break;
-	default:
-		Console.WriteLine("Invalid Input");
-		break;
-}
+	switch (gameSelected.Trim().ToLower())
+	{
+		case "a":
+			AdditionGame("You selected Addition Game.");
+			break;
+		case "s":
+			SubtractionGame("You selected Subtraction Game.");
+			break;
+		case "m":
+			MultiplicationGame("You selected Multiplication Game.");
+			break;
+		case "d":
+			DivisionGame("You selected Division Game.");
+			break;
+		case "r":
+			RandomGame("You selected Random Game.");
+			break;
+		case "q":
+			Console.WriteLine("You selected quit the game.");
+			Environment.Exit(0);
+			break;
+		default:
+			Console.WriteLine("Invalid Input");
+			Environment.Exit(0);
+			break;
+	}
+
 
 
 // Addition Game
+void AdditionGame(string message)
+{
+	Console.WriteLine(message);
+}
 
 // Subtraction Game
+void SubtractionGame(string message)
+{
+	Console.WriteLine(message);
+}
 
 // Multiplication Game
+void MultiplicationGame(string message)
+{
+
+	Console.WriteLine(message);
+}
 
 // Divsion Game
+void DivisionGame(string message)
+{
+	Console.WriteLine(message);
+
+}
+
+// Random Game
+void RandomGame(string message)
+{
+	Console.WriteLine(message);
+}
