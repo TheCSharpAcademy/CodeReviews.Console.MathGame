@@ -17,43 +17,54 @@ void Menu(string name)
 {
 	Console.WriteLine("------------------------------------------------------");
 	Console.WriteLine($"Welcome to The Math Game, {name}.\nThe time is {date.Hour}:{date.Minute} on {date.DayOfWeek}.\n");
-	Console.WriteLine($@"Please select a game to play from the list below:
+	bool firstRun = true;
+	bool playGame = true;
+	do
+	{
+		if (!firstRun)
+			Console.Clear();
+		firstRun = false;
+		Console.WriteLine($@"Please select a game to play from the list below:
 A - Addition
 S - Subtraction
 M - Multiplication
 D - Division
 R - Random
 Q - Quit");
-	Console.WriteLine("------------------------------------------------------");
+		Console.WriteLine("------------------------------------------------------");
+		Console.Write("Game Selection: ");
 
-	string? gameSelected = Console.ReadLine();
-	if (gameSelected != null)
-		switch (gameSelected.Trim().ToLower())
-		{
-			case "a":
-				AdditionGame("Addition Game");
-				break;
-			case "s":
-				SubtractionGame("Subtraction Game");
-				break;
-			case "m":
-				MultiplicationGame("Multiplication Game");
-				break;
-			case "d":
-				DivisionGame("Division Game");
-				break;
-			case "r":
-				RandomGame("Random Game");
-				break;
-			case "q":
-				Console.WriteLine("You selected quit the game.");
-				Environment.Exit(0);
-				break;
-			default:
-				Console.WriteLine("Invalid Input");
-				Environment.Exit(0);
-				break;
-		}
+		string? gameSelected = Console.ReadLine();
+		if (gameSelected != null)
+			switch (gameSelected.Trim().ToLower())
+			{
+				case "a":
+					AdditionGame("Addition Game");
+					break;
+				case "s":
+					SubtractionGame("Subtraction Game");
+					break;
+				case "m":
+					MultiplicationGame("Multiplication Game");
+					break;
+				case "d":
+					DivisionGame("Division Game");
+					break;
+				case "r":
+					RandomGame("Random Game");
+					break;
+				case "q":
+					Console.WriteLine("You selected quit the game.");
+					playGame = false;
+
+					break;
+				default:
+					Console.WriteLine("Invalid Input. Press any key to select a valid entry.");
+					Console.ReadLine();
+
+					break;
+			}
+	} while (playGame);
 }
 
 // Addition Game
@@ -88,6 +99,8 @@ void AdditionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	Console.Write("Press any key to return to main menu.");
+	Console.ReadLine();
 }
 
 // Subtraction Game
@@ -122,6 +135,8 @@ void SubtractionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	Console.Write("Press any key to return to main menu.");
+	Console.ReadLine();
 }
 
 // Multiplication Game
@@ -156,6 +171,8 @@ void MultiplicationGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	Console.Write("Press any key to return to main menu.");
+	Console.ReadLine();
 }
 
 // Divsion Game
@@ -190,6 +207,8 @@ void DivisionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	Console.Write("Press any key to return to main menu.");
+	Console.ReadLine();
 
 }
 
