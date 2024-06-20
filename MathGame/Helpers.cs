@@ -2,15 +2,15 @@
 {
 	internal class Helpers
 	{
-		static List<string> games = new();
-		internal static void GetGames()
+		static List<Game> games = new();
+		internal static void PrintGames()
 		{
 			Console.Clear();
 			Console.WriteLine("Games History");
 			Console.WriteLine("------------------------------------");
-			foreach (string game in games)
+			foreach (Game game in games)
 			{
-				Console.WriteLine(game);
+				Console.WriteLine($"{game.Date} - {game.Type}: Score {game.Score}");
 			}
 			Console.WriteLine("------------------------------------\n");
 			Console.Write("Press any key to return to main menu.");
@@ -19,7 +19,14 @@
 
 		internal static void AddToHistory(int gameScore, string gameType)
 		{
-			games.Add($"{DateTime.Now} - {gameType}: Score {gameScore}");
+			games.Add(new Game
+			{
+				Date = DateTime.Now,
+				Score = gameScore,
+				Type = gameType
+			});
+			//games.Add($"{DateTime.Now} - {gameType}: Score {gameScore}");
+
 		}
 
 		internal static int[] GetDivisionNumbers()
