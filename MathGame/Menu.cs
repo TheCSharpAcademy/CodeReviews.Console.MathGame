@@ -7,8 +7,10 @@
 		// Menu
 		internal void ShowMenu(string name, DateTime date)
 		{
-			Console.WriteLine("------------------------------------------------------");
+			Console.Clear();
 			Console.WriteLine($"Welcome to The Math Game, {name}.\nThe time is {date.Hour}:{date.Minute} on {date.DayOfWeek}.\n");
+			Console.WriteLine("Press eny key for game menu.");
+			Console.ReadLine();
 			bool firstRun = true;
 			bool playGame = true;
 			do

@@ -20,6 +20,10 @@
 				Console.Write($"{firstNumber} + {secondNumber} = ");
 				string? result = Console.ReadLine();
 
+
+				result = Helpers.ValidateResult(result!, $"{firstNumber} + {secondNumber} = ");
+
+
 				if (int.Parse(result!) == firstNumber + secondNumber)
 				{
 					Console.WriteLine("Correct! Press any key for next question.");
@@ -31,8 +35,8 @@
 					Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
 					Console.ReadLine();
 				}
-			}
 
+			}
 			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
 			Helpers.AddToHistory(score, GameType.Addition);
 
@@ -58,6 +62,8 @@
 				secondNumber = random.Next(1, 11);
 				Console.Write($"{firstNumber} - {secondNumber} = ");
 				string? result = Console.ReadLine();
+
+				result = Helpers.ValidateResult(result!, $"{firstNumber} - {secondNumber} = ");
 
 				if (int.Parse(result!) == firstNumber - secondNumber)
 				{
@@ -96,6 +102,8 @@
 				Console.Write($"{firstNumber} x {secondNumber} = ");
 				string? result = Console.ReadLine();
 
+				result = Helpers.ValidateResult(result!, $"{firstNumber} x {secondNumber} = ");
+
 				if (int.Parse(result!) == firstNumber * secondNumber)
 				{
 					Console.WriteLine("Correct! Press any key for next question.");
@@ -132,6 +140,8 @@
 
 				Console.Write($"{firstNumber} / {secondNumber} = ");
 				string? result = Console.ReadLine();
+
+				result = Helpers.ValidateResult(result!, $"{firstNumber} / {secondNumber} = ");
 
 				if (int.Parse(result!) == firstNumber / secondNumber)
 				{
