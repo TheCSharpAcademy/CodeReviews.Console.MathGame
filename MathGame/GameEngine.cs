@@ -1,172 +1,168 @@
-﻿namespace MathGame
+﻿namespace MathGame;
+
+internal class GameEngine
 {
-	internal class GameEngine
+	// Addition Game
+	internal void AdditionGame(string message)
 	{
-		// Addition Game
-		internal void AdditionGame(string message)
+		Random random = new Random();
+		int firstNumber;
+		int secondNumber;
+		int score = 0;
+
+		for (int i = 0; i < 5; i++)
 		{
+			Console.Clear();
+			Console.WriteLine(message + $" (Question {i + 1})");
 
-			Random random = new Random();
-			int firstNumber;
-			int secondNumber;
-			int score = 0;
+			firstNumber = random.Next(1, 11);
+			secondNumber = random.Next(1, 11);
+			Console.Write($"{firstNumber} + {secondNumber} = ");
 
-			for (int i = 0; i < 5; i++)
+			string? result = Console.ReadLine();
+			result = Helpers.ValidateResult(result!, $"{firstNumber} + {secondNumber} = ");
+
+			if (int.Parse(result!) == firstNumber + secondNumber)
 			{
-				Console.Clear();
-				Console.WriteLine(message + $" (Question {i + 1})");
-				firstNumber = random.Next(1, 11);
-				secondNumber = random.Next(1, 11);
-				Console.Write($"{firstNumber} + {secondNumber} = ");
-				string? result = Console.ReadLine();
-
-
-				result = Helpers.ValidateResult(result!, $"{firstNumber} + {secondNumber} = ");
-
-
-				if (int.Parse(result!) == firstNumber + secondNumber)
-				{
-					Console.WriteLine("Correct! Press any key for next question.");
-					score++;
-					Console.ReadLine();
-				}
-				else
-				{
-					Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
-					Console.ReadLine();
-				}
-
+				Console.WriteLine("Correct! Press any key for next question.");
+				score++;
+				Console.ReadLine();
 			}
-			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, GameType.Addition);
-
-
-			Console.Write("Press any key to return to main menu.");
-			Console.ReadLine();
-		}
-
-		// Subtraction Game
-		internal void SubtractionGame(string message)
-		{
-
-			Random random = new Random();
-			int firstNumber;
-			int secondNumber;
-			int score = 0;
-
-			for (int i = 0; i < 5; i++)
+			else
 			{
-				Console.Clear();
-				Console.WriteLine(message + $" (Question {i + 1})");
-				firstNumber = random.Next(1, 11);
-				secondNumber = random.Next(1, 11);
-				Console.Write($"{firstNumber} - {secondNumber} = ");
-				string? result = Console.ReadLine();
-
-				result = Helpers.ValidateResult(result!, $"{firstNumber} - {secondNumber} = ");
-
-				if (int.Parse(result!) == firstNumber - secondNumber)
-				{
-					Console.WriteLine("Correct! Press any key for next question.");
-					score++;
-					Console.ReadLine();
-				}
-				else
-				{
-					Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
-					Console.ReadLine();
-				}
+				Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+				Console.ReadLine();
 			}
-
-			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, GameType.Subtraction);
-			Console.Write("Press any key to return to main menu.");
-			Console.ReadLine();
 		}
 
-		// Multiplication Game
-		internal void MultiplicationGame(string message)
+		Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+		Helpers.AddToHistory(score, GameType.Addition);
+
+		Console.Write("Press any key to return to main menu.");
+		Console.ReadLine();
+	}
+
+	// Subtraction Game
+	internal void SubtractionGame(string message)
+	{
+		Random random = new Random();
+		int firstNumber;
+		int secondNumber;
+		int score = 0;
+
+		for (int i = 0; i < 5; i++)
 		{
+			Console.Clear();
+			Console.WriteLine(message + $" (Question {i + 1})");
 
-			Random random = new Random();
-			int firstNumber;
-			int secondNumber;
-			int score = 0;
+			firstNumber = random.Next(1, 11);
+			secondNumber = random.Next(1, 11);
+			Console.Write($"{firstNumber} - {secondNumber} = ");
 
-			for (int i = 0; i < 5; i++)
+			string? result = Console.ReadLine();
+			result = Helpers.ValidateResult(result!, $"{firstNumber} - {secondNumber} = ");
+
+			if (int.Parse(result!) == firstNumber - secondNumber)
 			{
-				Console.Clear();
-				Console.WriteLine(message + $" (Question {i + 1})");
-				firstNumber = random.Next(1, 11);
-				secondNumber = random.Next(1, 11);
-				Console.Write($"{firstNumber} x {secondNumber} = ");
-				string? result = Console.ReadLine();
-
-				result = Helpers.ValidateResult(result!, $"{firstNumber} x {secondNumber} = ");
-
-				if (int.Parse(result!) == firstNumber * secondNumber)
-				{
-					Console.WriteLine("Correct! Press any key for next question.");
-					score++;
-					Console.ReadLine();
-				}
-				else
-				{
-					Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
-					Console.ReadLine();
-				}
+				Console.WriteLine("Correct! Press any key for next question.");
+				score++;
+				Console.ReadLine();
 			}
-
-			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, GameType.Multiplication);
-			Console.Write("Press any key to return to main menu.");
-			Console.ReadLine();
-		}
-
-		// Divsion Game
-		internal void DivisionGame(string message)
-		{
-
-
-			int score = 0;
-
-			for (int i = 0; i < 5; i++)
+			else
 			{
-				Console.Clear();
-				Console.WriteLine(message + $" (Question {i + 1})");
-				int[] divisionNumbers = Helpers.GetDivisionNumbers();
-				int firstNumber = divisionNumbers[0];
-				int secondNumber = divisionNumbers[1];
-
-				Console.Write($"{firstNumber} / {secondNumber} = ");
-				string? result = Console.ReadLine();
-
-				result = Helpers.ValidateResult(result!, $"{firstNumber} / {secondNumber} = ");
-
-				if (int.Parse(result!) == firstNumber / secondNumber)
-				{
-					Console.WriteLine("Correct! Press any key for next question.");
-					score++;
-					Console.ReadLine();
-				}
-				else
-				{
-					Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
-					Console.ReadLine();
-				}
+				Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+				Console.ReadLine();
 			}
-
-			Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
-			Helpers.AddToHistory(score, GameType.Division);
-			Console.Write("Press any key to return to main menu.");
-			Console.ReadLine();
-
 		}
 
-		// Random Game
-		internal void RandomGame(string message)
+		Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+		Helpers.AddToHistory(score, GameType.Subtraction);
+		Console.Write("Press any key to return to main menu.");
+		Console.ReadLine();
+	}
+
+	// Multiplication Game
+	internal void MultiplicationGame(string message)
+	{
+		Random random = new Random();
+		int firstNumber;
+		int secondNumber;
+		int score = 0;
+
+		for (int i = 0; i < 5; i++)
 		{
-			Console.WriteLine(message);
+			Console.Clear();
+			Console.WriteLine(message + $" (Question {i + 1})");
+
+			firstNumber = random.Next(1, 11);
+			secondNumber = random.Next(1, 11);
+			Console.Write($"{firstNumber} x {secondNumber} = ");
+
+			string? result = Console.ReadLine();
+			result = Helpers.ValidateResult(result!, $"{firstNumber} x {secondNumber} = ");
+
+			if (int.Parse(result!) == firstNumber * secondNumber)
+			{
+				Console.WriteLine("Correct! Press any key for next question.");
+				score++;
+				Console.ReadLine();
+			}
+			else
+			{
+				Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+				Console.ReadLine();
+			}
 		}
+
+		Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+		Helpers.AddToHistory(score, GameType.Multiplication);
+		Console.Write("Press any key to return to main menu.");
+		Console.ReadLine();
+	}
+
+	// Divsion Game
+	internal void DivisionGame(string message)
+	{
+		int score = 0;
+
+		for (int i = 0; i < 5; i++)
+		{
+			Console.Clear();
+			Console.WriteLine(message + $" (Question {i + 1})");
+
+			int[] divisionNumbers = Helpers.GetDivisionNumbers();
+			int firstNumber = divisionNumbers[0];
+			int secondNumber = divisionNumbers[1];
+			Console.Write($"{firstNumber} / {secondNumber} = ");
+
+			string? result = Console.ReadLine();
+			result = Helpers.ValidateResult(result!, $"{firstNumber} / {secondNumber} = ");
+
+			if (int.Parse(result!) == firstNumber / secondNumber)
+			{
+				Console.WriteLine("Correct! Press any key for next question.");
+				score++;
+				Console.ReadLine();
+			}
+			else
+			{
+				Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+				Console.ReadLine();
+			}
+		}
+
+		Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+		Helpers.AddToHistory(score, GameType.Division);
+		Console.Write("Press any key to return to main menu.");
+		Console.ReadLine();
+	}
+
+	// Random Game (To be implemented)
+	internal void RandomGame(string message)
+	{
+		Console.WriteLine(message);
+		Console.WriteLine("This feature is under construction.");
+		Console.WriteLine("\nPress any key to return to game menu.");
+		Console.ReadLine();
 	}
 }
