@@ -31,19 +31,19 @@ Q - Quit");
 		switch (gameSelected.Trim().ToLower())
 		{
 			case "a":
-				AdditionGame("You selected Addition Game.");
+				AdditionGame("Addition Game");
 				break;
 			case "s":
-				SubtractionGame("You selected Subtraction Game.");
+				SubtractionGame("Subtraction Game");
 				break;
 			case "m":
-				MultiplicationGame("You selected Multiplication Game.");
+				MultiplicationGame("Multiplication Game");
 				break;
 			case "d":
-				DivisionGame("You selected Division Game.");
+				DivisionGame("Division Game");
 				break;
 			case "r":
-				RandomGame("You selected Random Game.");
+				RandomGame("Random Game");
 				break;
 			case "q":
 				Console.WriteLine("You selected quit the game.");
@@ -59,7 +59,6 @@ Q - Quit");
 // Addition Game
 void AdditionGame(string message)
 {
-	Console.WriteLine(message);
 
 	Random random = new Random();
 	int firstNumber;
@@ -68,6 +67,8 @@ void AdditionGame(string message)
 
 	for (int i = 0; i < 5; i++)
 	{
+		Console.Clear();
+		Console.WriteLine(message + $" (Question {i + 1})");
 		firstNumber = random.Next(1, 11);
 		secondNumber = random.Next(1, 11);
 		Console.Write($"{firstNumber} + {secondNumber} = ");
@@ -75,12 +76,14 @@ void AdditionGame(string message)
 
 		if (int.Parse(result!) == firstNumber + secondNumber)
 		{
-			Console.WriteLine("Correct!");
+			Console.WriteLine("Correct! Press any key for next question.");
 			score++;
+			Console.ReadLine();
 		}
 		else
 		{
-			Console.WriteLine("Bzzzt!!! Incorrect!");
+			Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+			Console.ReadLine();
 		}
 	}
 
@@ -90,7 +93,7 @@ void AdditionGame(string message)
 // Subtraction Game
 void SubtractionGame(string message)
 {
-	Console.WriteLine(message);
+
 	Random random = new Random();
 	int firstNumber;
 	int secondNumber;
@@ -98,6 +101,8 @@ void SubtractionGame(string message)
 
 	for (int i = 0; i < 5; i++)
 	{
+		Console.Clear();
+		Console.WriteLine(message + $" (Question {i + 1})");
 		firstNumber = random.Next(1, 11);
 		secondNumber = random.Next(1, 11);
 		Console.Write($"{firstNumber} - {secondNumber} = ");
@@ -105,12 +110,14 @@ void SubtractionGame(string message)
 
 		if (int.Parse(result!) == firstNumber - secondNumber)
 		{
-			Console.WriteLine("Correct!");
+			Console.WriteLine("Correct! Press any key for next question.");
 			score++;
+			Console.ReadLine();
 		}
 		else
 		{
-			Console.WriteLine("Bzzzt!!! Incorrect!");
+			Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+			Console.ReadLine();
 		}
 	}
 
@@ -121,7 +128,6 @@ void SubtractionGame(string message)
 void MultiplicationGame(string message)
 {
 
-	Console.WriteLine(message);
 	Random random = new Random();
 	int firstNumber;
 	int secondNumber;
@@ -129,6 +135,8 @@ void MultiplicationGame(string message)
 
 	for (int i = 0; i < 5; i++)
 	{
+		Console.Clear();
+		Console.WriteLine(message + $" (Question {i + 1})");
 		firstNumber = random.Next(1, 11);
 		secondNumber = random.Next(1, 11);
 		Console.Write($"{firstNumber} x {secondNumber} = ");
@@ -136,12 +144,14 @@ void MultiplicationGame(string message)
 
 		if (int.Parse(result!) == firstNumber * secondNumber)
 		{
-			Console.WriteLine("Correct!");
+			Console.WriteLine("Correct! Press any key for next question.");
 			score++;
+			Console.ReadLine();
 		}
 		else
 		{
-			Console.WriteLine("Bzzzt!!! Incorrect!");
+			Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+			Console.ReadLine();
 		}
 	}
 
@@ -151,13 +161,14 @@ void MultiplicationGame(string message)
 // Divsion Game
 void DivisionGame(string message)
 {
-	Console.WriteLine(message);
 
 
 	int score = 0;
 
 	for (int i = 0; i < 5; i++)
 	{
+		Console.Clear();
+		Console.WriteLine(message + $" (Question {i + 1})");
 		int[] divisionNumbers = GetDivisionNumbers();
 		int firstNumber = divisionNumbers[0];
 		int secondNumber = divisionNumbers[1];
@@ -167,12 +178,14 @@ void DivisionGame(string message)
 
 		if (int.Parse(result!) == firstNumber / secondNumber)
 		{
-			Console.WriteLine("Correct!");
+			Console.WriteLine("Correct! Press any key for next question.");
 			score++;
+			Console.ReadLine();
 		}
 		else
 		{
-			Console.WriteLine("Bzzzt!!! Incorrect!");
+			Console.WriteLine("Bzzzt!!! Incorrect! Press any key for next question.");
+			Console.ReadLine();
 		}
 	}
 
