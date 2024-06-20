@@ -3,6 +3,8 @@
 string name = GetName();
 var date = DateTime.Now;
 
+List<string> games = new();
+
 Menu(name);
 
 string GetName()
@@ -25,6 +27,7 @@ void Menu(string name)
 			Console.Clear();
 		firstRun = false;
 		Console.WriteLine($@"Please select a game to play from the list below:
+V - View Game History
 A - Addition
 S - Subtraction
 M - Multiplication
@@ -38,6 +41,9 @@ Q - Quit");
 		if (gameSelected != null)
 			switch (gameSelected.Trim().ToLower())
 			{
+				case "v":
+					GetGames();
+					break;
 				case "a":
 					AdditionGame("Addition Game");
 					break;
@@ -66,6 +72,21 @@ Q - Quit");
 			}
 	} while (playGame);
 }
+
+void GetGames()
+{
+	Console.Clear();
+	Console.WriteLine("Games History");
+	Console.WriteLine("------------------------------------");
+	foreach (string game in games)
+	{
+		Console.WriteLine(game);
+	}
+	Console.WriteLine("------------------------------------\n");
+	Console.Write("Press any key to return to main menu.");
+	Console.ReadLine();
+}
+
 
 // Addition Game
 void AdditionGame(string message)
@@ -99,8 +120,16 @@ void AdditionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	AddToHistory(score, "Addition");
+
+
 	Console.Write("Press any key to return to main menu.");
 	Console.ReadLine();
+}
+
+void AddToHistory(int gameScore, string gameType)
+{
+	games.Add($"{DateTime.Now} - {gameType}: Score {gameScore}");
 }
 
 // Subtraction Game
@@ -135,6 +164,7 @@ void SubtractionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	AddToHistory(score, "Subtraction");
 	Console.Write("Press any key to return to main menu.");
 	Console.ReadLine();
 }
@@ -171,6 +201,7 @@ void MultiplicationGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	AddToHistory(score, "Multiplication");
 	Console.Write("Press any key to return to main menu.");
 	Console.ReadLine();
 }
@@ -207,6 +238,7 @@ void DivisionGame(string message)
 	}
 
 	Console.WriteLine($"Game over. Your score is {score} ({(score / 5.0):P2})");
+	AddToHistory(score, "Division");
 	Console.Write("Press any key to return to main menu.");
 	Console.ReadLine();
 
