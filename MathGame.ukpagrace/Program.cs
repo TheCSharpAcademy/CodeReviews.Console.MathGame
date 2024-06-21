@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Security.Principal;
+
 
 
 
@@ -16,7 +16,6 @@ class MathGame{
 
   public bool ContinueGame{get; set;} = true;
 
-  public string level{get; set;} = "easy";
 
 
   public void DisplayOption(){
@@ -56,20 +55,17 @@ class MathGame{
 
     switch(Option){
       case "e":
-        level = "easy";
         rangeOne = 1;
         rangeTwo = Option == "d" ?   10 : 99;
   
         break;
 
       case "m":
-        level = "meduim";
         rangeOne = 100;
         rangeTwo = 999;
       break;
 
       case "h":
-        level = "hard";
         rangeOne = 1000;
         rangeTwo = 9999;
       break; 
