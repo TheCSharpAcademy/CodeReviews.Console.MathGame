@@ -3,10 +3,9 @@ using Math;
 
 var date = DateTime.UtcNow;
 string? name = GetName();
-var querries = questiondToAnswer();
+var querries = QuestionsToAnswer();
 
 
-var gameHistory = new List<string>();
 
 var selection = new SelectionMenu();
 
@@ -24,7 +23,7 @@ string? GetName()
     return name;
 }
 
-int questiondToAnswer()
+int QuestionsToAnswer()
 {
     Console.Write("How many questions do you want to answer? ");
     string? questions = Console.ReadLine();
