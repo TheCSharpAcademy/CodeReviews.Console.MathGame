@@ -146,36 +146,8 @@ internal class Helpers
 
     internal static int[] GetSubtractionNumbers(Difficulty difficulty)
     {
-        var random = new Random();
-
-        int firstNumber;
-        int secondNumber;
-
-        firstNumber = random.Next(1, 9);
-        secondNumber = random.Next(1, 9);
-
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                firstNumber *= 1;
-                secondNumber *= 1;
-                break;
-            case Difficulty.Medium:
-                firstNumber *= random.Next(2, 9);
-                secondNumber *= random.Next(2, 9);
-                break;
-            case Difficulty.Hard:
-                firstNumber *= random.Next(-5, 15);
-                secondNumber *= random.Next(-5, 15);
-                break;
-        }
-
-        int[] result = new int[2];
-
-        result[0] = firstNumber;
-        result[1] = secondNumber;
-
-        return result;
+        // Uses the same logic for generating numbers as the addition game and can therefore call its method
+        return GetAdditionNumbers(difficulty);
     }
 
     internal static int[] GetMultiplicationNumbers(Difficulty difficulty)
