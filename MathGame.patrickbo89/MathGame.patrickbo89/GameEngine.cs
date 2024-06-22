@@ -26,8 +26,8 @@ internal class GameEngine
 
     private void ShowGameResult(int score, int numberOfQuestions, string elapsedSeconds)
     {
-        Console.WriteLine($"The game is over. You had {score} of {numberOfQuestions} correct answers. You took {elapsedSeconds} seconds. Press any key to return to the main menu.");
-        Console.ReadLine();
+        Console.WriteLine($"\nThe game is over. You had {score} of {numberOfQuestions} correct answers. You took {elapsedSeconds} seconds. Press any key to return to the main menu.");
+        Console.ReadKey();
     }
 
     internal void RunGameLoop(GameType gameType, char operatorSymbol, int numberOfQuestions, Difficulty difficulty, ref int score)
@@ -39,7 +39,7 @@ internal class GameEngine
         for (int i = 0; i < numberOfQuestions; i++)
         {
             Console.Clear();
-            Console.WriteLine($"{gameType} Game ({difficulty}) - Round {i + 1} of {numberOfQuestions}");
+            Console.WriteLine($"{gameType} Game ({difficulty}) - Question {i + 1} of {numberOfQuestions}");
 
             if (gameType == GameType.Random)
             {
@@ -57,14 +57,18 @@ internal class GameEngine
 
             if (int.Parse(resultInput) == correctResult)
             {
-                Console.WriteLine("Correct! Press any key for the next question.");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Correct! Press any key to continue.");
+                Console.ForegroundColor = ConsoleColor.White;
                 score++;
-                Console.ReadLine();
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Incorrect! Press any key for the next question.");
-                Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Incorrect! Press any key to continue.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.ReadKey();
             }
         }
     }

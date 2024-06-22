@@ -11,7 +11,7 @@ internal class Menu
         Console.Clear();
         Console.WriteLine($"Hello, {name}. It's {date}. Welcome to the Math Game. Be ready to be challenged!");
         Console.WriteLine("\nPress any key to show the menu.");
-        Console.ReadLine();
+        Console.ReadKey();
 
         do
         {
@@ -90,7 +90,7 @@ Q - Quit");
                 default:
                     Console.WriteLine("Invalid choice...");
                     Console.WriteLine("Press any key to go back to the main menu.");
-                    Console.ReadLine();
+                    Console.ReadKey();
                     break;
             }
         } while (isGameRunning);

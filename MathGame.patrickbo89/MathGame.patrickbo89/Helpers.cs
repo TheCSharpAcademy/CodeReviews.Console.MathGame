@@ -34,13 +34,14 @@ internal class Helpers
         DrawLine();
 
         Console.WriteLine("\nPress any key to return to the main menu.");
-        Console.ReadLine();
+        Console.ReadKey();
     }
 
     internal static Difficulty GetDifficulty(GameType gameType)
     {
         while (true)
         {
+            Console.Clear();
             Console.WriteLine($@"On what difficulty will you play the {gameType} game?
 
 1 - Easy
@@ -48,6 +49,7 @@ internal class Helpers
 3 - Hard");
 
             Console.Write("\nPlease enter your choice: ");
+
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -59,7 +61,8 @@ internal class Helpers
                 case "3":
                     return Difficulty.Hard;
                 default:
-                    Console.WriteLine("\nInvalid choice. Try again.");
+                    Console.WriteLine("\nInvalid choice. Press any key to try again.");
+                    Console.ReadKey();
                     break;
             }
         }
@@ -84,6 +87,7 @@ internal class Helpers
     {
         int numberOfQuestions;
 
+        Console.Clear();
         Console.Write($"How many questions of {gameType} will you play? ");
         var input = Console.ReadLine();
 
