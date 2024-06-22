@@ -28,7 +28,7 @@ internal class GameEngine
         var endTime = DateTime.UtcNow;
         game.ElapsedSeconds = ((endTime - game.StartTime).TotalSeconds).ToString(string.Format(".00"));
 
-        ShowGameResult(game);
+        DisplayGameResult(game);
 
         Helpers.AddToHistory(game);
     }
@@ -75,7 +75,8 @@ internal class GameEngine
             }
         }
     }
-    private void ShowGameResult(Game game)
+
+    private void DisplayGameResult(Game game)
     {
         Console.WriteLine($"\nThe game is over. You had {game.Score} of {game.NumberOfQuestions} correct answers. You took {game.ElapsedSeconds} seconds. Press any key to return to the main menu.");
         Console.ReadKey();
