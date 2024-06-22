@@ -2,10 +2,10 @@
 
 internal class Menu
 {
-    internal void Show(string name, DateTime date)
-    {
-        GameEngine _gameEngine = new();
+    private readonly GameEngine _gameEngine = new();
 
+    internal void DisplayMenu(string name, DateTime date)
+    {
         bool isGameRunning = true;
 
         Console.Clear();
@@ -37,49 +37,24 @@ Q - Quit");
                     Helpers.DisplayHistory();
                     break;
                 case "a":
-                    int numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Addition);
-                    Helpers.DrawLine();
-
-                    Difficulty difficulty = Helpers.GetDifficulty(GameType.Addition);
-                    Helpers.DrawLine();
-
-                    _gameEngine.StartGame(GameType.Addition, numberOfQuestions, difficulty);
+                    Game game = CreateGame(GameType.Addition);
+                    _gameEngine.StartGame(game);
                     break;
                 case "s":
-                    numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Subtraction);
-                    Helpers.DrawLine();
-
-                    difficulty = Helpers.GetDifficulty(GameType.Subtraction);
-                    Helpers.DrawLine();
-
-                    _gameEngine.StartGame(GameType.Subtraction, numberOfQuestions, difficulty);
+                    game = CreateGame(GameType.Subtraction);
+                    _gameEngine.StartGame(game);
                     break;
                 case "m":
-                    numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Multiplication);
-                    Helpers.DrawLine();
-
-                    difficulty = Helpers.GetDifficulty(GameType.Multiplication);
-                    Helpers.DrawLine();
-
-                    _gameEngine.StartGame(GameType.Multiplication, numberOfQuestions, difficulty);
+                    game = CreateGame(GameType.Multiplication);
+                    _gameEngine.StartGame(game);
                     break;
                 case "d":
-                    numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Division);
-                    Helpers.DrawLine();
-
-                    difficulty = Helpers.GetDifficulty(GameType.Division);
-                    Helpers.DrawLine();
-
-                    _gameEngine.StartGame(GameType.Division, numberOfQuestions, difficulty);
+                    game = CreateGame(GameType.Division);
+                    _gameEngine.StartGame(game);
                     break;
                 case "r":
-                    numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Random);
-                    Helpers.DrawLine();
-
-                    difficulty = Helpers.GetDifficulty(GameType.Random);
-                    Helpers.DrawLine();
-
-                    _gameEngine.StartGame(GameType.Random, numberOfQuestions, difficulty);
+                    game = CreateGame(GameType.Random);
+                    _gameEngine.StartGame(game);
                     break;
                 case "q":
                     Console.WriteLine("\nHope you had fun playing the game. Bye!");
@@ -94,5 +69,16 @@ Q - Quit");
                     break;
             }
         } while (isGameRunning);
+    }
+
+    private Game CreateGame(GameType gameType)
+    {
+        int numberOfQuestions = Helpers.GetNumberOfQuestions(gameType);
+        Helpers.DrawLine();
+
+        Difficulty difficulty = Helpers.GetDifficulty(gameType);
+        Helpers.DrawLine();
+
+        return _gameEngine.SetupGame(gameType, numberOfQuestions, difficulty);
     }
 }

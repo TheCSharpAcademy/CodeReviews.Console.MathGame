@@ -2,51 +2,54 @@
 
 internal class GameEngine
 {
-    internal void StartGame(GameType gameType, int numberOfQuestions, Difficulty difficulty)
+    internal Game SetupGame(GameType gameType, int numberOfQuestions, Difficulty difficulty)
     {
-        var startTime = DateTime.UtcNow;
-        int score = 0;
+        return new Game()
+        {
+            StartTime = DateTime.UtcNow,
+            Type = gameType,
+            Score = 0,
+            NumberOfQuestions = numberOfQuestions,
+            Difficulty = difficulty
+        };
+    }
 
+    internal void StartGame(Game game)
+    {
         char operatorSymbol = ' ';
 
-        if (gameType != GameType.Random)
+        if (game.Type != GameType.Random)
         {
-            operatorSymbol = GetOperatorSymbol(gameType);
+            operatorSymbol = GetOperatorSymbol(game.Type);
         }
 
-        RunGameLoop(gameType, operatorSymbol, numberOfQuestions, difficulty, ref score);
+        RunGameLoop(game, operatorSymbol);
 
         var endTime = DateTime.UtcNow;
-        var elapsedSeconds = ((endTime - startTime).TotalSeconds).ToString(string.Format(".00"));
+        game.ElapsedSeconds = ((endTime - game.StartTime).TotalSeconds).ToString(string.Format(".00"));
 
-        ShowGameResult(score, numberOfQuestions, elapsedSeconds);
+        ShowGameResult(game);
 
-        Helpers.AddToHistory(gameType, difficulty, score, numberOfQuestions, elapsedSeconds);
+        Helpers.AddToHistory(game);
     }
 
-    private void ShowGameResult(int score, int numberOfQuestions, string elapsedSeconds)
-    {
-        Console.WriteLine($"\nThe game is over. You had {score} of {numberOfQuestions} correct answers. You took {elapsedSeconds} seconds. Press any key to return to the main menu.");
-        Console.ReadKey();
-    }
-
-    internal void RunGameLoop(GameType gameType, char operatorSymbol, int numberOfQuestions, Difficulty difficulty, ref int score)
+    internal void RunGameLoop(Game game, char operatorSymbol)
     {
         var random = new Random();
 
         int[] numbers;
 
-        for (int i = 0; i < numberOfQuestions; i++)
+        for (int i = 0; i < game.NumberOfQuestions; i++)
         {
             Console.Clear();
-            Console.WriteLine($"{gameType} Game ({difficulty}) - Question {i + 1} of {numberOfQuestions}");
+            Console.WriteLine($"{game.Type} Game ({game.Difficulty}) - Question {i + 1} of {game.NumberOfQuestions}");
 
-            if (gameType == GameType.Random)
+            if (game.Type == GameType.Random)
             {
                 operatorSymbol = GetRandomOperatorSymbol(random);
             }
 
-            numbers = GenerateNumbers(operatorSymbol, difficulty);
+            numbers = GenerateNumbers(operatorSymbol, game.Difficulty);
 
             Console.Write($"{numbers[0]} {operatorSymbol} {numbers[1]} = ");
 
@@ -60,7 +63,7 @@ internal class GameEngine
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Correct! Press any key to continue.");
                 Console.ForegroundColor = ConsoleColor.White;
-                score++;
+                game.Score++;
                 Console.ReadKey();
             }
             else
@@ -71,6 +74,11 @@ internal class GameEngine
                 Console.ReadKey();
             }
         }
+    }
+    private void ShowGameResult(Game game)
+    {
+        Console.WriteLine($"\nThe game is over. You had {game.Score} of {game.NumberOfQuestions} correct answers. You took {game.ElapsedSeconds} seconds. Press any key to return to the main menu.");
+        Console.ReadKey();
     }
 
     private char GetOperatorSymbol(GameType gameType)

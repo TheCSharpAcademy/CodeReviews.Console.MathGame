@@ -6,4 +6,4 @@ var menu = new Menu();
 
 string name = Helpers.GetName();
 
-menu.Show(name, date);
+menu.DisplayMenu(name, date);

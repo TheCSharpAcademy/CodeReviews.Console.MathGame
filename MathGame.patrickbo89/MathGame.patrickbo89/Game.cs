@@ -2,7 +2,7 @@
 
 internal class Game
 {
-    public DateTime Date { get; set; }
+    public DateTime StartTime { get; set; }
     public GameType Type { get; set; }
     public Difficulty Difficulty { get; set; }
 

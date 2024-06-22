@@ -4,17 +4,9 @@ internal class Helpers
 {
     internal static List<Game> _games = new();
 
-    internal static void AddToHistory(GameType gameType, Difficulty difficulty, int score, int numberOfQuestions, string elapsedSeconds)
+    internal static void AddToHistory(Game game)
     {
-        _games.Add(new Game()
-        {
-            Date = DateTime.Now,
-            Type = gameType,
-            Difficulty = difficulty,
-            Score = score,
-            NumberOfQuestions = numberOfQuestions,
-            ElapsedSeconds = elapsedSeconds
-        });
+        _games.Add(game);
     }
 
     internal static void DisplayHistory()
@@ -29,7 +21,7 @@ internal class Helpers
             if (game.Type == GameType.Addition || game.Type == GameType.Division || game.Type == GameType.Random)
                 tabstop = "\t\t";
 
-            Console.WriteLine($"{game.Date} - {game.Type} ({game.Difficulty}){tabstop} - Score: {game.Score}/{game.NumberOfQuestions}\t - Time: {game.ElapsedSeconds}s");
+            Console.WriteLine($"{game.StartTime} - {game.Type} ({game.Difficulty}){tabstop} - Score: {game.Score}/{game.NumberOfQuestions}\t - Time: {game.ElapsedSeconds}s");
         }
         DrawLine();
 
