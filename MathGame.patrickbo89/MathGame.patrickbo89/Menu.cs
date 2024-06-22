@@ -29,9 +29,9 @@ Q - Quit");
 
             Helpers.DrawLine();
 
-            var gameSelected = Console.ReadLine();
+            var selectedOption = Console.ReadLine();
 
-            switch (gameSelected?.Trim().ToLower())
+            switch (selectedOption?.Trim().ToLower())
             {
                 case "v":
                     Helpers.DisplayHistory();
@@ -43,7 +43,7 @@ Q - Quit");
                     Difficulty difficulty = Helpers.GetDifficulty(GameType.Addition);
                     Helpers.DrawLine();
 
-                    _gameEngine.StartAdditionGame(numberOfQuestions, difficulty);
+                    _gameEngine.StartGame(GameType.Addition, numberOfQuestions, difficulty);
                     break;
                 case "s":
                     numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Subtraction);
@@ -52,7 +52,7 @@ Q - Quit");
                     difficulty = Helpers.GetDifficulty(GameType.Subtraction);
                     Helpers.DrawLine();
 
-                    _gameEngine.StartSubtractionGame(numberOfQuestions, difficulty);
+                    _gameEngine.StartGame(GameType.Subtraction, numberOfQuestions, difficulty);
                     break;
                 case "m":
                     numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Multiplication);
@@ -61,7 +61,7 @@ Q - Quit");
                     difficulty = Helpers.GetDifficulty(GameType.Multiplication);
                     Helpers.DrawLine();
 
-                    _gameEngine.StartMultiplicationGame(numberOfQuestions, difficulty);
+                    _gameEngine.StartGame(GameType.Multiplication, numberOfQuestions, difficulty);
                     break;
                 case "d":
                     numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Division);
@@ -70,7 +70,7 @@ Q - Quit");
                     difficulty = Helpers.GetDifficulty(GameType.Division);
                     Helpers.DrawLine();
 
-                    _gameEngine.StartDivisionGame(numberOfQuestions, difficulty);
+                    _gameEngine.StartGame(GameType.Division, numberOfQuestions, difficulty);
                     break;
                 case "r":
                     numberOfQuestions = Helpers.GetNumberOfQuestions(GameType.Random);
@@ -79,7 +79,7 @@ Q - Quit");
                     difficulty = Helpers.GetDifficulty(GameType.Random);
                     Helpers.DrawLine();
 
-                    _gameEngine.StartRandomGame(numberOfQuestions, difficulty);
+                    _gameEngine.StartGame(GameType.Random, numberOfQuestions, difficulty);
                     break;
                 case "q":
                     Console.WriteLine("\nHope you had fun playing the game. Bye!");

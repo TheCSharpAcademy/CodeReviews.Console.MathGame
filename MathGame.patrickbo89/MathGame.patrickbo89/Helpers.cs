@@ -233,15 +233,15 @@ internal class Helpers
         return result;
     }
 
-    internal static int CalculateResult(GameType gameType, int firstNumber, int secondNumber)
+    internal static int CalculateResult(char operatorSymbol, int firstNumber, int secondNumber)
     {
-        return gameType switch
+        return operatorSymbol switch
         {
-            GameType.Addition => firstNumber + secondNumber,
-            GameType.Subtraction => firstNumber - secondNumber,
-            GameType.Multiplication => firstNumber * secondNumber,
-            GameType.Division => firstNumber / secondNumber,
-            _ => throw new ArgumentException("ArgumentException: Game type not supported.", nameof(gameType))
+            '+' => firstNumber + secondNumber,
+            '-' => firstNumber - secondNumber,
+            '*' => firstNumber * secondNumber,
+            '/' => firstNumber / secondNumber,
+            _ => throw new ArgumentException("ArgumentException: Unknown operator symbol", nameof(operatorSymbol))
         };
     }
 }
