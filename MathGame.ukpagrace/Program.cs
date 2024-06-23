@@ -188,4 +188,3 @@
         mathGame.RunGame();
     }
 }
-
