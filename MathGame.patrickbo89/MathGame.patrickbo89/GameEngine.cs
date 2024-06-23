@@ -2,8 +2,19 @@
 
 internal class GameEngine
 {
-    internal Game SetupGame(GameType gameType, int numberOfQuestions, Difficulty difficulty)
+    private readonly Random _randomizer = new();
+
+    private readonly List<Game> _history = new();
+    public List<Game> History
     {
+        get => _history;
+    }
+
+    internal Game SetupGame(GameType gameType)
+    {
+        int numberOfQuestions = UserInterface.GetNumberOfQuestions(gameType);
+        Difficulty difficulty = UserInterface.GetDifficulty(gameType);
+
         return new Game()
         {
             StartTime = DateTime.UtcNow,
@@ -16,87 +27,55 @@ internal class GameEngine
 
     internal void StartGame(Game game)
     {
-        char operatorSymbol = ' ';
-
-        if (game.Type != GameType.Random)
-        {
-            operatorSymbol = GetOperatorSymbol(game.Type);
-        }
+        char operatorSymbol = game.Type == GameType.Random ? ' ' : GetOperatorSymbol(game.Type);
 
         RunGameLoop(game, operatorSymbol);
 
         var endTime = DateTime.UtcNow;
         game.ElapsedSeconds = ((endTime - game.StartTime).TotalSeconds).ToString(string.Format(".00"));
 
-        DisplayGameResult(game);
-
-        Helpers.AddToHistory(game);
+        UserInterface.DisplayGameResult(game);
+        
+        _history.Add(game);
     }
 
     internal void RunGameLoop(Game game, char operatorSymbol)
     {
-        var random = new Random();
-
         int[] numbers;
 
         for (int i = 0; i < game.NumberOfQuestions; i++)
         {
-            Console.Clear();
-            Console.WriteLine($"{game.Type} Game ({game.Difficulty}) - Question {i + 1} of {game.NumberOfQuestions}");
+            UserInterface.DisplayHeader(game, i + 1);
 
-            if (game.Type == GameType.Random)
-            {
-                operatorSymbol = GetRandomOperatorSymbol(random);
-            }
+            operatorSymbol = game.Type == GameType.Random ? GetRandomOperatorSymbol() : operatorSymbol;
 
             numbers = GenerateNumbers(operatorSymbol, game.Difficulty);
+            UserInterface.DisplayQuestion(numbers, operatorSymbol);
 
-            Console.Write($"{numbers[0]} {operatorSymbol} {numbers[1]} = ");
+            string resultInput = UserInterface.GetResultInput(numbers, operatorSymbol);
+            int correctResult = CalculateResult(operatorSymbol, numbers);
+            bool isCorrectAnswer = int.Parse(resultInput) == correctResult;
+            UserInterface.DisplayAnswerOutcome(isCorrectAnswer);
 
-            var resultInput = Console.ReadLine();
-            resultInput = Helpers.ValidateResultInput(resultInput, numbers[0], numbers[1], operatorSymbol);
-
-            int correctResult = Helpers.CalculateResult(operatorSymbol, numbers[0], numbers[1]);
-
-            if (int.Parse(resultInput) == correctResult)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Correct! Press any key to continue.");
-                Console.ForegroundColor = ConsoleColor.White;
-                game.Score++;
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Incorrect! Press any key to continue.");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.ReadKey();
-            }
+            game.Score += isCorrectAnswer ? 1 : 0;
         }
-    }
-
-    private void DisplayGameResult(Game game)
-    {
-        Console.WriteLine($"\nThe game is over. You had {game.Score} of {game.NumberOfQuestions} correct answers. You took {game.ElapsedSeconds} seconds. Press any key to return to the main menu.");
-        Console.ReadKey();
     }
 
     private char GetOperatorSymbol(GameType gameType)
     {
         return gameType switch
         {
-            GameType.Addition       => '+',
-            GameType.Subtraction    => '-',
+            GameType.Addition => '+',
+            GameType.Subtraction => '-',
             GameType.Multiplication => '*',
-            GameType.Division       => '/',
-            _                       => '+' // fallback value
+            GameType.Division => '/',
+            _ => '+' // fallback value
         };
     }
 
-    private char GetRandomOperatorSymbol(Random random)
+    private char GetRandomOperatorSymbol()
     {
-        int selector = random.Next(0, 4);
+        int selector = _randomizer.Next(0, 4);
 
         return selector switch
         {
@@ -110,24 +89,55 @@ internal class GameEngine
 
     private int[] GenerateNumbers(char operatorSymbol, Difficulty difficulty)
     {
-        int[] numbers = new int[2];
+        int[] numbers;
 
-        switch (operatorSymbol)
+        int multiplier = difficulty switch
         {
-            case '+':
-                numbers = Helpers.GetAdditionNumbers(difficulty);
-                break;
-            case '-':
-                numbers = Helpers.GetSubtractionNumbers(difficulty);
-                break;
-            case '*':
-                numbers = Helpers.GetMultiplicationNumbers(difficulty);
-                break;
-            case '/':
-                numbers = Helpers.GetDivisionNumbers(difficulty);
-                break;
-        }
+            Difficulty.Easy     => 1,
+            Difficulty.Medium   => _randomizer.Next(10, 21),
+            Difficulty.Hard     => _randomizer.Next(100, 1001),
+            _                   => 1 // fallback value
+        };
+
+        if (operatorSymbol == '/')
+            numbers = GenerateDivisionNumbers(multiplier);
+        else
+            numbers = GenerateNumbers(multiplier);
 
         return numbers;
+    }
+
+    private int[] GenerateNumbers(int multiplier)
+    {
+        int firstNumber = _randomizer.Next(1, 9) * multiplier;
+        int secondNumber = _randomizer.Next(1, 9) * multiplier;
+
+        return new int[] { firstNumber, secondNumber };
+    }
+
+    private int[] GenerateDivisionNumbers(int multiplier)
+    {
+        int firstNumber;
+        int secondNumber;
+
+        do
+        {
+            firstNumber = _randomizer.Next(1, 9) * multiplier;
+            secondNumber = _randomizer.Next(1, 9) * multiplier;
+        } while (firstNumber % secondNumber != 0);
+
+        return new int[] { firstNumber, secondNumber };
+    }
+
+    private int CalculateResult(char operatorSymbol, int[] numbers)
+    {
+        return operatorSymbol switch
+        {
+            '+' => numbers[0] + numbers[1],
+            '-' => numbers[0] - numbers[1],
+            '*' => numbers[0] * numbers[1],
+            '/' => numbers[0] / numbers[1],
+            _ => throw new ArgumentException("ArgumentException: Unknown operator symbol", nameof(operatorSymbol))
+        };
     }
 }

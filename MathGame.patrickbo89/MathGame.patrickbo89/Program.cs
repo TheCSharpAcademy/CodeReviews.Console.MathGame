@@ -1,9 +1,9 @@
 ﻿using MathGame.patrickbo89;
 
 var date = DateTime.UtcNow;
-
+var gameEngine = new GameEngine();
 var menu = new Menu();
 
-string name = Helpers.GetName();
+string name = UserInterface.GetName();
 
-menu.DisplayMenu(name, date);
+menu.DisplayMenu(date, gameEngine, name);

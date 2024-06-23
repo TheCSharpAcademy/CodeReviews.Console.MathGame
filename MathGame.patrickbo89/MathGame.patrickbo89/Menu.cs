@@ -2,83 +2,52 @@
 
 internal class Menu
 {
-    private readonly GameEngine _gameEngine = new();
-
-    internal void DisplayMenu(string name, DateTime date)
+    internal void DisplayMenu(DateTime date, GameEngine gameEngine, string name)
     {
         bool isGameRunning = true;
 
-        Console.Clear();
-        Console.WriteLine($"Hello, {name}. It's {date}. Welcome to the Math Game. Be ready to be challenged!");
-        Console.WriteLine("\nPress any key to show the menu.");
-        Console.ReadKey();
+        UserInterface.DisplayGreeting(date, name);
 
         do
         {
-            Console.Clear();
-            Helpers.DrawLine();
-            Console.WriteLine($@"What type of game would you like to play this time? Choose an option:
-
-V - View Game History
-A - Addition
-S - Subtraction
-M - Multiplication
-D - Division
-R - Random
-Q - Quit");
-
-            Helpers.DrawLine();
+            UserInterface.DisplayMenuOptions();
 
             var selectedOption = Console.ReadLine();
 
             switch (selectedOption?.Trim().ToLower())
             {
                 case "v":
-                    Helpers.DisplayHistory();
+                    UserInterface.DisplayHistory(gameEngine);
                     break;
                 case "a":
-                    Game game = CreateGame(GameType.Addition);
-                    _gameEngine.StartGame(game);
+                    Game game = gameEngine.SetupGame(GameType.Addition);
+                    gameEngine.StartGame(game);
                     break;
                 case "s":
-                    game = CreateGame(GameType.Subtraction);
-                    _gameEngine.StartGame(game);
+                    game = gameEngine.SetupGame(GameType.Subtraction);
+                    gameEngine.StartGame(game);
                     break;
                 case "m":
-                    game = CreateGame(GameType.Multiplication);
-                    _gameEngine.StartGame(game);
+                    game = gameEngine.SetupGame(GameType.Multiplication);
+                    gameEngine.StartGame(game);
                     break;
                 case "d":
-                    game = CreateGame(GameType.Division);
-                    _gameEngine.StartGame(game);
+                    game = gameEngine.SetupGame(GameType.Division);
+                    gameEngine.StartGame(game);
                     break;
                 case "r":
-                    game = CreateGame(GameType.Random);
-                    _gameEngine.StartGame(game);
+                    game = gameEngine.SetupGame(GameType.Random);
+                    gameEngine.StartGame(game);
                     break;
                 case "q":
-                    Console.WriteLine("\nHope you had fun playing the game. Bye!");
-                    Console.ReadKey();
+                    UserInterface.DisplayQuitMessage();
 
                     isGameRunning = false;
                     break;
                 default:
-                    Console.WriteLine("Invalid choice...");
-                    Console.WriteLine("Press any key to go back to the main menu.");
-                    Console.ReadKey();
+                    UserInterface.DisplayInvalidMenuChoiceMessage();
                     break;
             }
         } while (isGameRunning);
-    }
-
-    private Game CreateGame(GameType gameType)
-    {
-        int numberOfQuestions = Helpers.GetNumberOfQuestions(gameType);
-        Helpers.DrawLine();
-
-        Difficulty difficulty = Helpers.GetDifficulty(gameType);
-        Helpers.DrawLine();
-
-        return _gameEngine.SetupGame(gameType, numberOfQuestions, difficulty);
     }
 }
