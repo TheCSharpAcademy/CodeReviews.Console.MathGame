@@ -6,10 +6,6 @@
     public List<string> previousGame = [];
     public bool endGame;
 
-    public void DisplayOption(){
-        Console.WriteLine(option);
-    }
-
     public void RandomGame(){
         int randomNumber = random.Next(1, 5);
         string operation;
