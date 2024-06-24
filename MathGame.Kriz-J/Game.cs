@@ -57,24 +57,24 @@ public abstract class Game(ResultKeeper resultKeeper)
         switch (mode)
         {
             case Mode.Standard:
-                PlayGame();
+                StartGame();
                 break;
             case Mode.Timed:
-                PlayGame(timed: true);
+                StartGame(timed: true);
                 break;
             case Mode.Custom:
-                PlayCustomGame();
+                StartCustomGame();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
         }
     }
 
-    private void PlayGame(bool timed = false)
+    private void StartGame(bool timed = false)
     {
         GameCountDown();
 
-        var result = GameLogic(Settings.NumberOfQuestions, timed);
+        var result = PlayGame(Settings.NumberOfQuestions, timed);
 
         result.SaveGameSettings(Settings);
         resultKeeper.Add(result);
@@ -100,29 +100,29 @@ public abstract class Game(ResultKeeper resultKeeper)
         Console.CursorVisible = true;
     }
 
-    private GameResult GameLogic(int nrOfQuestions, bool timed)
+    private GameResult PlayGame(int nrOfQuestions, bool timed)
     {
         var score = 0;
-        var generator = new Random();
+        var rng = new Random();
         var start = DateTime.Now;
 
         for (int i = 0; i < nrOfQuestions; i++)
         {
-            score += ProcessQuestion(timed, generator);
+            score += ProcessQuestion(timed, rng);
         }
 
         return timed ? new GameResult(score, TimeNeeded: DateTime.Now - start) : new GameResult(score);
     }
 
-    private int ProcessQuestion(bool timed, Random generator)
+    private int ProcessQuestion(bool timed, Random rng)
     {
-        int scoreIncrement = 0;
+        var scoreIncrement = 0;
         var isAnswerCorrect = false;
 
         while (!isAnswerCorrect)
         {
             var operatorSwitch = new OperatorSwitch(Settings.GameType);
-            var (a, b) = GenerateNumbers(generator, operatorSwitch);
+            var (a, b) = GenerateNumbers(rng, operatorSwitch);
 
             var startPosition = Console.GetCursorPosition();
             Console.Write($"\t{a} {operatorSwitch.Operator} {b} = ");
@@ -208,10 +208,10 @@ public abstract class Game(ResultKeeper resultKeeper)
         }
     }
     
-    private void PlayCustomGame()
+    private void StartCustomGame()
     {
         SetNumberOfQuestions();
-        PlayGame();
+        StartGame();
         Settings.NumberOfQuestions = Settings.DefaultNumberOfQuestions;
     }
 
