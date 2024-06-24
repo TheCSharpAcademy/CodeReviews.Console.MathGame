@@ -4,6 +4,8 @@ namespace MathGame.Kriz_J;
 
 public record GameResult(int Score, TimeSpan? TimeNeeded = null)
 {
+    private const int ColumnWidth = 20;
+
     public DateTime Timestamp { get; } = DateTime.Now;
 
     public GameType GameType { get; set; }
@@ -16,27 +18,32 @@ public record GameResult(int Score, TimeSpan? TimeNeeded = null)
 
     public double PercentageScore => 100.0 * Score / NumberOfQuestions;
 
-    //TODO: Fix column width/spacing
     public static void PrintResultRowHeaders()
     {
-        Console.WriteLine($"{"\tGAME TYPE",-15}{"MODE",-15}{"DIFFICULTY",-15}{"SCORE",-15}{"TIME NEEDED",-15}");
+        Console.Write("\t");
+
+        foreach (var header in new List<string> { "GAME TYPE", "MODE", "DIFFICULTY", "SCORE", "TIME NEEDED" })
+        {
+            Console.Write(header.PadRight(ColumnWidth));
+        }
+
+        Console.WriteLine();
     }
 
-    //TODO: Fix column width/spacing
     public static void PrintResultRow(GameResult result)
     {
         var score = $"{result.Score}/{result.NumberOfQuestions} - {result.PercentageScore:F2} %";
         var timeNeeded = $@"{result.TimeNeeded:mm\:ss\.fff}";
 
         Console.Write("\t");
-        Console.Write($"{Enum.GetName(result.GameType),-15}");
-        Console.Write($"{result.Mode,-15}");
-        Console.Write($"{result.Difficulty,-15}");
-        Console.Write($"{score,-15}");
+        Console.Write(Enum.GetName(result.GameType)!.PadRight(ColumnWidth));
+        Console.Write(result.Mode.ToString().PadRight(ColumnWidth));
+        Console.Write(result.Difficulty.ToString().PadRight(ColumnWidth));
+        Console.Write(score.PadRight(ColumnWidth));
 
         if (result.TimeNeeded.HasValue)
         {
-            Console.Write($"{timeNeeded,-15}");
+            Console.Write(timeNeeded.PadRight(ColumnWidth));
         }
 
         Console.WriteLine();
