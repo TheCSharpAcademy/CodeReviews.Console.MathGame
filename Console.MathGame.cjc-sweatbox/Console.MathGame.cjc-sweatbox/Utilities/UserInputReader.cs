@@ -20,7 +20,6 @@ namespace Console.MathGame.cjc_sweatbox.Utilities
             {
                 System.Console.WriteLine("Input must be an Integer.");
                 input = System.Console.ReadLine();
-
             };
 
             output = int.Parse(input);
@@ -37,7 +36,6 @@ namespace Console.MathGame.cjc_sweatbox.Utilities
             {
                 System.Console.WriteLine($"Input must be an Integer between {min} and {max}.");
                 input = System.Console.ReadLine();
-
             };
 
             output = int.Parse(input);
@@ -54,7 +52,6 @@ namespace Console.MathGame.cjc_sweatbox.Utilities
             {
                 System.Console.WriteLine("Input must be an Integer that represents the Game Difficulty option.");
                 input = System.Console.ReadLine();
-
             };
 
             output = (GameDifficulty)int.Parse(input);
