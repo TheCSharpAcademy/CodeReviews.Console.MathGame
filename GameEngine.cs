@@ -70,7 +70,7 @@ namespace MathGame
                 Console.WriteLine("Your answer was incorrect, press any key for the next question");
                 Console.ReadLine();
                 return false;
-            };
+            }
         }
 
         internal void SubtractionGame(string message)
