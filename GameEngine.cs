@@ -246,8 +246,6 @@ namespace MathGame
 
         private bool GetDivisionQuestion(int[] difficulty)
         {
-            Random random = new Random();
-
             var divisionNumbers = Helpers.GetDivisionNumbers(difficulty[2]);
             var firstNumber = divisionNumbers[0];
             var secondNumber = divisionNumbers[1];
