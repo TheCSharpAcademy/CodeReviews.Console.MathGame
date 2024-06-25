@@ -113,8 +113,8 @@ namespace Console.MathGame.cjc_sweatbox.Logic
         {
             Question result;
 
-            var firstNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-            var secondNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
+            var firstNumber = Random.Shared.Next(settings.MultiplicationNumberMin, settings.MultiplicationNumberMax + 1);
+            var secondNumber = Random.Shared.Next(settings.MultiplicationNumberMin, settings.MultiplicationNumberMax + 1);
 
             result = new Question()
             {
