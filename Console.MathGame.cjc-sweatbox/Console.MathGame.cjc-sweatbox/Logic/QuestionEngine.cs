@@ -37,16 +37,7 @@ namespace Console.MathGame.cjc_sweatbox.Logic
 
             for (int i = 0; i < settings.QuestionCount; i++)
             {
-                var firstNumber = Random.Shared.Next(settings.AdditionNumberMin, settings.AdditionNumberMax + 1);
-                var secondNumber = Random.Shared.Next(settings.AdditionNumberMin, settings.AdditionNumberMax + 1);
-
-                result.Add(new Question()
-                {
-                    Id = i + 1,
-                    FirstNumber = firstNumber,
-                    SecondNumber = secondNumber,
-                    Type = GameType.Addition
-                });
+                result.Add(GenerateAdditionQuestion(settings, i));
             }
 
             return result;
@@ -76,22 +67,7 @@ namespace Console.MathGame.cjc_sweatbox.Logic
 
             for (int i = 0; i < settings.QuestionCount; i++)
             {
-                var firstNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-                var secondNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-
-                while (firstNumber < secondNumber)
-                {
-                    firstNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-                    secondNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-                }
-
-                result.Add(new Question()
-                {
-                    Id = i + 1,
-                    FirstNumber = firstNumber,
-                    SecondNumber = secondNumber,
-                    Type = GameType.Subtraction
-                });
+                result.Add(GenerateSubtractionQuestion(settings, i));
             }
 
             return result;
@@ -127,16 +103,7 @@ namespace Console.MathGame.cjc_sweatbox.Logic
 
             for (int i = 0; i < settings.QuestionCount; i++)
             {
-                var firstNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-                var secondNumber = Random.Shared.Next(settings.SubtractionNumberMin, settings.SubtractionNumberMax + 1);
-
-                result.Add(new Question()
-                {
-                    Id = i + 1,
-                    FirstNumber = firstNumber,
-                    SecondNumber = secondNumber,
-                    Type = GameType.Multiplication
-                });
+                result.Add(GenerateMultiplicationQuestion(settings, i));
             }
 
             return result;
@@ -166,22 +133,7 @@ namespace Console.MathGame.cjc_sweatbox.Logic
 
             for (int i = 0; i < settings.QuestionCount; i++)
             {
-                var firstNumber = Random.Shared.Next(settings.DivisionNumberMin, settings.DivisionNumberMax + 1);
-                var secondNumber = Random.Shared.Next(settings.DivisionNumberMin, settings.DivisionNumberMax + 1);
-
-                while (firstNumber % secondNumber != 0)
-                {
-                    firstNumber = Random.Shared.Next(settings.DivisionNumberMin, settings.DivisionNumberMax + 1);
-                    secondNumber = Random.Shared.Next(settings.DivisionNumberMin, settings.DivisionNumberMax + 1);
-                }
-
-                result.Add(new Question()
-                {
-                    Id = i + 1,
-                    FirstNumber = firstNumber,
-                    SecondNumber = secondNumber,
-                    Type = GameType.Division
-                });
+                result.Add(GenerateDivisionQuestion(settings, i));
             }
 
             return result;
