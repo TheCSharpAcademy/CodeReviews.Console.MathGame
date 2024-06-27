@@ -1,11 +1,10 @@
 namespace MathGame.Ryleyy {
     public class Game {
-        // Timer _gameTimer = new Timer();
-        int _score = 0;
+        int _score;
         int _questionLimit = 10;
-        int _questionCount = 0;
-        bool _gameOver = false;
-        bool _randomFlag = false;
+        int _questionCount;
+        bool _gameOver;
+        bool _randomFlag;
         private List<string> History { get; } = [];
         MenuOptions _currentGameMode;
         Difficulty _currentDifficulty = Difficulty.Easy;
@@ -28,7 +27,7 @@ namespace MathGame.Ryleyy {
             History,
             Exit
         }
-        
+
         public void StartMenu() {
             Console.WriteLine("------ Welcome to the Math Game! ------");
             Console.WriteLine($"Difficulty: {_questionLimit} {_currentDifficulty} Questions");
@@ -177,7 +176,7 @@ namespace MathGame.Ryleyy {
             if (!_randomFlag)
             {
                 GameOver();
-            };
+            }
         }
 
         private void GameOver()
