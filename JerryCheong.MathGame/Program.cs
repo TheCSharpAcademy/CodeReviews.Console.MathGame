@@ -7,14 +7,13 @@ You should record previous games in a List and there should be an option in the 
 You don't need to record results on a database. Once the program is closed the results will be deleted.
 
 Implement 3 levels of difficulty.
+Easy: Long time to answer(999s). Numbers from 0 to 100
+Medium: Medium time to answer(15s). Numbers from 0 to 1000
+Hard: Short time to answer(5s). Numbers from 0 to 10000
 Add a timer to track how long the user takes to finish the game.
 Add a function that let's the user pick the number of questions.
 Create a 'Random Game' option where the players will be presented with questions from random operations
 */
-
-using System;  // Required for Console.WriteLine, Console.ReadLine, Console.Clear, Console.ReadKey
-using System.Collections.Generic;  // Required for List
-using System.Diagnostics;  // Required for Stopwatch
 
 namespace MathGame
 {
@@ -39,37 +38,63 @@ namespace MathGame
 
             string option = Console.ReadLine();
             int numberOfQuestions;
+            int difficultyLevel;
 
             switch (option)
             {
                 case "1":
                     Console.WriteLine("Enter the number of questions you want to answer:");
                     numberOfQuestions = int.Parse(Console.ReadLine());
-                    await Add(numberOfQuestions);
+                    Console.WriteLine("Select the difficulty level:");
+                    Console.WriteLine("1. Easy");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. Hard");
+                    difficultyLevel = int.Parse(Console.ReadLine());
+                    await Add(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "2":
                     Console.WriteLine("Enter the number of questions you want to answer:");
                     numberOfQuestions = int.Parse(Console.ReadLine());
-                    await Subtract(numberOfQuestions);
+                    Console.WriteLine("Select the difficulty level:");
+                    Console.WriteLine("1. Easy");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. Hard");
+                    difficultyLevel = int.Parse(Console.ReadLine());
+                    await Subtract(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "3":
                     Console.WriteLine("Enter the number of questions you want to answer:");
                     numberOfQuestions = int.Parse(Console.ReadLine());
-                    await Multiply(numberOfQuestions);
+                    Console.WriteLine("Select the difficulty level:");
+                    Console.WriteLine("1. Easy");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. Hard");
+                    difficultyLevel = int.Parse(Console.ReadLine());
+                    await Multiply(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "4":
                     Console.WriteLine("Enter the number of questions you want to answer:");
                     numberOfQuestions = int.Parse(Console.ReadLine());
-                    await Divide(numberOfQuestions);
+                    Console.WriteLine("Select the difficulty level:");
+                    Console.WriteLine("1. Easy");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. Hard");
+                    difficultyLevel = int.Parse(Console.ReadLine());
+                    await Divide(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "5":
                     Console.WriteLine("Enter the number of questions you want to answer:");
                     numberOfQuestions = int.Parse(Console.ReadLine());
-                    RandomGame(numberOfQuestions);
+                    Console.WriteLine("Select the difficulty level:");
+                    Console.WriteLine("1. Easy");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. Hard");
+                    difficultyLevel = int.Parse(Console.ReadLine());
+                    RandomGame(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "6":
@@ -88,10 +113,15 @@ namespace MathGame
 
         private static async Task<string> ReadInputAsync(CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 try
                 {
+                    while (!Console.KeyAvailable)
+                    {
+                        await Task.Delay(100, cancellationToken); // Use a delay to reduce CPU usage
+                        cancellationToken.ThrowIfCancellationRequested();
+                    }
                     return Console.ReadLine(); // Read the input if available
                 }
                 catch (OperationCanceledException)
@@ -114,7 +144,7 @@ namespace MathGame
             await ShowMenu();
         }
 
-        private async Task Add(int numberOfQuestions, bool calledByRandomGame = false)
+        private async Task Add(int numberOfQuestions, int difficultyLevel, bool calledByRandomGame = false)
         {
             int number1;
             int number2;
@@ -123,15 +153,50 @@ namespace MathGame
             while (numberOfQuestions > 0)
             {
                 numberOfQuestions--;
-                number1 = GetRandomNumber();
-                number2 = GetRandomNumber();
-                result = number1 + number2;
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                    case 2:
+                        number1 = GetRandomNumber(0, 1001);
+                        number2 = GetRandomNumber(0, 1001);
+                        result = number1 + number2;
+                        break;
+                    case 3:
+                        number1 = GetRandomNumber(0, 10001);
+                        number2 = GetRandomNumber(0, 10001);
+                        result = number1 + number2;
+                        break;
+                    default:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                }
 
                 Console.WriteLine($"\nWhat is {number1} + {number2}?");
 
                 CancellationTokenSource cts = new CancellationTokenSource();
 
-                Task<int> timer = StartTimerAsync(999, cts.Token);
+                Task<int> timer = new Task<int>(() => 0);
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                    case 2:
+                        timer = StartTimerAsync(15, cts.Token);
+                        break;
+                    case 3:
+                        timer = StartTimerAsync(5, cts.Token);
+                        break;
+                    default:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                }
                 Task<string> readInput = ReadInputAsync(cts.Token);
 
                 Task gameOver = await Task.WhenAny(readInput, timer);
@@ -158,7 +223,7 @@ namespace MathGame
                 else if (gameOver == timer)
                 {
                     cts.Cancel();
-                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
 
@@ -170,19 +235,58 @@ namespace MathGame
             }
         }
 
-        private async Task Subtract(int numberOfQuestions, bool calledByRandomGame = false)
+        private async Task Subtract(int numberOfQuestions, int difficultyLevel, bool calledByRandomGame = false)
         {
             while (numberOfQuestions > 0)
             {
                 numberOfQuestions--;
-                int number1 = GetRandomNumber();
-                int number2 = GetRandomNumber();
-                int result = number1 - number2;
+                int number1;
+                int number2;
+                int result;
+
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                    case 2:
+                        number1 = GetRandomNumber(0, 1001);
+                        number2 = GetRandomNumber(0, 1001);
+                        result = number1 + number2;
+                        break;
+                    case 3:
+                        number1 = GetRandomNumber(0, 10001);
+                        number2 = GetRandomNumber(0, 10001);
+                        result = number1 + number2;
+                        break;
+                    default:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                }
 
                 Console.WriteLine($"\nWhat is {number1} - {number2}?");
                 CancellationTokenSource cts = new CancellationTokenSource();
 
-                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<int> timer = new Task<int>(() => 0);
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                    case 2:
+                        timer = StartTimerAsync(15, cts.Token);
+                        break;
+                    case 3:
+                        timer = StartTimerAsync(5, cts.Token);
+                        break;
+                    default:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                }
                 Task<string> readInput = ReadInputAsync(cts.Token);
 
                 Task gameOver = await Task.WhenAny(readInput, timer);
@@ -221,19 +325,58 @@ namespace MathGame
             }
         }
 
-        private async Task Multiply(int numberOfQuestions, bool calledByRandomGame = false)
+        private async Task Multiply(int numberOfQuestions, int difficultyLevel, bool calledByRandomGame = false)
         {
             while (numberOfQuestions > 0)
             {
                 numberOfQuestions--;
-                int number1 = GetRandomNumber();
-                int number2 = GetRandomNumber();
-                int result = number1 * number2;
+                int number1;
+                int number2;
+                int result;
+
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                    case 2:
+                        number1 = GetRandomNumber(0, 1001);
+                        number2 = GetRandomNumber(0, 1001);
+                        result = number1 + number2;
+                        break;
+                    case 3:
+                        number1 = GetRandomNumber(0, 10001);
+                        number2 = GetRandomNumber(0, 10001);
+                        result = number1 + number2;
+                        break;
+                    default:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                }
 
                 Console.WriteLine($"\nWhat is {number1} * {number2}?");
                 CancellationTokenSource cts = new CancellationTokenSource();
 
-                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<int> timer = new Task<int>(() => 0);
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                    case 2:
+                        timer = StartTimerAsync(15, cts.Token);
+                        break;
+                    case 3:
+                        timer = StartTimerAsync(5, cts.Token);
+                        break;
+                    default:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                }
                 Task<string> readInput = ReadInputAsync(cts.Token);
 
                 Task gameOver = await Task.WhenAny(readInput, timer);
@@ -260,7 +403,7 @@ namespace MathGame
                 else if (gameOver == timer)
                 {
                     cts.Cancel();
-                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
 
@@ -272,14 +415,38 @@ namespace MathGame
             }
         }
 
-        private async Task Divide(int numberOfQuestions, bool calledByRandomGame = false)
+        private async Task Divide(int numberOfQuestions, int difficultyLevel, bool calledByRandomGame = false)
         {
             while (numberOfQuestions > 0)
             {
                 numberOfQuestions--;
-                int number1 = GetRandomNumber();
-                int number2 = GetRandomNumber(1, 11);
-                int result = number1 / number2;
+                int number1;
+                int number2;
+                int result;
+
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                    case 2:
+                        number1 = GetRandomNumber(0, 1001);
+                        number2 = GetRandomNumber(0, 1001);
+                        result = number1 + number2;
+                        break;
+                    case 3:
+                        number1 = GetRandomNumber(0, 10001);
+                        number2 = GetRandomNumber(0, 10001);
+                        result = number1 + number2;
+                        break;
+                    default:
+                        number1 = GetRandomNumber();
+                        number2 = GetRandomNumber();
+                        result = number1 + number2;
+                        break;
+                }
 
                 while (number1 % number2 != 0)
                 {
@@ -291,7 +458,22 @@ namespace MathGame
                 Console.WriteLine($"\nWhat is {number1} / {number2}?");
                 CancellationTokenSource cts = new CancellationTokenSource();
 
-                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<int> timer = new Task<int>(() => 0);
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                    case 2:
+                        timer = StartTimerAsync(15, cts.Token);
+                        break;
+                    case 3:
+                        timer = StartTimerAsync(5, cts.Token);
+                        break;
+                    default:
+                        timer = StartTimerAsync(999, cts.Token);
+                        break;
+                }
                 Task<string> readInput = ReadInputAsync(cts.Token);
 
                 Task gameOver = await Task.WhenAny(readInput, timer);
@@ -330,7 +512,7 @@ namespace MathGame
             }
         }
 
-        private void RandomGame(int numberOfQuestions)
+        private void RandomGame(int numberOfQuestions, int difficultyLevel)
         {
             Random random = new Random();
             while (numberOfQuestions > 0)
@@ -339,16 +521,16 @@ namespace MathGame
                 switch (random.Next(1, 5))
                 {
                     case 1:
-                        Add(1, calledByRandomGame: true).Wait();
+                        Add(1, difficultyLevel, calledByRandomGame: true).Wait();
                         break;
                     case 2:
-                        Subtract(1, calledByRandomGame: true).Wait();
+                        Subtract(1, difficultyLevel, calledByRandomGame: true).Wait();
                         break;
                     case 3:
-                        Multiply(1, calledByRandomGame: true).Wait();
+                        Multiply(1, difficultyLevel, calledByRandomGame: true).Wait();
                         break;
                     case 4:
-                        Divide(1, calledByRandomGame: true).Wait();
+                        Divide(1, difficultyLevel, calledByRandomGame: true).Wait();
                         break;
                 }
             }
@@ -365,7 +547,7 @@ namespace MathGame
             {
                 for (int i = 0; i <= secondsBeforeLose; i++)
                 {
-                    while (!cancellationToken.IsCancellationRequested)
+                    if (!cancellationToken.IsCancellationRequested)
                     {
                         await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
                         secondsElapsed++;
@@ -375,7 +557,7 @@ namespace MathGame
                     // Console.SetCursorPosition(0, Console.CursorTop - 1);
                     // Console.Write($"{i} seconds elapsed.\n");
 
-                    return secondsElapsed;
+                    cancellationToken.ThrowIfCancellationRequested();
                 }
             }
             catch (OperationCanceledException)
