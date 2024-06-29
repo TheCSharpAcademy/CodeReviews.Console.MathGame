@@ -2,7 +2,7 @@
 
 internal class Game
 {
-    public int Score {  get; set; }
+    public int Score { get; set; }
     public DateTime DatePlayed { get; set; }
     public GameType GameType { get; set; }
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-namespace MathGame.gsharshavardhan;
+﻿namespace MathGame.gsharshavardhan;
 
 internal class Menu
 {
-    GameEngine engine  = new GameEngine();
+    GameEngine engine = new GameEngine();
     internal void ShowMenu(string userName)
     {
         var optionsMenu = @$"What game would you like to play?

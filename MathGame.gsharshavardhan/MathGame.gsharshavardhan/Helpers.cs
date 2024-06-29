@@ -1,5 +1,4 @@
 ﻿using MathGame.gsharshavardhan.Models;
-using System.Security.AccessControl;
 
 namespace MathGame.gsharshavardhan;
 
@@ -13,7 +12,7 @@ internal class Helpers
             DatePlayed = DateTime.Now,
             GameType = gameType,
             Score = points
-        } );
+        });
     }
     internal static int[] GetDivisionNumbers()
     {
@@ -38,8 +37,11 @@ internal class Helpers
     {
         Console.Clear();
         PrintLine();
-        Console.Write("PREVIOUS GAMES\n");
-        foreach (var game in gameHistory) Console.WriteLine($"{game.DatePlayed} - {game.GameType}: {game.Score} pts");
+        Console.WriteLine("PREVIOUS GAMES\n");
+        foreach (var game in gameHistory)
+        { 
+            Console.WriteLine($"{game.DatePlayed} - {game.GameType}: {game.Score} pts"); 
+        }
         PrintLine();
         Console.WriteLine("Press any key to go back to the main menu");
         Console.ReadKey(true);
@@ -48,7 +50,7 @@ internal class Helpers
 
     internal static void PrintLine()
     {
-        Console.WriteLine($"{"".PadLeft(Console.WindowWidth, '=')}\n");
+        Console.WriteLine($"{"".PadLeft(Console.WindowWidth, '=')}");
     }
 
     internal static int ParseResult()
@@ -63,5 +65,17 @@ internal class Helpers
         }
 
         return result;
+    }
+
+    internal static string GetName()
+    {
+        Console.WriteLine("Please type your name:");
+        var userName = Console.ReadLine();
+        while (string.IsNullOrEmpty(userName))
+        {
+            Console.WriteLine("Name can't be empty!");
+            userName = Console.ReadLine();
+        }
+        return userName;
     }
 }

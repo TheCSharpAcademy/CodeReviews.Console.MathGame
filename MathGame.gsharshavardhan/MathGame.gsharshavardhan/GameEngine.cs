@@ -64,7 +64,7 @@ internal class GameEngine
             secondNumber = random.Next(1, 100);
 
             Console.WriteLine($"{firstNumber} - {secondNumber}");
-            var result =Helpers.ParseResult();
+            var result = Helpers.ParseResult();
 
             if (result == firstNumber - secondNumber)
             {
