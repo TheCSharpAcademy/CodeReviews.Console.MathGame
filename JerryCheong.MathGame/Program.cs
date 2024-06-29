@@ -588,7 +588,7 @@ namespace MathGame
         private static async Task<int> StartTimerAsync(int secondsBeforeLose, CancellationToken cancellationToken)
         {
             int secondsElapsed = 0;
-            // Console.WriteLine("");
+
             try
             {
                 for (int i = 0; i <= secondsBeforeLose; i++)
@@ -598,11 +598,6 @@ namespace MathGame
                         await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
                         secondsElapsed++;
                     }
-
-                    // Visually update the timer, but making user input difficult, not using for now
-                    // Console.SetCursorPosition(0, Console.CursorTop - 1);
-                    // Console.Write($"{i} seconds elapsed.\n");
-
                     cancellationToken.ThrowIfCancellationRequested();
                 }
             }
