@@ -36,64 +36,90 @@ namespace MathGame
             Console.WriteLine("6. Show History");
             Console.WriteLine("7. Exit");
 
-            string option = Console.ReadLine();
             int numberOfQuestions;
             int difficultyLevel;
+
+            string? option = Console.ReadLine();
 
             switch (option)
             {
                 case "1":
                     Console.WriteLine("Enter the number of questions you want to answer:");
-                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    numberOfQuestions = ConvertToInteger(Console.ReadLine());
                     Console.WriteLine("Select the difficulty level:");
-                    Console.WriteLine("1. Easy");
-                    Console.WriteLine("2. Medium");
-                    Console.WriteLine("3. Hard");
-                    difficultyLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("1. Easy (999 seconds to answer, numbers from 0 to 100)");
+                    Console.WriteLine("2. Medium (15 seconds to answer, numbers from 0 to 1000)");
+                    Console.WriteLine("3. Hard (5 seconds to answer, numbers from 0 to 10000)");
+                    difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    while (difficultyLevel < 1 || difficultyLevel > 3)
+                    {
+                        Console.WriteLine("Invalid difficulty level. Please select a valid option.");
+                        difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    }
                     await Add(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "2":
                     Console.WriteLine("Enter the number of questions you want to answer:");
-                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    numberOfQuestions = ConvertToInteger(Console.ReadLine());
                     Console.WriteLine("Select the difficulty level:");
-                    Console.WriteLine("1. Easy");
-                    Console.WriteLine("2. Medium");
-                    Console.WriteLine("3. Hard");
-                    difficultyLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("1. Easy (999 seconds to answer, numbers from 0 to 100)");
+                    Console.WriteLine("2. Medium (15 seconds to answer, numbers from 0 to 1000)");
+                    Console.WriteLine("3. Hard (5 seconds to answer, numbers from 0 to 10000)");
+                    difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    while (difficultyLevel < 1 || difficultyLevel > 3)
+                    {
+                        Console.WriteLine("Invalid difficulty level. Please select a valid option.");
+                        difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    }
                     await Subtract(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "3":
                     Console.WriteLine("Enter the number of questions you want to answer:");
-                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    numberOfQuestions = ConvertToInteger(Console.ReadLine());
                     Console.WriteLine("Select the difficulty level:");
-                    Console.WriteLine("1. Easy");
-                    Console.WriteLine("2. Medium");
-                    Console.WriteLine("3. Hard");
-                    difficultyLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("1. Easy (999 seconds to answer, numbers from 0 to 100)");
+                    Console.WriteLine("2. Medium (15 seconds to answer, numbers from 0 to 1000)");
+                    Console.WriteLine("3. Hard (5 seconds to answer, numbers from 0 to 10000)");
+                    difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    while (difficultyLevel < 1 || difficultyLevel > 3)
+                    {
+                        Console.WriteLine("Invalid difficulty level. Please select a valid option.");
+                        difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    }
                     await Multiply(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "4":
                     Console.WriteLine("Enter the number of questions you want to answer:");
-                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    numberOfQuestions = ConvertToInteger(Console.ReadLine());
                     Console.WriteLine("Select the difficulty level:");
-                    Console.WriteLine("1. Easy");
-                    Console.WriteLine("2. Medium");
-                    Console.WriteLine("3. Hard");
-                    difficultyLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("1. Easy (999 seconds to answer, numbers from 0 to 100)");
+                    Console.WriteLine("2. Medium (15 seconds to answer, numbers from 0 to 1000)");
+                    Console.WriteLine("3. Hard (5 seconds to answer, numbers from 0 to 10000)");
+                    difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    while (difficultyLevel < 1 || difficultyLevel > 3)
+                    {
+                        Console.WriteLine("Invalid difficulty level. Please select a valid option.");
+                        difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    }
                     await Divide(numberOfQuestions, difficultyLevel);
 
                     break;
                 case "5":
                     Console.WriteLine("Enter the number of questions you want to answer:");
-                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    numberOfQuestions = ConvertToInteger(Console.ReadLine());
                     Console.WriteLine("Select the difficulty level:");
-                    Console.WriteLine("1. Easy");
-                    Console.WriteLine("2. Medium");
-                    Console.WriteLine("3. Hard");
-                    difficultyLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("1. Easy (999 seconds to answer, numbers from 0 to 100)");
+                    Console.WriteLine("2. Medium (15 seconds to answer, numbers from 0 to 1000)");
+                    Console.WriteLine("3. Hard (5 seconds to answer, numbers from 0 to 10000)");
+                    difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    while (difficultyLevel < 1 || difficultyLevel > 3)
+                    {
+                        Console.WriteLine("Invalid difficulty level. Please select a valid option.");
+                        difficultyLevel = ConvertToInteger(Console.ReadLine());
+                    }
                     RandomGame(numberOfQuestions, difficultyLevel);
 
                     break;
@@ -111,6 +137,23 @@ namespace MathGame
             }
         }
 
+        private static int ConvertToInteger(string? input)
+        {
+            try
+            {
+                return int.Parse(input);
+            }
+            catch (FormatException)
+            {
+                do
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    input = Console.ReadLine();
+                } while (!int.TryParse(input, out int result));
+                return int.Parse(input);
+            }
+        }
+
         private static async Task<string> ReadInputAsync(CancellationToken cancellationToken)
         {
             return await Task.Run(async () =>
@@ -122,7 +165,13 @@ namespace MathGame
                         await Task.Delay(100, cancellationToken); // Use a delay to reduce CPU usage
                         cancellationToken.ThrowIfCancellationRequested();
                     }
-                    return Console.ReadLine(); // Read the input if available
+                    string? input = Console.ReadLine();
+                    while (!int.TryParse(input, out int result))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number.");
+                        input = Console.ReadLine();
+                    }
+                    return input; // Read the input if available
                 }
                 catch (OperationCanceledException)
                 {
@@ -249,22 +298,22 @@ namespace MathGame
                     case 1:
                         number1 = GetRandomNumber();
                         number2 = GetRandomNumber();
-                        result = number1 + number2;
+                        result = number1 - number2;
                         break;
                     case 2:
                         number1 = GetRandomNumber(0, 1001);
                         number2 = GetRandomNumber(0, 1001);
-                        result = number1 + number2;
+                        result = number1 - number2;
                         break;
                     case 3:
                         number1 = GetRandomNumber(0, 10001);
                         number2 = GetRandomNumber(0, 10001);
-                        result = number1 + number2;
+                        result = number1 - number2;
                         break;
                     default:
                         number1 = GetRandomNumber();
                         number2 = GetRandomNumber();
-                        result = number1 + number2;
+                        result = number1 - number2;
                         break;
                 }
 
@@ -339,22 +388,22 @@ namespace MathGame
                     case 1:
                         number1 = GetRandomNumber();
                         number2 = GetRandomNumber();
-                        result = number1 + number2;
+                        result = number1 * number2;
                         break;
                     case 2:
                         number1 = GetRandomNumber(0, 1001);
                         number2 = GetRandomNumber(0, 1001);
-                        result = number1 + number2;
+                        result = number1 * number2;
                         break;
                     case 3:
                         number1 = GetRandomNumber(0, 10001);
                         number2 = GetRandomNumber(0, 10001);
-                        result = number1 + number2;
+                        result = number1 * number2;
                         break;
                     default:
                         number1 = GetRandomNumber();
                         number2 = GetRandomNumber();
-                        result = number1 + number2;
+                        result = number1 * number2;
                         break;
                 }
 
@@ -424,36 +473,33 @@ namespace MathGame
                 int number2;
                 int result;
 
-                switch (difficultyLevel)
+                do
                 {
-                    case 1:
-                        number1 = GetRandomNumber();
-                        number2 = GetRandomNumber();
-                        result = number1 + number2;
-                        break;
-                    case 2:
-                        number1 = GetRandomNumber(0, 1001);
-                        number2 = GetRandomNumber(0, 1001);
-                        result = number1 + number2;
-                        break;
-                    case 3:
-                        number1 = GetRandomNumber(0, 10001);
-                        number2 = GetRandomNumber(0, 10001);
-                        result = number1 + number2;
-                        break;
-                    default:
-                        number1 = GetRandomNumber();
-                        number2 = GetRandomNumber();
-                        result = number1 + number2;
-                        break;
-                }
+                    switch (difficultyLevel)
+                    {
+                        case 1:
+                            number1 = GetRandomNumber();
+                            number2 = GetRandomNumber(1, 11);
+                            result = number1 / number2;
+                            break;
+                        case 2:
+                            number1 = GetRandomNumber(0, 1001);
+                            number2 = GetRandomNumber(1, 101);
+                            result = number1 / number2;
+                            break;
+                        case 3:
+                            number1 = GetRandomNumber(0, 10001);
+                            number2 = GetRandomNumber(1, 1001);
+                            result = number1 / number2;
+                            break;
+                        default:
+                            number1 = GetRandomNumber();
+                            number2 = GetRandomNumber();
+                            result = number1 / number2;
+                            break;
+                    }
+                } while (number1 % number2 != 0);
 
-                while (number1 % number2 != 0)
-                {
-                    number1 = GetRandomNumber();
-                    number2 = GetRandomNumber(1, 11);
-                    result = number1 / number2;
-                }
 
                 Console.WriteLine($"\nWhat is {number1} / {number2}?");
                 CancellationTokenSource cts = new CancellationTokenSource();
