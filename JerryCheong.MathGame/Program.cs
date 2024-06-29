@@ -12,31 +12,6 @@ Add a function that let's the user pick the number of questions.
 Create a 'Random Game' option where the players will be presented with questions from random operations
 */
 
-/*
-Timer Psuedo Code:
-1. Wait for user input
-2. Start stopwatch
-3. While user input != desired input
-4. console.WriteLine 
-*/
-
-/*
-Psuedo Code:
-1. Create a class called MathGame
-2. Create a method called StartGame
-3. Create a method called ShowMenu
-4. Create a method called ShowHistory
-5. Create a method called Add
-6. Create a method called Subtract
-7. Create a method called Multiply
-8. Create a method called Divide
-9. Create a method called GetRandomNumber
-11. Create a method called GetRandomDividend
-12. Create a method called GetRandomDivisor
-13. Create a method called RandomGame
-14. Create a method called AddTimer
-*/
-
 using System;  // Required for Console.WriteLine, Console.ReadLine, Console.Clear, Console.ReadKey
 using System.Collections.Generic;  // Required for List
 using System.Diagnostics;  // Required for Stopwatch
@@ -63,26 +38,42 @@ namespace MathGame
             Console.WriteLine("7. Exit");
 
             string option = Console.ReadLine();
+            int numberOfQuestions;
 
             switch (option)
             {
                 case "1":
-                    await Add();
+                    Console.WriteLine("Enter the number of questions you want to answer:");
+                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    await Add(numberOfQuestions);
+
                     break;
                 case "2":
-                    await Subtract();
+                    Console.WriteLine("Enter the number of questions you want to answer:");
+                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    await Subtract(numberOfQuestions);
+
                     break;
                 case "3":
-                    await Multiply();
+                    Console.WriteLine("Enter the number of questions you want to answer:");
+                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    await Multiply(numberOfQuestions);
+
                     break;
                 case "4":
-                    await Divide();
+                    Console.WriteLine("Enter the number of questions you want to answer:");
+                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    await Divide(numberOfQuestions);
+
                     break;
                 case "5":
-                    RandomGame();
+                    Console.WriteLine("Enter the number of questions you want to answer:");
+                    numberOfQuestions = int.Parse(Console.ReadLine());
+                    RandomGame(numberOfQuestions);
+
                     break;
                 case "6":
-                    ShowHistory();
+                    await ShowHistory();
                     break;
                 case "7":
                     Environment.Exit(0);
@@ -110,7 +101,7 @@ namespace MathGame
             }, cancellationToken).ConfigureAwait(false);
         }
 
-        private async void ShowHistory()
+        private async Task ShowHistory()
         {
             Console.Clear();
             Console.WriteLine("History of Games:");
@@ -123,207 +114,273 @@ namespace MathGame
             await ShowMenu();
         }
 
-        private async Task Add()
+        private async Task Add(int numberOfQuestions, bool calledByRandomGame = false)
         {
-            int number1 = GetRandomNumber();
-            int number2 = GetRandomNumber();
-            int result = number1 + number2;
+            int number1;
+            int number2;
+            int result;
 
-            Console.WriteLine($"What is {number1} + {number2}?");
-
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            Task<int> timer = StartTimerAsync(5, cts.Token);
-            Task<string> readInput = ReadInputAsync(cts.Token);
-
-            Task gameOver = await Task.WhenAny(readInput, timer);
-
-            if (gameOver == readInput)
+            while (numberOfQuestions > 0)
             {
-                cts.Cancel();
-                int answer = int.Parse(readInput.Result);
+                numberOfQuestions--;
+                number1 = GetRandomNumber();
+                number2 = GetRandomNumber();
+                result = number1 + number2;
 
-                if (answer == result)
+                Console.WriteLine($"\nWhat is {number1} + {number2}?");
+
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                Task<int> timer = StartTimerAsync(999, cts.Token);
+                Task<string> readInput = ReadInputAsync(cts.Token);
+
+                Task gameOver = await Task.WhenAny(readInput, timer);
+
+                if (gameOver == readInput)
                 {
-                    Console.WriteLine("Correct!");
-                    games.Add($"{number1} + {number2} = {result} - Correct!");
+                    cts.Cancel();
+                    int elapsedSeconds = timer.Result;
+                    int answer = int.Parse(readInput.Result);
+
+                    if (answer == result)
+                    {
+                        Console.WriteLine("Correct!");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} + {number2} = {result} - Correct! {elapsedSeconds} seconds elapsed.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Incorrect. The correct answer is {result}");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} + {number2} = {result} - Incorrect! {elapsedSeconds} seconds elapsed.");
+                    }
                 }
-                else
+                else if (gameOver == timer)
                 {
-                    Console.WriteLine($"Incorrect. The correct answer is {result}");
-                    games.Add($"{number1} + {number2} = {result} - Incorrect!");
+                    cts.Cancel();
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
                 }
             }
-            else if (gameOver == timer)
-            {
-                cts.Cancel();
-                games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
-            }
 
-            Console.WriteLine("Press any key to return to the menu.");
-            Console.ReadKey();
-            await ShowMenu();
+            if (!calledByRandomGame)
+            {
+                Console.WriteLine("Press any key to return to the menu.");
+                Console.ReadKey();
+                await ShowMenu();
+            }
         }
 
-        private async Task Subtract()
+        private async Task Subtract(int numberOfQuestions, bool calledByRandomGame = false)
         {
-            int number1 = GetRandomNumber();
-            int number2 = GetRandomNumber();
-            int result = number1 - number2;
-
-            Console.WriteLine($"What is {number1} - {number2}?");
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            Task<int> timer = StartTimerAsync(9999, cts.Token);
-            Task<string> readInput = ReadInputAsync(cts.Token);
-
-            Task gameOver = await Task.WhenAny(readInput, timer);
-
-            if (gameOver == readInput)
+            while (numberOfQuestions > 0)
             {
-                // cts.Cancel();
-                int answer = int.Parse(readInput.Result);
+                numberOfQuestions--;
+                int number1 = GetRandomNumber();
+                int number2 = GetRandomNumber();
+                int result = number1 - number2;
 
-                if (answer == result)
+                Console.WriteLine($"\nWhat is {number1} - {number2}?");
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<string> readInput = ReadInputAsync(cts.Token);
+
+                Task gameOver = await Task.WhenAny(readInput, timer);
+
+                if (gameOver == readInput)
                 {
-                    Console.WriteLine("Correct!");
-                    games.Add($"{number1} - {number2} = {result} - Correct!");
+                    cts.Cancel();
+                    int elapsedSeconds = timer.Result;
+                    int answer = int.Parse(readInput.Result);
+
+                    if (answer == result)
+                    {
+                        Console.WriteLine("Correct!");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} - {number2} = {result} - Correct! {elapsedSeconds} seconds elapsed.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Incorrect. The correct answer is {result}");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} - {number2} = {result} - Incorrect! {elapsedSeconds} seconds elapsed.");
+                    }
                 }
-                else
+                else if (gameOver == timer)
                 {
-                    Console.WriteLine($"Incorrect. The correct answer is {result}");
-                    games.Add($"{number1} - {number2} = {result} - Incorrect!");
+                    cts.Cancel();
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
-            else if (gameOver == timer)
-            {
-                cts.Cancel();
-                games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
-            }
 
-            Console.WriteLine("Press any key to return to the menu.");
-            Console.ReadKey();
-            await ShowMenu();
+            if (!calledByRandomGame)
+            {
+                Console.WriteLine("Press any key to return to the menu.");
+                Console.ReadKey();
+                await ShowMenu();
+            }
         }
 
-        private async Task Multiply()
+        private async Task Multiply(int numberOfQuestions, bool calledByRandomGame = false)
         {
-            int number1 = GetRandomNumber();
-            int number2 = GetRandomNumber();
-            int result = number1 * number2;
-
-            Console.WriteLine($"What is {number1} * {number2}?");
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            Task<int> timer = StartTimerAsync(9999, cts.Token);
-            Task<string> readInput = ReadInputAsync(cts.Token);
-
-            Task gameOver = await Task.WhenAny(readInput, timer);
-
-            if (gameOver == readInput)
+            while (numberOfQuestions > 0)
             {
-                cts.Cancel();
-                int answer = int.Parse(readInput.Result);
+                numberOfQuestions--;
+                int number1 = GetRandomNumber();
+                int number2 = GetRandomNumber();
+                int result = number1 * number2;
 
-                if (answer == result)
+                Console.WriteLine($"\nWhat is {number1} * {number2}?");
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<string> readInput = ReadInputAsync(cts.Token);
+
+                Task gameOver = await Task.WhenAny(readInput, timer);
+
+                if (gameOver == readInput)
                 {
-                    Console.WriteLine("Correct!");
-                    games.Add($"{number1} * {number2} = {result} - Correct!");
+                    cts.Cancel();
+                    int elapsedSeconds = timer.Result;
+                    int answer = int.Parse(readInput.Result);
+
+                    if (answer == result)
+                    {
+                        Console.WriteLine("Correct!");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} * {number2} = {result} - Correct! {elapsedSeconds} seconds elapsed.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Incorrect. The correct answer is {result}");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} * {number2} = {result} - Incorrect! {elapsedSeconds} seconds elapsed.");
+                    }
                 }
-                else
+                else if (gameOver == timer)
                 {
-                    Console.WriteLine($"Incorrect. The correct answer is {result}");
-                    games.Add($"{number1} * {number2} = {result} - Incorrect!");
+                    cts.Cancel();
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
                 }
             }
-            else if (gameOver == timer)
-            {
-                cts.Cancel();
-                games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result} seconds elapsed.");
-            }
 
-            Console.WriteLine("Press any key to return to the menu.");
-            Console.ReadKey();
-            await ShowMenu();
+            if (!calledByRandomGame)
+            {
+                Console.WriteLine("Press any key to return to the menu.");
+                Console.ReadKey();
+                await ShowMenu();
+            }
         }
 
-        private async Task Divide()
+        private async Task Divide(int numberOfQuestions, bool calledByRandomGame = false)
         {
-            int number1 = GetRandomNumber();
-            int number2 = GetRandomNumber(1, 11);
-            int result = number1 / number2;
-
-            Console.WriteLine($"What is {number1} / {number2}?");
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            Task<int> timer = StartTimerAsync(9999, cts.Token);
-            Task<string> readInput = ReadInputAsync(cts.Token);
-
-            Task gameOver = await Task.WhenAny(readInput, timer);
-
-            if (gameOver == readInput)
+            while (numberOfQuestions > 0)
             {
-                cts.Cancel();
-                int answer = int.Parse(readInput.Result);
+                numberOfQuestions--;
+                int number1 = GetRandomNumber();
+                int number2 = GetRandomNumber(1, 11);
+                int result = number1 / number2;
 
-                if (answer == result)
+                while (number1 % number2 != 0)
                 {
-                    Console.WriteLine("Correct!");
-                    games.Add($"{number1} / {number2} = {result} - Correct!");
+                    number1 = GetRandomNumber();
+                    number2 = GetRandomNumber(1, 11);
+                    result = number1 / number2;
                 }
-                else
+
+                Console.WriteLine($"\nWhat is {number1} / {number2}?");
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                Task<int> timer = StartTimerAsync(9999, cts.Token);
+                Task<string> readInput = ReadInputAsync(cts.Token);
+
+                Task gameOver = await Task.WhenAny(readInput, timer);
+
+                if (gameOver == readInput)
                 {
-                    Console.WriteLine($"Incorrect. The correct answer is {result}");
-                    games.Add($"{number1} / {number2} = {result} - Incorrect!");
+                    cts.Cancel();
+                    int elapsedSeconds = timer.Result;
+                    int answer = int.Parse(readInput.Result);
+
+                    if (answer == result)
+                    {
+                        Console.WriteLine("Correct!");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} / {number2} = {result} - Correct! {elapsedSeconds} seconds elapsed.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Incorrect. The correct answer is {result}");
+                        Console.WriteLine($"You took {elapsedSeconds} seconds to answer this question.");
+                        games.Add($"{number1} / {number2} = {result} - Incorrect! {elapsedSeconds} seconds elapsed.");
+                    }
+                }
+                else if (gameOver == timer)
+                {
+                    cts.Cancel();
+                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
-            else if (gameOver == timer)
-            {
-                cts.Cancel();
-                games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
-            }
 
-            Console.WriteLine("Press any key to return to the menu.");
-            Console.ReadKey();
-            await ShowMenu();
+            if (!calledByRandomGame)
+            {
+                Console.WriteLine("Press any key to return to the menu.");
+                Console.ReadKey();
+                await ShowMenu();
+            }
         }
 
-        private void RandomGame()
+        private void RandomGame(int numberOfQuestions)
         {
             Random random = new Random();
-            switch (random.Next(1, 5))
+            while (numberOfQuestions > 0)
             {
-                case 1:
-                    Add().Wait();
-                    break;
-                case 2:
-                    Subtract().Wait();
-                    break;
-                case 3:
-                    Multiply().Wait();
-                    break;
-                case 4:
-                    Divide().Wait();
-                    break;
+                numberOfQuestions--;
+                switch (random.Next(1, 5))
+                {
+                    case 1:
+                        Add(1, calledByRandomGame: true).Wait();
+                        break;
+                    case 2:
+                        Subtract(1, calledByRandomGame: true).Wait();
+                        break;
+                    case 3:
+                        Multiply(1, calledByRandomGame: true).Wait();
+                        break;
+                    case 4:
+                        Divide(1, calledByRandomGame: true).Wait();
+                        break;
+                }
             }
+            Console.WriteLine("Press any key to return to the menu.");
+            Console.ReadKey();
+            ShowMenu().Wait();
         }
 
         private static async Task<int> StartTimerAsync(int secondsBeforeLose, CancellationToken cancellationToken)
         {
             int secondsElapsed = 0;
-            Console.WriteLine("");
-            for (int i = 0; i <= secondsBeforeLose; i++)
+            // Console.WriteLine("");
+            try
             {
-                if (cancellationToken.IsCancellationRequested)
+                for (int i = 0; i <= secondsBeforeLose; i++)
                 {
+                    while (!cancellationToken.IsCancellationRequested)
+                    {
+                        await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
+                        secondsElapsed++;
+                    }
+
+                    // Visually update the timer, but making user input difficult, not using for now
+                    // Console.SetCursorPosition(0, Console.CursorTop - 1);
+                    // Console.Write($"{i} seconds elapsed.\n");
+
                     return secondsElapsed;
                 }
-
-                Console.SetCursorPosition(0, Console.CursorTop - 1);
-                Console.Write($"{i} seconds elapsed.\n");
-
-                await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
-                secondsElapsed++;
+            }
+            catch (OperationCanceledException)
+            {
+                return secondsElapsed;
             }
             Console.WriteLine("\nTime's up! ");
             return secondsElapsed;
