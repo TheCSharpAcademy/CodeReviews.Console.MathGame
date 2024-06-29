@@ -1,9 +1,3 @@
-﻿
-
-using MathGame.Models;
-using System;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace MathGame
 {
