@@ -362,7 +362,7 @@ namespace MathGame
                 else if (gameOver == timer)
                 {
                     cts.Cancel();
-                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
+                    games.Add($"{number1} - {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
 
@@ -452,7 +452,7 @@ namespace MathGame
                 else if (gameOver == timer)
                 {
                     cts.Cancel();
-                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
+                    games.Add($"{number1} * {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
 
@@ -546,7 +546,7 @@ namespace MathGame
                 else if (gameOver == timer)
                 {
                     cts.Cancel();
-                    games.Add($"{number1} + {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
+                    games.Add($"{number1} / {number2} = {result} - Time's up! {timer.Result - 1} seconds elapsed.");
                 }
             }
 
