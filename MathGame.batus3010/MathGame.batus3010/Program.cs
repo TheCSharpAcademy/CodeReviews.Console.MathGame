@@ -33,16 +33,16 @@ public class Game
             switch (option)
             {
                 case "1":
-                    PlayGame("+");
+                    SelectDifficultyAndPlayGame("+");
                     break;
                 case "2":
-                    PlayGame("-");
+                    SelectDifficultyAndPlayGame("-");
                     break;
                 case "3":
-                    PlayGame("*");
+                    SelectDifficultyAndPlayGame("*");
                     break;
                 case "4":
-                    PlayGame("/");
+                    SelectDifficultyAndPlayGame("/");
                     break;
                 case "5":
                     ShowHistory();
@@ -57,7 +57,26 @@ public class Game
         }
     }
 
-    private void PlayGame(string operation)
+    private void SelectDifficultyAndPlayGame(string operation)
+    {
+        Console.WriteLine("\nSelect Difficulty Level:");
+        Console.WriteLine("1. Easy");
+        Console.WriteLine("2. Medium");
+        Console.WriteLine("3. Hard");
+        Console.Write("Select an option: ");
+        string? difficulty = Console.ReadLine();
+
+        int maxNumber = difficulty switch
+        {
+            "1" => 10, // Easy
+            "2" => 50, // Medium
+            "3" => 100, // Hard
+            _ => 10
+        };
+
+        PlayGame(operation, maxNumber);
+    }
+    private void PlayGame(string operation, int maxNumber)
     {
         Random rand = new Random();
         int a = rand.Next(0, 101);
@@ -96,7 +115,7 @@ public class Game
             Console.WriteLine($"Wrong! The correct answer was {correctAnswer}.");
         }
 
-        history.Add(new GameRecord(operation, $"{a} {operation} {b}", answer, isCorrect, stopwatch.Elapsed));
+        history.Add(new GameRecord(operation, $"{a} {operation} {b}", answer, isCorrect, stopwatch.Elapsed, maxNumber));
     }
 
     private void ShowHistory()
@@ -123,13 +142,21 @@ public class GameRecord
     public int UserAnswer { get; }
     public bool IsCorrect { get; }
     public TimeSpan TimeTaken { get; }
+    public string Difficulty { get; }
 
-    public GameRecord(string gameType, string question, int userAnswer, bool isCorrect, TimeSpan timeTaken)
+    public GameRecord(string gameType, string question, int userAnswer, bool isCorrect, TimeSpan timeTaken, int maxNumber)
     {
         GameType = gameType;
         Question = question;
         UserAnswer = userAnswer;
         IsCorrect = isCorrect;
         TimeTaken = timeTaken;
+        Difficulty = maxNumber switch
+        {
+            10 => "Easy",
+            50 => "Medium",
+            100 => "Hard",
+            _ => "Unknown"
+        };
     }
 }
