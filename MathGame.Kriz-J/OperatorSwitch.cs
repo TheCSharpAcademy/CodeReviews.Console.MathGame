@@ -50,7 +50,12 @@ public class OperatorSwitch
         return numberGeneratorCondition;
     }
 
-    private static bool NoConditionNecessary(int a, int b) => false;
+    private static bool NoConditionNecessary(int a, int b)
+    {
+        // Explicitly unused parameters to suppress warning in Codacy Static Code Analysis
+        var _ = (a, b);
+        return false;
+    }
 
     private static bool SubtractionLessThanZero(int a, int b) => a - b < 0;
 
