@@ -103,18 +103,18 @@ public abstract class Game(ResultKeeper resultKeeper)
     private GameResult PlayGame(int nrOfQuestions, bool timed)
     {
         var score = 0;
-        var rng = new Random();
+        var generator = new Random();
         var start = DateTime.Now;
 
         for (int i = 0; i < nrOfQuestions; i++)
         {
-            score += ProcessQuestion(timed, rng);
+            score += ProcessQuestion(timed, generator);
         }
 
         return timed ? new GameResult(score, TimeNeeded: DateTime.Now - start) : new GameResult(score);
     }
 
-    private int ProcessQuestion(bool timed, Random rng)
+    private int ProcessQuestion(bool timed, Random generator)
     {
         var scoreIncrement = 0;
         var isAnswerCorrect = false;
@@ -122,7 +122,7 @@ public abstract class Game(ResultKeeper resultKeeper)
         while (!isAnswerCorrect)
         {
             var operatorSwitch = new OperatorSwitch(Settings.GameType);
-            var (a, b) = GenerateNumbers(rng, operatorSwitch);
+            var (a, b) = GenerateNumbers(generator, operatorSwitch);
 
             var startPosition = Console.GetCursorPosition();
             Console.Write($"\t{a} {operatorSwitch.Operator} {b} = ");
@@ -158,6 +158,7 @@ public abstract class Game(ResultKeeper resultKeeper)
         {
             a = generator.Next(lower, upper);
             b = generator.Next(lower, upper);
+
         } while (operatorSwitch.NumberGeneratorConditionDelegate(a, b));
 
         return (a, b);

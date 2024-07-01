@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace MathGame.Kriz_J;
+﻿namespace MathGame.Kriz_J;
 
 public class ConsoleHelperMethods
 {
@@ -18,12 +16,12 @@ public class ConsoleHelperMethods
         Console.CursorVisible = false;
         return ReadUserSelection();
     }
-    
+
     public static char ReadUserSelection()
     {
         return char.ToUpper(Console.ReadKey(intercept: true).KeyChar);
     }
-    
+
     public static int ReadUserInteger()
     {
         while (true)

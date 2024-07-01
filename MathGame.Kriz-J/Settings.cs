@@ -5,7 +5,7 @@ namespace MathGame.Kriz_J;
 public class Settings
 {
     public const int MaxNumberOfQuestions = 30;
-    
+
     public const int DefaultNumberOfQuestions = 10;
 
     public const int MinNumberOfQuestions = 0;
@@ -17,7 +17,7 @@ public class Settings
     public Difficulty Difficulty { get; set; } = Difficulty.Easy;
 
     public Mode Mode { get; set; } = Mode.Standard;
-    
+
     public int NumberOfQuestions
     {
         get => _numberOfQuestions;
@@ -31,14 +31,13 @@ public class Settings
 
     public (int Lower, int Upper) NumberLimits => SetNumberLimits(Difficulty);
 
-    //TODO: Customize the difficulty for multiplication and divisions to be fair.
     private static (int lower, int upper) SetNumberLimits(Difficulty difficulty)
     {
         return difficulty switch
         {
             Difficulty.Easy => (lower: 1, upper: 11),
-            Difficulty.Medium => (lower: 11, upper: 101),
-            Difficulty.Hard => (lower: 101, upper: 1001),
+            Difficulty.Medium => (lower: 1, upper: 101),
+            Difficulty.Hard => (lower: 1, upper: 1001),
             _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, "Only '[E]asy', '[M]edium', and '[H]ard' are accepted as difficulties.")
         };
     }
