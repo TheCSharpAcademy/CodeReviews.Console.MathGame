@@ -79,14 +79,14 @@ public class Game
     private void PlayGame(string operation, int maxNumber)
     {
         Random rand = new Random();
-        int a = rand.Next(0, 101);
-        int b = operation == "/" ? rand.Next(1, 101) : rand.Next(0, 101);
+        int a = rand.Next(0, maxNumber);
+        int b = operation == "/" ? rand.Next(1, maxNumber) : rand.Next(0, maxNumber);
         if (operation == "/")
         {
             while (a % b != 0)
             {
-                a = rand.Next(0, 101);
-                b = rand.Next(1, 101);
+                a = rand.Next(0, maxNumber);
+                b = rand.Next(1, maxNumber);
             }
         }
 
@@ -127,12 +127,15 @@ public class Game
         }
 
         Console.WriteLine("\nGame History:");
+        Console.WriteLine($"{"ID".PadRight(5)} | {"Type".PadRight(4)} | {"Question".PadRight(12)} | {"Answer".PadRight(7)} | {"Result".PadRight(7)} | {"Time Taken".PadRight(11)} | {"Difficulty".PadRight(10)}");
+        Console.WriteLine(new string('-', 70)); // Adjust the number of dashes based on the total length of the above header
         for (int i = 0; i < history.Count; i++)
         {
             var game = history[i];
-            Console.WriteLine($"ID: {i + 1} | Type: {game.GameType} | Question: {game.Question} | Answer: {game.UserAnswer} | Result: {(game.IsCorrect ? "Correct" : "Wrong")} | Taken time: {game.TimeTaken.TotalSeconds} seconds");
+            Console.WriteLine($"{(i + 1).ToString().PadRight(5)} | {game.GameType.PadRight(4)} | {game.Question.PadRight(12)} | {game.UserAnswer.ToString().PadRight(7)} | {(game.IsCorrect ? "Correct" : "Wrong").PadRight(7)} | {game.TimeTaken.TotalSeconds.ToString("F2").PadLeft(10)}s | {game.Difficulty.PadRight(10)}");
         }
     }
+
 }
 
 public class GameRecord
