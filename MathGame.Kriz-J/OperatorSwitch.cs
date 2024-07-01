@@ -1,4 +1,5 @@
 ﻿using MathGame.Kriz_J.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MathGame.Kriz_J;
 
@@ -50,12 +51,8 @@ public class OperatorSwitch
         return numberGeneratorCondition;
     }
 
-    private static bool NoConditionNecessary(int a, int b)
-    {
-        // Explicitly unused parameters to suppress warning in Codacy Static Code Analysis
-        var _ = (a, b);
-        return false;
-    }
+    [SuppressMessage("Minor Code Smell", "S1172:Unused method parameters should be removed", Justification = "Parameters are required for method signature consistency")]
+    private static bool NoConditionNecessary(int a, int b) => false;
 
     private static bool SubtractionLessThanZero(int a, int b) => a - b < 0;
 
