@@ -10,7 +10,7 @@ namespace MathGame
     
     internal class GameMechanics
     {
-        bool RandomGame = false;
+        bool RandomGame;
         private History history = new History();
         Random random = new Random();
         public void additionGame(int difficulty)
