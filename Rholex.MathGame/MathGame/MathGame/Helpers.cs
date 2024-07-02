@@ -46,7 +46,6 @@ namespace MathGame
 
         internal static void PrintRecords()
         {
-            //var gamesToPrint = records.Where(x => x.Date > new DateTime(2022, 08, 09)).OrderByDescending(x => x.Score);
             Console.Clear();
             Console.WriteLine("Game Records:");
             Console.WriteLine("--------------------");
