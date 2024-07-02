@@ -1,3 +1,4 @@
+using MathGame;
 
 var menu = new Menu();
 
