@@ -13,7 +13,7 @@ namespace MathGame
         bool RandomGame;
         private History history = new History();
         Random random = new Random();
-        public void additionGame(int difficulty)
+        public void AdditionGame(int difficulty)
         {
             
             Stopwatch stopwatch = new Stopwatch();
@@ -96,7 +96,7 @@ namespace MathGame
             }    
         }
 
-        public void subtractionGame(int difficulty)
+        public void SubtractionGame(int difficulty)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -181,7 +181,7 @@ namespace MathGame
             
         }
 
-        public void divisionGame(int difficulty)
+        public void DivisionGame(int difficulty)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -278,7 +278,7 @@ namespace MathGame
             
         }
 
-        public void multiplicationGame(int difficulty)
+        public void MultiplicationGame(int difficulty)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
