@@ -2,37 +2,13 @@
 {
     internal class Game
     {
-        IOperation Operation { get; set; }
+        IOperation? Operation { get; set; }
         Random Rng { get; set; }
         int NumberOfRounds { get; set; } = Int32.MaxValue;
-
-        internal class DefaultOperation : IOperation
-        {
-            int IOperation.Execute(int operandA, int operandB)
-            {
-                throw new NotImplementedException();
-            }
-
-            char IOperation.GetSymbolChar()
-            {
-                throw new NotImplementedException();
-            }
-
-            string IOperation.GetTextString()
-            {
-                throw new NotImplementedException();
-            }
-
-            bool IOperation.IsValidOperands(int operandA, int operandB)
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public Game(Random rand)
         {
             Rng = rand;
-            Operation = new DefaultOperation();
         }
 
         public void Play(IOperation op)
@@ -51,10 +27,7 @@
             }
 
             HighScore.Add(score, Operation.GetTextString());
-            Console.WriteLine("Time taken: {0}", totalTimeTaken.TotalSeconds);
-            Console.WriteLine("Avg time taken per question: {0}s", totalTimeTaken.TotalSeconds / ((score > 0 ? score : 1 ) + 1));
-            Console.WriteLine("Press any key to go back to main menu");
-            Console.ReadKey();
+            ShowGameEndScreen(score, totalTimeTaken);
         }        
         
         public void PlayRandom(List<IOperation> operations)
@@ -73,8 +46,13 @@
             }
 
             HighScore.Add(score, "Random");
+            ShowGameEndScreen(score, totalTimeTaken);
+        }
+
+        public void ShowGameEndScreen(int score, TimeSpan totalTimeTaken)
+        {
             Console.WriteLine("Time taken: {0}", totalTimeTaken.TotalSeconds);
-            Console.WriteLine("Avg time taken per question: {0}s", totalTimeTaken.TotalSeconds / ((score > 0 ? score : 1 ) + 1));
+            Console.WriteLine("Avg time taken per question: {0}s", totalTimeTaken.TotalSeconds / (score + 1));
             Console.WriteLine("Press any key to go back to main menu");
             Console.ReadKey();
         }
@@ -119,6 +97,11 @@
 
         private (int, int, int) GetNextQuestion()
         {
+            if (Operation is null)
+            {
+                return (0, 0, 0);
+            }
+
             int operandA = Rng.Next(0, 100);
             int operandB = Rng.Next(0, 100);
             
@@ -133,6 +116,11 @@
 
         private void DisplayQuestion(int opA, int opB)
         {
+            if (Operation is null)
+            {
+                return;
+            }
+
             Console.Clear();
             Console.WriteLine("{0} game", Operation.GetTextString());
             Console.WriteLine("{0} {1} {2} = ?", opA, Operation.GetSymbolChar(), opB);
