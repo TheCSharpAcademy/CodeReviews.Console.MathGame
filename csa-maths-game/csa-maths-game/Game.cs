@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Dynamic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace csa_maths_game
+﻿namespace csa_maths_game
 {
     internal class Game
     {
         IOperation Operation { get; set; }
-        Random rng { get; set; }
+        Random Rng { get; set; }
         int NumberOfRounds { get; set; } = Int32.MaxValue;
 
         internal class DefaultOperation : IOperation
@@ -41,7 +31,7 @@ namespace csa_maths_game
 
         public Game(Random rand)
         {
-            rng = rand;
+            Rng = rand;
             Operation = new DefaultOperation();
         }
 
@@ -76,7 +66,7 @@ namespace csa_maths_game
 
             while (correctAnswer && score < NumberOfRounds)
             {
-                Operation = operations[rng.Next(0, operations.Count)];
+                Operation = operations[Rng.Next(0, operations.Count)];
                 score++;
                 (correctAnswer, lastTimeTaken) = PlayRound();
                 totalTimeTaken += lastTimeTaken;
@@ -129,13 +119,13 @@ namespace csa_maths_game
 
         private (int, int, int) GetNextQuestion()
         {
-            int operandA = rng.Next(0, 100);
-            int operandB = rng.Next(0, 100);
+            int operandA = Rng.Next(0, 100);
+            int operandB = Rng.Next(0, 100);
             
             while (!Operation.IsValidOperands(operandA, operandB))
             {
-                operandA = rng.Next(0, 100);
-                operandB = rng.Next(0, 100);
+                operandA = Rng.Next(0, 100);
+                operandB = Rng.Next(0, 100);
             }
 
             return (operandA, operandB, Operation.Execute(operandA, operandB));
