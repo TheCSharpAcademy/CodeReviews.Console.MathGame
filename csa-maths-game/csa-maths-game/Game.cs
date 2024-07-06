@@ -133,13 +133,26 @@
 
         public void SetNumberOfRounds()
         {
-            Console.Clear();
-            Console.WriteLine("Enter number of rounds to play");
-            int rounds = GetUserResponse();
-            NumberOfRounds = rounds;
-            Console.WriteLine("Rounds set to {0}", NumberOfRounds);
-            Console.ReadKey();
+            int rounds = 0; 
+            while (rounds <= 0)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter number of rounds to play");
+                rounds = GetUserResponse();
+                if (rounds <= 0)
+                {
+                    Console.WriteLine("Invalid number of rounds set. Must be a positive and non-zero integer");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    NumberOfRounds = rounds;
+                    Console.WriteLine("Rounds set to {0}", NumberOfRounds);
+                }
+            }
             Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
     }
 }
