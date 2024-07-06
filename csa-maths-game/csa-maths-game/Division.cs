@@ -16,9 +16,9 @@
         }
         public bool IsValidOperands(int operandA, int operandB)
         {
-            if (operandA == 0 || operandB == 0) return false;
+            if (operandB == 0) return false;
 
-            return ((operandA % operandB) == 0);
+            return (operandA % operandB) == 0;
         }
     }
 }
