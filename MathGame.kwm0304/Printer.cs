@@ -92,7 +92,7 @@ public class Printer
     );
     return userAttempt;
   }
-  public static void PrintGameOver(int score)
+  public static void PrintGameOver(int correct, int total)
   {
     AnsiConsole.WriteLine(@"
   _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      
@@ -103,15 +103,15 @@ public class Printer
  \______| /__/     \__\ |__|  |__| |_______|    \______/      \__/     |_______|| _| `._____|
                                                                                              
 ");
-    AnsiConsole.MarkupLine($"[blue]Score: {score}[/]");
+    AnsiConsole.MarkupLine($"[blue]Score: {correct}/{total}[/]");
   }
   public static string PrintInitialsPrompt()
   {
     string response = AnsiConsole.Prompt(
-      new TextPrompt<string>("[green]Enter your initials[/]")
+      new TextPrompt<string>("[green]Enter your initials (Up to 3 letters)[/]")
     .Validate(initials =>
     {
-      return initials.Length != 3
+      return initials.Length > 3 || string.IsNullOrEmpty(initials)
       ? ValidationResult.Error("[red]Initials must be 3 letters.")
       : ValidationResult.Success();
     }
@@ -140,7 +140,7 @@ public class Printer
       table.AddColumns("Score", "Player", "Date", "Difficulty", "Time", "Completed").Centered();
       foreach (LeaderboardEntry entry in leaderboard)
       {
-        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString(), entry.EntryDifficulty, entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
+        table.AddRow(entry.EntryScore.ToString() + "%", entry.Initials, entry.EntryDate.ToString(), entry.EntryDifficulty, entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
       }
       AnsiConsole.Write(table);
     }

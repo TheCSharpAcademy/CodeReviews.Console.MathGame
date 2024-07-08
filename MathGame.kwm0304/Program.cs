@@ -14,7 +14,7 @@ class Program
     Console.Clear();
     while (true)
     {
-      GameLoop.DisplayMainMenu();
+      GameLoop.OnStart();
     }
   }
 }
