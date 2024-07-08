@@ -73,7 +73,7 @@ public class GameLoop
     Printer.PrintLeaderboard();
   }
 
-  private static void GenerateQuestion()
+  private static Question GenerateQuestion()
   {
     if (!settings!.IsRandom)
     {
@@ -84,6 +84,7 @@ public class GameLoop
       Operation randomOperation = GlobalConfig.RandomOperation();
       newQuestion = new Question(randomOperation, settings.DifficultySetting);
     }
+    return newQuestion;
   }
 
   public static GameSettings GetGameSettings()

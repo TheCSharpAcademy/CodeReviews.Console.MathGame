@@ -9,7 +9,7 @@ public class GameSettings
   public Difficulty DifficultySetting { get; set; }
   public bool IsRandom { get; set; }
   public int NumberOfQuestions { get; set; }
-  public int QuestionsAnswered { get; private set; }
+  public int QuestionsAnswered { get; private set; } = 0;
   public GameSettings(
     Operation initialOperation, Difficulty difficultySetting,
     bool isRandom, int numberOfQuetsions)
