@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using MathGame.CSA.Enums;
 using MathGame.CSA.Models;
-using MathGame.kwm0304.Models;
 
 namespace MathGame.CSA;
 
@@ -9,10 +8,9 @@ public class GameLoop
 {
   private static GameSettings? settings;
   private static Question? newQuestion;
-  private static readonly GameTimer timer = new();
-  private static double percent;
+  private static readonly Stopwatch timer = new();
   //StartGame 
-  public static void OnStart()
+  public static void DisplayMainMenu()
   {
     Printer.PrintHeader();
     string response = Printer.PrintMainMenuOptions();
@@ -28,18 +26,53 @@ public class GameLoop
   public static void Run()
   {
     settings = GetGameSettings();
+    timer.Restart();
     timer.Start();
-    HandleGameLoop();
-    GameOver();
-  }
-  private static void HandleGameLoop()
-  {
-    while (settings!.QuestionsAnswered() < settings.NumberOfQuestions)
+    while (settings.QuestionsAnswered < settings.NumberOfQuestions)
     {
       int userAttempt = DisplayNextQuetsion();
-      CheckAnswer(userAttempt, newQuestion!.Answer);
+      if (!CheckAnswer(userAttempt, newQuestion!.Answer))
+      {
+        GameOver();
+        return;
+      }
     }
+    GameOver();
   }
+
+  private static int DisplayNextQuetsion()
+  {
+    Console.Clear();
+    Printer.PrintProgressBar(settings!.NumberOfQuestions, settings.QuestionsAnswered);
+    GenerateQuestion();
+    return Printer.PrintQuestion(newQuestion?.QuestionText!);
+  }
+
+  private static bool CheckAnswer(int attempt, int answer)
+  {
+    if (attempt == answer)
+    {
+      settings!.Increment();
+      return true;
+    }
+    return false;
+  }
+
+  private static void GameOver()
+  {
+    timer.Stop();
+    TimeSpan time = timer.Elapsed;
+    Console.Clear();
+    bool completed = settings!.QuestionsAnswered == settings.NumberOfQuestions;
+    Printer.PrintGameOver(settings.QuestionsAnswered);
+    string initials = Printer.PrintInitialsPrompt();
+    LeaderboardEntry newEntry = new(settings.QuestionsAnswered, initials, settings.DifficultySetting.ToString(), time, completed);
+    Leaderboard.AddEntry(newEntry);
+    Thread.Sleep(1000);
+    Console.Clear();
+    Printer.PrintLeaderboard();
+  }
+
   private static void GenerateQuestion()
   {
     if (!settings!.IsRandom)
@@ -69,42 +102,5 @@ public class GameLoop
       settings = new GameSettings(gameDifficulty, isGameRandom, numberOfQuestions);
     }
     return settings;
-  }
-  private static int DisplayNextQuetsion()
-  {
-    Console.Clear();
-    Printer.PrintProgressBar(settings!.NumberOfQuestions, settings.Correct);
-    GenerateQuestion();
-    return Printer.PrintQuestion(newQuestion?.QuestionText!);
-  }
-  private static void CheckAnswer(int attempt, int answer)
-  {
-    if (attempt == answer)
-    {
-      settings!.Increment();
-    }
-    else
-    {
-      settings!.Decrement();
-    }
-  }
-  private static void GameOver()
-  {
-    timer.Stop();
-    TimeSpan time = timer.ElapsedTime;
-    Console.Clear();
-    bool completed = settings!.QuestionsAnswered() == settings.NumberOfQuestions;
-    Printer.PrintGameOver(settings!.Correct, settings.NumberOfQuestions);
-    string initials = Printer.PrintInitialsPrompt();
-    AddEntryToLeaderboard(initials, time, completed);
-    Thread.Sleep(1000);
-    Console.Clear();
-    Printer.PrintLeaderboard();
-  }
-  private static void AddEntryToLeaderboard(string initials, TimeSpan time, bool completed)
-  {
-    percent = settings!.PercentCorrect();
-    LeaderboardEntry newEntry = new(percent, initials, settings!.DifficultySetting.ToString(), time, completed);
-    Leaderboard.AddEntry(newEntry);
   }
 }
