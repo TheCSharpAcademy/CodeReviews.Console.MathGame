@@ -112,7 +112,7 @@ public class Printer
     .Validate(initials =>
     {
       return initials.Length > 3 || string.IsNullOrEmpty(initials)
-      ? ValidationResult.Error("[red]Initials must be 3 letters.")
+      ? ValidationResult.Error("[red]Initials must be 3 letters.[/]")
       : ValidationResult.Success();
     }
     ));
