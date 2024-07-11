@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathGame
 {
     internal abstract class Game
     {
-        protected int _difficulty { get; set; }
-        protected int _numOfQuestions { get; set; }
+        protected int difficulty { get; set; }
+        protected int numOfQuestions { get; set; }
 
         public Game(int difficulty, int numOfQuestions)
         {
-            _difficulty = difficulty;
-            _numOfQuestions = numOfQuestions;
+            this.difficulty = difficulty;
+            this.numOfQuestions = numOfQuestions;
         }
 
         public abstract int Start();
@@ -30,9 +26,9 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(_difficulty, _difficulty);
+            int power = (int)Math.Pow(this.difficulty, this.difficulty);
 
-            for (int i = 0; i < _numOfQuestions; ++i)
+            for (int i = 0; i < this.numOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(1, 11) * power;
@@ -69,9 +65,9 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(_difficulty, _difficulty);
+            int power = (int)Math.Pow(this.difficulty, this.difficulty);
 
-            for (int i = 0; i < _numOfQuestions; ++i)
+            for (int i = 0; i < this.numOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(0, firstNumber);
@@ -110,9 +106,9 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(_difficulty, _difficulty - 1);
+            int power = (int)Math.Pow(this.difficulty, this.difficulty - 1);
 
-            for (int i = 0; i < _numOfQuestions; ++i)
+            for (int i = 0; i < this.numOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(1, 11) * power;
@@ -152,11 +148,11 @@ namespace MathGame
             var dice = new Random();
             int firstNumber, secondNumber;
 
-            for (int i = 0; i < _numOfQuestions; ++i)
+            for (int i = 0; i < this.numOfQuestions; ++i)
             {
                 do
                 {
-                    firstNumber = dice.Next(0, 25) * _difficulty;
+                    firstNumber = dice.Next(0, 25) * this.difficulty;
                 } while (firstNumber % 2 != 0 && firstNumber % 3 != 0 && firstNumber % 5 != 0 && firstNumber % 7 != 0);
                 
                 do
@@ -200,26 +196,24 @@ namespace MathGame
 
             Console.WriteLine("\nRandom Game - Difficulty Level UNKNOWN");
 
-            var questionsRemain = _numOfQuestions;
-
-            for (int i = 0; i < _numOfQuestions; ++i)
+            for (int i = 0; i < this.numOfQuestions; ++i)
             {
-                var difficulty = dice.Next(1, 5);
+                var difficult = dice.Next(1, 5);
                 var mode = dice.Next(1, 5);
 
                 switch (mode)
                 {
                     case 1:
-                        score += new AdditionGame(difficulty, 1).Start();
+                        score += new AdditionGame(difficult, 1).Start();
                         break;
                     case 2:
-                        score += new SubtractionGame(difficulty, 1).Start();
+                        score += new SubtractionGame(difficult, 1).Start();
                         break;
                     case 3:
-                        score += new MultiplyGame(difficulty, 1).Start();
+                        score += new MultiplyGame(difficult, 1).Start();
                         break;
                     case 4:
-                        score += new DivisionGame(difficulty, 1).Start();
+                        score += new DivisionGame(difficult, 1).Start();
                         break;
                 }
             }
