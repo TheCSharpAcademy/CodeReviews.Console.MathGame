@@ -65,7 +65,6 @@ class Program
         Console.WriteLine("Number of menu option: ");
 
         int score = 0;
-        //int finalScore = 0;
 
         bool exit = false;
 
@@ -83,7 +82,7 @@ class Program
                     int addNum2 = random.Next(0, 100);
                     Calculator add = new Calculator(addNum, '+', addNum2);
                     // Calculating game score
-                    if (add.correctAnswer == true)
+                    if (add.CorrectAnswer == true)
                         score++;
 
                     Console.WriteLine("\n....................................");
@@ -102,7 +101,7 @@ class Program
                     int subtractNum2 = random.Next(0, 100);
 
                     Calculator subtract = new Calculator(subtractNum, '-', subtractNum2);
-                    if (subtract.correctAnswer == true)
+                    if (subtract.CorrectAnswer == true)
                         score++;
 
                     Console.WriteLine("\n....................................");
@@ -121,7 +120,7 @@ class Program
                     int multiplyNum2 = random.Next(0, 100);
 
                     Calculator multiply = new Calculator(multiplyNum, '*', multiplyNum2);
-                    if (multiply.correctAnswer == true)
+                    if (multiply.CorrectAnswer == true)
                         score++;
 
                     Console.WriteLine("\n....................................");
@@ -146,7 +145,7 @@ class Program
                     } while (invalidDivisionNumbers);
 
                     Calculator divide = new Calculator(dividend, '/', divisor);
-                    if (divide.correctAnswer == true)
+                    if (divide.CorrectAnswer == true)
                         score++;
 
                     Console.WriteLine("\n....................................");
@@ -192,35 +191,35 @@ class Program
 }
 public class Calculator
 {
-    public int num1 { get; set; }
-    public int num2 { get; set; }
-    public char myOperator { get; set; }
-    public int result { get; set; }
-    public bool correctAnswer { get; set; }
+    public int Num1 { get; set; }
+    public int Num2 { get; set; }
+    public char MyOperator { get; set; }
+    public int Result { get; set; }
+    public bool CorrectAnswer { get; set; }
     public static List<string> gameHistory = new List<string>();
 
     public Calculator(int num1, char myOperator, int num2)
     {
-        this.num1 = num1;
-        this.num2 = num2;
-        this.myOperator = myOperator;
+        this.Num1 = num1;
+        this.Num2 = num2;
+        this.MyOperator = myOperator;
 
         switch (myOperator)
         {
             case '+':
-                result = num1 + num2;
+                Result = num1 + num2;
                 break;
 
             case '-':
-                result = num1 - num2;
+                Result = num1 - num2;
                 break;
 
             case '*':
-                result = num1 * num2;
+                Result = num1 * num2;
                 break;
 
             case '/':
-                result = num1 / num2;
+                Result = num1 / num2;
                 break;
         }
         GameQA();
@@ -228,7 +227,7 @@ public class Calculator
     // Displaying game Questions & Answers + Game History 
     public void GameQA()
     {
-        string question = $"Q: {num1} {myOperator} {num2} = -------?";
+        string question = $"Q: {Num1} {MyOperator} {Num2} = -------?";
         Console.WriteLine(question);
 
         int solutionNumber;
@@ -236,20 +235,20 @@ public class Calculator
         string gameResult = "";
         string? answer = Console.ReadLine();
 
-        gameResult = int.TryParse(answer?.Trim(), out solutionNumber) ? (solutionNumber == result ? "Bravo!" : "Try harder!") : "Invalid number!";
+        gameResult = int.TryParse(answer?.Trim(), out solutionNumber) ? (solutionNumber == Result ? "Bravo!" : "Try harder!") : "Invalid number!";
         Console.WriteLine(@$"----------------------------------------------------
 {gameResult}
 Your answer = {answer?.Trim()}
-The correct answer = {result}
+The correct answer = {Result}
 ----------------------------------------------------");
-        correctAnswer = solutionNumber == result ? true : false;
+        CorrectAnswer = solutionNumber == Result ? true : false;
 
         gameHistory.Add(@$"
         Time: {DateTime.UtcNow}
 
 Question:         {question}
 Your Answer:      {answer?.Trim()}
-Correct Answer:   {result}
+Correct Answer:   {Result}
 
 **********************************************
 ");
