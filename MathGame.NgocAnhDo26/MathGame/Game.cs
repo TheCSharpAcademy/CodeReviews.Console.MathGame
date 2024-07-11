@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace MathGame
+﻿namespace MathGame
 {
     internal abstract class Game
     {
-        protected int difficulty { get; set; }
-        protected int numOfQuestions { get; set; }
+        protected int Difficulty { get; set; }
+        protected int NumOfQuestions { get; set; }
 
         public Game(int difficulty, int numOfQuestions)
         {
-            this.difficulty = difficulty;
-            this.numOfQuestions = numOfQuestions;
+            Difficulty = difficulty;
+            NumOfQuestions = numOfQuestions;
         }
 
         public abstract int Start();
@@ -26,14 +24,14 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(this.difficulty, this.difficulty);
+            int power = (int)Math.Pow(Difficulty, Difficulty);
 
-            for (int i = 0; i < this.numOfQuestions; ++i)
+            for (int i = 0; i < NumOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(1, 11) * power;
 
-                Menu.history.Add($"{firstNumber} + {secondNumber}");
+                Menu.History.Add($"{firstNumber} + {secondNumber}");
 
                 Console.WriteLine($"\nQuestion: {firstNumber} + {secondNumber}?");
                 Console.Write("Your answer: ");
@@ -65,14 +63,14 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(this.difficulty, this.difficulty);
+            int power = (int)Math.Pow(Difficulty, Difficulty);
 
-            for (int i = 0; i < this.numOfQuestions; ++i)
+            for (int i = 0; i < NumOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(0, firstNumber);
 
-                Menu.history.Add($"{firstNumber} - {secondNumber}");
+                Menu.History.Add($"{firstNumber} - {secondNumber}");
 
                 Console.WriteLine($"\nQuestion: {firstNumber} - {secondNumber}?");
                 Console.Write("Your answer: ");
@@ -106,14 +104,14 @@ namespace MathGame
             int score = 0;
             var dice = new Random();
             int firstNumber, secondNumber;
-            int power = (int)Math.Pow(this.difficulty, this.difficulty - 1);
+            int power = (int)Math.Pow(Difficulty, Difficulty - 1);
 
-            for (int i = 0; i < this.numOfQuestions; ++i)
+            for (int i = 0; i < NumOfQuestions; ++i)
             {
                 firstNumber = dice.Next(1, 11) * power;
                 secondNumber = dice.Next(1, 11) * power;
 
-                Menu.history.Add($"{firstNumber} * {secondNumber}");
+                Menu.History.Add($"{firstNumber} * {secondNumber}");
 
                 Console.WriteLine($"\nQuestion: {firstNumber} * {secondNumber}?");
                 Console.Write("Your answer: ");
@@ -148,11 +146,11 @@ namespace MathGame
             var dice = new Random();
             int firstNumber, secondNumber;
 
-            for (int i = 0; i < this.numOfQuestions; ++i)
+            for (int i = 0; i < NumOfQuestions; ++i)
             {
                 do
                 {
-                    firstNumber = dice.Next(0, 25) * this.difficulty;
+                    firstNumber = dice.Next(0, 25) * Difficulty;
                 } while (firstNumber % 2 != 0 && firstNumber % 3 != 0 && firstNumber % 5 != 0 && firstNumber % 7 != 0);
                 
                 do
@@ -160,7 +158,7 @@ namespace MathGame
                     secondNumber = dice.Next(1, firstNumber + 1);
                 } while (firstNumber % secondNumber != 0);
 
-                Menu.history.Add($"{firstNumber} / {secondNumber}");
+                Menu.History.Add($"{firstNumber} / {secondNumber}");
 
                 Console.WriteLine($"\nQuestion: {firstNumber} / {secondNumber}?");
                 Console.Write("Your answer: ");
@@ -196,7 +194,7 @@ namespace MathGame
 
             Console.WriteLine("\nRandom Game - Difficulty Level UNKNOWN");
 
-            for (int i = 0; i < this.numOfQuestions; ++i)
+            for (int i = 0; i < NumOfQuestions; ++i)
             {
                 var difficult = dice.Next(1, 5);
                 var mode = dice.Next(1, 5);

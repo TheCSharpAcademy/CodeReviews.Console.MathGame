@@ -76,8 +76,8 @@ while (isRunning)
         case 6:
             Console.Clear();
             Console.WriteLine("\tGame History\n");
-            for (int i = 0; i < Menu.history.Count; i++)
-                Console.WriteLine($"{i + 1}. {Menu.history[i]}");
+            for (int i = 0; i < Menu.History.Count; i++)
+                Console.WriteLine($"{i + 1}. {Menu.History[i]}");
             break;
         case 7:
             Console.WriteLine("The game ends here...");

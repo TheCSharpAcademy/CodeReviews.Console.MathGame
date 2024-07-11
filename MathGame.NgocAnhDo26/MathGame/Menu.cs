@@ -2,7 +2,7 @@
 {
     internal class Menu
     {
-        public static List<string> history = new List<string>();
+        public static List<string> History = new List<string>();
 
         public void Print()
         {
