@@ -66,7 +66,7 @@ void Input()
     } while (incorrectInput);
 }
 
-int Add(int x, int y)
+int Add()
 {
     int result = 0;
 
@@ -77,7 +77,7 @@ int Add(int x, int y)
     return result;
 }
 
-int Subtract(int x, int y)
+int Subtract()
 {
     int result = 0;
     string question = $"What is {num1} - {num2}?";
@@ -87,7 +87,7 @@ int Subtract(int x, int y)
     return result;
 }
 
-int Multiply(int x, int y)
+int Multiply()
 {
     int result = 0;
     string question = $"What is {num1} * {num2}?";
@@ -97,7 +97,7 @@ int Multiply(int x, int y)
     return result;
 }
 
-int Division(int x, int y)
+int Division()
 {
     int result = 0;
     string question = $"What is {num1} / {num2}?";
@@ -115,7 +115,6 @@ void LogHistory()
         Console.WriteLine("\nNo games played yet!!");
         return;
     }
-    // Console.WriteLine("");
     foreach (string str in log)
     {
         Console.WriteLine(str);
@@ -148,7 +147,7 @@ do
 
     Menu();
     int calculatedResult;
-
+    
     
 
     switch (choice)
@@ -156,7 +155,7 @@ do
         case 1:
             log.Add($"\nGame {gamesPlayed}");
             gamesPlayed++;
-            calculatedResult = Add(num1, num2);
+            calculatedResult = Add();
             stopwatch.Start();
             Input();
             Compare(calculatedResult);
@@ -164,7 +163,7 @@ do
         case 2:
             log.Add($"\nGame {gamesPlayed}");
             gamesPlayed++;
-            calculatedResult = Subtract(num1, num2);
+            calculatedResult = Subtract();
             stopwatch.Start();
             Input();
             Compare(calculatedResult);
@@ -172,7 +171,7 @@ do
         case 3:
             log.Add($"\nGame {gamesPlayed}");
             gamesPlayed++;
-            calculatedResult = Multiply(num1, num2);
+            calculatedResult = Multiply();
             stopwatch.Start();
             Input();
             Compare(calculatedResult);
@@ -180,7 +179,7 @@ do
         case 4:
             log.Add($"\nGame {gamesPlayed}");
             gamesPlayed++;
-            calculatedResult = Division(num1, num2);
+            calculatedResult = Division();
             stopwatch.Start();
             Input();
             Compare(calculatedResult);
