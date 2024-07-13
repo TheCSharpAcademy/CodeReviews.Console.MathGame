@@ -44,19 +44,19 @@ class MathGame
             switch (choice)
             {
                 case 1:
-                    Operation('+');
+                    OperationPrint('+');
                     calculatedResult = num1 + num2;
                     break;
                 case 2:
-                    Operation('-');
+                    OperationPrint('-');
                     calculatedResult = num1 - num2;
                     break;
                 case 3:
-                    Operation('*');
+                    OperationPrint('*');
                     calculatedResult = num1 * num2;
                     break;
                 case 4:
-                    Operation('/');
+                    OperationPrint('/');
                     calculatedResult = num1 / num2;
                     break;
                 case 6:
@@ -222,7 +222,7 @@ class MathGame
     }
 
 
-    private void Operation(char operation)
+    private void OperationPrint(char operation)
     {
         string question = $"\nWhat is {num1} {operation} {num2}?";
         Console.WriteLine(question);
