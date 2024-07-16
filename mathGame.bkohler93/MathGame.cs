@@ -11,7 +11,7 @@ public class MathGame
     private readonly int HardModeNumberOfQuestions = 100;
     private int GameTimeSeconds;
     private int NumberOfQuestions = 5;
-    private int NumberOfQuestionsCorrect = 0;
+    private int NumberOfQuestionsCorrect;
     private readonly Random random = new();
     private List<String> problemHistory = [];
     public void PlayRandomSelection()
