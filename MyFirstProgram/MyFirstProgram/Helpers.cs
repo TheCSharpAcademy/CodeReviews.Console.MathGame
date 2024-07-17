@@ -1,4 +1,6 @@
 ﻿using MyFirstProgram.Models;
+using System.Diagnostics;
+
 
 namespace MyFirstProgram
 {
@@ -6,19 +8,19 @@ namespace MyFirstProgram
     {
         internal static List<Game> games = new List<Game>
         {
-        /*new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
-        new Game { Date = DateTime.Now.AddDays(2), Type = GameType.Multiplication, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(3), Type = GameType.Division, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(4), Type = GameType.Subtraction, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(5), Type = GameType.Addition, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(6), Type = GameType.Multiplication, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(7), Type = GameType.Division, Score = 3 },
-        new Game { Date = DateTime.Now.AddDays(8), Type = GameType.Subtraction, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(9), Type = GameType.Addition, Score = 4 },
-        new Game { Date = DateTime.Now.AddDays(10), Type = GameType.Multiplication, Score = 1 },
-        new Game { Date = DateTime.Now.AddDays(11), Type = GameType.Subtraction, Score = 0 },
-        new Game { Date = DateTime.Now.AddDays(12), Type = GameType.Division, Score = 2 },
-        new Game { Date = DateTime.Now.AddDays(13), Type = GameType.Subtraction, Score = 5 },*/
+            /*new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
+            new Game { Date = DateTime.Now.AddDays(2), Type = GameType.Multiplication, Score = 4 },
+            new Game { Date = DateTime.Now.AddDays(3), Type = GameType.Division, Score = 4 },
+            new Game { Date = DateTime.Now.AddDays(4), Type = GameType.Subtraction, Score = 3 },
+            new Game { Date = DateTime.Now.AddDays(5), Type = GameType.Addition, Score = 1 },
+            new Game { Date = DateTime.Now.AddDays(6), Type = GameType.Multiplication, Score = 2 },
+            new Game { Date = DateTime.Now.AddDays(7), Type = GameType.Division, Score = 3 },
+            new Game { Date = DateTime.Now.AddDays(8), Type = GameType.Subtraction, Score = 4 },
+            new Game { Date = DateTime.Now.AddDays(9), Type = GameType.Addition, Score = 4 },
+            new Game { Date = DateTime.Now.AddDays(10), Type = GameType.Multiplication, Score = 1 },
+            new Game { Date = DateTime.Now.AddDays(11), Type = GameType.Subtraction, Score = 0 },
+            new Game { Date = DateTime.Now.AddDays(12), Type = GameType.Division, Score = 2 },
+            new Game { Date = DateTime.Now.AddDays(13), Type = GameType.Subtraction, Score = 5 },*/
         };
 
         internal static void PrintGames()
@@ -64,14 +66,33 @@ namespace MyFirstProgram
             result[0] = firstNumber;
             result[1] = secondNumber;
 
-            Console.WriteLine(result);
+            return result;
+        }
+
+        internal static int[] GetHardDivisionNumbers()
+        {
+            var random = new Random();
+            var firstNumber = random.Next(1, 201);
+            var secondNumber = random.Next(1, 201);
+
+            var result = new int[2];
+
+            while (firstNumber % secondNumber != 0)
+            {
+                firstNumber = random.Next(1, 142);
+                secondNumber = random.Next(1, 142);
+            }
+
+
+            result[0] = firstNumber;
+            result[1] = secondNumber;
 
             return result;
         }
 
-        internal static string? ValidateResult(string result)
+        internal static string ValidateResult(string? result)
         {
-            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _)) ;
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
             {
                 Console.WriteLine("Your answer needs to be an integer. Try again.");
                 result = Console.ReadLine();
@@ -79,7 +100,6 @@ namespace MyFirstProgram
 
             return result;
         }
-
 
         internal static string GetName()
         {
@@ -94,5 +114,6 @@ namespace MyFirstProgram
 
             return name;
         }
+
     }
 }
