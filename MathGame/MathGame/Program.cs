@@ -329,7 +329,7 @@ void ShowSingleGameStats()
 }
 
 //method asking players confirmation to exit the game 
-bool FinishGame ()
+void FinishGame ()
 {
     do
     {
@@ -339,12 +339,11 @@ bool FinishGame ()
 
         if (readResult == "y")
         {
-            exitGame = true;
-            return true;
+            exitGame = true; 
         }
         else if (readResult == "n")
         {
-            return false;
+            return;
         }
     } while (true);
 }
