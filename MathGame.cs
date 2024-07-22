@@ -12,8 +12,8 @@ namespace MathGame
         }
         private Level gameDifficulty = Level.Medium;
         private List<string> gameHistory = new();
-        private int score = 0;
-        private int questionsAnswered = 0;
+        private int score;
+        private int questionsAnswered;
         private int questionQty = 5;
         private readonly Stopwatch timer = new();
         private int[]? numbers;
@@ -55,13 +55,13 @@ namespace MathGame
                 case '5':
                     return PlayChallenge(questionQty);
                 case '6':
-                    return configSettings('d');
+                    return ConfigSettings('d');
                 case '7':
-                    return showHistory();
+                    return ShowHistory();
                 case '8':
-                    return configSettings('q');
+                    return ConfigSettings('q');
                 case '9':
-                    return configSettings('h');
+                    return ConfigSettings('h');
                 case '0':
                     return false;
                 default:
@@ -69,7 +69,7 @@ namespace MathGame
             }
         }
 
-        private bool configSettings(char setting)
+        private bool ConfigSettings(char setting)
         {
             if (setting == 'd')
             {
@@ -105,7 +105,7 @@ namespace MathGame
             return false;
         }
 
-        private bool showHistory()
+        private bool ShowHistory()
         {
             int roundNumber = 0;
             foreach (string logLine in gameHistory)
@@ -118,7 +118,7 @@ namespace MathGame
             return true;
         }
 
-        private bool generateNumbers(int quantity = 2, int maxValue = int.MaxValue)
+        private void GenerateNumbers(int quantity = 2, int maxValue = int.MaxValue)
         {
             Random numberGenerator = new();
             numbers = new int[quantity];
@@ -150,7 +150,7 @@ namespace MathGame
             }
         }
 
-        private int simplifier(Level difficulty = Level.Easy)
+        private int Simplifier(Level difficulty = Level.Easy)
         {
             switch (difficulty)
             {
@@ -176,7 +176,7 @@ namespace MathGame
                 switch (oper)
                 {
                     case '/':
-                        generateNumbers(2, 1000 / simplifier(gameDifficulty));
+                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         bool goodDivNumber = false;
                         while (!goodDivNumber)
                         {
@@ -185,18 +185,18 @@ namespace MathGame
                                 if (numbers[0] % numbers[1] == 0)
                                     goodDivNumber = true;
                                 else
-                                    generateNumbers(2, 1000 / simplifier(gameDifficulty));
+                                    generateNumbers(2, 1000 / Simplifier(gameDifficulty));
                             }
                             catch
                             {
-                                generateNumbers(2, 1000 / simplifier(gameDifficulty));
+                                generateNumbers(2, 1000 / Simplifier(gameDifficulty));
                                 continue;
                             }
                         }
                         break;
 
                     case '*':
-                        generateNumbers(2, 1200 / simplifier(gameDifficulty));
+                        generateNumbers(2, 1200 / Simplifier(gameDifficulty));
                         bool goodMulNumber = false;
                         double checkMulInt;
                         while (!goodMulNumber)
@@ -208,17 +208,17 @@ namespace MathGame
                             }
                             else
                             {
-                                generateNumbers(2, 1200 / simplifier(gameDifficulty));
+                                generateNumbers(2, 1200 / Simplifier(gameDifficulty));
                             }
                         }
                         break;
 
                     case '+':
-                        generateNumbers(2, 1000 / simplifier(gameDifficulty));
+                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         break;
 
                     case '-':
-                        generateNumbers(2, 1000 / simplifier(gameDifficulty));
+                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         break;
                 }
 
@@ -240,7 +240,7 @@ namespace MathGame
                     else
                     {
                         gameHistory.Add($"Your Answer: {submitted} | Correct Answer: {calculated}");
-                        // score--;
+                        continue;
                     }
                 }
                 else
@@ -275,7 +275,7 @@ namespace MathGame
         {
             char[] games = { '+', '-', '*', '/' };
             Random numberChoice = new();
-            for (int j = 0; j < questionQty; j++)
+            for (int j = 0; j < repeat; j++)
             {
                 int choice = numberChoice.Next(0, 4);
                 Play(games[choice]);

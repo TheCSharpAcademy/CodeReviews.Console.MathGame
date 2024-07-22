@@ -23,7 +23,7 @@ using MathGame;
 Game game = new Game();
 
 while (game.Menu()){
-    
+    continue;
 }
 
 Environment.Exit(0);
