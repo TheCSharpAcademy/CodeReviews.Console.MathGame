@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using MathGame;
 
 public enum DifficultyLevel
@@ -12,7 +11,7 @@ public enum DifficultyLevel
 
 class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         GameLogic gameLogic = new();
         DifficultyLevel difficulty = DifficultyLevel.Easy;
