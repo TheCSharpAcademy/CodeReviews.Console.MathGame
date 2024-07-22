@@ -262,7 +262,7 @@ namespace MathGame
                     else
                     {
                         gameHistory.Add($"Your Answer: {submitted} | Correct Answer: {calculated}");
-                        // score--;
+                        continue;
                     }
 
                 }
