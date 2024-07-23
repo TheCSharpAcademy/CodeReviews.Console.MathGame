@@ -80,7 +80,7 @@ namespace MathGame
                     }
                     _correctResult = FirstOperand / SecondOperand;
                     break;
-            };
+            }
         }
     }
 }
