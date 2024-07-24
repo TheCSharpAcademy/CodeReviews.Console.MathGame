@@ -126,7 +126,6 @@ namespace MathGame
             {
                 numbers[i - 1] = numberGenerator.Next(maxValue);
             }
-            return true;
         }
 
         private int Calculator(int numberFirst, int numberSecond, char oper)
@@ -176,7 +175,7 @@ namespace MathGame
                 switch (oper)
                 {
                     case '/':
-                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
+                        GenerateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         bool goodDivNumber = false;
                         while (!goodDivNumber)
                         {
@@ -185,18 +184,18 @@ namespace MathGame
                                 if (numbers[0] % numbers[1] == 0)
                                     goodDivNumber = true;
                                 else
-                                    generateNumbers(2, 1000 / Simplifier(gameDifficulty));
+                                    GenerateNumbers(2, 1000 / Simplifier(gameDifficulty));
                             }
                             catch
                             {
-                                generateNumbers(2, 1000 / Simplifier(gameDifficulty));
+                                GenerateNumbers(2, 1000 / Simplifier(gameDifficulty));
                                 continue;
                             }
                         }
                         break;
 
                     case '*':
-                        generateNumbers(2, 1200 / Simplifier(gameDifficulty));
+                        GenerateNumbers(2, 1200 / Simplifier(gameDifficulty));
                         bool goodMulNumber = false;
                         double checkMulInt;
                         while (!goodMulNumber)
@@ -208,17 +207,17 @@ namespace MathGame
                             }
                             else
                             {
-                                generateNumbers(2, 1200 / Simplifier(gameDifficulty));
+                                GenerateNumbers(2, 1200 / Simplifier(gameDifficulty));
                             }
                         }
                         break;
 
                     case '+':
-                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
+                        GenerateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         break;
 
                     case '-':
-                        generateNumbers(2, 1000 / Simplifier(gameDifficulty));
+                        GenerateNumbers(2, 1000 / Simplifier(gameDifficulty));
                         break;
                 }
 
