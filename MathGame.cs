@@ -234,11 +234,13 @@ namespace MathGame
                     if (calculated == submitted)
                     {
                         score++;
+                        questionsAnswered++;
                         gameHistory.Add($"Correct! | Answer: {calculated}");
                     }
                     else
                     {
                         gameHistory.Add($"Your Answer: {submitted} | Correct Answer: {calculated}");
+                        questionsAnswered++;
                         continue;
                     }
                 }
@@ -257,17 +259,18 @@ namespace MathGame
                     {
                         score++;
                         gameHistory.Add($"Correct! | Answer: {calculated}");
+                        questionsAnswered++;
                     }
                     else
                     {
                         gameHistory.Add($"Your Answer: {submitted} | Correct Answer: {calculated}");
+                        questionsAnswered++;
                         continue;
                     }
 
                 }
-                timer.Stop();
-                questionsAnswered++;
             }
+            timer.Stop();
             return true;
         }
         private bool PlayChallenge(int repeat = 1)
