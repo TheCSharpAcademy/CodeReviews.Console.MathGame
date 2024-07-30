@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathGame
 {
@@ -15,12 +9,12 @@ namespace MathGame
         static string? readResult;
         static int response;
         static Random random = new();
-        public static int score = 0;
+        public static int score;
         static bool validResponse;
         static int result;
         static int a;
         static int b;
-        public static int HighestScore = 0;
+        public static int HighestScore;
         public static void Addition(Random numberGenerator, int difficulty = 1, int smallestNum = 0, int greatestNum = 51)
         {
             if (difficulty == 2)
@@ -43,7 +37,7 @@ namespace MathGame
             b = numberGenerator.Next(smallestNum, greatestNum);
             result = a + b;
             GameMenu.DisplayMessage("Find the value of x for:");
-            GameMenu.DisplayMessage($"{a} + x = {result}\n"); ;
+            GameMenu.DisplayMessage($"{a} + x = {result}\n");
             
             do
             {

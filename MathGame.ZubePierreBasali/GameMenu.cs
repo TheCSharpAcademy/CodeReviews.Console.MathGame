@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Sources;
 
 namespace MathGame
 {
@@ -15,7 +12,7 @@ namespace MathGame
         private static Random random = new();
         private static int numberOfGames = 1;
         private static bool validOption;
-        public static int gameOption()
+        public static int GameOption()
         {
             DisplayMessage("Choose an otpion:\n");
             DisplayMessage("1. Play\n");
@@ -85,18 +82,17 @@ namespace MathGame
 
         public static int GameType()
         {
+            DisplayMessage("Choose an option:");
+            DisplayMessage("1. Random");
+            DisplayMessage("2. Select for every game");
+            DisplayMessage("3. Set to one type of game");
+            do
             {
-                DisplayMessage("Choose an option:");
-                DisplayMessage("1. Random");
-                DisplayMessage("2. Select for every game");
-                DisplayMessage("3. Set to one type of game");
-                do
-                {
-                    readResult = Console.ReadLine();
-                    validOption = int.TryParse(readResult, out option);
-                } while (readResult != null && !validOption || (option < 1 || option > 3));
-                return option;
-            }
+                readResult = Console.ReadLine();
+                validOption = int.TryParse(readResult, out option);
+            } while (readResult != null && !validOption || (option < 1 || option > 3));
+            return option;
+            
         }
         public static void LaunchGame(int option, int difficulty = 1, int gameType = 1, int numberOfGames = 5)
         {

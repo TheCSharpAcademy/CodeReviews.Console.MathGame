@@ -15,7 +15,8 @@
 
             do
             {
-                option = GameMenu.gameOption();
+                Games.score = 0;
+                option = GameMenu.GameOption();
 
                 switch (option)
                 {
