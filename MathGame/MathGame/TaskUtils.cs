@@ -156,14 +156,14 @@
                 Random rand = new Random();
                 if (dificulty == 0)
                 {
-                    var rand1 = rand.Next(1, 10);
+                    var rand1 = rand.Next(0, 10);
                     var rand2 = rand.Next(1, 10);
-                    while (!
-                    Helpers.Validation(rand1, rand2))
+                    do
                     {
                         rand1 = rand.Next(1, 10);
                         rand2 = rand.Next(1, 10);
-                    }
+                    } while (!Helpers.Validation(rand1, rand2));
+
                     Console.WriteLine($"What is the answer?: {rand1} : {rand2}?");
                     var answer = Console.ReadLine();
                     Helpers.Validation2(answer);
@@ -181,13 +181,14 @@
                 }
                 else
                 {
-                    var rand1 = rand.Next(1, 100);
+                    var rand1 = rand.Next(0, 100);
                     var rand2 = rand.Next(1, 100);
-                    while (Helpers.Validation(rand1, rand2))
+                    do
                     {
-                        rand1 = rand.Next(1, 100);
+                        rand1 = rand.Next(0, 100);
                         rand2 = rand.Next(1, 100);
-                    }
+                    } while (!Helpers.Validation(rand1, rand2));
+
                     Console.WriteLine($"What is the answer?: {rand1} / {rand2}?");
                     var answer = Console.ReadLine();
                     Helpers.Validation2(answer);

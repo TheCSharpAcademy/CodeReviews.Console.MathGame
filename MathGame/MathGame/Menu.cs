@@ -33,31 +33,31 @@
                 switch (option.ToUpper())
                 {
                     case "A":
-                        Console.WriteLine("How many round do you want to play? ");
+                        Console.WriteLine("How many rounds do you want to play? ");
                         var roundsA = Console.ReadLine();
                         Helpers.Validation2(roundsA);
                         TaskUtils.AdditionGame(difficulty, ref list, int.Parse(roundsA));
                         break;
                     case "S":
-                        Console.WriteLine("How many round do you want to play? ");
+                        Console.WriteLine("How many rounds do you want to play? ");
                         var roundsS = Console.ReadLine();
                         Helpers.Validation2(roundsS);
                         TaskUtils.SubGame(difficulty, ref list, int.Parse(roundsS));
                         break;
                     case "M":
-                        Console.WriteLine("How many round do you want to play? ");
+                        Console.WriteLine("How many rounds do you want to play? ");
                         var roundsM = Console.ReadLine();
                         Helpers.Validation2(roundsM);
                         TaskUtils.MultiplitionGame(difficulty, ref list, int.Parse(roundsM));
                         break;
                     case "D":
-                        Console.WriteLine("How many round do you want to play? ");
+                        Console.WriteLine("How many rounds do you want to play? ");
                         var roundsD = Console.ReadLine();
                         Helpers.Validation2(roundsD);
                         TaskUtils.DivisionGame(difficulty, ref list, int.Parse(roundsD));
                         break;
                     case "R":
-                        Console.WriteLine("How many round do you want to play? ");
+                        Console.WriteLine("How many rounds do you want to play? ");
                         var roundsR = Console.ReadLine();
                         Helpers.Validation2(roundsR);
                         TaskUtils.RandomGame(difficulty, ref list, int.Parse(roundsR));
