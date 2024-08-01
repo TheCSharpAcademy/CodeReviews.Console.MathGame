@@ -21,7 +21,6 @@ class Program
             Console.WriteLine("Q - Quit the program");
 
             entry = Console.ReadKey().KeyChar;
-            int gameRounds = rounds;
             switch (entry)
             {
                 case 'v':
@@ -71,8 +70,6 @@ class Program
         while (gameRounds > 0)
         {
             (int x, int y) = GenereateXandY(gameType);
-            // int x = GetRandom();
-            // int y = GetRandom();
             int solution = GameSolution(gameType, x, y);
             int userSolution = ValidateUserAnswer();
             bool isCorrect = userSolution == solution;
@@ -86,7 +83,6 @@ class Program
             gameRounds--;
         }
 
-        // final score can be passed to games tracker
         string finalScore = $"{correctGames}/{rounds}";
         ScoreSheet.Add(finalScore);
 
