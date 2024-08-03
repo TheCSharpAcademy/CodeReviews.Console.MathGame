@@ -7,6 +7,7 @@ namespace Math_Game.Controller
     internal class GameController
     {
         internal static readonly string[] operation = new[] {"A", "S", "M", "D" };
+        internal List<Game> Games = new(); 
 
         internal void Run()
         {
@@ -23,33 +24,40 @@ namespace Math_Game.Controller
 
                 if (operation.Contains(option))
                 {
-                    Types? type = TypesMethod.GetType(option);
+                    Types type = TypesMethod.GetType(option);
                     int score = 0;
                     
-                    int[]? problems = Problem.Generate(type);
+                    int[] problems = Problem.Generate(type);
                     int i = 0;
                     do
                     {
-                        Display.Start(type, problems[i], problems[i + 1]);
+                        int x = problems[i], y = problems[i + 1];
+                        Display.Start(type, x, y);
                         bool result = Int32.TryParse(Console.ReadLine(), out int answer);
                         if (result)
                         {
+                            if (Problem.CheckAnswer(type, x, y, answer))
+                                score++;
                             i += 2;
-                            score++;
                         }
                         else
                         {
-                            Console.WriteLine("Please enter a number, press enter to continue...");
+                            Display.Answer();
                             Console.ReadLine();
                         }
                     } while (i < problems.Length);
 
-                    Game game = new Game(type, name, score);
+                    Games.Add(new Game(type, name, score));
                 }
                 else
                     Display.Start(option);
+
                 if (option == "C")
                     name = Console.ReadLine();
+                else if (option == "V")
+                    Display.ViewHistory(Games);
+
+
 
             } while (option != "Q");
         }

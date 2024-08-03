@@ -24,7 +24,24 @@ namespace Math_Game.Helpers
                 case Types.Division:
                     return Division(numbers);
                 default:
-                    return null;
+                    return default;
+            }
+        }
+
+        internal static bool CheckAnswer(Types type, int x, int y, int answer)
+        {
+            switch (type)
+            {
+                case Types.Addition:
+                    return answer == x + y;
+                case Types.Multiplication:
+                    return answer == x * y;
+                case Types.Subtraction:
+                    return answer == x - y;
+                case Types.Division:
+                    return answer == x / y;
+                default:
+                    return default;
             }
         }
 

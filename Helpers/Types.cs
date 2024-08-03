@@ -17,7 +17,7 @@ namespace Math_Game.Helpers
 
     internal static class TypesMethod
     {
-        internal static Types? GetType(string? type)
+        internal static Types GetType(string? type)
         {
             switch (type)
             {
@@ -34,7 +34,7 @@ namespace Math_Game.Helpers
                     return Types.Division;
                     
                 default:
-                    return null;
+                    return default;
                     
             }
         }

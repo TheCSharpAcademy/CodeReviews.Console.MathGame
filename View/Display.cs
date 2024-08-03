@@ -21,6 +21,7 @@ namespace Math_Game.View
             Console.WriteLine("M - Multiplication");
             Console.WriteLine("D - Division");
             Console.WriteLine("V - View History");
+            Console.WriteLine("C - Change Name");
             Console.WriteLine("Q - Quit");
             Console.WriteLine("--------------------------");
             Console.Write("What would you like to do? ");
@@ -48,7 +49,7 @@ namespace Math_Game.View
             }
         }
 
-            internal static void Start(string? option)
+        internal static void Start(string? option)
         {
             switch (option)
             {
@@ -56,6 +57,7 @@ namespace Math_Game.View
                     Console.Write("Please enter your new name: ");
                     break;
                 case "V":
+                    Console.Clear();
                     break;
                 case "Q":
                     break;
@@ -65,6 +67,21 @@ namespace Math_Game.View
                     Console.ReadLine();
                     break;
             }
+        }
+
+        internal static void ViewHistory<T>(List<T> games)
+        {
+            foreach (T game in games)
+            {
+                Console.WriteLine(game);
+            }
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadLine();
+        }
+
+        internal static void Answer()
+        {
+            Console.WriteLine("Invalid answer, press enter to try again...");
         }
     }
 }
