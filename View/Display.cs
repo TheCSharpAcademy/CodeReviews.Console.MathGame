@@ -52,9 +52,10 @@ namespace Math_Game.View
         {
             switch (option)
             {
+                case "C":
+                    Console.Write("Please enter your new name: ");
+                    break;
                 case "V":
-                    Console.WriteLine("History");
-                    Console.ReadLine();
                     break;
                 case "Q":
                     break;

@@ -25,7 +25,7 @@ namespace Math_Game.Controller
                 {
                     Types? type = TypesMethod.GetType(option);
                     int score = 0;
-                    Game game = new Game(type, name, score);
+                    
                     int[]? problems = Problem.Generate(type);
                     int i = 0;
                     do
@@ -43,9 +43,13 @@ namespace Math_Game.Controller
                             Console.ReadLine();
                         }
                     } while (i < problems.Length);
+
+                    Game game = new Game(type, name, score);
                 }
                 else
                     Display.Start(option);
+                if (option == "C")
+                    name = Console.ReadLine();
 
             } while (option != "Q");
         }
