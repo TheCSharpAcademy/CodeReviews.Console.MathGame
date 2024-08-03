@@ -2,10 +2,9 @@
 {
     internal class Display
     {
-        internal string? Option { get; set; }
-
-        internal void Menu()
+        internal static void Menu()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to the Math Game!");
             Console.WriteLine("--------------------------");
             Console.WriteLine("What would you like to do?");
@@ -17,27 +16,32 @@
             Console.WriteLine("Q - Quit");
             Console.WriteLine("--------------------------");
 
-            Option = Console.ReadLine()?.ToUpper();
+
         }
 
-        internal void Start()
+        internal static void Start(string? option)
         {
-            switch (Option)
+            switch (option)
             {
                 case "A":
                     Console.WriteLine("5 + 5");
+                    Console.ReadLine();
                     break;
                 case "S":
                     Console.WriteLine("5 - 5");
+                    Console.ReadLine();
                     break;
                 case "M":
                     Console.WriteLine("5 * 5");
+                    Console.ReadLine();
                     break;
                 case "D":
                     Console.WriteLine("5 / 5");
+                    Console.ReadLine();
                     break;
                 case "V":
                     Console.WriteLine("History");
+                    Console.ReadLine();
                     break;
                 case "Q":
                     Environment.Exit(0);
