@@ -44,7 +44,6 @@
                     Console.ReadLine();
                     break;
                 case "Q":
-                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Please enter a letter from above.");

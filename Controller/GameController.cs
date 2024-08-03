@@ -6,13 +6,14 @@ namespace Math_Game.Controller
     {
         internal void Run()
         {
+            string? option;
             do
             {
                 Display.Menu();
-                string? option = Console.ReadLine()?.ToUpper();
+                option = Console.ReadLine()?.ToUpper();
                 Display.Start(option);
 
-            } while (true);
+            } while (option != "Q");
         }
     }
 }
