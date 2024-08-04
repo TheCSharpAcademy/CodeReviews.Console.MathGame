@@ -5,7 +5,7 @@ namespace Math_Game;
 
 internal class Helpers
 {
-    private static int timer = 0;
+    private static int timer;
     private static System.Timers.Timer _timer;
 
     static List<Game> gameHistory = new();
@@ -87,7 +87,7 @@ internal class Helpers
         _timer = new System.Timers.Timer(1000);
         _timer.Elapsed += (sender, e) =>
         {
-            int currentValue = Time();
+            Time();
         };
         _timer.Enabled = true;
     }
