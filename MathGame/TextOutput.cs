@@ -17,10 +17,26 @@ namespace MathGame
             Operation = operation;
             Console.WriteLine("How many games would you like to play?");
 
-            Rounds = Convert.ToInt32(Console.ReadLine());
+            string input = Console.ReadLine();
+            int rounds = 0;
+
+            do
+            {
+                if (int.TryParse(input, out rounds) == false)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please input an integer.");
+                    input = Console.ReadLine();
+                }
+                else
+                {
+                    Rounds = rounds;
+                }
+            } while (rounds == 0);
+            
             Console.Clear();
             return Rounds;
-            
+
         }
         public static (int, int, string, string) TimedCalculation(string operation)
         {
@@ -42,16 +58,31 @@ namespace MathGame
                     CorrectResult = Difficulty.Numbers[0] * Difficulty.Numbers[1];
                     Operator = 'x';
                     break;
-                case "Divison":
-                    CorrectResult = Difficulty.Numbers[0] - Difficulty.Numbers[1];
+                case "Division":
+                    CorrectResult = Difficulty.Numbers[0] / Difficulty.Numbers[1];
                     Operator = '/';
                     break;
-            }            
+            }
 
             timer.Start();
             Console.WriteLine($"What is the result of {Difficulty.Numbers[0]} {Operator} {Difficulty.Numbers[1]}?");
 
-            UserResult = Convert.ToInt32(Console.ReadLine());
+            string input = Console.ReadLine();
+            int result = 0;
+
+            do
+            {
+                if (int.TryParse(input, out result) == true)
+                {
+                    UserResult = result;
+                }
+                else
+                {
+                    Console.WriteLine("Please input an integer.");
+                    input = Console.ReadLine();
+                }
+            } while (result == 0);
+            
             timer.Stop();
 
             if (CorrectResult == UserResult)
@@ -61,7 +92,7 @@ namespace MathGame
             else
             {
                 Win = "Lose";
-            }           
+            }
 
             TimeSpan timeTaken = timer.Elapsed;
             Time = timeTaken.ToString(@"s\.ff");
@@ -78,12 +109,12 @@ namespace MathGame
                 Console.WriteLine($"That's correct!\n" +
                     $"It took you {Time} seconds to answer.\n");
                 Score.AddScores(
-                    Difficulty.Numbers[0], 
-                    Difficulty.Numbers[1], 
-                    Operation, 
+                    Difficulty.Numbers[0],
+                    Difficulty.Numbers[1],
+                    Operation,
                     Win,
-                    CorrectResult, 
-                    Operator, 
+                    CorrectResult,
+                    Operator,
                     Time,
                     UserResult);
                 Difficulty.Numbers.RemoveRange(0, 2);
@@ -93,12 +124,12 @@ namespace MathGame
                 Console.WriteLine($"That is not correct. The correct answer is: {CorrectResult}. \n" +
                     $"It took you {Time} seconds to answer.\n");
                 Score.AddScores(
-                    Difficulty.Numbers[0], 
-                    Difficulty.Numbers[1], 
-                    Operation, 
-                    Win, 
-                    CorrectResult, 
-                    Operator, 
+                    Difficulty.Numbers[0],
+                    Difficulty.Numbers[1],
+                    Operation,
+                    Win,
+                    CorrectResult,
+                    Operator,
                     Time,
                     UserResult);
                 Difficulty.Numbers.RemoveRange(0, 2);
@@ -112,11 +143,30 @@ namespace MathGame
             string again = Console.ReadLine();
             Console.Clear();
 
-            if(again.ToLower() == "y")
+            bool input = true;
+            bool nextGame = false;
+
+            do
             {
-                return true;
-            }
-            return false;
+                switch (again.ToLower())
+                {
+                    case "y":
+                        nextGame = true;
+                        input = true;
+                        break;
+                    case "n":
+                        input = true;
+                        break;
+                    default:
+                        input = false;
+                        Console.WriteLine("Please input only \"Y\" or \"N\".");
+                        again = Console.ReadLine();
+                        Console.Clear();
+                        break;
+                }                
+            } while (input == false);
+
+            return nextGame;
         }
     }
 }

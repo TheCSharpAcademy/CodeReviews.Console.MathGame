@@ -15,33 +15,41 @@
                 "6. Show all scores\n" +
                 "7. Exit");
 
-            string input = Console.ReadLine();
+            bool again = true;
 
-            switch(input)
+            do
             {
-                case "1":
-                    Operations.Addition();
-                    break;
-                case "2":
-                    Operations.Substraction();
-                    break;
-                case "3":
-                    Operations.Multiplication();
-                    break;
-                case "4":
-                    Operations.Division();
-                    break;
-                case "5":
-                    Randomizer.RandomGame();
-                    break;
-                case "6":
-                    Score.ShowScores();
-                    break;
-                case "7":
-                    Environment.Exit(0);
-                    break;
-                
-            }
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        Operations.Operation("Addition");
+                        break;
+                    case "2":
+                        Operations.Operation("Substraction");
+                        break;
+                    case "3":
+                        Operations.Operation("Multiplication");
+                        break;
+                    case "4":
+                        Operations.Operation("Division");
+                        break;
+                    case "5":
+                        Randomizer.RandomGame();
+                        break;
+                    case "6":
+                        Score.ShowScores();
+                        break;
+                    case "7":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please pick an option between 1 and 7.");
+                        again = false;
+                        break;
+                }
+            } while (again == false);
         }
     }
 }

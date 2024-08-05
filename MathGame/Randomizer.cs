@@ -11,23 +11,23 @@
             do
             {
                 int game = random.Next(1, 4);
-                string type = Type[game - 1];
+                string type = Type[random.Next(0, 4)];
 
                 switch (game)
                 {
                     case 1:
-                        Difficulty.Easy(type, 1);
+                        Difficulty.DifficultyGenerator(type, 1, "Easy");
                         TextOutput.TimedCalculation(type);
                         TextOutput.Result();
 
                         break;
                     case 2:
-                        Difficulty.Medium(type, 1);
+                        Difficulty.DifficultyGenerator(type, 1, "Medium");
                         TextOutput.TimedCalculation(type);
                         TextOutput.Result();
                         break;
                     case 3:
-                        Difficulty.Hard(type, 1);
+                        Difficulty.DifficultyGenerator(type, 1, "Hard");
                         TextOutput.TimedCalculation(type);
                         TextOutput.Result();
                         break;

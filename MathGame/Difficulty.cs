@@ -9,115 +9,114 @@
             string operationPick = operation;
             int games = rounds;
 
-            Console.WriteLine("Pick difficulty:\n1. Easy\n2. Medium\n3. Hard");
-            string difficulty = Console.ReadLine();
+            Console.WriteLine("Pick difficulty:\n1. Easy\n2. Medium\n3. Hard");           
 
-            switch(difficulty)
+            bool again = true;
+
+            do
             {
-                case "1":
-                    Console.Clear();
-                    Easy(operationPick, games);
-                    break;
-                case "2":
-                    Console.Clear();
-                    Medium(operationPick, games);
-                    break;
-                case "3":
-                    Console.Clear();
-                    Hard(operationPick, games);
-                    break;
-            }
+                again = true;
+                string difficulty = Console.ReadLine();
+
+                switch (difficulty)
+                {
+                    case "1":
+                        Console.Clear();
+                        DifficultyGenerator(operationPick, games, "Easy");
+                        break;
+                    case "2":
+                        Console.Clear();
+                        DifficultyGenerator(operationPick, games, "Medium");
+                        break;
+                    case "3":
+                        Console.Clear();
+                        DifficultyGenerator(operationPick, games, "Hard");
+                        break;
+                    default:
+                        Console.WriteLine("Please pick an option between 1 and 3.");
+                        again = false;
+                        break;
+                }
+            } while (again == false);            
         }
 
-        public static void Easy(string operationPick, int games)
+        public static void DifficultyGenerator(string operationPick, int games, string difficulty)
         {
-            for(int i = 0; i < games; i++)
-            {
-                Random random = new Random();
-                int number1 = random.Next(1, 101);
-                int number2 = random.Next(1, 101);
+            int number1 = 0;
+            int number2 = 0;
 
-                if (operationPick == "Divison")
-                {
-                    do
-                    {
-                        number1 = random.Next(0, 101);
-                        number2 = random.Next(1, 11);
-                    } while (number1 % number2 != 0);
-
-                    Numbers.Add(number1);
-                    Numbers.Add(number2);
-                }
-                else if (operationPick == "Substraction" && number2 > number1)
-                {
-                    Numbers.Add(number2);
-                    Numbers.Add(number1);
-                }
-                else
-                {
-                    Numbers.Add(number1);
-                    Numbers.Add(number2);
-                }                
-            }           
-        }
-
-        public static void Medium(string operationPick, int games)
-        {
             for (int i = 0; i < games; i++)
             {
-                Random random = new Random();
-                int number1 = random.Next(100, 501);
-                int number2 = random.Next(100, 501);
+                switch (difficulty)
+                {
+                    case "Easy":
+                        {
+                            Random random = new Random();
+                            number1 = random.Next(1, 101);
+                            number2 = random.Next(1, 101);
 
-                if (operationPick == "Divison")
-                {
-                    do
-                    {
-                        number1 = random.Next(50, 1001);
-                        number2 = random.Next(2, 51);
-                    } while (number1 % number2 != 0);
+                            if (operationPick == "Division")
+                            {
+                                do
+                                {
+                                    number1 = random.Next(0, 101);
+                                    number2 = random.Next(1, 11);
+                                } while (number1 % number2 != 0);
 
-                    Numbers.Add(number1);
-                    Numbers.Add(number2);
-                }
-                else if (operationPick == "Substraction" && number2 > number1)
-                {
-                    Numbers.Add(number2);
-                    Numbers.Add(number1);
-                }
-                else
-                {
-                    Numbers.Add(number1);
-                    Numbers.Add(number2);
-                }               
-            }
-        }
-        public static void Hard(string operationPick, int games)
-        {
-            for (int i = 0; i < games; i++)
-            {
-                Random random = new Random();
-                int number1 = random.Next(500, 1001);
-                int number2 = random.Next(500, 1001);
+                                Numbers.Add(number1);
+                                Numbers.Add(number2);
+                            }
+                        }
+                        break;
+                    case "Medium":
+                        {
+                            Random random = new Random();
+                            number1 = random.Next(100, 501);
+                            number2 = random.Next(100, 501);
 
-                if (operationPick == "Division")
-                {
-                    do
-                    {
-                        number1 = random.Next(500, 100001);
-                        number2 = random.Next(12, 101);
-                    } while (number1 % number2 != 0);
+                            if (operationPick == "Division")
+                            {
+                                do
+                                {
+                                    number1 = random.Next(50, 1001);
+                                    number2 = random.Next(2, 51);
+                                } while (number1 % number2 != 0);
+
+                                Numbers.Add(number1);
+                                Numbers.Add(number2);
+                            }
+                        }
+                        break;
+                    case "Hard":
+                        {
+                            Random random = new Random();
+                            number1 = random.Next(500, 1001);
+                            number2 = random.Next(500, 1001);
+
+                            if (operationPick == "Division")
+                            {
+                                do
+                                {
+                                    number1 = random.Next(500, 100001);
+                                    number2 = random.Next(12, 101);
+                                } while (number1 % number2 != 0);
+
+                                Numbers.Add(number1);
+                                Numbers.Add(number2);
+                            }
+                        }
+                        break;
                 }
-                else if (operationPick == "Substraction" && number2 > number1)
+                if (operationPick == "Substraction" && number2 > number1)
                 {
                     Numbers.Add(number2);
                     Numbers.Add(number1);
                 }
-                else
+                else if (operationPick == "Addition" || operationPick == "Multiplication")
                 {
                     Numbers.Add(number1);
                     Numbers.Add(number2);
-                }              
+                }
             }
         }
     }

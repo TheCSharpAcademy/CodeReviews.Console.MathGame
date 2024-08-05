@@ -2,21 +2,21 @@
 {
     public class Operations
     {
-        public static string Operation { get; set; }
-        public static void Addition()
+        public static string MathOperation { get; set; }
+        public static void Operation(string mathOperation)
         {
             Console.Clear();
-            Operation = "Addition";
+            MathOperation = mathOperation;
 
             do
             {
-                TextOutput.StartGame(Operation);
+                TextOutput.StartGame(MathOperation);
 
-                Difficulty.PickDifficulty(Operation, TextOutput.Rounds);
+                Difficulty.PickDifficulty(MathOperation, TextOutput.Rounds);
 
                 for (int i = 0; i < TextOutput.Rounds; i++)
                 {
-                    TextOutput.TimedCalculation(Operation);
+                    TextOutput.TimedCalculation(MathOperation);
                     
                     TextOutput.Result();
                 }
@@ -24,71 +24,6 @@
 
             Menu.MenuOptions();
         }
-
-        public static void Substraction()
-        {
-            Console.Clear();
-            Operation = "Substraction";
-
-            do
-            {
-                TextOutput.StartGame(Operation);
-
-                Difficulty.PickDifficulty(Operation, TextOutput.Rounds);
-
-                for (int i = 0; i < TextOutput.Rounds; i++)
-                {
-                    TextOutput.TimedCalculation(Operation);
-
-                    TextOutput.Result();
-                }
-            } while (TextOutput.PlayAgain() == true);
-
-            Menu.MenuOptions();
-        }
-
-        public static void Multiplication()
-        {
-            Console.Clear();
-            Operation = "Multiplication";
-
-            do
-            {
-                TextOutput.StartGame(Operation);
-
-                Difficulty.PickDifficulty(Operation, TextOutput.Rounds);
-
-                for (int i = 0; i < TextOutput.Rounds; i++)
-                {
-                    TextOutput.TimedCalculation(Operation);
-
-                    TextOutput.Result();
-                }
-            } while (TextOutput.PlayAgain() == true);
-
-            Menu.MenuOptions();
-        }
-
-        public static void Division()
-        {
-            Console.Clear();
-            Operation = "Division";
-
-            do
-            {
-                TextOutput.StartGame(Operation);
-
-                Difficulty.PickDifficulty(Operation, TextOutput.Rounds);
-
-                for (int i = 0; i < TextOutput.Rounds; i++)
-                {
-                    TextOutput.TimedCalculation(Operation);
-
-                    TextOutput.Result();
-                }
-            } while (TextOutput.PlayAgain() == true);
-
-            Menu.MenuOptions();
-        }
+        
     }
 }
