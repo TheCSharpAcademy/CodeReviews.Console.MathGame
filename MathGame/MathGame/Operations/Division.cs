@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace MathGame;
+﻿namespace MathGame;
 
 internal class Division : Operation
 {
@@ -23,7 +21,7 @@ internal class Division : Operation
                     dividend = GlobalRandom.Instance.Next(100, 1001);
                     break;
                 default:
-                    throw new InvalidEnumArgumentException($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
+                    throw new Exception($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
             }
             divisor = GlobalRandom.Instance.Next(80, 101);
         }

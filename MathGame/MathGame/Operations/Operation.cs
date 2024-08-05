@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace MathGame;
+﻿namespace MathGame;
 
 internal abstract class Operation
 {
@@ -24,7 +22,7 @@ internal abstract class Operation
                 SecondOperand = GlobalRandom.Instance.Next(100, 201);
                 break;
             default:
-                throw new InvalidEnumArgumentException($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
+                throw new Exception($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
         }
     }
 

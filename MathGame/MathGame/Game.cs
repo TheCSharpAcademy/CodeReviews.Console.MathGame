@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace MathGame;
+﻿namespace MathGame;
 
 public enum Options 
 { 
@@ -86,7 +84,7 @@ internal class Game
                 Options.Subtraction => new Subtraction(difficulty),
                 Options.Multiplication => new Multiplication(difficulty),
                 Options.Division => new Division(difficulty),
-                _ => throw new InvalidEnumArgumentException($"The option {Enum.GetName(typeof(Options), optionSelected)} isn't valid")
+                _ => throw new Exception($"The option {Enum.GetName(typeof(Options), optionSelected)} isn't valid")
             };
             if (InputValidator.OperationValidator(operation, UserInterface.ShowOperation(operation))) hits++;
         }
