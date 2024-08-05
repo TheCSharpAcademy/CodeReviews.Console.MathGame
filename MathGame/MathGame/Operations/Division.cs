@@ -1,52 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace MathGame
+namespace MathGame;
+
+internal class Division : Operation
 {
-    internal class Division : Operation
+    public Division(Difficulty difficulty) : base(difficulty)
     {
+        int dividend;
+        int divisor;
 
-        public Division(Difficulty difficulty) : base(difficulty)
+        do
         {
-            int dividend;
-            int divisor;
-
-            do
+            switch (difficulty)
             {
-                switch (difficulty)
-                {
-                    case Difficulty.Easy:
-                        dividend = GlobalRandom.Instance.Next(0, 501);
-                        break;
-                    case Difficulty.Medium:
-                        dividend = GlobalRandom.Instance.Next(10, 701);
-                        break;
-                    case Difficulty.Hard:
-                        dividend = GlobalRandom.Instance.Next(100, 1001);
-                        break;
-                    default:
-                        throw new InvalidEnumArgumentException($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
-                }
-                divisor = GlobalRandom.Instance.Next(80, 101);
+                case Difficulty.Easy:
+                    dividend = GlobalRandom.Instance.Next(0, 501);
+                    break;
+                case Difficulty.Medium:
+                    dividend = GlobalRandom.Instance.Next(10, 701);
+                    break;
+                case Difficulty.Hard:
+                    dividend = GlobalRandom.Instance.Next(100, 1001);
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException($"The difficulty {Enum.GetName(typeof(Difficulty), difficulty)} isn't valid");
             }
-            while (dividend % divisor != 0);
-
-            FirstOperand = dividend;
-            SecondOperand = divisor;
+            divisor = GlobalRandom.Instance.Next(80, 101);
         }
+        while (dividend % divisor != 0);
 
-        public override int PerformOperation()
-        {
-            return FirstOperand / SecondOperand;
-        }
+        FirstOperand = dividend;
+        SecondOperand = divisor;
+    }
 
-        public override string ToString()
-        {
-            return $"{FirstOperand} / {SecondOperand}";
-        }
+    public override int PerformOperation()
+    {
+        return FirstOperand / SecondOperand;
+    }
+
+    public override string ToString()
+    {
+        return $"{FirstOperand} / {SecondOperand}";
     }
 }
