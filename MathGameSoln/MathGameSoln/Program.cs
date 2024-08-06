@@ -21,6 +21,7 @@ class Program
             Console.WriteLine("S - Subtraction");
             Console.WriteLine("M - Multiplication");
             Console.WriteLine("D - Division");
+            Console.WriteLine("R - Set number of rounds per game");
             Console.WriteLine("Q - Quit the program");
 
             entry = Console.ReadKey().KeyChar;
@@ -43,6 +44,11 @@ class Program
                 case 'd':
                     Console.Clear();
                     PlayMathGame(rounds, entry);
+                    break;
+                case 'r':
+                    Console.Clear();
+                    Console.WriteLine("Enter the number of rounds:");
+                    rounds = ValidRoundsEntry();
                     break;
                 case 'q':
                 case 'e':
@@ -89,7 +95,6 @@ class Program
         }
         
         stopwatch.Stop();
-        decimal secondsElapsed = stopwatch.ElapsedMilliseconds * 0.1000m;
 
         string finalScore = $"{correctGames}/{rounds}";
         ScoreSheet.Add(finalScore);
@@ -215,6 +220,35 @@ class Program
             {
                 Console.WriteLine("Your input is invalid, please try again.");
                 userSolution = Console.ReadLine();
+            }
+            else
+            {
+                return numericValue;
+            }
+        } while (!validEntry);
+
+        return 0;
+    }
+
+    static int ValidRoundsEntry()
+    {
+        bool validEntry = false;
+
+        var userRounds = Console.ReadLine();
+        do
+        {
+            if (userRounds is null)
+            {
+                Console.WriteLine("Your input is invalid, please try again.");
+                userRounds = Console.ReadLine();
+                continue;
+            }
+
+            validEntry = int.TryParse(userRounds, out var numericValue);
+            if (!validEntry)
+            {
+                Console.WriteLine("Your input is invalid, please try again.");
+                userRounds = Console.ReadLine();
             }
             else
             {
