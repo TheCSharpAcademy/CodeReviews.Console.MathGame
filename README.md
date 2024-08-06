@@ -3,6 +3,12 @@
 ## Description
 Working console Math flash card game to practice mathematical expressions
 
+## How to run
+Open solution in Visual Studio
+Build the project to ensure there are no compilation errors. Clicking on "Build" in the menu bar, then "Build Solution".
+Run the application. Clicking the "Start" button (green arrow) on the toolbar.
+Follow the prompts supplied in the console to play games.
+
 ### Practice examples
 What Game would you like to play from the selection below:
 V - View Previous Games
