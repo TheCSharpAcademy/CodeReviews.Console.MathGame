@@ -1,13 +1,16 @@
-﻿namespace MathGameSoln;
+﻿using System.Diagnostics;
+
+namespace MathGameSoln;
 
 class Program
 {
     private static readonly Random Random = new();
     private static List<string> ScoreSheet = new();
+    
 
     static void Main(string[] args)
     {
-        var rounds = 2;
+        var rounds = 5;
         char entry;
         do
         {
@@ -55,6 +58,7 @@ class Program
 
     private static void PlayMathGame(int rounds, char gameType)
     {
+        Stopwatch stopwatch = new();
         int gameRounds = rounds;
         var gameName = gameType switch
         {
@@ -69,6 +73,7 @@ class Program
         int correctGames = 0;
         while (gameRounds > 0)
         {
+            stopwatch.Start();
             (int x, int y) = GenereateXandY(gameType);
             int solution = GameSolution(gameType, x, y);
             int userSolution = ValidateUserAnswer();
@@ -82,11 +87,15 @@ class Program
 
             gameRounds--;
         }
+        
+        stopwatch.Stop();
+        decimal secondsElapsed = stopwatch.ElapsedMilliseconds * 0.1000m;
 
         string finalScore = $"{correctGames}/{rounds}";
         ScoreSheet.Add(finalScore);
 
-        Console.WriteLine($"Final Score {finalScore}");
+        Console.WriteLine($"Final Score {finalScore}, time to complete game {stopwatch.Elapsed.Minutes} minutes and {stopwatch.Elapsed.Seconds} seconds. Press Enter to continue");
+        Console.ReadLine();
     }
 
     private static (int x, int y) GenereateXandY(char gameType) =>
