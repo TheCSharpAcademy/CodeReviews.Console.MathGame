@@ -21,7 +21,8 @@ class Program
             Console.WriteLine("S - Subtraction");
             Console.WriteLine("M - Multiplication");
             Console.WriteLine("D - Division");
-            Console.WriteLine("R - Set number of rounds per game");
+            Console.WriteLine("R - Select a game at Random");
+            Console.WriteLine("N - Set number of rounds per game");
             Console.WriteLine("Q - Quit the program");
 
             entry = Console.ReadKey().KeyChar;
@@ -45,7 +46,12 @@ class Program
                     Console.Clear();
                     PlayMathGame(rounds, entry);
                     break;
-                case 'r':
+                case 'r' :
+                    char[] gameOptions = { 'a', 's', 'm', 'd' };
+                    entry = gameOptions[Random.Next(3)];
+                    PlayMathGame(rounds, entry);
+                    break;
+                case 'n':
                     Console.Clear();
                     Console.WriteLine("Enter the number of rounds:");
                     rounds = ValidRoundsEntry();
