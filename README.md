@@ -1,4 +1,4 @@
-# Math Gmae
+# Math Game
 
 ## Description
 Working console Math flash card game to practice mathematical expressions
