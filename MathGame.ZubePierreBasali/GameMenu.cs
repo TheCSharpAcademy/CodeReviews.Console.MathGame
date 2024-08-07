@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks.Sources;
 
 namespace MathGame
 {
@@ -11,6 +12,63 @@ namespace MathGame
         private static Random random = new();
         private static int numberOfGames = 1;
         private static bool validOption;
+
+        public static void LaunchGame(int option, int difficulty = 1, int gameType = 1, int numberOfGames = 5)
+        {
+            Games.score = 0;
+
+            if (gameType == 3)
+            {
+                DisplayMessage("Select a game type:");
+                DisplayMessage("1. Addition");
+                DisplayMessage("2. Subtraction");
+                DisplayMessage("3. Multiplication");
+                DisplayMessage("4. Division");
+
+                do
+                {
+                    readResult = Console.ReadLine();
+                    validOption = int.TryParse(readResult, out option);
+                } while (readResult == null || !validOption || (option < 1 || option > 4));
+            }
+
+            do
+            {
+                if (gameType == 1)
+                {
+                    option = random.Next(1, 5);
+                }
+                if (gameType == 2)
+                {
+                    DisplayMessage("Select a game type:");
+                    DisplayMessage("1. Addition");
+                    DisplayMessage("2. Subtraction");
+                    DisplayMessage("3. Multiplication");
+                    DisplayMessage("4. Division");
+
+                    do
+                    {
+                        readResult = Console.ReadLine();
+                        validOption = int.TryParse(readResult, out option);
+                    } while (readResult == null || !validOption || (option < 1 || option > 4));
+                }
+
+                switch (option)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        Games.Play(difficulty, option);
+                        break;
+                }
+                numberOfGames--;
+            } while (numberOfGames > 0);
+
+            DisplayMessage($"Your score is: {Games.score}");
+            Games.HighestScore = Games.score > Games.HighestScore ? Games.score : Games.HighestScore;
+        }
+
         public static int GameOption()
         {
             DisplayMessage("Choose an otpion:\n");
@@ -92,67 +150,6 @@ namespace MathGame
             } while (readResult != null && !validOption || (option < 1 || option > 3));
             return option;
             
-        }
-        public static void LaunchGame(int option, int difficulty = 1, int gameType = 1, int numberOfGames = 5)
-        {
-            Games.score = 0;
-
-            if (gameType == 3)
-            {
-                DisplayMessage("Select a game type:");
-                DisplayMessage("1. Addition");
-                DisplayMessage("2. Subtraction");
-                DisplayMessage("3. Multiplication");
-                DisplayMessage("4. Division");
-
-                do
-                {
-                    readResult = Console.ReadLine();
-                    validOption = int.TryParse(readResult, out option);
-                } while (readResult == null || !validOption || (option < 1 || option > 4));
-            }
-
-            do
-            {
-                if (gameType == 1)
-                {
-                    option = random.Next(1, 5);
-                }
-                if (gameType == 2)
-                {
-                    DisplayMessage("Select a game type:");
-                    DisplayMessage("1. Addition");
-                    DisplayMessage("2. Subtraction");
-                    DisplayMessage("3. Multiplication");
-                    DisplayMessage("4. Division");
-
-                    do
-                    {
-                        readResult = Console.ReadLine();
-                        validOption = int.TryParse(readResult, out option);
-                    } while (readResult == null || !validOption || (option < 1 || option > 4));
-                }
-
-                switch (option)
-                {
-                    case 1:
-                        Games.Addition(random, difficulty);
-                        break;
-                    case 2:
-                        Games.Subtracion(random, difficulty);
-                        break;
-                    case 3:
-                        Games.Multiplication(random, difficulty);
-                        break;
-                    case 4:
-                        Games.Division(random, difficulty);
-                        break;
-                }
-                numberOfGames--;
-            } while (numberOfGames > 0);
-
-            DisplayMessage($"Your score is: {Games.score}");
-            Games.HighestScore = Games.score > Games.HighestScore ? Games.score : Games.HighestScore;
         }
 
         public static bool Replay()

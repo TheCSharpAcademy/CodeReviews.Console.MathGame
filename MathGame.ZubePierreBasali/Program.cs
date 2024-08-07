@@ -40,7 +40,7 @@
                         gameType = 1;
                         break;
                     case 6:
-                        GameMenu.DisplayMessage($"Your Highest score for thhis session is: {Games.HighestScore}");
+                        GameMenu.DisplayMessage($"Your Highest score for this session is: {Games.HighestScore}");
                         break;
                     case 7:
                         readResult = "exit";
