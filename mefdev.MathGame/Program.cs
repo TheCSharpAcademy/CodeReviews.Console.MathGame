@@ -30,7 +30,7 @@ class Application
             case "A":
                 return "+";
             default:
-                throw new InvalidOperationException("Invalid operation");
+                throw new InvalidOperationException("\nInvalid operation try again");
         }
     }
     private static string GetOperationName(string oper)
@@ -46,18 +46,20 @@ class Application
             case "A":
                 return "Addition";
             default:
-                throw new InvalidOperationException("Invalid operation");
+                throw new InvalidOperationException("\nInvalid operation");
         }
     }
-    private static void WhoWins(Game game, int questionAnswered)
+    private static bool IsWinner(Game game, int questionAnswered)
     {
         if (game.CheckWinner(questionAnswered))
         {
             Console.WriteLine("\nGood job, You are the winner :)");
+            return true;
         }
         else
         {
             Console.WriteLine("Game over! You have lost *_* :(");
+            return false;
         }
     }
     private static void DisplayMenu()
@@ -69,8 +71,13 @@ class Application
         Console.WriteLine("D - Division");
         Console.WriteLine("M - Multiplication");
         Console.WriteLine("R - Random Game");
+        Console.WriteLine("Q - Quit");
         Console.WriteLine("--------------------------------------------------");
         Console.Write("");
+    }
+    private static string AskUserToSelectOption(){
+         DisplayMenu();
+         return Console.ReadKey().KeyChar.ToString().ToUpper();
     }
     private static int GetQuestionNumber()
     {
@@ -78,8 +85,12 @@ class Application
         int.TryParse(Console.ReadLine(), out int questionNumber);
         return questionNumber;
     }
+    private static string DisplayErrorMessageAndResetGame(string errorMessage){
+        Console.Error.WriteLine(errorMessage);
+        return AskUserToSelectOption();
+    }
   
-    private static void GameCycle(Game game, Operations operations, int questionToAsk)
+    private static void GameCycle(Game game, Operations operations, int questionToAsk, string oper)
     {
         int questions = questionToAsk;
         int result = 0;
@@ -87,9 +98,6 @@ class Application
         int stepToQuestion = 0;
 
         Random random = new Random();
-
-        DisplayMenu();
-        string oper = Console.ReadKey().KeyChar.ToString().ToUpper();
 
         while (stepToQuestion < questions)
         {
@@ -104,11 +112,18 @@ class Application
                     }
                     catch (InvalidOperationException ex)
                     {
-                        Console.Error.WriteLine(ex.Message);
+                        oper = DisplayErrorMessageAndResetGame(ex.Message);
+                       
                     }
                     result = operations.Multiplication(randomNumber1, randomNumber2);
+                    try
+                    {
                     game.CheckRecord(randomNumber1, operation, randomNumber2, result);
-                   
+                    }
+                    catch (Exception ex)
+                    {
+                       oper =DisplayErrorMessageAndResetGame(ex.Message);
+                    }
                     break;
                 case "A":
                     try
@@ -117,11 +132,15 @@ class Application
                     }
                     catch (InvalidOperationException ex)
                     {
-                        Console.Error.WriteLine(ex.Message);
+                        oper = DisplayErrorMessageAndResetGame(ex.Message);
                     }
                     result = operations.Addition(randomNumber1, randomNumber2);
-                    game.CheckRecord(randomNumber1, operation, randomNumber2, result);
-                   
+                    try{
+                        game.CheckRecord(randomNumber1, operation, randomNumber2, result);
+                    }
+                    catch(Exception ex){
+                        oper = DisplayErrorMessageAndResetGame(ex.Message);
+                    }
                     break;
                 case "S":
                     try
@@ -130,7 +149,7 @@ class Application
                     }
                     catch (InvalidOperationException ex)
                     {
-                        Console.Error.WriteLine(ex.Message);
+                        oper = DisplayErrorMessageAndResetGame(ex.Message);
                     }
                     result = operations.Substraction(randomNumber1, randomNumber2);
                     game.CheckRecord(randomNumber1, operation, randomNumber2, result);
@@ -143,18 +162,26 @@ class Application
                     }
                     catch (InvalidOperationException ex)
                     {
-                        Console.Error.WriteLine(ex.Message);
+                        oper= DisplayErrorMessageAndResetGame(ex.Message);
                     }
                     int dividend = random.Next(0, 100);
                     result = operations.Division(randomNumber1, dividend);
                     if (result != 0)
                     {
-                        game.CheckRecord(randomNumber1, operation, dividend, result);
+                        try
+                        {
+                             game.CheckRecord(randomNumber1, operation, dividend, result);
+                        }
+                        catch (Exception ex)
+                        {
+                           oper= DisplayErrorMessageAndResetGame(ex.Message);
+                        } 
                     }
                     break;
                 case "V":
                     game.VisualizeHistory();
                     stepToQuestion = questionToAsk;
+                    oper = AskUserToSelectOption();
                     break;
                 case "Q":
                     Environment.Exit(0);
@@ -163,12 +190,19 @@ class Application
                     oper = game.GetRandomOperator();
                     break;
                 default:
-                    throw new InvalidOperationException("Invalid operation");
+                    Console.Write("\nInvalid operator, Press any key to try again ");
+                    Console.ReadLine();
+                    oper = AskUserToSelectOption();
+                    break;
+
             }
             stepToQuestion++;
             if (stepToQuestion == questions)
             {
-                WhoWins(game, questions);
+                if(IsWinner(game, questions)){
+                    Console.Write("Press any key to continue");
+                    Console.ReadLine();
+                }
             }
         }
         if (oper != "V" && oper != "R" && oper != "Q")
@@ -176,18 +210,16 @@ class Application
     }
     private static void SetUpGame()
     {
-        int cycles = 3;
-        int stepToCycles = 0;
         Operations operations = new Operations();
         Game game = new Game();
         int questionToAsk = GetQuestionNumber();
-
-        while (stepToCycles < cycles)
+        string oper;
+        do
         {
-            GameCycle(game, operations, questionToAsk);
+            oper = AskUserToSelectOption();
+            GameCycle(game, operations, questionToAsk, oper);
             game.IncreaseLevel();
-            stepToCycles++;
-        }  
+        } while (oper != "Q"); 
     }
     private static void SaveRecord(string oper, Game game)
     {
