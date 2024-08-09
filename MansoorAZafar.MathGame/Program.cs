@@ -53,6 +53,7 @@
                     case GameChoices.ViewGameHistory:
                         ShowGameHistory(); break;
                     case GameChoices.ChangeDifficulty:
+                        this.difficulty = Difficulty.Unset; // reset the difficulty each time before its called
                         SelectDifficulty(); break;
                     case GameChoices.ChangeNumberOfRounds:
                         SelectNumberOfRounds(); break;
@@ -111,7 +112,7 @@
                 (
                     "*".PadLeft(100, '*')
                     + "\nPlease choose a difficulty"
-                    + "\nThe higher the difficulty -> the greater the numbers and vice versa\n"
+                    + "\nThe higher the difficulty -> the greater the Divisor and vice versa\n"
                     + "\n1. Easy\n2. Normal\n3. Hard\n"
                     + new string('*', 100)
                     + "\n> "
@@ -191,7 +192,7 @@
                     randomUpperRange = 100;
                     break;
                 default:
-                    randomLowerRange = 0;
+                    randomLowerRange = 1;
                     randomUpperRange = 30;
                     break;
             }
@@ -225,6 +226,8 @@
             }
 
             //Setup for the actual gameplay 
+            const int lowerRangeDivisor = 1;
+
             int score = 0;
             int? expectedAnswer;
 
@@ -254,7 +257,16 @@
 
                 //Getting & Setting the Expected Answer
                 int firstValue = this.rand.Next(minValue: randomLowerRange, maxValue: randomUpperRange);
-                int secondValue = this.rand.Next(minValue: randomLowerRange, maxValue: randomUpperRange);
+                int secondValue = this.rand.Next(minValue: lowerRangeDivisor, maxValue: firstValue);
+                
+                //Need to add special rules for division so
+                // 1. only integer division
+                // 2. 0 cannot be in the divisior 
+                if(gameSelectionLocal == GameChoices.Division)
+                {
+                    while((firstValue % secondValue) != 0)
+                        secondValue = this.rand.Next(minValue: lowerRangeDivisor, maxValue: firstValue);
+                }
 
                 switch (gameSelectionLocal)
                 {
