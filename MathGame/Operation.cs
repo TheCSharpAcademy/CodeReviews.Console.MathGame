@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MathGame
 {
     internal class Operation
     {
         public int Addition(int num1, int num2)
         {
-            return num1 + num2; ;
+            return num1 + num2; 
         }
 
         public int Difference(int n1, int n2)
