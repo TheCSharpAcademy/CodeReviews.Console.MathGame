@@ -5,9 +5,6 @@
 4. You should record previous games in a List and there should be an option in the menu for the user to visualize a history of previous games.
 */
 
-using System.Collections;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 class Program
