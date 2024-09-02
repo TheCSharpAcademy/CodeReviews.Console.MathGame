@@ -68,9 +68,6 @@ do
         case "5":
             PrintResults(numbersCollection);
             break;
-        // default:
-        //     System.Console.WriteLine("Please choose a valid menu option.");
-        //     break;
     }
 } while (userChoice.ToLower() != "x");
 
