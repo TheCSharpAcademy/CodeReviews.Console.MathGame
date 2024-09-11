@@ -58,7 +58,6 @@ namespace MathGame
         }
         internal static void PrintGames()
         {
-            IEnumerable<Game> gamesToPrint;
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("---------------------");
