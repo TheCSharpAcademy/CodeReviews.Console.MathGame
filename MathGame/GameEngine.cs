@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MathGame
+﻿namespace MathGame
 {
     public class GameEngine
     {
@@ -21,7 +15,9 @@ namespace MathGame
 
         //Instantiating the Helper class
         Helpers method = new Helpers();
-        int timesPlayed = 0;
+
+        //Internal Variable to count the times played that the user play any math game.
+        int timesPlayed;
 
 
         internal void AdditionGame()
