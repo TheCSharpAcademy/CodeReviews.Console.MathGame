@@ -73,7 +73,6 @@
 
             for (int i = 0; i < 5; i++)
             {
-                bool isNumber = false;
 
                 int firstNumber = rand.Next(1, 100);
                 int secondNumber = rand.Next(1, 100);
@@ -113,16 +112,12 @@
 
             for (int i = 0; i < 5; i++)
             {
-                bool isNumber = false;
 
                 int firstNumber = rand.Next(1, 100);
                 int secondNumber = rand.Next(1, 100);
                 int operationResults = firstNumber * secondNumber;
                 Console.WriteLine($"{firstNumber} x {secondNumber} = ?");
 
-
-                while (isNumber == false)
-                {
 
                     int userAnwser = method.CheckUserInput();
 
@@ -137,9 +132,7 @@
                         IncorrectAwnserCounter++;
                     }
 
-                    isNumber = true;
-
-                }
+              
             }
 
             var scoreResult = correctAnwsercounter < IncorrectAwnserCounter ? $"you lost with {IncorrectAwnserCounter} incorrect anwsers of 5 questions" : $"you Won with {correctAnwsercounter} correct anwsers of 5 questions";
