@@ -4,7 +4,7 @@
     {
 
 
-        public List<string> previousGames { get; private set; }
+        public List<string> PreviousGames { get; private set; }
 
         public GameEngine()
         {
@@ -32,7 +32,7 @@
 
             for (int i = 0; i < 5; i++)
             {
-                bool isNumber = false;
+               
 
                 int firstNumber = rand.Next(1, 100);
                 int secondNumber = rand.Next(1, 100);
