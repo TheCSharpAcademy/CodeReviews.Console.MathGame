@@ -1,0 +1,3 @@
+[submodule "MathGame"]
+	path = MathGame
+	url = https://github.com/Bina28/MathGame.git
