@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MathGame/1.0.0": {
+        "dependencies": {
+          "MathClasses": "1.0.0"
+        },
+        "runtime": {
+          "MathGame.dll": {}
+        }
+      },
+      "MathClasses/1.0.0": {
+        "runtime": {
+          "MathClasses.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MathGame/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MathClasses/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

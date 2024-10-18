@@ -1,0 +1,11 @@
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\bin\Debug\net8.0\MathClasses.deps.json
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\bin\Debug\net8.0\MathClasses.dll
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\bin\Debug\net8.0\MathClasses.pdb
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.AssemblyInfoInputs.cache
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.AssemblyInfo.cs
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.csproj.CoreCompileInputs.cache
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.dll
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\refint\MathClasses.dll
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\MathClasses.pdb
+C:\Users\kroge\OneDrive\Tiedostot\Koodit\MathClasses\obj\Debug\net8.0\ref\MathClasses.dll
