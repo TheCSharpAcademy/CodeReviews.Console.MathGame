@@ -37,14 +37,14 @@
 
 			private static int[] GetOps(GameMode selectedMode, int difficulty)
 			{
-				int opOne = random.Next(1, 10 * difficulty);
+				int opOne = random.Next(0, 100 * difficulty);
 				int opTwo = random.Next(1, 10 * difficulty);
 				switch (selectedMode)
 				{
 					case GameMode.Division:
 						while (opOne % opTwo != 0)
 						{
-							opOne = random.Next(1, 15 * difficulty);
+							opOne = random.Next(0, 100 * difficulty);
 							opTwo = random.Next(1, 15 * difficulty);
 						}
 
@@ -114,6 +114,23 @@
 
 
 		static void Main()
+		{
+			bool running = true;
+
+			while (running)
+			{
+				RunGame();
+				Console.WriteLine("Would you like to play again? (y/n)");
+				string? input = Console.ReadLine();
+				if (input != "y")
+				{
+					running = false;
+				}
+			}
+			
+		}
+
+		private static void RunGame()
 		{
 			(GameMode, Difficulty) init = Startup();
 			List<Game> gamesList = GameGenerator(init.Item1, init.Item2);
