@@ -20,7 +20,7 @@
 		class Game
 		{
 			private static Random random = new();
-			private GameMode selectedMode;
+			public readonly GameMode selectedMode;
 			private int difficulty;
 			private int[] operators;
 			private string operation = string.Empty;
@@ -116,29 +116,40 @@
 		static void Main()
 		{
 			bool running = true;
+			List<string> gameHistory = new();
+			int count = 1;
 
 			while (running)
 			{
-				RunGame();
-				Console.WriteLine("Would you like to play again? (y/n)");
+				gameHistory.Add($"Game {count}: {RunGame()}");
+				Console.WriteLine("\nEnter 'y' to play again.\nEnter 'n' to show game history and quit. (y/n)");
+				count++;
 				string? input = Console.ReadLine();
 				if (input != "y")
 				{
+					Console.WriteLine("\nGame History:");
+					foreach (string game in gameHistory)
+					{
+						Console.WriteLine(game);
+					}
 					running = false;
 				}
 			}
-			
+
+
 		}
 
-		private static void RunGame()
+		private static string RunGame()
 		{
 			(GameMode, Difficulty) init = Startup();
 			List<Game> gamesList = GameGenerator(init.Item1, init.Item2);
+			string gameMode = string.Empty;
 			foreach (Game game in gamesList)
 			{
 				game.Play();
+				gameMode = game.selectedMode.ToString();
 			}
-			Console.WriteLine(QuizGrade(gamesList));
+			return $"({gameMode[0..3]}) {QuizGrade(gamesList)}";
 		}
 
 		static string QuizGrade(List<Game> gamesList)
