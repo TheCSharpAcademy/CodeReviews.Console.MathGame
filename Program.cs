@@ -5,8 +5,6 @@ using System.ComponentModel.Design;
 using System.Numerics;
 
 Random random = new Random();
-int a = random.Next(1, 101); // Generates a random number between 1 and 100
-int b = random.Next(1, 101); // Generates a random number between 1 and 100
 
 string? guess = "";
 int answer = 0;
@@ -16,53 +14,12 @@ int successfulGames = 0;
 string gameData = "";
 
 StartGame();
-if (HasWon() == true)
-{ 
-    if (gameSelector == "1")
-    {
-        successfulGames++;
-        gameData = "GameType: Addition" + $"Number of games won: {successfulGames}";
-        gameHistory.Add(gameData);
-
-    }
-    else if (gameSelector == "2")
-        {
-            successfulGames++;
-            gameData = "GameType: Subtraction" + $"Number of games won: {successfulGames}";
-            gameHistory.Add(gameData);
-        }
-    else if (gameSelector == "3")
-        {
-            successfulGames++;
-            gameData = "GameType: Multiplication" + $"Number of games won: {successfulGames}";
-            gameHistory.Add(gameData);
-        }
-    else if (gameSelector == "4")
-        {
-            successfulGames++;
-            gameData = "GameType: Division" + $"Number of games won: {successfulGames}";
-            gameHistory.Add(gameData);
-        }
-
-      }
-    if (successfulGames == 0)
-    {
-        Console.WriteLine("You have not won any games yet. Please try again!");
-    }
-else
-{
-    Console.WriteLine("Your game history is blank. Please play more games to see your history!");
-}   
-Console.WriteLine("Your game history is as follows: ");
-Console.WriteLine("-------------------------------------------------");
-foreach (string game in gameHistory)
-{
-    Console.WriteLine(game);
-}
-Console.WriteLine("-------------------------------------------------");
+GameStatistics();
 
 int AdditionGame()
     {
+        int a = random.Next(1, 101); // Generates a random number between 1 and 100
+        int b = random.Next(1, 101); // Generates a random number between 1 and 100
         Console.WriteLine($"Welcome to the Addition Game! The numbers are {a} and {b}.");
         int result = a + b;
         Console.WriteLine($"{a} + {b} = ?");
@@ -71,7 +28,9 @@ int AdditionGame()
         return result;
     }
 int SubtractionGame()
-{ 
+{
+    int a = random.Next(1, 101); // Generates a random number between 1 and 100
+    int b = random.Next(1, 101); // Generates a random number between 1 and 100
     Console.WriteLine($"Welcome to the Subtraction Game! The numbers are {a} and {b}.");
     int result = a - b;
     Console.WriteLine($"{a} - {b} = ?");
@@ -80,7 +39,9 @@ int SubtractionGame()
     return result;
 }
 int MultiplicationGame()
-{   
+{
+    int a = random.Next(1, 101); // Generates a random number between 1 and 100
+    int b = random.Next(1, 101); // Generates a random number between 1 and 100
     Console.WriteLine($"Welcome to the Multiplication Game! The numbers are {a} and {b}.");
     int result = a * b;
     Console.WriteLine($"{a} * {b} = ?");
@@ -90,6 +51,8 @@ int MultiplicationGame()
 }
 int DivisionGame()
 {
+    int a = random.Next(1, 101); // Generates a random number between 1 and 100
+    int b = random.Next(1, 101); // Generates a random number between 1 and 100
     Console.WriteLine($"Welcome to the Division Game! The numbers are {a} and {b}.");
     try
     {
@@ -104,8 +67,38 @@ int DivisionGame()
         throw new DivideByZeroException($"Error: Division by zero is not allowed.{e.Message}");
     }
 }
+string StartGame()
+{
+    Console.WriteLine("Welcome to Jack's Math Game!");
+    Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
+    Console.WriteLine("Please now choose from the following operations");
+    Console.WriteLine("1. Add");
+    Console.WriteLine("2: Substract");
+    Console.WriteLine("3: Multiply");
+    Console.WriteLine("4: Divide ");
+    gameSelector = Console.ReadLine();
+    switch (gameSelector)
+    {
+        case "1":
+            AdditionGame();
+            break;
+        case "2":
+            SubtractionGame();
+            break;
+        case "3":
+            MultiplicationGame();
+            break;
+        case "4":
+            DivisionGame();
+            break;
+        default:
+            Console.WriteLine("Invalid selection. Please try again.");
+            break;
+    }
+    return gameSelector;
+}
 
-    bool HasWon()
+bool HasWon()
 {
     bool wonGame = false;
     if (guess != null)
@@ -136,7 +129,6 @@ int DivisionGame()
             {
                 Console.WriteLine("Sorry, you did not guess correctly. Better luck next time!");
                 wonGame = false;
-                StartGame();
             }
         }
     }
@@ -147,34 +139,52 @@ int DivisionGame()
     return wonGame;
 }
 
-        string StartGame()
+        
+void GameStatistics()
+{
+    if (HasWon() == true)
+    {
+        if (gameSelector == "1")
         {
-            Console.WriteLine("Welcome to Jack's Math Game!");
-            Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
-            Console.WriteLine("Please now choose from the following operations");
-            Console.WriteLine("1. Add");
-            Console.WriteLine("2: Substract");
-            Console.WriteLine("3: Multiply");
-            Console.WriteLine("4: Divide ");
-            switch (gameSelector)
-            {
-                case "1":
-                    AdditionGame();
-                    break;
-                case "2":
-                    SubtractionGame();
-                    break;
-                case "3":
-                    MultiplicationGame();
-                    break;
-                case "4":
-                    DivisionGame();
-                    break;
-                default:
-                    Console.WriteLine("Invalid selection. Please try again.");
-                    break;
-            }
-            gameSelector = Console.ReadLine();
-            return gameSelector;
+            successfulGames++;
+            gameData = "GameType: Addition" + $"Number of games won: {successfulGames}";
+            gameHistory.Add(gameData);
+
         }
+        else if (gameSelector == "2")
+        {
+            successfulGames++;
+            gameData = "GameType: Subtraction" + $"Number of games won: {successfulGames}";
+            gameHistory.Add(gameData);
+        }
+        else if (gameSelector == "3")
+        {
+            successfulGames++;
+            gameData = "GameType: Multiplication" + $"Number of games won: {successfulGames}";
+            gameHistory.Add(gameData);
+        }
+        else if (gameSelector == "4")
+        {
+            successfulGames++;
+            gameData = "GameType: Division" + $"Number of games won: {successfulGames}";
+            gameHistory.Add(gameData);
+        }
+
+    }
+    if (successfulGames == 0)
+    {
+        Console.WriteLine("You have not won any games yet. Please try again!");
+    }
+    else
+    {
+        Console.WriteLine("Your game history is blank. Please play more games to see your history!");
+    }
+    Console.WriteLine("Your game history is as follows: ");
+    Console.WriteLine("-------------------------------------------------");
+    foreach (string game in gameHistory)
+    {
+        Console.WriteLine(game);
+    }
+    Console.WriteLine("-------------------------------------------------");
+}
 
