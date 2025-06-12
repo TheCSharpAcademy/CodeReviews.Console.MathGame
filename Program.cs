@@ -108,7 +108,8 @@ bool HasWon()
         {
             int correctAnswer = answer;
             if (wonGame == true)
-            {  Console.WriteLine("You have won this game. Please start a new game to continue playing Y/N.");
+            {
+                Console.WriteLine("You have won this game. Please start a new game to continue playing Y/N.");
                 string? continueGame = Console.ReadLine().ToUpper();
                 if (continueGame == "Y")
                 {
@@ -124,6 +125,7 @@ bool HasWon()
                     Console.WriteLine("Invalid input. Please enter Y or N.");
 
                 }
+            }
             if (gameSelector == "1")
             {
                 if (correctAnswer == answer)
@@ -182,8 +184,6 @@ bool HasWon()
     }
     return wonGame;
 }
-        
-
 
                 void GameStatistics()
                 {
