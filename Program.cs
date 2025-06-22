@@ -8,15 +8,13 @@ using static System.Net.Mime.MediaTypeNames;
 Random random = new Random();
 
 string? guess = "";
-string ? gameType = "";
+string? gameType = "";
 List<string> gameHistory = new List<string>();
 bool wonGame = false;
 int finalResult = 0;
 int answer = 0;
+string? gameSelector = "";
 
-Console.WriteLine("Welcome to Jack's Math Game!");
-Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
-Console.WriteLine("Please now choose from the following operations");
 var timer = System.Diagnostics.Stopwatch.StartNew();
 StartGame();
 GameStatistics();
@@ -28,8 +26,9 @@ int StartGame()
     int a = random.Next(1, 101); // Generates a random number between 1 and 100
     int b = random.Next(1, 101); // Generates a random number between 1 and 100
     int result = 0;
-    string? gameSelector = "";
-    finalResult = result;
+    Console.WriteLine("Welcome to Jack's Math Game!");
+    Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
+    Console.WriteLine("Please now choose from the following operations");
     Console.WriteLine("1. Add");
     Console.WriteLine("2: Subtract");
     Console.WriteLine("3: Multiply");
@@ -38,8 +37,7 @@ int StartGame()
     switch (gameSelector)
     {
         case "1":
-            gameType = "Addition Game";
-            Console.WriteLine($"Welcome to the {gameType}! The numbers are {a} and {b}.");
+            Console.WriteLine($"Welcome to the Addition Game! The numbers are {a} and {b}.");
             result = a + b;
             Console.WriteLine($"{a} + {b} = ?");
             Console.WriteLine("Please enter your guess: ");
@@ -50,8 +48,7 @@ int StartGame()
             }
             break;
         case "2":
-            gameType = "Subtraction Game";
-            Console.WriteLine($"Welcome to the {gameType}! The numbers are {a} and {b}.");
+            Console.WriteLine($"Welcome to the Subtraction Game! The numbers are {a} and {b}.");
             result = a - b;
             Console.WriteLine($"{a} - {b} = ?");
             Console.WriteLine("Please enter your guess: ");
@@ -62,8 +59,7 @@ int StartGame()
             }
             break;
         case "3":
-            gameType = "Multiplication Game";
-            Console.WriteLine($"Welcome to the {gameType}! The numbers are {a} and {b}.");
+            Console.WriteLine($"Welcome to the Multiplication Game! The numbers are {a} and {b}.");
             result = a * b;
             Console.WriteLine($"{a} * {b} = ?");
             Console.WriteLine("Please enter your guess: ");
@@ -74,8 +70,7 @@ int StartGame()
             }
             break;
         case "4":
-            gameType = "Division Game";
-            Console.WriteLine($"Welcome to the {gameType}! The numbers are {a} and {b}.");
+            Console.WriteLine($"Welcome to the Division Game! The numbers are {a} and {b}.");
             try
             {
                 result = a / b;
@@ -96,6 +91,7 @@ int StartGame()
             Console.WriteLine("Invalid selection. Please try again.");
             break;
     }
+    finalResult = result;
     return result;
 
 }
@@ -128,7 +124,23 @@ void GameStatistics()
         gameStatus = "Lost";
     }
     gameNumber++;
-    gameData = $"GameType: {gameType} || " + $"Game number: {gameNumber}. Won or lost?: {gameStatus = "Won"}";
+    if (gameSelector == "1")
+    {
+        gameType = "Addition";
+    }
+    else if (gameSelector == "2")
+    {
+        gameType = "Subtraction";
+    }
+    else if (gameSelector == "3")
+    {
+        gameType = "Multiplication";
+    }
+    else if (gameSelector == "4")
+    {
+        gameType = "Division";
+    }
+    gameData = $"GameType: {gameType} || " + $"Game number: {gameNumber}. Won or lost?: {gameStatus}";
     gameHistory.Add(gameData);
     Console.WriteLine("Thank you for playing. Play more games to improve your score!");
     Console.WriteLine("Your game history is as follows: ");
@@ -142,7 +154,7 @@ void GameStatistics()
     var elapsedTime = timer.ElapsedMilliseconds / 1000;
     Console.WriteLine($"You took {elapsedTime.ToString()} seconds to complete the game");
 
-    }
+}
 void ContinueGame()
 {
     string? continueGame;
