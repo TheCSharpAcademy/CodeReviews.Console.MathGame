@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data;
 using System.Numerics;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -20,11 +21,14 @@ StartGame();
 GameStatistics();
 ContinueGame();
 
-int StartGame()
+
+
+
+void StartGame()
 {
     string gameType = "";
-    int a = random.Next(1, 101); // Generates a random number between 1 and 100
-    int b = random.Next(1, 101); // Generates a random number between 1 and 100
+    int a = 0; 
+    int b = 0;
     int result = 0;
     Console.WriteLine("Welcome to Jack's Math Game!");
     Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
@@ -33,66 +37,10 @@ int StartGame()
     Console.WriteLine("2: Subtract");
     Console.WriteLine("3: Multiply");
     Console.WriteLine("4: Divide ");
-    gameSelector = Console.ReadLine();
-    switch (gameSelector)
-    {
-        case "1":
-            Console.WriteLine($"Welcome to the Addition Game! The numbers are {a} and {b}.");
-            result = a + b;
-            Console.WriteLine($"{a} + {b} = ?");
-            Console.WriteLine("Please enter your guess: ");
-            guess = Console.ReadLine();
-            if (int.TryParse(guess, out answer) == false)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-            break;
-        case "2":
-            Console.WriteLine($"Welcome to the Subtraction Game! The numbers are {a} and {b}.");
-            result = a - b;
-            Console.WriteLine($"{a} - {b} = ?");
-            Console.WriteLine("Please enter your guess: ");
-            guess = Console.ReadLine();
-            if (int.TryParse(guess, out answer) == false)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-            break;
-        case "3":
-            Console.WriteLine($"Welcome to the Multiplication Game! The numbers are {a} and {b}.");
-            result = a * b;
-            Console.WriteLine($"{a} * {b} = ?");
-            Console.WriteLine("Please enter your guess: ");
-            guess = Console.ReadLine();
-            if (int.TryParse(guess, out answer) == false)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-            break;
-        case "4":
-            Console.WriteLine($"Welcome to the Division Game! The numbers are {a} and {b}.");
-            try
-            {
-                result = a / b;
-                Console.WriteLine($"{a} / {b} = ?");
-                Console.WriteLine("Please enter your guess: ");
-                guess = Console.ReadLine();
-                if (int.TryParse(guess, out answer) == false)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                }
-            }
-            catch (DivideByZeroException e)
-            {
-                throw new DivideByZeroException($"Error: Division by zero is not allowed.{e.Message}");
-            }
-            break;
-        default:
-            Console.WriteLine("Invalid selection. Please try again.");
-            break;
-    }
-    finalResult = result;
-    return result;
+    ChooseDifficulty();
+    SelectGame();
+    
+    
 
 }
 
@@ -124,21 +72,20 @@ void GameStatistics()
         gameStatus = "Lost";
     }
     gameNumber++;
-    if (gameSelector == "1")
+    switch (gameSelector)
     {
-        gameType = "Addition";
-    }
-    else if (gameSelector == "2")
-    {
-        gameType = "Subtraction";
-    }
-    else if (gameSelector == "3")
-    {
-        gameType = "Multiplication";
-    }
-    else if (gameSelector == "4")
-    {
-        gameType = "Division";
+        case "1":
+            gameType = "Addition";
+            break;
+        case "2":
+            gameType = "Subtraction";
+            break;
+        case "3":
+            gameType = "Multiplication";
+            break;
+        case "4":
+            gameType = "Division";
+            break;
     }
     gameData = $"GameType: {gameType} || " + $"Game number: {gameNumber}. Won or lost?: {gameStatus}";
     gameHistory.Add(gameData);
@@ -155,39 +102,138 @@ void GameStatistics()
     Console.WriteLine($"You took {elapsedTime.ToString()} seconds to complete the game");
 
 }
+int SelectGame()
+{
+    int result = 0;
+    int a = 0;
+    int b = 0;
+    gameSelector = Console.ReadLine();
+    switch (gameSelector)
+    {
+        case "1":
+            Console.WriteLine($"Welcome to the Addition Game! The numbers are {a} and {b}.");
+            result = a + b;
+            Console.WriteLine($"{a} + {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case "2":
+            result = a - b;
+            if (result < 0)
+            {
+                a = random.Next(1, 101);
+                b = random.Next(1, 101);
+            }
+            else if (a < b)
+            {
+                b = a;
+            }
+            Console.WriteLine($"Welcome to the Subtraction Game! The numbers are {a} and {b}.");
+            Console.WriteLine($"{a} - {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case "3":
+            Console.WriteLine($"Welcome to the Multiplication Game! The numbers are {a} and {b}.");
+            result = a * b;
+            Console.WriteLine($"{a} * {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case "4":
+            Console.WriteLine($"Welcome to the Division Game! The numbers are {a} and {b}.");
+            if (b > a)
+            {
+                b = a;
+            }
+            result = a / b;
+            Console.WriteLine($"{a} / {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+
+            break;
+        default:
+            Console.WriteLine("Invalid selection. Please try again.");
+            break;
+    }
+    finalResult = result;
+    return result;
+}
+string ChooseDifficulty()
+{
+    string? difficultyMode = Console.ReadLine();
+    int a = 0;
+    int b = 0;
+    Console.WriteLine("Please choose from the following difficulty options: ");
+    Console.WriteLine("1. Easy");
+    Console.WriteLine("Medium");
+    Console.WriteLine("Hard");
+    if (difficultyMode != null)
+    {
+        if (difficultyMode == "1")
+        {
+            a = random.Next(1, 11); // Generates a random number between 1 and 10
+            b = random.Next(1, 11); // Generates a random number between 1 and 10
+        }
+        else if (difficultyMode == "2")
+        {
+            a = random.Next(1, 51); // Generates a random number between 1 and 50
+            b = random.Next(1, 51); // Generates a random number between 1 and 50
+        }
+        else if (difficultyMode == "3")
+        {
+            a = random.Next(1, 101); // Generates a random number between 1 and 100
+            b = random.Next(1, 101); // Generates a random number between 1 and 100
+        }
+        else
+        {
+            Console.WriteLine("Invalid difficulty mode selected. Please try again.");
+        }
+    }
+    return difficultyMode;
+}
 void ContinueGame()
 {
     string? continueGame;
     if (wonGame == true)
     {
-        Console.WriteLine("Congratulations! You have won this game! Would you like to continue playing? Y/N");
+        Console.WriteLine("Congratulations! You have won this game! Would you like to continue playing Y/N");
     }
     else
     {
-        Console.WriteLine("I am sorry, you have lost this game. Would you like to continue playing? Y/N");
+        Console.WriteLine("I am sorry, you have lost this game. Would you like to continue playing Y/N");
     }
     {
-        continueGame = Console.ReadLine().ToUpper();
         do
         {
-
-            if (continueGame != null)
-            {
-                if (continueGame == "N")
+            continueGame = Console.ReadLine().ToUpper();
+            if (continueGame == "N")
                 {
                     Console.WriteLine("Thank you for playing! Goodbye!");
                     Environment.Exit(0);
                 }
                 StartGame();
                 GameStatistics();
-            }
+                ContinueGame();
 
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter Y or N");
-            }
         }
-        while (continueGame != "N");
+        while (continueGame != "Y" || continueGame != "N");
     }
 
 }
