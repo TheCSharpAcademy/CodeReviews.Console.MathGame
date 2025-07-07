@@ -17,19 +17,43 @@ int answer = 0;
 string? gameSelector = "";
 
 var timer = System.Diagnostics.Stopwatch.StartNew();
-StartGame();
+
+SelectGameType();
 GameStatistics();
 ContinueGame();
 
 
-
-
-void StartGame()
+void SelectGameType()
 {
-    string gameType = "";
-    int a = 0; 
-    int b = 0;
-    int result = 0;
+    Console.WriteLine("Would you like to play a custom or random game? C/R");
+    string? gameChoice = Console.ReadLine()?.ToUpper();
+    if (gameChoice == "C")
+    {
+        Console.WriteLine("You have chosen a custom game!");
+        CustomGame();
+    }
+    else if (gameChoice == "R")
+    {
+        Console.WriteLine("You have chosen a random game!");
+        RandomGame();
+    }
+    else
+    {
+        Console.WriteLine("Invalid choice. Please enter C for custom or R for random.");
+        Environment.Exit(0);
+    }
+}
+void RandomGame()
+
+{ 
+    Console.WriteLine("Welcome to Jack's Math Game!");
+    Console.WriteLine("Please guess the correct result of two random numbers depending on the random operation selected");
+    ChooseDifficulty();
+    SelectRandomGame();
+
+}
+void CustomGame()
+{
     Console.WriteLine("Welcome to Jack's Math Game!");
     Console.WriteLine("Please guess the correct result of two random numbers depending on the operation selected");
     Console.WriteLine("Please now choose from the following operations");
@@ -38,7 +62,7 @@ void StartGame()
     Console.WriteLine("3: Multiply");
     Console.WriteLine("4: Divide ");
     ChooseDifficulty();
-    SelectGame();
+    SelectCustomGame();
     
     
 
@@ -102,7 +126,7 @@ void GameStatistics()
     Console.WriteLine($"You took {elapsedTime.ToString()} seconds to complete the game");
 
 }
-int SelectGame()
+int SelectCustomGame()
 {
     int result = 0;
     int a = 0;
@@ -123,12 +147,8 @@ int SelectGame()
             break;
         case "2":
             result = a - b;
-            if (result < 0)
-            {
-                a = random.Next(1, 101);
-                b = random.Next(1, 101);
-            }
-            else if (a < b)
+
+            if (a < b)
             {
                 b = a;
             }
@@ -175,15 +195,84 @@ int SelectGame()
     finalResult = result;
     return result;
 }
+int SelectRandomGame()
+{
+    int result = 0;
+    int a = 0;
+    int b = 0;
+    int gameSelector = random.Next(1, 5); // Randomly selects a game between 1 and 4
+    switch (gameSelector)
+    {
+        case 1:
+            Console.WriteLine($"Welcome to the Addition Game! The numbers are {a} and {b}.");
+            result = a + b;
+            Console.WriteLine($"{a} + {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case 2:
+            result = a - b;
+            if (a < b)
+            {
+                b = a;
+            }
+            Console.WriteLine($"Welcome to the Subtraction Game! The numbers are {a} and {b}.");
+            Console.WriteLine($"{a} - {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case 3:
+            Console.WriteLine($"Welcome to the Multiplication Game! The numbers are {a} and {b}.");
+            result = a * b;
+            Console.WriteLine($"{a} * {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            break;
+        case 4:
+            Console.WriteLine($"Welcome to the Division Game! The numbers are {a} and {b}.");
+            if (b > a)
+            {
+                b = a;
+            }
+            result = a / b;
+            Console.WriteLine($"{a} / {b} = ?");
+            Console.WriteLine("Please enter your guess: ");
+            guess = Console.ReadLine();
+            if (int.TryParse(guess, out answer) == false)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+
+            break;
+        default:
+            Console.WriteLine("Invalid selection. Please try again.");
+            break;
+    }
+    finalResult = result;
+    return result;
+}
 string ChooseDifficulty()
 {
-    string? difficultyMode = Console.ReadLine();
+    string? difficultyMode = "";
     int a = 0;
     int b = 0;
     Console.WriteLine("Please choose from the following difficulty options: ");
     Console.WriteLine("1. Easy");
     Console.WriteLine("Medium");
     Console.WriteLine("Hard");
+    difficultyMode= Console.ReadLine();
     if (difficultyMode != null)
     {
         if (difficultyMode == "1")
@@ -228,7 +317,7 @@ void ContinueGame()
                     Console.WriteLine("Thank you for playing! Goodbye!");
                     Environment.Exit(0);
                 }
-                StartGame();
+                SelectGameType();
                 GameStatistics();
                 ContinueGame();
 
