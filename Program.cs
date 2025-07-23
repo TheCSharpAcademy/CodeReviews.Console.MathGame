@@ -220,6 +220,7 @@ int SelectCustomGame()
                 if (b > a)
                 {
                     b = a;
+                    a = b;
                 }
                 result = a / b;
                 Console.WriteLine($"{a} / {b} = ?");
