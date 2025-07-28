@@ -57,7 +57,6 @@ internal class MainGame
 
         if (userAnswer == answer)
         {
-            //gameHistory.Add($"{currentGame}: {userAnswer} \n Correct\n");
             Console.WriteLine($"Your answer is correct! Press any key to continue...\n");
             score++;
         }

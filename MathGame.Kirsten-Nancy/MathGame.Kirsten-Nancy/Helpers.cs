@@ -9,21 +9,6 @@ namespace MathGame;
 internal class Helpers
 {
     internal static List<Game> games = new List<Game> { };
-    //{
-    //    new Game { Date = DateTime.Now.AddDays(1), Type = GameType.Addition, Score = 5 },
-    //    new Game { Date = DateTime.Now.AddDays(2), Type = GameType.Subtraction, Score = 5 },
-    //    new Game { Date = DateTime.Now.AddDays(3), Type = GameType.Multiplication, Score = 4 },
-    //    new Game { Date = DateTime.Now.AddDays(4), Type = GameType.Division, Score = 3 },
-    //    new Game { Date = DateTime.Now.AddDays(5), Type = GameType.Addition, Score = 1 },
-    //    new Game { Date = DateTime.Now.AddDays(6), Type = GameType.Subtraction, Score = 2 },
-    //    new Game { Date = DateTime.Now.AddDays(7), Type = GameType.Multiplication, Score = 3 },
-    //    new Game { Date = DateTime.Now.AddDays(8), Type = GameType.Division, Score = 4 },
-    //    new Game { Date = DateTime.Now.AddDays(9), Type = GameType.Addition, Score = 4 },
-    //    new Game { Date = DateTime.Now.AddDays(10), Type = GameType.Subtraction, Score = 1 },
-    //    new Game { Date = DateTime.Now.AddDays(11), Type = GameType.Multiplication, Score = 0 },
-    //    new Game { Date = DateTime.Now.AddDays(12), Type = GameType.Division, Score = 2 },
-    //    new Game { Date = DateTime.Now.AddDays(13), Type = GameType.Addition, Score = 5 },
-    //};
 
     internal static void ShowHistory()
     {
@@ -38,10 +23,6 @@ internal class Helpers
         }
         else
         {
-            //var gamesToDisplay = games.Where(x => x.Type == GameType.Multiplication);
-            // Search menu, to filter games by certain criteria
-            //var gamesToDisplay = games.Where(x => x.Date > new DateTime(2025, 05, 31)).OrderByDescending(x => x.Score);
-
             Console.Clear();
             Console.WriteLine("Game History");
             Console.WriteLine("=====================================");
