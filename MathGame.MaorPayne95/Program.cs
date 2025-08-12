@@ -53,7 +53,6 @@ internal class Program
 
             RecordRound(num1, num2, operation, userInput, result, roundResult, roundCount, rounds);
 
-            //Console.WriteLine(operation);
             roundStart = RoundStart(rounds);
         }
     }
@@ -142,7 +141,6 @@ internal class Program
                 Console.WriteLine("Invalid operator.");
                 break;
         }
-        //Console.WriteLine($"The result of {num1} {operation} {num2} is: {result}");
         return result;
     }
 
