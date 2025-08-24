@@ -1,15 +1,7 @@
-﻿
-namespace MyFirstProgram.Models;
+﻿namespace MyFirstProgram.Models;
 
 internal class Game
 {
-
-    // public int Score
-    // {
-    //     get { return score; }
-    //     set { score = value; }
-    // }
-
     public int Score { get; set; }
     public DateTime Date { get; set; }
     public GameType Type { get; set; }
