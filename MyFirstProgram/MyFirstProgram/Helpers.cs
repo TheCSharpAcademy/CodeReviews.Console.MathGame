@@ -35,7 +35,6 @@ namespace MyFirstProgram
 
         internal static void ViewGameResults()
         {
-            // var gamesToPrint = list.Where(x => x.Type == GameType.Multiplication).OrderByDescending(x => x.Score);
             Console.Clear();
             foreach (Game game in list)
             {

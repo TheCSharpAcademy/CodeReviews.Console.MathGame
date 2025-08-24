@@ -3,7 +3,6 @@ namespace MyFirstProgram.Models;
 
 internal class Game
 {
-    // private int score;
 
     // public int Score
     // {
