@@ -54,7 +54,6 @@ namespace MathGame
                         Console.WriteLine("Invalid input");
                         break;
                 }
-            ;
             } while (isGameOn);
         }
     }

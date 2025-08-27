@@ -43,8 +43,6 @@ namespace MathGame
         }
         internal static void PrintGames()
         {
-            //var gamesToPrint = games.Where(x => x.Date > new DateTime(2025, 08, 30) && x.Score < 4).OrderByDescending(x => x.Score);
-
             Console.Clear();
             Console.WriteLine("Games History");
             Console.WriteLine("------------------------------------------");
