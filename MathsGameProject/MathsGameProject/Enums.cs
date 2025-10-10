@@ -1,6 +1,6 @@
 ﻿namespace MathsGameProject
 {
-    internal class Enums
+    internal class Enums 
     {
         internal enum Dificulty
         {
