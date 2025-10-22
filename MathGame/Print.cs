@@ -18,10 +18,10 @@ namespace MathGame
             Console.WriteLine("----------------------");
         }
 
-        public static void Operation(int firstNumber, int SecondNumber, char operation)
+        public static void Operation(int firstNumber, int SecondNumber, char op)
         {
             Console.Clear();
-            Console.WriteLine($"{firstNumber} {operation} {SecondNumber}:");
+            Console.WriteLine($"{firstNumber} {op} {SecondNumber}:");
         }
 
         //TODO
