@@ -3,9 +3,9 @@
 class Program {
     static void Main(string[] args) {
         List<String> history = new List<String>();
-        mainMenu(history);
+        MainMenu(history);
     }
-    static public int getInput()
+    static public int GetInput()
     //Try catch to catch all invalid input (non-int)
     {
         int answer = 0;
@@ -20,11 +20,11 @@ class Program {
         return answer;
 
     }
-    static public void mainMenu(List<String> history)
+    static public void MainMenu(List<String> history)
     {
         Console.Clear();
         Console.WriteLine("Welcome, choose your option!\n");
-        Console.WriteLine("Type anything else to play\n");
+        Console.WriteLine("Type anything else to Play\n");
         Console.WriteLine("Type H for Match History\n");
         Console.WriteLine("Type Q to exit");
         String command = Console.ReadLine();
@@ -35,21 +35,21 @@ class Program {
         }
         else if (command == "H" || command == "h")
         {
-            getHistory(history);
+            GetHistory(history);
         }
         else
         {
-            play(history);
+            Play(history);
         }
     }
-    static public void play(List<String> history)
+    static public void Play(List<String> history)
     //Allowing the user to choose the amount of questions and randomizing the operations/numbers they get
     {
         Console.Clear();
         Random rand = new Random();
         char[] symbols = ['+', '-', '*', '/'];
         Console.WriteLine("How many questions would you like?");
-        int amountOfQuestions = getInput();
+        int amountOfQuestions = GetInput();
         int points = 0;
         for (int i = 1; i < amountOfQuestions + 1; i++)
         {
@@ -62,8 +62,8 @@ class Program {
             }
             Console.WriteLine($"Question #{i}");
             Console.WriteLine($"What's {a} {symbols[op]} {b}");
-            int answer = getInput();
-            if (answer == calculate(a,b,op))
+            int answer = GetInput();
+            if (answer == Calculate(a,b,op))
             {
                 Console.WriteLine("Correct, press any key to continue!");
                 Console.ReadKey();
@@ -71,7 +71,7 @@ class Program {
             }
             else
             {
-                Console.WriteLine($"Wrong, the correct answer is {calculate(a,b,op)}");
+                Console.WriteLine($"Wrong, the correct answer is {Calculate(a,b,op)}");
                 Console.WriteLine("Press any key to continue!");
                 Console.ReadKey();
             }
@@ -80,9 +80,9 @@ class Program {
         String score= $"{points} / {amountOfQuestions} points";
         history.Add(score);
         Console.ReadKey();
-        mainMenu(history);
+        MainMenu(history);
     }
-    static public int calculate(int a, int b,  int opIndex)
+    static public int Calculate(int a, int b,  int opIndex)
     {
         //Calculation logic, no need to check if dividend is 0 because the numbers dont go below 1
         int answer = 0;
@@ -105,7 +105,7 @@ class Program {
         }
         return answer;
     }
-    static public void getHistory(List<String> history)
+    static public void GetHistory(List<String> history)
     {
         //Saving the match history in a list which i then print out
         Console.Clear();
@@ -117,6 +117,6 @@ class Program {
         Console.WriteLine("Press any button to go back to Main Menu");
         Console.ReadKey();
 
-        mainMenu(history);
+        MainMenu(history);
     }
 }
