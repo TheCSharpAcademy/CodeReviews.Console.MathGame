@@ -64,7 +64,12 @@ public class Player
     /// Decreases the player's points by one, ensuring it doesn't go below zero.
     /// </summary>
     /// <returns>The updated points value.</returns>
-    public int LosePoint() => points < 0 ? 0 : points--;
+    public int LosePoint()
+    {
+        int current = points;
+        points = Math.Max(0, points - 1);
+        return current;
+    }
 
     /// <summary>
     /// Gets the player's current points.

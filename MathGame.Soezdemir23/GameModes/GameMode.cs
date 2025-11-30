@@ -25,7 +25,6 @@ public abstract class GameMode
         int maxRound = 5, round = 0;
         while (round < maxRound)
         {
-            Console.WriteLine($"Testing stopwatch {stopwatch.Elapsed} ");
             var (left, right, answer) = GenerateQuestion();
             bool awaitingAnswer = true;
             while (awaitingAnswer)
@@ -39,16 +38,36 @@ public abstract class GameMode
                 string input = Console.ReadLine() ?? "";
                 if (int.TryParse(input, out int result))
                 {
-                    if (result == answer) { Console.WriteLine("Correct! You gain a point"); player.GainPoint(); round++; awaitingAnswer = false; }
-                    else { Console.WriteLine("Wrong! You lose a point"); player.LosePoint(); }
+                    if (result == answer)
+                    {
+                        Console.WriteLine("Correct! You gain a point");
+                        player.GainPoint();
+                        round++;
+                        awaitingAnswer = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong! You lose a point");
+                        player.LosePoint();
+                    }
                 }
                 else if (input.Equals("q", StringComparison.OrdinalIgnoreCase) || input.Equals("quit", StringComparison.OrdinalIgnoreCase))
-                { Console.WriteLine("Exiting the game mode"); Console.WriteLine($"Your Score is {player.GetPoints()}"); Console.WriteLine("Press any key."); return player; }
-                else { Console.WriteLine("Please enter a valid command"); }
-
-                Console.Write("Enter a key to continue:"); Console.ReadKey(); Console.Clear();
+                { 
+                    Console.WriteLine("Exiting the game mode"); 
+                    Console.WriteLine($"Your Score is {player.GetPoints()}");
+                    Console.WriteLine("Press any key.");
+                    return player;
+                }
+                else 
+                { 
+                    Console.WriteLine("Please enter a valid command"); 
+                }
+                Console.Write("Enter a key to continue:"); 
+                Console.ReadKey(); 
+                Console.Clear();
             }
-            Thread.Sleep(1500); Console.Clear();
+            Thread.Sleep(1500); 
+            Console.Clear();
         }
         stopwatch.Stop();
         player.SetTimeTaken(stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds);

@@ -17,7 +17,7 @@ public class GameManager
     /// <summary>
     /// Indicates whether the game is currently running.
     /// </summary>
-    private static bool GameIsRunning = true;
+    private static bool gameIsRunning = true;
 
     /// <summary>
     /// Initializes a new instance of the GameManager class.
@@ -123,9 +123,6 @@ public class GameManager
  /// </summary>
     private static void LoadGame()
     {
-        string currentDir = Directory.GetCurrentDirectory();
-        Console.WriteLine(currentDir);
-
         bool exists = File.Exists("Highscore.txt");
         if (exists == false)
         {
@@ -159,7 +156,7 @@ public class GameManager
                     players.Add(new Player(playerstats[0], playerstats[1], parsedDate));
                 }
             }
-            Console.WriteLine($"The file was succesfully loaded: {players.Count} entries.");
+            Console.WriteLine($"The file was successfully loaded: {players.Count} entries.");
         }
         
     }
@@ -212,7 +209,7 @@ public class GameManager
         {
             foreach (var player in players)
             {
-                Console.WriteLine($"{player.GetName()}\t{player.GetPoints()}\t{player.GetDate()}\t{player.GetMinutesTaken()}:{player.GetSecondsTaken()}");
+                Console.WriteLine($"{player.GetName()}\t{player.GetPoints()}\t{player.GetDate()}\t{player.GetMinutesTaken()}:{(player.GetSecondsTaken() > 0 ? player.GetSecondsTaken().ToString("D2") : "00")}");
             }
         }
         Console.WriteLine("Press any key to return...");
