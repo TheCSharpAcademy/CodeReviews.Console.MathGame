@@ -6,7 +6,7 @@ namespace mathgame.Model;
 public class Player
 {
     private readonly string date;
-    private int points = 0;
+    private int points;
     private string name = string.Empty;
 
     private int minutesTaken;

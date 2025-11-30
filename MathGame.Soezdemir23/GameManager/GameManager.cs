@@ -58,7 +58,7 @@ public class GameManager
                     break;
                 case '3':
                     SaveHighscore(players);
-                    ExitGame(GameIsRunning);
+                    ExitGame();
                     break;
             }
             Console.ReadKey();
@@ -130,7 +130,7 @@ public class GameManager
         if (exists == false)
         {
             // could have used File.WriteAllText, but that's not clear cut as file.Create
-            using(File.Create("Highscore.txt")){};
+            File.Create("Highscore.txt");
         }
         else
         {
@@ -220,12 +220,11 @@ public class GameManager
     ///<summary>
     /// Game stops, everyone goes home.
     /// </summary>
-    private static bool ExitGame(bool GameRunning)
+    private static void ExitGame()
     {
         Console.Clear();
         Console.WriteLine("Thanks for playing!");
         Thread.Sleep(500);
         Environment.Exit(exitCode: 0);
-        return !GameRunning;
     }
 }
