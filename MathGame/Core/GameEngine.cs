@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 using MathGame.Helpers;
 using MathGame.Models;
 
@@ -6,13 +6,8 @@ namespace MathGame.Core
 {
     internal class GameEngine
     {
-        // TODO: Refactor to be configurable (ask user for input)
         const int QUESTIONS_PER_GAME = 5;
-
-        // Game Mode options available
         const int MENU_OPTIONS = 6;
-
-        // Maybe expand difficulty settings in the future
         const int MAX_DIFFICULTY_SETTING = 5;
         const int MIN_DIFFICULTY_SETTING = 1;
 
@@ -74,6 +69,9 @@ namespace MathGame.Core
             Console.WriteLine($"You are now playing the {gameMode} game.");
             int score = 0;
 
+            Stopwatch gameTimer = new Stopwatch();
+            gameTimer.Start();
+
             for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
                 Console.WriteLine(questionBank[gameMode][i].Question);
@@ -86,7 +84,8 @@ namespace MathGame.Core
                 }
             }
 
-            ConcludeGame(gameMode, score, difficulty);
+            gameTimer.Stop();
+            ConcludeGame(gameMode, score, difficulty, gameTimer.ElapsedMilliseconds);
         }
 
         void DisplayGameResults()
@@ -104,10 +103,10 @@ namespace MathGame.Core
             Console.WriteLine();
         }
 
-        void ConcludeGame(GameMode gameMode, int score, int difficulty)
+        void ConcludeGame(GameMode gameMode, int score, int difficulty, long timeTaken)
         {
-            Console.WriteLine($"Your game is complete! Your score was: {score}");
-            gameResults.Add(new GameResult(score, gameMode, difficulty));
+            Console.WriteLine($"Your game is complete! Your score was: {score}, and you took {TimeSpan.FromMilliseconds(timeTaken).TotalMinutes:N2} minutes.");
+            gameResults.Add(new GameResult(score, gameMode, difficulty, timeTaken));
         }
 
         void ExitGame()
