@@ -2,79 +2,55 @@
 
 namespace MathGame
 {
-    internal class GameResult
-    {
-        public int Result { get; set; }
-        public GameMode GameMode { get; set; }
-        public DateTime Date { get; set; }
-
-        public GameResult(int result, GameMode gameMode)
-        {
-            Result = result;
-            GameMode = gameMode;
-            Date = DateTime.Now;
-        }
-
-        public override string ToString()
-        {
-            return new string(
-                $"On {Date.ToString()} you played a game of {GameMode.ToString()} and got the score {Result} "
-            );
-        }
-    }
-
     internal class Program
     {
         const int QUESTIONS_PER_GAME = 5;
         const int GAME_MODES = 6;
 
-        public static Dictionary<GameMode, List<QuestionSet>> questionBank = new Dictionary<
-            GameMode,
-            List<QuestionSet>
-        >()
+        public static Dictionary<GameMode, List<QuestionSet>> questionBank = new()
         {
             {
                 GameMode.ADDITION,
                 new List<QuestionSet>()
                 {
-                    new QuestionSet("5 + 5 = ?", 10),
-                    new QuestionSet("10 + 2 = ?", 12),
-                    new QuestionSet("13 + 12 = ?", 25),
-                    new QuestionSet("44 + 22 = ?", 66),
-                    new QuestionSet("100 + 55 = ?", 155),
+                    new("5 + 5 = ?", 10),
+                    new("10 + 2 = ?", 12),
+                    new("13 + 12 = ?", 25),
+                    new("44 + 22 = ?", 66),
+                    new("100 + 55 = ?", 155),
                 }
             },
             {
                 GameMode.SUBTRACTION,
                 new List<QuestionSet>()
                 {
-                    new QuestionSet("5 - 5 = ?", 0),
-                    new QuestionSet("10 - 2 = ?", 8),
-                    new QuestionSet("13 - 12 = ?", 1),
-                    new QuestionSet("44 - 22 = ?", 22),
-                    new QuestionSet("100 - 55 = ?", 45),
+                    new("5 - 5 = ?", 0),
+                    new("10 - 2 = ?", 8),
+                    new("13 - 12 = ?", 1),
+                    new("44 - 22 = ?", 22),
+                    new("100 - 55 = ?", 45),
                 }
             },
             {
                 GameMode.MULTIPLICATION,
                 new List<QuestionSet>()
                 {
-                    new QuestionSet("5 * 5 = ?", 25),
-                    new QuestionSet("10 * 2 = ?", 20),
-                    new QuestionSet("13 * 12 = ?", 156),
-                    new QuestionSet("44 * 22 = ?", 968),
-                    new QuestionSet("100 * 55 = ?", 5500),
+                    new("5 * 5 = ?", 25),
+                    new("10 * 2 = ?", 20),
+                    new("13 * 12 = ?", 156),
+                    new("44 * 22 = ?", 968),
+                    new("100 * 55 = ?", 5500),
                 }
             },
             {
                 GameMode.DIVISION,
                 new List<QuestionSet>()
                 {
-                    new QuestionSet("5 / 5 = ?", 1),
-                    new QuestionSet("10 / 2 = ?", 5),
-                    new QuestionSet("36 / 12 = ?", 3),
-                    new QuestionSet("44 / 22 = ?", 2),
-                    new QuestionSet("100 / 10 = ?", 10),
+                    new("5 / 5 = ?", 1),
+                    new("10 / 2 = ?", 5),
+                    new("36 / 12 = ?", 3),
+                    new("44 / 22 = ?", 2),
+                    new("100 / 10 = ?", 10),
                 }
             },
         };
