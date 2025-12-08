@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\vboxuser\source\repos\CodeReviews.Console.MathGame\MathGame\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\vboxuser\source\repos\CodeReviews.Console.MathGame\MathGame\.editorconfig" />
+  </ItemGroup>
+
 </Project>
