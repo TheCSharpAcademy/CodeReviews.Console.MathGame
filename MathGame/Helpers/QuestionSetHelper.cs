@@ -4,8 +4,7 @@ namespace MathGame.Helpers
 {
     internal class QuestionSetHelper
     {
-        // TODO: Should take difficulty level into account
-        public static QuestionSet GenerateQuestionSet(GameMode gameMode, Random random)
+        public static QuestionSet GenerateQuestionSet(GameMode gameMode, Random random, int difficulty)
         {
             int result, firstOperand, secondOperand;
             bool haveValidQuestion = false;
@@ -14,8 +13,8 @@ namespace MathGame.Helpers
             // interesting results often
             do
             {
-                firstOperand = random.Next(50);
-                secondOperand = random.Next(50);
+                firstOperand = random.Next((int)Math.Pow(10, difficulty));
+                secondOperand = random.Next((int)Math.Pow(10, difficulty));
 
                 // Most questions are valid - the only strong consideration is for DIVISION
                 haveValidQuestion = IsValidQuestion(firstOperand, secondOperand, gameMode);

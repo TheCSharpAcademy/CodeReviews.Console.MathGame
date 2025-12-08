@@ -9,9 +9,12 @@ namespace MathGame.Core
         // TODO: Refactor to be configurable (ask user for input)
         const int QUESTIONS_PER_GAME = 5;
 
-        // TODO: Refactor to use a dictionary where the option provided is
-        // the key to an action
+        // Game Mode options available
         const int MENU_OPTIONS = 6;
+
+        // Maybe expand difficulty settings in the future
+        const int MAX_DIFFICULTY_SETTING = 5;
+        const int MIN_DIFFICULTY_SETTING = 1;
 
         List<GameResult> gameResults;
         Dictionary<GameMode, List<QuestionSet>> questionBank;
@@ -24,31 +27,26 @@ namespace MathGame.Core
             this.random = new(Guid.NewGuid().GetHashCode());
         }
 
-        public void SeedQuestions()
+        public void SeedQuestions(GameMode gameMode, int difficulty)
         {
             questionBank.Clear();
 
-            // Each game mode should have all questions populated so we only need to seed once
-            foreach (GameMode gameMode in Enum.GetValues(typeof(GameMode)))
+            List<QuestionSet> questions = new();
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
-                List<QuestionSet> questions = new();
-                for (int i = 0; i < QUESTIONS_PER_GAME; i++)
-                {
-                    // TODO: The ranges should depend on difficulty
-                    QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(
-                        gameMode,
-                        this.random
-                    );
-                    questions.Add(questionSet);
-                }
-
-                questionBank.Add(gameMode, questions);
+                QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(
+                    gameMode,
+                    this.random,
+                    difficulty
+                );
+                questions.Add(questionSet);
             }
+
+            questionBank.Add(gameMode, questions);
         }
 
         public void Run()
         {
-            SeedQuestions();
             Console.WriteLine(
                 "Welcome to the C# Academy Math Game!\nThere are several game modes to choose from. Each game run will contain 5 questions."
             );
@@ -56,8 +54,9 @@ namespace MathGame.Core
             while (true)
             {
                 int userChoice = GetGameModeChoice();
+                int difficulty = GetDifficulty();
 
-                HandleUserChoice(userChoice);
+                HandleUserChoice(userChoice, difficulty);
             }
         }
 
@@ -66,7 +65,12 @@ namespace MathGame.Core
             return (userChoice > 0 && userChoice <= MENU_OPTIONS);
         }
 
-        void PlayGame(GameMode gameMode)
+        bool ValidDifficultySetting(int difficulty)
+        {
+            return difficulty > MIN_DIFFICULTY_SETTING && difficulty < MAX_DIFFICULTY_SETTING;
+        }
+
+        void PlayGame(GameMode gameMode, int difficulty)
         {
             Console.WriteLine($"You are now playing the {gameMode} game.");
             int score = 0;
@@ -83,7 +87,7 @@ namespace MathGame.Core
                 }
             }
 
-            ConcludeGame(gameMode, score);
+            ConcludeGame(gameMode, score, difficulty);
         }
 
         void DisplayGameResults()
@@ -101,10 +105,10 @@ namespace MathGame.Core
             Console.WriteLine();
         }
 
-        void ConcludeGame(GameMode gameMode, int score)
+        void ConcludeGame(GameMode gameMode, int score, int difficulty)
         {
             Console.WriteLine($"Your game is complete! Your score was: {score}");
-            gameResults.Add(new GameResult(score, gameMode));
+            gameResults.Add(new GameResult(score, gameMode, difficulty));
         }
 
         void ExitGame()
@@ -133,7 +137,24 @@ namespace MathGame.Core
             }
         }
 
-        void HandleUserChoice(int choice)
+        int GetDifficulty()
+        {
+            while (true)
+            {
+                Console.WriteLine("Please choose a difficulty setting (1-5)\n");
+                bool validInput = Int32.TryParse(Console.ReadLine(), out int difficulty);
+                if (!validInput || !ValidDifficultySetting(difficulty))
+                {
+                    Console.WriteLine(
+                        "Invalid input provided. Please make sure you choose a valid difficulty setting.");
+                    continue;
+                }
+
+                return difficulty;
+            }
+        }
+
+        void HandleUserChoice(int choice, int difficulty)
         {
             switch (choice)
             {
@@ -141,7 +162,8 @@ namespace MathGame.Core
                 case 2:
                 case 3:
                 case 4:
-                    PlayGame((GameMode)choice);
+                    SeedQuestions((GameMode)choice, difficulty);
+                    PlayGame((GameMode)choice, difficulty);
                     break;
                 case 5:
                     DisplayGameResults();
