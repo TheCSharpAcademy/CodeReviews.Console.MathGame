@@ -54,9 +54,8 @@ namespace MathGame.Core
             while (true)
             {
                 int userChoice = GetGameModeChoice();
-                int difficulty = GetDifficulty();
 
-                HandleUserChoice(userChoice, difficulty);
+                HandleUserChoice(userChoice);
             }
         }
 
@@ -141,7 +140,7 @@ namespace MathGame.Core
         {
             while (true)
             {
-                Console.WriteLine("Please choose a difficulty setting (1-5)\n");
+                Console.WriteLine("Please choose a difficulty setting (1-5)");
                 bool validInput = Int32.TryParse(Console.ReadLine(), out int difficulty);
                 if (!validInput || !ValidDifficultySetting(difficulty))
                 {
@@ -154,7 +153,7 @@ namespace MathGame.Core
             }
         }
 
-        void HandleUserChoice(int choice, int difficulty)
+        void HandleUserChoice(int choice)
         {
             switch (choice)
             {
@@ -162,6 +161,7 @@ namespace MathGame.Core
                 case 2:
                 case 3:
                 case 4:
+                    int difficulty = GetDifficulty();
                     SeedQuestions((GameMode)choice, difficulty);
                     PlayGame((GameMode)choice, difficulty);
                     break;

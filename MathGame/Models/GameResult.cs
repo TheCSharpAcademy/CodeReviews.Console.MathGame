@@ -18,7 +18,7 @@
         public override string ToString()
         {
             return new string(
-                $"On {Date.ToString()} you played a game of {GameMode.ToString()} and got the score {Result} "
+                $"On {Date.ToString()} you played a game of {GameMode.ToString()} on difficulty level {Difficulty} and got the score {Result} "
             );
         }
     }
