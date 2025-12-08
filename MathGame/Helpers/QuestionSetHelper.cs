@@ -5,11 +5,13 @@ namespace MathGame.Helpers
     internal class QuestionSetHelper
     {
         // TODO: Should take difficulty level into account
-        // TODO: Make sure to validate division operations (result in integer division, no zero divisor, etc.,)
         public static QuestionSet GenerateQuestionSet(GameMode gameMode, Random random)
         {
             int result, firstOperand, secondOperand;
             bool haveValidQuestion = false;
+
+            // It may be worth revisiting how we find operands if division does not get 
+            // interesting results often
             do
             {
                 firstOperand = random.Next(50);

@@ -34,9 +34,6 @@ namespace MathGame.Core
                 List<QuestionSet> questions = new();
                 for (int i = 0; i < QUESTIONS_PER_GAME; i++)
                 {
-                    // TODO: We should make sure we have a valid question at some point
-                    // (i.e., a division only incurs an integer division)
-
                     // TODO: The ranges should depend on difficulty
                     QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(
                         gameMode,
@@ -58,14 +55,73 @@ namespace MathGame.Core
 
             while (true)
             {
-                // TODO: Refactor to extracted method
+                int userChoice = GetGameModeChoice();
+
+                HandleUserChoice(userChoice);
+            }
+        }
+
+        bool ValidGameModeChoice(int userChoice)
+        {
+            return (userChoice > 0 && userChoice <= MENU_OPTIONS);
+        }
+
+        void PlayGame(GameMode gameMode)
+        {
+            Console.WriteLine($"You are now playing the {gameMode} game.");
+            int score = 0;
+
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
+            {
+                Console.WriteLine(questionBank[gameMode][i].Question);
+
+                bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
+
+                if (validResponse && answer == questionBank[gameMode][i].Answer)
+                {
+                    score += 1;
+                }
+            }
+
+            ConcludeGame(gameMode, score);
+        }
+
+        void DisplayGameResults()
+        {
+            if (gameResults.Count() == 0)
+            {
+                Console.WriteLine("No previous game results found!\n");
+                return;
+            }
+
+            foreach (GameResult gameResult in gameResults)
+            {
+                Console.WriteLine(gameResult.ToString());
+            }
+            Console.WriteLine();
+        }
+
+        void ConcludeGame(GameMode gameMode, int score)
+        {
+            Console.WriteLine($"Your game is complete! Your score was: {score}");
+            gameResults.Add(new GameResult(score, gameMode));
+        }
+
+        void ExitGame()
+        {
+            Console.WriteLine("Thanks for playing!");
+            Environment.Exit(0);
+        }
+
+        int GetGameModeChoice()
+        {
+            while (true)
+            {
                 Console.WriteLine(
                     "Please choose a game mode. Your options are;\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n5) Show Previous Games\n6) Quit"
                 );
-
-                // TODO: Refactor to validation/ get user input method
-                bool validInput = Int32.TryParse(Console.ReadLine(), out int userChoice);
-                if (!validInput || !validGameMode(userChoice))
+                bool validInput = Int32.TryParse(Console.ReadLine(), out int choice);
+                if (!validInput || !ValidGameModeChoice(choice))
                 {
                     Console.WriteLine(
                         "Invalid input provided. Please make sure you choose an existing game mode."
@@ -73,76 +129,28 @@ namespace MathGame.Core
                     continue;
                 }
 
-                // TODO: Refactor to Engine Question method
-                switch (userChoice)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        PlayGame((GameMode)userChoice);
-                        break;
-                    case 5:
-                        DisplayGameResults();
-                        break;
-                    case 6:
-                        ExitGame();
-                        break;
-                    default:
-                        break;
-                }
+                return choice;
             }
+        }
 
-            bool validGameMode(int userChoice)
+        void HandleUserChoice(int choice)
+        {
+            switch (choice)
             {
-                return (userChoice > 0 && userChoice <= MENU_OPTIONS);
-            }
-
-            void PlayGame(GameMode gameMode)
-            {
-                Console.WriteLine($"You are now playing the {gameMode} game.");
-                int score = 0;
-
-                for (int i = 0; i < QUESTIONS_PER_GAME; i++)
-                {
-                    Console.WriteLine(questionBank[gameMode][i].Question);
-
-                    bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
-
-                    if (validResponse && answer == questionBank[gameMode][i].Answer)
-                    {
-                        score += 1;
-                    }
-                }
-
-                ConcludeGame(gameMode, score);
-            }
-
-            void DisplayGameResults()
-            {
-                if (gameResults.Count() == 0)
-                {
-                    Console.WriteLine("No previous game results found!\n");
-                    return;
-                }
-
-                foreach (GameResult gameResult in gameResults)
-                {
-                    Console.WriteLine(gameResult.ToString());
-                }
-                Console.WriteLine();
-            }
-
-            void ConcludeGame(GameMode gameMode, int score)
-            {
-                Console.WriteLine($"Your game is complete! Your score was: {score}");
-                gameResults.Add(new GameResult(score, gameMode));
-            }
-
-            void ExitGame()
-            {
-                Console.WriteLine("Thanks for playing!");
-                Environment.Exit(0);
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    PlayGame((GameMode)choice);
+                    break;
+                case 5:
+                    DisplayGameResults();
+                    break;
+                case 6:
+                    ExitGame();
+                    break;
+                default:
+                    break;
             }
         }
     }
