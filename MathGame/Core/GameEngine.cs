@@ -1,6 +1,6 @@
-﻿using MathGame.Helpers;
+﻿using System;
+using MathGame.Helpers;
 using MathGame.Models;
-using System;
 
 namespace MathGame.Core
 {
@@ -31,20 +31,30 @@ namespace MathGame.Core
             // Each game mode should have all questions populated so we only need to seed once
             foreach (GameMode gameMode in Enum.GetValues(typeof(GameMode)))
             {
+                List<QuestionSet> questions = new();
                 for (int i = 0; i < QUESTIONS_PER_GAME; i++)
                 {
                     // TODO: We should make sure we have a valid question at some point
                     // (i.e., a division only incurs an integer division)
 
                     // TODO: The ranges should depend on difficulty
-                    QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(gameMode, this.random);
+                    QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(
+                        gameMode,
+                        this.random
+                    );
+                    questions.Add(questionSet);
                 }
+
+                questionBank.Add(gameMode, questions);
             }
         }
 
         public void Run()
         {
             SeedQuestions();
+            Console.WriteLine(
+                "Welcome to the C# Academy Math Game!\nThere are several game modes to choose from. Each game run will contain 5 questions."
+            );
 
             while (true)
             {
