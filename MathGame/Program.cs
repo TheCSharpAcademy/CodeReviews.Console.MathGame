@@ -70,7 +70,7 @@ namespace MathGame
                 new List<QuestionSet>()
                 {
                     new QuestionSet("5 / 5 = ?", 1),
-                    new QuestionSet("10 / 2 = ?", 2),
+                    new QuestionSet("10 / 2 = ?", 5),
                     new QuestionSet("36 / 12 = ?", 3),
                     new QuestionSet("44 / 22 = ?", 2),
                     new QuestionSet("100 / 10 = ?", 10),
@@ -132,8 +132,9 @@ namespace MathGame
         static void PlayAdditionGame()
         {
             Console.WriteLine("You are now playing the ADDITION game.");
+            int score = 0;
 
-            for (int i = 0; i < GAME_MODES; i++)
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
                 Console.WriteLine(questionBank[GameMode.ADDITION][i].Question);
 
@@ -141,20 +142,18 @@ namespace MathGame
 
                 if (validResponse && answer == questionBank[GameMode.ADDITION][i].Answer)
                 {
-                    Console.WriteLine("Congrats smarty boy");
-                }
-                else
-                {
-                    Console.WriteLine("Dead wrong.");
+                    score += 1;
                 }
             }
+            ConcludeGame(score);
         }
 
         static void PlaySubtractionGame()
         {
             Console.WriteLine("You are now playing the SUBTRACTION game.");
+            int score = 0;
 
-            for (int i = 0; i < GAME_MODES; i++)
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
                 Console.WriteLine(questionBank[GameMode.SUBTRACTION][i].Question);
 
@@ -162,20 +161,18 @@ namespace MathGame
 
                 if (validResponse && answer == questionBank[GameMode.SUBTRACTION][i].Answer)
                 {
-                    Console.WriteLine("Congrats smarty boy");
-                }
-                else
-                {
-                    Console.WriteLine("Dead wrong.");
+                    score += 1;
                 }
             }
+            ConcludeGame(score);
         }
 
         static void PlayMultiplicationGame()
         {
             Console.WriteLine("You are now playing the MULTIPLICATION game.");
+            int score = 0;
 
-            for (int i = 0; i < GAME_MODES; i++)
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
                 Console.WriteLine(questionBank[GameMode.MULTIPLICATION][i].Question);
 
@@ -183,20 +180,18 @@ namespace MathGame
 
                 if (validResponse && answer == questionBank[GameMode.MULTIPLICATION][i].Answer)
                 {
-                    Console.WriteLine("Congrats smarty boy");
-                }
-                else
-                {
-                    Console.WriteLine("Dead wrong.");
+                    score += 1;
                 }
             }
+            ConcludeGame(score);
         }
 
         static void PlayDivisionGame()
         {
             Console.WriteLine("You are now playing the DIVISION game.");
+            int score = 0;
 
-            for (int i = 0; i < GAME_MODES; i++)
+            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
                 Console.WriteLine(questionBank[GameMode.DIVISION][i].Question);
 
@@ -204,13 +199,15 @@ namespace MathGame
 
                 if (validResponse && answer == questionBank[GameMode.DIVISION][i].Answer)
                 {
-                    Console.WriteLine("Congrats smarty boy");
-                }
-                else
-                {
-                    Console.WriteLine("Dead wrong.");
+                    score += 1;
                 }
             }
+            ConcludeGame(score);
+        }
+
+        static void ConcludeGame(int score)
+        {
+            Console.WriteLine($"Your game is complete! Your score was: {score}");
         }
     }
 }
