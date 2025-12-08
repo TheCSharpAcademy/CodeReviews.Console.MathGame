@@ -44,7 +44,7 @@ namespace MathGame
     internal class Program
     {
         const int QUESTIONS_PER_GAME = 5;
-        const int GAME_MODES = 5;
+        const int GAME_MODES = 6;
 
         public static Dictionary<GameMode, List<QuestionSet>> questionBank = new Dictionary<
             GameMode,
@@ -111,7 +111,7 @@ namespace MathGame
             while (playing)
             {
                 Console.WriteLine(
-                    "Please choose a game mode. Your options are;\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n5) Show Previous Games"
+                    "Please choose a game mode. Your options are;\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n5) Show Previous Games\n6) Quit"
                 );
 
                 bool validInput = Int32.TryParse(Console.ReadLine(), out int userChoice);
@@ -122,7 +122,6 @@ namespace MathGame
                     );
                     continue;
                 }
-                Console.WriteLine($"Entering game mode {userChoice}");
 
                 // TODO: Refactor to Engine Question method
                 switch (userChoice)
@@ -141,6 +140,9 @@ namespace MathGame
                         break;
                     case 5:
                         DisplayGameResults();
+                        break;
+                    case 6:
+                        playing = false;
                         break;
                     default:
                         break;
