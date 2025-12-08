@@ -7,8 +7,8 @@ namespace MathGame.Helpers
         // TODO: Should take difficulty level into account
         public static QuestionSet GenerateQuestionSet(GameMode gameMode, Random random)
         {
-            int firstOperand = random.Next();
-            int secondOperand = random.Next();
+            int firstOperand = random.Next(50);
+            int secondOperand = random.Next(50);
 
             int result;
 
