@@ -2,18 +2,6 @@
 
 namespace MathGame
 {
-    internal class QuestionSet
-    {
-        public string Question { get; set; }
-        public int Answer { get; set; }
-
-        public QuestionSet(string question, int answer)
-        {
-            Question = question;
-            Answer = answer;
-        }
-    }
-
     internal class GameResult
     {
         public int Result { get; set; }
