@@ -41,7 +41,7 @@ namespace MathGame.Core
 
                     int result = CalculateAnswer(gameMode, firstOperand, secondOperand);
 
-                    string question = new string($"{firstOperand} {gameMode.ToSymbol()} {secondOperand} = ?");
+                    string question = new string($"{firstOperand} {GameModeExtensions.ToSymbol(gameMode)} {secondOperand} = ?");
                     QuestionSet questionSet = new(question, result);  
                 }
             }
