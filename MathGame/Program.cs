@@ -20,12 +20,31 @@ namespace MathGame
             Question = question;
             Answer = answer;
         }
+
+    }
+
+    internal class GameResult
+    {
+        public int Result { get; set; }
+        public GameMode GameMode {  get; set; }
+        public DateTime Date { get; set; }
+
+        public GameResult(int result, GameMode gameMode)
+        {
+            Result = result; GameMode = gameMode;
+            Date = DateTime.Now;
+        }
+
+        public override string ToString()
+        {
+            return new string($"On {Date.ToString()} you played a game of {GameMode.ToString()} and got the score {Result} ");
+        }
     }
 
     internal class Program
     {
         const int QUESTIONS_PER_GAME = 5;
-        const int GAME_MODES = 4;
+        const int GAME_MODES = 5;
 
         public static Dictionary<GameMode, List<QuestionSet>> questionBank = new Dictionary<
             GameMode,
@@ -78,6 +97,8 @@ namespace MathGame
             },
         };
 
+        public static List<GameResult> gameResults = new();
+
         public static void Main(string[] args)
         {
             // TODO: Refactor to Engine class
@@ -90,7 +111,7 @@ namespace MathGame
             while (playing)
             {
                 Console.WriteLine(
-                    "Please choose a game mode. Your options are;\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division"
+                    "Please choose a game mode. Your options are;\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n5) Show Previous Games"
                 );
 
                 bool validInput = Int32.TryParse(Console.ReadLine(), out int userChoice);
@@ -117,6 +138,9 @@ namespace MathGame
                         break;
                     case 4:
                         PlayDivisionGame();
+                        break;
+                    case 5:
+                        DisplayGameResults();
                         break;
                     default:
                         break;
@@ -145,7 +169,7 @@ namespace MathGame
                     score += 1;
                 }
             }
-            ConcludeGame(score);
+            ConcludeGame(GameMode.ADDITION, score);
         }
 
         static void PlaySubtractionGame()
@@ -164,7 +188,7 @@ namespace MathGame
                     score += 1;
                 }
             }
-            ConcludeGame(score);
+            ConcludeGame(GameMode.SUBTRACTION, score);
         }
 
         static void PlayMultiplicationGame()
@@ -183,7 +207,7 @@ namespace MathGame
                     score += 1;
                 }
             }
-            ConcludeGame(score);
+            ConcludeGame(GameMode.MULTIPLICATION, score);
         }
 
         static void PlayDivisionGame()
@@ -202,12 +226,28 @@ namespace MathGame
                     score += 1;
                 }
             }
-            ConcludeGame(score);
+            ConcludeGame(GameMode.DIVISION, score);
         }
 
-        static void ConcludeGame(int score)
+        static void ConcludeGame(GameMode gameMode, int score)
         {
             Console.WriteLine($"Your game is complete! Your score was: {score}");
+            gameResults.Add(new GameResult(score, gameMode));
+        }
+
+        static void DisplayGameResults()
+        {
+            if (gameResults.Count() == 0)
+            {
+                Console.WriteLine("No previous game results found!\n");
+                return;
+            }
+
+            foreach (GameResult gameResult in gameResults)
+            {
+                Console.WriteLine(gameResult.ToString());
+            }
+            Console.WriteLine();
         }
     }
 }
