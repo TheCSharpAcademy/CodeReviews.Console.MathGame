@@ -4,7 +4,7 @@ namespace MathGame
 {
     internal enum GameMode
     {
-        ADDITION = 0,
+        ADDITION = 1,
         SUBTRACTION,
         MULTIPLICATION,
         DIVISION,
@@ -20,24 +20,26 @@ namespace MathGame
             Question = question;
             Answer = answer;
         }
-
     }
 
     internal class GameResult
     {
         public int Result { get; set; }
-        public GameMode GameMode {  get; set; }
+        public GameMode GameMode { get; set; }
         public DateTime Date { get; set; }
 
         public GameResult(int result, GameMode gameMode)
         {
-            Result = result; GameMode = gameMode;
+            Result = result;
+            GameMode = gameMode;
             Date = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return new string($"On {Date.ToString()} you played a game of {GameMode.ToString()} and got the score {Result} ");
+            return new string(
+                $"On {Date.ToString()} you played a game of {GameMode.ToString()} and got the score {Result} "
+            );
         }
     }
 
@@ -127,16 +129,10 @@ namespace MathGame
                 switch (userChoice)
                 {
                     case 1:
-                        PlayAdditionGame();
-                        break;
                     case 2:
-                        PlaySubtractionGame();
-                        break;
                     case 3:
-                        PlayMultiplicationGame();
-                        break;
                     case 4:
-                        PlayDivisionGame();
+                        PlayGame((GameMode)userChoice);
                         break;
                     case 5:
                         DisplayGameResults();
@@ -155,80 +151,24 @@ namespace MathGame
             return (userChoice > 0 && userChoice <= GAME_MODES);
         }
 
-        static void PlayAdditionGame()
+        static void PlayGame(GameMode gameMode)
         {
-            Console.WriteLine("You are now playing the ADDITION game.");
+            Console.WriteLine($"You are now playing the {gameMode} game.");
             int score = 0;
 
             for (int i = 0; i < QUESTIONS_PER_GAME; i++)
             {
-                Console.WriteLine(questionBank[GameMode.ADDITION][i].Question);
+                Console.WriteLine(questionBank[gameMode][i].Question);
 
                 bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
 
-                if (validResponse && answer == questionBank[GameMode.ADDITION][i].Answer)
+                if (validResponse && answer == questionBank[gameMode][i].Answer)
                 {
                     score += 1;
                 }
             }
-            ConcludeGame(GameMode.ADDITION, score);
-        }
 
-        static void PlaySubtractionGame()
-        {
-            Console.WriteLine("You are now playing the SUBTRACTION game.");
-            int score = 0;
-
-            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
-            {
-                Console.WriteLine(questionBank[GameMode.SUBTRACTION][i].Question);
-
-                bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
-
-                if (validResponse && answer == questionBank[GameMode.SUBTRACTION][i].Answer)
-                {
-                    score += 1;
-                }
-            }
-            ConcludeGame(GameMode.SUBTRACTION, score);
-        }
-
-        static void PlayMultiplicationGame()
-        {
-            Console.WriteLine("You are now playing the MULTIPLICATION game.");
-            int score = 0;
-
-            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
-            {
-                Console.WriteLine(questionBank[GameMode.MULTIPLICATION][i].Question);
-
-                bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
-
-                if (validResponse && answer == questionBank[GameMode.MULTIPLICATION][i].Answer)
-                {
-                    score += 1;
-                }
-            }
-            ConcludeGame(GameMode.MULTIPLICATION, score);
-        }
-
-        static void PlayDivisionGame()
-        {
-            Console.WriteLine("You are now playing the DIVISION game.");
-            int score = 0;
-
-            for (int i = 0; i < QUESTIONS_PER_GAME; i++)
-            {
-                Console.WriteLine(questionBank[GameMode.DIVISION][i].Question);
-
-                bool validResponse = Int32.TryParse(Console.ReadLine(), out int answer);
-
-                if (validResponse && answer == questionBank[GameMode.DIVISION][i].Answer)
-                {
-                    score += 1;
-                }
-            }
-            ConcludeGame(GameMode.DIVISION, score);
+            ConcludeGame(gameMode, score);
         }
 
         static void ConcludeGame(GameMode gameMode, int score)
