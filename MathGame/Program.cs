@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using MathGame.Models;
 
 namespace MathGame
 {
-    internal enum GameMode
-    {
-        ADDITION = 1,
-        SUBTRACTION,
-        MULTIPLICATION,
-        DIVISION,
-    }
-
     internal class QuestionSet
     {
         public string Question { get; set; }
