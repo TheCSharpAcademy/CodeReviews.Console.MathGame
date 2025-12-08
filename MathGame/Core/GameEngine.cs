@@ -67,7 +67,7 @@ namespace MathGame.Core
 
         bool ValidDifficultySetting(int difficulty)
         {
-            return difficulty > MIN_DIFFICULTY_SETTING && difficulty < MAX_DIFFICULTY_SETTING;
+            return difficulty >= MIN_DIFFICULTY_SETTING && difficulty < MAX_DIFFICULTY_SETTING;
         }
 
         void PlayGame(GameMode gameMode, int difficulty)
