@@ -1,4 +1,5 @@
-﻿using MathGame.Models;
+﻿using MathGame.Helpers;
+using MathGame.Models;
 using System;
 
 namespace MathGame.Core
@@ -36,13 +37,7 @@ namespace MathGame.Core
                     // (i.e., a division only incurs an integer division)
 
                     // TODO: The ranges should depend on difficulty
-                    int firstOperand = random.Next();
-                    int secondOperand = random.Next();
-
-                    int result = CalculateAnswer(gameMode, firstOperand, secondOperand);
-
-                    string question = new string($"{firstOperand} {GameModeExtensions.ToSymbol(gameMode)} {secondOperand} = ?");
-                    QuestionSet questionSet = new(question, result);  
+                    QuestionSet questionSet = QuestionSetHelper.GenerateQuestionSet(gameMode, this.random);
                 }
             }
         }
