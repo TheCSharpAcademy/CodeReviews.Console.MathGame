@@ -239,25 +239,29 @@
 
             while (true)
             {
-                int _numberOfQuestions;
                 Console.WriteLine("You can change number of questions to make the game harder/easier!");
                 Console.WriteLine("Input what amount of questions you would like to answer (at least 5)");
                 Console.WriteLine($"Current number of questions is {numberOfQuestions}");
-                bool validNumberOfQuestions = int.TryParse(Console.ReadLine(), out _numberOfQuestions);
-                {
-                    if (validNumberOfQuestions && _numberOfQuestions >= 5)
-                    {
-                        numberOfQuestions = _numberOfQuestions;
-                        Console.Clear();
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid number, please enter a valid one");
-                    }
-                }
 
+                if(TryGetValidNumber(out int newValue))
+                {
+                    numberOfQuestions = newValue;
+                    Console.Clear();
+                    break;
+                }
+                Console.WriteLine("Invalid number, try again");
             }
+        }
+
+        private static bool TryGetValidNumber(out int result)
+        {
+            if(int.TryParse(Console.ReadLine(), out int value) && value >= 5)
+            {
+                result = value;
+                return true;
+            }
+            result = default;
+            return false;
         }
     }
 }
