@@ -1,0 +1,15 @@
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\bin\Debug\net8.0\MathGame.exe
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\bin\Debug\net8.0\MathGame.deps.json
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\bin\Debug\net8.0\MathGame.runtimeconfig.json
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\bin\Debug\net8.0\MathGame.dll
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\bin\Debug\net8.0\MathGame.pdb
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.AssemblyInfoInputs.cache
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.AssemblyInfo.cs
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.csproj.CoreCompileInputs.cache
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.dll
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\refint\MathGame.dll
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.pdb
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.genruntimeconfig.cache
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\ref\MathGame.dll
+C:\Users\samue\source\repos\CSharpAcademy\Console\MathGame\obj\Debug\net8.0\MathGame.sourcelink.json
