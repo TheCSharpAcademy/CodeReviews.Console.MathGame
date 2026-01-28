@@ -86,7 +86,7 @@
 
             for (int i = 0; i < 5; i++)
             {
-                int[] nums = Helpers.getNumbers();
+                int[] nums = Helpers.GetNumbers();
                 Console.WriteLine(nums[0] + " / " + nums[1] + " = ?");
                 var result = int.Parse(Console.ReadLine());
                 if (result == nums[0] / nums[1])

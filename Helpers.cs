@@ -26,7 +26,7 @@ namespace MathGame
 
             Console.WriteLine("-----------------------");
         }
-        internal static int[] getNumbers()
+        internal static int[] GetNumbers()
         {
             Random random = new Random();
             int num1 = random.Next(0, 99);
@@ -35,7 +35,7 @@ namespace MathGame
 
             while (num1 % num2 != 0)
             {
-                num1 = random.Next(0, 99); ;
+                num1 = random.Next(0, 99);
                 num2 = random.Next(0, 99);
             }
             result[0] = num1;
