@@ -1,7 +1,7 @@
 ﻿namespace MathGame
 {
     internal class GameEngine
-    {       internal void Addition()
+    { internal void Addition()
         {
             Random random = new Random();
             var score = 0;
@@ -11,17 +11,22 @@
                 var num1 = random.Next(1, 10);
                 var num2 = random.Next(1, 10);
                 Console.WriteLine(num1 + " + " + num2 + " = ?");
-                var result = int.Parse(Console.ReadLine());
+                int result;
+                while (!int.TryParse(Console.ReadLine(), out result))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine(num1 + " + " + num2 + " = ?");
+                }
                 if (result == num1 + num2)
-                {
-                    Console.WriteLine("Correct!");
-                    score++;
+                    {
+                        Console.WriteLine("Correct!");
+                        score++;
 
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect! The correct answer is " + (num1 + num2));
-                }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect! The correct answer is " + (num1 + num2));
+                    }
             }
             Helpers.ShowScore(score);
             Helpers.AddScore(score, "Addition");
@@ -38,17 +43,22 @@
                 var num1 = random.Next(1, 10);
                 var num2 = random.Next(1, 10);
                 Console.WriteLine(num1 + " - " + num2 + " = ?");
-                var result = int.Parse(Console.ReadLine());
-                if (result == num1 - num2)
+                int result;
+                while (!int.TryParse(Console.ReadLine(), out result))
                 {
-                    Console.WriteLine("Correct!");
-                    score++;
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine(num1 + " - " + num2 + " = ?");
+                }
+                    if (result == num1 - num2)
+                    {
+                        Console.WriteLine("Correct!");
+                        score++;
 
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect! The correct answer is " + (num1 - num2));
-                }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect! The correct answer is " + (num1 - num2));
+                    }
             }
             Helpers.ShowScore(score);
             Helpers.AddScore(score, "Subtraction");
@@ -63,7 +73,12 @@
                 var num1 = random.Next(1, 10);
                 var num2 = random.Next(1, 10);
                 Console.WriteLine(num1 + " * " + num2 + " = ?");
-                var result = int.Parse(Console.ReadLine());
+                int result;
+                while (!int.TryParse(Console.ReadLine(), out result))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine(num1 + " * " + num2 + " = ?");
+                }
                 if (result == num1 * num2)
                 {
                     Console.WriteLine("Correct!");
@@ -88,17 +103,22 @@
             {
                 int[] nums = Helpers.GetNumbers();
                 Console.WriteLine(nums[0] + " / " + nums[1] + " = ?");
-                var result = int.Parse(Console.ReadLine());
+                int result;
+                while (!int.TryParse(Console.ReadLine(), out result))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine(nums[0] + " / " + nums[1] + " = ?");
+                }
                 if (result == nums[0] / nums[1])
-                {
-                    Console.WriteLine("Correct!");
-                    score++;
+                    {
+                        Console.WriteLine("Correct!");
+                        score++;
 
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect! The correct answer is " + (nums[0] / nums[1]));
-                }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect! The correct answer is " + (nums[0] / nums[1]));
+                    }
             }
             Helpers.ShowScore(score);
             Helpers.AddScore(score, "Division");

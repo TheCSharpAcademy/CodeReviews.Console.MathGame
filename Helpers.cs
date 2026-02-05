@@ -29,14 +29,14 @@ namespace MathGame
         internal static int[] GetNumbers()
         {
             Random random = new Random();
-            int num1 = random.Next(0, 99);
-            int num2 = random.Next(0, 99);
+            int num1 = random.Next(1, 99);
+            int num2 = random.Next(1, 99);
             var result = new int[2];
 
             while (num1 % num2 != 0)
             {
-                num1 = random.Next(0, 99);
-                num2 = random.Next(0, 99);
+                num1 = random.Next(1, 99);
+                num2 = random.Next(1, 99);
             }
             result[0] = num1;
             result[1] = num2;
