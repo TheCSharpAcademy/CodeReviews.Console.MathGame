@@ -18,7 +18,6 @@ internal class Game
     internal void Initialize()
     {
         bool keepPlaying = true;
-        string playerAnswer = String.Empty;
 
         while (keepPlaying)
         {
