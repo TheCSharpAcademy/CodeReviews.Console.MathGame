@@ -111,23 +111,25 @@ internal class Game
 
     internal bool GameOver(int playerScore, int winningScore, int losingScore)
     {
+        bool isGameOver = false;
+
         if (playerScore >= winningScore)
         {
+            isGameOver = true;
             history.Add("Win");
             AnsiConsole.MarkupLine($"[green]Congratulations. You won![/]");
-            return true;
         }
 
         if (playerScore <= losingScore)
         {
+            isGameOver = true;
             history.Add("Loss");
             AnsiConsole.MarkupLine($"[red]You lost... :([/]");
-            return true;
         }
 
         PrintController.Pause();
 
-        return false;
+        return isGameOver;
     }
 
     internal static int CalculateAnswer(Operator op, int operand1, int operand2)
