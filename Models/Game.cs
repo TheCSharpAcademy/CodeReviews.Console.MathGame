@@ -1,11 +1,11 @@
-using CodeReviews.Console.MathGame.Controllers;
+using mathGame.qua9k.Controllers;
 using Spectre.Console;
 
 namespace mathGame.qua9k.Models;
 
 internal class Game
 {
-    readonly List<string> history = [];
+    readonly List<(string Result, string PlayTime)> history = [];
 
     readonly Dictionary<Operator, string> operatorMap = new()
     {
@@ -38,7 +38,6 @@ internal class Game
                     PrintController.PrintHistory(history);
                     break;
                 default:
-                    AnsiConsole.WriteLine("Your input was not understood. Please try again.");
                     break;
             }
         }
@@ -48,6 +47,9 @@ internal class Game
 
     internal void Play(int winningScore = 5, int losingScore = -3)
     {
+        System.Timers.Timer timer = new(1000);
+        timer.Start();
+
         int playerScore = 0;
 
         PrintController.PresentRules(winningScore, losingScore);
@@ -114,27 +116,29 @@ internal class Game
         }
     }
 
+    // [[todo]] :: get timer value
     internal bool GameOver(int playerScore, int winningScore, int losingScore)
     {
-        bool isGameOver = false;
+        bool playerWon = playerScore >= winningScore;
+        bool playerLost = playerScore <= losingScore;
 
-        if (playerScore >= winningScore)
+        if (playerWon)
         {
-            isGameOver = true;
-            history.Add("Win");
+            (string Result, string PlayTime) t = ("Win", "0");
+            history.Add(t);
             AnsiConsole.MarkupLine($"[green]Congratulations. You won![/]");
         }
 
-        if (playerScore <= losingScore)
+        if (playerLost)
         {
-            isGameOver = true;
-            history.Add("Loss");
+            (string Result, string PlayTime) t = ("Loss", "0");
+            history.Add(t);
             AnsiConsole.MarkupLine($"[red]You lost... :([/]");
         }
 
         PrintController.Pause();
 
-        return isGameOver;
+        return playerWon || playerLost;
     }
 
     internal static int CalculateAnswer(Operator op, int operand1, int operand2)
