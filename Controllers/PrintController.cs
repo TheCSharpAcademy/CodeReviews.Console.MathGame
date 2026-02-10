@@ -73,7 +73,7 @@ internal static class PrintController
 
         table.AddColumn("[blue]Game[/]");
         table.AddColumn("[blue]Result[/]");
-        table.AddColumn("[blue]Play Time[/]");
+        table.AddColumn("[blue]Play Time (Seconds)[/]");
 
         for (int i = 0; i < history.Count; i += 1)
         {

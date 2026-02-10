@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using mathGame.qua9k.Controllers;
 using Spectre.Console;
 
@@ -47,9 +48,7 @@ internal class Game
 
     internal void Play(int winningScore = 5, int losingScore = -3)
     {
-        System.Timers.Timer timer = new(1000);
-        timer.Start();
-
+        var stopwatch = Stopwatch.StartNew();
         int playerScore = 0;
 
         PrintController.PresentRules(winningScore, losingScore);
@@ -108,37 +107,42 @@ internal class Game
             }
 
             AnsiConsole.WriteLine($"Your score: {playerScore}");
+            PrintController.Pause();
 
-            if (GameOver(playerScore, winningScore, losingScore))
+            bool playerWon = playerScore >= winningScore;
+            bool playerLost = playerScore <= losingScore;
+            bool isGameOver = playerWon || playerLost;
+
+            if (isGameOver)
             {
+                stopwatch.Stop();
+
+                (string Result, string PlayTime) t = (
+                    "",
+                    Convert.ToString(stopwatch.ElapsedMilliseconds / 1000)
+                );
+
+                if (playerWon)
+                {
+                    t.Result = "Won";
+                    AnsiConsole.Clear();
+                    AnsiConsole.MarkupLine($"[green]Congratulations. You won![/]");
+                }
+
+                if (playerLost)
+                {
+                    t.Result = "Loss";
+                    AnsiConsole.Clear();
+                    AnsiConsole.MarkupLine($"[red]You lost... :([/]");
+                }
+
+                history.Add(t);
+
+                PrintController.Pause();
+
                 break;
             }
         }
-    }
-
-    // [[todo]] :: get timer value
-    internal bool GameOver(int playerScore, int winningScore, int losingScore)
-    {
-        bool playerWon = playerScore >= winningScore;
-        bool playerLost = playerScore <= losingScore;
-
-        if (playerWon)
-        {
-            (string Result, string PlayTime) t = ("Win", "0");
-            history.Add(t);
-            AnsiConsole.MarkupLine($"[green]Congratulations. You won![/]");
-        }
-
-        if (playerLost)
-        {
-            (string Result, string PlayTime) t = ("Loss", "0");
-            history.Add(t);
-            AnsiConsole.MarkupLine($"[red]You lost... :([/]");
-        }
-
-        PrintController.Pause();
-
-        return playerWon || playerLost;
     }
 
     internal static int CalculateAnswer(Operator op, int operand1, int operand2)
