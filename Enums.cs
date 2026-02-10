@@ -1,4 +1,4 @@
-namespace CodeReviews.Console.MathGame;
+namespace mathGame.qua9k;
 
 internal enum Operator
 {
@@ -6,4 +6,5 @@ internal enum Operator
     Subtract,
     Multiply,
     Divide,
+    Random,
 }

@@ -10,10 +10,11 @@ internal static class PrintController
         AnsiConsole.MarkupLine("[blue]***********************************************[/]");
         AnsiConsole.MarkupLine("[blue]***      Welcome to the Tiny Math Game      ***[/]");
         AnsiConsole.MarkupLine("[blue]***********************************************[/]");
-        AnsiConsole.WriteLine("What would you like to do?");
-        AnsiConsole.MarkupLine("[green]y: play game[/]");
-        AnsiConsole.MarkupLine("[red]n: exit game[/]");
+        AnsiConsole.WriteLine("\nWhat would you like to do?");
+        AnsiConsole.MarkupLine("\n[green]p: play game[/]");
+        AnsiConsole.MarkupLine("[red]x: exit game[/]");
         AnsiConsole.MarkupLine("[yellow]h: view history[/]");
+        AnsiConsole.Write("\nPlease make a choice: ");
     }
 
     internal static void PresentRules(int winningScore, int losingScore)

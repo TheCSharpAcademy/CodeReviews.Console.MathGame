@@ -1,7 +1,7 @@
 using CodeReviews.Console.MathGame.Controllers;
 using Spectre.Console;
 
-namespace CodeReviews.Console.MathGame.Models;
+namespace mathGame.qua9k.Models;
 
 internal class Game
 {
@@ -13,6 +13,7 @@ internal class Game
         { Operator.Subtract, "-" },
         { Operator.Divide, "/" },
         { Operator.Multiply, "*" },
+        { Operator.Random, "?" },
     };
 
     internal void Initialize()
@@ -23,14 +24,14 @@ internal class Game
         {
             PrintController.Welcome();
 
-            string? playerInput = System.Console.ReadLine();
+            string? playerInput = Console.ReadLine();
 
             switch (playerInput!.ToLower())
             {
-                case "y":
+                case "p":
                     Play();
                     break;
-                case "n":
+                case "x":
                     keepPlaying = false;
                     break;
                 case "h":
@@ -64,6 +65,11 @@ internal class Game
             int operand1 = Random.Shared.Next(0, 100);
             int operand2 = Random.Shared.Next(0, 100);
 
+            if (choice == Operator.Random)
+            {
+                choice = GetRandomOperator(choice);
+            }
+
             if (choice == Operator.Divide)
             {
                 while (operand1 <= operand2 || operand1 % operand2 != 0)
@@ -77,7 +83,7 @@ internal class Game
 
             AnsiConsole.Write(question);
 
-            string? playerAnswer = System.Console.ReadLine();
+            string? playerAnswer = Console.ReadLine();
 
             while (!int.TryParse(playerAnswer, out int _))
             {
@@ -85,7 +91,7 @@ internal class Game
                 PrintController.Pause();
                 AnsiConsole.Clear();
                 AnsiConsole.Write(question);
-                playerAnswer = System.Console.ReadLine();
+                playerAnswer = Console.ReadLine();
             }
 
             if (Convert.ToInt32(playerAnswer) == CalculateAnswer(choice, operand1, operand2))
@@ -141,5 +147,18 @@ internal class Game
             Operator.Multiply => operand1 * operand2,
             _ => 0,
         };
+    }
+
+    internal static Operator GetRandomOperator(Operator choice)
+    {
+        Random random = new();
+
+        while (choice == Operator.Random)
+        {
+            int i = random.Next(0, Enum.GetNames<Operator>().Length);
+            choice = (Operator)i;
+        }
+
+        return choice;
     }
 }

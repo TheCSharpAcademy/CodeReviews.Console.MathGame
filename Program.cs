@@ -1,4 +1,4 @@
-﻿using CodeReviews.Console.MathGame.Models;
+﻿using mathGame.qua9k.Models;
 
 Game game = new();
 game.Initialize();
