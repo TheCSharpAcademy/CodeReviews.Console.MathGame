@@ -144,8 +144,6 @@ char SelectMathOperator()
     }
     while (running);
 
-    // Console.WriteLine($"  DEBUG: DisplayMathOptions() returns '{chosenOperator}'");
-    // Console.ReadKey();
     return chosenOperator;
 }
 
