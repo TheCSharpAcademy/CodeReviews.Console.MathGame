@@ -1,0 +1,15 @@
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.AssemblyInfoInputs.cache
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.AssemblyInfo.cs
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.csproj.CoreCompileInputs.cache
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.sourcelink.json
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/bin/Debug/net8.0/MathGames
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/bin/Debug/net8.0/MathGames.deps.json
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/bin/Debug/net8.0/MathGames.runtimeconfig.json
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/bin/Debug/net8.0/MathGames.dll
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/bin/Debug/net8.0/MathGames.pdb
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.dll
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/refint/MathGames.dll
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.pdb
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/MathGames.genruntimeconfig.cache
+/Users/hyungminoh/asp-learn/aspnet-learning/BeginnerConsole/MathGames/obj/Debug/net8.0/ref/MathGames.dll
