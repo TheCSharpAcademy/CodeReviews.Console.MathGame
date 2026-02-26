@@ -127,6 +127,7 @@ namespace MathGame {
         string question = $"{operands[0]} {opSign} {operands[1]}";
         Console.WriteLine(question);
         var response = Console.ReadLine();
+        int userAnswer;
 
         int answer = operation switch
         {
@@ -137,7 +138,8 @@ namespace MathGame {
           _ => throw new ArgumentException("Invalid operation")
         };
 
-        if (int.Parse(response) == answer)
+        bool validInput = int.TryParse(response, out userAnswer);
+        if (validInput && userAnswer == answer)
         {
           score++;
           Console.WriteLine($"Correct! Your score is now {score}/{i+1}");
