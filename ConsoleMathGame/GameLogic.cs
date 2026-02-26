@@ -109,7 +109,7 @@ namespace MathGame {
           break;
         default:
           return;
-      };
+      }
       
       var opSign = operation switch
       {
