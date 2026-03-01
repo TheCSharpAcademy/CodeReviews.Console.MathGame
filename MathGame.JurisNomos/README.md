@@ -22,7 +22,7 @@ generated math questions and earn points for correct answers.
 
 ## Getting started
 
-### Run on linux / macos
+### Run on linux
 1. Download the latest release from the [Releases page](../../releases).
 2. Open a terminal and navigate to your download folder:
 ```bash
