@@ -14,14 +14,14 @@
 - 遊戲記錄儲存在記憶體中
 - 可以查看之前的遊戲結果
 
-## Tech Stack
+## Tech stack
 
 - C# / .NET
 - 控制台應用程式
 
-## Getting Started
+## Getting started
 
-### Run on Linux / macOS
+### Run on linux / macos
 1. 從 [Releases page](../../releases) 下載最新的版本。
 2. 打開終端機並移動到您的下載資料夾：
 ```bash
@@ -36,7 +36,7 @@
    ./Game
 ```
 
-## How to Play
+## How to play
 
 1. 啟動遊戲並從選單中選擇一個數學模式。
 2. 回答至少 5 個隨機產生的問題。

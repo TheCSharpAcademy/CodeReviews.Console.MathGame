@@ -15,14 +15,14 @@ generated math questions and earn points for correct answers.
 - Game history stored in memory
 - View previous game results
 
-## Tech Stack
+## Tech stack
 
 - C# / .NET
 - Console Application
 
-## Getting Started
+## Getting started
 
-### Run on Linux / macOS
+### Run on linux / macos
 1. Download the latest release from the [Releases page](../../releases).
 2. Open a terminal and navigate to your download folder:
 ```bash
@@ -37,7 +37,7 @@ generated math questions and earn points for correct answers.
    ./Game
 ```
 
-## How to Play
+## How to play
 
 1. Launch the game and choose a math operation from the menu.
 2. Answer at least 5 randomly generated questions.
