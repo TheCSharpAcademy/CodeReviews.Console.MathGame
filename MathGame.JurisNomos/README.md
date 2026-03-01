@@ -7,8 +7,6 @@ generated math questions and earn points for correct answers.
 
 ![Screenshot](./Screenshot.png)
 
----
-
 ## Features
 
 - Menu-based operation selection (+, -, ×, ÷)
@@ -17,14 +15,10 @@ generated math questions and earn points for correct answers.
 - Game history stored in memory
 - View previous game results
 
----
-
 ## Tech Stack
 
 - C# / .NET
 - Console Application
-
----
 
 ## Getting Started
 
@@ -43,8 +37,6 @@ generated math questions and earn points for correct answers.
    ./Game
 ```
 
----
-
 ## How to Play
 
 1. Launch the game and choose a math operation from the menu.
@@ -53,16 +45,12 @@ generated math questions and earn points for correct answers.
 4. View your score summary at the end.
 5. Check past game results from the history menu.
 
----
-
 ## Roadmap
 
 - [ ] Difficulty levels (Easy / Medium / Hard)
 - [ ] Timer per question
 - [ ] Save game history to a file
 - [ ] Leaderboard
-
----
 
 ## License
 
