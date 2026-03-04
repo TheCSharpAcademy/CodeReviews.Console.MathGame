@@ -11,14 +11,14 @@ public class MathQuestion
     public int CorrectAnswer { get; }
     public int? PlayerAnswer { get; private set; } // ? means it can be null; private set means only changable within the class
 
-    public bool isAnswered
+    public bool IsAnswered
     {
         get { return PlayerAnswer.HasValue; }
     }
 
-    public bool isCorrect
+    public bool IsCorrect
     {
-        get { return isAnswered && (PlayerAnswer == CorrectAnswer); }
+        get { return IsAnswered && (PlayerAnswer == CorrectAnswer); }
     }
     
     // Constructor:

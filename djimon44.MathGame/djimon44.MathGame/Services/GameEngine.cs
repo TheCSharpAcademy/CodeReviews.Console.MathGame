@@ -46,7 +46,7 @@ public class GameEngine : IGameEngine
             {
                 question.RecordAnswer(playerAnswer);
 
-                if (question.isCorrect)
+                if (question.IsCorrect)
                 {
                     score++;
                     _ui.DisplayFeedback(correct: true);
