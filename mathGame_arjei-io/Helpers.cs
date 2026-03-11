@@ -1,8 +1,5 @@
 ﻿
-
-using System.Diagnostics;
-
-namespace MathGame
+namespace mathGame_arjei_io
 {
     internal class Helpers
     {

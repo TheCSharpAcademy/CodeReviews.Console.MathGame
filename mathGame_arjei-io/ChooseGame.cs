@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Diagnostics;
-using System.Text;
 
-namespace MathGame
+namespace mathGame_arjei_io
 {
     internal class ChooseGame
     {

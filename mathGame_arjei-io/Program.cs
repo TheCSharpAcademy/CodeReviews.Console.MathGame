@@ -1,4 +1,4 @@
-﻿namespace MathGame
+﻿namespace mathGame_arjei_io
 {
     internal class Program
     {
