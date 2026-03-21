@@ -9,7 +9,7 @@ var configuration = new ConfigurationBuilder()
 Menu menu = new(configuration);
 DateTime date = DateTime.UtcNow;
 
-List<string> games = new();
+
 
 string name = Helpers.GetName();
 
