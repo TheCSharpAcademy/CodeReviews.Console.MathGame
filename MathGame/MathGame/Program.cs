@@ -1,4 +1,10 @@
-﻿while (true)
+﻿using System.Collections.Generic;
+
+string[] questions = ["9 x 9", "5 + 3", "6 - 2", "8 / 4", "7 * 5"];
+int[] answers = [81, 8, 4, 2, 35];
+List<string> pastGames = new List<string>();
+
+while (true)
 {
     showMainMenu();
 
@@ -6,12 +12,14 @@
     
     if (menuSelection == "1")
     {
-        int result = playGame();
-        Console.WriteLine($"You got {result} / 5 correct!");
+        int result = playGame(questions, answers);
+        Console.WriteLine($"You got {result} / {questions.Length} correct!");
+        
+        pastGames.Add($"{result} / {questions.Length} - {((decimal)result / questions.Length):P0}");
     }
     else if (menuSelection == "2")
     {
-        // TODO
+        printPastGames(pastGames);
     }
     else if (menuSelection == "x")
     {
@@ -33,14 +41,11 @@ void showMainMenu()
     Console.WriteLine("Enter x to exit");
 }
 
-int playGame()
+// Gets input from user and increments correct if it matches the answer
+int playGame(string[] questions, int[] answers)
 {
-    string[] questions = ["9 x 9", "5 + 3", "6 - 2", "8 / 4", "7 * 5"];
-    int[] answers = [81, 8, 4, 2, 35];
-
     int correct = 0;
-
-    // Gets input from user and increments correct if it matches the answer
+    
     for (int i = 0; i < questions.Length; i++)
     {
         Console.Write($"What does {questions[i]} = ");
@@ -56,6 +61,15 @@ int playGame()
             Console.WriteLine("Incorrect :(");
         }
     }
-
+    
     return correct;
+}
+
+void printPastGames(List<string> games)
+{
+    Console.WriteLine("Past Games:");
+    foreach (string game in games)
+    {
+        Console.WriteLine(game);
+    }
 }
