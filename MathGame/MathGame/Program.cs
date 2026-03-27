@@ -6,20 +6,20 @@ List<string> pastGames = new List<string>();
 
 while (true)
 {
-    showMainMenu();
+    ShowMainMenu();
 
     string menuSelection = Console.ReadLine();
     
     if (menuSelection == "1")
     {
-        int result = playGame(questions, answers);
+        int result = PlayGame(questions, answers);
         Console.WriteLine($"You got {result} / {questions.Length} correct!");
         
         pastGames.Add($"{result} / {questions.Length} - {((decimal)result / questions.Length):P0}");
     }
     else if (menuSelection == "2")
     {
-        printPastGames(pastGames);
+        PrintPastGames(pastGames);
     }
     else if (menuSelection == "x")
     {
@@ -33,7 +33,7 @@ while (true)
 
 
 
-void showMainMenu()
+void ShowMainMenu()
 {
     Console.WriteLine("Main Menu");
     Console.WriteLine("1. Play Math Game!");
@@ -42,7 +42,7 @@ void showMainMenu()
 }
 
 // Gets input from user and increments correct if it matches the answer
-int playGame(string[] questions, int[] answers)
+int PlayGame(string[] questions, int[] answers)
 {
     int correct = 0;
     
@@ -65,7 +65,7 @@ int playGame(string[] questions, int[] answers)
     return correct;
 }
 
-void printPastGames(List<string> games)
+void PrintPastGames(List<string> games)
 {
     Console.WriteLine("Past Games:");
     foreach (string game in games)
