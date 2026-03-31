@@ -1,3 +1,6 @@
+using MathGame.Models;
+using Type = System.Type;
+
 namespace MathGame;
 
 internal class Menu
@@ -21,10 +24,11 @@ internal class Menu
             switch (menuSelection)
             {
                 case "1":
-                    Console.WriteLine("Math Game");
+                    PlayMathGame();
                     break;
                 case "2":
-                    Console.WriteLine("Show Scores");
+                    Console.Clear();
+                    Helpers.PrintScores();
                     break;
                 case "x":
                     playAgain = false;
@@ -37,6 +41,29 @@ internal class Menu
         
         Console.WriteLine("Thanks for playing!");
     }
-    
-    
+
+    internal void PlayMathGame()
+    {
+        GameEngine engine = new GameEngine();
+        
+        Console.Clear();
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Math Game");
+        
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Multiplication");
+        Console.WriteLine("4. Division");
+        
+        string menuSelection = Console.ReadLine();
+
+        switch (menuSelection)
+        {
+            case "1":
+                int result = engine.AdditionGame();
+                
+                Helpers.AddToScores(new Score(DateTime.Now, Models.Type.Addition,  result));
+                break;
+        }
+    }
 }
