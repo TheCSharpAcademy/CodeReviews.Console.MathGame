@@ -123,7 +123,6 @@ public class GameEngine
     {
         Console.Clear();
         int result = 0;
-        Random random = new();
 
         for (int i = 0; i < 5; i++)
         {
