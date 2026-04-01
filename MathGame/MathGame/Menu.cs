@@ -1,5 +1,4 @@
 using MathGame.Models;
-using Type = System.Type;
 
 namespace MathGame;
 
@@ -9,8 +8,13 @@ internal class Menu
     {
         bool playAgain = true;
         
+        Console.Clear();
         Console.WriteLine($"Hello {name}! It is {date}.");
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadKey();
 
+        Console.Clear();
+        
         do
         {
             Console.WriteLine("---------------------------");
@@ -47,23 +51,53 @@ internal class Menu
         GameEngine engine = new GameEngine();
         
         Console.Clear();
-        Console.WriteLine("---------------------------");
-        Console.WriteLine("Math Game");
         
-        Console.WriteLine("1. Addition");
-        Console.WriteLine("2. Subtraction");
-        Console.WriteLine("3. Multiplication");
-        Console.WriteLine("4. Division");
-        
-        string menuSelection = Console.ReadLine();
+        bool isPlaying = true;
 
-        switch (menuSelection)
+        do
         {
-            case "1":
-                int result = engine.AdditionGame();
-                
-                Helpers.AddToScores(new Score(DateTime.Now, Models.Type.Addition,  result));
-                break;
-        }
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Math Game");
+
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.WriteLine("Press x to exit.");
+
+            string menuSelection = Console.ReadLine();
+            int result = 0;
+
+            switch (menuSelection)
+            {
+                case "1":
+                    result = engine.AdditionGame();
+
+                    Helpers.AddToScores(result, GameType.Addition);
+                    break;
+                case "2":
+                    result = engine.SubtractionGame();
+
+                    Helpers.AddToScores(result, GameType.Subtraction);
+                    break;
+                case "3":
+                    result = engine.MultiplicationGame();
+
+                    Helpers.AddToScores(result, GameType.Multiplication);
+                    break;
+                case "4":
+                    result = engine.DivisionGame();
+
+                    Helpers.AddToScores(result, GameType.Division);
+                    break;
+                case "x":
+                    isPlaying = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid selection. Please try again.");
+                    break;
+            }
+        } while (isPlaying);
+
     }
 }

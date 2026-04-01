@@ -1,13 +1,13 @@
 namespace MathGame.Models;
 
-internal class Score(DateTime dateTime,  Type type,  int points)
+internal class Score()
 {
-    internal Type Type { get; set; }
-    internal int Points { get; set; }
-    internal DateTime Date { get; set; }
+    public GameType Type { get; set; }
+    public int Points { get; set; }
+    public DateTime Date { get; set; }
 }
 
-internal enum Type
+internal enum GameType
 {
     Addition,
     Subtraction,
