@@ -38,6 +38,7 @@ internal class Menu
                     playAgain = false;
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Invalid selection. Please try again.");
                     break;
             }
@@ -63,7 +64,7 @@ internal class Menu
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
-            Console.WriteLine("Press x to exit.");
+            Console.WriteLine("Enter x to exit.");
 
             string menuSelection = Console.ReadLine();
             int result = 0;
@@ -94,6 +95,7 @@ internal class Menu
                     isPlaying = false;
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Invalid selection. Please try again.");
                     break;
             }

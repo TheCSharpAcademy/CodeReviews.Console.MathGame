@@ -37,6 +37,7 @@ public class GameEngine
             }
         }
         
+        Console.WriteLine($"You got  {result} correct.");
         return result;
     }
     
@@ -75,6 +76,7 @@ public class GameEngine
             }
         }
         
+        Console.WriteLine($"You got  {result} correct.");
         return result;
     }
     
@@ -112,7 +114,8 @@ public class GameEngine
                 Console.WriteLine("Incorrect!");
             }
         }
-        
+                
+        Console.WriteLine($"You got  {result} correct.");
         return result;
     }
     
@@ -149,7 +152,8 @@ public class GameEngine
                 Console.WriteLine("Incorrect!");
             }
         }
-        
+                
+        Console.WriteLine($"You got  {result} correct.");
         return result;
     }
 }
