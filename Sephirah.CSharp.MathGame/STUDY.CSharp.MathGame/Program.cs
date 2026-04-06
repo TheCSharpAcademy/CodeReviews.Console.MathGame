@@ -2,9 +2,9 @@
 
 Random rand = new Random();int second = 0;
 
-game();
+Game();
 
-void game()
+void Game()
 {
     string[] mainMenuChoices = { "New Game", "Game History", "Exit" };
     string mainMenuChoice = "";
@@ -12,29 +12,29 @@ void game()
 
     while (true)
     {
-        menuDisplay(mainMenuChoices);
-        mainMenuChoice = userInputReading();
+        MenuDisplay(mainMenuChoices);
+        mainMenuChoice = UserInputReading();
 
         switch (mainMenuChoice)
         {
             case "new game":
-                newGame(previousGames);
+                NewGame(previousGames);
                 break;
             case "game history":
-                gameHistory(previousGames);
+                GameHistory(previousGames);
                 break;
             case "exit":
                 Console.WriteLine("See you next time! (Press Enter to exit.)");
                 Console.ReadLine();
                 return;
             default:
-                invalidOption();
+                InvalidOption();
                 break;
         }
     }
 }
 
-void menuDisplay(string[] menuChoices)
+void MenuDisplay(string[] menuChoices)
 {
     Console.Clear();
 
@@ -45,7 +45,7 @@ void menuDisplay(string[] menuChoices)
     }
 }
 
-string userInputReading()
+string UserInputReading()
 {
     string? readInput;
     string verifiedInput = "";
@@ -60,14 +60,14 @@ string userInputReading()
     return "";
 }
 
-void newGame(List<string> previousGames)
+void NewGame(List<string> previousGames)
 {
     string[] newGameChoices = { "Addition", "Subtraction", "Multiplication", "Division", "Random Operation", "Main Menu" };
 
     while (true)
     {
-        menuDisplay(newGameChoices);
-        string newGameChoice = userInputReading();
+        MenuDisplay(newGameChoices);
+        string newGameChoice = UserInputReading();
         string mathOperator = "";
         string operation = "";
 
@@ -95,14 +95,14 @@ void newGame(List<string> previousGames)
             case "main menu":
                 return;
             default:
-                invalidOption();
+                InvalidOption();
                 continue;
         }
-        levelDifficultyMenu(mathOperator, previousGames, operation);
+        LevelDifficultyMenu(mathOperator, previousGames, operation);
     }
 }
 
-void levelDifficultyMenu(string mathOperator, List<string> previousGames, string operation)
+void LevelDifficultyMenu(string mathOperator, List<string> previousGames, string operation)
 {
     string[] difficultyLevels = { "Easy", "Normal", "Hard", "Operation Choice Menu" };
     string userChoice;
@@ -110,8 +110,8 @@ void levelDifficultyMenu(string mathOperator, List<string> previousGames, string
 
     while (true)
     {
-        menuDisplay(difficultyLevels);
-        userChoice = userInputReading();
+        MenuDisplay(difficultyLevels);
+        userChoice = UserInputReading();
 
         switch (userChoice)
         {
@@ -123,13 +123,13 @@ void levelDifficultyMenu(string mathOperator, List<string> previousGames, string
             case "operation choice menu":
                 return;
             default:
-                invalidOption();
+                InvalidOption();
                 continue;
         }
-        mathOperation(mathOperator, difficulty, previousGames, operation);
+        MathOperation(mathOperator, difficulty, previousGames, operation);
     }
 }
-void gameHistory(List<string> previousGames)
+void GameHistory(List<string> previousGames)
 {
     Console.Clear();
     foreach (string previousGame in previousGames)
@@ -140,7 +140,7 @@ void gameHistory(List<string> previousGames)
     Console.ReadLine();
 }
 
-void mathOperation (string mathOperator, string difficulty, List<string> previousGames, string operation)
+void MathOperation (string mathOperator, string difficulty, List<string> previousGames, string operation)
 {
     System.Timers.Timer timer = new System.Timers.Timer(1000);
 
@@ -148,13 +148,13 @@ void mathOperation (string mathOperator, string difficulty, List<string> previou
     string gameLogStart = "";
 
     timer.Start();
-    timer.Elapsed += onTimedEvent;
+    timer.Elapsed += OnTimedEvent;
 
     for (int i = 0; i < 5; i++)
     {
         if (operation.Equals("Random operation"))
         {
-            mathOperator = operatorGenerator();
+            mathOperator = OperatorGenerator();
             gameLogStart = $"{operation}\t";
         }
         else
@@ -162,8 +162,8 @@ void mathOperation (string mathOperator, string difficulty, List<string> previou
             gameLogStart = $"{operation}\t\t";
         }
 
-        int[] numbers = numbersGenerator(mathOperator, difficulty);
-        int result = resultCalculation(numbers, mathOperator);
+        int[] numbers = NumbersGenerator(mathOperator, difficulty);
+        int result = ResultCalculation(numbers, mathOperator);
         int userInput;
 
         while (true)
@@ -172,7 +172,7 @@ void mathOperation (string mathOperator, string difficulty, List<string> previou
             Console.WriteLine($"Score: {score}\n");
             Console.WriteLine($"{numbers[0]} {mathOperator} {numbers[1]} = ?");
 
-            if (!int.TryParse(userInputReading(), out userInput))
+            if (!int.TryParse(UserInputReading(), out userInput))
             {
                 Console.WriteLine("Please enter a valid number. (Press Enter to continue)");
                 Console.ReadLine();
@@ -206,7 +206,7 @@ void mathOperation (string mathOperator, string difficulty, List<string> previou
     second = 0;
 }
 
-string operatorGenerator()
+string OperatorGenerator()
 {
     int randomNum = rand.Next(0, 4);
 
@@ -223,12 +223,12 @@ string operatorGenerator()
     }
 }
 
-void onTimedEvent(Object? source, ElapsedEventArgs e)
+void OnTimedEvent(Object? source, ElapsedEventArgs e)
 {
     second += 1;
 }
 
-int[] numbersGenerator(string mathOperator, string difficulty)
+int[] NumbersGenerator(string mathOperator, string difficulty)
 {
     int[] numbers = {0, 0};
     bool resultIsInt = false;
@@ -255,7 +255,7 @@ int[] numbersGenerator(string mathOperator, string difficulty)
     return numbers;
 }
 
-int resultCalculation(int[]numbers, string mathOperator)
+int ResultCalculation(int[]numbers, string mathOperator)
 {
     int result = 0;
     switch (mathOperator)
@@ -277,7 +277,7 @@ int resultCalculation(int[]numbers, string mathOperator)
     return result;
 }
 
-void invalidOption ()
+void InvalidOption ()
 {
     Console.WriteLine("Please enter a valid option. (Press Enter to return to the previous Menu.)");
     Console.ReadLine();
