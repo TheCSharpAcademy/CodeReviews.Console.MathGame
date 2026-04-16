@@ -27,7 +27,6 @@ Math Quiz Game is an interactive console-based application where players solve r
 - 🎯 **Score Tracking** — Earn a point for every correct answer
 - 📜 **Game History** — Review scores from all previous rounds in the current session
 - 🔢 **Integer-Safe Division** — Division questions are guaranteed to produce whole-number answers
-- 🔄 **Replayable** — Play as many rounds as you like without restarting the program
 
 ---
 
