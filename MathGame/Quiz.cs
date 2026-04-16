@@ -6,9 +6,9 @@ namespace MathGame
     {
         public int Score { get; private set; }
 
-        private Random _random;
+        private Random random;
 
-        private Dictionary<int, char> _operations { get; } = new()
+        private Dictionary<int, char> mathOperations { get; } = new()
         {
             [1] = '+',
             [2] = '-',
@@ -18,18 +18,18 @@ namespace MathGame
 
         private List<string> History { get; set; }
 
-        private int _firstOperand;
+        private int firstOperand;
         
-        private int _secondOperand;
+        private int secondOperand;
         
-        private char _operation;
+        private char operation;
         
-        private int _result;
+        private int result;
 
         public Quiz()
         {
             History = [];
-            _random = new Random();
+            random = new Random();
         }
 
         public void PrintHistory()
@@ -49,43 +49,43 @@ namespace MathGame
 
         public string GenerateQuestion(int menuSelection)
         {
-            _operation = _operations[menuSelection];
+            operation = mathOperations[menuSelection];
 
-            _firstOperand = _random.Next(0, 100);
-            _secondOperand = _random.Next(0, 100);
+            firstOperand = random.Next(0, 101);
+            secondOperand = random.Next(0, 101);
 
-            switch (_operation)
+            switch (operation)
             {
                 case '+':
-                    _result = _firstOperand + _secondOperand;
+                    result = firstOperand + secondOperand;
                     break;
                 case '-':
-                    _result = _firstOperand - _secondOperand;
+                    result = firstOperand - secondOperand;
                     break;
                 case '*':
-                    _result = _firstOperand * _secondOperand;
+                    result = firstOperand * secondOperand;
                     break;
                 case '/':
-                    double quotient;
-                    do
-                    {
-                        _firstOperand = _random.Next(0, 100);
-                        _secondOperand = _random.Next(1, _firstOperand);
-                        quotient = (double) _firstOperand / _secondOperand;
-                    } while (quotient != (int) quotient); // ensures the result is an int
-                    _result = (int)quotient;
+                    // Division's result must be a true integer, dividend must be between 0-100
+                    int quotient = random.Next(0, 11);
+                    int divisor = random.Next(1, 11);
+                    int dividend = quotient * divisor;
+
+                    result = quotient;
+                    firstOperand = dividend;
+                    secondOperand = divisor;
                     break;
                 default:
                     throw new InvalidOperationException("This isn't what I signed up for");
             }
 
-            return $"{_firstOperand} {_operation} {_secondOperand} = ?";
+            return $"{firstOperand} {operation} {secondOperand} = ?";
         }
 
         public bool VerifyAnswer(int userResult)
         {
             LogResult();
-            if (_result == userResult)
+            if (result == userResult)
             {
                 Score += 1;
                 return true;
@@ -96,7 +96,7 @@ namespace MathGame
 
         public void LogResult()
         {
-            string currentResult = $"{_firstOperand} {_operation} {_secondOperand} = {_result}";
+            string currentResult = $"{firstOperand} {operation} {secondOperand} = {result}";
             History.Add(currentResult);
         }
     }
