@@ -1,0 +1,14 @@
+D:\New folder\mathGame\bin\Debug\net10.0\mathGame.exe
+D:\New folder\mathGame\bin\Debug\net10.0\mathGame.deps.json
+D:\New folder\mathGame\bin\Debug\net10.0\mathGame.runtimeconfig.json
+D:\New folder\mathGame\bin\Debug\net10.0\mathGame.dll
+D:\New folder\mathGame\bin\Debug\net10.0\mathGame.pdb
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.AssemblyInfoInputs.cache
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.AssemblyInfo.cs
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.csproj.CoreCompileInputs.cache
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.dll
+D:\New folder\mathGame\obj\Debug\net10.0\refint\mathGame.dll
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.pdb
+D:\New folder\mathGame\obj\Debug\net10.0\mathGame.genruntimeconfig.cache
+D:\New folder\mathGame\obj\Debug\net10.0\ref\mathGame.dll
