@@ -1,18 +1,18 @@
 ﻿using System.Diagnostics;
 
-const int playGameMenu = 1;
-const int viewScoresMenu = 2;
-const int additionMenu = 1;
-const int subtractionMenu = 2;
-const int multiplicationMenu = 3;
-const int divisionMenu = 4;
-const int randomGameMenu = 5;
-const int exitMenu = 9;
-const int numberOfQuestions = 5;
+const int PlayGameMenu = 1;
+const int ViewScoresMenu = 2;
+const int AdditionMenu = 1;
+const int SubtractionMenu = 2;
+const int MultiplicationMenu = 3;
+const int DivisionMenu = 4;
+const int RandomGameMenu = 5;
+const int ExitMenu = 9;
+const int NumberOfQuestions = 5;
 
 int selectedMenu;
-List<int> mainMenuNumbers = new List<int>{playGameMenu, viewScoresMenu, exitMenu};
-List<string> mainMenuText = new List<string> {$"{playGameMenu} - Play the game", $"{viewScoresMenu} - View score"};
+List<int> mainMenuNumbers = new List<int>{PlayGameMenu, ViewScoresMenu, ExitMenu};
+List<string> mainMenuText = new List<string> {$"{PlayGameMenu} - Play the game", $"{ViewScoresMenu} - View score"};
 List<ScoreHistory> scoreHistory = new List<ScoreHistory>();
 
 do
@@ -23,19 +23,19 @@ do
 
     switch (selectedMenu)
     {
-        case playGameMenu:
+        case PlayGameMenu:
             PlayGame();
             break;
-        case viewScoresMenu:
+        case ViewScoresMenu:
             ListScores();
             break;
-        case exitMenu:
+        case ExitMenu:
             break;
         default:
             break;
     }
 
-} while (selectedMenu != exitMenu);
+} while (selectedMenu != ExitMenu);
 
 void ListMenu(List<string> menuText)
 {
@@ -45,7 +45,7 @@ void ListMenu(List<string> menuText)
     }
 
     System.Console.WriteLine();
-    System.Console.WriteLine($"{exitMenu} - Exit");
+    System.Console.WriteLine($"{ExitMenu} - Exit");
     System.Console.WriteLine();
     System.Console.Write("Please select a menu number: ");
 }
@@ -57,15 +57,15 @@ void PlayGame()
 
     List <string> operationMenuText = new List<string>
     {
-        $"{additionMenu} - Addition",
-        $"{subtractionMenu} - Subtraction",
-        $"{multiplicationMenu} - Multiplication",
-        $"{divisionMenu} - Division",
-        $"{randomGameMenu} - Random(All of the above)"
+        $"{AdditionMenu} - Addition",
+        $"{SubtractionMenu} - Subtraction",
+        $"{MultiplicationMenu} - Multiplication",
+        $"{DivisionMenu} - Division",
+        $"{RandomGameMenu} - Random(All of the above)"
     };
     List<int> operationMenuNumbers = new List<int> 
     {
-        additionMenu, subtractionMenu, multiplicationMenu, divisionMenu, randomGameMenu, exitMenu
+        AdditionMenu, SubtractionMenu, MultiplicationMenu, DivisionMenu, RandomGameMenu, ExitMenu
     };
     
     ListMenu(operationMenuText);
@@ -74,10 +74,10 @@ void PlayGame()
 
     stopWatch.Start();
 
-    if (operationNumber == randomGameMenu)
+    if (operationNumber == RandomGameMenu)
     {
         Random random = new Random();
-        for (int i = 0; i < numberOfQuestions; i++)
+        for (int i = 0; i < NumberOfQuestions; i++)
         {
             operationNumber = random.Next(1, 5);
             OperationQuestion(operationNumber, ref currentScore);
@@ -85,7 +85,7 @@ void PlayGame()
     }
     else
     {
-        for (int i = 0; i < numberOfQuestions; i++)
+        for (int i = 0; i < NumberOfQuestions; i++)
             OperationQuestion(operationNumber, ref currentScore);
     }
 
@@ -107,7 +107,7 @@ void OperationQuestion(int operationNumber, ref int currentScore)
 
     switch (operationNumber)
     {
-        case additionMenu:
+        case AdditionMenu:
             numberFirst = random.Next(0, easyAdditionSubtractionDivisionMax);
             numberSecond = random.Next(0, easyAdditionSubtractionDivisionMax);
 
@@ -116,7 +116,7 @@ void OperationQuestion(int operationNumber, ref int currentScore)
 
             CheckAnswer(correctAnswer, ref currentScore);            
             break;
-        case subtractionMenu:
+        case SubtractionMenu:
             numberFirst = random.Next(0, easyAdditionSubtractionDivisionMax);
             numberSecond = random.Next(0, easyAdditionSubtractionDivisionMax);
 
@@ -125,7 +125,7 @@ void OperationQuestion(int operationNumber, ref int currentScore)
 
             CheckAnswer(correctAnswer, ref currentScore);  
             break;
-        case multiplicationMenu:
+        case MultiplicationMenu:
             numberFirst = random.Next(0, easyMultiplicationMaxNumber1);
             numberSecond = random.Next(0, easyMultiplicationMaxNumber2);
 
@@ -134,7 +134,7 @@ void OperationQuestion(int operationNumber, ref int currentScore)
 
             CheckAnswer(correctAnswer, ref currentScore);  
             break;
-        case divisionMenu:
+        case DivisionMenu:
             numberFirst = random.Next(0, easyAdditionSubtractionDivisionMax);
             numberSecond = random.Next(1, numberFirst + 1);
 
@@ -148,7 +148,7 @@ void OperationQuestion(int operationNumber, ref int currentScore)
 
             CheckAnswer(correctAnswer, ref currentScore);
             break;
-        case exitMenu:
+        case ExitMenu:
             break;
         default:
             break;
@@ -172,7 +172,7 @@ void ListScores(int startScoreIndex = 0)
 {
     for (int i = startScoreIndex; i < scoreHistory.Count; i++)
     {
-        System.Console.WriteLine($"Score of game #{i+1}: {scoreHistory[i].Score}/{numberOfQuestions} Time: {scoreHistory[i].FormatTime()}");
+        System.Console.WriteLine($"Score of game #{i+1}: {scoreHistory[i].Score}/{NumberOfQuestions} Time: {scoreHistory[i].FormatTime()}");
     }
     System.Console.WriteLine();
 }
