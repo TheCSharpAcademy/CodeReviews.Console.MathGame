@@ -130,7 +130,7 @@ static int game(Operations operation)
 
         Console.WriteLine($"Question {i + 1}/{NumberOfQuestionsPerGame}\nWhat is {number1} {operationSymbol} {number2} ?");
 
-        string input = Console.ReadLine();
+        string? input = Console.ReadLine();
         int userAnswer;
 
         while (input == null || input.Length == 0 || !int.TryParse(input, out userAnswer))
@@ -152,5 +152,8 @@ static int game(Operations operation)
 }
 enum Operations
 {
-    ADDITION = '+', SUBSTRACTION = '-', MULTIPLICATION = '*', DIVISION = '/'
+    ADDITION = '+',
+    SUBSTRACTION = '-',
+    MULTIPLICATION = '*',
+    DIVISION = '/'
 }
