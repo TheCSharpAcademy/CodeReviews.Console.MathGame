@@ -1,6 +1,8 @@
-﻿bool exitGame = false;
+﻿using MathGame;
+
+bool exitGame = false;
 string? input;
-List<int> scores = new List<int>();
+List<GameRecord> games = [];
 const int NumberOfQuestionsPerGame = 5;
 const int ScorePerQuestion = 10;
 const int MaximumScore = ScorePerQuestion * NumberOfQuestionsPerGame;
@@ -13,6 +15,7 @@ do
     Console.WriteLine("2. Substraction game");
     Console.WriteLine("3. Multiplication game");
     Console.WriteLine("4. Division game");
+    Console.WriteLine("5. View past games");
 
     bool validSelection;
     do
@@ -32,32 +35,38 @@ do
                     break;
                 case "1":
                     Console.Clear();
-                    score = game(Operations.ADDITION);
-                    scores.Add(score);
+                    score = Game(Operations.ADDITION);
+                    games.Add(new GameRecord(score,DateTime.Now,"Addition"));
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case "2":
                     Console.Clear();
-                    score = game(Operations.SUBSTRACTION);
-                    scores.Add(score);
+                    score = Game(Operations.SUBSTRACTION);
+                    games.Add(new GameRecord(score, DateTime.Now, "Substraction"));
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case "3":
                     Console.Clear();
-                    score = game(Operations.MULTIPLICATION);
-                    scores.Add(score);
+                    score = Game(Operations.MULTIPLICATION);
+                    games.Add(new GameRecord(score, DateTime.Now, "Multiplication"));
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case "4":
                     Console.Clear();
-                    score = game(Operations.DIVISION);
-                    scores.Add(score);
+                    score = Game(Operations.DIVISION);
+                    games.Add(new GameRecord(score, DateTime.Now, "Division"));
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+                case "5":
+                    PrintResults(games);
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
@@ -71,9 +80,22 @@ do
     } while (!validSelection);
 } while (!exitGame);
 
-static List<int> getFactors(int num)
+static void PrintResults(List<GameRecord> gameResults)
 {
-    List<int> factors = new List<int>();
+    string header = $"{"Date",-28} | {"Operation",-16} | {"Score",-8}";
+    Console.WriteLine(header);
+    Console.WriteLine(new String('-',header.Length));
+
+    foreach (GameRecord gameRecord in gameResults)
+    {
+        string row = $"{gameRecord.EndGameTime,-28} | {gameRecord.OperationName,-16} | {gameRecord.Score,-8}";
+        Console.WriteLine(row);
+    }
+}
+
+static List<int> GetFactors(int num)
+{
+    List<int> factors = [];
 
     for (int i = 1; i <= num; i++)
     {
@@ -86,7 +108,7 @@ static List<int> getFactors(int num)
     return factors;
 }
 
-static int game(Operations operation)
+static int Game(Operations operation)
 {
     int score = 0;
     char operationSymbol = ((char)operation);
@@ -115,7 +137,7 @@ static int game(Operations operation)
                 expectedResult = number1 * number2;
                 break;
             case Operations.DIVISION:
-                List<int> number1Factors = getFactors(number1);
+                List<int> number1Factors = GetFactors(number1);
                 int number2PositionInFactors = random.Next(0, number1Factors.Count);
                 number2 = number1Factors[number2PositionInFactors];
 
