@@ -1,6 +1,4 @@
-﻿
-
-// ASK PLAYER A QUESTION + GET INPUT + ADD POINTS
+﻿// ASK PLAYER A QUESTION + GET INPUT + ADD POINTS
 
 // PARTIDAS MINIMA 5 PREGUNTAS
 
@@ -74,20 +72,25 @@ while (!mainMenuExit)
                 {
                     currentPoints++;
                     Console.WriteLine("Correct Answer!! +1 Points!");
-                    Console.WriteLine($"Current Points: {currentPoints}");
-
-                    currentMatch++;
 
                 }
                 else
                 {
-                    Console.WriteLine("Wrong Answer!! \n GAME OVER ");
-
-                    RecordPoints(ref currentPoints);
-                    currentMatch = matchLength;
+                    Console.WriteLine("Wrong Answer!! No Points :(");
                 }
 
+                Console.WriteLine($"Current Points: {currentPoints}");
+                currentMatch++;
+                Console.ReadLine();
+                Console.Clear();
+
             } while (currentMatch < matchLength);
+
+            //END OF MATCH
+
+            Console.WriteLine($"Game Over! \n You got a total of {currentPoints} point{(currentPoints > 1 ? "s" : "")}!!");
+            RecordPoints(ref currentPoints);
+
 
             break;
 
@@ -276,7 +279,7 @@ int DivisionHandler()
     while (firstOperand % secondOperand != 0)
     {
         firstOperand = rng.Next(1, 101);
-        secondOperand = rng.Next(0, 101);
+        secondOperand = rng.Next(1, 101);
     }
 
     Console.WriteLine("QUESTION:");
