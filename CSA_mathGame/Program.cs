@@ -1,9 +1,16 @@
 ﻿using System.Text;
 
 // Menu strings.
-string[] menuOptions = { "CSharpAcademy - MathGame\n", "1 - Start", "2 - Random mode", "3 - Scoreboard", "4 - Exit", "Enter menu option # & press enter:" };
+string[] menuOptions = { "CSharpAcademy - MathGame\n", "1 - Start", "2 - Random mode(legacy code)", "3 - Scoreboard", "4 - Exit", "Enter menu option # & press enter:" };
 string[] menuOperatorOptions = { "Select an operator type\n", "1 - Addition", "2 - Subtraction", "3 - Multiplication", "4 - Division", "5 - Any" };
 
+const int BankSize = 3;
+const int MaxQuestions = 5;
+const int Addition = 0;
+const int Subtraction = 1;
+const int Multiplication = 2;
+const int Division = 3;
+const int RandomSign = -1;
 
 // Main loop (and game) exit.
 bool exit = false;
@@ -16,59 +23,7 @@ int gameCounter = 0;
 
 // Game management
 const int RandomQuestionAmount = 5;
-int[,] questionBank = new int[5, 3]; // holds question bank once operator type is selected ('standard' mode only).
-
-//pre-set question data
-int[,] questionDataAny = new int[5, 3]
-{
-    //value1, value2, sign 0-3 (+ - * /)
-    {50, 10, 3},
-    {7, 8, 2},
-    {6, 2, 1},
-    {5, 3, 0},
-    {12, 2, 3},
-};
-
-int[,] questionDataAddition = new int[5, 3]
-{
-    //value1, value2, sign 0-3 (+ - * /)
-    { 5, 17, 0 },
-    { 23, 8, 0 },
-    { 12, 14, 0 },
-    { 3, 21, 0 },
-    { 19, 6, 0 }
-};
-
-int[,] questionDataSubtraction = new int[5, 3]
-{
-    //value1, value2, sign 0-3 (+ - * /)
-    { 3, 7, 1 },
-    { 12, 4, 1 },
-    { 8, 15, 1 },
-    { 21, 9, 1 },
-    { 6, 18, 1 }
-};
-
-int[,] questionDataMultiplication = new int[5, 3]
-{
-    //value1, value2, sign 0-3 (+ - * /)
-    { 14, 3, 2 },
-    { 7, 19, 2 },
-    { 22, 5, 2 },
-    { 9, 11, 2 },
-    { 16, 8, 2 }
-};
-
-int[,] questionDataDivision = new int[5, 3]
-{
-    //value1, value2, sign 0-3 (+ - * /)
-    { 24, 6, 3 },
-    { 18, 3, 3 },
-    { 35, 5, 3 },
-    { 81, 9, 3 },
-    { 14, 7, 3 }
-};
-
+int[,] questionBank = new int[5, 3]; // holds question bank once operator type is selected.
 
 //main loop
 while (!exit)
@@ -125,23 +80,23 @@ void ShowOperatorSelectionMenu()
     switch (Console.ReadLine())
     {
         case "1":
-            questionBank = questionDataAddition;
+            questionBank = GetRandomQuestionBank(Addition);
             currentGameInfo.OperatorType = "Addition";
             break;
         case "2":
-            questionBank = questionDataSubtraction;
+            questionBank = GetRandomQuestionBank(Subtraction);
             currentGameInfo.OperatorType = "Subtraction";
             break;
         case "3":
-            questionBank = questionDataMultiplication;
+            questionBank = GetRandomQuestionBank(Multiplication);
             currentGameInfo.OperatorType = "Multiplication";
             break;
         case "4":
-            questionBank = questionDataDivision;
+            questionBank = GetRandomQuestionBank(Division);
             currentGameInfo.OperatorType = "Division";
             break;
         case "5":
-            questionBank = questionDataAny;
+            questionBank = GetRandomQuestionBank(RandomSign);
             currentGameInfo.OperatorType = "Any";
             break;
         default:
@@ -275,7 +230,7 @@ void startGame()
 
 void startRandomGame(int signOverride = -1)
 {
-    currentGameInfo.Gametype = "Random";
+    currentGameInfo.Gametype = "Random(legacy)";
     //used to so that a new question is not generated when bad input is detected & we restart the loop.
     bool generateRandoms = true;
     int consoleInput;
@@ -330,11 +285,28 @@ void EndGame()
     Console.Clear();
 }
 
+int[,] GetRandomQuestionBank(int signOverride = -1)
+{
+    // Loops to generate a bank (int[5,3]) of questions from the GetRandomQuestionData method.
+    int[,] questionBank = new int[5, 3];
+    int[] tempBank = new int[3];
+    for (int x = 0; x < MaxQuestions; x++)
+    {
+        tempBank = GetRandomQuestionData(signOverride);
+        for (int y = 0; y < BankSize; y++)
+        {
+            questionBank[x, y] = tempBank[y];
+        }
+    }
+    return questionBank;
+}
+
 int[] GetRandomQuestionData(int signOverride = -1) // Allow forcing a sign.
 {
     int sign;
     int value1 = 0;
     int value2 = 0;
+
     //determine sign
     if (signOverride > -1)
     {
@@ -366,6 +338,7 @@ int[] GetRandomQuestionData(int signOverride = -1) // Allow forcing a sign.
     }
     return new int[] { value1, value2, sign };
 }
+
 public class GameInfo
 {
     private int _gameNumber;
