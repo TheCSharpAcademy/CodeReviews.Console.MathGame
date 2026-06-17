@@ -7,7 +7,6 @@ string userName = GetUserName();
 // Store games history in a list
 List<string> gamesHistory = new List<string>();
 
-
 bool isGameOn = true;
 while (isGameOn)
 {
@@ -81,7 +80,7 @@ int CalculateAnswer(int num1, int num2, string operation)
         "+" => num1 + num2,
         "-" => num1 - num2,
         "*" => num1 * num2,
-        "/" => num2 != 0 ? num1 / num2 : 0,
+        "/" => num1 / num2,
         _ => throw new InvalidOperationException("Invalid operation")
     };
 }
@@ -96,27 +95,54 @@ string GetRandomOperation(Random randomSeed)
 void GameMode(string mode, Random randomSeed)
 {
     Console.WriteLine($"Starting {mode} game mode...");
+    int userScore = 0;
     for (int i = 0; i < 5; i++)
     {
         int num1 = randomSeed.Next(1, 101);
         int num2 = randomSeed.Next(1, 101);
         string operation = mode == "mixed" ? GetRandomOperation(randomSeed) : mode;
+        if (operation == "/")
+        {
+            // By multiplying them, we guarantee that (product / num2) is perfectly equal to num1
+            int product = num1 * num2;
+
+            // Re-assign num1 to the product so the question asks "product / num2 = ?"
+            num1 = product;
+        }
         int correctAnswer = CalculateAnswer(num1, num2, operation);
         Console.WriteLine($"Question {i + 1}: {num1} {operation} {num2} = ?");
+
         string userAnswer = Console.ReadLine();
+
         if (int.TryParse(userAnswer, out int userAnswerInt) && userAnswerInt == correctAnswer)
         {
             Console.WriteLine("Correct!");
-            score++;
+            userScore++;
         }
         else
         {
             Console.WriteLine($"Wrong! The correct answer is {correctAnswer}.");
         }
     }
+    Console.WriteLine($"\nGame over! Your score for this round is: {userScore}/5");
+
+    // 6. Add the result to the leaderboard history list
+    gamesHistory.Add($"{DateTime.UtcNow:dd/MM/yyyy HH:mm} - {mode}: {userScore}/5");
 }
 
 void SeeLeaderboard()
 {
     Console.WriteLine("Displaying leaderboard...");
+    if (gamesHistory.Count == 0)
+    {
+        Console.WriteLine("No games played yet!");
+    }
+    else
+    {
+        foreach (var record in gamesHistory)
+        {
+            Console.WriteLine(record);
+        }
+    }
+    Console.WriteLine("-------------------\n");
 }
