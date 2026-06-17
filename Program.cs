@@ -21,6 +21,7 @@ string GetUserName()
 
 void StartMenu(string userName)
 {
+    Console.Clear();
     Console.WriteLine($"Welcome, {userName}!");
     Console.WriteLine($"Today is {date:dd/MM/yyyy HH:mm}");
     Console.WriteLine("Please select a game mode:");
@@ -66,13 +67,14 @@ void StartMenu(string userName)
         case "7":
             Console.WriteLine("Thank you for playing! Goodbye!");
             isGameOn = false;
-            break;
+            return;
         default:
             Console.WriteLine("Invalid selection. Please try again.");
             break;
     }
+    Console.WriteLine("\nPress any key to return to the menu...");
+    Console.ReadKey();
 }
-
 int CalculateAnswer(int num1, int num2, string operation)
 {
     return operation switch
@@ -132,6 +134,7 @@ void GameMode(string mode, Random randomSeed)
 
 void SeeLeaderboard()
 {
+    Console.Clear();
     Console.WriteLine("-------------------");
     Console.WriteLine("Displaying leaderboard...");
     if (gamesHistory.Count == 0)
