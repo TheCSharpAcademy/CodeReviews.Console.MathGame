@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic; // Required to use List<T>
 
 var date = DateTime.UtcNow;
 Console.WriteLine($"Welcome to Math game - {date}");
 string userName = GetUserName();
-int score = 0;
-// List of previous results for the leaderboard
+// Store games history in a list
+List<string> gamesHistory = new List<string>();
 
 
-StartMenu(userName);
+bool isGameOn = true;
+while (isGameOn)
+{
+    StartMenu(userName);
+}
 string GetUserName()
 {
     Console.WriteLine("Please enter your name:");
@@ -26,8 +31,8 @@ void StartMenu(string userName)
     | 3. Multiplication            |
     | 4. Division                  |
     | 5. Mixed                     |
-    | 6. See leaderboard                |
-    | 7. Quit                       |");
+    | 6. See leaderboard           |
+    | 7. Quit                      |");
     Console.WriteLine("+-----------------------------+");
 
     var randomSeed = new Random();
@@ -61,15 +66,12 @@ void StartMenu(string userName)
             break;
         case "7":
             Console.WriteLine("Thank you for playing! Goodbye!");
-            Environment.Exit(0);
+            isGameOn = false;
             break;
         default:
             Console.WriteLine("Invalid selection. Please try again.");
-            StartMenu(userName);
             break;
     }
-    Console.WriteLine($"Your final score is: {score}");
-
 }
 
 int CalculateAnswer(int num1, int num2, string operation)
