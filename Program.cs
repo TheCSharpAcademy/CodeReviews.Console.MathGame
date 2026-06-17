@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
+// Vietnamese time is UTC+7
 var date = DateTime.UtcNow.AddHours(7);
 Console.WriteLine($"Welcome to Math game - {date}");
 string userName = GetUserName();
@@ -139,6 +140,9 @@ void GameMode(string mode, Random randomSeed)
     Console.Clear();
     Console.WriteLine($"You selected {diffName} difficulty.");
 
+    var stopwatch = new System.Diagnostics.Stopwatch();
+    stopwatch.Start();
+
     for (int i = 0; i < 5; i++)
     {
         string operation = mode == "mixed" ? GetRandomOperation(randomSeed) : mode;
@@ -173,9 +177,11 @@ void GameMode(string mode, Random randomSeed)
             Console.WriteLine($"Wrong! The correct answer is {correctAnswer}.");
         }
     }
+    stopwatch.Stop();
+    double timeTaken = stopwatch.Elapsed.TotalSeconds;
 
     Console.WriteLine($"\nGame over! Your score for this round is: {userScore}/5");
-    gamesHistory.Add($"{date:dd/MM/yyyy HH:mm} - {diffName} - {mode}: {userScore}/5");
+    gamesHistory.Add($"{date:dd/MM/yyyy HH:mm} - Difficulty: {diffName} - Mode: {mode}: {userScore}/5 - Time taken: {timeTaken:F2} seconds");
 }
 
 // 6. Add the result to the leaderboard history list
