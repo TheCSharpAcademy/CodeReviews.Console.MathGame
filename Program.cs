@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic; // Required to use List<T>
+using System.Collections.Generic; 
 
-var date = DateTime.UtcNow;
+var date = DateTime.UtcNow.AddHours(7);
 Console.WriteLine($"Welcome to Math game - {date}");
 string userName = GetUserName();
 // Store games history in a list
@@ -22,7 +22,7 @@ string GetUserName()
 void StartMenu(string userName)
 {
     Console.WriteLine($"Welcome, {userName}!");
-    Console.WriteLine($"Today is {DateTime.UtcNow:dd MM, yyyy}");
+    Console.WriteLine($"Today is {date:dd/MM/yyyy HH:mm}");
     Console.WriteLine("Please select a game mode:");
     Console.WriteLine($@"+-----------------------------+
     | 1. Addition                  |
@@ -127,11 +127,12 @@ void GameMode(string mode, Random randomSeed)
     Console.WriteLine($"\nGame over! Your score for this round is: {userScore}/5");
 
     // 6. Add the result to the leaderboard history list
-    gamesHistory.Add($"{DateTime.UtcNow:dd/MM/yyyy HH:mm} - {mode}: {userScore}/5");
+    gamesHistory.Add($"{date:dd/MM/yyyy HH:mm} - {mode}: {userScore}/5");
 }
 
 void SeeLeaderboard()
 {
+    Console.WriteLine("-------------------");
     Console.WriteLine("Displaying leaderboard...");
     if (gamesHistory.Count == 0)
     {
