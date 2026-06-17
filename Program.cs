@@ -15,7 +15,12 @@ while (isGameOn)
 string GetUserName()
 {
     Console.WriteLine("Please enter your name:");
-    string name = Console.ReadLine();
+    string? name = Console.ReadLine();
+    if (name == null )
+    {
+        Console.WriteLine("Invalid input. Please enter a valid name.");
+        return GetUserName();
+    }
     return name;
 }
 
@@ -114,7 +119,7 @@ void GameMode(string mode, Random randomSeed)
         int correctAnswer = CalculateAnswer(num1, num2, operation);
         Console.WriteLine($"Question {i + 1}: {num1} {operation} {num2} = ?");
 
-        string userAnswer = Console.ReadLine();
+        string? userAnswer = Console.ReadLine();
 
         if (int.TryParse(userAnswer, out int userAnswerInt) && userAnswerInt == correctAnswer)
         {
