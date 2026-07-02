@@ -1,3 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using MathGame.Dknx8888;
 
-Console.WriteLine("Hello, World!");
+var menu = new Menu();
+menu.ShowMenu();
