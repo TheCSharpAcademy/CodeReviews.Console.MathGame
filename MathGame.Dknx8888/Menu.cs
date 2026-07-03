@@ -35,7 +35,8 @@ public class Menu
                     break;
                 
                 case "2":
-                    // ...
+                    var gameHistory = new GameHistory();
+                    gameHistory.ShowHistory();
                     break;
                 
                 case "3":

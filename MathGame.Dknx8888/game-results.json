@@ -1,0 +1,100 @@
+[
+  {
+    "GameMode": 1,
+    "Difficulty": 0,
+    "Score": 4,
+    "RoundTime": 7.6807389,
+    "Questions": [
+      {
+        "Num1": 1,
+        "Num2": 8,
+        "Sign": "-",
+        "PlayerAnswer": -7,
+        "CorrectAnswer": -7,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 9,
+        "Num2": 7,
+        "Sign": "-",
+        "PlayerAnswer": 2,
+        "CorrectAnswer": 2,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 4,
+        "Num2": 7,
+        "Sign": "-",
+        "PlayerAnswer": -3,
+        "CorrectAnswer": -3,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 0,
+        "Num2": 9,
+        "Sign": "-",
+        "PlayerAnswer": 1,
+        "CorrectAnswer": -9,
+        "IsCorrect": false
+      },
+      {
+        "Num1": 9,
+        "Num2": 1,
+        "Sign": "-",
+        "PlayerAnswer": 8,
+        "CorrectAnswer": 8,
+        "IsCorrect": true
+      }
+    ],
+    "StartTime": "2026-07-03T16:51:52.6703836-04:00"
+  },
+  {
+    "GameMode": 4,
+    "Difficulty": 0,
+    "Score": 5,
+    "RoundTime": 7.1863017,
+    "Questions": [
+      {
+        "Num1": 3,
+        "Num2": 4,
+        "Sign": "*",
+        "PlayerAnswer": 12,
+        "CorrectAnswer": 12,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 6,
+        "Num2": 6,
+        "Sign": "/",
+        "PlayerAnswer": 1,
+        "CorrectAnswer": 1,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 8,
+        "Num2": 2,
+        "Sign": "/",
+        "PlayerAnswer": 4,
+        "CorrectAnswer": 4,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 3,
+        "Num2": 6,
+        "Sign": "*",
+        "PlayerAnswer": 18,
+        "CorrectAnswer": 18,
+        "IsCorrect": true
+      },
+      {
+        "Num1": 7,
+        "Num2": 1,
+        "Sign": "/",
+        "PlayerAnswer": 7,
+        "CorrectAnswer": 7,
+        "IsCorrect": true
+      }
+    ],
+    "StartTime": "2026-07-03T17:02:30.5309754-04:00"
+  }
+]

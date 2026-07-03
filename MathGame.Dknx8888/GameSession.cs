@@ -1,19 +1,27 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
+using static MathGame.Dknx8888.GameResultTemplate;
 
 namespace MathGame.Dknx8888;
 
 public class GameSession(GameMode gameMode, Difficulty difficulty)
 {
     private readonly Random _random = new();
-
+    private readonly JsonSerializerOptions _options = new JsonSerializerOptions { WriteIndented = true };
+    
     public void Start()
     {
-        Console.Clear();
-        Console.WriteLine("Please answer the following questions: ");
         var count = 0;
         var score = 0;
-        var questions = new HashSet<(int, int, GameMode)>();
+        HashSet<(int, int, GameMode)> questions = [];
         var timer = Stopwatch.StartNew();
+        List<QuestionResult> questionResults = [];
+        List<GameResult> gameResults;
+        var startingDateTime = DateTime.Now;
+        
+        Console.Clear();
+        Console.WriteLine("Please answer the following questions: ");
         while (count < 5)
         {
             int num1;
@@ -28,8 +36,8 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
                 selectedGameMode = gameMode == GameMode.Random ? GetRandomGameMode() : gameMode;
                 
                 // Division handling
-                if (gameMode != GameMode.Division) continue;
-                while (num1 % num2 != 0 && num2 != 0)
+                if (selectedGameMode != GameMode.Division) continue;
+                while (num2 == 0 || num1 % num2 != 0)
                 {
                     (num1, num2) = NumGen();
                 }
@@ -61,7 +69,8 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
             }
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (playerInput == correctResult)
+            var isCorrect = playerInput == correctResult;
+            if (isCorrect)
             {
                 ++score;
                 Console.WriteLine("Congratulations! You are correct!");
@@ -70,6 +79,16 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
             {
                 Console.WriteLine($"You are incorrect. The correct answer is {correctResult}");
             }
+            
+            // Add record
+            questionResults.Add(new QuestionResult (
+                num1,
+                num2,
+                sign,
+                playerInput,
+                correctResult,
+                isCorrect
+            ));
         
             count++;
         }
@@ -77,6 +96,33 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
         var roundTime = timer.Elapsed.TotalSeconds;
         Console.WriteLine($"Your final score is {score} out of 5!");
         Console.WriteLine($"You completed this game in {roundTime:F2} seconds.");
+        
+        // Save
+        var gameResult = new GameResult(
+            gameMode,
+            difficulty,
+            score,
+            roundTime,
+            questionResults,
+            startingDateTime
+        );
+
+        var filePath = GameHistoryJson.FilePath;
+        if (File.Exists(filePath))
+        {
+            var existingJson = File.ReadAllText(filePath);
+            gameResults = JsonSerializer.Deserialize<List<GameResult>>(existingJson, _options) ?? [];
+        }
+        else
+        {
+            gameResults = [];
+        }
+
+        gameResults.Add(gameResult);
+        var json = JsonSerializer.Serialize(gameResults, _options);
+        File.WriteAllText(filePath, json);
+        Console.WriteLine($"Game history saved to: {filePath}");
+        
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
