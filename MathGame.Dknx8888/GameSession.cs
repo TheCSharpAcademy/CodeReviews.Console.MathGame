@@ -13,7 +13,7 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
         var count = 0;
         var score = 0;
         var questions = new HashSet<(int, int, GameMode)>();
-        Stopwatch timer = Stopwatch.StartNew();
+        var timer = Stopwatch.StartNew();
         while (count < 5)
         {
             int num1;
@@ -29,7 +29,7 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
                 
                 // Division handling
                 if (gameMode != GameMode.Division) continue;
-                while (num1 % num2 != 0)
+                while (num1 % num2 != 0 && num2 != 0)
                 {
                     (num1, num2) = NumGen();
                 }
@@ -85,8 +85,8 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
     {
         return difficulty switch
         {
-            Difficulty.Easy => (_random.Next(1, 10), _random.Next(1, 10)),
-            Difficulty.Medium => (_random.Next(10, 101), _random.Next(1, 10)),
+            Difficulty.Easy => (_random.Next(0, 10), _random.Next(0, 10)),
+            Difficulty.Medium => (_random.Next(10, 101), _random.Next(0, 10)),
             Difficulty.Hard => (_random.Next(10, 101), _random.Next(10, 101)),
             _ => throw new InvalidOperationException("Somehow an invalid difficulty is selected. Fix your bug.")
         };
