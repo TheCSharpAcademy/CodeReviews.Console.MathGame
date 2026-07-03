@@ -2,15 +2,24 @@ namespace MathGame.Dknx8888;
 
 public class Menu
 {
+    private Difficulty _difficulty = Difficulty.Easy;
+
+    // NOTE: This is an expression-bodied property, using => not =
+    private string DifficultyDisplay => _difficulty switch
+    {
+        Difficulty.Easy => "Easy",
+        Difficulty.Medium => "Medium",
+        Difficulty.Hard => "Hard",
+        _ => throw new ArgumentOutOfRangeException()
+    };
+    
     public void ShowMenu()
     {
-        var running = true;
-
-        while (running)
+        while (true)
         {
             Console.Clear();
             Console.WriteLine("Welcome to A Simple Math Game!");
-            Console.WriteLine("\nCurrently selected difficulty: \n");
+            Console.WriteLine($"\nCurrently selected difficulty: {DifficultyDisplay}\n");
             Console.WriteLine("Press choose one of the options below (1-4):");
             Console.WriteLine("1. Start");
             Console.WriteLine("2. View Game History");
@@ -35,8 +44,7 @@ public class Menu
                 
                 case "4":
                     Console.WriteLine("\nGoodbye!");
-                    running = false;
-                    break;
+                    return;
             }
         }
     }
@@ -54,14 +62,15 @@ public class Menu
             Console.WriteLine("5. Random");
             Console.WriteLine("6. Go Back");
         
-            var input = Console.ReadLine()?.Trim();
+            var gameModeInput = Console.ReadLine()?.Trim();
 
-            if (input == "6")
+            // Go back (exit the while loop)
+            if (gameModeInput == "6")
             {
                 return;
             }
 
-            GameMode? gameMode = input switch
+            GameMode? gameMode = gameModeInput switch
             {
                 "1" => GameMode.Addition,
                 "2" => GameMode.Subtraction,
@@ -70,14 +79,15 @@ public class Menu
                 "5" => GameMode.Random,
                 _ => null
             };
-        
+            
+            // Nothing ever happens.
             if (gameMode is null)
             {
                 continue;
             }
             
-            // Starts game here
-            var gameSession = new GameSession(gameMode.Value);
+            // Starts game here (so .Value here is needed because gameMode is nullable)
+            var gameSession = new GameSession(gameMode.Value, _difficulty);
             gameSession.Start();
         }
     }
@@ -87,11 +97,27 @@ public class Menu
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Currently Selected Difficulty: \n");
+            Console.WriteLine($"Currently Selected Difficulty: {DifficultyDisplay}\n");
             Console.WriteLine("Please select one of the difficulties below (1-3): ");
-            Console.WriteLine("1. Easy (1 digit operations)");
+            Console.WriteLine("1. Easy (1 digit operations) - Default");
             Console.WriteLine("2. Medium (1 digit number and 2 digit number operations)");
             Console.WriteLine("3: Hard (2 digit number operations)");
+            Console.WriteLine("4: Go Back");
+            
+            var difficultyInput = Console.ReadLine()?.Trim();
+
+            if (difficultyInput == "4")
+            {
+                break;
+            }
+            
+            _difficulty = difficultyInput switch
+            {
+                "1" => Difficulty.Easy,
+                "2" => Difficulty.Medium,
+                "3" => Difficulty.Hard,
+                _ => _difficulty // Invalid keeps the selected one
+            };
         }
     }
 }
