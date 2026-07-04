@@ -2,7 +2,8 @@ using System.Runtime.CompilerServices;
 
 namespace MathGame.Dknx8888;
 
-public class GameHistoryJson
+// Repository pattern in the future?
+public static class GameHistoryJson
 {
     public static string FilePath => GetGameResultsFilePath();
     

@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using static MathGame.Dknx8888.GameResultTemplate;
 
@@ -22,6 +21,8 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
         
         Console.Clear();
         Console.WriteLine("Please answer the following questions: ");
+        
+        //May implement quitting in the middle of the game later
         while (count < 5)
         {
             int num1;
@@ -49,6 +50,7 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
                 GameMode.Subtraction => '-',
                 GameMode.Multiplication => '*',
                 GameMode.Division => '/',
+                _ => throw new InvalidOperationException("Invalid game mode selected.")
             };
 
             var correctResult = selectedGameMode switch
@@ -57,12 +59,14 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
                 GameMode.Subtraction => num1 - num2,
                 GameMode.Multiplication => num1 * num2,
                 GameMode.Division => num1 / num2,
+                _ => throw new InvalidOperationException("Invalid game mode selected.")
             };
             
             Console.WriteLine($"{num1} {sign} {num2} = ?");
 
             // Checking int would give the player a hint instead so nah
             double playerInput;
+            // Put ReadLine in while to avoid infinite loops 
             while (!double.TryParse(Console.ReadLine()?.Trim(), out playerInput))
             {
                 Console.WriteLine("Please enter a valid number");
@@ -93,16 +97,16 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
             count++;
         }
         timer.Stop();
-        var roundTime = timer.Elapsed.TotalSeconds;
+        var duration = timer.Elapsed.TotalSeconds;
         Console.WriteLine($"Your final score is {score} out of 5!");
-        Console.WriteLine($"You completed this game in {roundTime:F2} seconds.");
+        Console.WriteLine($"You completed this game in {duration:F2} seconds.");
         
         // Save
         var gameResult = new GameResult(
             gameMode,
             difficulty,
             score,
-            roundTime,
+            duration,
             questionResults,
             startingDateTime
         );

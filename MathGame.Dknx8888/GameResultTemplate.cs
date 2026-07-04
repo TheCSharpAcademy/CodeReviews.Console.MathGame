@@ -15,7 +15,7 @@ public static class GameResultTemplate
         GameMode GameMode,
         Difficulty Difficulty,
         int Score,
-        double RoundTime,
+        double Duration,
         List<QuestionResult> Questions,
         DateTime StartTime
     );
