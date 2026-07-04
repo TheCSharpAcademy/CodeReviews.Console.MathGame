@@ -22,7 +22,7 @@ public class GameSession(GameMode gameMode, Difficulty difficulty)
         Console.Clear();
         Console.WriteLine("Please answer the following questions: ");
         
-        //May implement quitting in the middle of the game later
+        // May implement quitting in the middle of the game later
         while (count < 5)
         {
             int num1;
