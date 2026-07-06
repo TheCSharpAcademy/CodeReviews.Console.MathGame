@@ -126,6 +126,9 @@ namespace MathGame
                         }
                         break;
                     case "/":
+                        b = random.Next(1, 11); 
+                        a = b * random.Next(1, 11);
+                        a = a * b;
                         Console.WriteLine($"What is {a} / {b}");
                         if (!int.TryParse(Console.ReadLine(), out answer))
                         {
