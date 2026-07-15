@@ -7,6 +7,7 @@ namespace STUDY.MathGame
 {
     internal class MathGame
     {
+        
         private Difficulty Difficulty { get; set; }
         private Operation Operation { get; set; }
         private TimeOnly StartTime { get; set; }
@@ -19,7 +20,7 @@ namespace STUDY.MathGame
 
         public void Game(int count)
         {
-            int i = 0;
+            int totalScore=0, i = 0;
             while (i < count)
             {
                 GenerateNumbers(out int first, out int second, Difficulty, Operation);
@@ -34,8 +35,10 @@ namespace STUDY.MathGame
                                 if (number == (first + second))
                                 {
                                     Console.WriteLine("Ответ верный!");
+                                    totalScore++;
                                 }
                                 else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first + second}");
+                                i++;
                                 break;
                             }
                         case Operation.Substraction:
@@ -43,8 +46,10 @@ namespace STUDY.MathGame
                                 if (number == (first - second))
                                 {
                                     Console.WriteLine("Ответ верный!");
+                                    totalScore++;
                                 }
                                 else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first - second}");
+                                i++;
                                 break;
                             }
                         case Operation.Multiplication:
@@ -52,8 +57,10 @@ namespace STUDY.MathGame
                                 if (number == (first * second))
                                 {
                                     Console.WriteLine("Ответ верный!");
+                                    totalScore++;
                                 }
                                 else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first * second}");
+                                i++;
                                 break;
                             }
                         case Operation.Division:
@@ -62,9 +69,10 @@ namespace STUDY.MathGame
                                 if (number == (first / second))
                                 {
                                     Console.WriteLine("Ответ верный!");
+                                    totalScore++;
                                 }
                                 else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first / second}");
-
+                                i++;
                                 break;
                             }
 
@@ -72,29 +80,34 @@ namespace STUDY.MathGame
                 }
 
                 else Console.WriteLine("Неверный формат ответа!");
-                i++;
+                
             }
             TimeOnly endTime = TimeOnly.FromDateTime(DateTime.Now);
             Console.WriteLine($"Вы закончили игру за {endTime - StartTime} секунд!\n" +
                 $"Уровень сложности:{Difficulty}\n" +
+                $"Ваш счет: {totalScore} из {count}\n" +
                 $"Нажмите любую клавишу для продолжения.");
+            SaveResults(Operation, totalScore, count);
             Console.ReadKey();
             
         }
 
-
+        private void SaveResults(Operation operation, int gameScore, int totalScore)
+        {
+            GameResults game = new(operation, gameScore, totalScore);
+            GameList.Add(game);
+        }
         private void GenerateNumbers(out int firstNumber, out int secondNumber, Difficulty difficulty, Operation operation)
         {
             Random firstRand = new();
-            int diff = (int)difficulty;
-            firstNumber = firstRand.Next(diff);
-            secondNumber = firstRand.Next(diff);
+            firstNumber = firstRand.Next((int)difficulty);
+            secondNumber = firstRand.Next((int)difficulty);
             if (operation == Operation.Division)
             {
                 while (secondNumber == 0 || firstNumber % secondNumber != 0)
                 {
-                    firstNumber = firstRand.Next(diff);
-                    secondNumber = firstRand.Next(diff);
+                    firstNumber = firstRand.Next((int)difficulty);
+                    secondNumber = firstRand.Next((int)difficulty);
                 }
             }
           

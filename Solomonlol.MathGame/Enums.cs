@@ -4,20 +4,28 @@ using System.Text;
 
 namespace STUDY.MathGame
 {
-    internal class Enums
+    public class Enums
     {
-        internal enum Operation
+        public enum Operation
         {
             Addition ='+',
             Substraction='-',
             Multiplication='*',
-            Division='/'
+            Division='/',
+            Exit=0
         }
-        internal enum Difficulty
+        public enum Difficulty
         {
             Easy=10,
             Medium=100,
             Hard=1000
+        }
+
+        public enum Menu
+        {
+            StartGame=1,
+            GameHistory,
+            Exit
         }
     }
 }
