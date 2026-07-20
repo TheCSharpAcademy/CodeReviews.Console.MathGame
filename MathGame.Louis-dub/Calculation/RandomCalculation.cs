@@ -4,7 +4,7 @@ namespace MathGame.Louis_dub.Calculation;
 
 internal class RandomCalculation : IBaseCalculation
 {
-    public int RandomOperation(int mode)
+    public static int RandomOperation(int mode)
     {
         int score = 0;
         Func<int, int>[] operations = {

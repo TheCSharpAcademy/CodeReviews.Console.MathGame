@@ -23,11 +23,14 @@ internal class UserInterface
                 .AddChoices(Enum.GetValues<Menu>())
             );
 
-            var modeChoice = AnsiConsole.Prompt(
-                new SelectionPrompt<Mode>()
-                .Title("Choose a game mode")
-                .AddChoices(Enum.GetValues<Mode>())
-            );
+            var modeChoice = Mode.Easy;
+            if (gameChoice != Menu.History) {
+                modeChoice = AnsiConsole.Prompt(
+                    new SelectionPrompt<Mode>()
+                    .Title("Choose a game mode")
+                    .AddChoices(Enum.GetValues<Mode>())
+                );
+            }
 
             switch (gameChoice)
             {
@@ -145,6 +148,26 @@ internal class UserInterface
 
     private void History()
     {
+        var table = new Table();
+
+        table.Border(TableBorder.Rounded);
+        table.AddColumn("[yellow]ID[/]");
+        table.AddColumn("[yellow]Game[/]");
+        table.AddColumn("[yellow]Mode[/]");
+        table.AddColumn("[yellow]Score[/]");
+        
+        var operations = DataBase.Operations;
+
+        foreach (var operation in operations)
+        {
+            table.AddRow(
+                operation.Id.ToString(),
+                $"[cyan]{operation.Game}[/]",
+                $"[cyan]{operation.Mode}[/]",
+                $"[blue]{operation.Score}[/]"
+            );
+        }
+        AnsiConsole.Write(table);
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
