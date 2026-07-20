@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Spectre.Console;
 
 namespace MathGame.Louis_dub.Calculation;
@@ -22,47 +23,37 @@ internal class AdditionCalculation : IBaseCalculation
             AnsiConsole.MarkupLine("[red]False[/]");
             return 0;
         }
-}
+    }
+
+    public static int Game(int mode, string modeDB)
+    {
+        Stopwatch stopwatch = new();
+        int score = 0;
+
+        stopwatch.Start();
+        for (int i = 0; i < 5; i++)
+            score += Sum(mode);
+        stopwatch.Stop();
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", modeDB, strScore, stopwatch.Elapsed.TotalSeconds);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\nTime : [bold]{stopwatch.Elapsed.TotalSeconds:F1}s\n[/]");
+        return score;
+    }
 
     public int EasyMode()
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
-            score += Sum(10);
-        string strScore = $"{score} / 5";
-
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Easy", strScore);
-        DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
-        return score;
+        return Game(10, "Easy");
     }
 
     public int MediumMode()
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
-            score += Sum(100);
-        string strScore = $"{score} / 5";
-
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Medium", strScore);
-        DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
-        return score;
+        return Game(100, "Medium");
     }
 
     public int HardMode()
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
-            score += Sum(1000);
-        string strScore = $"{score} / 5";
-
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Hard", strScore);
-        DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
-        return score;
+        return Game(1000, "Hard");
     }
 }

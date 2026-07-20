@@ -1,4 +1,5 @@
 using Spectre.Console;
+using System.Diagnostics;
 
 namespace MathGame.Louis_dub.Calculation;
 
@@ -24,45 +25,35 @@ internal class SubtractionCalculation : IBaseCalculation
         }
     }
 
-    public int EasyMode()
+    public static int Game(int mode, string modeDB)
     {
+        Stopwatch stopwatch = new();
         int score = 0;
 
+        stopwatch.Start();
         for (int i = 0; i < 5; i++)
-            score += Sub(10);
+            score += Sub(mode);
+        stopwatch.Stop();
         string strScore = $"{score} / 5";
 
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Easy", strScore);
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", modeDB, strScore, stopwatch.Elapsed.TotalSeconds);
         DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\nTime : [bold]{stopwatch.Elapsed.TotalSeconds:F1}s[/]\n");
         return score;
+    }
+
+    public int EasyMode()
+    {
+        return Game(10, "Easy");
     }
 
     public int MediumMode()
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
-            score += Sub(100);
-        string strScore = $"{score} / 5";
-
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Medium", strScore);
-        DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
-        return score;
+        return Game(100, "Medium");
     }
 
     public int HardMode()
     {
-        int score = 0;
-
-        for (int i = 0; i < 5; i++)
-            score += Sub(1000);
-        string strScore = $"{score} / 5";
-
-        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Hard", strScore);
-        DataBase.Operations.Add(newOperation);
-        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
-        return score;
+        return Game(1000, "Hard");
     }
 }

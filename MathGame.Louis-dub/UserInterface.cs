@@ -146,7 +146,7 @@ internal class UserInterface
         Console.ReadKey();
     }
 
-    private void History()
+    private static void History()
     {
         var table = new Table();
 
@@ -155,6 +155,7 @@ internal class UserInterface
         table.AddColumn("[yellow]Game[/]");
         table.AddColumn("[yellow]Mode[/]");
         table.AddColumn("[yellow]Score[/]");
+        table.AddColumn("[yellow]Time[/]");
         
         var operations = DataBase.Operations;
 
@@ -164,7 +165,8 @@ internal class UserInterface
                 operation.Id.ToString(),
                 $"[cyan]{operation.Game}[/]",
                 $"[cyan]{operation.Mode}[/]",
-                $"[blue]{operation.Score}[/]"
+                $"[blue]{operation.Score}[/]",
+                $"[blue]{operation.Time:F1}[/]"
             );
         }
         AnsiConsole.Write(table);
