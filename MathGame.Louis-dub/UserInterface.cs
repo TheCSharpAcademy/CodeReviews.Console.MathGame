@@ -1,10 +1,12 @@
 using Spectre.Console;
+using MathGame.Louis_dub.Calculation;
 using static MathGame.Louis_dub.Enums;
 
 namespace MathGame.Louis_dub;
 
 internal class UserInterface
 {
+    private readonly AdditionCalculation _additionCalculation = new();
     internal void MainMenu()
     {
         while (true)
@@ -49,6 +51,18 @@ internal class UserInterface
 
     private void AdditionPary(Mode mode)
     {
+        switch (mode)
+        {
+            case Mode.Easy:
+                _additionCalculation.EasyMode();
+                break;
+            case Mode.Medium:
+                _additionCalculation.MediumMode();
+                break;
+            case Mode.Hard:
+                _additionCalculation.HardMode();
+                break;
+        }
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }

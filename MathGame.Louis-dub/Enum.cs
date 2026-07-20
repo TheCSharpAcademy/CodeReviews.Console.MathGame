@@ -15,8 +15,8 @@ internal class Enums
     internal enum Mode
     {
         Easy,
-        meidum,
-        hard
+        Medium,
+        Hard
 
     }
 }
