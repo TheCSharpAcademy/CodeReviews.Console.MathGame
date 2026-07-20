@@ -4,7 +4,7 @@ namespace MathGame.Louis_dub.Calculation;
 
 internal class RandomCalculation : IBaseCalculation
 {
-    public int Operation(int mode)
+    public int RandomOperation(int mode)
     {
         int score = 0;
         Func<int, int>[] operations = {
@@ -18,16 +18,34 @@ internal class RandomCalculation : IBaseCalculation
     }
     public int EasyMode()
     {
-        return Operation(10);
+        int score = RandomOperation(10);
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Randokm", "Easy", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
+        return score;
     }
 
     public int MediumMode()
     {
-        return Operation(100);
+        int score = RandomOperation(100);
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Randokm", "Medium", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
+        return score;
     }
 
     public int HardMode()
     {
-        return Operation(1000);
+        int score = RandomOperation(1000);
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Randokm", "Hard", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
+        return score;
     }
 }
