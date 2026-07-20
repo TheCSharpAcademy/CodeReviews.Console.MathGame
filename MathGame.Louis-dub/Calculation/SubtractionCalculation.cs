@@ -4,44 +4,53 @@ namespace MathGame.Louis_dub.Calculation;
 
 internal class SubtractionCalculation : IBaseCalculation
 {
-    private static int Sub(int mode)
+    public static int Sub(int mode)
     {
-        int score = 0;
         Random rnd = new();
+        int n1 = rnd.Next(1, mode);
+        int n2 = rnd.Next(1, mode);
 
-        for (int i = 0; i < 5; i++)
+        var result = AnsiConsole.Ask<int>($"{n1} - {n2} = ");
+
+        if (result == n1 - n2)
         {
-            int n1 = rnd.Next(1, mode);
-            int n2 = rnd.Next(1, mode);
-
-            var result = AnsiConsole.Ask<int>($"{n1} - {n2} = ");
-
-            if (result == n1 - n2)
-            {
-                AnsiConsole.MarkupLine("[green]True[/]");
-                score++;
-            }
-            else
-            {
-                AnsiConsole.MarkupLine("[red]False[/]");
-            }
+            AnsiConsole.MarkupLine("[green]True[/]");
+            return 1;
         }
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
-        return score;
+        else
+        {
+            AnsiConsole.MarkupLine("[red]False[/]");
+            return 0;
+        }
     }
 
     public int EasyMode()
     {
-        return Sub(10);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Sub(10);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 
     public int MediumMode()
     {
-        return Sub(100);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Sub(100);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 
     public int HardMode()
     {
-        return Sub(1000);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Sub(1000);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 }

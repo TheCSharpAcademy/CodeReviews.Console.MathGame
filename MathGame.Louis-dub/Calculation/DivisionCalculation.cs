@@ -5,45 +5,55 @@ namespace MathGame.Louis_dub.Calculation;
 
 internal class DivisionCalculation : IBaseCalculation
 {
-    private static int Div(int mode)
+    public static int Div(int mode)
     {
-        int score = 0;
         Random rnd = new();
 
-        for (int i = 0; i < 5; i++)
+        int divisor = rnd.Next(1, mode);
+        int result = rnd.Next(0, mode + 1);
+        int dividend = divisor * result;
+
+        var resultAsk = AnsiConsole.Ask<int>($"{dividend} / {divisor} = ");
+
+        if (result == resultAsk)
         {
-            int divisor = rnd.Next(1, mode);
-            int result = rnd.Next(0, mode + 1);
-            int dividend = divisor * result;
-
-            var resultAsk = AnsiConsole.Ask<int>($"{dividend} / {divisor} = ");
-
-            if (result == resultAsk)
-            {
-                AnsiConsole.MarkupLine("[green]True[/]");
-                score++;
-            }
-            else
-            {
-                AnsiConsole.MarkupLine("[red]False[/]");
-            }
+            AnsiConsole.MarkupLine("[green]True[/]");
+            return 1;
         }
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
-        return score;
+        else
+        {
+            AnsiConsole.MarkupLine("[red]False[/]");
+            return 0;
+        }
     }
 
     public int EasyMode()
     {
-        return Div(10);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Div(10);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 
     public int MediumMode()
     {
-        return Div(100);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Div(100);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 
     public int HardMode()
     {
-        return Div(1000);
+        int score = 0;
+
+        for (int i = 0; i < 5; i++)
+            score += Div(1000);
+        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        return score;
     }
 }

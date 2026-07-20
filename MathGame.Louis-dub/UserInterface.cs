@@ -10,6 +10,7 @@ internal class UserInterface
     private readonly SubtractionCalculation _subtractionCalculation = new();
     private readonly MultiplicationCalculation _multiplicationCalculation = new();
     private readonly DivisionCalculation _divisionCalculation = new();
+    private readonly RandomCalculation _randomCalculation = new();
     internal void MainMenu()
     {
         while (true)
@@ -126,6 +127,18 @@ internal class UserInterface
 
     private void RandomParty(Mode mode)
     {
+        switch (mode)
+        {
+            case Mode.Easy:
+                _randomCalculation.EasyMode();
+                break;
+            case Mode.Medium:
+                _randomCalculation.MediumMode();
+                break;
+            case Mode.Hard:
+                _randomCalculation.HardMode();
+                break;
+        }
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
