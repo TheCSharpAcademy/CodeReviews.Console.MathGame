@@ -30,7 +30,11 @@ internal class AdditionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sum(10);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Easy", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -40,7 +44,11 @@ internal class AdditionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sum(100);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Medium", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -50,7 +58,11 @@ internal class AdditionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sum(1000);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Addition", "Hard", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 }

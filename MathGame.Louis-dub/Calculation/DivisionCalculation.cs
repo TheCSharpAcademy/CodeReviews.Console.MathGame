@@ -1,5 +1,5 @@
-using System.Reflection.Metadata;
 using Spectre.Console;
+using MathGame.Louis_dub;
 
 namespace MathGame.Louis_dub.Calculation;
 
@@ -33,7 +33,11 @@ internal class DivisionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Div(10);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Division", "Easy", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -43,7 +47,11 @@ internal class DivisionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Div(100);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Division", "Medium", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -53,7 +61,11 @@ internal class DivisionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Div(1000);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Division", "Hard", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 }

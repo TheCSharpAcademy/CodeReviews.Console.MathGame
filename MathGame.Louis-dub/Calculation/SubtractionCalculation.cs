@@ -30,7 +30,11 @@ internal class SubtractionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sub(10);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Easy", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -40,7 +44,11 @@ internal class SubtractionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sub(100);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Medium", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 
@@ -50,7 +58,11 @@ internal class SubtractionCalculation : IBaseCalculation
 
         for (int i = 0; i < 5; i++)
             score += Sub(1000);
-        AnsiConsole.Markup($"Your score : [bold]{score} / 5[/]\n");
+        string strScore = $"{score} / 5";
+
+        var newOperation = new Operation(DataBase.Operations.Count + 1, "Subtraction", "Hard", strScore);
+        DataBase.Operations.Add(newOperation);
+        AnsiConsole.Markup($"Your score : [bold]{strScore}[/]\n");
         return score;
     }
 }
