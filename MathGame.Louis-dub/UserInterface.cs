@@ -7,6 +7,9 @@ namespace MathGame.Louis_dub;
 internal class UserInterface
 {
     private readonly AdditionCalculation _additionCalculation = new();
+    private readonly SubtractionCalculation _subtractionCalculation = new();
+    private readonly MultiplicationCalculation _multiplicationCalculation = new();
+    private readonly DivisionCalculation _divisionCalculation = new();
     internal void MainMenu()
     {
         while (true)
@@ -69,18 +72,54 @@ internal class UserInterface
 
     private void SubtractioParty(Mode mode)
     {
+        switch (mode)
+        {
+            case Mode.Easy:
+                _subtractionCalculation.EasyMode();
+                break;
+            case Mode.Medium:
+                _subtractionCalculation.MediumMode();
+                break;
+            case Mode.Hard:
+                _subtractionCalculation.HardMode();
+                break;
+        }
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
 
     private void MultiplicationParty(Mode mode)
     {
+        switch (mode)
+        {
+            case Mode.Easy:
+                _multiplicationCalculation.EasyMode();
+                break;
+            case Mode.Medium:
+                _multiplicationCalculation.MediumMode();
+                break;
+            case Mode.Hard:
+                _multiplicationCalculation.HardMode();
+                break;
+        }
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
 
     private void DivisionParty(Mode mode)
     {
+        switch (mode)
+        {
+            case Mode.Easy:
+                _divisionCalculation.EasyMode();
+                break;
+            case Mode.Medium:
+                _divisionCalculation.MediumMode();
+                break;
+            case Mode.Hard:
+                _divisionCalculation.HardMode();
+                break;
+        }
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
