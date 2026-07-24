@@ -22,12 +22,12 @@ namespace STUDY.MathGame
                 {
                     result.Display();
                 }
-                Console.WriteLine("Нажмите любую клавишу для продолжения.");
+                Console.WriteLine("Press any key to continue.");
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Нет записей для вывода.\nНажмите любую клавишу для продолжения.");
+                Console.WriteLine("No records to display.\nPress any key to continue.");
                 Console.ReadKey();
             }
         }

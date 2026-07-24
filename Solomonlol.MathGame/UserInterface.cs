@@ -15,7 +15,7 @@ namespace STUDY.MathGame
             while (!endGame)
             {
                 Console.Clear();
-                Console.WriteLine($"Введите тип опрерации(1-3):\n1:{Menu.StartGame}\n2:{Menu.GameHistory}\n3:{Menu.Exit}");
+                Console.WriteLine($"Enter the operation type(1-3):\n1:{Menu.StartGame}\n2:{Menu.GameHistory}\n3:{Menu.Exit}");
 
                 if (int.TryParse(Console.ReadLine(), out int choose) && choose >= 1 && choose < 4)
                 {
@@ -41,7 +41,7 @@ namespace STUDY.MathGame
                 }
                 else
                 {
-                    Console.WriteLine("Неверная операция!\nНажмите любую клавишу для продолжения.");
+                    Console.WriteLine("Invalid operation!\nPress any key to continue.");
                     Console.ReadKey();
                 }
             }
@@ -52,7 +52,7 @@ namespace STUDY.MathGame
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"Введите тип опрерации(0-4):\n1:{(char)Operation.Addition}\n2:{(char)Operation.Substraction}\n3:{(char)Operation.Multiplication}\n4:{(char)Operation.Division}\n0:{Operation.Exit}");
+                Console.WriteLine($"Enter the operation type(0-4):\n1:{(char)Operation.Addition}\n2:{(char)Operation.Substraction}\n3:{(char)Operation.Multiplication}\n4:{(char)Operation.Division}\n0:{Operation.Exit}");
 
 
                 if (int.TryParse(Console.ReadLine(), out int choose) && choose >= 0 && choose < 5)
@@ -68,7 +68,7 @@ namespace STUDY.MathGame
                     Console.Clear();
                     if (operation != Operation.Exit)
                     {
-                        Console.WriteLine($"Введите уровень сложности(1-3):\n1:{Difficulty.Easy}\n2:{Difficulty.Medium}\n3:{Difficulty.Hard}");
+                        Console.WriteLine($"Enter the difficulty level(1-3):\n1:{Difficulty.Easy}\n2:{Difficulty.Medium}\n3:{Difficulty.Hard}");
 
                         if (int.TryParse(Console.ReadLine(), out choose) && choose >= 1 && choose < 4)
                         {
@@ -79,7 +79,7 @@ namespace STUDY.MathGame
                                 3 => Difficulty.Hard,
                             };
                             Console.Clear();
-                            Console.WriteLine("Введите количество игр:");
+                            Console.WriteLine("Enter the number of games:");
                             if (int.TryParse(Console.ReadLine(), out choose) && choose > 0)
                             {
                                 MathGame game = new MathGame(diff, operation);
@@ -87,13 +87,13 @@ namespace STUDY.MathGame
                             }
                             else
                             {
-                                Console.WriteLine("Неверный формат ввода!\nНажмите любую клавишу для прожолжения.");
+                                Console.WriteLine("Invalid input format!\nPress any key to continue.");
                                 Console.ReadKey();
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Неверный формат ввода!\nНажмите любую клавишу для прожолжения.");
+                            Console.WriteLine("Invalid input format!\nPress any key to continue.");
                             Console.ReadKey();
                         }
                     }
@@ -101,7 +101,7 @@ namespace STUDY.MathGame
                 }
                 else
                 {
-                    Console.WriteLine("Неверная операция!\nНажмите любую клавишу для продолжения.");
+                    Console.WriteLine("Invalid operation!\nPress any key to continue.");
                     Console.ReadKey();
                 }
             }

@@ -25,7 +25,7 @@ namespace STUDY.MathGame
             {
                 GenerateNumbers(out int first, out int second, Difficulty, Operation);
                 Console.WriteLine($"{first}{(char)Operation}{second}=");
-                Console.WriteLine($"Введите ответ:");
+                Console.WriteLine($"Enter your answer:");
                 if (int.TryParse(Console.ReadLine(), out int number))
                 {
                     switch (Operation)
@@ -34,10 +34,10 @@ namespace STUDY.MathGame
                             {
                                 if (number == (first + second))
                                 {
-                                    Console.WriteLine("Ответ верный!");
+                                    Console.WriteLine("Answer is correct!");
                                     totalScore++;
                                 }
-                                else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first + second}");
+                                else Console.WriteLine($"Wrong answer!\nCorrect answer: {first + second}");
                                 i++;
                                 break;
                             }
@@ -45,10 +45,10 @@ namespace STUDY.MathGame
                             {
                                 if (number == (first - second))
                                 {
-                                    Console.WriteLine("Ответ верный!");
+                                    Console.WriteLine("Answer is correct!");
                                     totalScore++;
                                 }
-                                else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first - second}");
+                                else Console.WriteLine($"Wrong answer!\nCorrect answer: {first - second}");
                                 i++;
                                 break;
                             }
@@ -56,10 +56,10 @@ namespace STUDY.MathGame
                             {
                                 if (number == (first * second))
                                 {
-                                    Console.WriteLine("Ответ верный!");
+                                    Console.WriteLine("Answer is correct!");
                                     totalScore++;
                                 }
-                                else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first * second}");
+                                else Console.WriteLine($"Wrong answer!\nCorrect answer: {first * second}");
                                 i++;
                                 break;
                             }
@@ -68,10 +68,10 @@ namespace STUDY.MathGame
 
                                 if (number == (first / second))
                                 {
-                                    Console.WriteLine("Ответ верный!");
+                                    Console.WriteLine("Answer is correct!");
                                     totalScore++;
                                 }
-                                else Console.WriteLine($"Ответ неверный!\nПравильный ответ: {first / second}");
+                                else Console.WriteLine($"Wrong answer!\nCorrect answer: {first / second}");
                                 i++;
                                 break;
                             }
@@ -79,14 +79,14 @@ namespace STUDY.MathGame
                     }
                 }
 
-                else Console.WriteLine("Неверный формат ответа!");
+                else Console.WriteLine("Wrong answer format!");
                 
             }
             TimeOnly endTime = TimeOnly.FromDateTime(DateTime.Now);
-            Console.WriteLine($"Вы закончили игру за {endTime - StartTime} секунд!\n" +
-                $"Уровень сложности:{Difficulty}\n" +
-                $"Ваш счет: {totalScore} из {count}\n" +
-                $"Нажмите любую клавишу для продолжения.");
+            Console.WriteLine($"\r\nYou completed this game in {endTime - StartTime} second!\n" +
+                $"Difficulty level:{Difficulty}\n" +
+                $"Your score: {totalScore} from {count}\n" +
+                $"Press any key to continue.");
             SaveResults(Operation, totalScore, count);
             Console.ReadKey();
             
