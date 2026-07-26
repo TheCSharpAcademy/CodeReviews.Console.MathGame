@@ -12,7 +12,6 @@ internal class Games
      * which is found in the main Program.cs.*/
     internal static void Game(string gameChoice, int[] difficulty, int MAX_ROUNDS, List<string> gameLog)
     {
-        
         // Initial variables
         Random random = new Random();
         int firstNumber;

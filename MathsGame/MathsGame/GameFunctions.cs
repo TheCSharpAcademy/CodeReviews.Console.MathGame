@@ -87,6 +87,7 @@ public class GameFunctions
 
     internal static void ViewLog(List<string> log)
     {
+        Console.Clear();
         Console.WriteLine("---------- Past Games Log ----------\n");
 
         foreach (string line in log)

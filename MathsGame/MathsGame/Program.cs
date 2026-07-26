@@ -10,6 +10,7 @@ List<string> gameLog = new List<string>();
 
 // Run initial difficulty setting
 GameFunctions.SetDifficulty(difficulty);
+Console.Clear();
 
 TheMenu();
 
@@ -17,6 +18,7 @@ void TheMenu()
 {
     do
     {
+        Console.Clear();
         gameRunning = true;
         
         Console.WriteLine("---------- Maths Game ----------");
@@ -86,6 +88,7 @@ void TheMenu()
         catch (FormatException)
         {
             Console.WriteLine($"{result} has too many characters. Please only input one character.");
+            Helpers.ConsoleClear();
         }
 
     } while (gameRunning);
