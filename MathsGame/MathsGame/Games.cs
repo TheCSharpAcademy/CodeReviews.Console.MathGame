@@ -106,7 +106,7 @@ internal class Games
         Console.WriteLine("Game Over. Press any key to return to the main menu.\n");
         Console.ReadLine();
 
-        string log = $"{gameChoice}: Total Score: {score}, Total Seconds: {seconds} --- {DateTime.Now}";
+        string log = $"{gameChoice}: Difficulty: {difficulty[0]} to {difficulty[1]}, Total Score: {score}, Total Seconds: {seconds} --- {DateTime.Now}";
         gameLog.Add(log);
     }
 
@@ -118,6 +118,12 @@ internal class Games
             case "Addition":
                 Console.WriteLine($"What is {firstNumber} + {secondNumber}?\n");
                 return firstNumber + secondNumber;
+            case "Subtraction":
+                Console.WriteLine($"What is {firstNumber} - {secondNumber}?\n");
+                return firstNumber - secondNumber;
+            case "Multiplication":
+                Console.WriteLine($"What is {firstNumber} * {secondNumber}?\n");
+                return firstNumber * secondNumber;
             case "Division":
                 Console.WriteLine($"What is {firstNumber} / {secondNumber}?\n");
                 return firstNumber / secondNumber;

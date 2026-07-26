@@ -65,6 +65,12 @@ void TheMenu()
                     case 'a':
                         Games.Game("Addition", difficulty, MAX_ROUNDS, gameLog);
                         break;
+                    case 's':
+                        Games.Game("Subtraction", difficulty, MAX_ROUNDS, gameLog);
+                        break;
+                    case 'm':
+                        Games.Game("Multiplication", difficulty, MAX_ROUNDS, gameLog);
+                        break;
                     case 'd':
                         Games.Game("Division", difficulty, MAX_ROUNDS, gameLog);
                         break;
