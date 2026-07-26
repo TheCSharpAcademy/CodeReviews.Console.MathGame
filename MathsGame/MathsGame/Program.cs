@@ -1,7 +1,7 @@
 ﻿using MathsGame;
 
 // Game parameters
-const int MAX_ROUNDS = 2;
+const int MAX_ROUNDS = 5;
 int[] difficulty = new int[2];
 bool gameRunning = false;
 
