@@ -1,26 +1,13 @@
-﻿Random rng = new();
+﻿using Spectre.Console;
+
+Random rng = new();
 
 bool stillPlaying = true;
 int curGame = 1;
 int curScore = 0;
+int totalScore = 0;
 List<string> gameHistory = [];
 
-void menuOptions()
-{
-  Console.WriteLine("1: Play new game");
-  if (curGame > 1)
-  {
-    Console.WriteLine("2: View game history");
-  }
-
-  Console.WriteLine("(e) to exit...");
-}
-
-void printMainMenu()
-{
-  Console.WriteLine("Welcome to the Maths Game! Please select from one of the options:\n");
-  menuOptions();
-}
 
 Dictionary<int, char> operators = new()
 {
@@ -30,11 +17,27 @@ Dictionary<int, char> operators = new()
   { 4, '/' }
 };
 
+void addToGameHistory(int num1, int num2, int res, int usersRes, int curScore, char mathSymbol)
+{
+  gameHistory.Add($"{num1} {mathSymbol} {num2} = {res} - your answer {usersRes}. Current score {curScore}");
+}
+
+void displayWrongAnswer(int res)
+{
+  AnsiConsole.MarkupLine($"[red]Unlucky... the result was {res}[/]");
+}
+
+void displayCorrectAnswer(int res)
+{
+  AnsiConsole.MarkupLine($"[green]Right you are! The answer was {res}[/]");
+  curScore++;
+}
+
 
 void additionQuestion()
 {
-  int num1 = rng.Next(1, 100000);
-  int num2 = rng.Next(1, 100000);
+  int num1 = rng.Next(1, 100);
+  int num2 = rng.Next(1, 100);
   Console.WriteLine($"What is {num1:N0} + {num2:N0}");
   int res = num1 + num2;
   string? usersResStr = Console.ReadLine();
@@ -43,21 +46,20 @@ void additionQuestion()
     int.TryParse(usersResStr, out int usersRes);
     if (usersRes != res)
     {
-      Console.WriteLine($"Unlucky... the result was {res}");
+      displayWrongAnswer(res);
     }
     else
     {
-      Console.WriteLine($"Right you are! The answer was {res}");
-      curScore++;
+      displayCorrectAnswer(res);
     }
-    gameHistory.Add($"{num1} + {num2} = {res} - your answer {usersRes}. Current score {curScore}");
+    addToGameHistory(num1, num2, res, usersRes, curScore, '+');
   }
 }
 
 void subtractionQuestion()
 {
-  int num1 = rng.Next(1, 100000);
-  int num2 = rng.Next(1, 100000);
+  int num1 = rng.Next(1, 100);
+  int num2 = rng.Next(1, 100);
   Console.WriteLine($"What is {num1:N0} - {num2:N0}");
   int res = num1 - num2;
   string? usersResStr = Console.ReadLine();
@@ -66,21 +68,20 @@ void subtractionQuestion()
     int.TryParse(usersResStr, out int usersRes);
     if (usersRes != res)
     {
-      Console.WriteLine($"Unlucky... the result was {res}");
+      displayWrongAnswer(res);
     }
     else
     {
-      Console.WriteLine($"Right you are! The answer was {res}");
-      curScore++;
+      displayCorrectAnswer(res);
     }
-    gameHistory.Add($"{num1} - {num2} = {res} - your answer {usersRes}. Current score {curScore}");
+    addToGameHistory(num1, num2, res, usersRes, curScore, '-');
   }
 }
 
 void multiplicationQuestion()
 {
-  int num1 = rng.Next(1, 100);
-  int num2 = rng.Next(1, 100);
+  int num1 = rng.Next(1, 10);
+  int num2 = rng.Next(1, 10);
   Console.WriteLine($"What is {num1:N0} * {num2:N0}");
   int res = num1 * num2;
   string? usersResStr = Console.ReadLine();
@@ -89,14 +90,13 @@ void multiplicationQuestion()
     int.TryParse(usersResStr, out int usersRes);
     if (usersRes != res)
     {
-      Console.WriteLine($"Unlucky... the result was {res}");
+      displayWrongAnswer(res);
     }
     else
     {
-      Console.WriteLine($"Right you are! The answer was {res}");
-      curScore++;
+      displayCorrectAnswer(res);
     }
-    gameHistory.Add($"{num1} * {num2} = {res} - your answer {usersRes}. Current score {curScore}");
+    addToGameHistory(num1, num2, res, usersRes, curScore, '*');
   }
 }
 
@@ -113,14 +113,13 @@ void divisionQuestion()
     int.TryParse(usersResStr, out int usersRes);
     if (usersRes != res)
     {
-      Console.WriteLine($"Unlucky... the result was {res}");
+      displayWrongAnswer(res);
     }
     else
     {
-      Console.WriteLine($"Right you are! The answer was {res}");
-      curScore++;
+      displayCorrectAnswer(res);
     }
-    gameHistory.Add($"{divided}/{quotient} = {res} - your answer {usersRes}. Current score {curScore}");
+    addToGameHistory(divided, quotient, res, usersRes, curScore, '/');
   }
 }
 
@@ -151,6 +150,7 @@ void playGame()
   }
   Console.WriteLine($"You got {curScore}/5");
   curGame++;
+  totalScore += curScore;
   curScore = 0;
 }
 
@@ -163,45 +163,46 @@ void displayHistory()
       int gameNumber = (i / 5) + 1;
       Console.WriteLine($"== Game {gameNumber} ==");
     }
-
     Console.WriteLine(gameHistory[i]);
-
   }
+  AnsiConsole.MarkupLine($"Total score [green]{totalScore}[/]");
+  Console.WriteLine("\n");
+}
+
+List<string> BuildMenuChoices()
+{
+  List<string> menuChoices = ["Start a new game"];
+
+  if (curGame > 1)
+  {
+    menuChoices.Add("View previous game history");
+  }
+  menuChoices.Add("Exit game");
+  return menuChoices;
 }
 
 while (stillPlaying)
 {
+  string userChoice = AnsiConsole.Prompt(
+    new SelectionPrompt<string>().
+    Title("Please select from the following...")
+    .AddChoices(BuildMenuChoices())
+  ).ToLower().Trim();
 
-  printMainMenu();
-  string? userInput = Console.ReadLine();
-  if (userInput != null)
+  switch (userChoice)
   {
-    userInput = userInput.Trim().ToLower();
-    if (userInput != "e" || userInput != "1" || userInput != "2" || (userInput == "2" && curGame == 1))
-    {
-      Console.WriteLine($"You inputted... {userInput}, please choose one of the options provided");
-      menuOptions();
-    }
-
-    if (userInput == "e")
-    {
+    case "exit game":
       Console.WriteLine("Thank you for playing :)");
       stillPlaying = false;
       break;
-    }
-
-    if (userInput == "1")
-    {
+    case "start a new game":
       playGame();
-    }
-
-    Console.WriteLine($"User inputted {userInput}");
-    if (userInput == "2")
-    {
-      Console.WriteLine("Display history");
+      break;
+    case "view previous game history":
       displayHistory();
-    }
-
+      break;
+    default:
+      playGame();
+      break;
   }
-
 }
