@@ -123,30 +123,56 @@ void divisionQuestion()
   }
 }
 
+char chooseOperation()
+{
+  Dictionary<string, char> operationChoices = new()
+  {
+    { "Addition (+)", '+' },
+    { "Subtraction (-)", '-' },
+    { "Multiplication (*)", '*' },
+    { "Division (/)", '/' },
+    { "Mixed (random)", '?' }
+  };
+
+  string selection = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+    .Title("Which operation would you like to practice?")
+    .AddChoices(operationChoices.Keys)
+  );
+
+  return operationChoices[selection];
+}
+
+void askQuestion(char mathOperator)
+{
+  char resolvedOperator = mathOperator == '?'
+    ? operators[rng.Next(1, 5)]
+    : mathOperator;
+
+  switch (resolvedOperator)
+  {
+    case '+':
+      additionQuestion();
+      break;
+    case '-':
+      subtractionQuestion();
+      break;
+    case '*':
+      multiplicationQuestion();
+      break;
+    case '/':
+      divisionQuestion();
+      break;
+  }
+}
+
 void playGame()
 {
+  char mathOperator = chooseOperation();
+
   for (int i = 1; i < 6; i++)
   {
-    int operatorRng = rng.Next(1, 5);
-    char mathOperator = operators[operatorRng];
-    switch (mathOperator)
-    {
-      case '+':
-        additionQuestion();
-        break;
-      case '-':
-        subtractionQuestion();
-        break;
-      case '*':
-        multiplicationQuestion();
-        break;
-      case '/':
-        divisionQuestion();
-        break;
-      default:
-        additionQuestion();
-        break;
-    }
+    askQuestion(mathOperator);
   }
   Console.WriteLine($"You got {curScore}/5");
   curGame++;
