@@ -23,7 +23,7 @@ namespace MathGameAcademy
                     }
                     return (random[0] / random[1]);
                 default:
-                    throw new ArgumentException("Invalid operator.");
+                    throw new ArgumentException("Invalid operator.");https://www.youtube.com/watch?v=oCvb-Q5lXb8&t=19s
             }
         }
     }

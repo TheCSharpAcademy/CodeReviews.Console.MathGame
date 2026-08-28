@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace MathGameAcademy
+﻿namespace MathGameAcademy
 {
     class Program
     {
@@ -14,9 +12,9 @@ namespace MathGameAcademy
                 Console.WriteLine("How many rounds do you want to play? (Enter a number between 5 and 10):");
                 int roundsInt = GetInteger(5, 10);
                 int pointsInt = 0;
+                Random random = new Random();
                 for (int i = 0; i < roundsInt; i++)
                 {
-                    Random random = new Random();
                     int[] randomNumbers = new int[2];
                     char _operator = GetOperator();
                     if (_operator == 'r')
@@ -95,8 +93,8 @@ namespace MathGameAcademy
                 }
                 Console.WriteLine("Game Finished!");
                 Console.WriteLine("You got {0} points out of {1} possible points.", pointsInt, roundsInt);
-                
-            } while (YesOrNo("Do you want to abort the game? (y/n)") == false);
+
+            }while (YesOrNo("Do you want to play again? (y/n)"));
 
         }
 
