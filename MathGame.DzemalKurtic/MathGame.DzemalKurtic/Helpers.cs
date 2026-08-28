@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MathGame.DzemalKurtic.Models;
 
 namespace MathGame.DzemalKurtic
 {
     internal class Helpers
     {
-        internal static List<string> games = new List<string>();
+        internal static List<Game> games = new List<Game>();
         internal static void PrintGames()
         {
             Console.Clear();
@@ -14,16 +12,21 @@ namespace MathGame.DzemalKurtic
             Console.WriteLine("----------------");
             foreach (var game in games)
             {
-                Console.WriteLine(game);
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts");
             }
             Console.WriteLine("----------------");
             Console.WriteLine("Press any key to go back to main menu.");
             Console.ReadLine();
         }
 
-        internal static void AddToHistory(int gameScore, string gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType)
         {
-            games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+            games.Add(new Game
+            {
+                Date = DateTime.Now,
+                Score = gameScore,
+                Type = gameType
+            });
         }
 
         internal static int[] GetDivisionNumbers()
@@ -42,6 +45,31 @@ namespace MathGame.DzemalKurtic
 
             result[0] = firstNumber;
             result[1] = secondNumber;
+
+            return result;
+        }
+
+        internal static string GetName()
+        {
+            Console.WriteLine("Please type your name");
+            var name = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("Name can't be empty");
+                name = Console.ReadLine();
+            }
+
+            return name;
+        }
+
+        internal static string ValidateResult(string? result)
+        {
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+            {
+                Console.WriteLine("Your answer needs to be an integer. Try again.");
+                result = Console.ReadLine();
+            }
 
             return result;
         }

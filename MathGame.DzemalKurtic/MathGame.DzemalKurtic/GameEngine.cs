@@ -1,4 +1,6 @@
-﻿namespace MathGame.DzemalKurtic
+﻿using MathGame.DzemalKurtic.Models;
+
+namespace MathGame.DzemalKurtic
 {
     internal class GameEngine
     {
@@ -17,6 +19,7 @@
 
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber / secondNumber)
                 {
@@ -36,7 +39,7 @@
                     Console.ReadLine();
                 }
             }
-            Helpers.AddToHistory(score, "Division");
+            Helpers.AddToHistory(score, GameType.Division);
         }
 
         internal void MultiplicationGame(string message)
@@ -58,6 +61,7 @@
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
 
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
@@ -77,7 +81,7 @@
                     Console.ReadLine();
                 }
             }
-            Helpers.AddToHistory(score, "Multiplication");
+            Helpers.AddToHistory(score, GameType.Multiplication);
         }
 
         internal void SubtractionGame(string message)
@@ -99,6 +103,7 @@
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
 
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber - secondNumber)
                 {
@@ -119,7 +124,7 @@
                 }
             }
 
-            Helpers.AddToHistory(score, "Subtraction");
+            Helpers.AddToHistory(score, GameType.Subtraction);
         }
 
         internal void AdditionGame(string message)
@@ -141,6 +146,7 @@
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
 
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber + secondNumber)
                 {
@@ -161,7 +167,7 @@
                 }
             }
 
-            Helpers.AddToHistory(score, "Addition");
+            Helpers.AddToHistory(score, GameType.Addition);
         }
     }
 }
