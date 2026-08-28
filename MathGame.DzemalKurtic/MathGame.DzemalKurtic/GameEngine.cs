@@ -1,94 +1,8 @@
 ﻿namespace MathGame.DzemalKurtic
 {
-    internal class Program
+    internal class GameEngine
     {
-        static List<string> games = new List<string>();
-
-        static void Main(string[] args)
-        {
-            var menu = new Menu();
-
-            string? name = GetName();
-            var date = DateTime.UtcNow;
-
-            menu.ShowMenu(name, date);
-        }
-
-        private static string? GetName()
-        {
-            Console.WriteLine("Please type your name");
-            var name = Console.ReadLine();
-            return name;
-        }
-
-      /*  private static void Menu(string? name, DateTime date)
-        {
-            Console.WriteLine($"Hello {name}. It's {date} this is your Math game");
-
-            bool isGameOn = true;
-
-            do
-            {
-                Console.Clear();
-                Console.WriteLine($@"What game would you like to play? Choose from options below:
-                        V - View Previous Games
-                        A - Addition
-                        S - Subtraction
-                        M - Multiplication
-                        D - Division
-                        Q - Quit the program");
-
-                Console.WriteLine();
-
-                var gameSelected = Console.ReadLine()?.Trim().ToLower();
-
-                switch (gameSelected)
-                {
-                    case "v":
-                        GetGames();
-                        break;
-                    case "a":
-                        AdditionGame("Addition game");
-                        break;
-                    case "s":
-                        SubtractionGame("Subtraction game");
-                        break;
-                    case "m":
-                        MultiplicationGame("Multiplication game");
-                        break;
-                    case "d":
-                        DivisionGame("Division game");
-                        break;
-                    case "q":
-                        Console.WriteLine("Goodbye");
-                        isGameOn = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input");
-                        break;
-                }
-            } while (isGameOn);
-        }
-      */
-
-        /*
-        private static void GetGames()
-        {
-            Console.Clear();
-            Console.WriteLine("Game History");
-            Console.WriteLine("----------------");
-            foreach (var game in games)
-            {
-                Console.WriteLine(game);
-            }
-            Console.WriteLine("----------------");
-            Console.WriteLine("Press any key to go back to main menu.");
-            Console.ReadLine();
-        }
-
-        /*
-
-        private static void DivisionGame(string message)
+        internal void DivisionGame(string message)
         {
             var score = 0;
 
@@ -97,7 +11,7 @@
                 Console.Clear();
                 Console.WriteLine(message);
 
-                var divisionNumbers = GetDivisionNumbers();
+                var divisionNumbers = Helpers.GetDivisionNumbers();
                 var firstNumber = divisionNumbers[0];
                 var secondNumber = divisionNumbers[1];
 
@@ -122,10 +36,10 @@
                     Console.ReadLine();
                 }
             }
-            AddToHistory(score, "Division");
+            Helpers.AddToHistory(score, "Division");
         }
 
-        private static void MultiplicationGame(string message)
+        internal void MultiplicationGame(string message)
         {
             Console.WriteLine(message);
 
@@ -136,6 +50,9 @@
 
             for (int i = 0; i < 5; i++)
             {
+                Console.Clear();
+                Console.WriteLine(message);
+
                 firstNumber = random.Next(1, 9);
                 secondNumber = random.Next(1, 9);
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
@@ -160,10 +77,10 @@
                     Console.ReadLine();
                 }
             }
-            AddToHistory(score, "Multiplication");
+            Helpers.AddToHistory(score, "Multiplication");
         }
 
-        private static void SubtractionGame(string message)
+        internal void SubtractionGame(string message)
         {
             Console.WriteLine(message);
 
@@ -174,6 +91,9 @@
 
             for (int i = 0; i < 5; i++)
             {
+                Console.Clear();
+                Console.WriteLine(message);
+
                 firstNumber = random.Next(1, 9);
                 secondNumber = random.Next(1, 9);
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
@@ -199,10 +119,10 @@
                 }
             }
 
-            AddToHistory(score, "Subtraction");
+            Helpers.AddToHistory(score, "Subtraction");
         }
 
-        static void AdditionGame(string message)
+        internal void AdditionGame(string message)
         {
             Console.WriteLine(message);
 
@@ -213,6 +133,9 @@
 
             for (int i = 0; i < 5; i++)
             {
+                Console.Clear();
+                Console.WriteLine(message);
+
                 firstNumber = random.Next(1, 9);
                 secondNumber = random.Next(1, 9);
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
@@ -238,35 +161,7 @@
                 }
             }
 
-            AddToHistory(score, "Addition");
+            Helpers.AddToHistory(score, "Addition");
         }
-        */
-
-        /*
-        private static void AddToHistory(int gameScore, string gameType)
-        {
-            games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
-        }
-
-        static int[] GetDivisionNumbers()
-        {
-            var random = new Random();
-            var firstNumber = random.Next(0, 99);
-            var secondNumber = random.Next(0, 99);
-
-            var result = new int[2];
-
-            while (firstNumber % secondNumber != 0)
-            {
-                firstNumber = random.Next(1, 99);
-                secondNumber = random.Next(1, 99);
-            }
-
-            result[0] = firstNumber;
-            result[1] = secondNumber;
-
-            return result;
-        }
-        */
     }
 }
