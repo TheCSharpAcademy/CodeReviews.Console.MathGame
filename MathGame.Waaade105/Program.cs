@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Hello.The MathGame have 5 questions for each math opeartion, you need to answer. For each correct answer you will receive 1 point.");
+﻿Console.WriteLine(
+    "Welcome to the Math Game! Choose a math operation and answer 5 questions. " +
+    "You will receive 1 point for each correct answer.");
 
 List<string> gamesHistory = [];
 bool stillWantToPlay = true;
@@ -8,10 +10,14 @@ while (stillWantToPlay)
     Console.WriteLine("What do you want to do?");
     Console.WriteLine("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Game history\n6.Exit");
     Console.WriteLine("Choice:");
-    string choice = Console.ReadLine();
-    int parsed = int.Parse(choice);
 
-    switch (parsed)
+    int choice;
+    while (!int.TryParse(Console.ReadLine(), out choice))
+    {
+        Console.WriteLine("Invalid choice.");
+    }
+
+    switch (choice)
     {
         case 1:
             PlayGame("+", gamesHistory);
@@ -31,11 +37,21 @@ while (stillWantToPlay)
         case 6:
             stillWantToPlay = false;
             break;
+
+        default:
+            Console.WriteLine("Invalid choice. Please select a number from 1 to 6.");
+            break;
     }
 }
 
 void ShowGameHistory(List<string> gamesHistory)
 {
+    if(gamesHistory.Count == 0)
+    {
+        Console.WriteLine("No games have been played yet.");
+        return;
+    }
+
     foreach (string game in gamesHistory)
     {
         Console.WriteLine(game);
@@ -45,20 +61,28 @@ void ShowGameHistory(List<string> gamesHistory)
 void PlayGame(string operationSign, List<string> gamesHistory)
 {
     var random = new Random();
-    int questionCounter = 0;
     int points = 0;
-    int askedQuestions = 2;
+    int askedQuestions = 5;
 
     for (int i = 1; i <= askedQuestions; i++)
     {
         int number1;
         int number2;
 
-        do
+        if (operationSign == "/")
+        {
+            do
+            {
+                number1 = random.Next(0, 101);
+                number2 = random.Next(1, 101);
+            } while (number1 % number2 != 0);
+        }
+        else
         {
             number1 = random.Next(0, 101);
-            number2 = random.Next(0, 101);
-        } while (number1 % number2 == 0);
+            number2 = random.Next(1, 101);
+        }
+
 
         int result = 0;
         switch (operationSign)
@@ -77,13 +101,16 @@ void PlayGame(string operationSign, List<string> gamesHistory)
                 break;
         }
 
-        Console.WriteLine(i + " question:");
-        Console.WriteLine(number1 + operationSign + number2 + " ?");
-        string answear = Console.ReadLine();
-        int.TryParse(answear, out int answearParsed);
-        bool isUserRight = result == answearParsed ? true : false;
+        Console.WriteLine($"question {i}:");
+        Console.WriteLine($"{number1} {operationSign} {number2} = ?");
 
-        if (isUserRight)
+        int answer;
+        while (!int.TryParse(Console.ReadLine(), out answer))
+        {
+            Console.WriteLine("Please enter a valid number:");
+        }
+
+        if (result == answer)
         {
             Console.WriteLine("Correct! 1 point was added");
             points++;
@@ -92,13 +119,21 @@ void PlayGame(string operationSign, List<string> gamesHistory)
         {
             Console.WriteLine("Not this time. The correct answer is " + result);
         }
-        questionCounter++;
     }
 
-    gamesHistory.Add("Result " + points + "/" + askedQuestions);
+    string gameType = operationSign switch
+    {
+        "+" => "Addition",
+        "-" => "Subtraction",
+        "*" => "Multiplication",
+        "/" => "Division",
+        _ => "Unknown"
+    };
+
+    gamesHistory.Add($"{gameType} - Result: {points}/{askedQuestions}");
 
     Console.WriteLine("You answered all questions.");
-    Console.WriteLine("result: " + points + "/" + askedQuestions);
+    Console.WriteLine($"Result: {points}/{askedQuestions}");
 }
 
 
