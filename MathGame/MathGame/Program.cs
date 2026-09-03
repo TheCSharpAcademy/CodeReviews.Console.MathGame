@@ -16,10 +16,21 @@
             examples = new string[5];
             int[] answers = new int[5];
 
-            for(int i= 0; i < examples.Length; i++)
+            for (int i = 0; i < examples.Length; i++)
             {
-                int firstNum = rnd.Next(0, 100);
-                int secondNum = rnd.Next(0, 100);
+                int firstNum;
+                int secondNum;
+                if (op == "/")
+                {
+                    secondNum = rnd.Next(1, 10);
+                    int multiplier = rnd.Next(0, 11);
+                    firstNum = multiplier * secondNum;
+                }
+                else
+                {
+                    firstNum = rnd.Next(0, 100);
+                    secondNum = rnd.Next(0, 100);
+                }
                 string example = $"{firstNum} {op} {secondNum}";
                 examples[i] = example;
                 int answer;
@@ -42,9 +53,9 @@
                         answers[i] = answer;
                         break;
                 }
-                
+
             }
-            
+
             return answers;
         }
 
@@ -109,7 +120,7 @@
                     }
                     else if (finalOrContinue == "BURMALDA")
                     {
-                        if(listHistoryMathGame.Count == 0)
+                        if (listHistoryMathGame.Count == 0)
                         {
                             Console.WriteLine("You haven't played any games.");
                             continue;
@@ -123,7 +134,7 @@
                             {
                                 Console.WriteLine(exmp);
                             }
-                            
+
                             matchNumber++;
                         }
                         Console.WriteLine("That's your game history! Press any button to continue");
@@ -133,8 +144,8 @@
                     else Console.WriteLine("Invalid input! Pls enter Y or N");
                 }
 
-                
-                
+
+
             }
         }
     }
