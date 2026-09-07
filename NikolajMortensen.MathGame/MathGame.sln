@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathGame", "MathGame\MathGame.csproj", "{87CB0EA7-30F3-4227-A620-1970FDABD549}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87CB0EA7-30F3-4227-A620-1970FDABD549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CB0EA7-30F3-4227-A620-1970FDABD549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CB0EA7-30F3-4227-A620-1970FDABD549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CB0EA7-30F3-4227-A620-1970FDABD549}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
