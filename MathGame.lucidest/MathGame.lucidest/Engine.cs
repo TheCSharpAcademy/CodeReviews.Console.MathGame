@@ -11,7 +11,7 @@ namespace MathGame
             int num1 = Random.Shared.Next(0, 13);
             int num2 = Random.Shared.Next(0, 13);
 
-            Console.WriteLine($"{num1} + {num2} = ?");
+            Console.WriteLine($"\n{num1} + {num2} = ?");
             Console.Write("\nAnswer: ");
 
             string input = Console.ReadLine();

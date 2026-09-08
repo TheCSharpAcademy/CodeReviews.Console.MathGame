@@ -7,9 +7,12 @@ namespace MathGame;
 public class UI
 {
     List<string> hist = new();
-    public int totalCount = 0;
-    public int winCount = 0;
     public bool contPlaying = true;
+    public int addWinCount = 0;
+    public int subWinCount = 0;
+    public int mulWinCount = 0;
+    public int divWinConut = 0;
+
     private void DisplayMenu()
     {
         Console.WriteLine("-----------\tWelcome to the math game!\t-----------");
@@ -54,51 +57,51 @@ public class UI
             switch (input)
             {
                 case 1:
-                    bool resultAdd = Engine.Addition();
-                    if (resultAdd)
-                        winCount++;
-                    totalCount++;
-                    if (resultAdd)
-                        hist.Add("Addition - WIN");
-                    else hist.Add("Addition - LOSS");
-                    Console.WriteLine($"Score: {winCount}");
+                    for (int i = 0; i < 6; i++)
+                    {
+                        bool resultAdd = Engine.Addition();
+                        if (resultAdd)
+                            addWinCount++;
+                    }
+                    hist.Add($"{DateTime.Now} - Addition - {addWinCount}");
+                    Console.WriteLine($"\nScore: {addWinCount}");
                     break;
                 case 2:
-                    bool resultSub = Engine.Subtraction();
-                    if (resultSub)
-                        winCount++;
-                    totalCount++;
-                    if (resultSub)
-                        hist.Add("Subtraction - WIN");
-                    else hist.Add("Subtraction - LOSS");
-                    Console.WriteLine($"Score: {winCount}");
+                    for (int i = 0; i < 6; i++)
+                    {
+                        bool resultSub = Engine.Subtraction();
+                        if (resultSub)
+                            subWinCount++;
+                    }
+                    hist.Add($"{DateTime.Now} - Subtraction - {subWinCount}");
+                    Console.WriteLine($"\nScore: {subWinCount}");
                     break;
                 case 3:
-                    bool resultMul = Engine.Multiplication();
+                    for (int i = 0; i < 6; i++) 
+                    {
+                        bool resultMul = Engine.Multiplication();
                     if (resultMul)
-                        winCount++;
-                    totalCount++;
-                    if (resultMul)
-                        hist.Add("Multiplication - WIN");
-                    else hist.Add("Multiplication - LOSS");
-                    Console.WriteLine($"Score: {winCount}");
+                        mulWinCount++;
+                    }
+                    hist.Add($"{DateTime.Now} - Multiplication - {mulWinCount}");
+                    Console.WriteLine($"\nScore: {mulWinCount}");
                     break;
                 case 4:
-                    bool resultDiv = Engine.Division();
-                    if (resultDiv)
-                        winCount++;
-                    totalCount++;
-                    if (resultDiv)
-                        hist.Add("Division - WIN");
-                    else hist.Add("Division - LOSS");
-                    Console.WriteLine($"Score: {winCount}");
+                    for (int i = 0; i < 6; i++)
+                    {
+                        bool resultDiv = Engine.Division();
+                        if (resultDiv)
+                            divWinConut++;
+                    }
+                    hist.Add($"{DateTime.Now} - Division - {divWinConut}");
+                    Console.WriteLine($"\nScore: {divWinConut}");
                     break;
                 case 5:
                     Console.WriteLine();
                     foreach (string history in hist)
                     {
                         Console.WriteLine(history);
-                        Console.WriteLine("-----------\t ------- \t-----------");
+                        Console.WriteLine("--------------------------------------------------");
                     }
                     break;
                 case 6:
