@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Math_Game</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tools\Tools\Tools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Tools">
+      <HintPath>..\..\..\Tools\Tools\bin\Debug\net9.0\Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
